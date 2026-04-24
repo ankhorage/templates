@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/templates",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Reusable Ankhorage app templates, presets, and manifest generators.",
   "license": "MIT",
   "type": "module",

@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 0.1.1
+
+### Patch Changes
+
+- Refresh the README copy so the published package overview and starter-template positioning stay aligned with the current messaging.
+
 ## 0.1.0
 
 ### Initial release
