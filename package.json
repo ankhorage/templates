@@ -36,7 +36,8 @@
     "format:check": "prettier --check .",
     "typecheck": "bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
     "test": "bun test",
-    "prepublishOnly": "bun run typecheck && bun run build && bun test"
+    "prepublishOnly": "bun run typecheck && bun run build && bun test",
+    "version-packages": "changeset version"
   },
   "dependencies": {
     "@ankhorage/contracts": "^0.1.3",
