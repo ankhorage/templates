@@ -56,7 +56,7 @@ export function createStarterTemplate(seed: TemplateSeed): AppManifest {
   const homeScreenId = `${idPrefix}-home`;
   const detailsScreenId = `${idPrefix}-details`;
   const settingsScreenId = `${idPrefix}-settings`;
-  const loginScreenId = `${idPrefix}-login`;
+  const signInScreenId = `${idPrefix}-sign-in`;
 
   return {
     metadata: {
@@ -76,7 +76,7 @@ export function createStarterTemplate(seed: TemplateSeed): AppManifest {
         { name: 'index', screenId: homeScreenId, label: 'Home' },
         { name: 'details', screenId: detailsScreenId, label: 'Details' },
         { name: 'settings', screenId: settingsScreenId, label: 'Settings' },
-        { name: 'login', screenId: loginScreenId, label: 'Login' },
+        { name: 'sign-in', screenId: signInScreenId, label: 'Sign in' },
       ],
     },
     screens: {
@@ -228,10 +228,10 @@ export function createStarterTemplate(seed: TemplateSeed): AppManifest {
           ),
         ]),
       },
-      [loginScreenId]: {
-        id: loginScreenId,
-        name: 'Login',
-        title: 'Login',
+      [signInScreenId]: {
+        id: signInScreenId,
+        name: 'Sign in',
+        title: 'Sign in',
         description: 'Authentication entrypoint for the starter template.',
         root: createZoraNode(
           `${idPrefix}-auth-layout`,

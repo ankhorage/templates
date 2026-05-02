@@ -20,13 +20,13 @@ export const BASE_INFRA: InfraManifest = {
       kind: 'ABAC',
       engine: 'cerbos',
     },
-    login: {
+    signIn: {
       identifiers: ['email'],
     },
-    registration: {
+    signUp: {
       requiredFields: ['email', 'password'],
       optionalFields: ['firstName', 'lastName'],
-      signupPolicy: 'autoSignIn',
+      signUpPolicy: 'autoSignIn',
     },
     profile: {
       fields: ['email', 'firstName', 'lastName'],
@@ -40,9 +40,11 @@ export const BASE_INFRA: InfraManifest = {
 
 export const BASE_SETTINGS: AppManifest['settings'] = {
   authFlow: {
-    unauthorizedRoute: 'login',
-    loginRoute: 'login',
-    postLoginRoute: 'index',
+    unauthorizedRoute: 'sign-in',
+    signInRoute: 'sign-in',
+    signUpRoute: 'sign-up',
+    signOutRoute: 'sign-out',
+    postSignInRoute: 'index',
   },
   localization: {
     defaultLocale: 'en',

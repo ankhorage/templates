@@ -6,9 +6,10 @@ import type {
   PageProps,
   PageSectionProps,
 } from '@ankhorage/zora';
-import type { EmptyStateProps, FormFieldProps, NoticeProps, PanelProps } from '@ankhorage/zora';
+import type { EmptyStateProps, NoticeProps, PanelProps } from '@ankhorage/zora';
 import type { SectionHeaderProps, SettingsRowProps } from '@ankhorage/zora';
 
+type SerializableProps<T extends object> = T & Record<string, unknown>;
 type SerializablePageProps = Omit<PageProps, 'children' | 'footer' | 'header'>;
 type SerializablePageHeaderProps = Omit<
   PageHeaderProps,
@@ -60,15 +61,34 @@ type SerializableSectionHeaderProps = Omit<
   description?: string;
   eyebrow?: string;
 };
-type SerializableFormFieldProps = Omit<
-  FormFieldProps,
-  'children' | 'description' | 'helperText' | 'label'
-> & {
+type SerializableFormFieldProps = SerializableProps<{
   label: string;
   description?: string;
+  errorText?: string;
   helperText?: string;
-};
-type SerializableInputProps = Omit<InputProps, 'leadingIcon' | 'trailingIcon'>;
+  disabled?: boolean;
+  invalid?: boolean;
+  readOnly?: boolean;
+  required?: boolean;
+  testID?: string;
+}>;
+type SerializableInputProps = SerializableProps<
+  Pick<
+    InputProps,
+    | 'autoCapitalize'
+    | 'autoComplete'
+    | 'disabled'
+    | 'invalid'
+    | 'keyboardType'
+    | 'maxLength'
+    | 'placeholder'
+    | 'readOnly'
+    | 'secureTextEntry'
+    | 'size'
+    | 'testID'
+    | 'textContentType'
+  >
+>;
 type SerializableButtonProps = Omit<ButtonProps, 'children'> & {
   children?: string;
 };
