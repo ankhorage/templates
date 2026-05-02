@@ -1,5 +1,16 @@
 # @ankhorage/templates
 
+## 1.0.0
+
+### Major Changes
+
+- edab0ba: Adopt canonical sign-in, sign-up, and sign-out auth flow fields and generated starter routes, and tighten serialized ZORA node prop typing.
+
+### Patch Changes
+
+- 2feb951: Update @bun/types
+- 7c62157: Add 'version-packages' script for releasing"
+
 ## 0.1.1
 
 ### Patch Changes
