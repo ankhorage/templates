@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.1.1
+
+### Patch Changes
+
+- 1c87c93: Remove the fallback starter's route-level `sign-in` screen so global auth remains represented through infra and auth flow settings instead of navigation.
+
 ## 1.1.0
 
 ### Minor Changes
