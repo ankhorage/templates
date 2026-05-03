@@ -83,16 +83,16 @@ describe('createCategoryAppManifest', () => {
         expect(manifest.navigator.routes.map((route) => route.label ?? '')).toEqual([
           ...categoryRouteLabels,
         ]);
-        expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
         expect(manifest.navigator.routes.every((route) => route.icon)).toBe(true);
       } else {
         expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
           'index',
           'details',
           'settings',
-          'sign-in',
         ]);
       }
+
+      expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
 
       expect(manifest.settings.authFlow.signInRoute).toBe('sign-in');
       expect(manifest.settings.authFlow.signUpRoute).toBe('sign-up');
@@ -172,8 +172,7 @@ describe('createStarterTemplate', () => {
     expect(nodeTypes).toContain('Page');
     expect(nodeTypes).toContain('Panel');
     expect(nodeTypes).toContain('Card');
-    expect(nodeTypes).toContain('AuthLayout');
-    expect(nodeTypes).toContain('FormField');
+    expect(nodeTypes).toContain('SettingsRow');
     expect(nodeTypes).not.toContain('Box');
     expect(nodeTypes).not.toContain('Container');
     expect(nodeTypes).not.toContain('Stack');
@@ -187,9 +186,8 @@ describe('createStarterTemplate', () => {
       'index',
       'details',
       'settings',
-      'sign-in',
     ]);
-    expect(manifest.screens['developer_tools-starter-sign-in']).toBeDefined();
+    expect(manifest.screens['developer_tools-starter-sign-in']).toBeUndefined();
   });
 
   test('falls back to the generic starter for unknown runtime categories', () => {
@@ -206,7 +204,6 @@ describe('createStarterTemplate', () => {
       'Home',
       'Details',
       'Settings',
-      'Sign in',
     ]);
     expect(manifest.metadata.slug).toBe('unknown-app');
   });
