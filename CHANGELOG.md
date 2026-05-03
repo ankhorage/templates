@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.1.0
+
+### Minor Changes
+
+- 3adf66e: Add category-specific starter template variants for existing AppCategory values while keeping unsupported categories on the generic fallback path.
+
 ## 1.0.0
 
 ### Major Changes
