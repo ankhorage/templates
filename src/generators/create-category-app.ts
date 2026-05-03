@@ -3,7 +3,7 @@ import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts
 import { mergeAppManifest } from '../internal/merge';
 import type { AppManifestOverrides } from '../internal/overrides';
 import { CATEGORY_PRESETS } from '../presets/category-presets';
-import { createStarterTemplate, type TemplateKind } from '../templates/starter.template';
+import { createStarterTemplate, type TemplateKind } from '../templates/starter';
 
 function resolveThemeModeValue<TValue>(
   overrides: AppManifestOverrides | undefined,

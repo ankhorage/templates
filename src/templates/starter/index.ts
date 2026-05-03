@@ -8,4 +8,4 @@ export {
   type StarterTemplateSelection,
   type TemplateKind,
   type TemplateSeed,
-} from './starter';
+} from './starter.template';

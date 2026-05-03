@@ -1,4 +1,4 @@
-import type { AppManifest, UiNode } from '@ankhorage/contracts';
+import type { AppCategory, AppManifest, UiNode } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
 import {
@@ -6,11 +6,63 @@ import {
   CATEGORY_PRESETS,
   createCategoryAppManifest,
   createStarterTemplate,
+  type TemplateSeed,
 } from '../src/index';
+import { listStarterTemplates } from '../src/templates/starter/starter.registry';
 
 function collectNodeTypes(node: UiNode): string[] {
   return [node.type, ...(node.children?.flatMap(collectNodeTypes) ?? [])];
 }
+
+function createSeed(category: AppCategory): TemplateSeed {
+  const preset = CATEGORY_PRESETS[category];
+
+  return {
+    category,
+    categoryLabel: preset.label,
+    appName: preset.defaultName,
+    slug: preset.defaultSlug,
+    summary: preset.summary,
+    focusAreas: preset.focusAreas,
+    primaryColor: preset.primaryColor,
+    harmony: preset.harmony,
+    systemTone: preset.systemTone,
+  };
+}
+
+function assertManifestIntegrity(manifest: AppManifest) {
+  expect(manifest.metadata.themeId).toBe(manifest.activeThemeId);
+  expect(manifest.themes.some((theme) => theme.id === manifest.activeThemeId)).toBe(true);
+
+  const routeNames = manifest.navigator.routes.map((route) => route.name);
+  const { initialRouteName } = manifest.navigator;
+  expect(initialRouteName).toBeDefined();
+
+  if (initialRouteName) {
+    expect(routeNames).toContain(initialRouteName);
+  }
+
+  for (const route of manifest.navigator.routes) {
+    expect(route.screenId).toBeDefined();
+    expect(route.screenId ? manifest.screens[route.screenId] : undefined).toBeDefined();
+  }
+
+  for (const screen of Object.values(manifest.screens)) {
+    expect(screen.id).toBeTruthy();
+    expect(screen.name).toBeTruthy();
+    expect(screen.title).toBeTruthy();
+    expect(screen.description).toBeTruthy();
+    expect(screen.root.id).toBeTruthy();
+    expect(screen.root.type).toBeTruthy();
+  }
+}
+
+const CATEGORY_SPECIFIC_ROUTE_LABELS: Partial<Record<AppCategory, readonly string[]>> = {
+  food_drink: ['Discover', 'Menu', 'Reservations', 'Orders', 'Profile'],
+  health_fitness: ['Today', 'Plans', 'Progress', 'Coach', 'Profile'],
+  shopping_commerce: ['Browse', 'Search', 'Sell', 'Orders', 'Profile'],
+  social_community: ['Feed', 'Groups', 'Messages', 'Profile', 'Settings'],
+};
 
 describe('createCategoryAppManifest', () => {
   test('builds a manifest for every category preset', () => {
@@ -23,12 +75,25 @@ describe('createCategoryAppManifest', () => {
       expect(manifest.themes[0]?.light.primaryColor).toBe(preset.primaryColor);
       expect(manifest.themes[0]?.light.harmony).toBe(preset.harmony);
       expect(manifest.themes[0]?.light.systemTone).toBe(preset.systemTone);
-      expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
-        'index',
-        'details',
-        'settings',
-        'sign-in',
-      ]);
+      assertManifestIntegrity(manifest);
+
+      const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
+
+      if (categoryRouteLabels) {
+        expect(manifest.navigator.routes.map((route) => route.label ?? '')).toEqual([
+          ...categoryRouteLabels,
+        ]);
+        expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
+        expect(manifest.navigator.routes.every((route) => route.icon)).toBe(true);
+      } else {
+        expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
+          'index',
+          'details',
+          'settings',
+          'sign-in',
+        ]);
+      }
+
       expect(manifest.settings.authFlow.signInRoute).toBe('sign-in');
       expect(manifest.settings.authFlow.signUpRoute).toBe('sign-up');
       expect(manifest.settings.authFlow.signOutRoute).toBe('sign-out');
@@ -113,5 +178,96 @@ describe('createStarterTemplate', () => {
     expect(nodeTypes).not.toContain('Container');
     expect(nodeTypes).not.toContain('Stack');
     expect(nodeTypes).not.toContain('Heading');
+  });
+
+  test('falls back to the generic starter for unregistered categories', () => {
+    const manifest = createStarterTemplate(createSeed('developer_tools'));
+
+    expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
+      'index',
+      'details',
+      'settings',
+      'sign-in',
+    ]);
+    expect(manifest.screens['developer_tools-starter-sign-in']).toBeDefined();
+  });
+
+  test('falls back to the generic starter for unknown runtime categories', () => {
+    const seed: TemplateSeed = {
+      ...createSeed('developer_tools'),
+      category: 'unknown_category' as TemplateSeed['category'],
+      categoryLabel: 'Unknown Category',
+      appName: 'Unknown App',
+      slug: 'unknown-app',
+    };
+    const manifest = createStarterTemplate(seed);
+
+    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
+      'Home',
+      'Details',
+      'Settings',
+      'Sign in',
+    ]);
+    expect(manifest.metadata.slug).toBe('unknown-app');
+  });
+
+  test('uses category default when a requested template id is unknown', () => {
+    const manifest = createStarterTemplate(createSeed('social_community'), {
+      templateId: 'missing-template',
+    });
+
+    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
+      'Feed',
+      'Groups',
+      'Messages',
+      'Profile',
+      'Settings',
+    ]);
+  });
+
+  test('selects different social community template variants', () => {
+    const community = createStarterTemplate(createSeed('social_community'), {
+      templateId: 'community',
+    });
+    const creator = createStarterTemplate(createSeed('social_community'), {
+      templateId: 'creator',
+    });
+
+    expect(community.navigator.routes.map((route) => route.label)).toEqual([
+      'Feed',
+      'Groups',
+      'Messages',
+      'Profile',
+      'Settings',
+    ]);
+    expect(creator.navigator.routes.map((route) => route.label)).toEqual([
+      'Studio',
+      'Posts',
+      'Audience',
+      'Insights',
+      'Settings',
+    ]);
+    expect(community.navigator.routes.map((route) => route.label)).not.toEqual(
+      creator.navigator.routes.map((route) => route.label),
+    );
+  });
+
+  test('creates valid manifests for every registered category template', () => {
+    const registeredCategories: AppCategory[] = [
+      'food_drink',
+      'health_fitness',
+      'shopping_commerce',
+      'social_community',
+    ];
+
+    for (const category of registeredCategories) {
+      for (const template of listStarterTemplates(category)) {
+        const manifest = createStarterTemplate(createSeed(category), { templateId: template.id });
+
+        assertManifestIntegrity(manifest);
+        expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
+        expect(manifest.navigator.routes.every((route) => route.icon)).toBe(true);
+      }
+    }
   });
 });
