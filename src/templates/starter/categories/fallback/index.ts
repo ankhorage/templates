@@ -7,7 +7,7 @@ export const fallbackStarterTemplates = [
   {
     id: 'default',
     label: 'Generic starter',
-    description: 'The original Home, Details, Settings, and Sign in starter manifest.',
+    description: 'The original Home, Details, and Settings starter manifest.',
     create: createFallbackStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
