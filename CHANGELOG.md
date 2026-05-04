@@ -1,5 +1,13 @@
 # @ankhorage/templates
 
+## 1.1.2
+
+### Patch Changes
+
+- 061fb82: update @ankhorage/zora & @ankhorage/contracts
+- 81c8841: Rename systemTone to colorTone
+- 9e397ea: Update @ankhorage/zora & @ankhorage/contracts"
+
 ## 1.1.1
 
 ### Patch Changes
