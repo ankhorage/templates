@@ -20,7 +20,7 @@ export interface TemplateSeed {
   focusAreas?: readonly [string, string, string];
   primaryColor: string;
   harmony: ThemeConfig['light']['harmony'];
-  systemTone: ThemeConfig['light']['systemTone'];
+  colorTone: ThemeConfig['light']['colorTone'];
   version?: string;
   themeId?: string;
   themeName?: string;

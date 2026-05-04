@@ -26,7 +26,7 @@ function createSeed(category: AppCategory): TemplateSeed {
     focusAreas: preset.focusAreas,
     primaryColor: preset.primaryColor,
     harmony: preset.harmony,
-    systemTone: preset.systemTone,
+    colorTone: preset.colorTone,
   };
 }
 
@@ -74,7 +74,7 @@ describe('createCategoryAppManifest', () => {
       expect(manifest.metadata.slug).toBe(preset.defaultSlug);
       expect(manifest.themes[0]?.light.primaryColor).toBe(preset.primaryColor);
       expect(manifest.themes[0]?.light.harmony).toBe(preset.harmony);
-      expect(manifest.themes[0]?.light.systemTone).toBe(preset.systemTone);
+      expect(manifest.themes[0]?.light.colorTone).toBe(preset.colorTone);
       assertManifestIntegrity(manifest);
 
       const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
@@ -128,12 +128,12 @@ describe('createCategoryAppManifest', () => {
           light: {
             primaryColor: '#0F766E',
             harmony: 'monochromatic',
-            systemTone: 'neutral',
+            colorTone: 'neutral',
           },
           dark: {
             primaryColor: '#0F766E',
             harmony: 'monochromatic',
-            systemTone: 'neutral',
+            colorTone: 'neutral',
           },
         },
       ],
@@ -162,7 +162,7 @@ describe('createStarterTemplate', () => {
       focusAreas: ['Build status', 'Incident queue', 'Developer settings'],
       primaryColor: '#7C3AED',
       harmony: 'triadic',
-      systemTone: 'jewel',
+      colorTone: 'jewel',
     });
 
     const nodeTypes = Object.values(manifest.screens).flatMap((screen) =>

@@ -49,10 +49,10 @@ const TEMPLATE_FACTORIES: Record<
         preset.primaryColor,
       ),
       harmony: resolveThemeModeValue(overrides, (theme) => theme.light.harmony, preset.harmony),
-      systemTone: resolveThemeModeValue(
+      colorTone: resolveThemeModeValue(
         overrides,
-        (theme) => theme.light.systemTone,
-        preset.systemTone,
+        (theme) => theme.light.colorTone,
+        preset.colorTone,
       ),
       ...(version ? { version } : {}),
       ...(themeId ? { themeId } : {}),
