@@ -169,10 +169,7 @@ describe('createCategoryAppManifest', () => {
       primaryColor: '#0F766E',
       harmony: 'monochromatic',
     });
-    expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual([
-      'harmony',
-      'primaryColor',
-    ]);
+    expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual(['harmony', 'primaryColor']);
   });
 });
 
