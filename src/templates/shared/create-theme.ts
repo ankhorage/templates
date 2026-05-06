@@ -5,7 +5,6 @@ import { DEFAULT_THEME_ID, DEFAULT_THEME_NAME } from '../../internal/defaults';
 export interface CreateThemeSeed {
   primaryColor: string;
   harmony: ThemeConfig['light']['harmony'];
-  colorTone: ThemeConfig['light']['colorTone'];
   themeId?: string;
   themeName?: string;
 }
@@ -19,12 +18,10 @@ export function createTheme(seed: CreateThemeSeed): ThemeConfig {
     light: {
       primaryColor: seed.primaryColor,
       harmony: seed.harmony,
-      colorTone: seed.colorTone,
     },
     dark: {
       primaryColor: seed.primaryColor,
       harmony: seed.harmony,
-      colorTone: seed.colorTone,
     },
   };
 }
