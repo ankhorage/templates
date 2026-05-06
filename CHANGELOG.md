@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.1.4
+
+### Patch Changes
+
+- c3b1933: Update Ankhorage package dependencies to the latest published Contracts/ZORA releases and remove serialized `colorTone` from generated template manifests, presets, seeds, and tests.
+
 ## 1.1.3
 
 ### Patch Changes
