@@ -26,7 +26,6 @@ function createSeed(category: AppCategory): TemplateSeed {
     focusAreas: preset.focusAreas,
     primaryColor: preset.primaryColor,
     harmony: preset.harmony,
-    colorTone: preset.colorTone,
   };
 }
 
@@ -72,9 +71,22 @@ describe('createCategoryAppManifest', () => {
 
       expect(manifest.metadata.name).toBe(preset.defaultName);
       expect(manifest.metadata.slug).toBe(preset.defaultSlug);
-      expect(manifest.themes[0]?.light.primaryColor).toBe(preset.primaryColor);
-      expect(manifest.themes[0]?.light.harmony).toBe(preset.harmony);
-      expect(manifest.themes[0]?.light.colorTone).toBe(preset.colorTone);
+      expect(manifest.themes[0]?.light).toEqual({
+        primaryColor: preset.primaryColor,
+        harmony: preset.harmony,
+      });
+      expect(Object.keys(manifest.themes[0]?.light ?? {}).sort()).toEqual([
+        'harmony',
+        'primaryColor',
+      ]);
+      expect(manifest.themes[0]?.dark).toEqual({
+        primaryColor: preset.primaryColor,
+        harmony: preset.harmony,
+      });
+      expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual([
+        'harmony',
+        'primaryColor',
+      ]);
       assertManifestIntegrity(manifest);
 
       const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
@@ -128,12 +140,10 @@ describe('createCategoryAppManifest', () => {
           light: {
             primaryColor: '#0F766E',
             harmony: 'monochromatic',
-            colorTone: 'neutral',
           },
           dark: {
             primaryColor: '#0F766E',
             harmony: 'monochromatic',
-            colorTone: 'neutral',
           },
         },
       ],
@@ -147,7 +157,22 @@ describe('createCategoryAppManifest', () => {
     expect(manifest.infra.networking?.domain).toBe('money.example.test');
     expect(manifest.activeThemeMode).toBe('dark');
     expect(manifest.themes[0]?.id).toBe('brand');
-    expect(manifest.themes[0]?.light.primaryColor).toBe('#0F766E');
+    expect(manifest.themes[0]?.light).toEqual({
+      primaryColor: '#0F766E',
+      harmony: 'monochromatic',
+    });
+    expect(Object.keys(manifest.themes[0]?.light ?? {}).sort()).toEqual([
+      'harmony',
+      'primaryColor',
+    ]);
+    expect(manifest.themes[0]?.dark).toEqual({
+      primaryColor: '#0F766E',
+      harmony: 'monochromatic',
+    });
+    expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual([
+      'harmony',
+      'primaryColor',
+    ]);
   });
 });
 
@@ -162,7 +187,6 @@ describe('createStarterTemplate', () => {
       focusAreas: ['Build status', 'Incident queue', 'Developer settings'],
       primaryColor: '#7C3AED',
       harmony: 'triadic',
-      colorTone: 'jewel',
     });
 
     const nodeTypes = Object.values(manifest.screens).flatMap((screen) =>
