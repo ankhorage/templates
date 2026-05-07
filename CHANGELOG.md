@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.1.5
+
+### Patch Changes
+
+- ef3a58a: Update ZORA & CONTRACTS
+
 ## 1.1.4
 
 ### Patch Changes
