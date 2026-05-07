@@ -2,4 +2,4 @@
 '@ankhorage/templates': patch
 ---
 
-Update ZORA
+update ZORA
