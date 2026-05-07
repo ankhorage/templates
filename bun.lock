@@ -6,7 +6,7 @@
       "name": "@ankhorage/templates",
       "dependencies": {
         "@ankhorage/contracts": "^1.1.0",
-        "@ankhorage/zora": "^1.0.3",
+        "@ankhorage/zora": "^1.0.4",
       },
       "devDependencies": {
         "@ankhorage/devtools": "^1.0.1",
@@ -24,9 +24,9 @@
 
     "@ankhorage/devtools": ["@ankhorage/devtools@1.0.1", "", { "dependencies": { "@eslint/js": "^10.0.1", "eslint": "^10.2.0", "eslint-config-prettier": "^10.1.8", "eslint-plugin-import": "^2.32.0", "eslint-plugin-prettier": "^5.5.5", "eslint-plugin-simple-import-sort": "^12.1.1", "eslint-plugin-unused-imports": "^4.4.1", "prettier": "^3.8.1", "typescript-eslint": "^8.24.0" } }, "sha512-Qpr+TL7biJnUwIYvZtuvG/oXq43+UyBoM+Q61pVDCmTA13Uu/a/A669U9fqJprFAicJfBDWBi/NJ7WvVH+ud/Q=="],
 
-    "@ankhorage/surface": ["@ankhorage/surface@1.0.0", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.2", "@ankhorage/contracts": "^1.1.0" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "expo-font"] }, "sha512-woNNOsQVTMkddhcbAAOww46qY/MU/aC2wNvQ+Jj3lPnVr+iVG9tCIGfHZ7hKt7TYliRCqjBX7TNM/+m/PN/WFA=="],
+    "@ankhorage/surface": ["@ankhorage/surface@1.0.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.3", "@ankhorage/contracts": "^1.1.0" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "expo-font"] }, "sha512-0hwInhKXb6jKYAahI/KueV9cSxWrVkO+neC3raJKDSyQMajkathmbpD9LdxApJarCDunROKuxDbcFG5YybQ4TQ=="],
 
-    "@ankhorage/zora": ["@ankhorage/zora@1.0.3", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.3", "@ankhorage/contracts": "^1.1.0", "@ankhorage/surface": "^1.0.0" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "@react-native-picker/picker": ">=2.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "@react-native-picker/picker", "expo-font"] }, "sha512-dlw9N2S94/m0TgPyvxiP/d00Zbsctl6jUMJF8TBZ+oliHt7hgaxjpMfxPotSw9cYRZXgBgQk/uUQLW5KOJDL2g=="],
+    "@ankhorage/zora": ["@ankhorage/zora@1.0.4", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.3", "@ankhorage/contracts": "^1.1.1", "@ankhorage/surface": "^1.0.1" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "@react-native-picker/picker": ">=2.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "@react-native-picker/picker", "expo-font"] }, "sha512-EOOT6k4ILqUAWxvE092LA/anHeNqNLeIejC6YUjqxCgnK5cUMldLs1wdI+35VlUQOXq3IYqSUvQ7skOdWqthlw=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
 
@@ -972,7 +972,13 @@
 
     "yocto-queue": ["yocto-queue@0.1.0", "", {}, "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="],
 
+    "@ankhorage/surface/@ankhorage/color-theory": ["@ankhorage/color-theory@0.0.3", "", { "dependencies": { "culori": "^4.0.2" } }, "sha512-obKcFrEbnhbsrYEOSCDnH4wSEobB+wTIxaUEXDOlq69Oirwzk7Z2Rsu0drmROCnY14ITpCWvE9BEdeCezzLVOg=="],
+
+    "@ankhorage/surface/@ankhorage/contracts": ["@ankhorage/contracts@1.1.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.3" } }, "sha512-IvUy5CGTQDyZxCkxQlclycEyQX2PHynu2pVwBdE0USgg0FXpdY2WtBk9VBEquIxlFkVgQ6EgoZm5ibps7yn14A=="],
+
     "@ankhorage/zora/@ankhorage/color-theory": ["@ankhorage/color-theory@0.0.3", "", { "dependencies": { "culori": "^4.0.2" } }, "sha512-obKcFrEbnhbsrYEOSCDnH4wSEobB+wTIxaUEXDOlq69Oirwzk7Z2Rsu0drmROCnY14ITpCWvE9BEdeCezzLVOg=="],
+
+    "@ankhorage/zora/@ankhorage/contracts": ["@ankhorage/contracts@1.1.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.3" } }, "sha512-IvUy5CGTQDyZxCkxQlclycEyQX2PHynu2pVwBdE0USgg0FXpdY2WtBk9VBEquIxlFkVgQ6EgoZm5ibps7yn14A=="],
 
     "@babel/core/json5": ["json5@2.2.3", "", { "bin": { "json5": "lib/cli.js" } }, "sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg=="],
 
