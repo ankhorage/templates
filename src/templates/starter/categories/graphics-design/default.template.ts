@@ -19,4 +19,3 @@ export function createGraphicsDesignStarterTemplate(seed: TemplateSeed): AppMani
     screens: createGraphicsDesignScreens(seed, idPrefix, screenIds),
   });
 }
-

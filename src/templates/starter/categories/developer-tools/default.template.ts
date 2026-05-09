@@ -19,4 +19,3 @@ export function createDeveloperToolsStarterTemplate(seed: TemplateSeed): AppMani
     screens: createDeveloperToolsScreens(seed, idPrefix, screenIds),
   });
 }
-

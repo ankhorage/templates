@@ -66,4 +66,3 @@ export function createReferenceNavigator(screenIds: ReferenceScreenIds): AppMani
     ],
   };
 }
-

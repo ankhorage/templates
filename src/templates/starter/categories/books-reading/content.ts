@@ -97,4 +97,3 @@ export const booksReadingContent = {
     description: 'Model language, formats, and discovery preferences for a reading app.',
   },
 } as const;
-

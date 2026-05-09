@@ -2,7 +2,8 @@ export const weatherContent = {
   now: {
     eyebrow: 'Current conditions',
     title: 'Weather now',
-    description: 'Seed the current conditions surface with summary, feels-like, and quick insights.',
+    description:
+      'Seed the current conditions surface with summary, feels-like, and quick insights.',
     sections: [
       {
         title: 'Right now',
@@ -92,4 +93,3 @@ export const weatherContent = {
     ],
   },
 } as const;
-

@@ -19,4 +19,3 @@ export function createSportsStarterTemplate(seed: TemplateSeed): AppManifest {
     screens: createSportsScreens(seed, idPrefix, screenIds),
   });
 }
-

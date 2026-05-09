@@ -11,4 +11,3 @@ export const photoVideoStarterTemplates = [
     create: createPhotoVideoStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

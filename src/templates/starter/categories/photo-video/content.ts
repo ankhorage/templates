@@ -97,4 +97,3 @@ export const photoVideoContent = {
     description: 'Model quality, storage, and publishing defaults.',
   },
 } as const;
-

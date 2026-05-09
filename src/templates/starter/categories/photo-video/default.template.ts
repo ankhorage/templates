@@ -19,4 +19,3 @@ export function createPhotoVideoStarterTemplate(seed: TemplateSeed): AppManifest
     screens: createPhotoVideoScreens(seed, idPrefix, screenIds),
   });
 }
-

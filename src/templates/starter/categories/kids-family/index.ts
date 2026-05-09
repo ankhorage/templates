@@ -7,8 +7,8 @@ export const kidsFamilyStarterTemplates = [
   {
     id: 'default',
     label: 'Family hub',
-    description: 'A home, routines, discovery, favorites, and parent controls starter for family apps.',
+    description:
+      'A home, routines, discovery, favorites, and parent controls starter for family apps.',
     create: createKidsFamilyStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

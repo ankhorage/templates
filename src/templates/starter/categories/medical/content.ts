@@ -2,7 +2,8 @@ export const medicalContent = {
   appointments: {
     eyebrow: 'Appointments',
     title: 'Upcoming care',
-    description: 'Seed the appointment surface with schedule, reminders, and visit prep placeholders.',
+    description:
+      'Seed the appointment surface with schedule, reminders, and visit prep placeholders.',
     sections: [
       {
         title: 'Upcoming visits',
@@ -11,7 +12,8 @@ export const medicalContent = {
           {
             eyebrow: 'Upcoming',
             title: 'Checkup',
-            description: 'A placeholder appointment card with time, location, and preparation notes.',
+            description:
+              'A placeholder appointment card with time, location, and preparation notes.',
           },
           {
             eyebrow: 'Reminder',
@@ -97,4 +99,3 @@ export const medicalContent = {
     description: 'Model communication preferences and intake defaults.',
   },
 } as const;
-

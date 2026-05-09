@@ -11,4 +11,3 @@ export const gamesStarterTemplates = [
     create: createGamesStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

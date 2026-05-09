@@ -7,8 +7,8 @@ export const lifestyleStarterTemplates = [
   {
     id: 'default',
     label: 'Lifestyle dashboard',
-    description: 'A dashboard, collections, plans, explore, and profile starter for lifestyle apps.',
+    description:
+      'A dashboard, collections, plans, explore, and profile starter for lifestyle apps.',
     create: createLifestyleStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

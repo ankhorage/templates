@@ -20,7 +20,9 @@ export function createFinanceMoneyScreenIds(idPrefix: string): FinanceMoneyScree
   };
 }
 
-export function createFinanceMoneyNavigator(screenIds: FinanceMoneyScreenIds): AppManifest['navigator'] {
+export function createFinanceMoneyNavigator(
+  screenIds: FinanceMoneyScreenIds,
+): AppManifest['navigator'] {
   return {
     type: 'tabs',
     initialRouteName: 'index',
@@ -58,4 +60,3 @@ export function createFinanceMoneyNavigator(screenIds: FinanceMoneyScreenIds): A
     ],
   };
 }
-

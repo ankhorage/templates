@@ -19,4 +19,3 @@ export function createUtilitiesToolsStarterTemplate(seed: TemplateSeed): AppMani
     screens: createUtilitiesToolsScreens(seed, idPrefix, screenIds),
   });
 }
-

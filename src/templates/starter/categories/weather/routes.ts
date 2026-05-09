@@ -50,4 +50,3 @@ export function createWeatherNavigator(screenIds: WeatherScreenIds): AppManifest
     ],
   };
 }
-

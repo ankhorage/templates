@@ -7,8 +7,8 @@ export const developerToolsStarterTemplates = [
   {
     id: 'default',
     label: 'Engineering console',
-    description: 'A dashboard, builds, incidents, environments, deployments, and settings starter for developer tooling.',
+    description:
+      'A dashboard, builds, incidents, environments, deployments, and settings starter for developer tooling.',
     create: createDeveloperToolsStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

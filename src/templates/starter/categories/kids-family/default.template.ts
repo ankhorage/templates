@@ -19,4 +19,3 @@ export function createKidsFamilyStarterTemplate(seed: TemplateSeed): AppManifest
     screens: createKidsFamilyScreens(seed, idPrefix, screenIds),
   });
 }
-

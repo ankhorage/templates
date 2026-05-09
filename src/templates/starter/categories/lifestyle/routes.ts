@@ -58,4 +58,3 @@ export function createLifestyleNavigator(screenIds: LifestyleScreenIds): AppMani
     ],
   };
 }
-

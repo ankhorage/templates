@@ -53,7 +53,8 @@ export const musicAudioContent = {
   player: {
     eyebrow: 'Now playing',
     title: 'Playback surface',
-    description: 'Model playback state, queue, and quick actions without implementing audio engines.',
+    description:
+      'Model playback state, queue, and quick actions without implementing audio engines.',
     sections: [
       {
         title: 'Playback states',
@@ -79,4 +80,3 @@ export const musicAudioContent = {
     description: 'Model playback quality, downloads, and notification defaults.',
   },
 } as const;
-

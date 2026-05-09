@@ -11,4 +11,3 @@ export const booksReadingStarterTemplates = [
     create: createBooksReadingStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

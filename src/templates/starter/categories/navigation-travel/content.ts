@@ -97,4 +97,3 @@ export const navigationTravelContent = {
     description: 'Model travel preferences, alerts, and saved traveler details.',
   },
 } as const;
-

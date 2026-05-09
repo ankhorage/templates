@@ -1,5 +1,5 @@
 ---
-"@ankhorage/templates": minor
+'@ankhorage/templates': minor
 ---
 
 Expand starter template coverage to every `AppCategory`.

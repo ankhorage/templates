@@ -67,14 +67,18 @@ export function createStarterContentScreen(args: {
     name: args.name,
     title: args.content.title,
     description: args.content.description,
-    root: createPage(`${args.idPrefix}-${args.name.toLowerCase()}-page`, { width: args.pageWidth ?? 'wide' }, [
-      createHeader(`${args.idPrefix}-${args.name.toLowerCase()}-header`, {
-        eyebrow: args.content.eyebrow,
-        title: args.content.title,
-        description: args.content.description,
-      }),
-      ...sectionNodes,
-    ]),
+    root: createPage(
+      `${args.idPrefix}-${args.name.toLowerCase()}-page`,
+      { width: args.pageWidth ?? 'wide' },
+      [
+        createHeader(`${args.idPrefix}-${args.name.toLowerCase()}-header`, {
+          eyebrow: args.content.eyebrow,
+          title: args.content.title,
+          description: args.content.description,
+        }),
+        ...sectionNodes,
+      ],
+    ),
   });
 }
 
@@ -118,4 +122,3 @@ export function createStarterSettingsScreen(args: {
     ]),
   });
 }
-

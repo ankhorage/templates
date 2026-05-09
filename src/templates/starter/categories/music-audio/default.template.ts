@@ -19,4 +19,3 @@ export function createMusicAudioStarterTemplate(seed: TemplateSeed): AppManifest
     screens: createMusicAudioScreens(seed, idPrefix, screenIds),
   });
 }
-

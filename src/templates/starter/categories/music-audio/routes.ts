@@ -20,7 +20,9 @@ export function createMusicAudioScreenIds(idPrefix: string): MusicAudioScreenIds
   };
 }
 
-export function createMusicAudioNavigator(screenIds: MusicAudioScreenIds): AppManifest['navigator'] {
+export function createMusicAudioNavigator(
+  screenIds: MusicAudioScreenIds,
+): AppManifest['navigator'] {
   return {
     type: 'tabs',
     initialRouteName: 'index',
@@ -58,4 +60,3 @@ export function createMusicAudioNavigator(screenIds: MusicAudioScreenIds): AppMa
     ],
   };
 }
-

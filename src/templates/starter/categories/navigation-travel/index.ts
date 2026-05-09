@@ -11,4 +11,3 @@ export const navigationTravelStarterTemplates = [
     create: createNavigationTravelStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

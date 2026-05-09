@@ -20,7 +20,9 @@ export function createPhotoVideoScreenIds(idPrefix: string): PhotoVideoScreenIds
   };
 }
 
-export function createPhotoVideoNavigator(screenIds: PhotoVideoScreenIds): AppManifest['navigator'] {
+export function createPhotoVideoNavigator(
+  screenIds: PhotoVideoScreenIds,
+): AppManifest['navigator'] {
   return {
     type: 'tabs',
     initialRouteName: 'index',
@@ -58,4 +60,3 @@ export function createPhotoVideoNavigator(screenIds: PhotoVideoScreenIds): AppMa
     ],
   };
 }
-

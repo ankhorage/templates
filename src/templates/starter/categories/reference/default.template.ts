@@ -19,4 +19,3 @@ export function createReferenceStarterTemplate(seed: TemplateSeed): AppManifest 
     screens: createReferenceScreens(seed, idPrefix, screenIds),
   });
 }
-

@@ -120,4 +120,3 @@ export const graphicsDesignContent = {
     description: 'Model review defaults, exports, and collaboration preferences.',
   },
 } as const;
-

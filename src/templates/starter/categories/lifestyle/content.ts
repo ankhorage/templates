@@ -97,4 +97,3 @@ export const lifestyleContent = {
     description: 'Model notification, membership, and privacy defaults for a lifestyle app.',
   },
 } as const;
-

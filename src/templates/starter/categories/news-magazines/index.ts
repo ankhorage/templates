@@ -11,4 +11,3 @@ export const newsMagazinesStarterTemplates = [
     create: createNewsMagazinesStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

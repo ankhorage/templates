@@ -120,4 +120,3 @@ export const businessProductivityContent = {
     description: 'Model the defaults that shape projects, tasks, and reporting.',
   },
 } as const;
-

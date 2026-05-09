@@ -11,4 +11,3 @@ export const weatherStarterTemplates = [
     create: createWeatherStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

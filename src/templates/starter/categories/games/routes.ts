@@ -58,4 +58,3 @@ export function createGamesNavigator(screenIds: GamesScreenIds): AppManifest['na
     ],
   };
 }
-

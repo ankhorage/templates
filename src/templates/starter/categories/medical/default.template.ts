@@ -19,4 +19,3 @@ export function createMedicalStarterTemplate(seed: TemplateSeed): AppManifest {
     screens: createMedicalScreens(seed, idPrefix, screenIds),
   });
 }
-

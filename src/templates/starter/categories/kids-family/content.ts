@@ -94,7 +94,7 @@ export const kidsFamilyContent = {
   parents: {
     eyebrow: 'Parent controls',
     title: 'Safety and account controls',
-    description: 'Model guardian settings and safety defaults before integrating auth/profile wiring.',
+    description:
+      'Model guardian settings and safety defaults before integrating auth/profile wiring.',
   },
 } as const;
-

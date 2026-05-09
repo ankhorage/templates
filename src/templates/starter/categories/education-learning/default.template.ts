@@ -19,4 +19,3 @@ export function createEducationLearningStarterTemplate(seed: TemplateSeed): AppM
     screens: createEducationLearningScreens(seed, idPrefix, screenIds),
   });
 }
-

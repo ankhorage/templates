@@ -19,4 +19,3 @@ export function createNewsMagazinesStarterTemplate(seed: TemplateSeed): AppManif
     screens: createNewsMagazinesScreens(seed, idPrefix, screenIds),
   });
 }
-

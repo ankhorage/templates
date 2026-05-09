@@ -19,4 +19,3 @@ export function createEntertainmentMediaStarterTemplate(seed: TemplateSeed): App
     screens: createEntertainmentMediaScreens(seed, idPrefix, screenIds),
   });
 }
-

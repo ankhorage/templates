@@ -20,7 +20,9 @@ export function createKidsFamilyScreenIds(idPrefix: string): KidsFamilyScreenIds
   };
 }
 
-export function createKidsFamilyNavigator(screenIds: KidsFamilyScreenIds): AppManifest['navigator'] {
+export function createKidsFamilyNavigator(
+  screenIds: KidsFamilyScreenIds,
+): AppManifest['navigator'] {
   return {
     type: 'tabs',
     initialRouteName: 'index',
@@ -58,4 +60,3 @@ export function createKidsFamilyNavigator(screenIds: KidsFamilyScreenIds): AppMa
     ],
   };
 }
-

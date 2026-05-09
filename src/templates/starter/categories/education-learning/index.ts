@@ -11,4 +11,3 @@ export const educationLearningStarterTemplates = [
     create: createEducationLearningStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

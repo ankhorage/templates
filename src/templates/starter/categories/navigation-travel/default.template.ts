@@ -19,4 +19,3 @@ export function createNavigationTravelStarterTemplate(seed: TemplateSeed): AppMa
     screens: createNavigationTravelScreens(seed, idPrefix, screenIds),
   });
 }
-

@@ -19,4 +19,3 @@ export function createFinanceMoneyStarterTemplate(seed: TemplateSeed): AppManife
     screens: createFinanceMoneyScreens(seed, idPrefix, screenIds),
   });
 }
-

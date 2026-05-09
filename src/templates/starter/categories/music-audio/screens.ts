@@ -43,33 +43,43 @@ export function createMusicAudioScreens(
             description: 'Seed a search bar and category chips before adding catalog wiring.',
           },
           [
-            createZoraNode(`${idPrefix}-search-panel`, 'Panel', {
-              title: 'Search catalog',
-              description: 'Use the input and filters to shape the search experience.',
-              tone: 'subtle',
-            }, [
-              createZoraNode(`${idPrefix}-search-field`, 'FormField', {
-                label: 'Search',
-                description: 'Search by song, artist, album, or podcast.',
-              }, [
-                createZoraNode(`${idPrefix}-search-input`, 'Input', {
-                  placeholder: 'Search...',
-                  size: 'm',
+            createZoraNode(
+              `${idPrefix}-search-panel`,
+              'Panel',
+              {
+                title: 'Search catalog',
+                description: 'Use the input and filters to shape the search experience.',
+                tone: 'subtle',
+              },
+              [
+                createZoraNode(
+                  `${idPrefix}-search-field`,
+                  'FormField',
+                  {
+                    label: 'Search',
+                    description: 'Search by song, artist, album, or podcast.',
+                  },
+                  [
+                    createZoraNode(`${idPrefix}-search-input`, 'Input', {
+                      placeholder: 'Search...',
+                      size: 'm',
+                    }),
+                  ],
+                ),
+                createZoraNode(`${idPrefix}-search-chip-1`, 'Card', {
+                  eyebrow: 'Filter',
+                  title: 'Songs',
+                  description: 'Reserve for result-scoping filters and sorting.',
+                  tone: 'outline',
                 }),
-              ]),
-              createZoraNode(`${idPrefix}-search-chip-1`, 'Card', {
-                eyebrow: 'Filter',
-                title: 'Songs',
-                description: 'Reserve for result-scoping filters and sorting.',
-                tone: 'outline',
-              }),
-              createZoraNode(`${idPrefix}-search-chip-2`, 'Card', {
-                eyebrow: 'Filter',
-                title: 'Artists',
-                description: 'Seed category chips without implementing the search engine.',
-                tone: 'outline',
-              }),
-            ]),
+                createZoraNode(`${idPrefix}-search-chip-2`, 'Card', {
+                  eyebrow: 'Filter',
+                  title: 'Artists',
+                  description: 'Seed category chips without implementing the search engine.',
+                  tone: 'outline',
+                }),
+              ],
+            ),
           ],
         ),
       ]),
@@ -118,4 +128,3 @@ export function createMusicAudioScreens(
     }),
   };
 }
-

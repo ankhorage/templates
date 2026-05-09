@@ -19,4 +19,3 @@ export function createBooksReadingStarterTemplate(seed: TemplateSeed): AppManife
     screens: createBooksReadingScreens(seed, idPrefix, screenIds),
   });
 }
-

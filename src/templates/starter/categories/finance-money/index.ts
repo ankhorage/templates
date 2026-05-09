@@ -7,8 +7,8 @@ export const financeMoneyStarterTemplates = [
   {
     id: 'default',
     label: 'Money dashboard',
-    description: 'An overview, accounts, transactions, budget, and insights starter for finance apps.',
+    description:
+      'An overview, accounts, transactions, budget, and insights starter for finance apps.',
     create: createFinanceMoneyStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

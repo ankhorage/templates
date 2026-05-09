@@ -11,4 +11,3 @@ export const musicAudioStarterTemplates = [
     create: createMusicAudioStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

@@ -19,4 +19,3 @@ export function createLifestyleStarterTemplate(seed: TemplateSeed): AppManifest 
     screens: createLifestyleScreens(seed, idPrefix, screenIds),
   });
 }
-

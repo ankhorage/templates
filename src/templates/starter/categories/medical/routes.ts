@@ -58,4 +58,3 @@ export function createMedicalNavigator(screenIds: MedicalScreenIds): AppManifest
     ],
   };
 }
-

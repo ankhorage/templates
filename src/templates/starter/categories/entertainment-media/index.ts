@@ -7,8 +7,8 @@ export const entertainmentMediaStarterTemplates = [
   {
     id: 'default',
     label: 'Streaming hub',
-    description: 'A discover, watchlist, now playing, library, and profile starter for entertainment apps.',
+    description:
+      'A discover, watchlist, now playing, library, and profile starter for entertainment apps.',
     create: createEntertainmentMediaStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

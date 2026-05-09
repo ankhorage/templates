@@ -7,8 +7,8 @@ export const medicalStarterTemplates = [
   {
     id: 'default',
     label: 'Care hub',
-    description: 'An appointments, care team, records, messages, and profile starter for medical experiences.',
+    description:
+      'An appointments, care team, records, messages, and profile starter for medical experiences.',
     create: createMedicalStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

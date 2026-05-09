@@ -7,8 +7,8 @@ export const graphicsDesignStarterTemplates = [
   {
     id: 'default',
     label: 'Creative workspace',
-    description: 'A dashboard, briefs, assets, reviews, brand, and settings starter for design workflows.',
+    description:
+      'A dashboard, briefs, assets, reviews, brand, and settings starter for design workflows.',
     create: createGraphicsDesignStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
-

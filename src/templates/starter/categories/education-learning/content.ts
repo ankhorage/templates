@@ -97,4 +97,3 @@ export const educationLearningContent = {
     description: 'Model pacing, reminders, and study settings for a learner.',
   },
 } as const;
-

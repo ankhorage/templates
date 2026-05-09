@@ -97,4 +97,3 @@ export const sportsContent = {
     description: 'Model favorite teams, alerts, and viewing preferences.',
   },
 } as const;
-

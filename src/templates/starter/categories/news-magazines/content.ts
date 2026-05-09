@@ -79,4 +79,3 @@ export const newsMagazinesContent = {
     description: 'Model topic preferences, digest frequency, and reading defaults.',
   },
 } as const;
-

@@ -58,4 +58,3 @@ export function createSportsNavigator(screenIds: SportsScreenIds): AppManifest['
     ],
   };
 }
-
