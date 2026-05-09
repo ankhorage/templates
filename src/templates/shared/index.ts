@@ -8,6 +8,13 @@ export { createTheme, type CreateThemeSeed } from './create-theme';
 export { createRoute, type ManifestNavigator, type ManifestRoute } from './route';
 export { createScreen } from './screen';
 export {
+  createStarterContentScreen,
+  createStarterSettingsScreen,
+  type StarterCardContent,
+  type StarterContentScreenContent,
+  type StarterSectionContent,
+} from './starter-screens';
+export {
   createHeader,
   createPage,
   createSection,
