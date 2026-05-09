@@ -57,10 +57,55 @@ function assertManifestIntegrity(manifest: AppManifest) {
 }
 
 const CATEGORY_SPECIFIC_ROUTE_LABELS: Partial<Record<AppCategory, readonly string[]>> = {
+  books_reading: ['Library', 'Discover', 'Lists', 'Notes', 'Profile'],
+  business_productivity: ['Dashboard', 'Projects', 'Tasks', 'Calendar', 'Reports', 'Settings'],
+  developer_tools: ['Dashboard', 'Builds', 'Incidents', 'Environments', 'Deployments', 'Settings'],
+  education_learning: ['Courses', 'Study', 'Practice', 'Progress', 'Profile'],
+  entertainment_media: ['Discover', 'Watchlist', 'Now', 'Library', 'Profile'],
+  finance_money: ['Overview', 'Accounts', 'Transactions', 'Budget', 'Insights'],
   food_drink: ['Discover', 'Menu', 'Reservations', 'Orders', 'Profile'],
+  games: ['Home', 'Quests', 'Inventory', 'Friends', 'Profile'],
+  graphics_design: ['Dashboard', 'Briefs', 'Assets', 'Reviews', 'Brand', 'Settings'],
   health_fitness: ['Today', 'Plans', 'Progress', 'Coach', 'Profile'],
+  kids_family: ['Home', 'Routines', 'Discover', 'Favorites', 'Parents'],
+  lifestyle: ['Dashboard', 'Collections', 'Plans', 'Explore', 'Profile'],
+  medical: ['Appointments', 'Care Team', 'Records', 'Messages', 'Profile'],
+  music_audio: ['Home', 'Search', 'Library', 'Player', 'Profile'],
+  navigation_travel: ['Destinations', 'Itinerary', 'Bookings', 'Map', 'Profile'],
+  news_magazines: ['Headlines', 'Topics', 'Saved', 'Search', 'Profile'],
+  photo_video: ['Capture', 'Library', 'Edit', 'Share', 'Profile'],
+  reference: ['Browse', 'Search', 'Categories', 'Saved', 'History', 'Settings'],
   shopping_commerce: ['Browse', 'Search', 'Sell', 'Orders', 'Profile'],
   social_community: ['Feed', 'Groups', 'Messages', 'Profile', 'Settings'],
+  sports: ['Scores', 'Schedule', 'Standings', 'Teams', 'Profile'],
+  utilities_tools: ['Dashboard', 'Tools', 'Shortcuts', 'Storage', 'Diagnostics', 'Settings'],
+  weather: ['Now', 'Forecast', 'Alerts', 'Locations'],
+};
+
+const CATEGORY_EXPECTED_NAVIGATORS: Record<AppCategory, AppManifest['navigator']['type']> = {
+  books_reading: 'tabs',
+  business_productivity: 'drawer',
+  developer_tools: 'drawer',
+  education_learning: 'tabs',
+  entertainment_media: 'tabs',
+  finance_money: 'tabs',
+  food_drink: 'tabs',
+  games: 'tabs',
+  graphics_design: 'drawer',
+  health_fitness: 'tabs',
+  kids_family: 'tabs',
+  lifestyle: 'tabs',
+  medical: 'tabs',
+  music_audio: 'tabs',
+  navigation_travel: 'tabs',
+  news_magazines: 'tabs',
+  photo_video: 'tabs',
+  reference: 'drawer',
+  shopping_commerce: 'tabs',
+  social_community: 'tabs',
+  sports: 'tabs',
+  utilities_tools: 'drawer',
+  weather: 'tabs',
 };
 
 describe('createCategoryAppManifest', () => {
@@ -91,18 +136,15 @@ describe('createCategoryAppManifest', () => {
 
       const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
 
-      if (categoryRouteLabels) {
-        expect(manifest.navigator.routes.map((route) => route.label ?? '')).toEqual([
-          ...categoryRouteLabels,
-        ]);
-        expect(manifest.navigator.routes.every((route) => route.icon)).toBe(true);
-      } else {
-        expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
-          'index',
-          'details',
-          'settings',
-        ]);
-      }
+      expect(categoryRouteLabels).toBeDefined();
+      expect(manifest.navigator.type).toBe(CATEGORY_EXPECTED_NAVIGATORS[category]);
+      expect(manifest.navigator.routes.map((route) => route.label ?? '')).toEqual([
+        ...(categoryRouteLabels ?? []),
+      ]);
+      expect(manifest.navigator.routes.every((route) => route.icon)).toBe(true);
+      expect(
+        manifest.navigator.routes.every((route) => route.icon?.provider === 'material-community'),
+      ).toBe(true);
 
       expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
 
@@ -200,13 +242,17 @@ describe('createStarterTemplate', () => {
     expect(nodeTypes).not.toContain('Heading');
   });
 
-  test('falls back to the generic starter for unregistered categories', () => {
+  test('builds a dedicated template for known AppCategory values', () => {
     const manifest = createStarterTemplate(createSeed('developer_tools'));
 
-    expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
-      'index',
-      'details',
-      'settings',
+    expect(manifest.navigator.type).toBe('drawer');
+    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
+      'Dashboard',
+      'Builds',
+      'Incidents',
+      'Environments',
+      'Deployments',
+      'Settings',
     ]);
     expect(manifest.screens['developer_tools-starter-sign-in']).toBeUndefined();
   });
@@ -271,20 +317,16 @@ describe('createStarterTemplate', () => {
   });
 
   test('creates valid manifests for every registered category template', () => {
-    const registeredCategories: AppCategory[] = [
-      'food_drink',
-      'health_fitness',
-      'shopping_commerce',
-      'social_community',
-    ];
-
-    for (const category of registeredCategories) {
+    for (const category of APP_CATEGORIES) {
       for (const template of listStarterTemplates(category)) {
         const manifest = createStarterTemplate(createSeed(category), { templateId: template.id });
 
         assertManifestIntegrity(manifest);
         expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
         expect(manifest.navigator.routes.every((route) => route.icon)).toBe(true);
+        expect(
+          manifest.navigator.routes.every((route) => route.icon?.provider === 'material-community'),
+        ).toBe(true);
       }
     }
   });
