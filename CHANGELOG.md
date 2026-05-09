@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.1.9
+
+### Patch Changes
+
+- f64788a: update packages
+
 ## 1.1.8
 
 ### Patch Changes
