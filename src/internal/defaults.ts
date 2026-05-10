@@ -9,6 +9,10 @@ export const BASE_INFRA: InfraManifest = {
     provider: 'supabase',
     tier: 'dev',
   },
+  storage: {
+    provider: 'auto',
+    buckets: ['media'],
+  },
   deployment: {
     target: 'minikube',
     monitoring: false,
