@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createKidsFamilyStarterTemplate } from './default.template';
 
-export { createKidsFamilyStarterTemplate } from './default.template';
-
 export const kidsFamilyStarterTemplates = [
   {
     id: 'default',
