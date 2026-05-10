@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createReferenceStarterTemplate } from './default.template';
 
-export { createReferenceStarterTemplate } from './default.template';
-
 export const referenceStarterTemplates = [
   {
     id: 'default',
