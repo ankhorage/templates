@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createMedicalStarterTemplate } from './default.template';
 
-export { createMedicalStarterTemplate } from './default.template';
-
 export const medicalStarterTemplates = [
   {
     id: 'default',
