@@ -41,8 +41,8 @@
     "version-packages": "changeset version"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^1.1.1",
-    "@ankhorage/zora": "^1.0.10"
+    "@ankhorage/contracts": "^1.2.0",
+    "@ankhorage/zora": "^1.1.0"
   },
   "devDependencies": {
     "@ankhorage/devtools": "^1.0.1",
