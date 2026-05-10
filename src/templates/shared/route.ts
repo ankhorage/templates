@@ -1,7 +1,6 @@
 import type { AppManifest, IconSpec, RouteDefinition } from '@ankhorage/contracts';
 
-export type ManifestNavigator = AppManifest['navigator'];
-export type ManifestRoute = RouteDefinition;
+type ManifestRoute = RouteDefinition;
 
 export function createRoute(args: {
   name: string;
