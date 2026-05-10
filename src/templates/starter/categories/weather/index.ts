@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createWeatherStarterTemplate } from './default.template';
 
-export { createWeatherStarterTemplate } from './default.template';
-
 export const weatherStarterTemplates = [
   {
     id: 'default',
