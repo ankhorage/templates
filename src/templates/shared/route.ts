@@ -1,4 +1,4 @@
-import type { AppManifest, IconSpec, RouteDefinition } from '@ankhorage/contracts';
+import type { IconSpec, RouteDefinition } from '@ankhorage/contracts';
 
 type ManifestRoute = RouteDefinition;
 
