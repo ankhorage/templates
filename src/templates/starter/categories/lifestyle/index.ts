@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createLifestyleStarterTemplate } from './default.template';
 
-export { createLifestyleStarterTemplate } from './default.template';
-
 export const lifestyleStarterTemplates = [
   {
     id: 'default',
