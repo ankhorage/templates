@@ -153,6 +153,10 @@ describe('createCategoryAppManifest', () => {
       expect(manifest.settings.authFlow.signOutRoute).toBe('sign-out');
       expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
       expect(manifest.infra.auth?.scope).toBe('global');
+      expect(manifest.infra.storage).toEqual({
+        provider: 'auto',
+        buckets: ['media'],
+      });
     }
   });
 
@@ -197,6 +201,10 @@ describe('createCategoryAppManifest', () => {
     expect(manifest.settings.localization.locales).toEqual(['de', 'en']);
     expect(manifest.infra.networking?.cdn).toBe(true);
     expect(manifest.infra.networking?.domain).toBe('money.example.test');
+    expect(manifest.infra.storage).toEqual({
+      provider: 'auto',
+      buckets: ['media'],
+    });
     expect(manifest.activeThemeMode).toBe('dark');
     expect(manifest.themes[0]?.id).toBe('brand');
     expect(manifest.themes[0]?.light).toEqual({
