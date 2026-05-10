@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createDeveloperToolsStarterTemplate } from './default.template';
 
-export { createDeveloperToolsStarterTemplate } from './default.template';
-
 export const developerToolsStarterTemplates = [
   {
     id: 'default',
