@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createBooksReadingStarterTemplate } from './default.template';
 
-export { createBooksReadingStarterTemplate } from './default.template';
-
 export const booksReadingStarterTemplates = [
   {
     id: 'default',
