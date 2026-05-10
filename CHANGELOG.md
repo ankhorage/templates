@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.4
+
+### Patch Changes
+
+- 96ebcb1: Add default storage infra to generated app manifests.
+
 ## 1.2.3
 
 ### Patch Changes
