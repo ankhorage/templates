@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createNavigationTravelStarterTemplate } from './default.template';
 
-export { createNavigationTravelStarterTemplate } from './default.template';
-
 export const navigationTravelStarterTemplates = [
   {
     id: 'default',
