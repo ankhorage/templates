@@ -2,7 +2,7 @@ import type { ThemeConfig } from '@ankhorage/contracts';
 
 import { DEFAULT_THEME_ID, DEFAULT_THEME_NAME } from '../../internal/defaults';
 
-export interface CreateThemeSeed {
+interface CreateThemeSeed {
   primaryColor: string;
   harmony: ThemeConfig['light']['harmony'];
   themeId?: string;
