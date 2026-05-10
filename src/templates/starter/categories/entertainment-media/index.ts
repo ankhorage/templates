@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createEntertainmentMediaStarterTemplate } from './default.template';
 
-export { createEntertainmentMediaStarterTemplate } from './default.template';
-
 export const entertainmentMediaStarterTemplates = [
   {
     id: 'default',

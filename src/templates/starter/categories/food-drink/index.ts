@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createFoodDrinkStarterTemplate } from './default.template';
 
-export { createFoodDrinkStarterTemplate } from './default.template';
-
 export const foodDrinkStarterTemplates = [
   {
     id: 'default',

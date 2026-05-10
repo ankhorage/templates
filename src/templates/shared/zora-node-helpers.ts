@@ -1,7 +1,7 @@
 import { createZoraNode, type ZoraNode, type ZoraNodePropsByType } from '../../internal/zora-nodes';
 
 export { createZoraNode };
-export type { ZoraNode, ZoraNodeType } from '../../internal/zora-nodes';
+export type { ZoraNode } from '../../internal/zora-nodes';
 
 export function createPage(
   id: string,

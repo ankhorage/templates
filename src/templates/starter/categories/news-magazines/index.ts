@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createNewsMagazinesStarterTemplate } from './default.template';
 
-export { createNewsMagazinesStarterTemplate } from './default.template';
-
 export const newsMagazinesStarterTemplates = [
   {
     id: 'default',

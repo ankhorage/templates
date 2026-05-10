@@ -2,9 +2,6 @@ import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createSocialCommunityTemplate } from './community.template';
 import { createSocialCreatorTemplate } from './creator.template';
 
-export { createSocialCommunityTemplate } from './community.template';
-export { createSocialCreatorTemplate } from './creator.template';
-
 export const socialCommunityStarterTemplates = [
   {
     id: 'default',

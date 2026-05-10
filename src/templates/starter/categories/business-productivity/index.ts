@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createBusinessProductivityStarterTemplate } from './default.template';
 
-export { createBusinessProductivityStarterTemplate } from './default.template';
-
 export const businessProductivityStarterTemplates = [
   {
     id: 'default',

@@ -1,6 +1,6 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-export type OverrideShape<T> = T extends readonly unknown[]
+type OverrideShape<T> = T extends readonly unknown[]
   ? T
   : T extends object
     ? {

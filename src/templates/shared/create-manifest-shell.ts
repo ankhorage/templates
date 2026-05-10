@@ -2,7 +2,7 @@ import type { AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
 import { BASE_INFRA, BASE_SETTINGS } from '../../internal/defaults';
 
-export interface ManifestShellSeed {
+interface ManifestShellSeed {
   appName: string;
   slug: string;
 }

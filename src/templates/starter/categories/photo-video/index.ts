@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createPhotoVideoStarterTemplate } from './default.template';
 
-export { createPhotoVideoStarterTemplate } from './default.template';
-
 export const photoVideoStarterTemplates = [
   {
     id: 'default',

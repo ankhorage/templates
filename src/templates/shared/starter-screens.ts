@@ -10,13 +10,13 @@ import {
   type ZoraNode,
 } from './zora-node-helpers';
 
-export interface StarterCardContent {
+interface StarterCardContent {
   eyebrow: string;
   title: string;
   description: string;
 }
 
-export interface StarterSectionContent {
+interface StarterSectionContent {
   title: string;
   description: string;
   cards: readonly StarterCardContent[];

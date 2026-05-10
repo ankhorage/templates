@@ -1,7 +1,5 @@
 import type { AppCategory, ThemeConfig } from '@ankhorage/contracts';
 
-export { APP_CATEGORIES } from '@ankhorage/contracts';
-
 export interface CategoryPreset {
   label: string;
   defaultName: string;

@@ -1,8 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createGamesStarterTemplate } from './default.template';
 
-export { createGamesStarterTemplate } from './default.template';
-
 export const gamesStarterTemplates = [
   {
     id: 'default',
