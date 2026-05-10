@@ -15,6 +15,15 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "typescript",
+    "templates",
+    "app-templates",
+    "manifest",
+    "app-generator",
+    "react-native",
+    "expo"
+  ],
   "sideEffects": false,
   "files": [
     "dist",
