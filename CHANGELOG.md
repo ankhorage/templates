@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.9
+
+### Patch Changes
+
+- 7bd33ef: Update ZORA
+
 ## 1.2.8
 
 ### Patch Changes
