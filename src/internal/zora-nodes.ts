@@ -1,26 +1,13 @@
 import type { UiNode } from '@ankhorage/contracts';
 import type { ButtonProps, CardProps, InputProps } from '@ankhorage/zora';
-import type {
-  AuthLayoutProps,
-  PageHeaderProps,
-  PageProps,
-  PageSectionProps,
-} from '@ankhorage/zora';
+import type { AuthLayoutProps, ScreenProps, ScreenSectionProps } from '@ankhorage/zora';
 import type { EmptyStateProps, NoticeProps, PanelProps } from '@ankhorage/zora';
 import type { SectionHeaderProps, SettingsRowProps } from '@ankhorage/zora';
 
 type SerializableProps<T extends object> = T & Record<string, unknown>;
-type SerializablePageProps = Omit<PageProps, 'children' | 'footer' | 'header'>;
-type SerializablePageHeaderProps = Omit<
-  PageHeaderProps,
-  'actions' | 'meta' | 'title' | 'description' | 'eyebrow'
-> & {
-  title: string;
-  description?: string;
-  eyebrow?: string;
-};
-type SerializablePageSectionProps = Omit<
-  PageSectionProps,
+type SerializableScreenProps = Omit<ScreenProps, 'children' | 'footer'>;
+type SerializableScreenSectionProps = Omit<
+  ScreenSectionProps,
   'actions' | 'children' | 'title' | 'description'
 > & {
   title?: string;
@@ -125,10 +112,9 @@ export interface ZoraNodePropsByType {
   FormField: SerializableFormFieldProps;
   Input: SerializableInputProps;
   Notice: SerializableNoticeProps;
-  Page: SerializablePageProps;
-  PageHeader: SerializablePageHeaderProps;
-  PageSection: SerializablePageSectionProps;
   Panel: SerializablePanelProps;
+  Screen: SerializableScreenProps;
+  ScreenSection: SerializableScreenSectionProps;
   SectionHeader: SerializableSectionHeaderProps;
   SettingsRow: SerializableSettingsRowProps;
 }
