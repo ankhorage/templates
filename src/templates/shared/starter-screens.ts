@@ -2,8 +2,7 @@ import type { ScreenSpec } from '@ankhorage/contracts';
 
 import { createScreen } from './screen';
 import {
-  createHeader,
-  createPage,
+  createScreenRoot,
   createSection,
   createSettingsSection,
   createZoraNode,
@@ -68,14 +67,18 @@ export function createStarterContentScreen(args: {
     name: args.name,
     title: args.content.title,
     description: args.content.description,
-    root: createPage(`${args.idPrefix}-${idSegment}-page`, { width: args.pageWidth ?? 'wide' }, [
-      createHeader(`${args.idPrefix}-${idSegment}-header`, {
-        eyebrow: args.content.eyebrow,
-        title: args.content.title,
-        description: args.content.description,
-      }),
-      ...sectionNodes,
-    ]),
+    root: createScreenRoot(
+      `${args.idPrefix}-${idSegment}-screen`,
+      { width: args.pageWidth ?? 'wide' },
+      [
+        createZoraNode(`${args.idPrefix}-${idSegment}-screen-header`, 'SectionHeader', {
+          eyebrow: args.content.eyebrow,
+          title: args.content.title,
+          description: args.content.description,
+        }),
+        ...sectionNodes,
+      ],
+    ),
   });
 }
 
@@ -106,8 +109,8 @@ export function createStarterSettingsScreen(args: {
     name: args.name,
     title: args.header.title,
     description: args.header.description,
-    root: createPage(`${args.idPrefix}-${idSegment}-page`, { width: 'default' }, [
-      createHeader(`${args.idPrefix}-${idSegment}-header`, {
+    root: createScreenRoot(`${args.idPrefix}-${idSegment}-screen`, { width: 'default' }, [
+      createZoraNode(`${args.idPrefix}-${idSegment}-screen-header`, 'SectionHeader', {
         eyebrow: args.header.eyebrow,
         title: args.header.title,
         description: args.header.description,

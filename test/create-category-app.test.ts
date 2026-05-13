@@ -224,7 +224,7 @@ describe('createCategoryAppManifest', () => {
 });
 
 describe('createStarterTemplate', () => {
-  test('uses ZORA node types instead of legacy surface-only building blocks', () => {
+  test('uses ZORA screen node types instead of legacy surface-only building blocks', () => {
     const manifest = createStarterTemplate({
       category: 'developer_tools',
       categoryLabel: 'Developer Tools',
@@ -240,10 +240,15 @@ describe('createStarterTemplate', () => {
       collectNodeTypes(screen.root),
     );
 
-    expect(nodeTypes).toContain('Page');
+    expect(nodeTypes).toContain('Screen');
+    expect(nodeTypes).toContain('ScreenSection');
+    expect(nodeTypes).toContain('SectionHeader');
     expect(nodeTypes).toContain('Panel');
     expect(nodeTypes).toContain('Card');
     expect(nodeTypes).toContain('SettingsRow');
+    expect(nodeTypes).not.toContain('Page');
+    expect(nodeTypes).not.toContain('PageHeader');
+    expect(nodeTypes).not.toContain('PageSection');
     expect(nodeTypes).not.toContain('Box');
     expect(nodeTypes).not.toContain('Container');
     expect(nodeTypes).not.toContain('Stack');

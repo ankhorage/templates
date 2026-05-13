@@ -1,9 +1,8 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
 import {
-  createHeader,
-  createPage,
   createScreen,
+  createScreenRoot,
   createSection,
   createStarterContentScreen,
   createStarterSettingsScreen,
@@ -30,8 +29,8 @@ export function createMusicAudioScreens(
       name: 'Search',
       title: musicAudioContent.search.title,
       description: musicAudioContent.search.description,
-      root: createPage(`${idPrefix}-search-page`, { width: 'wide' }, [
-        createHeader(`${idPrefix}-search-header`, {
+      root: createScreenRoot(`${idPrefix}-search-screen`, { width: 'wide' }, [
+        createZoraNode(`${idPrefix}-search-header`, 'SectionHeader', {
           eyebrow: musicAudioContent.search.eyebrow,
           title: musicAudioContent.search.title,
           description: musicAudioContent.search.description,

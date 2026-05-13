@@ -24,18 +24,18 @@ export function createFallbackScreens(
       title: seed.appName,
       description: `Starter experience for ${seed.categoryLabel}.`,
       root: createZoraNode(
-        `${idPrefix}-home-page`,
-        'Page',
-        { width: 'wide', testID: `${idPrefix}-home-page` },
+        `${idPrefix}-home-screen`,
+        'Screen',
+        { width: 'wide', testID: `${idPrefix}-home-screen` },
         [
-          createZoraNode(`${idPrefix}-home-header`, 'PageHeader', {
+          createZoraNode(`${idPrefix}-home-header`, 'SectionHeader', {
             eyebrow: seed.categoryLabel,
             title: seed.appName,
             description: `Starter experience for ${seed.summary}.`,
           }),
           createZoraNode(
             `${idPrefix}-home-section`,
-            'PageSection',
+            'ScreenSection',
             {
               title: 'Launch surface',
               description:
@@ -97,15 +97,15 @@ export function createFallbackScreens(
       name: 'Details',
       title: 'Details',
       description: 'Secondary informational screen for the starter template.',
-      root: createZoraNode(`${idPrefix}-details-page`, 'Page', { width: 'default' }, [
-        createZoraNode(`${idPrefix}-details-header`, 'PageHeader', {
+      root: createZoraNode(`${idPrefix}-details-screen`, 'Screen', { width: 'default' }, [
+        createZoraNode(`${idPrefix}-details-header`, 'SectionHeader', {
           eyebrow: 'Starter module',
           title: 'Detail screen',
           description: 'Use this route for previews, drill-downs, or richer storytelling.',
         }),
         createZoraNode(
           `${idPrefix}-details-section`,
-          'PageSection',
+          'ScreenSection',
           {
             title: 'Placeholder state',
             description:
@@ -127,15 +127,15 @@ export function createFallbackScreens(
       name: 'Settings',
       title: 'Settings',
       description: 'Configuration screen for starter defaults.',
-      root: createZoraNode(`${idPrefix}-settings-page`, 'Page', { width: 'default' }, [
-        createZoraNode(`${idPrefix}-settings-header`, 'PageHeader', {
+      root: createZoraNode(`${idPrefix}-settings-screen`, 'Screen', { width: 'default' }, [
+        createZoraNode(`${idPrefix}-settings-header`, 'SectionHeader', {
           eyebrow: 'Operations',
           title: 'Settings',
           description: 'Starter defaults for localization, auth flow, and deployment assumptions.',
         }),
         createZoraNode(
           `${idPrefix}-settings-section`,
-          'PageSection',
+          'ScreenSection',
           {
             title: 'Manifest defaults',
             description: 'These rows mirror the baseline config shipped with the template package.',

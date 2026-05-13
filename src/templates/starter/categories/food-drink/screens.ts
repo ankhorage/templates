@@ -1,9 +1,8 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
 import {
-  createHeader,
-  createPage,
   createScreen,
+  createScreenRoot,
   createSection,
   createSettingsSection,
   createZoraNode,
@@ -38,13 +37,14 @@ function createFoodDrinkContentScreen(args: {
   name: string;
   content: FoodDrinkScreenContent;
 }) {
+  const idSegment = args.name.toLowerCase();
   const sectionNodes: ZoraNode[] = args.content.sections.map((section, sectionIndex) =>
     createSection(
-      `${args.idPrefix}-${args.name.toLowerCase()}-section-${sectionIndex + 1}`,
+      `${args.idPrefix}-${idSegment}-section-${sectionIndex + 1}`,
       { title: section.title, description: section.description },
       [
         createZoraNode(
-          `${args.idPrefix}-${args.name.toLowerCase()}-panel-${sectionIndex + 1}`,
+          `${args.idPrefix}-${idSegment}-panel-${sectionIndex + 1}`,
           'Panel',
           {
             title: section.title,
@@ -53,7 +53,7 @@ function createFoodDrinkContentScreen(args: {
           },
           section.cards.map((card, cardIndex) =>
             createZoraNode(
-              `${args.idPrefix}-${args.name.toLowerCase()}-card-${sectionIndex + 1}-${cardIndex + 1}`,
+              `${args.idPrefix}-${idSegment}-card-${sectionIndex + 1}-${cardIndex + 1}`,
               'Card',
               {
                 eyebrow: card.eyebrow,
@@ -73,8 +73,8 @@ function createFoodDrinkContentScreen(args: {
     name: args.name,
     title: args.content.title,
     description: args.content.description,
-    root: createPage(`${args.idPrefix}-${args.name.toLowerCase()}-page`, { width: 'wide' }, [
-      createHeader(`${args.idPrefix}-${args.name.toLowerCase()}-header`, {
+    root: createScreenRoot(`${args.idPrefix}-${idSegment}-screen`, { width: 'wide' }, [
+      createZoraNode(`${args.idPrefix}-${idSegment}-header`, 'SectionHeader', {
         eyebrow: args.content.eyebrow,
         title: args.content.title,
         description: args.content.description,
@@ -119,8 +119,8 @@ export function createFoodDrinkScreens(
       name: 'Profile',
       title: foodDrinkContent.profile.title,
       description: foodDrinkContent.profile.description,
-      root: createPage(`${idPrefix}-profile-page`, { width: 'default' }, [
-        createHeader(`${idPrefix}-profile-header`, {
+      root: createScreenRoot(`${idPrefix}-profile-screen`, { width: 'default' }, [
+        createZoraNode(`${idPrefix}-profile-header`, 'SectionHeader', {
           eyebrow: foodDrinkContent.profile.eyebrow,
           title: foodDrinkContent.profile.title,
           description: foodDrinkContent.profile.description,

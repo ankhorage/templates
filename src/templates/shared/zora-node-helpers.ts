@@ -3,27 +3,20 @@ import { createZoraNode, type ZoraNode, type ZoraNodePropsByType } from '../../i
 export { createZoraNode };
 export type { ZoraNode } from '../../internal/zora-nodes';
 
-export function createPage(
+export function createScreenRoot(
   id: string,
-  props: ZoraNodePropsByType['Page'],
+  props: ZoraNodePropsByType['Screen'],
   children: ZoraNode[],
-): ZoraNode<'Page'> {
-  return createZoraNode(id, 'Page', props, children);
-}
-
-export function createHeader(
-  id: string,
-  props: ZoraNodePropsByType['PageHeader'],
-): ZoraNode<'PageHeader'> {
-  return createZoraNode(id, 'PageHeader', props);
+): ZoraNode<'Screen'> {
+  return createZoraNode(id, 'Screen', props, children);
 }
 
 export function createSection(
   id: string,
-  props: ZoraNodePropsByType['PageSection'],
+  props: ZoraNodePropsByType['ScreenSection'],
   children: ZoraNode[],
-): ZoraNode<'PageSection'> {
-  return createZoraNode(id, 'PageSection', props, children);
+): ZoraNode<'ScreenSection'> {
+  return createZoraNode(id, 'ScreenSection', props, children);
 }
 
 export function createSettingsSection(
@@ -36,7 +29,7 @@ export function createSettingsSection(
     description: string;
     meta?: string;
   }[],
-): ZoraNode<'PageSection'> {
+): ZoraNode<'ScreenSection'> {
   return createSection(
     `${idPrefix}-settings-section`,
     {
