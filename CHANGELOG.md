@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 1.2.14
+
+### Patch Changes
+
+- 1cb8715: Generate ZORA `Screen` and `ScreenSection` manifest nodes instead of the removed `Page`, `PageHeader`, and `PageSection` nodes.
+- 5ef4b15: Update ZORA
+
 ## 1.2.13
 
 ### Patch Changes
