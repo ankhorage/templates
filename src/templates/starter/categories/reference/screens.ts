@@ -1,9 +1,8 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
 import {
-  createHeader,
-  createPage,
   createScreen,
+  createScreenRoot,
   createSection,
   createStarterContentScreen,
   createStarterSettingsScreen,
@@ -30,8 +29,8 @@ export function createReferenceScreens(
       name: 'Search',
       title: referenceContent.search.title,
       description: referenceContent.search.description,
-      root: createPage(`${idPrefix}-search-page`, { width: 'wide' }, [
-        createHeader(`${idPrefix}-search-header`, {
+      root: createScreenRoot(`${idPrefix}-search-screen`, { width: 'wide' }, [
+        createZoraNode(`${idPrefix}-search-header`, 'SectionHeader', {
           eyebrow: referenceContent.search.eyebrow,
           title: referenceContent.search.title,
           description: referenceContent.search.description,
