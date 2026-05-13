@@ -4,8 +4,7 @@ export { createRoute } from './route';
 export { createScreen } from './screen';
 export { createStarterContentScreen, createStarterSettingsScreen } from './starter-screens';
 export {
-  createHeader,
-  createPage,
+  createScreenRoot,
   createSection,
   createSettingsSection,
   createZoraNode,
