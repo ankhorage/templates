@@ -24,7 +24,11 @@ import { socialCommunityStarterTemplates } from './categories/social-community';
 import { sportsStarterTemplates } from './categories/sports';
 import { utilitiesToolsStarterTemplates } from './categories/utilities-tools';
 import { weatherStarterTemplates } from './categories/weather';
-import type { CategoryStarterTemplateDefinition, TemplateSeed } from './starter.types';
+import type {
+  CategoryStarterTemplateDefinition,
+  StarterTemplateSummary,
+  TemplateSeed,
+} from './starter.types';
 
 const STARTER_TEMPLATE_REGISTRY: Partial<
   Record<AppCategory, readonly CategoryStarterTemplateDefinition[]>
@@ -64,6 +68,18 @@ function resolveFallbackTemplate(): CategoryStarterTemplateDefinition {
   return fallbackDefault;
 }
 
+function createTemplateSummary(
+  category: AppCategory,
+  template: CategoryStarterTemplateDefinition,
+): StarterTemplateSummary {
+  return {
+    category,
+    description: template.description,
+    id: template.id,
+    label: template.label,
+  };
+}
+
 export function resolveStarterTemplate(
   seed: TemplateSeed,
   templateId = 'default',
@@ -90,4 +106,22 @@ export function listStarterTemplates(
     .flatMap((templates) => templates);
 
   return [...fallbackStarterTemplates, ...registeredTemplates];
+}
+
+export function listStarterTemplatesByCategory(
+  category: AppCategory,
+): readonly StarterTemplateSummary[] {
+  return listStarterTemplates(category).map((template) =>
+    createTemplateSummary(category, template),
+  );
+}
+
+export function listStarterTemplateSummaries(): readonly StarterTemplateSummary[] {
+  return Object.entries(STARTER_TEMPLATE_REGISTRY).flatMap(([category, templates]) => {
+    if (templates === undefined) {
+      return [];
+    }
+
+    return templates.map((template) => createTemplateSummary(category as AppCategory, template));
+  });
 }

@@ -1,7 +1,7 @@
 import type { UiNode } from '@ankhorage/contracts';
 import type { ButtonProps, CardProps, InputProps } from '@ankhorage/zora';
-import type { AuthLayoutProps, ScreenProps, ScreenSectionProps } from '@ankhorage/zora';
 import type { EmptyStateProps, NoticeProps, PanelProps } from '@ankhorage/zora';
+import type { ScreenProps, ScreenSectionProps } from '@ankhorage/zora';
 import type { SectionHeaderProps, SettingsRowProps } from '@ankhorage/zora';
 
 type SerializableProps<T extends object> = T & Record<string, unknown>;
@@ -31,15 +31,13 @@ type SerializableCardProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
-type SerializableAuthLayoutProps = Omit<
-  AuthLayoutProps,
-  'children' | 'description' | 'eyebrow' | 'footer' | 'title'
-> & {
+type SerializableAuthLayoutProps = SerializableProps<{
   title?: string;
   description?: string;
   eyebrow?: string;
   footer?: string;
-};
+  testID?: string;
+}>;
 type SerializableSectionHeaderProps = Omit<
   SectionHeaderProps,
   'actions' | 'description' | 'eyebrow' | 'title'

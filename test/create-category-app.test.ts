@@ -6,9 +6,11 @@ import {
   CATEGORY_PRESETS,
   createCategoryAppManifest,
   createStarterTemplate,
+  listStarterTemplates,
+  listStarterTemplatesByCategory,
+  listStarterTemplateSummaries,
   type TemplateSeed,
 } from '../src/index';
-import { listStarterTemplates } from '../src/templates/starter/starter.registry';
 
 function collectNodeTypes(node: UiNode): string[] {
   return [node.type, ...(node.children?.flatMap(collectNodeTypes) ?? [])];
@@ -223,6 +225,42 @@ describe('createCategoryAppManifest', () => {
   });
 });
 
+describe('starter template listing', () => {
+  test('exposes category summaries without factories', () => {
+    const games = listStarterTemplatesByCategory('games');
+
+    expect(games).toEqual([
+      {
+        category: 'games',
+        description:
+          'A home, quests, inventory, friends, and profile starter for game experiences.',
+        id: 'default',
+        label: 'Quest loop',
+      },
+      {
+        category: 'games',
+        description:
+          'A two-tab chess starter with a home dashboard and board settings placeholder.',
+        id: 'chess',
+        label: 'Chess',
+      },
+    ]);
+    expect(Object.keys(games[0] ?? {})).not.toContain('create');
+  });
+
+  test('lists all registered starter summaries', () => {
+    const summaries = listStarterTemplateSummaries();
+
+    expect(summaries).toContainEqual({
+      category: 'games',
+      description: 'A two-tab chess starter with a home dashboard and board settings placeholder.',
+      id: 'chess',
+      label: 'Chess',
+    });
+    expect(summaries.some((summary) => summary.category === 'social_community')).toBe(true);
+  });
+});
+
 describe('createStarterTemplate', () => {
   test('uses ZORA screen node types instead of legacy surface-only building blocks', () => {
     const manifest = createStarterTemplate({
@@ -327,6 +365,25 @@ describe('createStarterTemplate', () => {
     expect(community.navigator.routes.map((route) => route.label)).not.toEqual(
       creator.navigator.routes.map((route) => route.label),
     );
+  });
+
+  test('selects the games chess template', () => {
+    const manifest = createStarterTemplate(createSeed('games'), { templateId: 'chess' });
+
+    assertManifestIntegrity(manifest);
+    expect(manifest.navigator.type).toBe('tabs');
+    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
+      'Home',
+      'Chess board & settings',
+    ]);
+    expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
+      'index',
+      'chess-board-settings',
+    ]);
+    expect(Object.values(manifest.screens).map((screen) => screen.name)).toEqual([
+      'Home',
+      'Chess board & settings',
+    ]);
   });
 
   test('creates valid manifests for every registered category template', () => {

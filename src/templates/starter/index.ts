@@ -1,11 +1,16 @@
 export {
   createStarterTemplate,
+  listStarterTemplateSummaries,
+  listStarterTemplates,
+  listStarterTemplatesByCategory,
+  resolveStarterTemplate,
   TEMPLATE_KINDS,
   type CategoryStarterTemplateDefinition,
   type StarterTemplateFactory,
   type StarterTemplateId,
   type StarterTemplateOptions,
   type StarterTemplateSelection,
+  type StarterTemplateSummary,
   type TemplateKind,
   type TemplateSeed,
 } from './starter.template';

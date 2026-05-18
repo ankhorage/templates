@@ -56,7 +56,7 @@ export function createFallbackScreens(
                     title: 'ZORA-first authoring',
                     description:
                       'This screen uses ZORA layout and pattern nodes instead of legacy Surface-only trees.',
-                    tone: 'primary',
+                    color: 'primary',
                   }),
                   createZoraNode(`${idPrefix}-focus-card-1`, 'Card', {
                     eyebrow: 'Focus area',
@@ -80,8 +80,7 @@ export function createFallbackScreens(
                   }),
                   createZoraNode(`${idPrefix}-overview-button`, 'Button', {
                     children: 'Customize this starter',
-                    tone: 'primary',
-                    emphasis: 'solid',
+                    color: 'primary',
                     size: 'm',
                     fullWidth: true,
                   }),
