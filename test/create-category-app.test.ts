@@ -6,9 +6,9 @@ import {
   CATEGORY_PRESETS,
   createCategoryAppManifest,
   createStarterTemplate,
-  listStarterTemplateSummaries,
   listStarterTemplates,
   listStarterTemplatesByCategory,
+  listStarterTemplateSummaries,
   type TemplateSeed,
 } from '../src/index';
 
@@ -232,13 +232,15 @@ describe('starter template listing', () => {
     expect(games).toEqual([
       {
         category: 'games',
-        description: 'A home, quests, inventory, friends, and profile starter for game experiences.',
+        description:
+          'A home, quests, inventory, friends, and profile starter for game experiences.',
         id: 'default',
         label: 'Quest loop',
       },
       {
         category: 'games',
-        description: 'A two-tab chess starter with a home dashboard and board settings placeholder.',
+        description:
+          'A two-tab chess starter with a home dashboard and board settings placeholder.',
         id: 'chess',
         label: 'Chess',
       },

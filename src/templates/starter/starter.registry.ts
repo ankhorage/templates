@@ -111,7 +111,9 @@ export function listStarterTemplates(
 export function listStarterTemplatesByCategory(
   category: AppCategory,
 ): readonly StarterTemplateSummary[] {
-  return listStarterTemplates(category).map((template) => createTemplateSummary(category, template));
+  return listStarterTemplates(category).map((template) =>
+    createTemplateSummary(category, template),
+  );
 }
 
 export function listStarterTemplateSummaries(): readonly StarterTemplateSummary[] {

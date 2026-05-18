@@ -3,9 +3,9 @@ export { CATEGORY_PRESETS, type CategoryPreset } from './presets/category-preset
 export {
   type CategoryStarterTemplateDefinition,
   createStarterTemplate,
-  listStarterTemplateSummaries,
   listStarterTemplates,
   listStarterTemplatesByCategory,
+  listStarterTemplateSummaries,
   resolveStarterTemplate,
   type StarterTemplateFactory,
   type StarterTemplateId,

@@ -5,9 +5,9 @@ import {
   CATEGORY_PRESETS,
   createCategoryAppManifest,
   createStarterTemplate,
-  listStarterTemplateSummaries,
   listStarterTemplates,
   listStarterTemplatesByCategory,
+  listStarterTemplateSummaries,
   resolveStarterTemplate,
   TEMPLATE_KINDS,
 } from '../src/index';
