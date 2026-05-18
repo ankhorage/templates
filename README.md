@@ -5,20 +5,39 @@ Reusable Ankhorage app templates, presets, and manifest generators.
 ## Usage
 
 ```ts
-import { createCategoryAppManifest, createStarterTemplate } from '@ankhorage/templates';
+import {
+  createCategoryAppManifest,
+  createStarterTemplate,
+  listStarterTemplatesByCategory,
+} from '@ankhorage/templates';
 
 const manifest = createCategoryAppManifest('social_community');
 
 const creatorManifest = createStarterTemplate(seed, {
   templateId: 'creator',
 });
+
+const gameTemplates = listStarterTemplatesByCategory('games');
 ```
 
 ## Category Starter Templates
 
 Starter templates are category-aware. A category can expose one or more template variants.
 For example, `social_community` provides a default community starter and a `creator`
-starter.
+starter, while `games` provides the default quest-loop starter and a `chess` starter.
+
+Use `listStarterTemplatesByCategory(category)` when an editor or generator needs a selectable
+list for one category. It returns summaries only, not factories:
+
+```ts
+const templates = listStarterTemplatesByCategory('games');
+// [
+//   { id: 'default', category: 'games', label: 'Quest loop', ... },
+//   { id: 'chess', category: 'games', label: 'Chess', ... },
+// ]
+```
+
+Use `listStarterTemplateSummaries()` when a tool needs all registered starter choices.
 
 Default resolution is deterministic:
 
@@ -77,8 +96,9 @@ The fallback template remains available and is used only for unknown runtime cat
 
 - `fallback/default`: Home · Details · Settings (stack)
 
-`social_community` includes an additional variant:
+Additional variants:
 
+- `games/chess`: Home · Chess board & settings
 - `social_community/creator`: Studio · Posts · Audience · Insights · Settings
 
 Only categories that exist in `AppCategory` are registered. New category literals should be added
