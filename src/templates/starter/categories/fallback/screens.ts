@@ -81,7 +81,6 @@ export function createFallbackScreens(
                   createZoraNode(`${idPrefix}-overview-button`, 'Button', {
                     children: 'Customize this starter',
                     color: 'primary',
-                    emphasis: 'solid',
                     size: 'm',
                     fullWidth: true,
                   }),
