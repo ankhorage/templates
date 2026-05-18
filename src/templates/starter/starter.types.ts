@@ -11,6 +11,13 @@ export interface StarterTemplateSelection {
   templateId?: StarterTemplateId;
 }
 
+export interface StarterTemplateSummary {
+  id: StarterTemplateId;
+  category: AppCategory;
+  label: string;
+  description: string;
+}
+
 export interface TemplateSeed {
   category: AppCategory;
   categoryLabel: string;
