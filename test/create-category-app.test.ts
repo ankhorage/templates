@@ -239,8 +239,7 @@ describe('starter template listing', () => {
       },
       {
         category: 'games',
-        description:
-          'A two-tab chess starter with a home dashboard and board settings placeholder.',
+        description: 'A two-tab chess starter with Home and Settings screens.',
         id: 'chess',
         label: 'Chess',
       },
@@ -253,7 +252,7 @@ describe('starter template listing', () => {
 
     expect(summaries).toContainEqual({
       category: 'games',
-      description: 'A two-tab chess starter with a home dashboard and board settings placeholder.',
+      description: 'A two-tab chess starter with Home and Settings screens.',
       id: 'chess',
       label: 'Chess',
     });
@@ -372,17 +371,11 @@ describe('createStarterTemplate', () => {
 
     assertManifestIntegrity(manifest);
     expect(manifest.navigator.type).toBe('tabs');
-    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
-      'Home',
-      'Chess board & settings',
-    ]);
-    expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
-      'index',
-      'chess-board-settings',
-    ]);
+    expect(manifest.navigator.routes.map((route) => route.label)).toEqual(['Home', 'Settings']);
+    expect(manifest.navigator.routes.map((route) => route.name)).toEqual(['index', 'settings']);
     expect(Object.values(manifest.screens).map((screen) => screen.name)).toEqual([
       'Home',
-      'Chess board & settings',
+      'Settings',
     ]);
   });
 
