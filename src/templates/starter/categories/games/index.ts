@@ -12,7 +12,7 @@ export const gamesStarterTemplates = [
   {
     id: 'chess',
     label: 'Chess',
-    description: 'A two-tab chess starter with a home dashboard and board settings placeholder.',
+    description: 'A two-tab chess starter with Home and Settings screens.',
     create: createChessStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];
