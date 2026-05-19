@@ -24,82 +24,25 @@ export function createChessScreens(
       name: 'Home',
       title: chessContent.home.title,
       description: chessContent.home.description,
-      root: createScreenRoot(`${idPrefix}-home-screen`, { width: 'wide' }, [
+      root: createScreenRoot(`${idPrefix}-home-screen`, { width: 'default' }, [
         createZoraNode(`${idPrefix}-home-header`, 'SectionHeader', {
           eyebrow: chessContent.home.eyebrow,
           title: chessContent.home.title,
-          description: chessContent.home.description,
+          description: 'Study and play from the board.',
         }),
         createSection(
           `${idPrefix}-home-board-section`,
           {
             title: 'Board',
-            description:
-              'Start from the initial position and wire move handling once app state is available.',
           },
           [
-            createZoraNode(
-              `${idPrefix}-home-board-panel`,
-              'Panel',
-              {
-                title: 'Interactive board',
-                description:
-                  'Rendered by @ankhorage/zora-chess through the generated app extension registry.',
-                tone: 'subtle',
-              },
-              [
-                createZoraNode(`${idPrefix}-home-chessboard`, 'ChessBoard', {
-                  fen: INITIAL_CHESS_FEN,
-                  orientation: 'white',
-                  showCoordinates: true,
-                  validateMoves: true,
-                  testID: `${idPrefix}-home-chessboard`,
-                }),
-                createZoraNode(`${idPrefix}-home-position-card`, 'Card', {
-                  eyebrow: 'Position',
-                  title: 'Initial position',
-                  description:
-                    'A static FEN is used for now. Opening-book queries and persisted study state come later via data binding.',
-                  tone: 'outline',
-                }),
-              ],
-            ),
-          ],
-        ),
-        createSection(
-          `${idPrefix}-home-study-section`,
-          {
-            title: 'Study context',
-            description:
-              'Useful starter scaffolding around the board without hardcoding an opening-book API yet.',
-          },
-          [
-            createZoraNode(
-              `${idPrefix}-home-study-panel`,
-              'Panel',
-              {
-                title: 'Practice flow',
-                description:
-                  'Keep board, position notes, and next actions together so the app can evolve into a trainer.',
-                tone: 'subtle',
-              },
-              [
-                createZoraNode(`${idPrefix}-home-line-card`, 'Card', {
-                  eyebrow: 'Opening line',
-                  title: 'Choose a repertoire branch',
-                  description:
-                    'Reserve this block for the selected opening family, variation name, and next-book moves.',
-                  tone: 'outline',
-                }),
-                createZoraNode(`${idPrefix}-home-action-card`, 'Card', {
-                  eyebrow: 'Next step',
-                  title: 'Play, review, repeat',
-                  description:
-                    'Connect move events to local state first, then add public opening-book API data later.',
-                  tone: 'outline',
-                }),
-              ],
-            ),
+            createZoraNode(`${idPrefix}-home-chessboard`, 'ChessBoard', {
+              fen: INITIAL_CHESS_FEN,
+              orientation: 'white',
+              showCoordinates: true,
+              validateMoves: true,
+              testID: `${idPrefix}-home-chessboard`,
+            }),
           ],
         ),
       ]),
