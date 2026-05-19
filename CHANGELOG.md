@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.16
+
+### Patch Changes
+
+- 21ca5f0: Correct the games chess starter to generate Home and Settings tabs.
+
 ## 1.2.15
 
 ### Patch Changes
