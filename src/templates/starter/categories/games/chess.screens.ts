@@ -17,11 +17,11 @@ export function createChessScreens(
       name: 'Home',
       content: chessContent.home,
     }),
-    [screenIds.boardSettings]: createStarterContentScreen({
+    [screenIds.settings]: createStarterContentScreen({
       idPrefix,
-      screenId: screenIds.boardSettings,
-      name: 'Chess board & settings',
-      content: chessContent.boardSettings,
+      screenId: screenIds.settings,
+      name: 'Settings',
+      content: chessContent.settings,
     }),
   };
 }
