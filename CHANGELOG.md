@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.17
+
+### Patch Changes
+
+- 1db98fd: Render a real ChessBoard node in the games chess starter home screen.
+
 ## 1.2.16
 
 ### Patch Changes
