@@ -4,13 +4,13 @@ import { createRoute } from '../../../shared';
 
 export interface ChessScreenIds {
   home: string;
-  boardSettings: string;
+  settings: string;
 }
 
 export function createChessScreenIds(idPrefix: string): ChessScreenIds {
   return {
     home: `${idPrefix}-home`,
-    boardSettings: `${idPrefix}-board-settings`,
+    settings: `${idPrefix}-settings`,
   };
 }
 
@@ -26,10 +26,10 @@ export function createChessNavigator(screenIds: ChessScreenIds): AppManifest['na
         icon: { provider: 'material-community', name: 'chess-king' },
       }),
       createRoute({
-        name: 'chess-board-settings',
-        screenId: screenIds.boardSettings,
-        label: 'Chess board & settings',
-        icon: { provider: 'material-community', name: 'chess-board' },
+        name: 'settings',
+        screenId: screenIds.settings,
+        label: 'Settings',
+        icon: { provider: 'material-community', name: 'cog-outline' },
       }),
     ],
   };
