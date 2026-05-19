@@ -98,7 +98,7 @@ The fallback template remains available and is used only for unknown runtime cat
 
 Additional variants:
 
-- `games/chess`: Home · Chess board & settings
+- `games/chess`: Home · Settings
 - `social_community/creator`: Studio · Posts · Audience · Insights · Settings
 
 Only categories that exist in `AppCategory` are registered. New category literals should be added
