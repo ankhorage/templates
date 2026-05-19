@@ -44,8 +44,7 @@ export const chessContent = {
           {
             eyebrow: 'Controls',
             title: 'Coordinates and study mode',
-            description:
-              'Reserve controls for coordinates, interaction behavior, and study mode.',
+            description: 'Reserve controls for coordinates, interaction behavior, and study mode.',
           },
         ],
       },
