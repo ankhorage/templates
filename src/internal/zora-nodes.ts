@@ -101,11 +101,27 @@ type SerializableEmptyStateProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
+type SerializableChessBoardProps = SerializableProps<{
+  fen: string;
+  orientation?: 'white' | 'black';
+  selectedSquare?: string | null;
+  legalTargets?: readonly string[];
+  lastMove?: {
+    from: string;
+    to: string;
+    promotion?: 'q' | 'r' | 'b' | 'n';
+  } | null;
+  disabled?: boolean;
+  showCoordinates?: boolean;
+  validateMoves?: boolean;
+  testID?: string;
+}>;
 
 export interface ZoraNodePropsByType {
   AuthLayout: SerializableAuthLayoutProps;
   Button: SerializableButtonProps;
   Card: SerializableCardProps;
+  ChessBoard: SerializableChessBoardProps;
   EmptyState: SerializableEmptyStateProps;
   FormField: SerializableFormFieldProps;
   Input: SerializableInputProps;
