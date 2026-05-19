@@ -25,27 +25,27 @@ export const chessContent = {
       },
     ],
   },
-  boardSettings: {
-    eyebrow: 'Board',
-    title: 'Chess board & settings',
+  settings: {
+    eyebrow: 'Settings',
+    title: 'Settings',
     description: 'Prepare board display controls and study preferences for a chess app.',
     sections: [
       {
-        title: 'Board placeholder',
+        title: 'Board preferences',
         description:
-          'Use this area for a future ChessBoard integration and board-specific controls.',
+          'Use this area for board-specific controls and future ChessBoard integration settings.',
         cards: [
           {
             eyebrow: 'Board',
-            title: 'Interactive board slot',
+            title: 'Orientation',
             description:
-              'A placeholder ready for @ankhorage/zora-chess once app dependencies are wired.',
+              'Reserve controls for white/black orientation and board display preferences.',
           },
           {
             eyebrow: 'Controls',
-            title: 'Orientation and coordinates',
+            title: 'Coordinates and study mode',
             description:
-              'Reserve controls for white/black orientation, coordinates, and study mode.',
+              'Reserve controls for coordinates, interaction behavior, and study mode.',
           },
         ],
       },
