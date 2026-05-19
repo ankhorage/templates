@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.18
+
+### Patch Changes
+
+- 6495bfe: Keep the games chess starter home screen focused on the ChessBoard.
+
 ## 1.2.17
 
 ### Patch Changes
