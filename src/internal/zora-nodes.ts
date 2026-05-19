@@ -20,7 +20,6 @@ type SerializablePanelProps = Omit<
   title?: string;
   description?: string;
   eyebrow?: string;
-  footer?: string;
 };
 type SerializableCardProps = Omit<
   CardProps,
@@ -29,15 +28,7 @@ type SerializableCardProps = Omit<
   title?: string;
   description?: string;
   eyebrow?: string;
-  footer?: string;
 };
-type SerializableAuthLayoutProps = SerializableProps<{
-  title?: string;
-  description?: string;
-  eyebrow?: string;
-  footer?: string;
-  testID?: string;
-}>;
 type SerializableSectionHeaderProps = Omit<
   SectionHeaderProps,
   'actions' | 'description' | 'eyebrow' | 'title'
@@ -101,11 +92,26 @@ type SerializableEmptyStateProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
+type SerializableChessBoardProps = SerializableProps<{
+  fen: string;
+  orientation?: 'white' | 'black';
+  selectedSquare?: string | null;
+  legalTargets?: readonly string[];
+  lastMove?: {
+    from: string;
+    to: string;
+    promotion?: 'q' | 'r' | 'b' | 'n';
+  } | null;
+  disabled?: boolean;
+  showCoordinates?: boolean;
+  validateMoves?: boolean;
+  testID?: string;
+}>;
 
 export interface ZoraNodePropsByType {
-  AuthLayout: SerializableAuthLayoutProps;
   Button: SerializableButtonProps;
   Card: SerializableCardProps;
+  ChessBoard: SerializableChessBoardProps;
   EmptyState: SerializableEmptyStateProps;
   FormField: SerializableFormFieldProps;
   Input: SerializableInputProps;

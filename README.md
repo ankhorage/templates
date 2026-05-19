@@ -98,7 +98,9 @@ The fallback template remains available and is used only for unknown runtime cat
 
 Additional variants:
 
-- `games/chess`: Home · Settings
+- `games/chess`: Home · Settings. The Home screen renders a `ChessBoard` node with a static
+  initial FEN and requires generated apps to provide `@ankhorage/zora-chess` through their
+  extension registry.
 - `social_community/creator`: Studio · Posts · Audience · Insights · Settings
 
 Only categories that exist in `AppCategory` are registered. New category literals should be added
