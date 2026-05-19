@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.15
+
+### Patch Changes
+
+- b22f678: Expose starter template listing APIs and add a games chess starter template.
+
 ## 1.2.14
 
 ### Patch Changes
