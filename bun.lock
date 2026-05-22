@@ -7,7 +7,6 @@
       "dependencies": {
         "@ankhorage/contracts": "^1.8.0",
         "@ankhorage/zora": "^2.5.1",
-        "@ankhorage/zora-tabletop": "^0.0.1",
       },
       "devDependencies": {
         "@ankhorage/devtools": "^1.0.6",
@@ -28,8 +27,6 @@
     "@ankhorage/surface": ["@ankhorage/surface@2.0.2", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.7", "@ankhorage/contracts": "^1.7.0" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0", "react-native-safe-area-context": "^5.0.0" }, "optionalPeers": ["@expo/vector-icons", "expo-font"] }, "sha512-mqWxud3bFEezlrtYselveqrhEI9olgGMNHv35iI/pvzZP+oPqIwKSl5JzV7CTrbzp+YhHZVNzAzYEMtdhiD5QA=="],
 
     "@ankhorage/zora": ["@ankhorage/zora@2.5.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.7", "@ankhorage/contracts": "^1.12.0", "@ankhorage/surface": "^2.0.2" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "@react-native-picker/picker": ">=2.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "@react-native-picker/picker", "expo-font"] }, "sha512-xmuR2yfG+kLarG/gExb/wUUCse5D5KoAN6ALXocMl2a5Y8pwe/gqOrYo4NAZyW+ucM/6E0h9Nv4QxgLlZcZMIA=="],
-
-    "@ankhorage/zora-tabletop": ["@ankhorage/zora-tabletop@0.0.1", "", { "peerDependencies": { "@ankhorage/zora": ">=0.1.0", "react": ">=18.2.0", "react-native": ">=0.72.0" } }, "sha512-gWAmSQwr0Db8bee15m+ZFJ0yKe0fZcpCapRLTDZW9IB7Zq5tw0iMwwg3YEPJGJhqurqA4UyDzj/n0wTnQMUE5g=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
 
