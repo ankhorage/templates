@@ -1,10 +1,6 @@
 import type { AppManifest, UiNode } from '@ankhorage/contracts';
 
-import {
-  createScreen,
-  createSettingsSection,
-  createZoraNode,
-} from '../../../shared';
+import { createScreen, createSettingsSection, createZoraNode } from '../../../shared';
 import type { TemplateSeed } from '../../starter.types';
 import { chessContent } from './chess.content';
 import type { ChessScreenIds } from './chess.routes';
