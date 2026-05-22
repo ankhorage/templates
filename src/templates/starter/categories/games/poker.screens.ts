@@ -5,7 +5,12 @@ import type { TemplateSeed } from '../../starter.types';
 import { pokerContent } from './poker.content';
 import type { PokerScreenIds } from './poker.routes';
 
-function createNode(id: string, type: string, props?: Record<string, unknown>, children?: UiNode[]): UiNode {
+function createNode(
+  id: string,
+  type: string,
+  props?: Record<string, unknown>,
+  children?: UiNode[],
+): UiNode {
   return {
     id,
     type,
