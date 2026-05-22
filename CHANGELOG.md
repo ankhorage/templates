@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.20
+
+### Patch Changes
+
+- 47c0492: Add a games card-trainer starter template using tabletop presentation components.
+
 ## 1.2.19
 
 ### Patch Changes
