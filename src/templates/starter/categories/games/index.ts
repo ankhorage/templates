@@ -1,6 +1,7 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createChessStarterTemplate } from './chess.template';
 import { createGamesStarterTemplate } from './default.template';
+import { createPokerStarterTemplate } from './poker.template';
 
 export const gamesStarterTemplates = [
   {
@@ -14,5 +15,11 @@ export const gamesStarterTemplates = [
     label: 'Chess',
     description: 'A two-tab chess starter with Home and Settings screens.',
     create: createChessStarterTemplate,
+  },
+  {
+    id: 'poker',
+    label: 'Card trainer',
+    description: 'A two-tab card-game trainer starter with a tabletop scenario view.',
+    create: createPokerStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];

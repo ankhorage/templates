@@ -243,6 +243,12 @@ describe('starter template listing', () => {
         id: 'chess',
         label: 'Chess',
       },
+      {
+        category: 'games',
+        description: 'A two-tab card-game trainer starter with a tabletop scenario view.',
+        id: 'poker',
+        label: 'Card trainer',
+      },
     ]);
     expect(Object.keys(games[0] ?? {})).not.toContain('create');
   });
