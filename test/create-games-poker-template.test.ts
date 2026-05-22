@@ -1,7 +1,11 @@
 import type { UiNode } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
-import { CATEGORY_PRESETS, createStarterTemplate, listStarterTemplatesByCategory } from '../src/index';
+import {
+  CATEGORY_PRESETS,
+  createStarterTemplate,
+  listStarterTemplatesByCategory,
+} from '../src/index';
 
 function collectNodeTypes(node: UiNode): string[] {
   return [node.type, ...(node.children?.flatMap(collectNodeTypes) ?? [])];
@@ -39,10 +43,7 @@ describe('games card trainer starter', () => {
     );
 
     expect(manifest.navigator.type).toBe('tabs');
-    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
-      'Trainer',
-      'Settings',
-    ]);
+    expect(manifest.navigator.routes.map((route) => route.label)).toEqual(['Trainer', 'Settings']);
     expect(Object.values(manifest.screens).map((screen) => screen.name)).toEqual([
       'Trainer',
       'Settings',
