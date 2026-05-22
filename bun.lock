@@ -6,7 +6,7 @@
       "name": "@ankhorage/templates",
       "dependencies": {
         "@ankhorage/contracts": "^1.8.0",
-        "@ankhorage/zora": "^2.4.8",
+        "@ankhorage/zora": "^2.5.1",
       },
       "devDependencies": {
         "@ankhorage/devtools": "^1.0.6",
@@ -26,7 +26,7 @@
 
     "@ankhorage/surface": ["@ankhorage/surface@2.0.2", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.7", "@ankhorage/contracts": "^1.7.0" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0", "react-native-safe-area-context": "^5.0.0" }, "optionalPeers": ["@expo/vector-icons", "expo-font"] }, "sha512-mqWxud3bFEezlrtYselveqrhEI9olgGMNHv35iI/pvzZP+oPqIwKSl5JzV7CTrbzp+YhHZVNzAzYEMtdhiD5QA=="],
 
-    "@ankhorage/zora": ["@ankhorage/zora@2.4.8", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.7", "@ankhorage/contracts": "^1.7.0", "@ankhorage/surface": "^2.0.2" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "@react-native-picker/picker": ">=2.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "@react-native-picker/picker", "expo-font"] }, "sha512-DvoFll6pXykTPqUelQ9Fw0KAl3bl2R/w9007niQf2dDFfmiBDDhtslLeZNKwcSYQpxnRKb9fbCptOi0qTMXI6Q=="],
+    "@ankhorage/zora": ["@ankhorage/zora@2.5.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.7", "@ankhorage/contracts": "^1.12.0", "@ankhorage/surface": "^2.0.2" }, "peerDependencies": { "@expo/vector-icons": ">=14.0.0", "@react-native-picker/picker": ">=2.0.0", "expo-font": "^55.0.6", "react": ">=18.2.0", "react-native": ">=0.72.0" }, "optionalPeers": ["@expo/vector-icons", "@react-native-picker/picker", "expo-font"] }, "sha512-xmuR2yfG+kLarG/gExb/wUUCse5D5KoAN6ALXocMl2a5Y8pwe/gqOrYo4NAZyW+ucM/6E0h9Nv4QxgLlZcZMIA=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
 
@@ -1093,6 +1093,8 @@
     "yocto-queue": ["yocto-queue@0.1.0", "", {}, "sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q=="],
 
     "zod": ["zod@4.4.3", "", {}, "sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ=="],
+
+    "@ankhorage/zora/@ankhorage/contracts": ["@ankhorage/contracts@1.12.0", "", { "dependencies": { "@ankhorage/color-theory": "^0.0.7" } }, "sha512-ytnkj9pKwQa38vMaGeriSPRslg2M42ECWhxkdAbz+z4m2LE3K385rQG+u3mtw92imNSsGv/6wmfN8LGfVr3m5Q=="],
 
     "@babel/core/json5": ["json5@2.2.3", "", { "bin": { "json5": "lib/cli.js" } }, "sha512-XmOWe7eyHYH14cLdVPoyg+GOH3rYX++KpzrylJwSW98t3Nk+U8XOl8FWKOgwtzdb8lXGf6zYwDUzeHMWfxasyg=="],
 
