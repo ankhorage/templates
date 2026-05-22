@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.21
+
+### Patch Changes
+
+- 77595d3: Add an opening-book panel below the chess starter board.
+
 ## 1.2.20
 
 ### Patch Changes
