@@ -19,6 +19,6 @@ export {
 export {
   APP_CATEGORIES,
   type AppCategory,
-  type SplashScreenSpec,
   type SplashScreenResizeMode,
+  type SplashScreenSpec,
 } from '@ankhorage/contracts';
