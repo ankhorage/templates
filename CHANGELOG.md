@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.3.1
+
+### Patch Changes
+
+- 3b7eb55: Use the canonical splash screen manifest contract from `@ankhorage/contracts`.
+
 ## 1.3.0
 
 ### Minor Changes
