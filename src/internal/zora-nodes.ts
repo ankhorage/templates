@@ -1,6 +1,11 @@
 import type { UiNode } from '@ankhorage/contracts';
 import type { ButtonProps, CardProps, InputProps } from '@ankhorage/zora';
-import type { EmptyStateProps, NoticeProps, OAuthProviderListProps, PanelProps } from '@ankhorage/zora';
+import type {
+  EmptyStateProps,
+  NoticeProps,
+  OAuthProviderListProps,
+  PanelProps,
+} from '@ankhorage/zora';
 import type { ScreenProps, ScreenSectionProps } from '@ankhorage/zora';
 import type { SectionHeaderProps, SettingsRowProps } from '@ankhorage/zora';
 
@@ -92,19 +97,19 @@ type SerializableEmptyStateProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
-type SerializableOAuthProviderIconSpec = {
+interface SerializableOAuthProviderIconSpec {
   name: string;
   provider?: string;
   size?: number | string;
   color?: string;
-};
-type SerializableOAuthProviderItem = {
+}
+interface SerializableOAuthProviderItem {
   id: string;
   label?: string;
   icon?: SerializableOAuthProviderIconSpec;
   disabled?: boolean;
   loading?: boolean;
-};
+}
 type SerializableOAuthProviderListProps = Omit<
   OAuthProviderListProps,
   'onProviderPress' | 'providers'

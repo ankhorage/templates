@@ -42,7 +42,7 @@ function createOauthManifest() {
 describe('OAuth auth template generation', () => {
   test('adds an OAuth provider entry screen outside navigation when enabled', () => {
     const manifest = createOauthManifest();
-    const signInRoute = manifest.settings.authFlow.signInRoute;
+    const { signInRoute } = manifest.settings.authFlow;
     const screen = manifest.screens[signInRoute];
 
     expect(screen).toBeDefined();

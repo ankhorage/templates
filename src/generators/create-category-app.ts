@@ -4,10 +4,16 @@ import { mergeAppManifest } from '../internal/merge';
 import type { AppManifestOverrides } from '../internal/overrides';
 import { CATEGORY_PRESETS } from '../presets/category-presets';
 import { createScreen } from '../templates/shared/screen';
-import { createScreenRoot, createSection, createZoraNode } from '../templates/shared/zora-node-helpers';
+import {
+  createScreenRoot,
+  createSection,
+  createZoraNode,
+} from '../templates/shared/zora-node-helpers';
 import { createStarterTemplate, type TemplateKind } from '../templates/starter';
 
-type ProviderConfig = NonNullable<NonNullable<AppManifest['infra']['auth']>['oauth']>['providers'][number];
+type ProviderConfig = NonNullable<
+  NonNullable<AppManifest['infra']['auth']>['oauth']
+>['providers'][number];
 
 function resolveThemeModeValue<TValue>(
   overrides: AppManifestOverrides | undefined,
@@ -73,7 +79,11 @@ function addProviderEntryScreen(manifest: AppManifest): AppManifest {
     (provider) => provider.enabled !== false,
   );
 
-  if (manifest.infra.auth?.oauth?.enabled !== true || providers === undefined || providers.length === 0) {
+  if (
+    manifest.infra.auth?.oauth?.enabled !== true ||
+    providers === undefined ||
+    providers.length === 0
+  ) {
     return manifest;
   }
 
@@ -92,7 +102,10 @@ function addProviderEntryScreen(manifest: AppManifest): AppManifest {
   };
 }
 
-function createProviderEntryScreen(screenId: string, providers: readonly ProviderConfig[]): ScreenSpec {
+function createProviderEntryScreen(
+  screenId: string,
+  providers: readonly ProviderConfig[],
+): ScreenSpec {
   return createScreen({
     id: screenId,
     name: 'Provider entry',
