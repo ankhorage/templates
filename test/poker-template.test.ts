@@ -32,8 +32,12 @@ function findNodeById(node: UiNode, id: string): UiNode | undefined {
 describe('poker starter template', () => {
   test('groups trainer decision actions in a readable ButtonGroup', () => {
     const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
-    const trainerScreen = Object.values(manifest.screens).find((screen) => screen.name === 'Trainer');
-    const actions = trainerScreen ? findNodeById(trainerScreen.root, 'games-poker-home-actions') : undefined;
+    const trainerScreen = Object.values(manifest.screens).find(
+      (screen) => screen.name === 'Trainer',
+    );
+    const actions = trainerScreen
+      ? findNodeById(trainerScreen.root, 'games-poker-home-actions')
+      : undefined;
 
     expect(actions?.type).toBe('ButtonGroup');
     expect(actions?.props).toEqual({
