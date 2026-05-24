@@ -1,4 +1,4 @@
-import type { AppCategory, AppManifest, UiNode } from '@ankhorage/contracts';
+import type { AppCategory, AppManifest, SplashScreenSpec, UiNode } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
 import {
@@ -10,11 +10,10 @@ import {
   listStarterTemplatesByCategory,
   listStarterTemplateSummaries,
   type TemplateSeed,
-  type TemplateSplashScreenSpec,
 } from '../src/index';
 
 interface ManifestWithSplashScreen extends AppManifest {
-  readonly splashScreen: TemplateSplashScreenSpec;
+  readonly splashScreen: SplashScreenSpec;
 }
 
 function collectNodeTypes(node: UiNode): string[] {
