@@ -1,8 +1,8 @@
 import type { AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
-export type TemplateSplashScreenResizeMode = 'contain' | 'cover' | 'native';
+type TemplateSplashScreenResizeMode = 'contain' | 'cover' | 'native';
 
-export interface TemplateSplashScreenAssetSpec {
+interface TemplateSplashScreenAssetSpec {
   readonly image?: string;
   readonly imageWidth?: number;
   readonly resizeMode?: TemplateSplashScreenResizeMode;
