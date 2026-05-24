@@ -10,7 +10,12 @@ import {
   listStarterTemplatesByCategory,
   listStarterTemplateSummaries,
   type TemplateSeed,
+  type TemplateSplashScreenSpec,
 } from '../src/index';
+
+interface ManifestWithSplashScreen extends AppManifest {
+  readonly splashScreen: TemplateSplashScreenSpec;
+}
 
 function collectNodeTypes(node: UiNode): string[] {
   return [node.type, ...(node.children?.flatMap(collectNodeTypes) ?? [])];
@@ -29,6 +34,24 @@ function createSeed(category: AppCategory): TemplateSeed {
     primaryColor: preset.primaryColor,
     harmony: preset.harmony,
   };
+}
+
+function assertSplashScreen(
+  manifest: ManifestWithSplashScreen,
+  expectedBackgroundColor: string,
+) {
+  expect(manifest.splashScreen).toEqual({
+    backgroundColor: expectedBackgroundColor,
+    image: './assets/splash/icon.png',
+    imageWidth: 160,
+    resizeMode: 'contain',
+    dark: {
+      backgroundColor: expectedBackgroundColor,
+      image: './assets/splash/icon-dark.png',
+      imageWidth: 160,
+      resizeMode: 'contain',
+    },
+  });
 }
 
 function assertManifestIntegrity(manifest: AppManifest) {
@@ -113,7 +136,7 @@ const CATEGORY_EXPECTED_NAVIGATORS: Record<AppCategory, AppManifest['navigator']
 describe('createCategoryAppManifest', () => {
   test('builds a manifest for every category preset', () => {
     for (const category of APP_CATEGORIES) {
-      const manifest: AppManifest = createCategoryAppManifest(category);
+      const manifest = createCategoryAppManifest(category) as ManifestWithSplashScreen;
       const preset = CATEGORY_PRESETS[category];
 
       expect(manifest.metadata.name).toBe(preset.defaultName);
@@ -134,6 +157,7 @@ describe('createCategoryAppManifest', () => {
         'harmony',
         'primaryColor',
       ]);
+      assertSplashScreen(manifest, preset.primaryColor);
       assertManifestIntegrity(manifest);
 
       const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
@@ -195,7 +219,7 @@ describe('createCategoryAppManifest', () => {
           },
         },
       ],
-    });
+    }) as ManifestWithSplashScreen;
 
     expect(manifest.metadata.name).toBe('Treasury Console');
     expect(manifest.metadata.slug).toBe('treasury-console');
@@ -222,6 +246,7 @@ describe('createCategoryAppManifest', () => {
       harmony: 'monochromatic',
     });
     expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual(['harmony', 'primaryColor']);
+    assertSplashScreen(manifest, '#0F766E');
   });
 });
 
@@ -277,7 +302,9 @@ describe('createStarterTemplate', () => {
       focusAreas: ['Build status', 'Incident queue', 'Developer settings'],
       primaryColor: '#7C3AED',
       harmony: 'triadic',
-    });
+    }) as ManifestWithSplashScreen;
+
+    assertSplashScreen(manifest, '#7C3AED');
 
     const nodeTypes = Object.values(manifest.screens).flatMap((screen) =>
       collectNodeTypes(screen.root),
@@ -321,7 +348,7 @@ describe('createStarterTemplate', () => {
       appName: 'Unknown App',
       slug: 'unknown-app',
     };
-    const manifest = createStarterTemplate(seed);
+    const manifest = createStarterTemplate(seed) as ManifestWithSplashScreen;
 
     expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
       'Home',
@@ -329,6 +356,7 @@ describe('createStarterTemplate', () => {
       'Settings',
     ]);
     expect(manifest.metadata.slug).toBe('unknown-app');
+    assertSplashScreen(manifest, seed.primaryColor);
   });
 
   test('uses category default when a requested template id is unknown', () => {
