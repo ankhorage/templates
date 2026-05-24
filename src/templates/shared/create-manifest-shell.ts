@@ -1,6 +1,7 @@
 import type { AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
 import { BASE_INFRA, BASE_SETTINGS } from '../../internal/defaults';
+import { createSplashScreen, type AppManifestWithSplashScreen } from './splash-screen';
 
 interface ManifestShellSeed {
   appName: string;
@@ -13,7 +14,7 @@ export function createManifestShell(args: {
   version: string;
   navigator: AppManifest['navigator'];
   screens: AppManifest['screens'];
-}): AppManifest {
+}): AppManifestWithSplashScreen {
   return {
     metadata: {
       name: args.seed.appName,
@@ -23,6 +24,7 @@ export function createManifestShell(args: {
     },
     themes: [args.theme],
     activeThemeId: args.theme.id,
+    splashScreen: createSplashScreen(args.theme),
     infra: structuredClone(BASE_INFRA),
     settings: structuredClone(BASE_SETTINGS),
     navigator: args.navigator,
