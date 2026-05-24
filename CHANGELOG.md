@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.22
+
+### Patch Changes
+
+- d0ece74: Update packages
+
 ## 1.2.21
 
 ### Patch Changes
