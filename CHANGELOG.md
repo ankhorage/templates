@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.2.23
+
+### Patch Changes
+
+- 3e61f48: Add default splash screen branding to generated starter manifests.
+
 ## 1.2.22
 
 ### Patch Changes
