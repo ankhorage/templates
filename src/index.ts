@@ -16,4 +16,5 @@ export {
   type TemplateKind,
   type TemplateSeed,
 } from './templates/starter';
+export type { TemplateSplashScreenSpec } from './templates/shared/splash-screen';
 export { APP_CATEGORIES, type AppCategory } from '@ankhorage/contracts';
