@@ -92,19 +92,19 @@ type SerializableEmptyStateProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
-type SerializableOAuthProviderIconSpec = SerializableProps<{
+type SerializableOAuthProviderIconSpec = {
   name: string;
   provider?: string;
   size?: number | string;
   color?: string;
-}>;
-type SerializableOAuthProviderItem = SerializableProps<{
+};
+type SerializableOAuthProviderItem = {
   id: string;
   label?: string;
   icon?: SerializableOAuthProviderIconSpec;
   disabled?: boolean;
   loading?: boolean;
-}>;
+};
 type SerializableOAuthProviderListProps = Omit<
   OAuthProviderListProps,
   'onProviderPress' | 'providers'
