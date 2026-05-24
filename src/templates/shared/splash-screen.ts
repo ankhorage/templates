@@ -1,30 +1,15 @@
-import type { AppManifest, ThemeConfig } from '@ankhorage/contracts';
-
-type TemplateSplashScreenResizeMode = 'contain' | 'cover' | 'native';
-
-interface TemplateSplashScreenAssetSpec {
-  readonly image?: string;
-  readonly imageWidth?: number;
-  readonly resizeMode?: TemplateSplashScreenResizeMode;
-}
-
-export interface TemplateSplashScreenSpec extends TemplateSplashScreenAssetSpec {
-  readonly backgroundColor?: string;
-  readonly dark?: TemplateSplashScreenAssetSpec & {
-    readonly backgroundColor?: string;
-  };
-}
+import type { AppManifest, SplashScreenSpec, ThemeConfig } from '@ankhorage/contracts';
 
 export type AppManifestWithSplashScreen = AppManifest & {
-  readonly splashScreen: TemplateSplashScreenSpec;
+  readonly splashScreen: SplashScreenSpec;
 };
 
 const DEFAULT_SPLASH_IMAGE = './assets/splash/icon.png';
 const DEFAULT_DARK_SPLASH_IMAGE = './assets/splash/icon-dark.png';
 const DEFAULT_SPLASH_IMAGE_WIDTH = 160;
-const DEFAULT_SPLASH_RESIZE_MODE = 'contain' satisfies TemplateSplashScreenResizeMode;
+const DEFAULT_SPLASH_RESIZE_MODE = 'contain' satisfies SplashScreenSpec['resizeMode'];
 
-export function createSplashScreen(theme: ThemeConfig): TemplateSplashScreenSpec {
+export function createSplashScreen(theme: ThemeConfig): SplashScreenSpec {
   return {
     backgroundColor: theme.light.primaryColor,
     image: DEFAULT_SPLASH_IMAGE,
