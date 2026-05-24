@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.3.0
+
+### Minor Changes
+
+- bc2db84: Generate OAuth-aware provider entry screens from manifest auth config.
+
 ## 1.2.23
 
 ### Patch Changes
