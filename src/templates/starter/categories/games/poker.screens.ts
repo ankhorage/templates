@@ -111,18 +111,32 @@ export function createPokerScreens(
               description:
                 'Use this card for stack depth, previous action, position, and trainer prompt copy.',
             }),
-            createNode(`${idPrefix}-home-fold`, 'Button', {
-              children: 'Fold',
-              variant: 'secondary',
-            }),
-            createNode(`${idPrefix}-home-call`, 'Button', {
-              children: 'Call',
-              variant: 'secondary',
-            }),
-            createNode(`${idPrefix}-home-raise`, 'Button', {
-              children: 'Raise',
-              variant: 'primary',
-            }),
+            createNode(
+              `${idPrefix}-home-actions`,
+              'ButtonGroup',
+              {
+                align: 'start',
+                gap: 's',
+                orientation: 'responsive',
+              },
+              [
+                createNode(`${idPrefix}-home-fold`, 'Button', {
+                  children: 'Fold',
+                  color: 'neutral',
+                  variant: 'soft',
+                }),
+                createNode(`${idPrefix}-home-call`, 'Button', {
+                  children: 'Call',
+                  color: 'primary',
+                  variant: 'soft',
+                }),
+                createNode(`${idPrefix}-home-raise`, 'Button', {
+                  children: 'Raise',
+                  color: 'primary',
+                  variant: 'solid',
+                }),
+              ],
+            ),
             createNode(`${idPrefix}-home-result`, 'Notice', {
               title: 'Explanation placeholder',
               description:
