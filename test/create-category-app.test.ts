@@ -36,10 +36,7 @@ function createSeed(category: AppCategory): TemplateSeed {
   };
 }
 
-function assertSplashScreen(
-  manifest: ManifestWithSplashScreen,
-  expectedBackgroundColor: string,
-) {
+function assertSplashScreen(manifest: ManifestWithSplashScreen, expectedBackgroundColor: string) {
   expect(manifest.splashScreen).toEqual({
     backgroundColor: expectedBackgroundColor,
     image: './assets/splash/icon.png',

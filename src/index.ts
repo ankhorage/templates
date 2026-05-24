@@ -1,5 +1,6 @@
 export { createCategoryAppManifest } from './generators/create-category-app';
 export { CATEGORY_PRESETS, type CategoryPreset } from './presets/category-presets';
+export type { TemplateSplashScreenSpec } from './templates/shared/splash-screen';
 export {
   type CategoryStarterTemplateDefinition,
   createStarterTemplate,
@@ -16,5 +17,4 @@ export {
   type TemplateKind,
   type TemplateSeed,
 } from './templates/starter';
-export type { TemplateSplashScreenSpec } from './templates/shared/splash-screen';
 export { APP_CATEGORIES, type AppCategory } from '@ankhorage/contracts';
