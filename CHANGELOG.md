@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.3.2
+
+### Patch Changes
+
+- d2e2571: Render poker trainer decision actions as a readable ButtonGroup.
+
 ## 1.3.1
 
 ### Patch Changes
