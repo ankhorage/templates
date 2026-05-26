@@ -64,16 +64,20 @@ describe('games card trainer starter', () => {
       throw new Error('Expected poker_situations to be a generated API.');
     }
 
+    const seed = api.resource?.seed?.[0];
+
     expect(api.resource?.kind).toBe('collection');
     expect(api.resource?.collection.name).toBe('poker_situations');
-    expect(api.resource?.seed?.[0]).toEqual(
-      expect.objectContaining({
-        id: 'preflop-btn-aa',
-        street: 'Preflop',
-        blinds: '400 / 800',
-        heroPosition: 'BTN',
-        correctAction: 'All-In',
-      }),
-    );
+    expect(seed).toBeDefined();
+
+    if (!seed) {
+      throw new Error('Expected poker_situations to include a seed record.');
+    }
+
+    expect(seed.id).toBe('preflop-btn-aa');
+    expect(seed.street).toBe('Preflop');
+    expect(seed.blinds).toBe('400 / 800');
+    expect(seed.heroPosition).toBe('BTN');
+    expect(seed.correctAction).toBe('All-In');
   });
 });
