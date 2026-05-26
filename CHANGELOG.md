@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.3.3
+
+### Patch Changes
+
+- 58b67ed: Improve the generated poker/card trainer starter with a compact trainer layout, visible hero cards, horizontal decisions, hidden initial feedback, and API-first `poker_situations` seed data.
+
 ## 1.3.2
 
 ### Patch Changes
