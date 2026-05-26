@@ -14,8 +14,9 @@ export function createManifestShell(args: {
   version: string;
   navigator: AppManifest['navigator'];
   screens: AppManifest['screens'];
+  data?: AppManifest['data'];
 }): AppManifestWithSplashScreen {
-  return {
+  const manifest: AppManifestWithSplashScreen = {
     metadata: {
       name: args.seed.appName,
       slug: args.seed.slug,
@@ -29,5 +30,14 @@ export function createManifestShell(args: {
     settings: structuredClone(BASE_SETTINGS),
     navigator: args.navigator,
     screens: args.screens,
+  };
+
+  if (!args.data) {
+    return manifest;
+  }
+
+  return {
+    ...manifest,
+    data: args.data,
   };
 }
