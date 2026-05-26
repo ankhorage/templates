@@ -1,11 +1,11 @@
 import type { AppManifest, DataContractValue } from '@ankhorage/contracts';
 
-export interface PokerPlayingCard {
+interface PokerPlayingCard {
   readonly rank: string;
   readonly suit: 'clubs' | 'diamonds' | 'hearts' | 'spades';
 }
 
-export interface PokerSeatState {
+interface PokerSeatState {
   readonly id: string;
   readonly label: string;
   readonly sublabel?: string;
