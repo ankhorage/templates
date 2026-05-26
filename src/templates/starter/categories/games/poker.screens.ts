@@ -65,11 +65,15 @@ function createDecisionActions(idPrefix: string, situation: PokerSituation): UiN
       orientation: 'horizontal',
     },
     situation.availableActions.map((action) =>
-      createNode(`${idPrefix}-home-action-${action.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`, 'Button', {
-        children: action,
-        color: action === 'Fold' ? 'neutral' : 'primary',
-        variant: 'soft',
-      }),
+      createNode(
+        `${idPrefix}-home-action-${action.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`,
+        'Button',
+        {
+          children: action,
+          color: action === 'Fold' ? 'neutral' : 'primary',
+          variant: 'soft',
+        },
+      ),
     ),
   );
 }
@@ -136,13 +140,15 @@ export function createPokerScreens(
             {
               id: 'table-row',
               title: 'Table layout',
-              description: 'Start with six compact seats, visible hero cards, stacks, and chip labels.',
+              description:
+                'Start with six compact seats, visible hero cards, stacks, and chip labels.',
               meta: '6 seats',
             },
             {
               id: 'feedback-row',
               title: 'Feedback mode',
-              description: 'Initial trainer screen hides explanations until a decision is selected.',
+              description:
+                'Initial trainer screen hides explanations until a decision is selected.',
               meta: 'after answer',
             },
             {

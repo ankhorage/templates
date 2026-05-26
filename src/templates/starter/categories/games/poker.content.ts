@@ -5,6 +5,7 @@ export const pokerContent = {
   },
   settings: {
     title: 'Trainer settings',
-    description: 'Prepare table display, decision mode, and study preferences for a card-game trainer app.',
+    description:
+      'Prepare table display, decision mode, and study preferences for a card-game trainer app.',
   },
 } as const;

@@ -49,8 +49,7 @@ export const pokerSituation: PokerSituation = {
   progress: 7,
   progressTotal: 20,
   score: '84%',
-  prompt:
-    'Hero is on the button with A♥ A♣. HJ opened to 2.4K, CO folded, and action is on you.',
+  prompt: 'Hero is on the button with A♥ A♣. HJ opened to 2.4K, CO folded, and action is on you.',
   availableActions: ['Fold', 'Call', 'All-In'],
   correctAction: 'All-In',
   explanation:
