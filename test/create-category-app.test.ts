@@ -285,6 +285,25 @@ describe('starter template listing', () => {
     });
     expect(summaries.some((summary) => summary.category === 'social_community')).toBe(true);
   });
+
+  test('lists social community templates without duplicate community network entries', () => {
+    const socialTemplates = listStarterTemplatesByCategory('social_community');
+
+    expect(socialTemplates).toEqual([
+      {
+        category: 'social_community',
+        description: 'A feed, groups, messages, profile, and settings starter for community apps.',
+        id: 'default',
+        label: 'Community network',
+      },
+      {
+        category: 'social_community',
+        description: 'A studio, posts, audience, insights, and settings starter for creator apps.',
+        id: 'creator',
+        label: 'Creator social',
+      },
+    ]);
+  });
 });
 
 describe('createStarterTemplate', () => {
@@ -369,10 +388,8 @@ describe('createStarterTemplate', () => {
     ]);
   });
 
-  test('selects different social community template variants', () => {
-    const community = createStarterTemplate(createSeed('social_community'), {
-      templateId: 'community',
-    });
+  test('selects the social community default and creator variants', () => {
+    const community = createStarterTemplate(createSeed('social_community'));
     const creator = createStarterTemplate(createSeed('social_community'), {
       templateId: 'creator',
     });
