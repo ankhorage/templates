@@ -59,9 +59,14 @@ describe('games card trainer starter', () => {
     const api = manifest.data?.apis?.poker_situations;
 
     expect(api?.kind).toBe('generated');
-    expect(api?.resource?.kind).toBe('collection');
-    expect(api?.resource?.collection.name).toBe('poker_situations');
-    expect(api?.resource?.seed?.[0]).toEqual(
+
+    if (api?.kind !== 'generated') {
+      throw new Error('Expected poker_situations to be a generated API.');
+    }
+
+    expect(api.resource?.kind).toBe('collection');
+    expect(api.resource?.collection.name).toBe('poker_situations');
+    expect(api.resource?.seed?.[0]).toEqual(
       expect.objectContaining({
         id: 'preflop-btn-aa',
         street: 'Preflop',
