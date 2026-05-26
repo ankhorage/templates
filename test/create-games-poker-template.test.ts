@@ -36,7 +36,7 @@ describe('games card trainer starter', () => {
     });
   });
 
-  test('creates a two-tab trainer manifest with a tabletop table node', () => {
+  test('creates a two-tab trainer manifest with a compact tabletop trainer flow', () => {
     const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
     const nodeTypes = Object.values(manifest.screens).flatMap((screen) =>
       collectNodeTypes(screen.root),
@@ -48,8 +48,27 @@ describe('games card trainer starter', () => {
       'Trainer',
       'Settings',
     ]);
+    expect(nodeTypes).toContain('Progress');
     expect(nodeTypes).toContain('TabletopTable');
     expect(nodeTypes).toContain('Button');
-    expect(nodeTypes).toContain('Notice');
+    expect(nodeTypes).not.toContain('Notice');
+  });
+
+  test('adds an API-first poker_situations generated resource', () => {
+    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
+    const api = manifest.data?.apis?.poker_situations;
+
+    expect(api?.kind).toBe('generated');
+    expect(api?.resource?.kind).toBe('collection');
+    expect(api?.resource?.collection.name).toBe('poker_situations');
+    expect(api?.resource?.seed?.[0]).toEqual(
+      expect.objectContaining({
+        id: 'preflop-btn-aa',
+        street: 'Preflop',
+        blinds: '400 / 800',
+        heroPosition: 'BTN',
+        correctAction: 'All-In',
+      }),
+    );
   });
 });
