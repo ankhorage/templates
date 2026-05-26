@@ -10,12 +10,6 @@ export const socialCommunityStarterTemplates = [
     create: createSocialCommunityTemplate,
   },
   {
-    id: 'community',
-    label: 'Community network',
-    description: 'A feed, groups, messages, profile, and settings starter for community apps.',
-    create: createSocialCommunityTemplate,
-  },
-  {
     id: 'creator',
     label: 'Creator social',
     description: 'A studio, posts, audience, insights, and settings starter for creator apps.',
