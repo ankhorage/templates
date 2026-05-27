@@ -45,7 +45,7 @@ function createScenarioChips(idPrefix: string, situation: PokerSituation): UiNod
         variant: 'soft',
       }),
       createNode(`${idPrefix}-home-chip-position`, 'Button', {
-        children: `Hero ${situation.heroPosition}`,
+        children: `User ${situation.userPosition}`,
         color: 'primary',
         disabled: true,
         size: 's',
@@ -110,7 +110,7 @@ export function createPokerScreens(
           centerSublabel: `Level ${situation.level}`,
           seatCount: situation.seats.length,
           shape: 'oval',
-          cardSize: 'small',
+          cardSize: 'medium',
           seats: situation.seats,
           testID: `${idPrefix}-home-table`,
         }),
@@ -141,7 +141,7 @@ export function createPokerScreens(
               id: 'table-row',
               title: 'Table layout',
               description:
-                'Start with six compact seats, visible hero cards, stacks, and chip labels.',
+                'Start with six compact seats, visible user cards, stacks, and chip labels.',
               meta: '6 seats',
             },
             {
@@ -152,10 +152,11 @@ export function createPokerScreens(
               meta: 'after answer',
             },
             {
-              id: 'api-row',
-              title: 'Scenario API',
-              description: 'Generated data is modeled through manifest.data.apis.poker_situations.',
-              meta: 'api-first',
+              id: 'bindings-row',
+              title: 'Data binding',
+              description:
+                'Map tabletop props to app API data in Studio when the real trainer data source is available.',
+              meta: 'app-owned',
             },
           ],
         ),

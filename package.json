@@ -52,7 +52,7 @@
   },
   "dependencies": {
     "@ankhorage/contracts": "^1.16.0",
-    "@ankhorage/zora": "^2.6.0"
+    "@ankhorage/zora": "^2.6.1"
   },
   "devDependencies": {
     "@ankhorage/devtools": "^1.0.6",
