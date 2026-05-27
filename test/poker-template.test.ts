@@ -67,7 +67,7 @@ describe('poker starter template', () => {
     ]);
   });
 
-  test('renders visible hero cards and hides feedback before answer selection', () => {
+  test('renders visible user cards and hides feedback before answer selection', () => {
     const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
     const trainerScreen = Object.values(manifest.screens).find(
       (screen) => screen.name === 'Trainer',
@@ -81,18 +81,24 @@ describe('poker starter template', () => {
     const seats = table?.props?.seats;
 
     expect(Array.isArray(seats)).toBe(true);
-    expect(seats).toContainEqual(
-      expect.objectContaining({
-        id: 'seat-button',
-        label: 'BTN',
-        selected: true,
-        cards: [
-          { rank: 'A', suit: 'hearts' },
-          { rank: 'A', suit: 'clubs' },
-        ],
-        tokenLabel: 'Hero',
-      }),
-    );
+
+    if (!Array.isArray(seats)) {
+      throw new Error('Expected table seats to be an array.');
+    }
+
+    expect(seats).toContainEqual({
+      id: 'seat-user',
+      label: 'BTN',
+      sublabel: '98K',
+      selected: true,
+      cards: [
+        { rank: 'A', suit: 'hearts' },
+        { rank: 'A', suit: 'clubs' },
+      ],
+      tokenLabel: 'User',
+      accessibilityLabel: 'User on button with ace of hearts and ace of clubs',
+    });
+    expect(table?.props?.cardSize).toBe('medium');
 
     const nodeTypes = trainerScreen ? collectNodeTypes(trainerScreen.root) : [];
 
