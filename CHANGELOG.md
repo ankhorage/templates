@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.3.4
+
+### Patch Changes
+
+- 7f7c6a8: Keep the poker/card trainer starter API-neutral by removing generated `poker_situations` manifest data and switching sample table copy from `Hero` to `User` terminology.
+
 ## 1.3.3
 
 ### Patch Changes
