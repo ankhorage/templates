@@ -13,12 +13,57 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
   const idPrefix = `${seed.category}-nutrition-catalog-scan`;
   const theme = createTheme(seed);
   const screenIds = createNutritionCatalogScanScreenIds(idPrefix);
-
-  return createManifestShell({
+  const manifest = createManifestShell({
     seed,
     theme,
     version: seed.version ?? DEFAULT_TEMPLATE_VERSION,
     navigator: createNutritionCatalogScanNavigator(screenIds),
     screens: createNutritionCatalogScanScreens(seed, idPrefix, screenIds),
   });
+
+  return {
+    ...manifest,
+    infra: {
+      ...manifest.infra,
+      auth: {
+        scope: 'global',
+        provider: 'supabase',
+        authorization: {
+          kind: 'RBAC',
+          engine: 'native',
+        },
+        flow: {
+          signInRoute: 'sign-in',
+          signUpRoute: 'sign-up',
+          signOutRoute: 'sign-out',
+          postSignInRoute: 'challenge',
+          unauthorizedRoute: 'sign-in',
+        },
+        signIn: {
+          identifiers: ['email'],
+        },
+        signUp: {
+          requiredFields: ['email', 'password', 'displayName'],
+          signUpPolicy: 'requireVerification',
+        },
+        profile: {
+          fields: ['email', 'displayName', 'avatarUrl'],
+          table: 'profiles',
+          primaryKey: 'authUserId',
+          createStrategy: 'trigger',
+          updateStrategy: 'api',
+        },
+      },
+    },
+    settings: {
+      ...manifest.settings,
+      authFlow: {
+        signInRoute: 'sign-in',
+        signUpRoute: 'sign-up',
+        signOutRoute: 'sign-out',
+        postSignInRoute: 'challenge',
+        unauthorizedRoute: 'sign-in',
+      },
+    },
+  };
 }
