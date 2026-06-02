@@ -13,7 +13,7 @@ function collectNodeTypes(node: UiNode): string[] {
 }
 
 function collectNodeText(node: UiNode): string[] {
-  const props = node.props as Record<string, unknown> | undefined;
+  const { props } = node;
   const values = props
     ? Object.values(props).filter((value): value is string => typeof value === 'string')
     : [];
