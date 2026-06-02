@@ -12,7 +12,9 @@ export interface NutritionCatalogScanScreenIds {
   readonly settings: string;
 }
 
-export function createNutritionCatalogScanScreenIds(idPrefix: string): NutritionCatalogScanScreenIds {
+export function createNutritionCatalogScanScreenIds(
+  idPrefix: string,
+): NutritionCatalogScanScreenIds {
   return {
     catalog: `${idPrefix}-catalog`,
     detail: `${idPrefix}-detail`,

@@ -32,7 +32,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Migros · published',
             title: 'Bio Greek Yogurt 250 g',
-            description: 'Example published product card with brand, quantity, barcode, and confidence metadata.',
+            description:
+              'Example published product card with brand, quantity, barcode, and confidence metadata.',
           },
           {
             eyebrow: 'Coop · published',
@@ -121,18 +122,19 @@ export const nutritionCatalogScanContent = {
       },
       {
         title: 'Lookup branch',
-        description:
-          'After scanning, call GET /v1/nutrition/products/by-barcode/{barcode}.',
+        description: 'After scanning, call GET /v1/nutrition/products/by-barcode/{barcode}.',
         cards: [
           {
             eyebrow: 'Found',
             title: 'Open product detail',
-            description: 'A 200 response opens the product detail screen for the published product.',
+            description:
+              'A 200 response opens the product detail screen for the published product.',
           },
           {
             eyebrow: 'Unknown',
             title: 'Create capture',
-            description: 'A 404 response is expected for unknown barcodes and opens the capture form.',
+            description:
+              'A 404 response is expected for unknown barcodes and opens the capture form.',
           },
         ],
       },
@@ -161,7 +163,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Photos placeholder',
             title: 'Front, nutrition, ingredients, barcode',
-            description: 'Real image upload is intentionally deferred; capture image paths stay API-shaped.',
+            description:
+              'Real image upload is intentionally deferred; capture image paths stay API-shaped.',
           },
         ],
       },
@@ -204,7 +207,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Pending',
             title: 'Waiting for connection',
-            description: 'Submissions can be stored locally with anonymousDeviceId and clientCapturedAt.',
+            description:
+              'Submissions can be stored locally with anonymousDeviceId and clientCapturedAt.',
           },
           {
             eyebrow: 'Failed',
@@ -221,4 +225,7 @@ export const nutritionCatalogScanContent = {
     description:
       'Configuration for API Gateway base URL, locale, app version, and anonymous device id.',
   },
-} satisfies Record<string, NutritionCatalogScreenContent | { eyebrow: string; title: string; description: string }>;
+} satisfies Record<
+  string,
+  NutritionCatalogScreenContent | { eyebrow: string; title: string; description: string }
+>;

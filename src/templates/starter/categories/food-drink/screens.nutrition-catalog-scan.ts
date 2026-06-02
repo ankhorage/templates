@@ -226,7 +226,8 @@ export function createNutritionCatalogScanScreens(
             {
               id: 'capture-row',
               title: 'Capture endpoint',
-              description: 'POST /v1/nutrition/products/capture queues submissions for later review.',
+              description:
+                'POST /v1/nutrition/products/capture queues submissions for later review.',
               meta: 'live',
             },
           ],
@@ -251,7 +252,8 @@ export function createNutritionCatalogScanScreens(
             {
               id: 'camera-row',
               title: 'Camera dependency',
-              description: 'Isolate expo-camera behind a scanner adapter and compose visible UI from ZORA.',
+              description:
+                'Isolate expo-camera behind a scanner adapter and compose visible UI from ZORA.',
               meta: 'ZORA-first',
             },
           ],
