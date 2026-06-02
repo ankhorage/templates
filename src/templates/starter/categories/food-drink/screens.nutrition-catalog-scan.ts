@@ -12,30 +12,30 @@ import type { TemplateSeed } from '../../starter.types';
 import { nutritionCatalogScanContent } from './content.nutrition-catalog-scan';
 import type { NutritionCatalogScanScreenIds } from './routes.nutrition-catalog-scan';
 
-interface NutritionCatalogCardContent {
+interface CardContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
 }
 
-interface NutritionCatalogSectionContent {
+interface SectionContent {
   readonly title: string;
   readonly description: string;
-  readonly cards: readonly NutritionCatalogCardContent[];
+  readonly cards: readonly CardContent[];
 }
 
-interface NutritionCatalogScreenContent {
+interface ScreenContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
-  readonly sections: readonly NutritionCatalogSectionContent[];
+  readonly sections: readonly SectionContent[];
 }
 
 function createContentScreen(args: {
   readonly idPrefix: string;
   readonly screenId: string;
   readonly name: string;
-  readonly content: NutritionCatalogScreenContent;
+  readonly content: ScreenContent;
   readonly headerActions?: readonly ZoraNode[];
 }): AppManifest['screens'][string] {
   const idSegment = args.name.toLowerCase().replaceAll(' ', '-');
@@ -47,11 +47,7 @@ function createContentScreen(args: {
         createZoraNode(
           `${args.idPrefix}-${idSegment}-panel-${sectionIndex + 1}`,
           'Panel',
-          {
-            title: section.title,
-            description: section.description,
-            tone: 'subtle',
-          },
+          { title: section.title, description: section.description, tone: 'subtle' },
           section.cards.map((card, cardIndex) =>
             createZoraNode(
               `${args.idPrefix}-${idSegment}-card-${sectionIndex + 1}-${cardIndex + 1}`,
@@ -100,18 +96,18 @@ function createCatalogActions(idPrefix: string): ZoraNode[] {
     createZoraNode(`${idPrefix}-catalog-scan-button`, 'Button', {
       children: 'Scan barcode',
       color: 'primary',
-      size: 'l',
-      variant: 'solid',
+      size: 'm',
+      fullWidth: true,
     }),
   ];
 }
 
-function createScanAdapterNotice(idPrefix: string): ZoraNode {
+function createScannerNotice(idPrefix: string): ZoraNode {
   return createZoraNode(`${idPrefix}-scan-zora-notice`, 'Notice', {
     title: 'Scanner implementation note',
     description:
-      'Use expo-camera behind a local adapter for now. Promote reusable permission, overlay, and scanner UI into ZORA once the API stabilizes.',
-    tone: 'info',
+      'Use expo-camera behind a local adapter now. Promote reusable permission, overlay, and scanner UI into ZORA later.',
+    color: 'primary',
   });
 }
 
@@ -121,14 +117,13 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
     'Panel',
     {
       title: 'Minimal capture form',
-      description:
-        'The first implementation should prioritize fast in-store entry over OCR or review workflow complexity.',
+      description: 'Prioritize fast in-store entry over OCR or review workflow complexity.',
       tone: 'subtle',
     },
     [
       createZoraNode(`${idPrefix}-capture-barcode-field`, 'FormField', {
         label: 'Barcode',
-        description: 'Prefilled from scan or manual entry; normalized to digits before API calls.',
+        description: 'Prefilled from scan or manual entry; normalized before API calls.',
         required: true,
       }),
       createZoraNode(`${idPrefix}-capture-barcode-input`, 'Input', {
@@ -138,7 +133,7 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
       }),
       createZoraNode(`${idPrefix}-capture-name-field`, 'FormField', {
         label: 'Product name',
-        description: 'Required by the minimal capture request.',
+        description: 'Required by the minimal request.',
         required: true,
       }),
       createZoraNode(`${idPrefix}-capture-name-input`, 'Input', {
@@ -148,8 +143,8 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
       createZoraNode(`${idPrefix}-capture-submit-button`, 'Button', {
         children: 'Submit queued capture',
         color: 'primary',
-        size: 'l',
-        variant: 'solid',
+        size: 'm',
+        fullWidth: true,
       }),
     ],
   );
@@ -179,7 +174,7 @@ export function createNutritionCatalogScanScreens(
       screenId: screenIds.scan,
       name: 'Scan',
       content: nutritionCatalogScanContent.scan,
-      headerActions: [createScanAdapterNotice(idPrefix)],
+      headerActions: [createScannerNotice(idPrefix)],
     }),
     [screenIds.capture]: createContentScreen({
       idPrefix,
