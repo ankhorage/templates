@@ -101,6 +101,14 @@ Additional variants:
 - `games/chess`: Home · Settings. The Home screen renders a `ChessBoard` node with a static
   initial FEN and requires generated apps to provide `@ankhorage/zora-chess` through their
   extension registry.
+- `food_drink/nutrition-catalog-scan`: Products · Scan · Capture · Queue · Settings. This
+  catalog-first Swiss nutrition starter expects API Gateway clients for `GET /v1/nutrition/products`,
+  `GET /v1/nutrition/products/by-barcode/{barcode}`, and `POST /v1/nutrition/products/capture`.
+  It intentionally keeps Supabase out of the generated app surface. Native barcode scanning can use
+  `expo-camera` behind an app adapter, while permission prompts, scan overlays, loading states,
+  form fields, buttons, notices, and product cards should be composed through ZORA. A reusable
+  `BarcodeScannerView` / `CameraPermissionView` belongs in ZORA once the scanner API stabilizes,
+  not in Surface.
 - `social_community/creator`: Studio · Posts · Audience · Insights · Settings
 
 Only categories that exist in `AppCategory` are registered. New category literals should be added
