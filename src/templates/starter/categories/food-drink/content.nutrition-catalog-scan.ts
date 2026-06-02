@@ -323,5 +323,18 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Challenge app settings',
     title: 'Settings',
     description: 'Configuration for API Gateway base URL, locale, profile table, and challenge auth.',
+    sections: [
+      {
+        title: 'Runtime configuration',
+        description: 'Settings screen sections are assembled by the screen factory.',
+        cards: [
+          {
+            eyebrow: 'Auth',
+            title: 'Global Supabase auth',
+            description: 'Friends sign in before entering the scanner challenge app.',
+          },
+        ],
+      },
+    ],
   },
 } satisfies Record<string, NutritionCatalogScreenContent>;
