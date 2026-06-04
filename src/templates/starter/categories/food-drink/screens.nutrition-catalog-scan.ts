@@ -36,21 +36,44 @@ function createContentScreen(args: {
   readonly screenId: string;
   readonly name: string;
   readonly content: ScreenContent;
-  readonly headerActions?: readonly ZoraNode[];
+  readonly body?: readonly ZoraNode[];
 }): AppManifest['screens'][string] {
   const idSegment = args.name.toLowerCase().replaceAll(' ', '-');
-  const sectionNodes: ZoraNode[] = args.content.sections.map((section, sectionIndex) =>
+  const body = args.body ?? createSectionCards(args.idPrefix, idSegment, args.content.sections);
+
+  return createScreen({
+    id: args.screenId,
+    name: args.name,
+    title: args.content.title,
+    description: args.content.description,
+    root: createScreenRoot(`${args.idPrefix}-${idSegment}-screen`, { width: 'wide' }, [
+      createZoraNode(`${args.idPrefix}-${idSegment}-header`, 'SectionHeader', {
+        eyebrow: args.content.eyebrow,
+        title: args.content.title,
+        description: args.content.description,
+      }),
+      ...body,
+    ]),
+  });
+}
+
+function createSectionCards(
+  idPrefix: string,
+  idSegment: string,
+  sections: readonly SectionContent[],
+): ZoraNode[] {
+  return sections.map((section, sectionIndex) =>
     createSection(
-      `${args.idPrefix}-${idSegment}-section-${sectionIndex + 1}`,
+      `${idPrefix}-${idSegment}-section-${sectionIndex + 1}`,
       { title: section.title, description: section.description },
       [
         createZoraNode(
-          `${args.idPrefix}-${idSegment}-panel-${sectionIndex + 1}`,
+          `${idPrefix}-${idSegment}-panel-${sectionIndex + 1}`,
           'Panel',
           { title: section.title, description: section.description, tone: 'subtle' },
           section.cards.map((card, cardIndex) =>
             createZoraNode(
-              `${args.idPrefix}-${idSegment}-card-${sectionIndex + 1}-${cardIndex + 1}`,
+              `${idPrefix}-${idSegment}-card-${sectionIndex + 1}-${cardIndex + 1}`,
               'Card',
               {
                 eyebrow: card.eyebrow,
@@ -64,51 +87,67 @@ function createContentScreen(args: {
       ],
     ),
   );
-
-  return createScreen({
-    id: args.screenId,
-    name: args.name,
-    title: args.content.title,
-    description: args.content.description,
-    root: createScreenRoot(`${args.idPrefix}-${idSegment}-screen`, { width: 'wide' }, [
-      createZoraNode(`${args.idPrefix}-${idSegment}-header`, 'SectionHeader', {
-        eyebrow: args.content.eyebrow,
-        title: args.content.title,
-        description: args.content.description,
-      }),
-      ...(args.headerActions ?? []),
-      ...sectionNodes,
-    ]),
-  });
 }
 
-function createCatalogActions(idPrefix: string): ZoraNode[] {
+function createProductsBody(idPrefix: string): ZoraNode[] {
   return [
-    createZoraNode(`${idPrefix}-catalog-search-field`, 'FormField', {
-      label: 'Search challenge products',
+    createZoraNode(`${idPrefix}-products-search-field`, 'FormField', {
+      label: 'Search products',
       description: 'Search by product name, brand, barcode, or store chain.',
     }),
-    createZoraNode(`${idPrefix}-catalog-search-input`, 'Input', {
+    createZoraNode(`${idPrefix}-products-search-input`, 'Input', {
       placeholder: 'Search Migros, Coop, barcode...',
       autoCapitalize: 'none',
       size: 'm',
     }),
-    createZoraNode(`${idPrefix}-catalog-scan-button`, 'Button', {
-      children: 'Scan barcode',
-      color: 'primary',
-      size: 'm',
-      fullWidth: true,
-    }),
+    createSection(
+      `${idPrefix}-products-grid-section`,
+      {
+        title: 'Products',
+        description: 'Available products in the shared challenge catalog.',
+      },
+      [
+        createZoraNode(`${idPrefix}-products-grid`, 'Grid', undefined, [
+          createZoraNode(`${idPrefix}-product-card-yogurt`, 'Card', {
+            eyebrow: 'Known product',
+            title: 'Bio Greek Yogurt 250 g',
+            description: 'Migros · 7612345678901 · confidence 92%',
+            tone: 'outline',
+          }),
+          createZoraNode(`${idPrefix}-product-card-oat-drink`, 'Card', {
+            eyebrow: 'Known product',
+            title: 'Haferdrink Barista 1 l',
+            description: 'Coop · 7612345678918 · confidence 88%',
+            tone: 'outline',
+          }),
+          createZoraNode(`${idPrefix}-product-card-missing`, 'Card', {
+            eyebrow: 'Contribution target',
+            title: 'Missing supermarket product',
+            description: 'Scan a missing barcode to add a capture and earn points.',
+            tone: 'outline',
+          }),
+        ]),
+      ],
+    ),
   ];
 }
 
-function createScannerNotice(idPrefix: string): ZoraNode {
-  return createZoraNode(`${idPrefix}-scan-zora-notice`, 'Notice', {
-    title: 'Scanner implementation note',
-    description:
-      'Use ZORA scanner components with an app camera adapter. Native camera dependencies stay outside templates.',
-    color: 'primary',
-  });
+function createScanBody(idPrefix: string): ZoraNode[] {
+  return [
+    createZoraNode(`${idPrefix}-scan-scanner`, 'BarcodeScannerView', {
+      permissionStatus: 'unknown',
+      title: 'Scan product barcode',
+      description: 'Point the camera at a barcode to look up or add a product.',
+      overlayTitle: 'Align barcode',
+      overlayDescription: 'Hold the barcode inside the frame. Scanning starts automatically.',
+      cornerLabel: 'EAN',
+      requestPermissionLabel: 'Allow camera access',
+      manualEntryLabel: 'Enter barcode manually',
+      onBarcodeScanned: 'nutrition.scanBarcode',
+      onManualEntry: 'nutrition.enterBarcodeManually',
+      onRequestPermission: 'camera.requestPermission',
+    }),
+  ];
 }
 
 function createCaptureFormPreview(idPrefix: string): ZoraNode {
@@ -156,43 +195,24 @@ export function createNutritionCatalogScanScreens(
   screenIds: NutritionCatalogScanScreenIds,
 ): AppManifest['screens'] {
   return {
-    [screenIds.challenge]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.challenge,
-      name: 'Challenge',
-      content: nutritionCatalogScanContent.challenge,
-    }),
     [screenIds.catalog]: createContentScreen({
       idPrefix,
       screenId: screenIds.catalog,
       name: 'Products',
       content: nutritionCatalogScanContent.catalog,
-      headerActions: createCatalogActions(idPrefix),
-    }),
-    [screenIds.detail]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.detail,
-      name: 'Product Detail',
-      content: nutritionCatalogScanContent.detail,
+      body: createProductsBody(idPrefix),
     }),
     [screenIds.scan]: createContentScreen({
       idPrefix,
       screenId: screenIds.scan,
       name: 'Scan',
       content: nutritionCatalogScanContent.scan,
-      headerActions: [createScannerNotice(idPrefix)],
-    }),
-    [screenIds.capture]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.capture,
-      name: 'Capture',
-      content: nutritionCatalogScanContent.capture,
-      headerActions: [createCaptureFormPreview(idPrefix)],
+      body: createScanBody(idPrefix),
     }),
     [screenIds.leaderboard]: createContentScreen({
       idPrefix,
       screenId: screenIds.leaderboard,
-      name: 'Leaderboard',
+      name: 'Stats',
       content: nutritionCatalogScanContent.leaderboard,
     }),
     [screenIds.profile]: createContentScreen({
@@ -200,6 +220,25 @@ export function createNutritionCatalogScanScreens(
       screenId: screenIds.profile,
       name: 'Profile',
       content: nutritionCatalogScanContent.profile,
+    }),
+    [screenIds.challenge]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.challenge,
+      name: 'Challenge',
+      content: nutritionCatalogScanContent.challenge,
+    }),
+    [screenIds.detail]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.detail,
+      name: 'Product Detail',
+      content: nutritionCatalogScanContent.detail,
+    }),
+    [screenIds.capture]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.capture,
+      name: 'Capture',
+      content: nutritionCatalogScanContent.capture,
+      body: [createCaptureFormPreview(idPrefix)],
     }),
     [screenIds.success]: createContentScreen({
       idPrefix,
@@ -237,32 +276,6 @@ export function createNutritionCatalogScanScreens(
           description: nutritionCatalogScanContent.settings.description,
         }),
         createSettingsSection(
-          `${idPrefix}-settings-auth`,
-          'Restricted challenge auth',
-          'The whole app is protected with global Supabase auth and native RBAC.',
-          [
-            {
-              id: 'auth-scope-row',
-              title: 'Auth scope',
-              description: 'Global auth means friends sign in before entering the app.',
-              meta: 'global',
-            },
-            {
-              id: 'profile-table-row',
-              title: 'Profile table',
-              description: 'Use an app-facing profiles table linked to Supabase Auth users.',
-              meta: 'profiles',
-            },
-            {
-              id: 'challenge-row',
-              title: 'Challenge participation',
-              description:
-                'Scan events, captures, and leaderboard rows belong to signed-in scanners.',
-              meta: 'scanner',
-            },
-          ],
-        ),
-        createSettingsSection(
           `${idPrefix}-settings-api`,
           'API Gateway',
           'Runtime product, scan, capture, challenge, and leaderboard data should go through the API Gateway.',
@@ -280,35 +293,10 @@ export function createNutritionCatalogScanScreens(
               meta: 'auth',
             },
             {
-              id: 'leaderboard-row',
-              title: 'Leaderboard endpoint',
-              description: 'GET /v1/nutrition/challenges/current/leaderboard ranks scanners.',
-              meta: 'ranking',
-            },
-          ],
-        ),
-        createSettingsSection(
-          `${idPrefix}-settings-client`,
-          'Client defaults',
-          `${seed.appName} should send appVersion, platform, locale, user id, and clientCapturedAt with challenge actions.`,
-          [
-            {
-              id: 'locale-row',
-              title: 'Default locale',
-              description: 'de-CH for the Swiss retail MVP.',
+              id: 'client-row',
+              title: 'Client defaults',
+              description: `${seed.appName} sends de-CH locale, CH country, platform, user id, and clientCapturedAt.`,
               meta: 'de-CH',
-            },
-            {
-              id: 'country-row',
-              title: 'Default country',
-              description: 'Store observations default to CH.',
-              meta: 'CH',
-            },
-            {
-              id: 'camera-row',
-              title: 'Camera dependency',
-              description: 'Use ZORA scanner UI with an app camera adapter such as expo-camera.',
-              meta: 'ZORA-first',
             },
           ],
         ),
