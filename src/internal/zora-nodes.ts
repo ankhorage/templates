@@ -1,5 +1,5 @@
 import type { UiNode } from '@ankhorage/contracts';
-import type { ButtonProps, CardProps, InputProps } from '@ankhorage/zora';
+import type { BarcodeScannerViewProps, ButtonProps, CardProps, GridProps, InputProps } from '@ankhorage/zora';
 import type {
   EmptyStateProps,
   NoticeProps,
@@ -97,6 +97,17 @@ type SerializableEmptyStateProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
+type SerializableGridProps = SerializableProps<Omit<GridProps, 'children'>>;
+type SerializableBarcodeScannerViewProps = Omit<
+  BarcodeScannerViewProps,
+  'camera' | 'children' | 'description' | 'onBarcodeScanned' | 'onManualEntry' | 'onRequestPermission' | 'title'
+> & {
+  title?: string;
+  description?: string;
+  onBarcodeScanned?: string;
+  onManualEntry?: string;
+  onRequestPermission?: string;
+};
 interface SerializableOAuthProviderIconSpec {
   name: string;
   provider?: string;
@@ -133,11 +144,13 @@ type SerializableChessBoardProps = SerializableProps<{
 }>;
 
 export interface ZoraNodePropsByType {
+  BarcodeScannerView: SerializableBarcodeScannerViewProps;
   Button: SerializableButtonProps;
   Card: SerializableCardProps;
   ChessBoard: SerializableChessBoardProps;
   EmptyState: SerializableEmptyStateProps;
   FormField: SerializableFormFieldProps;
+  Grid: SerializableGridProps;
   Input: SerializableInputProps;
   Notice: SerializableNoticeProps;
   OAuthProviderList: SerializableOAuthProviderListProps;
