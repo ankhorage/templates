@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.5.0
+
+### Minor Changes
+
+- d70345c: Update the nutrition catalog scan starter to model a restricted scanner challenge with global auth, Supabase profile metadata, challenge routes, and leaderboard/profile screens.
+
 ## 1.4.0
 
 ### Minor Changes
