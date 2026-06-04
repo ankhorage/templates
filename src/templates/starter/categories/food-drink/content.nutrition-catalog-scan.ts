@@ -19,52 +19,51 @@ interface NutritionCatalogScreenContent {
 
 export const nutritionCatalogScanContent = {
   catalog: {
-    eyebrow: 'Swiss product catalog',
-    title: 'Available products',
+    eyebrow: 'Friends-only scanner challenge',
+    title: 'Challenge products',
     description:
-      'Browse published products from the API Gateway and use the primary scan action to add more products from Swiss stores.',
+      'Signed-in scanners browse the shared Swiss product catalog, scan new products, and collect points for the active challenge.',
     sections: [
       {
-        title: 'Catalog feed',
+        title: 'Restricted catalog',
         description:
-          'Backed by the planned GET /v1/nutrition/products endpoint with search, pagination, and store-chain filters.',
+          'The whole app is protected by global auth. Product browsing happens after sign-in inside the challenge app.',
         cards: [
           {
-            eyebrow: 'Migros · published',
+            eyebrow: 'Known product',
             title: 'Bio Greek Yogurt 250 g',
             description:
-              'Example published product card with brand, quantity, barcode, and confidence metadata.',
+              'Example product card with brand, quantity, barcode, and confidence metadata.',
           },
           {
-            eyebrow: 'Coop · published',
+            eyebrow: 'Known product',
             title: 'Haferdrink Barista 1 l',
-            description:
-              'Catalog items should render with ZORA cards and never read directly from Supabase.',
+            description: 'Products are read through the API Gateway, not directly from Supabase.',
           },
           {
-            eyebrow: 'Denner · candidate',
-            title: 'Protein Quark Vanilla',
+            eyebrow: 'Contribution target',
+            title: 'Missing supermarket products',
             description:
-              'The template reserves room for recent captures once review and publish flows are available.',
+              'Scanners earn more points when a missing barcode becomes a queued capture submission.',
           },
         ],
       },
       {
-        title: 'Primary contribution action',
+        title: 'Challenge loop',
         description:
-          'The scan CTA is the main way to grow the database while keeping browsing useful for users who do not scan yet.',
+          'Friends sign in, scan products, submit missing products, and climb the leaderboard.',
         cards: [
           {
-            eyebrow: 'Main CTA',
+            eyebrow: 'Action',
             title: 'Scan barcode',
             description:
-              'Open the scanner, normalize barcode digits, then lookup or create a queued capture submission.',
+              'Open the scanner, normalize barcode digits, then record a scan event for the signed-in user.',
           },
           {
-            eyebrow: 'Fallback',
-            title: 'Enter barcode manually',
+            eyebrow: 'Ranking',
+            title: 'Points and leaderboard',
             description:
-              'Useful on web, simulator, denied camera permission, or damaged retail labels.',
+              'Known product scans, missing product captures, and accepted captures can use different point values.',
           },
         ],
       },
@@ -74,7 +73,7 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Published product',
     title: 'Product detail',
     description:
-      'Show barcode, brand, quantity, confidence, store observations, and nutrition facts from the public lookup model.',
+      'Show barcode, brand, quantity, confidence, store observations, and nutrition facts from the API Gateway.',
     sections: [
       {
         title: 'Product summary',
@@ -86,37 +85,37 @@ export const nutritionCatalogScanContent = {
             description: 'Barcode values are normalized by removing non-digits before lookup.',
           },
           {
-            eyebrow: 'Nutrition facts',
-            title: 'Per 100 g values',
+            eyebrow: 'Challenge value',
+            title: 'Known scan: 1 point',
             description:
-              'Energy, protein, carbohydrates, sugars, fat, saturated fat, fiber, salt, and sodium can appear once published.',
+              'The backend should avoid duplicate point farming with per-user barcode limits.',
           },
         ],
       },
     ],
   },
   scan: {
-    eyebrow: 'Scan to add',
+    eyebrow: 'Authenticated scan',
     title: 'Scan barcode',
     description:
-      'Use expo-camera under a local adapter now and migrate the visible scanner and permission states into ZORA later.',
+      'Use the ZORA BarcodeScannerView with an app-level camera adapter. Successful scans create signed-in scan events.',
     sections: [
       {
-        title: 'Camera permission',
+        title: 'Scanner adapter',
         description:
-          'Permission prompts, denied states, retry actions, and manual entry fallback should be composed from ZORA UI.',
+          'Native camera dependencies such as expo-camera stay in the generated app adapter; ZORA owns visible scanner UI.',
         cards: [
           {
-            eyebrow: 'Native capability',
-            title: 'expo-camera barcode scanner',
-            description:
-              'The native camera dependency should stay isolated behind a small scanner adapter, not leak into generic templates.',
-          },
-          {
-            eyebrow: 'Future ZORA component',
+            eyebrow: 'Camera shell',
             title: 'BarcodeScannerView',
             description:
-              'A reusable ZORA scanner wrapper can own permission UI, scan overlay, loading, and error states.',
+              'Use ZORA scanner, permission, and overlay primitives for the visible scanner surface.',
+          },
+          {
+            eyebrow: 'Fallback',
+            title: 'Manual barcode entry',
+            description:
+              'Useful on web, simulator, denied camera permission, or damaged retail labels.',
           },
         ],
       },
@@ -126,29 +125,29 @@ export const nutritionCatalogScanContent = {
         cards: [
           {
             eyebrow: 'Found',
-            title: 'Open product detail',
+            title: 'Record known scan',
             description:
-              'A 200 response opens the product detail screen for the published product.',
+              'A known barcode creates a scan event and can open the product detail screen.',
           },
           {
             eyebrow: 'Unknown',
             title: 'Create capture',
             description:
-              'A 404 response is expected for unknown barcodes and opens the capture form.',
+              'A missing barcode opens the capture form and can earn more challenge points.',
           },
         ],
       },
     ],
   },
   capture: {
-    eyebrow: 'Queued contribution',
+    eyebrow: 'Challenge contribution',
     title: 'Capture missing product',
     description:
-      'Collect the minimal data needed to create a queued capture submission through the API Gateway.',
+      'Collect the minimal data needed to create a queued capture submission for the signed-in scanner.',
     sections: [
       {
         title: 'Required fields',
-        description: 'Keep the first PR fast and field-friendly.',
+        description: 'Keep in-store entry fast and reward useful missing-product captures.',
         cards: [
           {
             eyebrow: 'Product identity',
@@ -163,8 +162,87 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Photos placeholder',
             title: 'Front, nutrition, ingredients, barcode',
+            description: 'Real image upload can be added after the first challenge flow works.',
+          },
+        ],
+      },
+    ],
+  },
+  challenge: {
+    eyebrow: 'Active challenge',
+    title: 'Scanner challenge',
+    description:
+      'Show challenge rules, dates, invite status, scoring, and the signed-in scanner progress.',
+    sections: [
+      {
+        title: 'Scoring rules',
+        description:
+          'Point rules should reward useful scans and discourage duplicate barcode farming.',
+        cards: [
+          {
+            eyebrow: 'Known scan',
+            title: '1 point',
+            description: 'Awarded for a valid known product scan within the duplicate limits.',
+          },
+          {
+            eyebrow: 'Missing product',
+            title: '5 points',
+            description: 'Awarded when a signed-in scanner submits a new missing product capture.',
+          },
+          {
+            eyebrow: 'Accepted capture',
+            title: '20 points',
             description:
-              'Real image upload is intentionally deferred; capture image paths stay API-shaped.',
+              'Awarded later when review tooling publishes or accepts the captured product.',
+          },
+        ],
+      },
+    ],
+  },
+  leaderboard: {
+    eyebrow: 'Friends ranking',
+    title: 'Leaderboard',
+    description: 'Rank signed-in scanners by challenge points, then scan count as a tie breaker.',
+    sections: [
+      {
+        title: 'Top scanners',
+        description: 'The API Gateway should expose leaderboard rows for the active challenge.',
+        cards: [
+          {
+            eyebrow: '#1',
+            title: 'Scanner with most points',
+            description:
+              'Show display name, points, scan count, accepted captures, and current rank.',
+          },
+          {
+            eyebrow: 'Anti-spam',
+            title: 'Backend ranking rules',
+            description: 'Duplicate and rejected captures should not increase score.',
+          },
+        ],
+      },
+    ],
+  },
+  profile: {
+    eyebrow: 'Scanner profile',
+    title: 'Profile',
+    description: 'Show signed-in scanner profile, stats, invite status, and sign-out action.',
+    sections: [
+      {
+        title: 'Profile data',
+        description:
+          'Profile data comes from the app-facing profiles table linked to Supabase Auth.',
+        cards: [
+          {
+            eyebrow: 'Identity',
+            title: 'Display name and avatar',
+            description:
+              'Stored in public.profiles; auth.users remains provider-owned identity data.',
+          },
+          {
+            eyebrow: 'Stats',
+            title: 'Scans, captures, points',
+            description: 'Aggregate challenge stats from scan events and capture submissions.',
           },
         ],
       },
@@ -174,7 +252,7 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Submission queued',
     title: 'Thanks — product queued',
     description:
-      'The API returns a submission id and queued status. Publishing happens later through review/merge tooling.',
+      'The API returns a submission id and queued status. Points can be updated immediately or after review.',
     sections: [
       {
         title: 'Next actions',
@@ -186,9 +264,9 @@ export const nutritionCatalogScanContent = {
             description: 'Return to the scan screen for fast in-store collection.',
           },
           {
-            eyebrow: 'Review',
-            title: 'Open local queue',
-            description: 'Inspect pending or failed submissions once offline retry is wired.',
+            eyebrow: 'Ranking',
+            title: 'Open leaderboard',
+            description: 'Show the scanner how the capture affected their challenge ranking.',
           },
         ],
       },
@@ -198,7 +276,7 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Offline-ready shell',
     title: 'Capture queue',
     description:
-      'A simple local queue abstraction prepares the template for offline retry without overbuilding the first PR.',
+      'A simple local queue abstraction prepares the signed-in app for offline retry without losing field data.',
     sections: [
       {
         title: 'Queue states',
@@ -207,25 +285,70 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Pending',
             title: 'Waiting for connection',
-            description:
-              'Submissions can be stored locally with anonymousDeviceId and clientCapturedAt.',
+            description: 'Submissions can be stored locally with user id and clientCapturedAt.',
           },
           {
             eyebrow: 'Failed',
             title: 'Retry required',
-            description: 'Keep failures visible instead of silently dropping field data.',
+            description: 'Keep failures visible instead of silently dropping scanner data.',
+          },
+        ],
+      },
+    ],
+  },
+  signIn: {
+    eyebrow: 'Restricted access',
+    title: 'Sign in',
+    description: 'Friends sign in before entering the scanner challenge app.',
+    sections: [
+      {
+        title: 'Challenge access',
+        description: 'This template uses global auth, so app entry is protected.',
+        cards: [
+          {
+            eyebrow: 'Auth provider',
+            title: 'Supabase Auth',
+            description: 'Email sign-in is the default identity flow for generated challenge apps.',
+          },
+        ],
+      },
+    ],
+  },
+  signUp: {
+    eyebrow: 'Join challenge',
+    title: 'Create scanner account',
+    description: 'Create an account with display name and optional invite code before scanning.',
+    sections: [
+      {
+        title: 'Profile creation',
+        description: 'Generated infra should create a profiles row linked to the auth user.',
+        cards: [
+          {
+            eyebrow: 'Required fields',
+            title: 'Email, password, display name',
+            description: 'The profile table stores display name and avatar for leaderboard rows.',
           },
         ],
       },
     ],
   },
   settings: {
-    eyebrow: 'Field scanner settings',
+    eyebrow: 'Challenge app settings',
     title: 'Settings',
     description:
-      'Configuration for API Gateway base URL, locale, app version, and anonymous device id.',
+      'Configuration for API Gateway base URL, locale, profile table, and challenge auth.',
+    sections: [
+      {
+        title: 'Runtime configuration',
+        description: 'Settings screen sections are assembled by the screen factory.',
+        cards: [
+          {
+            eyebrow: 'Auth',
+            title: 'Global Supabase auth',
+            description: 'Friends sign in before entering the scanner challenge app.',
+          },
+        ],
+      },
+    ],
   },
-} satisfies Record<
-  string,
-  NutritionCatalogScreenContent | { eyebrow: string; title: string; description: string }
->;
+} satisfies Record<string, NutritionCatalogScreenContent>;

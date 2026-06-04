@@ -85,7 +85,7 @@ function createContentScreen(args: {
 function createCatalogActions(idPrefix: string): ZoraNode[] {
   return [
     createZoraNode(`${idPrefix}-catalog-search-field`, 'FormField', {
-      label: 'Search products',
+      label: 'Search challenge products',
       description: 'Search by product name, brand, barcode, or store chain.',
     }),
     createZoraNode(`${idPrefix}-catalog-search-input`, 'Input', {
@@ -106,7 +106,7 @@ function createScannerNotice(idPrefix: string): ZoraNode {
   return createZoraNode(`${idPrefix}-scan-zora-notice`, 'Notice', {
     title: 'Scanner implementation note',
     description:
-      'Use expo-camera behind a local adapter now. Promote reusable permission, overlay, and scanner UI into ZORA later.',
+      'Use ZORA scanner components with an app camera adapter. Native camera dependencies stay outside templates.',
     color: 'primary',
   });
 }
@@ -117,7 +117,7 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
     'Panel',
     {
       title: 'Minimal capture form',
-      description: 'Prioritize fast in-store entry over OCR or review workflow complexity.',
+      description: 'Prioritize fast in-store entry and useful challenge contributions.',
       tone: 'subtle',
     },
     [
@@ -141,7 +141,7 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
         size: 'm',
       }),
       createZoraNode(`${idPrefix}-capture-submit-button`, 'Button', {
-        children: 'Submit queued capture',
+        children: 'Submit and earn points',
         color: 'primary',
         size: 'm',
         fullWidth: true,
@@ -156,6 +156,12 @@ export function createNutritionCatalogScanScreens(
   screenIds: NutritionCatalogScanScreenIds,
 ): AppManifest['screens'] {
   return {
+    [screenIds.challenge]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.challenge,
+      name: 'Challenge',
+      content: nutritionCatalogScanContent.challenge,
+    }),
     [screenIds.catalog]: createContentScreen({
       idPrefix,
       screenId: screenIds.catalog,
@@ -183,6 +189,18 @@ export function createNutritionCatalogScanScreens(
       content: nutritionCatalogScanContent.capture,
       headerActions: [createCaptureFormPreview(idPrefix)],
     }),
+    [screenIds.leaderboard]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.leaderboard,
+      name: 'Leaderboard',
+      content: nutritionCatalogScanContent.leaderboard,
+    }),
+    [screenIds.profile]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.profile,
+      name: 'Profile',
+      content: nutritionCatalogScanContent.profile,
+    }),
     [screenIds.success]: createContentScreen({
       idPrefix,
       screenId: screenIds.success,
@@ -194,6 +212,18 @@ export function createNutritionCatalogScanScreens(
       screenId: screenIds.queue,
       name: 'Queue',
       content: nutritionCatalogScanContent.queue,
+    }),
+    [screenIds.signIn]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.signIn,
+      name: 'Sign In',
+      content: nutritionCatalogScanContent.signIn,
+    }),
+    [screenIds.signUp]: createContentScreen({
+      idPrefix,
+      screenId: screenIds.signUp,
+      name: 'Sign Up',
+      content: nutritionCatalogScanContent.signUp,
     }),
     [screenIds.settings]: createScreen({
       id: screenIds.settings,
@@ -207,9 +237,35 @@ export function createNutritionCatalogScanScreens(
           description: nutritionCatalogScanContent.settings.description,
         }),
         createSettingsSection(
+          `${idPrefix}-settings-auth`,
+          'Restricted challenge auth',
+          'The whole app is protected with global Supabase auth and native RBAC.',
+          [
+            {
+              id: 'auth-scope-row',
+              title: 'Auth scope',
+              description: 'Global auth means friends sign in before entering the app.',
+              meta: 'global',
+            },
+            {
+              id: 'profile-table-row',
+              title: 'Profile table',
+              description: 'Use an app-facing profiles table linked to Supabase Auth users.',
+              meta: 'profiles',
+            },
+            {
+              id: 'challenge-row',
+              title: 'Challenge participation',
+              description:
+                'Scan events, captures, and leaderboard rows belong to signed-in scanners.',
+              meta: 'scanner',
+            },
+          ],
+        ),
+        createSettingsSection(
           `${idPrefix}-settings-api`,
           'API Gateway',
-          'Keep runtime clients API-only and never connect this template directly to Supabase.',
+          'Runtime product, scan, capture, challenge, and leaderboard data should go through the API Gateway.',
           [
             {
               id: 'base-url-row',
@@ -218,24 +274,23 @@ export function createNutritionCatalogScanScreens(
               meta: 'runtime',
             },
             {
-              id: 'product-list-row',
-              title: 'Product list endpoint',
-              description: 'Requires GET /v1/nutrition/products for the catalog-first home screen.',
-              meta: 'backend gap',
+              id: 'scan-events-row',
+              title: 'Scan events endpoint',
+              description: 'POST /v1/nutrition/scan-events records scanner progress.',
+              meta: 'auth',
             },
             {
-              id: 'capture-row',
-              title: 'Capture endpoint',
-              description:
-                'POST /v1/nutrition/products/capture queues submissions for later review.',
-              meta: 'live',
+              id: 'leaderboard-row',
+              title: 'Leaderboard endpoint',
+              description: 'GET /v1/nutrition/challenges/current/leaderboard ranks scanners.',
+              meta: 'ranking',
             },
           ],
         ),
         createSettingsSection(
           `${idPrefix}-settings-client`,
           'Client defaults',
-          `${seed.appName} should persist anonymousDeviceId and send appVersion, platform, locale, and clientCapturedAt with captures.`,
+          `${seed.appName} should send appVersion, platform, locale, user id, and clientCapturedAt with challenge actions.`,
           [
             {
               id: 'locale-row',
@@ -252,8 +307,7 @@ export function createNutritionCatalogScanScreens(
             {
               id: 'camera-row',
               title: 'Camera dependency',
-              description:
-                'Isolate expo-camera behind a scanner adapter and compose visible UI from ZORA.',
+              description: 'Use ZORA scanner UI with an app camera adapter such as expo-camera.',
               meta: 'ZORA-first',
             },
           ],
