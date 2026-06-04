@@ -3,6 +3,7 @@ import type { AppManifest } from '@ankhorage/contracts';
 import { DEFAULT_TEMPLATE_VERSION } from '../../../../internal/defaults';
 import { createManifestShell, createTheme } from '../../../shared';
 import type { TemplateSeed } from '../../starter.types';
+import { nutritionCatalogScanData } from './data.nutrition-catalog-scan';
 import {
   createNutritionCatalogScanNavigator,
   createNutritionCatalogScanScreenIds,
@@ -23,6 +24,7 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
 
   return {
     ...manifest,
+    data: nutritionCatalogScanData,
     infra: {
       ...manifest.infra,
       auth: {
