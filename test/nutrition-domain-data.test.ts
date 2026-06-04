@@ -41,12 +41,14 @@ describe('nutrition domain data manifest', () => {
     const products = manifest.data?.apis?.nutritionProducts;
     const events = manifest.data?.apis?.nutritionScanEvents;
 
-    const productCollection = products?.kind === 'generated' && products.resource?.kind === 'collection'
-      ? products.resource.collection
-      : undefined;
-    const eventCollection = events?.kind === 'generated' && events.resource?.kind === 'collection'
-      ? events.resource.collection
-      : undefined;
+    const productCollection =
+      products?.kind === 'generated' && products.resource?.kind === 'collection'
+        ? products.resource.collection
+        : undefined;
+    const eventCollection =
+      events?.kind === 'generated' && events.resource?.kind === 'collection'
+        ? events.resource.collection
+        : undefined;
 
     expect(productCollection?.name).toBe('nutrition_products');
     expect(productCollection?.fields.map((field) => field.name)).toContain('barcode');
