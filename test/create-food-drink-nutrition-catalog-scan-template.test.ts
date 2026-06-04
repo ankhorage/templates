@@ -107,9 +107,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       'Settings',
     ]);
     expect(
-      manifest.navigator.routes
-        .filter((route) => route.hideInTabBar)
-        .map((route) => route.name),
+      manifest.navigator.routes.filter((route) => route.hideInTabBar).map((route) => route.name),
     ).toEqual(['capture', 'queue', 'sign-in', 'sign-up', 'settings']);
 
     const screenTitles = Object.values(manifest.screens).map((screen) => screen.title);

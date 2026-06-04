@@ -32,7 +32,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Known product',
             title: 'Bio Greek Yogurt 250 g',
-            description: 'Example product card with brand, quantity, barcode, and confidence metadata.',
+            description:
+              'Example product card with brand, quantity, barcode, and confidence metadata.',
           },
           {
             eyebrow: 'Known product',
@@ -49,7 +50,8 @@ export const nutritionCatalogScanContent = {
       },
       {
         title: 'Challenge loop',
-        description: 'Friends sign in, scan products, submit missing products, and climb the leaderboard.',
+        description:
+          'Friends sign in, scan products, submit missing products, and climb the leaderboard.',
         cards: [
           {
             eyebrow: 'Action',
@@ -85,7 +87,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Challenge value',
             title: 'Known scan: 1 point',
-            description: 'The backend should avoid duplicate point farming with per-user barcode limits.',
+            description:
+              'The backend should avoid duplicate point farming with per-user barcode limits.',
           },
         ],
       },
@@ -105,12 +108,14 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Camera shell',
             title: 'BarcodeScannerView',
-            description: 'Use ZORA scanner, permission, and overlay primitives for the visible scanner surface.',
+            description:
+              'Use ZORA scanner, permission, and overlay primitives for the visible scanner surface.',
           },
           {
             eyebrow: 'Fallback',
             title: 'Manual barcode entry',
-            description: 'Useful on web, simulator, denied camera permission, or damaged retail labels.',
+            description:
+              'Useful on web, simulator, denied camera permission, or damaged retail labels.',
           },
         ],
       },
@@ -121,12 +126,14 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Found',
             title: 'Record known scan',
-            description: 'A known barcode creates a scan event and can open the product detail screen.',
+            description:
+              'A known barcode creates a scan event and can open the product detail screen.',
           },
           {
             eyebrow: 'Unknown',
             title: 'Create capture',
-            description: 'A missing barcode opens the capture form and can earn more challenge points.',
+            description:
+              'A missing barcode opens the capture form and can earn more challenge points.',
           },
         ],
       },
@@ -164,11 +171,13 @@ export const nutritionCatalogScanContent = {
   challenge: {
     eyebrow: 'Active challenge',
     title: 'Scanner challenge',
-    description: 'Show challenge rules, dates, invite status, scoring, and the signed-in scanner progress.',
+    description:
+      'Show challenge rules, dates, invite status, scoring, and the signed-in scanner progress.',
     sections: [
       {
         title: 'Scoring rules',
-        description: 'Point rules should reward useful scans and discourage duplicate barcode farming.',
+        description:
+          'Point rules should reward useful scans and discourage duplicate barcode farming.',
         cards: [
           {
             eyebrow: 'Known scan',
@@ -183,7 +192,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Accepted capture',
             title: '20 points',
-            description: 'Awarded later when review tooling publishes or accepts the captured product.',
+            description:
+              'Awarded later when review tooling publishes or accepts the captured product.',
           },
         ],
       },
@@ -201,7 +211,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: '#1',
             title: 'Scanner with most points',
-            description: 'Show display name, points, scan count, accepted captures, and current rank.',
+            description:
+              'Show display name, points, scan count, accepted captures, and current rank.',
           },
           {
             eyebrow: 'Anti-spam',
@@ -219,12 +230,14 @@ export const nutritionCatalogScanContent = {
     sections: [
       {
         title: 'Profile data',
-        description: 'Profile data comes from the app-facing profiles table linked to Supabase Auth.',
+        description:
+          'Profile data comes from the app-facing profiles table linked to Supabase Auth.',
         cards: [
           {
             eyebrow: 'Identity',
             title: 'Display name and avatar',
-            description: 'Stored in public.profiles; auth.users remains provider-owned identity data.',
+            description:
+              'Stored in public.profiles; auth.users remains provider-owned identity data.',
           },
           {
             eyebrow: 'Stats',
@@ -322,6 +335,7 @@ export const nutritionCatalogScanContent = {
   settings: {
     eyebrow: 'Challenge app settings',
     title: 'Settings',
-    description: 'Configuration for API Gateway base URL, locale, profile table, and challenge auth.',
+    description:
+      'Configuration for API Gateway base URL, locale, profile table, and challenge auth.',
   },
 } satisfies Record<string, NutritionCatalogScreenContent>;

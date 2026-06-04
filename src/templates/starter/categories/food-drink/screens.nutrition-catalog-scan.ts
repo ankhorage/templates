@@ -256,7 +256,8 @@ export function createNutritionCatalogScanScreens(
             {
               id: 'challenge-row',
               title: 'Challenge participation',
-              description: 'Scan events, captures, and leaderboard rows belong to signed-in scanners.',
+              description:
+                'Scan events, captures, and leaderboard rows belong to signed-in scanners.',
               meta: 'scanner',
             },
           ],
@@ -306,8 +307,7 @@ export function createNutritionCatalogScanScreens(
             {
               id: 'camera-row',
               title: 'Camera dependency',
-              description:
-                'Use ZORA scanner UI with an app camera adapter such as expo-camera.',
+              description: 'Use ZORA scanner UI with an app camera adapter such as expo-camera.',
               meta: 'ZORA-first',
             },
           ],
