@@ -1,5 +1,5 @@
 import type { UiNode } from '@ankhorage/contracts';
-import type { BarcodeScannerViewProps, ButtonProps, CardProps, GridProps, InputProps } from '@ankhorage/zora';
+import type { ButtonProps, CardProps, GridProps, InputProps } from '@ankhorage/zora';
 import type {
   EmptyStateProps,
   NoticeProps,
@@ -98,16 +98,21 @@ type SerializableEmptyStateProps = Omit<
   footer?: string;
 };
 type SerializableGridProps = SerializableProps<Omit<GridProps, 'children'>>;
-type SerializableBarcodeScannerViewProps = Omit<
-  BarcodeScannerViewProps,
-  'camera' | 'children' | 'description' | 'onBarcodeScanned' | 'onManualEntry' | 'onRequestPermission' | 'title'
-> & {
+type SerializableBarcodeScannerViewProps = SerializableProps<{
+  permissionStatus: 'unknown' | 'requesting' | 'granted' | 'denied';
   title?: string;
   description?: string;
+  overlayTitle?: string;
+  overlayDescription?: string;
+  cornerLabel?: string;
+  requestPermissionLabel?: string;
+  deniedPermissionLabel?: string;
+  manualEntryLabel?: string;
   onBarcodeScanned?: string;
   onManualEntry?: string;
   onRequestPermission?: string;
-};
+  testID?: string;
+}>;
 interface SerializableOAuthProviderIconSpec {
   name: string;
   provider?: string;
