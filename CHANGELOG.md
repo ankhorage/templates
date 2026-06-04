@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.7.0
+
+### Minor Changes
+
+- 368456f: Make the nutrition scanner starter useful with Products, Scan, Stats, and Profile tabs plus direct ZORA scanner and product grid nodes.
+
 ## 1.6.0
 
 ### Minor Changes
