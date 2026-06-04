@@ -88,20 +88,6 @@ export function createNutritionCatalogScanNavigator(
         hideInTabBar: true,
       }),
       createRoute({
-        name: 'sign-in',
-        screenId: screenIds.signIn,
-        label: 'Sign in',
-        icon: { provider: 'material-community', name: 'login' },
-        hideInTabBar: true,
-      }),
-      createRoute({
-        name: 'sign-up',
-        screenId: screenIds.signUp,
-        label: 'Join',
-        icon: { provider: 'material-community', name: 'account-plus-outline' },
-        hideInTabBar: true,
-      }),
-      createRoute({
         name: 'settings',
         screenId: screenIds.settings,
         label: 'Settings',

@@ -102,13 +102,13 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       'Profile',
       'Capture',
       'Queue',
-      'Sign in',
-      'Join',
       'Settings',
     ]);
     expect(
       manifest.navigator.routes.filter((route) => route.hideInTabBar).map((route) => route.name),
-    ).toEqual(['capture', 'queue', 'sign-in', 'sign-up', 'settings']);
+    ).toEqual(['capture', 'queue', 'settings']);
+    expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
+    expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-up');
 
     const screenTitles = Object.values(manifest.screens).map((screen) => screen.title);
 
