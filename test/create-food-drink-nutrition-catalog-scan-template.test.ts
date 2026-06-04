@@ -49,14 +49,14 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     });
   });
 
-  test('creates a restricted scanner challenge manifest', () => {
+  test('creates a restricted scanner app manifest', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
 
     expect(manifest.metadata.name).toBe('Nutrition Scan');
     expect(manifest.navigator.type).toBe('tabs');
-    expect(manifest.navigator.initialRouteName).toBe('challenge');
+    expect(manifest.navigator.initialRouteName).toBe('index');
     expect(manifest.infra.auth).toEqual({
       scope: 'global',
       provider: 'supabase',
@@ -68,7 +68,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         signInRoute: 'sign-in',
         signUpRoute: 'sign-up',
         signOutRoute: 'sign-out',
-        postSignInRoute: 'challenge',
+        postSignInRoute: 'index',
         unauthorizedRoute: 'sign-in',
       },
       signIn: {
@@ -86,41 +86,34 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         updateStrategy: 'api',
       },
     });
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('challenge');
+    expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
   });
 
-  test('creates challenge-first routes and screens', () => {
+  test('creates useful tabs for products, scan, stats, and profile', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
 
     expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
-      'Challenge',
       'Products',
       'Scan',
-      'Ranking',
+      'Stats',
       'Profile',
-      'Capture',
-      'Queue',
-      'Settings',
     ]);
-    expect(
-      manifest.navigator.routes.filter((route) => route.hideInTabBar).map((route) => route.name),
-    ).toEqual(['capture', 'queue', 'settings']);
-    expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
-    expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-up');
-
-    const screenTitles = Object.values(manifest.screens).map((screen) => screen.title);
-
-    expect(screenTitles).toContain('Scanner challenge');
-    expect(screenTitles).toContain('Challenge products');
-    expect(screenTitles).toContain('Leaderboard');
-    expect(screenTitles).toContain('Profile');
-    expect(screenTitles).toContain('Sign in');
-    expect(screenTitles).toContain('Create scanner account');
+    expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
+      'index',
+      'scan',
+      'stats',
+      'profile',
+    ]);
+    expect(manifest.navigator.routes.find((route) => route.name === 'scan')?.icon).toEqual({
+      provider: 'material-community',
+      name: 'barcode-scan',
+    });
+    expect(manifest.navigator.routes.some((route) => route.hideInTabBar)).toBe(false);
   });
 
-  test('documents API-only integration, ZORA scanner direction, and profiles table', () => {
+  test('renders product grid and direct ZORA barcode scanner nodes', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
@@ -128,15 +121,11 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const nodeTypes = roots.flatMap(collectNodeTypes);
     const nodeText = roots.flatMap(collectNodeText).join('\n');
 
-    expect(nodeTypes).toContain('Button');
+    expect(nodeTypes).toContain('Grid');
     expect(nodeTypes).toContain('Card');
-    expect(nodeTypes).toContain('FormField');
-    expect(nodeTypes).toContain('Input');
-    expect(nodeTypes).toContain('Notice');
-    expect(nodeText).toContain('GET /v1/nutrition/products/by-barcode/{barcode}');
-    expect(nodeText).toContain('POST /v1/nutrition/scan-events');
-    expect(nodeText).toContain('GET /v1/nutrition/challenges/current/leaderboard');
-    expect(nodeText).toContain('BarcodeScannerView');
-    expect(nodeText).toContain('profiles table');
+    expect(nodeTypes).toContain('BarcodeScannerView');
+    expect(nodeText).toContain('Bio Greek Yogurt 250 g');
+    expect(nodeText).toContain('Haferdrink Barista 1 l');
+    expect(nodeText).toContain('Scan product barcode');
   });
 });
