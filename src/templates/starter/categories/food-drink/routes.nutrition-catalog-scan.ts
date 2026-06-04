@@ -41,58 +41,31 @@ export function createNutritionCatalogScanNavigator(
 ): AppManifest['navigator'] {
   return {
     type: 'tabs',
-    initialRouteName: 'challenge',
+    initialRouteName: 'index',
     routes: [
-      createRoute({
-        name: 'challenge',
-        screenId: screenIds.challenge,
-        label: 'Challenge',
-        icon: { provider: 'material-community', name: 'trophy-outline' },
-      }),
       createRoute({
         name: 'index',
         screenId: screenIds.catalog,
         label: 'Products',
-        icon: { provider: 'material-community', name: 'barcode-scan' },
+        icon: { provider: 'material-community', name: 'package-variant-closed' },
       }),
       createRoute({
         name: 'scan',
         screenId: screenIds.scan,
         label: 'Scan',
-        icon: { provider: 'material-community', name: 'camera-outline' },
+        icon: { provider: 'material-community', name: 'barcode-scan' },
       }),
       createRoute({
-        name: 'leaderboard',
+        name: 'stats',
         screenId: screenIds.leaderboard,
-        label: 'Ranking',
-        icon: { provider: 'material-community', name: 'podium-gold' },
+        label: 'Stats',
+        icon: { provider: 'material-community', name: 'chart-bar' },
       }),
       createRoute({
         name: 'profile',
         screenId: screenIds.profile,
         label: 'Profile',
         icon: { provider: 'material-community', name: 'account-circle-outline' },
-      }),
-      createRoute({
-        name: 'capture',
-        screenId: screenIds.capture,
-        label: 'Capture',
-        icon: { provider: 'material-community', name: 'package-variant-plus' },
-        hideInTabBar: true,
-      }),
-      createRoute({
-        name: 'queue',
-        screenId: screenIds.queue,
-        label: 'Queue',
-        icon: { provider: 'material-community', name: 'tray-full' },
-        hideInTabBar: true,
-      }),
-      createRoute({
-        name: 'settings',
-        screenId: screenIds.settings,
-        label: 'Settings',
-        icon: { provider: 'material-community', name: 'cog-outline' },
-        hideInTabBar: true,
       }),
     ],
   };

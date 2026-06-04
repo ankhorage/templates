@@ -1,5 +1,5 @@
 import type { UiNode } from '@ankhorage/contracts';
-import type { ButtonProps, CardProps, InputProps } from '@ankhorage/zora';
+import type { ButtonProps, CardProps, GridProps, InputProps } from '@ankhorage/zora';
 import type {
   EmptyStateProps,
   NoticeProps,
@@ -97,6 +97,22 @@ type SerializableEmptyStateProps = Omit<
   eyebrow?: string;
   footer?: string;
 };
+type SerializableGridProps = SerializableProps<Omit<GridProps, 'children'>>;
+type SerializableBarcodeScannerViewProps = SerializableProps<{
+  permissionStatus: 'unknown' | 'requesting' | 'granted' | 'denied';
+  title?: string;
+  description?: string;
+  overlayTitle?: string;
+  overlayDescription?: string;
+  cornerLabel?: string;
+  requestPermissionLabel?: string;
+  deniedPermissionLabel?: string;
+  manualEntryLabel?: string;
+  onBarcodeScanned?: string;
+  onManualEntry?: string;
+  onRequestPermission?: string;
+  testID?: string;
+}>;
 interface SerializableOAuthProviderIconSpec {
   name: string;
   provider?: string;
@@ -133,11 +149,13 @@ type SerializableChessBoardProps = SerializableProps<{
 }>;
 
 export interface ZoraNodePropsByType {
+  BarcodeScannerView: SerializableBarcodeScannerViewProps;
   Button: SerializableButtonProps;
   Card: SerializableCardProps;
   ChessBoard: SerializableChessBoardProps;
   EmptyState: SerializableEmptyStateProps;
   FormField: SerializableFormFieldProps;
+  Grid: SerializableGridProps;
   Input: SerializableInputProps;
   Notice: SerializableNoticeProps;
   OAuthProviderList: SerializableOAuthProviderListProps;
