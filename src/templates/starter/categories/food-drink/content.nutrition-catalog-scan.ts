@@ -335,7 +335,8 @@ export const nutritionCatalogScanContent = {
   settings: {
     eyebrow: 'Challenge app settings',
     title: 'Settings',
-    description: 'Configuration for API Gateway base URL, locale, profile table, and challenge auth.',
+    description:
+      'Configuration for API Gateway base URL, locale, profile table, and challenge auth.',
     sections: [
       {
         title: 'Runtime configuration',
