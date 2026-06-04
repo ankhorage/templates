@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.6.0
+
+### Minor Changes
+
+- 870ebf3: Add generated domain data API declarations to the nutrition catalog scan starter.
+
 ## 1.5.0
 
 ### Minor Changes
