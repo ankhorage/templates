@@ -17,10 +17,10 @@ export function createUrbanWaterMonitorNavigator(
 ): AppManifest['navigator'] {
   return {
     type: 'stack',
-    initialRouteName: 'project',
+    initialRouteName: 'index',
     routes: [
       createRoute({
-        name: 'project',
+        name: 'index',
         screenId: screenIds.project,
         label: 'Project',
         icon: { provider: 'material-community', name: 'water-outline' },
