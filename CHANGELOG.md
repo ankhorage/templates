@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.7.2
+
+### Patch Changes
+
+- 4a2adc0: Fix Urban Water Monitor starter root route so generated authenticated apps resolve /.
+
 ## 1.7.1
 
 ### Patch Changes
