@@ -1,4 +1,4 @@
-export interface UrbanWaterMonitorCardContent {
+interface UrbanWaterMonitorCardContent {
   readonly eyebrow: string;
   readonly title: string;
   readonly description: string;
