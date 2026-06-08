@@ -1,5 +1,11 @@
 import type { UiNode } from '@ankhorage/contracts';
-import type { ButtonProps, CardProps, GridProps, InputProps } from '@ankhorage/zora';
+import type {
+  ButtonProps,
+  CardProps,
+  DisclosureSectionProps,
+  GridProps,
+  InputProps,
+} from '@ankhorage/zora';
 import type {
   EmptyStateProps,
   NoticeProps,
@@ -33,6 +39,13 @@ type SerializableCardProps = Omit<
   title?: string;
   description?: string;
   eyebrow?: string;
+};
+type SerializableDisclosureSectionProps = Omit<
+  DisclosureSectionProps,
+  'actions' | 'children' | 'description' | 'icon' | 'onOpenChange' | 'open' | 'title'
+> & {
+  title: string;
+  description?: string;
 };
 type SerializableSectionHeaderProps = Omit<
   SectionHeaderProps,
@@ -153,6 +166,7 @@ export interface ZoraNodePropsByType {
   Button: SerializableButtonProps;
   Card: SerializableCardProps;
   ChessBoard: SerializableChessBoardProps;
+  DisclosureSection: SerializableDisclosureSectionProps;
   EmptyState: SerializableEmptyStateProps;
   FormField: SerializableFormFieldProps;
   Grid: SerializableGridProps;

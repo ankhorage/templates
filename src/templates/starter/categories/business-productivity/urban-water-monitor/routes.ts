@@ -16,7 +16,7 @@ export function createUrbanWaterMonitorNavigator(
   screenIds: UrbanWaterMonitorScreenIds,
 ): AppManifest['navigator'] {
   return {
-    type: 'stack',
+    type: 'tabs',
     initialRouteName: 'index',
     routes: [
       createRoute({

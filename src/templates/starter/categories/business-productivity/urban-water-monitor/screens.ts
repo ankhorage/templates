@@ -1,12 +1,6 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import {
-  createScreen,
-  createScreenRoot,
-  createSection,
-  createZoraNode,
-  type ZoraNode,
-} from '../../../../shared';
+import { createScreen, createScreenRoot, createZoraNode, type ZoraNode } from '../../../../shared';
 import { urbanWaterMonitorProjectContent, type UrbanWaterMonitorSectionContent } from './content';
 import type { UrbanWaterMonitorScreenIds } from './routes';
 
@@ -26,25 +20,22 @@ function createProjectSection(
 ): ZoraNode {
   const idSegment = createIdSegment(section.title);
 
-  // TODO: Replace section cards with ZORA DisclosureSection once it is manifest-supported.
-  return createSection(
-    `${idPrefix}-project-${idSegment}-section`,
-    { title: section.title, description: section.description },
-    [
-      createZoraNode(
-        `${idPrefix}-project-${idSegment}-panel`,
-        'Panel',
-        { title: section.title, description: section.description, tone: 'subtle' },
-        section.cards.map((card, cardIndex) =>
-          createZoraNode(`${idPrefix}-project-${idSegment}-card-${cardIndex + 1}`, 'Card', {
-            eyebrow: card.eyebrow,
-            title: card.title,
-            description: card.description,
-            tone: 'outline',
-          }),
-        ),
-      ),
-    ],
+  return createZoraNode(
+    `${idPrefix}-project-${idSegment}-disclosure`,
+    'DisclosureSection',
+    {
+      title: section.title,
+      description: section.description,
+      defaultOpen: false,
+    },
+    section.cards.map((card, cardIndex) =>
+      createZoraNode(`${idPrefix}-project-${idSegment}-card-${cardIndex + 1}`, 'Card', {
+        eyebrow: card.eyebrow,
+        title: card.title,
+        description: card.description,
+        tone: 'outline',
+      }),
+    ),
   );
 }
 
