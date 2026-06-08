@@ -24,7 +24,7 @@ export function createUrbanWaterMonitorStarterTemplate(seed: TemplateSeed): AppM
       ...manifest.settings,
       authFlow: {
         ...manifest.settings.authFlow,
-        postSignInRoute: 'project',
+        postSignInRoute: 'index',
       },
     },
   };

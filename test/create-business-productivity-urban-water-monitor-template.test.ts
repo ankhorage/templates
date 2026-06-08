@@ -41,18 +41,18 @@ describe('business_productivity/urban-water-monitor starter', () => {
     });
   });
 
-  test('creates a single project route and screen', () => {
+  test('creates a single index route with project screen content', () => {
     const manifest = createStarterTemplate(createBusinessProductivitySeed(), {
       templateId: 'urban-water-monitor',
     });
 
     expect(manifest.navigator.type).toBe('stack');
-    expect(manifest.navigator.initialRouteName).toBe('project');
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('project');
+    expect(manifest.navigator.initialRouteName).toBe('index');
+    expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
     expect(manifest.navigator.routes).toHaveLength(1);
     expect(Object.keys(manifest.screens)).toHaveLength(1);
     expect(manifest.navigator.routes[0]).toMatchObject({
-      name: 'project',
+      name: 'index',
       label: 'Project',
       screenId: 'business_productivity-urban-water-monitor-project',
       icon: { provider: 'material-community', name: 'water-outline' },
