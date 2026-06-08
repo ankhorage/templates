@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.7.3
+
+### Patch Changes
+
+- 7f994ac: Use tabs navigation and collapsed disclosure sections for the Urban Water Monitor starter.
+
 ## 1.7.2
 
 ### Patch Changes
