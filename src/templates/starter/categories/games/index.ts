@@ -1,7 +1,7 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
-import { createChessStarterTemplate } from './chess.template';
+import { createChessStarterTemplate } from './chess';
 import { createGamesStarterTemplate } from './default.template';
-import { createPokerStarterTemplate } from './poker.template';
+import { createPokerStarterTemplate } from './poker';
 
 export const gamesStarterTemplates = [
   {

@@ -7,10 +7,10 @@ import {
   createSettingsSection,
   createZoraNode,
   type ZoraNode,
-} from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { creatorSocialContent } from './content';
-import type { CreatorSocialScreenIds } from './routes.creator';
+} from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { creatorSocialContent } from '../content';
+import type { CreatorSocialScreenIds } from './routes';
 
 interface CreatorCardContent {
   eyebrow: string;

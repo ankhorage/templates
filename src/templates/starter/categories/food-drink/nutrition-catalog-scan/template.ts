@@ -1,14 +1,11 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { DEFAULT_TEMPLATE_VERSION } from '../../../../internal/defaults';
-import { createManifestShell, createTheme } from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { nutritionCatalogScanData } from './data.nutrition-catalog-scan';
-import {
-  createNutritionCatalogScanNavigator,
-  createNutritionCatalogScanScreenIds,
-} from './routes.nutrition-catalog-scan';
-import { createNutritionCatalogScanScreens } from './screens.nutrition-catalog-scan';
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { nutritionCatalogScanData } from './data';
+import { createNutritionCatalogScanNavigator, createNutritionCatalogScanScreenIds } from './routes';
+import { createNutritionCatalogScanScreens } from './screens';
 
 export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): AppManifest {
   const idPrefix = `${seed.category}-nutrition-catalog-scan`;

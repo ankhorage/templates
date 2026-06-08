@@ -1,6 +1,6 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { createRoute } from '../../../shared';
+import { createRoute } from '../../../../shared';
 
 export interface CreatorSocialScreenIds {
   studio: string;

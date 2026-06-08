@@ -1,0 +1,1 @@
+export { createNutritionCatalogScanStarterTemplate } from './template';

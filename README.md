@@ -98,6 +98,8 @@ The fallback template remains available and is used only for unknown runtime cat
 
 Additional variants:
 
+- `business_productivity/urban-water-monitor`: Project. This urban water monitoring concept
+  starter uses a single `project` route and keeps API strategy as Project screen copy only.
 - `games/chess`: Home · Settings. The Home screen renders a `ChessBoard` node with a static
   initial FEN and requires generated apps to provide `@ankhorage/zora-chess` through their
   extension registry.
@@ -115,13 +117,21 @@ in `@ankhorage/contracts` before this package registers templates for them.
 
 ## Adding A Category Template
 
-Add category-owned files under `src/templates/starter/categories/<category>/`:
+Add category-owned default files under `src/templates/starter/categories/<category>/`:
 
 - `content.ts` for category-specific copy and placeholder data
-- `routes.ts` or `routes.<variant>.ts` for route names, labels, screen ids, and icons
-- `screens.ts` or `screens.<variant>.ts` for ZORA node trees
-- `<variant>.template.ts` for manifest assembly
+- `routes.ts` for route names, labels, screen ids, and icons
+- `screens.ts` for ZORA node trees
+- `default.template.ts` for manifest assembly
 - `index.ts` for `CategoryStarterTemplateDefinition` metadata
+
+Add named non-default variants in their own folder:
+
+- `src/templates/starter/categories/<category>/<template-id>/content.ts`
+- `src/templates/starter/categories/<category>/<template-id>/routes.ts`
+- `src/templates/starter/categories/<category>/<template-id>/screens.ts`
+- `src/templates/starter/categories/<category>/<template-id>/template.ts`
+- `src/templates/starter/categories/<category>/<template-id>/index.ts`
 
 Register the category in `src/templates/starter/starter.registry.ts`. Keep shared behavior in
 `src/templates/shared/*`; category wording and navigation should stay inside the category folder.
