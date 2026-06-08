@@ -30,6 +30,20 @@ function assertRouteScreenReferences(manifest: AppManifest): void {
   }
 }
 
+function collectNodeTypes(node: AppManifest['screens'][string]['root']): string[] {
+  return [node.type, ...(node.children?.flatMap(collectNodeTypes) ?? [])];
+}
+
+function collectNodesByType(
+  node: AppManifest['screens'][string]['root'],
+  type: string,
+): AppManifest['screens'][string]['root'][] {
+  return [
+    ...(node.type === type ? [node] : []),
+    ...(node.children?.flatMap((child) => collectNodesByType(child, type)) ?? []),
+  ];
+}
+
 describe('business_productivity/urban-water-monitor starter', () => {
   test('is listed as a business productivity template variant', () => {
     expect(listStarterTemplatesByCategory('business_productivity')).toContainEqual({
@@ -46,7 +60,7 @@ describe('business_productivity/urban-water-monitor starter', () => {
       templateId: 'urban-water-monitor',
     });
 
-    expect(manifest.navigator.type).toBe('stack');
+    expect(manifest.navigator.type).toBe('tabs');
     expect(manifest.navigator.initialRouteName).toBe('index');
     expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
     expect(manifest.navigator.routes).toHaveLength(1);
@@ -61,6 +75,25 @@ describe('business_productivity/urban-water-monitor starter', () => {
       'Project',
     );
     assertRouteScreenReferences(manifest);
+  });
+
+  test('renders project sections as collapsed disclosure sections', () => {
+    const manifest = createStarterTemplate(createBusinessProductivitySeed(), {
+      templateId: 'urban-water-monitor',
+    });
+    const screen = manifest.screens['business_productivity-urban-water-monitor-project'];
+    expect(screen).toBeDefined();
+    if (!screen) {
+      throw new Error('Expected Urban Water Monitor project screen.');
+    }
+    const nodeTypes = collectNodeTypes(screen.root);
+    const disclosureSections = collectNodesByType(screen.root, 'DisclosureSection');
+
+    expect(nodeTypes).toContain('Screen');
+    expect(nodeTypes).toContain('SectionHeader');
+    expect(nodeTypes).toContain('DisclosureSection');
+    expect(disclosureSections).toHaveLength(13);
+    expect(disclosureSections.every((node) => node.props?.defaultOpen === false)).toBe(true);
   });
 
   test('includes project concept and API strategy copy without unsupported live claims', () => {
