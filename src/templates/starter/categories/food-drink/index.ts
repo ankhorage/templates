@@ -1,6 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createFoodDrinkStarterTemplate } from './default.template';
-import { createNutritionCatalogScanStarterTemplate } from './nutrition-catalog-scan.template';
+import { createNutritionCatalogScanStarterTemplate } from './nutrition-catalog-scan';
 
 export const foodDrinkStarterTemplates = [
   {

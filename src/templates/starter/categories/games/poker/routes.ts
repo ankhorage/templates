@@ -1,20 +1,20 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { createRoute } from '../../../shared';
+import { createRoute } from '../../../../shared';
 
-export interface ChessScreenIds {
+export interface PokerScreenIds {
   home: string;
   settings: string;
 }
 
-export function createChessScreenIds(idPrefix: string): ChessScreenIds {
+export function createPokerScreenIds(idPrefix: string): PokerScreenIds {
   return {
     home: `${idPrefix}-home`,
     settings: `${idPrefix}-settings`,
   };
 }
 
-export function createChessNavigator(screenIds: ChessScreenIds): AppManifest['navigator'] {
+export function createPokerNavigator(screenIds: PokerScreenIds): AppManifest['navigator'] {
   return {
     type: 'tabs',
     initialRouteName: 'index',
@@ -22,8 +22,8 @@ export function createChessNavigator(screenIds: ChessScreenIds): AppManifest['na
       createRoute({
         name: 'index',
         screenId: screenIds.home,
-        label: 'Home',
-        icon: { provider: 'material-community', name: 'chess-king' },
+        label: 'Trainer',
+        icon: { provider: 'material-community', name: 'gamepad-variant-outline' },
       }),
       createRoute({
         name: 'settings',

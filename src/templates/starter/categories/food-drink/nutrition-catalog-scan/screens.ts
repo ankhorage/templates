@@ -7,10 +7,10 @@ import {
   createSettingsSection,
   createZoraNode,
   type ZoraNode,
-} from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { nutritionCatalogScanContent } from './content.nutrition-catalog-scan';
-import type { NutritionCatalogScanScreenIds } from './routes.nutrition-catalog-scan';
+} from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { nutritionCatalogScanContent } from './content';
+import type { NutritionCatalogScanScreenIds } from './routes';
 
 interface CardContent {
   readonly eyebrow: string;

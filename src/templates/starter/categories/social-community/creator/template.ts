@@ -1,10 +1,10 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { DEFAULT_TEMPLATE_VERSION } from '../../../../internal/defaults';
-import { createManifestShell, createTheme } from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { createCreatorSocialNavigator, createCreatorSocialScreenIds } from './routes.creator';
-import { createCreatorSocialScreens } from './screens.creator';
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { createCreatorSocialNavigator, createCreatorSocialScreenIds } from './routes';
+import { createCreatorSocialScreens } from './screens';
 
 export function createSocialCreatorTemplate(seed: TemplateSeed): AppManifest {
   const idPrefix = `${seed.category}-creator-starter`;

@@ -1,6 +1,6 @@
 import type { CategoryStarterTemplateDefinition } from '../../starter.types';
 import { createSocialCommunityTemplate } from './community.template';
-import { createSocialCreatorTemplate } from './creator.template';
+import { createSocialCreatorTemplate } from './creator';
 
 export const socialCommunityStarterTemplates = [
   {

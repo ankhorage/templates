@@ -1,9 +1,9 @@
 import type { AppManifest, UiNode } from '@ankhorage/contracts';
 
-import { createScreen, createSettingsSection, createZoraNode } from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { chessContent } from './chess.content';
-import type { ChessScreenIds } from './chess.routes';
+import { createScreen, createSettingsSection, createZoraNode } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { chessContent } from './content';
+import type { ChessScreenIds } from './routes';
 
 const INITIAL_CHESS_FEN = 'rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1';
 

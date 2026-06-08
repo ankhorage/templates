@@ -1,0 +1,1 @@
+export { createChessStarterTemplate } from './template';

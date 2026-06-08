@@ -1,10 +1,10 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { DEFAULT_TEMPLATE_VERSION } from '../../../../internal/defaults';
-import { createManifestShell, createTheme } from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { createPokerNavigator, createPokerScreenIds } from './poker.routes';
-import { createPokerScreens } from './poker.screens';
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { createPokerNavigator, createPokerScreenIds } from './routes';
+import { createPokerScreens } from './screens';
 
 export function createPokerStarterTemplate(seed: TemplateSeed): AppManifest {
   const idPrefix = `${seed.category}-poker`;

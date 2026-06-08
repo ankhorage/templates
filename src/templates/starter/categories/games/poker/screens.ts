@@ -1,10 +1,10 @@
 import type { AppManifest, UiNode } from '@ankhorage/contracts';
 
-import { createScreen, createSettingsSection } from '../../../shared';
-import type { TemplateSeed } from '../../starter.types';
-import { pokerContent } from './poker.content';
-import { pokerSituation, type PokerSituation } from './poker.data';
-import type { PokerScreenIds } from './poker.routes';
+import { createScreen, createSettingsSection } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import { pokerContent } from './content';
+import { pokerSituation, type PokerSituation } from './data';
+import type { PokerScreenIds } from './routes';
 
 function createNode(
   id: string,
