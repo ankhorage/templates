@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.7.4
+
+### Patch Changes
+
+- 4fd369f: Update nutrition app template (scanner) and set the camera permission as a requirement
+
 ## 1.7.3
 
 ### Patch Changes
