@@ -37,6 +37,7 @@ function createContentScreen(args: {
   readonly name: string;
   readonly content: ScreenContent;
   readonly body?: readonly ZoraNode[];
+  readonly requires?: AppManifest['screens'][string]['requires'];
 }): AppManifest['screens'][string] {
   const idSegment = args.name.toLowerCase().replaceAll(' ', '-');
   const body = args.body ?? createSectionCards(args.idPrefix, idSegment, args.content.sections);
@@ -54,6 +55,7 @@ function createContentScreen(args: {
       }),
       ...body,
     ]),
+    requires: args.requires,
   });
 }
 
@@ -208,6 +210,10 @@ export function createNutritionCatalogScanScreens(
       name: 'Scan',
       content: nutritionCatalogScanContent.scan,
       body: createScanBody(idPrefix),
+      requires: {
+        permissions: [{ permission: 'camera' }],
+        capabilities: [{ capability: 'barcodeScanner' }],
+      },
     }),
     [screenIds.leaderboard]: createContentScreen({
       idPrefix,

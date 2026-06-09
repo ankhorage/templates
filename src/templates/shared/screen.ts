@@ -6,6 +6,7 @@ export function createScreen(args: {
   title: string;
   description: string;
   root: UiNode;
+  requires?: ScreenSpec['requires'];
 }): ScreenSpec {
   return {
     id: args.id,
@@ -13,5 +14,6 @@ export function createScreen(args: {
     title: args.title,
     description: args.description,
     root: args.root,
+    ...(args.requires ? { requires: args.requires } : {}),
   };
 }

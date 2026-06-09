@@ -113,6 +113,19 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(manifest.navigator.routes.some((route) => route.hideInTabBar)).toBe(false);
   });
 
+  test('declares scanner runtime requirements on the scan screen', () => {
+    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const scanRoute = manifest.navigator.routes.find((route) => route.name === 'scan');
+    const scanScreen = scanRoute?.screenId ? manifest.screens[scanRoute.screenId] : undefined;
+
+    expect(scanScreen?.requires).toEqual({
+      permissions: [{ permission: 'camera' }],
+      capabilities: [{ capability: 'barcodeScanner' }],
+    });
+  });
+
   test('renders product grid and direct ZORA barcode scanner nodes', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
