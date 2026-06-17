@@ -430,7 +430,9 @@ describe('createStarterTemplate', () => {
     for (const category of APP_CATEGORIES) {
       for (const template of listStarterTemplates(category)) {
         const manifest = createStarterTemplate(createSeed(category), { templateId: template.id });
-        const visibleRoutes = manifest.navigator.routes.filter((route) => route.hideInTabBar !== true);
+        const visibleRoutes = manifest.navigator.routes.filter(
+          (route) => route.hideInTabBar !== true,
+        );
 
         assertManifestIntegrity(manifest);
         expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
