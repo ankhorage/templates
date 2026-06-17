@@ -5,6 +5,7 @@ import type {
   DisclosureSectionProps,
   GridProps,
   InputProps,
+  ProductCardProps,
 } from '@ankhorage/zora';
 import type {
   EmptyStateProps,
@@ -40,6 +41,10 @@ type SerializableCardProps = Omit<
   description?: string;
   eyebrow?: string;
 };
+type SerializableProductCardProps = Omit<
+  ProductCardProps,
+  'onPress' | 'onPrimaryAction' | 'onSecondaryAction'
+>;
 type SerializableDisclosureSectionProps = Omit<
   DisclosureSectionProps,
   'actions' | 'children' | 'description' | 'icon' | 'onOpenChange' | 'open' | 'title'
@@ -174,6 +179,7 @@ export interface ZoraNodePropsByType {
   Notice: SerializableNoticeProps;
   OAuthProviderList: SerializableOAuthProviderListProps;
   Panel: SerializablePanelProps;
+  ProductCard: SerializableProductCardProps;
   Screen: SerializableScreenProps;
   ScreenSection: SerializableScreenSectionProps;
   SectionHeader: SerializableSectionHeaderProps;

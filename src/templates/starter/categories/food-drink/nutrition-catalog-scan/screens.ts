@@ -110,23 +110,20 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
       },
       [
         createZoraNode(`${idPrefix}-products-grid`, 'Grid', undefined, [
-          createZoraNode(`${idPrefix}-product-card-yogurt`, 'Card', {
-            eyebrow: 'Known product',
+          createZoraNode(`${idPrefix}-product-card-yogurt`, 'ProductCard', {
             title: 'Bio Greek Yogurt 250 g',
-            description: 'Migros · 7612345678901 · confidence 92%',
-            tone: 'outline',
+            brand: 'Migros',
+            description: '7612345678901 · confidence 92%',
           }),
-          createZoraNode(`${idPrefix}-product-card-oat-drink`, 'Card', {
-            eyebrow: 'Known product',
+          createZoraNode(`${idPrefix}-product-card-oat-drink`, 'ProductCard', {
             title: 'Haferdrink Barista 1 l',
-            description: 'Coop · 7612345678918 · confidence 88%',
-            tone: 'outline',
+            brand: 'Coop',
+            description: '7612345678918 · confidence 88%',
           }),
-          createZoraNode(`${idPrefix}-product-card-missing`, 'Card', {
-            eyebrow: 'Contribution target',
+          createZoraNode(`${idPrefix}-product-card-missing`, 'ProductCard', {
             title: 'Missing supermarket product',
-            description: 'Scan a missing barcode to add a capture and earn points.',
-            tone: 'outline',
+            brand: 'Contribution target',
+            description: 'Scan a missing barcode to add a product proposal and earn points.',
           }),
         ]),
       ],
@@ -145,9 +142,6 @@ function createScanBody(idPrefix: string): ZoraNode[] {
       cornerLabel: 'EAN',
       requestPermissionLabel: 'Allow camera access',
       manualEntryLabel: 'Enter barcode manually',
-      onBarcodeScanned: 'nutrition.scanBarcode',
-      onManualEntry: 'nutrition.enterBarcodeManually',
-      onRequestPermission: 'camera.requestPermission',
     }),
   ];
 }
@@ -242,7 +236,7 @@ export function createNutritionCatalogScanScreens(
     [screenIds.capture]: createContentScreen({
       idPrefix,
       screenId: screenIds.capture,
-      name: 'Capture',
+      name: 'Create',
       content: nutritionCatalogScanContent.capture,
       body: [createCaptureFormPreview(idPrefix)],
     }),

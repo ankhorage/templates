@@ -21,6 +21,21 @@ function collectNodeText(node: UiNode): string[] {
   return [...values, ...(node.children?.flatMap(collectNodeText) ?? [])];
 }
 
+function findNodeById(node: UiNode, id: string): UiNode | undefined {
+  if (node.id === id) {
+    return node;
+  }
+
+  for (const child of node.children ?? []) {
+    const match = findNodeById(child, id);
+    if (match) {
+      return match;
+    }
+  }
+
+  return undefined;
+}
+
 function createFoodDrinkSeed(): TemplateSeed {
   const preset = CATEGORY_PRESETS.food_drink;
 
@@ -93,24 +108,25 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
+    const visibleRoutes = manifest.navigator.routes.filter((route) => route.hideInTabBar !== true);
 
-    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
+    expect(visibleRoutes.map((route) => route.label)).toEqual([
       'Products',
       'Scan',
       'Stats',
       'Profile',
     ]);
-    expect(manifest.navigator.routes.map((route) => route.name)).toEqual([
-      'index',
-      'scan',
-      'stats',
-      'profile',
-    ]);
+    expect(visibleRoutes.map((route) => route.name)).toEqual(['index', 'scan', 'stats', 'profile']);
     expect(manifest.navigator.routes.find((route) => route.name === 'scan')?.icon).toEqual({
       provider: 'material-community',
       name: 'barcode-scan',
     });
-    expect(manifest.navigator.routes.some((route) => route.hideInTabBar)).toBe(false);
+    expect(
+      manifest.navigator.routes.find((route) => route.name === '/products/[id]')?.hideInTabBar,
+    ).toBe(true);
+    expect(
+      manifest.navigator.routes.find((route) => route.name === '/products/create')?.hideInTabBar,
+    ).toBe(true);
   });
 
   test('declares scanner runtime requirements on the scan screen', () => {
@@ -135,10 +151,83 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const nodeText = roots.flatMap(collectNodeText).join('\n');
 
     expect(nodeTypes).toContain('Grid');
-    expect(nodeTypes).toContain('Card');
+    expect(nodeTypes).toContain('ProductCard');
     expect(nodeTypes).toContain('BarcodeScannerView');
     expect(nodeText).toContain('Bio Greek Yogurt 250 g');
     expect(nodeText).toContain('Haferdrink Barista 1 l');
     expect(nodeText).toContain('Scan product barcode');
+  });
+
+  test('removes opaque scanner props and emits scanner navigation bindings', () => {
+    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const scanRoute = manifest.navigator.routes.find((route) => route.name === 'scan');
+    const scanScreen = scanRoute?.screenId ? manifest.screens[scanRoute.screenId] : undefined;
+    const scannerNode = scanScreen
+      ? findNodeById(scanScreen.root, 'food_drink-nutrition-catalog-scan-scan-scanner')
+      : undefined;
+    const barcodeBindings =
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-scan-scanner']?.events
+        ?.barcodeScanned;
+
+    expect(scannerNode?.props).not.toHaveProperty('onBarcodeScanned');
+    expect(scannerNode?.props).not.toHaveProperty('onManualEntry');
+    expect(scannerNode?.props).not.toHaveProperty('onRequestPermission');
+    expect(JSON.stringify(manifest)).not.toContain('nutrition.scanBarcode');
+    expect(barcodeBindings).toHaveLength(3);
+    expect(barcodeBindings?.[0]?.target.kind).toBe('operation');
+    expect(barcodeBindings?.[1]?.input?.route).toEqual({
+      kind: 'literal',
+      value: '/products/[id]',
+    });
+    expect(barcodeBindings?.[2]?.input?.route).toEqual({
+      kind: 'literal',
+      value: '/products/create',
+    });
+    expect(
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-scan-scanner']?.events
+        ?.manualEntry?.[0]?.input?.route,
+    ).toEqual({
+      kind: 'literal',
+      value: '/products/create',
+    });
+  });
+
+  test('binds product cards and runtime data sources for catalog navigation', () => {
+    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const productCardBindings =
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-product-card-yogurt'];
+    const dataSource = manifest.dataSources?.['nutrition-api'];
+    const productsEndpoint = dataSource?.endpoints.products;
+
+    expect(productCardBindings?.componentType).toBe('ProductCard');
+    expect(productCardBindings?.events?.press?.[0]?.input?.route).toEqual({
+      kind: 'literal',
+      value: '/products/[id]',
+    });
+    expect(productCardBindings?.events?.press?.[0]?.input?.params).toEqual({
+      kind: 'object',
+      fields: {
+        id: {
+          kind: 'literal',
+          value: 'bio-greek-yogurt-250g',
+        },
+      },
+    });
+    expect(dataSource?.kind).toBe('rest');
+    expect(productsEndpoint).toBeDefined();
+
+    if (productsEndpoint === undefined) {
+      throw new Error('Expected products endpoint to be defined');
+    }
+
+    expect(productsEndpoint.operations['products.list']?.method).toBe('GET');
+    expect(productsEndpoint.operations['products.lookupByBarcode']?.path).toBe(
+      '/by-barcode/:barcode',
+    );
+    expect(productsEndpoint.operations['products.create']?.path).toBe('/captures');
   });
 });
