@@ -126,9 +126,6 @@ type SerializableBarcodeScannerViewProps = SerializableProps<{
   requestPermissionLabel?: string;
   deniedPermissionLabel?: string;
   manualEntryLabel?: string;
-  onBarcodeScanned?: string;
-  onManualEntry?: string;
-  onRequestPermission?: string;
   testID?: string;
 }>;
 interface SerializableOAuthProviderIconSpec {

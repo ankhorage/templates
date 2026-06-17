@@ -175,6 +175,8 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(scannerNode?.props).not.toHaveProperty('onManualEntry');
     expect(scannerNode?.props).not.toHaveProperty('onRequestPermission');
     expect(JSON.stringify(manifest)).not.toContain('nutrition.scanBarcode');
+    expect(JSON.stringify(manifest)).not.toContain('nutrition.enterBarcodeManually');
+    expect(JSON.stringify(manifest)).not.toContain('camera.requestPermission');
     expect(barcodeBindings).toHaveLength(3);
     expect(barcodeBindings?.[0]?.target.kind).toBe('operation');
     expect(barcodeBindings?.[1]?.input?.route).toEqual({
