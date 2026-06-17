@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.8.0
+
+### Minor Changes
+
+- 16a2a1f: Emit runtime `dataSources` and `dataBindings` for the nutrition catalog scan starter so scanner lookups and product-card navigation no longer depend on opaque action strings.
+
 ## 1.7.4
 
 ### Patch Changes
