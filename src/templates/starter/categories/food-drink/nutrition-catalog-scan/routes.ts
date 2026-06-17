@@ -67,6 +67,18 @@ export function createNutritionCatalogScanNavigator(
         label: 'Profile',
         icon: { provider: 'material-community', name: 'account-circle-outline' },
       }),
+      createRoute({
+        name: '/products/[id]',
+        screenId: screenIds.detail,
+        label: 'Product detail',
+        hideInTabBar: true,
+      }),
+      createRoute({
+        name: '/products/create',
+        screenId: screenIds.capture,
+        label: 'Create product',
+        hideInTabBar: true,
+      }),
     ],
   };
 }
