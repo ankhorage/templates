@@ -39,9 +39,32 @@ export function createNutritionCatalogScanNavigator(
     routes: [
       createRoute({
         name: 'products',
-        screenId: screenIds.catalog,
         label: 'Products',
         icon: { provider: 'material-community', name: 'package-variant-closed' },
+        navigator: {
+          type: 'stack',
+          initialRouteName: '/products',
+          routes: [
+            createRoute({
+              name: '/products',
+              path: '/products',
+              screenId: screenIds.catalog,
+              label: 'Products',
+            }),
+            createRoute({
+              name: '/products/[id]',
+              screenId: screenIds.detail,
+              label: 'Product detail',
+              hideInTabBar: true,
+            }),
+            createRoute({
+              name: '/products/create',
+              screenId: screenIds.create,
+              label: 'Create product',
+              hideInTabBar: true,
+            }),
+          ],
+        },
       }),
       createRoute({
         name: 'scan',
@@ -60,18 +83,6 @@ export function createNutritionCatalogScanNavigator(
         screenId: screenIds.profile,
         label: 'Profile',
         icon: { provider: 'material-community', name: 'account-circle-outline' },
-      }),
-      createRoute({
-        name: '/products/[id]',
-        screenId: screenIds.detail,
-        label: 'Product detail',
-        hideInTabBar: true,
-      }),
-      createRoute({
-        name: '/products/create',
-        screenId: screenIds.create,
-        label: 'Create product',
-        hideInTabBar: true,
       }),
     ],
   };

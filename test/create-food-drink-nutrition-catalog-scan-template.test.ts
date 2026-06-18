@@ -51,6 +51,42 @@ function findNodeByType(node: UiNode, type: string): UiNode | undefined {
   return undefined;
 }
 
+function findRouteByName(
+  routes: readonly {
+    name: string;
+    navigator?: { routes: readonly { name: string }[] };
+  }[],
+  name: string,
+):
+  | {
+      name: string;
+      screenId?: string;
+      hideInTabBar?: boolean;
+      navigator?: {
+        type: string;
+        initialRouteName?: string;
+        routes: readonly {
+          name: string;
+          screenId?: string;
+          hideInTabBar?: boolean;
+        }[];
+      };
+    }
+  | undefined {
+  for (const route of routes) {
+    if (route.name === name) {
+      return route as ReturnType<typeof findRouteByName>;
+    }
+
+    const nestedMatch = route.navigator ? findRouteByName(route.navigator.routes, name) : undefined;
+    if (nestedMatch !== undefined) {
+      return nestedMatch;
+    }
+  }
+
+  return undefined;
+}
+
 function createFoodDrinkSeed(): TemplateSeed {
   const preset = CATEGORY_PRESETS.food_drink;
 
@@ -124,6 +160,8 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       templateId: 'nutrition-catalog-scan',
     });
     const visibleRoutes = manifest.navigator.routes.filter((route) => route.hideInTabBar !== true);
+    const productsRoute = manifest.navigator.routes.find((route) => route.name === 'products');
+    const productsStack = productsRoute?.navigator;
 
     expect(visibleRoutes.map((route) => route.label)).toEqual([
       'Products',
@@ -137,15 +175,26 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       'stats',
       'profile',
     ]);
+    expect(productsRoute?.screenId).toBeUndefined();
+    expect(productsStack?.type).toBe('stack');
+    expect(productsStack?.initialRouteName).toBe('/products');
+    expect(productsStack?.routes.map((route) => route.name)).toEqual([
+      '/products',
+      '/products/[id]',
+      '/products/create',
+    ]);
     expect(manifest.navigator.routes.find((route) => route.name === 'scan')?.icon).toEqual({
       provider: 'material-community',
       name: 'barcode-scan',
     });
+    expect(productsStack?.routes.find((route) => route.name === '/products')?.screenId).toBe(
+      'food_drink-nutrition-catalog-scan-catalog',
+    );
     expect(
-      manifest.navigator.routes.find((route) => route.name === '/products/[id]')?.hideInTabBar,
+      productsStack?.routes.find((route) => route.name === '/products/[id]')?.hideInTabBar,
     ).toBe(true);
     expect(
-      manifest.navigator.routes.find((route) => route.name === '/products/create')?.hideInTabBar,
+      productsStack?.routes.find((route) => route.name === '/products/create')?.hideInTabBar,
     ).toBe(true);
   });
 
@@ -169,7 +218,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const roots = Object.values(manifest.screens).map((screen) => screen.root);
     const nodeTypes = roots.flatMap(collectNodeTypes);
     const nodeText = roots.flatMap(collectNodeText).join('\n');
-    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'products');
+    const catalogRoute = findRouteByName(manifest.navigator.routes, '/products');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;
@@ -339,7 +388,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const dataSource = manifest.dataSources?.['nutrition-api'];
     const healthEndpoint = dataSource?.endpoints.health;
     const productsEndpoint = dataSource?.endpoints.products;
-    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'products');
+    const catalogRoute = findRouteByName(manifest.navigator.routes, '/products');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;
