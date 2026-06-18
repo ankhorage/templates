@@ -22,7 +22,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               protocol: 'http',
               intent: 'read',
               method: 'GET',
-              path: '/',
+              path: '/products',
             },
             'products.read': {
               id: 'products.read',
@@ -32,7 +32,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               protocol: 'http',
               intent: 'read',
               method: 'GET',
-              path: '/:id',
+              path: '/products/:id',
             },
             'products.lookupByBarcode': {
               id: 'products.lookupByBarcode',
@@ -42,7 +42,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               protocol: 'http',
               intent: 'read',
               method: 'GET',
-              path: '/by-barcode/:barcode',
+              path: '/products/by-barcode/:barcode',
             },
             'products.create': {
               id: 'products.create',
@@ -52,7 +52,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               protocol: 'http',
               intent: 'create',
               method: 'POST',
-              path: '/',
+              path: '/products',
             },
             'products.update': {
               id: 'products.update',
@@ -62,7 +62,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               protocol: 'http',
               intent: 'update',
               method: 'PATCH',
-              path: '/:id',
+              path: '/products/:id',
             },
             'products.delete': {
               id: 'products.delete',
@@ -72,7 +72,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               protocol: 'http',
               intent: 'delete',
               method: 'DELETE',
-              path: '/:id',
+              path: '/products/:id',
             },
           },
         },

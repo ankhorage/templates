@@ -166,37 +166,6 @@ export const nutritionCatalogScanContent = {
       },
     ],
   },
-  challenge: {
-    eyebrow: 'Active challenge',
-    title: 'Scanner challenge',
-    description:
-      'Show challenge rules, dates, invite status, scoring, and the signed-in scanner progress.',
-    sections: [
-      {
-        title: 'Scoring rules',
-        description:
-          'Point rules should reward useful scans and discourage duplicate barcode farming.',
-        cards: [
-          {
-            eyebrow: 'Known scan',
-            title: '1 point',
-            description: 'Awarded for a valid known product scan within the duplicate limits.',
-          },
-          {
-            eyebrow: 'Missing product',
-            title: '5 points',
-            description: 'Awarded when a signed-in scanner submits a new missing product capture.',
-          },
-          {
-            eyebrow: 'Accepted capture',
-            title: '20 points',
-            description:
-              'Awarded later when review tooling publishes or accepts the captured product.',
-          },
-        ],
-      },
-    ],
-  },
   leaderboard: {
     eyebrow: 'Catalog progress',
     title: 'Stats',
@@ -205,7 +174,7 @@ export const nutritionCatalogScanContent = {
     sections: [
       {
         title: 'Suggested metrics',
-        description: 'This starter no longer assumes challenge or scan-event APIs.',
+        description: 'This starter no longer assumes extra event or leaderboard APIs.',
         cards: [
           {
             eyebrow: 'Catalog',

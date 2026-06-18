@@ -9,7 +9,6 @@ export interface NutritionCatalogScanScreenIds {
   readonly capture: string;
   readonly success: string;
   readonly queue: string;
-  readonly challenge: string;
   readonly leaderboard: string;
   readonly profile: string;
   readonly signIn: string;
@@ -27,7 +26,6 @@ export function createNutritionCatalogScanScreenIds(
     capture: `${idPrefix}-capture`,
     success: `${idPrefix}-success`,
     queue: `${idPrefix}-queue`,
-    challenge: `${idPrefix}-challenge`,
     leaderboard: `${idPrefix}-leaderboard`,
     profile: `${idPrefix}-profile`,
     signIn: `${idPrefix}-sign-in`,

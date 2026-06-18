@@ -95,7 +95,7 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
   return [
     createZoraNode(`${idPrefix}-products-search-field`, 'FormField', {
       label: 'Search products',
-      description: 'Search by product name, brand, barcode, or store chain.',
+      description: 'Search by product name, brand, barcode, or package label.',
     }),
     createZoraNode(`${idPrefix}-products-search-input`, 'Input', {
       placeholder: 'Search Migros, Coop, barcode...',
@@ -237,12 +237,6 @@ export function createNutritionCatalogScanScreens(
       name: 'Profile',
       content: nutritionCatalogScanContent.profile,
     }),
-    [screenIds.challenge]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.challenge,
-      name: 'Challenge',
-      content: nutritionCatalogScanContent.challenge,
-    }),
     [screenIds.detail]: createContentScreen({
       idPrefix,
       screenId: screenIds.detail,
@@ -299,7 +293,7 @@ export function createNutritionCatalogScanScreens(
             {
               id: 'base-url-row',
               title: 'API base URL',
-              description: 'Defaults to https://api-gateway.fabio-gartenmann.workers.dev.',
+              description: 'Defaults to https://api.ankhorage.com/v1/nutrition.',
               meta: 'runtime',
             },
             {

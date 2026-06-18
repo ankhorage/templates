@@ -306,10 +306,11 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
 
     expect(productsEndpoint.operations['products.list']?.method).toBe('GET');
     expect(productsEndpoint.operations['products.lookupByBarcode']?.path).toBe(
-      '/by-barcode/:barcode',
+      '/products/by-barcode/:barcode',
     );
-    expect(productsEndpoint.operations['products.create']?.path).toBe('/');
-    expect(productsEndpoint.operations['products.update']?.path).toBe('/:id');
-    expect(productsEndpoint.operations['products.delete']?.path).toBe('/:id');
+    expect(productsEndpoint.operations['products.create']?.path).toBe('/products');
+    expect(productsEndpoint.operations['products.read']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['products.update']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['products.delete']?.path).toBe('/products/:id');
   });
 });
