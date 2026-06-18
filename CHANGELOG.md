@@ -1,5 +1,14 @@
 # @ankhorage/templates
 
+## 1.8.3
+
+### Patch Changes
+
+- 481d13b: Align the food/drink nutrition catalog scanner starter with the current product-centric nutrition API.
+
+  Generated nutrition scanner manifests now use direct product CRUD operations under `/v1/nutrition/products`, full runtime product operation paths, and `packageLabel`-based product data instead of the legacy capture/challenge/event flow.
+  EOF
+
 ## 1.8.2
 
 ### Patch Changes
