@@ -86,7 +86,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
 
     expect(manifest.metadata.name).toBe('Nutrition Scan');
     expect(manifest.navigator.type).toBe('tabs');
-    expect(manifest.navigator.initialRouteName).toBe('index');
+    expect(manifest.navigator.initialRouteName).toBe('products');
     expect(manifest.infra.auth).toEqual({
       scope: 'global',
       provider: 'supabase',
@@ -98,7 +98,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         signInRoute: 'sign-in',
         signUpRoute: 'sign-up',
         signOutRoute: 'sign-out',
-        postSignInRoute: 'index',
+        postSignInRoute: 'products',
         unauthorizedRoute: 'sign-in',
       },
       signIn: {
@@ -116,7 +116,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         updateStrategy: 'api',
       },
     });
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
+    expect(manifest.settings.authFlow.postSignInRoute).toBe('products');
   });
 
   test('creates useful tabs for products, scan, stats, and profile', () => {
@@ -131,7 +131,12 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       'Stats',
       'Profile',
     ]);
-    expect(visibleRoutes.map((route) => route.name)).toEqual(['index', 'scan', 'stats', 'profile']);
+    expect(visibleRoutes.map((route) => route.name)).toEqual([
+      'products',
+      'scan',
+      'stats',
+      'profile',
+    ]);
     expect(manifest.navigator.routes.find((route) => route.name === 'scan')?.icon).toEqual({
       provider: 'material-community',
       name: 'barcode-scan',
@@ -164,7 +169,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const roots = Object.values(manifest.screens).map((screen) => screen.root);
     const nodeTypes = roots.flatMap(collectNodeTypes);
     const nodeText = roots.flatMap(collectNodeText).join('\n');
-    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'index');
+    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'products');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;
@@ -334,7 +339,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const dataSource = manifest.dataSources?.['nutrition-api'];
     const healthEndpoint = dataSource?.endpoints.health;
     const productsEndpoint = dataSource?.endpoints.products;
-    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'index');
+    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'products');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;

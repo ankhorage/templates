@@ -35,10 +35,10 @@ export function createNutritionCatalogScanNavigator(
 ): AppManifest['navigator'] {
   return {
     type: 'tabs',
-    initialRouteName: 'index',
+    initialRouteName: 'products',
     routes: [
       createRoute({
-        name: 'index',
+        name: 'products',
         screenId: screenIds.catalog,
         label: 'Products',
         icon: { provider: 'material-community', name: 'package-variant-closed' },
