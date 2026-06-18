@@ -6,10 +6,8 @@ export interface NutritionCatalogScanScreenIds {
   readonly catalog: string;
   readonly detail: string;
   readonly scan: string;
-  readonly capture: string;
-  readonly success: string;
-  readonly queue: string;
-  readonly leaderboard: string;
+  readonly create: string;
+  readonly stats: string;
   readonly profile: string;
   readonly signIn: string;
   readonly signUp: string;
@@ -23,10 +21,8 @@ export function createNutritionCatalogScanScreenIds(
     catalog: `${idPrefix}-catalog`,
     detail: `${idPrefix}-detail`,
     scan: `${idPrefix}-scan`,
-    capture: `${idPrefix}-capture`,
-    success: `${idPrefix}-success`,
-    queue: `${idPrefix}-queue`,
-    leaderboard: `${idPrefix}-leaderboard`,
+    create: `${idPrefix}-create`,
+    stats: `${idPrefix}-stats`,
     profile: `${idPrefix}-profile`,
     signIn: `${idPrefix}-sign-in`,
     signUp: `${idPrefix}-sign-up`,
@@ -55,7 +51,7 @@ export function createNutritionCatalogScanNavigator(
       }),
       createRoute({
         name: 'stats',
-        screenId: screenIds.leaderboard,
+        screenId: screenIds.stats,
         label: 'Stats',
         icon: { provider: 'material-community', name: 'chart-bar' },
       }),
@@ -73,7 +69,7 @@ export function createNutritionCatalogScanNavigator(
       }),
       createRoute({
         name: '/products/create',
-        screenId: screenIds.capture,
+        screenId: screenIds.create,
         label: 'Create product',
         hideInTabBar: true,
       }),

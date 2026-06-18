@@ -75,7 +75,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       category: 'food_drink',
       label: 'Nutrition catalog scan',
       description:
-        'A Swiss product catalog starter with ZORA-first product browsing and direct barcode-to-product creation flow.',
+        'A product barcode nutrition scanner starter with direct product lookup, creation, and catalog browsing.',
     });
   });
 
@@ -157,7 +157,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     });
   });
 
-  test('renders product grid with a repeated product-card template and direct ZORA barcode scanner node', () => {
+  test('renders product grid, scanner, notices, and DTO detail guidance', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
@@ -177,14 +177,20 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(nodeTypes).toContain('Grid');
     expect(nodeTypes).toContain('ProductCard');
     expect(nodeTypes).toContain('BarcodeScannerView');
+    expect(nodeTypes).toContain('Notice');
+    expect(nodeTypes).toContain('Button');
     expect(nodeText).toContain('Scan product barcode');
+    expect(nodeText).toContain('nutritionFacts');
+    expect(nodeText).toContain('imageRefs');
+    expect(nodeText).toContain('packageLabel');
+    expect(nodeText).not.toContain('updatedByUserId');
     expect(productsGrid?.repeat).toEqual({
       source: {
         kind: 'operation',
         operation: {
           dataSourceId: 'nutrition-api',
           endpointId: 'products',
-          operationId: 'products.list',
+          operationId: 'nutrition.products.list',
         },
       },
       itemAlias: 'item',
@@ -196,7 +202,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     );
   });
 
-  test('removes opaque scanner props and emits scanner navigation bindings', () => {
+  test('emits scanner lookup bindings for camera scans and manual barcode entry', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
@@ -205,42 +211,58 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const scannerNode = scanScreen
       ? findNodeById(scanScreen.root, 'food_drink-nutrition-catalog-scan-scan-scanner')
       : undefined;
-    const barcodeBindings =
-      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-scan-scanner']?.events
-        ?.barcodeScanned;
+    const scannerBindings =
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-scan-scanner']?.events;
 
     expect(scannerNode?.props).not.toHaveProperty('onBarcodeScanned');
     expect(scannerNode?.props).not.toHaveProperty('onManualEntry');
     expect(scannerNode?.props).not.toHaveProperty('onRequestPermission');
-    expect(JSON.stringify(manifest)).not.toContain('nutrition.scanBarcode');
-    expect(JSON.stringify(manifest)).not.toContain('nutrition.enterBarcodeManually');
-    expect(JSON.stringify(manifest)).not.toContain('camera.requestPermission');
-    expect(barcodeBindings).toHaveLength(3);
-    expect(barcodeBindings?.[0]?.target.kind).toBe('operation');
-    expect(barcodeBindings?.[1]?.input?.route).toEqual({
+    expect(scannerBindings?.barcodeScanned).toHaveLength(3);
+    expect(scannerBindings?.barcodeScanned?.[0]?.target).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getByBarcode',
+      },
+    });
+    expect(scannerBindings?.barcodeScanned?.[1]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/[id]',
     });
-    expect(barcodeBindings?.[2]?.input?.route).toEqual({
+    expect(scannerBindings?.barcodeScanned?.[2]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/create',
     });
-    expect(
-      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-scan-scanner']?.events
-        ?.manualEntry?.[0]?.input?.route,
-    ).toEqual({
+    expect(scannerBindings?.manualEntry).toHaveLength(3);
+    expect(scannerBindings?.manualEntry?.[0]?.target).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getByBarcode',
+      },
+    });
+    expect(scannerBindings?.manualEntry?.[1]?.input?.route).toEqual({
+      kind: 'literal',
+      value: '/products/[id]',
+    });
+    expect(scannerBindings?.manualEntry?.[2]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/create',
     });
   });
 
-  test('binds product cards and runtime data sources for catalog navigation', () => {
+  test('binds product cards, create submit behavior, and runtime data sources', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
     const productCardBindings =
       manifest.dataBindings?.['food_drink-nutrition-catalog-scan-product-card-template'];
+    const createButtonBindings =
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-create-submit-button'];
     const dataSource = manifest.dataSources?.['nutrition-api'];
+    const healthEndpoint = dataSource?.endpoints.health;
     const productsEndpoint = dataSource?.endpoints.products;
     const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'index');
     const catalogScreen = catalogRoute?.screenId
@@ -274,43 +296,96 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       kind: 'literal',
       value: '/products/[id]',
     });
-    expect(productCardBindings?.events?.press?.[0]?.input?.params).toEqual({
-      kind: 'object',
-      fields: {
-        id: {
-          kind: 'source',
-          source: {
-            kind: 'context',
-            path: 'item.id',
-          },
-        },
-      },
-    });
     expect(productsGrid?.repeat?.source).toEqual({
       kind: 'operation',
       operation: {
         dataSourceId: 'nutrition-api',
         endpointId: 'products',
-        operationId: 'products.list',
+        operationId: 'nutrition.products.list',
       },
     });
     expect(repeatedCardTemplate?.id).toBe(
       'food_drink-nutrition-catalog-scan-product-card-template',
     );
+
+    expect(createButtonBindings?.componentType).toBe('Button');
+    expect(createButtonBindings?.events?.press?.[0]?.target).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.create',
+      },
+    });
+    expect(createButtonBindings?.events?.press?.[0]?.input?.packageLabel).toEqual({
+      kind: 'source',
+      source: {
+        kind: 'state',
+        path: 'forms.products.create.packageLabel',
+      },
+      transforms: ['trim'],
+    });
+    expect(createButtonBindings?.events?.press?.[0]?.input?.nutritionFacts).toEqual({
+      kind: 'source',
+      source: {
+        kind: 'state',
+        path: 'forms.products.create.nutritionFacts',
+      },
+    });
+    expect(createButtonBindings?.events?.press?.[0]?.input?.imageRefs).toEqual({
+      kind: 'source',
+      source: {
+        kind: 'state',
+        path: 'forms.products.create.imageRefs',
+      },
+    });
+    expect(createButtonBindings?.events?.press?.[1]?.input?.route).toEqual({
+      kind: 'literal',
+      value: '/products/[id]',
+    });
+    expect(createButtonBindings?.events?.press?.[2]?.when?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.create',
+      },
+      path: 'product.id',
+    });
+
     expect(dataSource?.kind).toBe('rest');
+    expect(healthEndpoint?.operations['nutrition.health']?.method).toBe('GET');
+    expect(healthEndpoint?.operations['nutrition.health']?.path).toBe('/health');
+
     expect(productsEndpoint).toBeDefined();
 
     if (productsEndpoint === undefined) {
       throw new Error('Expected products endpoint to be defined');
     }
 
-    expect(productsEndpoint.operations['products.list']?.method).toBe('GET');
-    expect(productsEndpoint.operations['products.lookupByBarcode']?.path).toBe(
+    expect(productsEndpoint.operations['nutrition.products.list']?.method).toBe('GET');
+    expect(productsEndpoint.operations['nutrition.products.getByBarcode']?.path).toBe(
       '/products/by-barcode/:barcode',
     );
-    expect(productsEndpoint.operations['products.create']?.path).toBe('/products');
-    expect(productsEndpoint.operations['products.read']?.path).toBe('/products/:id');
-    expect(productsEndpoint.operations['products.update']?.path).toBe('/products/:id');
-    expect(productsEndpoint.operations['products.delete']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['nutrition.products.create']?.path).toBe('/products');
+    expect(productsEndpoint.operations['nutrition.products.getById']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['nutrition.products.update']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['nutrition.products.delete']?.path).toBe('/products/:id');
+  });
+
+  test('removes stale capture and challenge vocabulary from the generated manifest', () => {
+    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const json = JSON.stringify(manifest);
+
+    expect(json).not.toContain('/captures');
+    expect(json).not.toContain('/challenges');
+    expect(json).not.toContain('/scan-events');
+    expect(json).not.toContain('scanEvent');
+    expect(json).not.toContain('storeObservation');
+    expect(json).not.toContain('review queue');
+    expect(json).not.toContain('confidence');
+    expect(json).not.toContain('-capture');
   });
 });
