@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.8.5
+
+### Patch Changes
+
+- 7c0430b: Fix nutrition web route nesting
+
 ## 1.8.4
 
 ### Patch Changes
