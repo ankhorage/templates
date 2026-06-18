@@ -75,7 +75,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       category: 'food_drink',
       label: 'Nutrition catalog scan',
       description:
-        'A Swiss product catalog starter with ZORA-first product browsing and scan-to-add capture flow.',
+        'A Swiss product catalog starter with ZORA-first product browsing and direct barcode-to-product creation flow.',
     });
   });
 
@@ -264,7 +264,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     });
     expect(productCardBindings?.props?.subtitle?.source).toEqual({
       kind: 'context',
-      path: 'item.quantity',
+      path: 'item.packageLabel',
     });
     expect(productCardBindings?.props?.description?.source).toEqual({
       kind: 'context',
@@ -306,8 +306,11 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
 
     expect(productsEndpoint.operations['products.list']?.method).toBe('GET');
     expect(productsEndpoint.operations['products.lookupByBarcode']?.path).toBe(
-      '/by-barcode/:barcode',
+      '/products/by-barcode/:barcode',
     );
-    expect(productsEndpoint.operations['products.create']?.path).toBe('/captures');
+    expect(productsEndpoint.operations['products.create']?.path).toBe('/products');
+    expect(productsEndpoint.operations['products.read']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['products.update']?.path).toBe('/products/:id');
+    expect(productsEndpoint.operations['products.delete']?.path).toBe('/products/:id');
   });
 });

@@ -13,7 +13,7 @@ export const foodDrinkStarterTemplates = [
     id: 'nutrition-catalog-scan',
     label: 'Nutrition catalog scan',
     description:
-      'A Swiss product catalog starter with ZORA-first product browsing and scan-to-add capture flow.',
+      'A Swiss product catalog starter with ZORA-first product browsing and direct barcode-to-product creation flow.',
     create: createNutritionCatalogScanStarterTemplate,
   },
 ] satisfies readonly CategoryStarterTemplateDefinition[];

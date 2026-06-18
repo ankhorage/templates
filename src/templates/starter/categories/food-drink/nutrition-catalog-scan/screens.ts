@@ -95,7 +95,7 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
   return [
     createZoraNode(`${idPrefix}-products-search-field`, 'FormField', {
       label: 'Search products',
-      description: 'Search by product name, brand, barcode, or store chain.',
+      description: 'Search by product name, brand, barcode, or package label.',
     }),
     createZoraNode(`${idPrefix}-products-search-input`, 'Input', {
       placeholder: 'Search Migros, Coop, barcode...',
@@ -106,7 +106,7 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
       `${idPrefix}-products-grid-section`,
       {
         title: 'Products',
-        description: 'Available products in the shared challenge catalog.',
+        description: 'Available products in the shared nutrition catalog.',
       },
       [
         {
@@ -151,8 +151,8 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
     `${idPrefix}-capture-form-panel`,
     'Panel',
     {
-      title: 'Minimal capture form',
-      description: 'Prioritize fast in-store entry and useful challenge contributions.',
+      title: 'Direct product create form',
+      description: 'Create a product directly when barcode lookup does not find a match.',
       tone: 'subtle',
     },
     [
@@ -175,8 +175,24 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
         placeholder: 'Product name',
         size: 'm',
       }),
+      createZoraNode(`${idPrefix}-capture-brand-field`, 'FormField', {
+        label: 'Brand',
+        description: 'Optional product brand.',
+      }),
+      createZoraNode(`${idPrefix}-capture-brand-input`, 'Input', {
+        placeholder: 'Brand',
+        size: 'm',
+      }),
+      createZoraNode(`${idPrefix}-capture-package-label-field`, 'FormField', {
+        label: 'Package label',
+        description: 'Optional package text such as 500ml or 6 x 33cl.',
+      }),
+      createZoraNode(`${idPrefix}-capture-package-label-input`, 'Input', {
+        placeholder: '500ml',
+        size: 'm',
+      }),
       createZoraNode(`${idPrefix}-capture-submit-button`, 'Button', {
-        children: 'Submit and earn points',
+        children: 'Create product',
         color: 'primary',
         size: 'm',
         fullWidth: true,
@@ -220,12 +236,6 @@ export function createNutritionCatalogScanScreens(
       screenId: screenIds.profile,
       name: 'Profile',
       content: nutritionCatalogScanContent.profile,
-    }),
-    [screenIds.challenge]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.challenge,
-      name: 'Challenge',
-      content: nutritionCatalogScanContent.challenge,
     }),
     [screenIds.detail]: createContentScreen({
       idPrefix,
@@ -278,24 +288,24 @@ export function createNutritionCatalogScanScreens(
         createSettingsSection(
           `${idPrefix}-settings-api`,
           'API Gateway',
-          'Runtime product, scan, capture, challenge, and leaderboard data should go through the API Gateway.',
+          'Runtime nutrition product lookup and CRUD should go through the API Gateway.',
           [
             {
               id: 'base-url-row',
               title: 'API base URL',
-              description: 'Defaults to https://api-gateway.fabio-gartenmann.workers.dev.',
+              description: 'Defaults to https://api.ankhorage.com/v1/nutrition.',
               meta: 'runtime',
             },
             {
-              id: 'scan-events-row',
-              title: 'Scan events endpoint',
-              description: 'POST /v1/nutrition/scan-events records scanner progress.',
+              id: 'product-create-row',
+              title: 'Product create endpoint',
+              description: 'POST /v1/nutrition/products creates a product directly from the app.',
               meta: 'auth',
             },
             {
               id: 'client-row',
               title: 'Client defaults',
-              description: `${seed.appName} sends de-CH locale, CH country, platform, user id, and clientCapturedAt.`,
+              description: `${seed.appName} uses de-CH locale and normalizes barcode input before gateway lookup.`,
               meta: 'de-CH',
             },
           ],
