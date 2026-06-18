@@ -41,6 +41,7 @@ describe('nutrition domain data manifest', () => {
     expect(productCollection?.fields.map((field) => field.name)).toContain('packageLabel');
     expect(productCollection?.fields.map((field) => field.name)).toContain('nutritionFacts');
     expect(productCollection?.fields.map((field) => field.name)).toContain('imageRefs');
+    expect(productCollection?.fields.map((field) => field.name)).not.toContain('updatedByUserId');
     expect(products?.endpoints.map((endpoint) => endpoint.id)).toEqual([
       'listNutritionProducts',
       'getNutritionProductById',
@@ -48,6 +49,14 @@ describe('nutrition domain data manifest', () => {
       'createNutritionProduct',
       'updateNutritionProduct',
       'deleteNutritionProduct',
+    ]);
+    expect(products?.endpoints.map((endpoint) => endpoint.path)).toEqual([
+      '/',
+      '/:id',
+      '/by-barcode/:barcode',
+      '/',
+      '/:id',
+      '/:id',
     ]);
   });
 });

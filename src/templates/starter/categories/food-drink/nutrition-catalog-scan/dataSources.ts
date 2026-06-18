@@ -9,13 +9,30 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
       description: 'Runtime data-source bindings for nutrition product browsing, lookup, and CRUD.',
       baseUrl: 'https://api.ankhorage.com/v1/nutrition',
       endpoints: {
+        health: {
+          id: 'health',
+          kind: 'http',
+          path: '/health',
+          operations: {
+            'nutrition.health': {
+              id: 'nutrition.health',
+              endpointId: 'health',
+              name: 'Nutrition health',
+              description: 'Checks whether the nutrition API is available.',
+              protocol: 'http',
+              intent: 'read',
+              method: 'GET',
+              path: '/health',
+            },
+          },
+        },
         products: {
           id: 'products',
           kind: 'http',
           path: '/products',
           operations: {
-            'products.list': {
-              id: 'products.list',
+            'nutrition.products.list': {
+              id: 'nutrition.products.list',
               endpointId: 'products',
               name: 'List products',
               description: 'Lists catalog products for the products grid.',
@@ -24,8 +41,8 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               method: 'GET',
               path: '/products',
             },
-            'products.read': {
-              id: 'products.read',
+            'nutrition.products.getById': {
+              id: 'nutrition.products.getById',
               endpointId: 'products',
               name: 'Read product detail',
               description: 'Reads a single product detail entry by ID.',
@@ -34,8 +51,8 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               method: 'GET',
               path: '/products/:id',
             },
-            'products.lookupByBarcode': {
-              id: 'products.lookupByBarcode',
+            'nutrition.products.getByBarcode': {
+              id: 'nutrition.products.getByBarcode',
               endpointId: 'products',
               name: 'Lookup product by barcode',
               description: 'Looks up a product by scanned barcode.',
@@ -44,8 +61,8 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               method: 'GET',
               path: '/products/by-barcode/:barcode',
             },
-            'products.create': {
-              id: 'products.create',
+            'nutrition.products.create': {
+              id: 'nutrition.products.create',
               endpointId: 'products',
               name: 'Create nutrition product',
               description: 'Creates a product directly from the create screen.',
@@ -54,8 +71,8 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               method: 'POST',
               path: '/products',
             },
-            'products.update': {
-              id: 'products.update',
+            'nutrition.products.update': {
+              id: 'nutrition.products.update',
               endpointId: 'products',
               name: 'Update nutrition product',
               description: 'Updates an existing product by ID.',
@@ -64,8 +81,8 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
               method: 'PATCH',
               path: '/products/:id',
             },
-            'products.delete': {
-              id: 'products.delete',
+            'nutrition.products.delete': {
+              id: 'nutrition.products.delete',
               endpointId: 'products',
               name: 'Delete nutrition product',
               description: 'Soft deletes a product by ID.',

@@ -103,13 +103,14 @@ Additional variants:
 - `games/chess`: Home · Settings. The Home screen renders a `ChessBoard` node with a static
   initial FEN and requires generated apps to provide `@ankhorage/zora-chess` through their
   extension registry.
-- `food_drink/nutrition-catalog-scan`: Challenge · Products · Scan · Ranking · Profile. This
-  restricted Swiss scanner challenge starter uses `infra.auth.scope = "global"`, Supabase auth,
-  native RBAC, and an app-facing `profiles` table. The generated app should keep identity in
-  Supabase Auth, store leaderboard display fields in `profiles`, and send product, scan, capture,
-  challenge, and leaderboard data through the API Gateway. Native barcode scanning can use an app
-  camera adapter such as `expo-camera`, while visible scanner and permission UI should use ZORA
-  scanner primitives.
+- `food_drink/nutrition-catalog-scan`: Products · Scan · Stats · Profile. This restricted product
+  barcode nutrition scanner starter uses `infra.auth.scope = "global"`, Supabase auth, native
+  RBAC, and an app-facing `profiles` table. Generated apps should keep identity in Supabase Auth,
+  browse products through `GET /products`, look up barcodes through
+  `GET /products/by-barcode/:barcode`, create missing products through `POST /products`, and
+  handle duplicate barcode conflicts by opening the existing product id. Native barcode scanning
+  can use an app camera adapter such as `expo-camera`, while visible scanner and permission UI
+  should use ZORA scanner primitives.
 - `social_community/creator`: Studio · Posts · Audience · Insights · Settings
 
 Only categories that exist in `AppCategory` are registered. New category literals should be added

@@ -62,10 +62,27 @@ function assertManifestIntegrity(manifest: AppManifest) {
     expect(routeNames).toContain(initialRouteName);
   }
 
-  for (const route of manifest.navigator.routes) {
-    expect(route.screenId).toBeDefined();
-    expect(route.screenId ? manifest.screens[route.screenId] : undefined).toBeDefined();
-  }
+  const assertRoutes = (routes: AppManifest['navigator']['routes']) => {
+    for (const route of routes) {
+      if (route.screenId) {
+        expect(manifest.screens[route.screenId]).toBeDefined();
+      }
+
+      if (route.navigator) {
+        const nestedRouteNames = route.navigator.routes.map((nestedRoute) => nestedRoute.name);
+
+        if (route.navigator.initialRouteName) {
+          expect(nestedRouteNames).toContain(route.navigator.initialRouteName);
+        }
+
+        assertRoutes(route.navigator.routes);
+      } else {
+        expect(route.screenId).toBeDefined();
+      }
+    }
+  };
+
+  assertRoutes(manifest.navigator.routes);
 
   for (const screen of Object.values(manifest.screens)) {
     expect(screen.id).toBeTruthy();

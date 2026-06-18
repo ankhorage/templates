@@ -98,7 +98,7 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
       description: 'Search by product name, brand, barcode, or package label.',
     }),
     createZoraNode(`${idPrefix}-products-search-input`, 'Input', {
-      placeholder: 'Search Migros, Coop, barcode...',
+      placeholder: 'Search product name, brand, or barcode...',
       autoCapitalize: 'none',
       size: 'm',
     }),
@@ -118,7 +118,7 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
               operation: {
                 dataSourceId: 'nutrition-api',
                 endpointId: 'products',
-                operationId: 'products.list',
+                operationId: 'nutrition.products.list',
               },
             },
             itemAlias: 'item',
@@ -143,12 +143,87 @@ function createScanBody(idPrefix: string): ZoraNode[] {
       requestPermissionLabel: 'Allow camera access',
       manualEntryLabel: 'Enter barcode manually',
     }),
+    createZoraNode(`${idPrefix}-scan-lookup-notice`, 'Notice', {
+      title: 'Lookup behavior',
+      description:
+        'GET /products/by-barcode/:barcode opens product detail on 200, opens create with a prefilled barcode on 404, and should surface retry messaging for 400 or 503 responses.',
+    }),
   ];
 }
 
-function createCaptureFormPreview(idPrefix: string): ZoraNode {
+function createProductDetailBody(idPrefix: string): ZoraNode[] {
+  return [
+    createSection(
+      `${idPrefix}-detail-dto-section`,
+      {
+        title: 'Product DTO',
+        description: 'Display the current product API fields on the detail screen.',
+      },
+      [
+        createZoraNode(
+          `${idPrefix}-detail-summary-panel`,
+          'Panel',
+          {
+            title: 'Primary fields',
+            description:
+              'Name, brand, packageLabel, barcode, barcodeType, createdAt, and updatedAt come from GET /products/:id.',
+            tone: 'subtle',
+          },
+          [
+            createZoraNode(`${idPrefix}-detail-name-card`, 'Card', {
+              eyebrow: 'Required',
+              title: 'name',
+              description: 'The canonical product display name.',
+              tone: 'outline',
+            }),
+            createZoraNode(`${idPrefix}-detail-package-label-card`, 'Card', {
+              eyebrow: 'Optional',
+              title: 'packageLabel',
+              description: 'Human-readable package text such as 500ml or 6 x 33cl.',
+              tone: 'outline',
+            }),
+            createZoraNode(`${idPrefix}-detail-barcode-card`, 'Card', {
+              eyebrow: 'Barcode',
+              title: 'barcode and barcodeType',
+              description: 'Show the scanned barcode plus its normalized type.',
+              tone: 'outline',
+            }),
+          ],
+        ),
+        createZoraNode(
+          `${idPrefix}-detail-nutrition-panel`,
+          'Panel',
+          {
+            title: 'Structured nutrition',
+            description:
+              'Render nutritionFacts.basis with per-field values for energy, fat, carbohydrates, sugars, fiber, protein, and salt.',
+            tone: 'subtle',
+          },
+          [
+            createZoraNode(`${idPrefix}-detail-nutrition-card`, 'Card', {
+              eyebrow: 'nutritionFacts',
+              title:
+                'basis, energyKj, energyKcal, fatG, saturatedFatG, carbohydratesG, sugarsG, fiberG, proteinG, saltG',
+              description: 'These fields match the current NutritionFacts DTO exactly.',
+              tone: 'outline',
+            }),
+            createZoraNode(`${idPrefix}-detail-images-card`, 'Card', {
+              eyebrow: 'imageRefs',
+              title: 'Structured image refs',
+              description:
+                'Display uploaded image refs with bucket, path, kind, publicUrl, size, and uploader metadata when present.',
+              tone: 'outline',
+            }),
+          ],
+        ),
+      ],
+    ),
+  ];
+}
+
+function createProductFormPreview(idPrefix: string): ZoraNode {
   return createZoraNode(
-    `${idPrefix}-capture-form-panel`,
+    `${idPrefix}-create-form-panel`,
     'Panel',
     {
       title: 'Direct product create form',
@@ -156,46 +231,85 @@ function createCaptureFormPreview(idPrefix: string): ZoraNode {
       tone: 'subtle',
     },
     [
-      createZoraNode(`${idPrefix}-capture-barcode-field`, 'FormField', {
+      createZoraNode(`${idPrefix}-create-barcode-field`, 'FormField', {
         label: 'Barcode',
         description: 'Prefilled from scan or manual entry; normalized before API calls.',
         required: true,
       }),
-      createZoraNode(`${idPrefix}-capture-barcode-input`, 'Input', {
+      createZoraNode(`${idPrefix}-create-barcode-input`, 'Input', {
         placeholder: '7612345678901',
         keyboardType: 'number-pad',
         size: 'm',
       }),
-      createZoraNode(`${idPrefix}-capture-name-field`, 'FormField', {
+      createZoraNode(`${idPrefix}-create-name-field`, 'FormField', {
         label: 'Product name',
         description: 'Required by the minimal request.',
         required: true,
       }),
-      createZoraNode(`${idPrefix}-capture-name-input`, 'Input', {
+      createZoraNode(`${idPrefix}-create-name-input`, 'Input', {
         placeholder: 'Product name',
         size: 'm',
       }),
-      createZoraNode(`${idPrefix}-capture-brand-field`, 'FormField', {
+      createZoraNode(`${idPrefix}-create-brand-field`, 'FormField', {
         label: 'Brand',
         description: 'Optional product brand.',
       }),
-      createZoraNode(`${idPrefix}-capture-brand-input`, 'Input', {
+      createZoraNode(`${idPrefix}-create-brand-input`, 'Input', {
         placeholder: 'Brand',
         size: 'm',
       }),
-      createZoraNode(`${idPrefix}-capture-package-label-field`, 'FormField', {
+      createZoraNode(`${idPrefix}-create-package-label-field`, 'FormField', {
         label: 'Package label',
         description: 'Optional package text such as 500ml or 6 x 33cl.',
       }),
-      createZoraNode(`${idPrefix}-capture-package-label-input`, 'Input', {
+      createZoraNode(`${idPrefix}-create-package-label-input`, 'Input', {
         placeholder: '500ml',
         size: 'm',
       }),
-      createZoraNode(`${idPrefix}-capture-submit-button`, 'Button', {
+      createZoraNode(`${idPrefix}-create-nutrition-basis-field`, 'FormField', {
+        label: 'nutritionFacts.basis',
+        description: 'Use per_100g, per_100ml, or per_serving.',
+      }),
+      createZoraNode(`${idPrefix}-create-nutrition-basis-input`, 'Input', {
+        placeholder: 'per_100g',
+        autoCapitalize: 'none',
+        size: 'm',
+      }),
+      createZoraNode(`${idPrefix}-create-nutrition-facts-field`, 'FormField', {
+        label: 'nutritionFacts',
+        description:
+          'Structured numeric fields such as energyKcal, proteinG, carbohydratesG, sugarsG, fatG, and saltG.',
+      }),
+      createZoraNode(`${idPrefix}-create-nutrition-facts-input`, 'Input', {
+        placeholder: '{"energyKcal": 42, "proteinG": 3.4}',
+        autoCapitalize: 'none',
+        size: 'm',
+      }),
+      createZoraNode(`${idPrefix}-create-image-refs-field`, 'FormField', {
+        label: 'imageRefs',
+        description:
+          'Structured storage refs with bucket, path, kind, publicUrl, width, and height.',
+      }),
+      createZoraNode(`${idPrefix}-create-image-refs-input`, 'Input', {
+        placeholder: '[{"bucket":"nutrition","path":"products/front.jpg"}]',
+        autoCapitalize: 'none',
+        size: 'm',
+      }),
+      createZoraNode(`${idPrefix}-create-duplicate-notice`, 'Notice', {
+        title: 'Duplicate barcode handling',
+        description:
+          'If POST /products returns 409 with product.id, the generated binding opens the existing product instead of treating the conflict as fatal.',
+      }),
+      createZoraNode(`${idPrefix}-create-submit-button`, 'Button', {
         children: 'Create product',
         color: 'primary',
         size: 'm',
         fullWidth: true,
+      }),
+      createZoraNode(`${idPrefix}-create-error-notice`, 'Notice', {
+        title: 'Validation and availability',
+        description:
+          'The generated app should show inline validation for 400 responses and retry messaging when the backend is unavailable with 503.',
       }),
     ],
   );
@@ -225,11 +339,11 @@ export function createNutritionCatalogScanScreens(
         capabilities: [{ capability: 'barcodeScanner' }],
       },
     }),
-    [screenIds.leaderboard]: createContentScreen({
+    [screenIds.stats]: createContentScreen({
       idPrefix,
-      screenId: screenIds.leaderboard,
+      screenId: screenIds.stats,
       name: 'Stats',
-      content: nutritionCatalogScanContent.leaderboard,
+      content: nutritionCatalogScanContent.stats,
     }),
     [screenIds.profile]: createContentScreen({
       idPrefix,
@@ -242,25 +356,14 @@ export function createNutritionCatalogScanScreens(
       screenId: screenIds.detail,
       name: 'Product Detail',
       content: nutritionCatalogScanContent.detail,
+      body: createProductDetailBody(idPrefix),
     }),
-    [screenIds.capture]: createContentScreen({
+    [screenIds.create]: createContentScreen({
       idPrefix,
-      screenId: screenIds.capture,
+      screenId: screenIds.create,
       name: 'Create',
-      content: nutritionCatalogScanContent.capture,
-      body: [createCaptureFormPreview(idPrefix)],
-    }),
-    [screenIds.success]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.success,
-      name: 'Capture Success',
-      content: nutritionCatalogScanContent.success,
-    }),
-    [screenIds.queue]: createContentScreen({
-      idPrefix,
-      screenId: screenIds.queue,
-      name: 'Queue',
-      content: nutritionCatalogScanContent.queue,
+      content: nutritionCatalogScanContent.create,
+      body: [createProductFormPreview(idPrefix)],
     }),
     [screenIds.signIn]: createContentScreen({
       idPrefix,
@@ -287,8 +390,8 @@ export function createNutritionCatalogScanScreens(
         }),
         createSettingsSection(
           `${idPrefix}-settings-api`,
-          'API Gateway',
-          'Runtime nutrition product lookup and CRUD should go through the API Gateway.',
+          'Nutrition API',
+          'Runtime nutrition product lookup and CRUD should go through the nutrition API.',
           [
             {
               id: 'base-url-row',
@@ -297,15 +400,21 @@ export function createNutritionCatalogScanScreens(
               meta: 'runtime',
             },
             {
+              id: 'health-row',
+              title: 'Health check',
+              description: 'GET /health verifies that the nutrition backend is reachable.',
+              meta: 'health',
+            },
+            {
               id: 'product-create-row',
               title: 'Product create endpoint',
-              description: 'POST /v1/nutrition/products creates a product directly from the app.',
-              meta: 'auth',
+              description: 'POST /products creates a product directly from the app.',
+              meta: 'create',
             },
             {
               id: 'client-row',
               title: 'Client defaults',
-              description: `${seed.appName} uses de-CH locale and normalizes barcode input before gateway lookup.`,
+              description: `${seed.appName} uses de-CH locale and normalizes barcode input before nutrition API lookup.`,
               meta: 'de-CH',
             },
           ],

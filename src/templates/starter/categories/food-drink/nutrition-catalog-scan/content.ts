@@ -22,10 +22,10 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Signed-in nutrition catalog',
     title: 'Catalog products',
     description:
-      'Signed-in scanners browse the shared Swiss product catalog, scan barcodes, and create missing products directly through the gateway.',
+      'Signed-in scanners browse the shared Swiss product catalog, scan barcodes, and create missing products directly through the nutrition API.',
     sections: [
       {
-        title: 'Restricted catalog',
+        title: 'Product catalog',
         description:
           'The whole app is protected by global auth. Product browsing happens after sign-in.',
         cards: [
@@ -33,15 +33,15 @@ export const nutritionCatalogScanContent = {
             eyebrow: 'Known product',
             title: 'Bio Greek Yogurt 250 g',
             description:
-              'Example product card with brand, package label, barcode, and typed nutrition metadata.',
+              'Example product card with brand, package label, barcode, and nutritionFacts metadata.',
           },
           {
             eyebrow: 'Known product',
             title: 'Haferdrink Barista 1 l',
-            description: 'Products are read through the API Gateway, not directly from Supabase.',
+            description: 'Products are read through the nutrition API, not directly from Supabase.',
           },
           {
-            eyebrow: 'Contribution target',
+            eyebrow: 'Catalog growth',
             title: 'Missing supermarket products',
             description:
               'Missing barcodes can be turned into real products immediately from the create screen.',
@@ -57,13 +57,13 @@ export const nutritionCatalogScanContent = {
             eyebrow: 'Action',
             title: 'Scan barcode',
             description:
-              'Open the scanner, normalize barcode digits, and look up the product through the gateway.',
+              'Open the scanner, normalize barcode digits, and look up the product through the nutrition API.',
           },
           {
             eyebrow: 'Create path',
             title: 'Direct product creation',
             description:
-              'When a barcode is unknown, the app opens a direct product create form instead of a capture queue.',
+              'When a barcode is unknown, the app opens a direct product create form instead of any intermediate queue.',
           },
         ],
       },
@@ -73,22 +73,22 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Published product',
     title: 'Product detail',
     description:
-      'Show barcode, brand, package label, image refs, and nutrition facts from the API Gateway.',
+      'Show barcode, brand, packageLabel, imageRefs, and nutritionFacts from the nutrition API.',
     sections: [
       {
         title: 'Product summary',
-        description: 'A product detail screen for data returned by the API Gateway.',
+        description: 'A product detail screen for the current NutritionProduct DTO.',
         cards: [
           {
             eyebrow: 'Primary barcode',
-            title: '7612345678901 · EAN-13',
+            title: '7612345678901 · ean_13',
             description: 'Barcode values are normalized by removing non-digits before lookup.',
           },
           {
             eyebrow: 'Stable DTO',
-            title: 'Gateway-owned product shape',
+            title: 'Product-centric response shape',
             description:
-              'The detail payload exposes packageLabel, nutritionFacts, imageRefs, and soft-delete-safe product reads.',
+              'The detail payload exposes packageLabel, nutritionFacts, imageRefs, createdAt, updatedAt, and optional soft-delete metadata.',
           },
         ],
       },
@@ -115,13 +115,13 @@ export const nutritionCatalogScanContent = {
             eyebrow: 'Fallback',
             title: 'Manual barcode entry',
             description:
-              'Useful on web, simulator, denied camera permission, or damaged retail labels.',
+              'Manual entry should use the same lookup path as the scanner on web, simulator, denied camera permission, or damaged retail labels.',
           },
         ],
       },
       {
         title: 'Lookup branch',
-        description: 'After scanning, call GET /v1/nutrition/products/by-barcode/{barcode}.',
+        description: 'After scanning, call GET /products/by-barcode/:barcode.',
         cards: [
           {
             eyebrow: 'Found',
@@ -137,11 +137,11 @@ export const nutritionCatalogScanContent = {
       },
     ],
   },
-  capture: {
+  create: {
     eyebrow: 'Direct create flow',
     title: 'Create product',
     description:
-      'Collect the minimal data needed to create a nutrition product directly through the gateway.',
+      'Collect the minimal data needed to create a nutrition product directly through the nutrition API.',
     sections: [
       {
         title: 'Required fields',
@@ -149,24 +149,25 @@ export const nutritionCatalogScanContent = {
         cards: [
           {
             eyebrow: 'Product identity',
-            title: 'Barcode, name, brand',
+            title: 'barcode, name, brand',
             description: 'The barcode is prefilled from the scanner or manual input.',
           },
           {
             eyebrow: 'Packaging',
-            title: 'Package label',
+            title: 'packageLabel',
             description: 'Store package text such as 500ml, 1L, or 6 x 33cl.',
           },
           {
-            eyebrow: 'Photos placeholder',
-            title: 'Front, nutrition, ingredients, barcode',
-            description: 'Real image upload can be added later through typed imageRefs inputs.',
+            eyebrow: 'Structured data',
+            title: 'nutritionFacts and imageRefs',
+            description:
+              'Use the current DTO fields directly so create requests can match the live product contract.',
           },
         ],
       },
     ],
   },
-  leaderboard: {
+  stats: {
     eyebrow: 'Catalog progress',
     title: 'Stats',
     description:
@@ -174,7 +175,7 @@ export const nutritionCatalogScanContent = {
     sections: [
       {
         title: 'Suggested metrics',
-        description: 'This starter no longer assumes extra event or leaderboard APIs.',
+        description: 'This starter keeps metrics focused on the product catalog and scanner flow.',
         cards: [
           {
             eyebrow: 'Catalog',
@@ -193,7 +194,8 @@ export const nutritionCatalogScanContent = {
   profile: {
     eyebrow: 'Scanner profile',
     title: 'Profile',
-    description: 'Show signed-in scanner profile, stats, invite status, and sign-out action.',
+    description:
+      'Show signed-in scanner profile, catalog stats, invite status, and sign-out action.',
     sections: [
       {
         title: 'Profile data',
@@ -211,56 +213,6 @@ export const nutritionCatalogScanContent = {
             title: 'Catalog activity',
             description:
               'Aggregate product contributions and lookup activity from app-facing analytics.',
-          },
-        ],
-      },
-    ],
-  },
-  success: {
-    eyebrow: 'Product created',
-    title: 'Thanks - product created',
-    description:
-      'The API returns the created product directly, so the app can open detail or continue scanning immediately.',
-    sections: [
-      {
-        title: 'Next actions',
-        description: 'Keep contributors in the scan loop.',
-        cards: [
-          {
-            eyebrow: 'Continue',
-            title: 'Scan another product',
-            description: 'Return to the scan screen for fast in-store collection.',
-          },
-          {
-            eyebrow: 'Ranking',
-            title: 'Open product detail',
-            description:
-              'Show the freshly created product and let the scanner add more metadata later.',
-          },
-        ],
-      },
-    ],
-  },
-  queue: {
-    eyebrow: 'Offline-ready shell',
-    title: 'Create queue',
-    description:
-      'A simple local queue abstraction prepares the signed-in app for offline retry without losing direct-create field data.',
-    sections: [
-      {
-        title: 'Queue states',
-        description: 'Use ZORA cards and notices for pending, failed, and submitted items.',
-        cards: [
-          {
-            eyebrow: 'Pending',
-            title: 'Waiting for connection',
-            description:
-              'Create requests can be stored locally until the gateway is reachable again.',
-          },
-          {
-            eyebrow: 'Failed',
-            title: 'Retry required',
-            description: 'Keep failures visible instead of silently dropping scanner data.',
           },
         ],
       },
@@ -288,7 +240,7 @@ export const nutritionCatalogScanContent = {
   signUp: {
     eyebrow: 'Join scanner app',
     title: 'Create scanner account',
-    description: 'Create an account with display name and optional invite code before scanning.',
+    description: 'Create an account with display name before scanning.',
     sections: [
       {
         title: 'Profile creation',
@@ -308,7 +260,7 @@ export const nutritionCatalogScanContent = {
     eyebrow: 'Nutrition app settings',
     title: 'Settings',
     description:
-      'Configuration for API Gateway base URL, locale, profile table, and nutrition scanner auth.',
+      'Configuration for nutrition API base URL, locale, profile table, and nutrition scanner auth.',
     sections: [
       {
         title: 'Runtime configuration',
