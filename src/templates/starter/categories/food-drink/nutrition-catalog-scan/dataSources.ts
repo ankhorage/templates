@@ -7,7 +7,7 @@ export function createNutritionCatalogScanDataSources(): NonNullable<AppManifest
       kind: 'rest',
       name: 'Nutrition API',
       description: 'Runtime data-source bindings for product browsing, lookup, and creation.',
-      baseUrl: '/v1/nutrition',
+      baseUrl: 'https://api.ankhorage.com/v1/nutrition',
       endpoints: {
         products: {
           id: 'products',
