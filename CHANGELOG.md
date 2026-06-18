@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.8.1
+
+### Patch Changes
+
+- e3e2208: Rewrite the nutrition catalog scan starter to render catalog products through generic repeated product-card bindings backed by `products.list`.
+
 ## 1.8.0
 
 ### Minor Changes
