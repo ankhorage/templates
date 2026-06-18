@@ -146,7 +146,6 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       templateId: 'nutrition-catalog-scan',
     });
     const visibleRoutes = manifest.navigator.routes.filter((route) => route.hideInTabBar !== true);
-    const rootRoute = findTopLevelRouteByName(manifest.navigator.routes, 'index');
     const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
     const productsStack = productsRoute?.navigator;
 
@@ -162,9 +161,6 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       'stats',
       'profile',
     ]);
-    expect(rootRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-catalog');
-    expect(rootRoute?.hideInTabBar).toBe(true);
-    expect(rootRoute?.name).toBe('index');
     expect(manifest.navigator.initialRouteName).toBe('products');
     expect(productsRoute?.screenId).toBeUndefined();
     expect(productsStack?.type).toBe('stack');
@@ -527,14 +523,12 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
-    const rootRoute = findTopLevelRouteByName(manifest.navigator.routes, 'index');
     const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
     const productsStack = productsRoute?.navigator;
     const detailRoute = productsStack?.routes.find((route) => route.name === '[id]');
     const createRoute = productsStack?.routes.find((route) => route.name === 'create');
 
-    expect(rootRoute?.path).toBe('/');
-    expect(rootRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-catalog');
+    expect(manifest.navigator.routes.some((route) => route.path === '/')).toBe(false);
     expect(manifest.navigator.initialRouteName).toBe('products');
     expect(productsRoute?.name).toBe('products');
     expect(productsStack?.initialRouteName).toBe('index');

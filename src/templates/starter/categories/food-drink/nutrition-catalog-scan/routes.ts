@@ -38,12 +38,6 @@ export function createNutritionCatalogScanNavigator(
     initialRouteName: 'products',
     routes: [
       createRoute({
-        name: 'index',
-        path: '/',
-        screenId: screenIds.catalog,
-        hideInTabBar: true,
-      }),
-      createRoute({
         name: 'products',
         label: 'Products',
         icon: { provider: 'material-community', name: 'package-variant-closed' },
