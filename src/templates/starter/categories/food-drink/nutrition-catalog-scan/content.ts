@@ -26,7 +26,8 @@ export const nutritionCatalogScanContent = {
     sections: [
       {
         title: 'Restricted catalog',
-        description: 'The whole app is protected by global auth. Product browsing happens after sign-in.',
+        description:
+          'The whole app is protected by global auth. Product browsing happens after sign-in.',
         cards: [
           {
             eyebrow: 'Known product',
@@ -125,14 +126,12 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Found',
             title: 'Open product detail',
-            description:
-              'A known barcode opens the product detail screen.',
+            description: 'A known barcode opens the product detail screen.',
           },
           {
             eyebrow: 'Unknown',
             title: 'Create product',
-            description:
-              'A missing barcode opens the direct product create form.',
+            description: 'A missing barcode opens the direct product create form.',
           },
         ],
       },
@@ -201,7 +200,8 @@ export const nutritionCatalogScanContent = {
   leaderboard: {
     eyebrow: 'Catalog progress',
     title: 'Stats',
-    description: 'Use this screen for catalog growth, scan throughput, and contributor-facing nutrition app metrics.',
+    description:
+      'Use this screen for catalog growth, scan throughput, and contributor-facing nutrition app metrics.',
     sections: [
       {
         title: 'Suggested metrics',
@@ -210,8 +210,7 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Catalog',
             title: 'Products added',
-            description:
-              'Track how many products were created or enriched through the app.',
+            description: 'Track how many products were created or enriched through the app.',
           },
           {
             eyebrow: 'Quality',
@@ -241,7 +240,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Stats',
             title: 'Catalog activity',
-            description: 'Aggregate product contributions and lookup activity from app-facing analytics.',
+            description:
+              'Aggregate product contributions and lookup activity from app-facing analytics.',
           },
         ],
       },
@@ -265,7 +265,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Ranking',
             title: 'Open product detail',
-            description: 'Show the freshly created product and let the scanner add more metadata later.',
+            description:
+              'Show the freshly created product and let the scanner add more metadata later.',
           },
         ],
       },
@@ -284,7 +285,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Pending',
             title: 'Waiting for connection',
-            description: 'Create requests can be stored locally until the gateway is reachable again.',
+            description:
+              'Create requests can be stored locally until the gateway is reachable again.',
           },
           {
             eyebrow: 'Failed',
@@ -307,7 +309,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Auth provider',
             title: 'Supabase Auth',
-            description: 'Email sign-in is the default identity flow for generated nutrition scanner apps.',
+            description:
+              'Email sign-in is the default identity flow for generated nutrition scanner apps.',
           },
         ],
       },
@@ -325,7 +328,8 @@ export const nutritionCatalogScanContent = {
           {
             eyebrow: 'Required fields',
             title: 'Email, password, display name',
-            description: 'The profile table stores display name and avatar for shared catalog attribution.',
+            description:
+              'The profile table stores display name and avatar for shared catalog attribution.',
           },
         ],
       },
