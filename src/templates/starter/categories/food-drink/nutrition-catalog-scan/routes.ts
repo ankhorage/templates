@@ -35,13 +35,12 @@ export function createNutritionCatalogScanNavigator(
 ): AppManifest['navigator'] {
   return {
     type: 'tabs',
-    initialRouteName: 'products',
+    initialRouteName: 'index',
     routes: [
       createRoute({
         name: 'index',
         path: '/',
         screenId: screenIds.catalog,
-        label: 'Products',
         hideInTabBar: true,
       }),
       createRoute({
