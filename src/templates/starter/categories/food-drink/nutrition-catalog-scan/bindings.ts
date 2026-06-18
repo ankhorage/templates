@@ -6,41 +6,38 @@ const productLookupOperation = {
   operationId: 'products.lookupByBarcode',
 } as const satisfies BindingOperationRef;
 
-interface ProductPreview {
-  readonly productId: string;
-  readonly title: string;
-  readonly brand: string;
-  readonly description: string;
-}
-
-const yogurtPreview: ProductPreview = {
-  productId: 'bio-greek-yogurt-250g',
-  title: 'Bio Greek Yogurt 250 g',
-  brand: 'Migros',
-  description: '7612345678901 · confidence 92%',
-};
-
-const oatDrinkPreview: ProductPreview = {
-  productId: 'haferdrink-barista-1l',
-  title: 'Haferdrink Barista 1 l',
-  brand: 'Coop',
-  description: '7612345678918 · confidence 88%',
-};
-
-const missingProductPreview: ProductPreview = {
-  productId: 'missing-supermarket-product',
-  title: 'Missing supermarket product',
-  brand: 'Contribution target',
-  description: 'Scan a missing barcode to add a product proposal and earn points.',
-};
-
 function createProductCardBinding(args: {
   readonly componentId: string;
-  readonly fallback: ProductPreview;
 }): NonNullable<AppManifest['dataBindings']>[string] {
   return {
     componentId: args.componentId,
     componentType: 'ProductCard',
+    props: {
+      title: {
+        source: {
+          kind: 'context',
+          path: 'item.name',
+        },
+      },
+      brand: {
+        source: {
+          kind: 'context',
+          path: 'item.brand',
+        },
+      },
+      subtitle: {
+        source: {
+          kind: 'context',
+          path: 'item.quantity',
+        },
+      },
+      description: {
+        source: {
+          kind: 'context',
+          path: 'item.barcode',
+        },
+      },
+    },
     events: {
       press: [
         {
@@ -57,8 +54,11 @@ function createProductCardBinding(args: {
               kind: 'object',
               fields: {
                 id: {
-                  kind: 'literal',
-                  value: args.fallback.productId,
+                  kind: 'source',
+                  source: {
+                    kind: 'context',
+                    path: 'item.id',
+                  },
                 },
               },
             },
@@ -197,17 +197,8 @@ export function createNutritionCatalogScanBindings(
         ],
       },
     },
-    [`${idPrefix}-product-card-yogurt`]: createProductCardBinding({
-      componentId: `${idPrefix}-product-card-yogurt`,
-      fallback: yogurtPreview,
-    }),
-    [`${idPrefix}-product-card-oat-drink`]: createProductCardBinding({
-      componentId: `${idPrefix}-product-card-oat-drink`,
-      fallback: oatDrinkPreview,
-    }),
-    [`${idPrefix}-product-card-missing`]: createProductCardBinding({
-      componentId: `${idPrefix}-product-card-missing`,
-      fallback: missingProductPreview,
+    [`${idPrefix}-product-card-template`]: createProductCardBinding({
+      componentId: `${idPrefix}-product-card-template`,
     }),
   };
 }

@@ -109,23 +109,23 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
         description: 'Available products in the shared challenge catalog.',
       },
       [
-        createZoraNode(`${idPrefix}-products-grid`, 'Grid', undefined, [
-          createZoraNode(`${idPrefix}-product-card-yogurt`, 'ProductCard', {
-            title: 'Bio Greek Yogurt 250 g',
-            brand: 'Migros',
-            description: '7612345678901 · confidence 92%',
-          }),
-          createZoraNode(`${idPrefix}-product-card-oat-drink`, 'ProductCard', {
-            title: 'Haferdrink Barista 1 l',
-            brand: 'Coop',
-            description: '7612345678918 · confidence 88%',
-          }),
-          createZoraNode(`${idPrefix}-product-card-missing`, 'ProductCard', {
-            title: 'Missing supermarket product',
-            brand: 'Contribution target',
-            description: 'Scan a missing barcode to add a product proposal and earn points.',
-          }),
-        ]),
+        {
+          id: `${idPrefix}-products-grid`,
+          type: 'Grid',
+          repeat: {
+            source: {
+              kind: 'operation',
+              operation: {
+                dataSourceId: 'nutrition-api',
+                endpointId: 'products',
+                operationId: 'products.list',
+              },
+            },
+            itemAlias: 'item',
+            keyPath: 'id',
+          },
+          children: [createZoraNode(`${idPrefix}-product-card-template`, 'ProductCard')],
+        },
       ],
     ),
   ];

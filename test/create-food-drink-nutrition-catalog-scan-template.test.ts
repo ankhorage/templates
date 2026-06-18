@@ -36,6 +36,21 @@ function findNodeById(node: UiNode, id: string): UiNode | undefined {
   return undefined;
 }
 
+function findNodeByType(node: UiNode, type: string): UiNode | undefined {
+  if (node.type === type) {
+    return node;
+  }
+
+  for (const child of node.children ?? []) {
+    const match = findNodeByType(child, type);
+    if (match) {
+      return match;
+    }
+  }
+
+  return undefined;
+}
+
 function createFoodDrinkSeed(): TemplateSeed {
   const preset = CATEGORY_PRESETS.food_drink;
 
@@ -142,20 +157,43 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     });
   });
 
-  test('renders product grid and direct ZORA barcode scanner nodes', () => {
+  test('renders product grid with a repeated product-card template and direct ZORA barcode scanner node', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
     const roots = Object.values(manifest.screens).map((screen) => screen.root);
     const nodeTypes = roots.flatMap(collectNodeTypes);
     const nodeText = roots.flatMap(collectNodeText).join('\n');
+    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'index');
+    const catalogScreen = catalogRoute?.screenId
+      ? manifest.screens[catalogRoute.screenId]
+      : undefined;
+    const productsGrid = catalogScreen
+      ? findNodeById(catalogScreen.root, 'food_drink-nutrition-catalog-scan-products-grid')
+      : undefined;
+    const productCardChildren =
+      productsGrid?.children?.filter((child) => child.type === 'ProductCard') ?? [];
 
     expect(nodeTypes).toContain('Grid');
     expect(nodeTypes).toContain('ProductCard');
     expect(nodeTypes).toContain('BarcodeScannerView');
-    expect(nodeText).toContain('Bio Greek Yogurt 250 g');
-    expect(nodeText).toContain('Haferdrink Barista 1 l');
     expect(nodeText).toContain('Scan product barcode');
+    expect(productsGrid?.repeat).toEqual({
+      source: {
+        kind: 'operation',
+        operation: {
+          dataSourceId: 'nutrition-api',
+          endpointId: 'products',
+          operationId: 'products.list',
+        },
+      },
+      itemAlias: 'item',
+      keyPath: 'id',
+    });
+    expect(productCardChildren).toHaveLength(1);
+    expect(productCardChildren[0]?.id).toBe(
+      'food_drink-nutrition-catalog-scan-product-card-template',
+    );
   });
 
   test('removes opaque scanner props and emits scanner navigation bindings', () => {
@@ -201,11 +239,37 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       templateId: 'nutrition-catalog-scan',
     });
     const productCardBindings =
-      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-product-card-yogurt'];
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-product-card-template'];
     const dataSource = manifest.dataSources?.['nutrition-api'];
     const productsEndpoint = dataSource?.endpoints.products;
+    const catalogRoute = manifest.navigator.routes.find((route) => route.name === 'index');
+    const catalogScreen = catalogRoute?.screenId
+      ? manifest.screens[catalogRoute.screenId]
+      : undefined;
+    const productsGrid = catalogScreen
+      ? findNodeById(catalogScreen.root, 'food_drink-nutrition-catalog-scan-products-grid')
+      : undefined;
+    const repeatedCardTemplate = productsGrid
+      ? findNodeByType(productsGrid, 'ProductCard')
+      : undefined;
 
     expect(productCardBindings?.componentType).toBe('ProductCard');
+    expect(productCardBindings?.props?.title?.source).toEqual({
+      kind: 'context',
+      path: 'item.name',
+    });
+    expect(productCardBindings?.props?.brand?.source).toEqual({
+      kind: 'context',
+      path: 'item.brand',
+    });
+    expect(productCardBindings?.props?.subtitle?.source).toEqual({
+      kind: 'context',
+      path: 'item.quantity',
+    });
+    expect(productCardBindings?.props?.description?.source).toEqual({
+      kind: 'context',
+      path: 'item.barcode',
+    });
     expect(productCardBindings?.events?.press?.[0]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/[id]',
@@ -214,11 +278,25 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       kind: 'object',
       fields: {
         id: {
-          kind: 'literal',
-          value: 'bio-greek-yogurt-250g',
+          kind: 'source',
+          source: {
+            kind: 'context',
+            path: 'item.id',
+          },
         },
       },
     });
+    expect(productsGrid?.repeat?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'products.list',
+      },
+    });
+    expect(repeatedCardTemplate?.id).toBe(
+      'food_drink-nutrition-catalog-scan-product-card-template',
+    );
     expect(dataSource?.kind).toBe('rest');
     expect(productsEndpoint).toBeDefined();
 
