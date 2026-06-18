@@ -107,7 +107,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
 
     expect(manifest.metadata.name).toBe('Nutrition Scan');
     expect(manifest.navigator.type).toBe('tabs');
-    expect(manifest.navigator.initialRouteName).toBe('index');
+    expect(manifest.navigator.initialRouteName).toBe('products');
     expect(manifest.infra.auth).toEqual({
       scope: 'global',
       provider: 'supabase',
@@ -165,7 +165,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(rootRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-catalog');
     expect(rootRoute?.hideInTabBar).toBe(true);
     expect(rootRoute?.name).toBe('index');
-    expect(manifest.navigator.initialRouteName).toBe('index');
+    expect(manifest.navigator.initialRouteName).toBe('products');
     expect(productsRoute?.screenId).toBeUndefined();
     expect(productsStack?.type).toBe('stack');
     expect(productsStack?.initialRouteName).toBe('index');
@@ -535,7 +535,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
 
     expect(rootRoute?.path).toBe('/');
     expect(rootRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-catalog');
-    expect(manifest.navigator.initialRouteName).toBe('index');
+    expect(manifest.navigator.initialRouteName).toBe('products');
     expect(productsRoute?.name).toBe('products');
     expect(productsStack?.initialRouteName).toBe('index');
     expect(productsStack?.routes.find((route) => route.name === 'index')?.screenId).toBe(

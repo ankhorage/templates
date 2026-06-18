@@ -35,7 +35,7 @@ export function createNutritionCatalogScanNavigator(
 ): AppManifest['navigator'] {
   return {
     type: 'tabs',
-    initialRouteName: 'index',
+    initialRouteName: 'products',
     routes: [
       createRoute({
         name: 'index',
