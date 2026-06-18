@@ -1,5 +1,5 @@
 ---
-"@ankhorage/templates": patch
+'@ankhorage/templates': patch
 ---
 
 Align the nutrition scanner starter with the cleaned product-centric nutrition API.

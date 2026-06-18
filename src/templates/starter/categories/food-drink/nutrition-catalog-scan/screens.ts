@@ -202,7 +202,8 @@ function createProductDetailBody(idPrefix: string): ZoraNode[] {
           [
             createZoraNode(`${idPrefix}-detail-nutrition-card`, 'Card', {
               eyebrow: 'nutritionFacts',
-              title: 'basis, energyKj, energyKcal, fatG, saturatedFatG, carbohydratesG, sugarsG, fiberG, proteinG, saltG',
+              title:
+                'basis, energyKj, energyKcal, fatG, saturatedFatG, carbohydratesG, sugarsG, fiberG, proteinG, saltG',
               description: 'These fields match the current NutritionFacts DTO exactly.',
               tone: 'outline',
             }),

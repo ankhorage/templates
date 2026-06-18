@@ -194,7 +194,8 @@ export const nutritionCatalogScanContent = {
   profile: {
     eyebrow: 'Scanner profile',
     title: 'Profile',
-    description: 'Show signed-in scanner profile, catalog stats, invite status, and sign-out action.',
+    description:
+      'Show signed-in scanner profile, catalog stats, invite status, and sign-out action.',
     sections: [
       {
         title: 'Profile data',

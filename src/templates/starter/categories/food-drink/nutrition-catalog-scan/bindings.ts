@@ -75,9 +75,7 @@ function createProductCardBinding(args: {
   };
 }
 
-function createLookupNavigationBindings(
-  barcodeSourcePath: string,
-): readonly EventBinding[] {
+function createLookupNavigationBindings(barcodeSourcePath: string): readonly EventBinding[] {
   return [
     {
       target: {
@@ -171,9 +169,9 @@ function createLookupNavigationBindings(
   ];
 }
 
-function createProductCreateBinding(componentId: string): NonNullable<
-  AppManifest['dataBindings']
->[string] {
+function createProductCreateBinding(
+  componentId: string,
+): NonNullable<AppManifest['dataBindings']>[string] {
   return {
     componentId,
     componentType: 'Button',
