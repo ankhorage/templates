@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.8.2
+
+### Patch Changes
+
+- 14e32f8: Fix wrong nutrition api baseUrl
+
 ## 1.8.1
 
 ### Patch Changes
