@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 1.8.6
+
+### Patch Changes
+
+- Release trigger
+- c0966db: Release Trigger
+
 ## 1.8.5
 
 ### Patch Changes
