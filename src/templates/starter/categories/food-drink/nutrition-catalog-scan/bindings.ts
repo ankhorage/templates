@@ -28,7 +28,7 @@ function createProductCardBinding(args: {
       subtitle: {
         source: {
           kind: 'context',
-          path: 'item.quantity',
+          path: 'item.packageLabel',
         },
       },
       description: {
