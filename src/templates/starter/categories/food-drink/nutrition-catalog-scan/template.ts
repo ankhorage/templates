@@ -39,7 +39,7 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
           signInRoute: 'sign-in',
           signUpRoute: 'sign-up',
           signOutRoute: 'sign-out',
-          postSignInRoute: 'products',
+          postSignInRoute: '/products',
           unauthorizedRoute: 'sign-in',
         },
         signIn: {
@@ -64,7 +64,7 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
         signInRoute: 'sign-in',
         signUpRoute: 'sign-up',
         signOutRoute: 'sign-out',
-        postSignInRoute: 'products',
+        postSignInRoute: '/products',
         unauthorizedRoute: 'sign-in',
       },
     },

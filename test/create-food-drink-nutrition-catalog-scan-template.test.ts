@@ -51,40 +51,25 @@ function findNodeByType(node: UiNode, type: string): UiNode | undefined {
   return undefined;
 }
 
-function findRouteByName(
+function findTopLevelRouteByName(
   routes: readonly {
     name: string;
-    navigator?: { routes: readonly { name: string }[] };
+    path?: string;
+    screenId?: string;
+    hideInTabBar?: boolean;
+    navigator?: {
+      type: string;
+      initialRouteName?: string;
+      routes: readonly {
+        name: string;
+        screenId?: string;
+        hideInTabBar?: boolean;
+      }[];
+    };
   }[],
   name: string,
-):
-  | {
-      name: string;
-      screenId?: string;
-      hideInTabBar?: boolean;
-      navigator?: {
-        type: string;
-        initialRouteName?: string;
-        routes: readonly {
-          name: string;
-          screenId?: string;
-          hideInTabBar?: boolean;
-        }[];
-      };
-    }
-  | undefined {
-  for (const route of routes) {
-    if (route.name === name) {
-      return route as ReturnType<typeof findRouteByName>;
-    }
-
-    const nestedMatch = route.navigator ? findRouteByName(route.navigator.routes, name) : undefined;
-    if (nestedMatch !== undefined) {
-      return nestedMatch;
-    }
-  }
-
-  return undefined;
+) {
+  return routes.find((route) => route.name === name);
 }
 
 function createFoodDrinkSeed(): TemplateSeed {
@@ -134,7 +119,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         signInRoute: 'sign-in',
         signUpRoute: 'sign-up',
         signOutRoute: 'sign-out',
-        postSignInRoute: 'products',
+        postSignInRoute: '/products',
         unauthorizedRoute: 'sign-in',
       },
       signIn: {
@@ -152,15 +137,17 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         updateStrategy: 'api',
       },
     });
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('products');
+    expect(manifest.settings.authFlow.postSignInRoute).toBe('/products');
+    expect(manifest.settings.authFlow.postSignInRoute).not.toContain('products/products');
   });
 
-  test('creates useful tabs for products, scan, stats, and profile', () => {
+  test('creates useful tabs plus a stack-safe products flow', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
     const visibleRoutes = manifest.navigator.routes.filter((route) => route.hideInTabBar !== true);
-    const productsRoute = manifest.navigator.routes.find((route) => route.name === 'products');
+    const rootRoute = findTopLevelRouteByName(manifest.navigator.routes, 'index');
+    const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
     const productsStack = productsRoute?.navigator;
 
     expect(visibleRoutes.map((route) => route.label)).toEqual([
@@ -175,27 +162,28 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       'stats',
       'profile',
     ]);
+    expect(rootRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-catalog');
+    expect(rootRoute?.hideInTabBar).toBe(true);
+    expect(rootRoute?.name).toBe('index');
     expect(productsRoute?.screenId).toBeUndefined();
     expect(productsStack?.type).toBe('stack');
-    expect(productsStack?.initialRouteName).toBe('/products');
-    expect(productsStack?.routes.map((route) => route.name)).toEqual([
-      '/products',
-      '/products/[id]',
-      '/products/create',
-    ]);
+    expect(productsStack?.initialRouteName).toBe('index');
+    expect(productsStack?.routes.map((route) => route.name)).toEqual(['index', '[id]', 'create']);
     expect(manifest.navigator.routes.find((route) => route.name === 'scan')?.icon).toEqual({
       provider: 'material-community',
       name: 'barcode-scan',
     });
-    expect(productsStack?.routes.find((route) => route.name === '/products')?.screenId).toBe(
+    expect(productsStack?.routes.find((route) => route.name === 'index')?.screenId).toBe(
       'food_drink-nutrition-catalog-scan-catalog',
     );
-    expect(
-      productsStack?.routes.find((route) => route.name === '/products/[id]')?.hideInTabBar,
-    ).toBe(true);
-    expect(
-      productsStack?.routes.find((route) => route.name === '/products/create')?.hideInTabBar,
-    ).toBe(true);
+    expect(productsStack?.routes.find((route) => route.name === '[id]')?.screenId).toBe(
+      'food_drink-nutrition-catalog-scan-detail',
+    );
+    expect(productsStack?.routes.find((route) => route.name === 'create')?.screenId).toBe(
+      'food_drink-nutrition-catalog-scan-create',
+    );
+    expect(productsStack?.routes.find((route) => route.name === '[id]')?.hideInTabBar).toBe(true);
+    expect(productsStack?.routes.find((route) => route.name === 'create')?.hideInTabBar).toBe(true);
   });
 
   test('declares scanner runtime requirements on the scan screen', () => {
@@ -218,7 +206,8 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const roots = Object.values(manifest.screens).map((screen) => screen.root);
     const nodeTypes = roots.flatMap(collectNodeTypes);
     const nodeText = roots.flatMap(collectNodeText).join('\n');
-    const catalogRoute = findRouteByName(manifest.navigator.routes, '/products');
+    const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
+    const catalogRoute = productsRoute?.navigator?.routes.find((route) => route.name === 'index');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;
@@ -388,7 +377,8 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const dataSource = manifest.dataSources?.['nutrition-api'];
     const healthEndpoint = dataSource?.endpoints.health;
     const productsEndpoint = dataSource?.endpoints.products;
-    const catalogRoute = findRouteByName(manifest.navigator.routes, '/products');
+    const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
+    const catalogRoute = productsRoute?.navigator?.routes.find((route) => route.name === 'index');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;
@@ -530,5 +520,33 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(json).not.toContain('review queue');
     expect(json).not.toContain('confidence');
     expect(json).not.toContain('-capture');
+  });
+
+  test('keeps web route smoke paths stable for root, products, detail, and create', () => {
+    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const rootRoute = findTopLevelRouteByName(manifest.navigator.routes, 'index');
+    const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
+    const productsStack = productsRoute?.navigator;
+    const detailRoute = productsStack?.routes.find((route) => route.name === '[id]');
+    const createRoute = productsStack?.routes.find((route) => route.name === 'create');
+
+    expect(rootRoute?.path).toBe('/');
+    expect(rootRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-catalog');
+    expect(productsRoute?.name).toBe('products');
+    expect(productsStack?.initialRouteName).toBe('index');
+    expect(productsStack?.routes.find((route) => route.name === 'index')?.screenId).toBe(
+      'food_drink-nutrition-catalog-scan-catalog',
+    );
+    expect(manifest.settings.authFlow.postSignInRoute).toBe('/products');
+    expect(manifest.settings.authFlow.postSignInRoute).not.toContain('products/products');
+    expect(productsRoute?.navigator?.routes.map((route) => route.name)).toEqual([
+      'index',
+      '[id]',
+      'create',
+    ]);
+    expect(detailRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-detail');
+    expect(createRoute?.screenId).toBe('food_drink-nutrition-catalog-scan-create');
   });
 });
