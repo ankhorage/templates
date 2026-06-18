@@ -109,7 +109,7 @@ function createLookupNavigationBindings(barcodeSourcePath: string): readonly Eve
         source: {
           kind: 'operation',
           operation: productLookupOperation,
-          path: 'id',
+          path: 'product.id',
         },
         operator: 'exists',
       },
@@ -126,7 +126,7 @@ function createLookupNavigationBindings(barcodeSourcePath: string): readonly Eve
               source: {
                 kind: 'operation',
                 operation: productLookupOperation,
-                path: 'id',
+                path: 'product.id',
               },
             },
           },
@@ -142,7 +142,7 @@ function createLookupNavigationBindings(barcodeSourcePath: string): readonly Eve
         source: {
           kind: 'operation',
           operation: productLookupOperation,
-          path: 'id',
+          path: 'product.id',
         },
         operator: 'notExists',
       },
@@ -227,39 +227,6 @@ function createProductCreateBinding(
               source: {
                 kind: 'state',
                 path: 'forms.products.create.imageRefs',
-              },
-            },
-          },
-        },
-        {
-          target: {
-            kind: 'action',
-            type: 'navigate',
-          },
-          when: {
-            source: {
-              kind: 'operation',
-              operation: productCreateOperation,
-              path: 'id',
-            },
-            operator: 'exists',
-          },
-          input: {
-            route: {
-              kind: 'literal',
-              value: '/products/[id]',
-            },
-            params: {
-              kind: 'object',
-              fields: {
-                id: {
-                  kind: 'source',
-                  source: {
-                    kind: 'operation',
-                    operation: productCreateOperation,
-                    path: 'id',
-                  },
-                },
               },
             },
           },

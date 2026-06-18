@@ -230,9 +230,44 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       kind: 'literal',
       value: '/products/[id]',
     });
+    expect(scannerBindings?.barcodeScanned?.[1]?.when?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getByBarcode',
+      },
+      path: 'product.id',
+    });
+    expect(scannerBindings?.barcodeScanned?.[1]?.input?.params).toEqual({
+      kind: 'object',
+      fields: {
+        id: {
+          kind: 'source',
+          source: {
+            kind: 'operation',
+            operation: {
+              dataSourceId: 'nutrition-api',
+              endpointId: 'products',
+              operationId: 'nutrition.products.getByBarcode',
+            },
+            path: 'product.id',
+          },
+        },
+      },
+    });
     expect(scannerBindings?.barcodeScanned?.[2]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/create',
+    });
+    expect(scannerBindings?.barcodeScanned?.[2]?.when?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getByBarcode',
+      },
+      path: 'product.id',
     });
     expect(scannerBindings?.manualEntry).toHaveLength(3);
     expect(scannerBindings?.manualEntry?.[0]?.target).toEqual({
@@ -247,9 +282,44 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       kind: 'literal',
       value: '/products/[id]',
     });
+    expect(scannerBindings?.manualEntry?.[1]?.when?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getByBarcode',
+      },
+      path: 'product.id',
+    });
+    expect(scannerBindings?.manualEntry?.[1]?.input?.params).toEqual({
+      kind: 'object',
+      fields: {
+        id: {
+          kind: 'source',
+          source: {
+            kind: 'operation',
+            operation: {
+              dataSourceId: 'nutrition-api',
+              endpointId: 'products',
+              operationId: 'nutrition.products.getByBarcode',
+            },
+            path: 'product.id',
+          },
+        },
+      },
+    });
     expect(scannerBindings?.manualEntry?.[2]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/create',
+    });
+    expect(scannerBindings?.manualEntry?.[2]?.when?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getByBarcode',
+      },
+      path: 'product.id',
     });
   });
 
@@ -339,11 +409,13 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         path: 'forms.products.create.imageRefs',
       },
     });
+    expect(createButtonBindings?.events?.press).toHaveLength(2);
     expect(createButtonBindings?.events?.press?.[1]?.input?.route).toEqual({
       kind: 'literal',
       value: '/products/[id]',
     });
-    expect(createButtonBindings?.events?.press?.[2]?.when?.source).toEqual({
+    expect(createButtonBindings?.events?.press?.[2]).toBeUndefined();
+    expect(createButtonBindings?.events?.press?.[1]?.when?.source).toEqual({
       kind: 'operation',
       operation: {
         dataSourceId: 'nutrition-api',
@@ -351,6 +423,23 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         operationId: 'nutrition.products.create',
       },
       path: 'product.id',
+    });
+    expect(createButtonBindings?.events?.press?.[1]?.input?.params).toEqual({
+      kind: 'object',
+      fields: {
+        id: {
+          kind: 'source',
+          source: {
+            kind: 'operation',
+            operation: {
+              dataSourceId: 'nutrition-api',
+              endpointId: 'products',
+              operationId: 'nutrition.products.create',
+            },
+            path: 'product.id',
+          },
+        },
+      },
     });
 
     expect(dataSource?.kind).toBe('rest');
