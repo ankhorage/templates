@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.8.8
+
+### Patch Changes
+
+- 0336efe: Remove the nutrition scanner starter's hidden root fallback route and make the visible products tab the top-level initial route. Root `/` startup remains generator-owned while the authenticated landing path stays `/products`.
+
 ## 1.8.7
 
 ### Patch Changes
