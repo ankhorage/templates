@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.8.9
+
+### Patch Changes
+
+- 8114302: Update the nutrition catalog scan starter to use a generic product detail screen loader, preserve wrapped product list repeats, and render a runtime-driven empty state for successful empty product lists.
+
 ## 1.8.8
 
 ### Patch Changes
