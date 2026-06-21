@@ -31,12 +31,19 @@ interface ScreenContent {
   readonly sections: readonly SectionContent[];
 }
 
+const productDetailLoaderOperation = {
+  dataSourceId: 'nutrition-api',
+  endpointId: 'products',
+  operationId: 'nutrition.products.getById',
+} as const;
+
 function createContentScreen(args: {
   readonly idPrefix: string;
   readonly screenId: string;
   readonly name: string;
   readonly content: ScreenContent;
   readonly body?: readonly ZoraNode[];
+  readonly dataLoaders?: AppManifest['screens'][string]['dataLoaders'];
   readonly requires?: AppManifest['screens'][string]['requires'];
 }): AppManifest['screens'][string] {
   const idSegment = args.name.toLowerCase().replaceAll(' ', '-');
@@ -55,6 +62,7 @@ function createContentScreen(args: {
       }),
       ...body,
     ]),
+    dataLoaders: args.dataLoaders,
     requires: args.requires,
   });
 }
@@ -91,6 +99,18 @@ function createSectionCards(
   );
 }
 
+function createDetailValueCard(args: {
+  readonly id: string;
+  readonly label: string;
+  readonly placeholder: string;
+}): ZoraNode {
+  return createZoraNode(args.id, 'Card', {
+    eyebrow: args.label,
+    title: args.placeholder,
+    tone: 'outline',
+  });
+}
+
 function createProductsBody(idPrefix: string): ZoraNode[] {
   return [
     createZoraNode(`${idPrefix}-products-search-field`, 'FormField', {
@@ -120,9 +140,16 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
                 endpointId: 'products',
                 operationId: 'nutrition.products.list',
               },
+              path: 'products',
             },
             itemAlias: 'item',
             keyPath: 'id',
+            empty: [
+              createZoraNode(`${idPrefix}-products-empty-state`, 'Notice', {
+                title: 'No products found',
+                description: 'Scan a barcode or create a product to start building the catalog.',
+              }),
+            ],
           },
           children: [createZoraNode(`${idPrefix}-product-card-template`, 'ProductCard')],
         },
@@ -154,68 +181,155 @@ function createScanBody(idPrefix: string): ZoraNode[] {
 function createProductDetailBody(idPrefix: string): ZoraNode[] {
   return [
     createSection(
-      `${idPrefix}-detail-dto-section`,
+      `${idPrefix}-detail-summary-section`,
       {
-        title: 'Product DTO',
-        description: 'Display the current product API fields on the detail screen.',
+        title: 'Product details',
+        description: 'Loaded from the nutrition API using the current route param product ID.',
       },
       [
-        createZoraNode(
-          `${idPrefix}-detail-summary-panel`,
-          'Panel',
-          {
-            title: 'Primary fields',
-            description:
-              'Name, brand, packageLabel, barcode, barcodeType, createdAt, and updatedAt come from GET /products/:id.',
+        createDetailValueCard({
+          id: `${idPrefix}-detail-name-value`,
+          label: 'Name',
+          placeholder: 'Loading name...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-brand-value`,
+          label: 'Brand',
+          placeholder: 'Loading brand...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-package-label-value`,
+          label: 'Package label',
+          placeholder: 'Loading package label...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-barcode-value`,
+          label: 'Barcode',
+          placeholder: 'Loading barcode...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-barcode-type-value`,
+          label: 'Barcode type',
+          placeholder: 'Loading barcode type...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-created-at-value`,
+          label: 'Created at',
+          placeholder: 'Loading created timestamp...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-updated-at-value`,
+          label: 'Updated at',
+          placeholder: 'Loading updated timestamp...',
+        }),
+      ],
+    ),
+    createSection(
+      `${idPrefix}-detail-nutrition-section`,
+      {
+        title: 'Nutrition facts',
+        description: 'Synchronous bindings read the cached product nutrition facts fields.',
+      },
+      [
+        createDetailValueCard({
+          id: `${idPrefix}-detail-nutrition-basis-value`,
+          label: 'Basis',
+          placeholder: 'Loading basis...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-energy-kj-value`,
+          label: 'Energy (kJ)',
+          placeholder: 'Loading energy...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-energy-kcal-value`,
+          label: 'Energy (kcal)',
+          placeholder: 'Loading energy...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-fat-g-value`,
+          label: 'Fat (g)',
+          placeholder: 'Loading fat...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-saturated-fat-g-value`,
+          label: 'Saturated fat (g)',
+          placeholder: 'Loading saturated fat...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-carbohydrates-g-value`,
+          label: 'Carbohydrates (g)',
+          placeholder: 'Loading carbohydrates...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-sugars-g-value`,
+          label: 'Sugars (g)',
+          placeholder: 'Loading sugars...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-fiber-g-value`,
+          label: 'Fiber (g)',
+          placeholder: 'Loading fiber...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-protein-g-value`,
+          label: 'Protein (g)',
+          placeholder: 'Loading protein...',
+        }),
+        createDetailValueCard({
+          id: `${idPrefix}-detail-salt-g-value`,
+          label: 'Salt (g)',
+          placeholder: 'Loading salt...',
+        }),
+      ],
+    ),
+    createSection(
+      `${idPrefix}-detail-images-section`,
+      {
+        title: 'Image refs',
+        description: 'Cached product image refs render synchronously from the loader result.',
+      },
+      [
+        {
+          id: `${idPrefix}-detail-image-ref-list`,
+          type: 'Panel',
+          props: {
+            title: 'Product images',
+            description: 'Each block reflects one image ref from product.imageRefs.',
             tone: 'subtle',
           },
-          [
-            createZoraNode(`${idPrefix}-detail-name-card`, 'Card', {
-              eyebrow: 'Required',
-              title: 'name',
-              description: 'The canonical product display name.',
-              tone: 'outline',
-            }),
-            createZoraNode(`${idPrefix}-detail-package-label-card`, 'Card', {
-              eyebrow: 'Optional',
-              title: 'packageLabel',
-              description: 'Human-readable package text such as 500ml or 6 x 33cl.',
-              tone: 'outline',
-            }),
-            createZoraNode(`${idPrefix}-detail-barcode-card`, 'Card', {
-              eyebrow: 'Barcode',
-              title: 'barcode and barcodeType',
-              description: 'Show the scanned barcode plus its normalized type.',
-              tone: 'outline',
-            }),
-          ],
-        ),
-        createZoraNode(
-          `${idPrefix}-detail-nutrition-panel`,
-          'Panel',
-          {
-            title: 'Structured nutrition',
-            description:
-              'Render nutritionFacts.basis with per-field values for energy, fat, carbohydrates, sugars, fiber, protein, and salt.',
-            tone: 'subtle',
+          repeat: {
+            source: {
+              kind: 'operation',
+              operation: productDetailLoaderOperation,
+              path: 'product.imageRefs',
+            },
+            itemAlias: 'imageRef',
+            keyPath: 'path',
           },
-          [
-            createZoraNode(`${idPrefix}-detail-nutrition-card`, 'Card', {
-              eyebrow: 'nutritionFacts',
-              title:
-                'basis, energyKj, energyKcal, fatG, saturatedFatG, carbohydratesG, sugarsG, fiberG, proteinG, saltG',
-              description: 'These fields match the current NutritionFacts DTO exactly.',
-              tone: 'outline',
+          children: [
+            createDetailValueCard({
+              id: `${idPrefix}-detail-image-ref-kind-value`,
+              label: 'Kind',
+              placeholder: 'Loading image kind...',
             }),
-            createZoraNode(`${idPrefix}-detail-images-card`, 'Card', {
-              eyebrow: 'imageRefs',
-              title: 'Structured image refs',
-              description:
-                'Display uploaded image refs with bucket, path, kind, publicUrl, size, and uploader metadata when present.',
-              tone: 'outline',
+            createDetailValueCard({
+              id: `${idPrefix}-detail-image-ref-bucket-value`,
+              label: 'Bucket',
+              placeholder: 'Loading bucket...',
+            }),
+            createDetailValueCard({
+              id: `${idPrefix}-detail-image-ref-path-value`,
+              label: 'Path',
+              placeholder: 'Loading path...',
+            }),
+            createDetailValueCard({
+              id: `${idPrefix}-detail-image-ref-public-url-value`,
+              label: 'Public URL',
+              placeholder: 'Loading image URL...',
             }),
           ],
-        ),
+        },
       ],
     ),
   ];
@@ -357,6 +471,22 @@ export function createNutritionCatalogScanScreens(
       name: 'Product Detail',
       content: nutritionCatalogScanContent.detail,
       body: createProductDetailBody(idPrefix),
+      dataLoaders: [
+        {
+          kind: 'operation',
+          id: 'product-detail',
+          operation: productDetailLoaderOperation,
+          input: {
+            id: {
+              kind: 'source',
+              source: {
+                kind: 'context',
+                path: 'route.params.id',
+              },
+            },
+          },
+        },
+      ],
     }),
     [screenIds.create]: createContentScreen({
       idPrefix,
