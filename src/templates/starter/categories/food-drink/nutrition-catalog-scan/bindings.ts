@@ -12,6 +12,12 @@ const productCreateOperation = {
   operationId: 'nutrition.products.create',
 } as const satisfies BindingOperationRef;
 
+const productDetailOperation = {
+  dataSourceId: 'nutrition-api',
+  endpointId: 'products',
+  operationId: 'nutrition.products.getById',
+} as const satisfies BindingOperationRef;
+
 function createProductCardBinding(args: {
   readonly componentId: string;
 }): NonNullable<AppManifest['dataBindings']>[string] {
@@ -269,6 +275,43 @@ function createProductCreateBinding(
   };
 }
 
+function createDetailTextBinding(args: {
+  readonly componentId: string;
+  readonly path: string;
+}): NonNullable<AppManifest['dataBindings']>[string] {
+  return {
+    componentId: args.componentId,
+    componentType: 'Card',
+    props: {
+      title: {
+        source: {
+          kind: 'operation',
+          operation: productDetailOperation,
+          path: args.path,
+        },
+      },
+    },
+  };
+}
+
+function createImageRefTextBinding(args: {
+  readonly componentId: string;
+  readonly path: string;
+}): NonNullable<AppManifest['dataBindings']>[string] {
+  return {
+    componentId: args.componentId,
+    componentType: 'Card',
+    props: {
+      title: {
+        source: {
+          kind: 'context',
+          path: `imageRef.${args.path}`,
+        },
+      },
+    },
+  };
+}
+
 export function createNutritionCatalogScanBindings(
   idPrefix: string,
 ): NonNullable<AppManifest['dataBindings']> {
@@ -286,6 +329,90 @@ export function createNutritionCatalogScanBindings(
     ),
     [`${idPrefix}-product-card-template`]: createProductCardBinding({
       componentId: `${idPrefix}-product-card-template`,
+    }),
+    [`${idPrefix}-detail-name-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-name-value`,
+      path: 'product.name',
+    }),
+    [`${idPrefix}-detail-brand-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-brand-value`,
+      path: 'product.brand',
+    }),
+    [`${idPrefix}-detail-package-label-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-package-label-value`,
+      path: 'product.packageLabel',
+    }),
+    [`${idPrefix}-detail-barcode-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-barcode-value`,
+      path: 'product.barcode',
+    }),
+    [`${idPrefix}-detail-barcode-type-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-barcode-type-value`,
+      path: 'product.barcodeType',
+    }),
+    [`${idPrefix}-detail-created-at-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-created-at-value`,
+      path: 'product.createdAt',
+    }),
+    [`${idPrefix}-detail-updated-at-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-updated-at-value`,
+      path: 'product.updatedAt',
+    }),
+    [`${idPrefix}-detail-nutrition-basis-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-nutrition-basis-value`,
+      path: 'product.nutritionFacts.basis',
+    }),
+    [`${idPrefix}-detail-energy-kj-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-energy-kj-value`,
+      path: 'product.nutritionFacts.energyKj',
+    }),
+    [`${idPrefix}-detail-energy-kcal-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-energy-kcal-value`,
+      path: 'product.nutritionFacts.energyKcal',
+    }),
+    [`${idPrefix}-detail-fat-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-fat-g-value`,
+      path: 'product.nutritionFacts.fatG',
+    }),
+    [`${idPrefix}-detail-saturated-fat-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-saturated-fat-g-value`,
+      path: 'product.nutritionFacts.saturatedFatG',
+    }),
+    [`${idPrefix}-detail-carbohydrates-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-carbohydrates-g-value`,
+      path: 'product.nutritionFacts.carbohydratesG',
+    }),
+    [`${idPrefix}-detail-sugars-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-sugars-g-value`,
+      path: 'product.nutritionFacts.sugarsG',
+    }),
+    [`${idPrefix}-detail-fiber-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-fiber-g-value`,
+      path: 'product.nutritionFacts.fiberG',
+    }),
+    [`${idPrefix}-detail-protein-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-protein-g-value`,
+      path: 'product.nutritionFacts.proteinG',
+    }),
+    [`${idPrefix}-detail-salt-g-value`]: createDetailTextBinding({
+      componentId: `${idPrefix}-detail-salt-g-value`,
+      path: 'product.nutritionFacts.saltG',
+    }),
+    [`${idPrefix}-detail-image-ref-kind-value`]: createImageRefTextBinding({
+      componentId: `${idPrefix}-detail-image-ref-kind-value`,
+      path: 'kind',
+    }),
+    [`${idPrefix}-detail-image-ref-bucket-value`]: createImageRefTextBinding({
+      componentId: `${idPrefix}-detail-image-ref-bucket-value`,
+      path: 'bucket',
+    }),
+    [`${idPrefix}-detail-image-ref-path-value`]: createImageRefTextBinding({
+      componentId: `${idPrefix}-detail-image-ref-path-value`,
+      path: 'path',
+    }),
+    [`${idPrefix}-detail-image-ref-public-url-value`]: createImageRefTextBinding({
+      componentId: `${idPrefix}-detail-image-ref-public-url-value`,
+      path: 'publicUrl',
     }),
   };
 }

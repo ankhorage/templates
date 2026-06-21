@@ -196,7 +196,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     });
   });
 
-  test('renders product grid, scanner, notices, and DTO detail guidance', () => {
+  test('renders product grid, scanner, notices, and detail loader wiring', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
@@ -205,11 +205,16 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const nodeText = roots.flatMap(collectNodeText).join('\n');
     const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
     const catalogRoute = productsRoute?.navigator?.routes.find((route) => route.name === 'index');
+    const detailRoute = productsRoute?.navigator?.routes.find((route) => route.name === '[id]');
     const catalogScreen = catalogRoute?.screenId
       ? manifest.screens[catalogRoute.screenId]
       : undefined;
+    const detailScreen = detailRoute?.screenId ? manifest.screens[detailRoute.screenId] : undefined;
     const productsGrid = catalogScreen
       ? findNodeById(catalogScreen.root, 'food_drink-nutrition-catalog-scan-products-grid')
+      : undefined;
+    const detailImageRefList = detailScreen
+      ? findNodeById(detailScreen.root, 'food_drink-nutrition-catalog-scan-detail-image-ref-list')
       : undefined;
     const productCardChildren =
       productsGrid?.children?.filter((child) => child.type === 'ProductCard') ?? [];
@@ -220,10 +225,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(nodeTypes).toContain('Notice');
     expect(nodeTypes).toContain('Button');
     expect(nodeText).toContain('Scan product barcode');
-    expect(nodeText).toContain('nutritionFacts');
-    expect(nodeText).toContain('imageRefs');
-    expect(nodeText).toContain('packageLabel');
-    expect(nodeText).not.toContain('updatedByUserId');
+    expect(nodeText).toContain('Product details');
+    expect(nodeText).toContain('Nutrition facts');
+    expect(nodeText).toContain('Image refs');
     expect(productsGrid?.repeat).toEqual({
       source: {
         kind: 'operation',
@@ -232,14 +236,54 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
           endpointId: 'products',
           operationId: 'nutrition.products.list',
         },
+        path: 'products',
       },
       itemAlias: 'item',
       keyPath: 'id',
+      empty: [
+        {
+          id: 'food_drink-nutrition-catalog-scan-products-empty-state',
+          type: 'Notice',
+          props: {
+            title: 'No products found',
+            description: 'Scan a barcode or create a product to start building the catalog.',
+          },
+        },
+      ],
     });
     expect(productCardChildren).toHaveLength(1);
     expect(productCardChildren[0]?.id).toBe(
       'food_drink-nutrition-catalog-scan-product-card-template',
     );
+    expect(detailScreen?.dataLoaders).toEqual([
+      {
+        kind: 'operation',
+        id: 'product-detail',
+        operation: {
+          dataSourceId: 'nutrition-api',
+          endpointId: 'products',
+          operationId: 'nutrition.products.getById',
+        },
+        input: {
+          id: {
+            kind: 'source',
+            source: {
+              kind: 'context',
+              path: 'route.params.id',
+            },
+          },
+        },
+      },
+    ]);
+    expect(detailImageRefList?.repeat?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getById',
+      },
+      path: 'product.imageRefs',
+    });
   });
 
   test('emits scanner lookup bindings for camera scans and manual barcode entry', () => {
@@ -371,6 +415,14 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       manifest.dataBindings?.['food_drink-nutrition-catalog-scan-product-card-template'];
     const createButtonBindings =
       manifest.dataBindings?.['food_drink-nutrition-catalog-scan-create-submit-button'];
+    const detailNameBindings =
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-detail-name-value'];
+    const detailNutritionBasisBindings =
+      manifest.dataBindings?.['food_drink-nutrition-catalog-scan-detail-nutrition-basis-value'];
+    const detailImageRefBindings =
+      manifest.dataBindings?.[
+        'food_drink-nutrition-catalog-scan-detail-image-ref-public-url-value'
+      ];
     const dataSource = manifest.dataSources?.['nutrition-api'];
     const healthEndpoint = dataSource?.endpoints.health;
     const productsEndpoint = dataSource?.endpoints.products;
@@ -407,6 +459,18 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       kind: 'literal',
       value: '/products/[id]',
     });
+    expect(productCardBindings?.events?.press?.[0]?.input?.params).toEqual({
+      kind: 'object',
+      fields: {
+        id: {
+          kind: 'source',
+          source: {
+            kind: 'context',
+            path: 'item.id',
+          },
+        },
+      },
+    });
     expect(productsGrid?.repeat?.source).toEqual({
       kind: 'operation',
       operation: {
@@ -414,10 +478,33 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'nutrition.products.list',
       },
+      path: 'products',
     });
     expect(repeatedCardTemplate?.id).toBe(
       'food_drink-nutrition-catalog-scan-product-card-template',
     );
+    expect(detailNameBindings?.props?.title?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getById',
+      },
+      path: 'product.name',
+    });
+    expect(detailNutritionBasisBindings?.props?.title?.source).toEqual({
+      kind: 'operation',
+      operation: {
+        dataSourceId: 'nutrition-api',
+        endpointId: 'products',
+        operationId: 'nutrition.products.getById',
+      },
+      path: 'product.nutritionFacts.basis',
+    });
+    expect(detailImageRefBindings?.props?.title?.source).toEqual({
+      kind: 'context',
+      path: 'imageRef.publicUrl',
+    });
 
     expect(createButtonBindings?.componentType).toBe('Button');
     expect(createButtonBindings?.events?.press?.[0]?.target).toEqual({
