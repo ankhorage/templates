@@ -24,24 +24,41 @@ describe('templates commands', () => {
     const capture = createCapturedContext();
 
     const result = await runCommand('list', [], capture.context);
+    const output = capture.readStdout();
 
     expect(result.exitCode).toBe(0);
-    expect(capture.readStdout()).toContain('Available templates:');
-    expect(capture.readStdout()).toContain('fallback/default');
-    expect(capture.readStdout()).toContain('games/default');
-    expect(capture.readStdout()).toContain('games/chess');
-    expect(capture.readStdout()).toContain('social_community/creator');
+    expect(output).toContain('Available templates:');
+    expect(output).toContain(
+      'fallback/default - Generic starter: The original Home, Details, and Settings starter manifest.',
+    );
+    expect(output).toContain(
+      'games/default - Quest loop: A home, quests, inventory, friends, and profile starter for game experiences.',
+    );
+    expect(output).toContain(
+      'games/chess - Chess: A two-tab chess starter with Home and Settings screens.',
+    );
+    expect(output).toContain(
+      'social_community/creator - Creator social: A studio, posts, audience, insights, and settings starter for creator apps.',
+    );
   });
 
   test('lists templates by category', async () => {
     const capture = createCapturedContext();
 
     const result = await runCommand('list', ['--category', 'games'], capture.context);
+    const output = capture.readStdout();
 
     expect(result.exitCode).toBe(0);
-    expect(capture.readStdout()).toContain('games/default');
-    expect(capture.readStdout()).toContain('games/chess');
-    expect(capture.readStdout()).not.toContain('social_community/creator');
+    expect(output).toContain(
+      'games/default - Quest loop: A home, quests, inventory, friends, and profile starter for game experiences.',
+    );
+    expect(output).toContain(
+      'games/chess - Chess: A two-tab chess starter with Home and Settings screens.',
+    );
+    expect(output).toContain(
+      'games/poker - Card trainer: A two-tab card-game trainer starter with a tabletop scenario view.',
+    );
+    expect(output).not.toContain('social_community/creator');
   });
 
   test('inspects one canonical selector', async () => {

@@ -321,7 +321,9 @@ function parseCreateArguments(argv: readonly string[]): {
 }
 
 function renderTemplateList(entries: readonly TemplateCatalogEntry[]): string {
-  const lines = entries.map((entry) => `  ${entry.selector} - ${entry.label}`);
+  const lines = entries.map(
+    (entry) => `  ${entry.selector} - ${entry.label}: ${entry.description}`,
+  );
 
   return ['Available templates:', '', ...lines, ''].join('\n');
 }
