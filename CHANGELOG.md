@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.9.0
+
+### Minor Changes
+
+- 18fd9d2: Add Ankh provider metadata, standalone CLI commands, and manifest-first template seed creation.
+
 ## 1.8.9
 
 ### Patch Changes
