@@ -1,8 +1,4 @@
-import type {
-  AnkhCapabilityId,
-  AnkhCommandCategory,
-  AnkhPackageMetadata,
-} from '@ankhorage/contracts/cli';
+import type { AnkhCapabilityId, AnkhCommandCategory } from '@ankhorage/contracts/cli';
 
 import packageJson from '../package.json';
 
@@ -14,9 +10,3 @@ export const TEMPLATES_CAPABILITIES = [
   'templates.inspect',
   'templates.create',
 ] as const satisfies readonly AnkhCapabilityId[];
-
-export const TEMPLATES_PACKAGE_METADATA = {
-  category: TEMPLATES_COMMAND_CATEGORY,
-  provider: './dist/ankh.provider.js',
-  capabilities: TEMPLATES_CAPABILITIES,
-} as const satisfies AnkhPackageMetadata;

@@ -53,7 +53,7 @@ export interface TemplatesCommandInvocation {
   readonly context: TemplatesCommandContext;
 }
 
-export interface TemplatesCommandServices {
+interface TemplatesCommandServices {
   readonly createManifestForSelector: typeof createManifestForSelector;
   readonly createProjectSeed: (
     request: CreateProjectSeedRequest,

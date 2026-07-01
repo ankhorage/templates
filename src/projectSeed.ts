@@ -5,7 +5,7 @@ import type { AppManifest } from '@ankhorage/contracts';
 
 import type { StarterTemplateCategory } from './templates/starter/index.js';
 
-export interface TemplateSeedMetadata {
+interface TemplateSeedMetadata {
   readonly package: string;
   readonly version: string;
   readonly projectSlug: string;
