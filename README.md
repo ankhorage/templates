@@ -2,6 +2,45 @@
 
 Reusable Ankhorage app templates, presets, and manifest generators.
 
+## CLI And Provider Commands
+
+`@ankhorage/templates` is now also a package-scoped Ankh provider and standalone CLI for the
+template catalog.
+
+Shipped commands:
+
+```bash
+ankh templates list
+ankh templates list --category games
+
+ankh templates inspect games/chess
+
+ankh templates create my-app --template games/chess
+
+bunx @ankhorage/templates list
+bunx @ankhorage/templates inspect games/chess
+bunx @ankhorage/templates create my-app --template games/chess
+```
+
+Canonical selector syntax is strict:
+
+- use `<category>/<templateId>`
+- examples: `games/default`, `games/chess`, `social_community/creator`
+- `create` and `inspect` reject bare ids like `chess`
+- CLI/provider commands do not silently fall back from invalid selectors
+
+`create` is manifest-first only in this package. It writes:
+
+```txt
+my-app/
+  ankh.config.json
+  ankh.template.json
+  README.md
+```
+
+It does not scaffold a full runnable app/workspace, install dependencies, or depend on Studio.
+Root-level `ankh create ...` remains a later composition concern outside this package.
+
 ## Usage
 
 ```ts
