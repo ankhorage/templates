@@ -6,13 +6,13 @@ import {
   type RunTemplatesCommandImpl,
   type RunTemplatesCommandOptions,
   TEMPLATES_COMMANDS,
-} from './commands.js';
+} from '../commands.js';
 import {
   TEMPLATES_CAPABILITIES,
   TEMPLATES_COMMAND_CATEGORY,
   TEMPLATES_PACKAGE_NAME,
   TEMPLATES_PACKAGE_VERSION,
-} from './packageMetadata.js';
+} from '../packageMetadata.js';
 
 export interface CreateTemplatesRuntimeProviderOptions extends Omit<
   RunTemplatesCommandOptions,

@@ -7,7 +7,7 @@ describe('package metadata', () => {
   test('publishes the expected Ankh metadata and bin entry', () => {
     const expectedAnkhMetadata = {
       category: 'templates',
-      provider: './dist/ankh.provider.js',
+      provider: './dist/cli/index.js',
       capabilities: ['templates.list', 'templates.inspect', 'templates.create'],
     } as const satisfies AnkhPackageMetadata;
 
@@ -20,6 +20,10 @@ describe('package metadata', () => {
       '.': {
         types: './dist/index.d.ts',
         import: './dist/index.js',
+      },
+      './cli': {
+        types: './dist/cli/index.d.ts',
+        import: './dist/cli/index.js',
       },
       './package.json': './package.json',
     });
