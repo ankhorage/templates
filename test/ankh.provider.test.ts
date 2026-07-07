@@ -5,7 +5,7 @@ import type {
 } from '@ankhorage/ankh';
 import { describe, expect, mock, test } from 'bun:test';
 
-import provider, { createTemplatesRuntimeProvider } from '../src/ankh.provider.js';
+import provider, { createTemplatesRuntimeProvider } from '../src/cli/index.js';
 import {
   createProviderCommandDescriptors,
   type RunTemplatesCommandImpl,
@@ -153,7 +153,7 @@ function createExecutionRequest(args: {
         source: 'workspace',
         metadata: {
           category: args.category,
-          provider: './dist/ankh.provider.js',
+          provider: './dist/cli/index.js',
           capabilities: [...TEMPLATES_CAPABILITIES],
         },
       },
@@ -164,8 +164,8 @@ function createExecutionRequest(args: {
         capabilities: [...TEMPLATES_CAPABILITIES],
         commands: createProviderCommandDescriptors(),
       },
-      providerModulePath: '/tmp/dist/ankh.provider.js',
-      providerModuleUrl: 'file:///tmp/dist/ankh.provider.js',
+      providerModulePath: '/tmp/dist/cli/index.js',
+      providerModuleUrl: 'file:///tmp/dist/cli/index.js',
       providerModuleDefaultExport: provider,
     },
     context: args.context,
