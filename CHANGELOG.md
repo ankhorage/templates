@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.9.1
+
+### Patch Changes
+
+- 82d0247: Release package entry changes.
+
 ## 1.9.0
 
 ### Minor Changes
