@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 1.9.2
+
+### Patch Changes
+
+- 6dd2cec: Move the standalone executable into the canonical `src/cli/` folder while keeping the provider export at `src/cli/index.ts`.
+
 ## 1.9.1
 
 ### Patch Changes
