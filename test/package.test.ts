@@ -14,7 +14,7 @@ describe('package metadata', () => {
     expect(packageJson.name).toBe('@ankhorage/templates');
     expect(packageJson.type).toBe('module');
     expect(packageJson.bin).toEqual({
-      'ankhorage-templates': './dist/cli.js',
+      'ankhorage-templates': './dist/cli/standalone.js',
     });
     expect(packageJson.exports).toEqual({
       '.': {
