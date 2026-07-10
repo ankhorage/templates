@@ -1,7 +1,7 @@
 #!/usr/bin/env bun
 
-import type { TemplatesCommandContext, TemplatesCommandRunResult } from './commandContext.js';
-import { createDefaultCommandContext } from './commandContext.js';
+import type { TemplatesCommandContext, TemplatesCommandRunResult } from '../commandContext.js';
+import { createDefaultCommandContext } from '../commandContext.js';
 import {
   findTemplatesCommandByStandaloneName,
   renderRootHelp,
@@ -9,7 +9,7 @@ import {
   runTemplatesCommand,
   type RunTemplatesCommandImpl,
   type RunTemplatesCommandOptions,
-} from './commands.js';
+} from '../commands.js';
 
 export interface TemplatesCliOptions extends Omit<RunTemplatesCommandOptions, 'runCommandImpl'> {
   readonly context?: TemplatesCommandContext;

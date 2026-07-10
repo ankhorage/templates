@@ -1,7 +1,7 @@
 import { describe, expect, mock, test } from 'bun:test';
 
 import packageJson from '../package.json';
-import { runCli } from '../src/cli.js';
+import { runCli } from '../src/cli/standalone.js';
 import type { RunTemplatesCommandImpl } from '../src/commands.js';
 import { createCapturedContext } from './testSupport.js';
 
