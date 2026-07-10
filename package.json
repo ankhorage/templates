@@ -44,7 +44,7 @@
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "bin": {
-    "ankhorage-templates": "./dist/cli.js"
+    "ankhorage-templates": "./dist/cli/standalone.js"
   },
   "ankh": {
     "category": "templates",
