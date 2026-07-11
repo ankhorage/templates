@@ -1,4 +1,4 @@
-import { DEFAULT_AUTH_FLOW, type AppManifest, type InfraManifest } from '@ankhorage/contracts';
+import { type AppManifest, DEFAULT_AUTH_FLOW, type InfraManifest } from '@ankhorage/contracts';
 
 export const DEFAULT_TEMPLATE_VERSION = '1.0.0';
 export const DEFAULT_THEME_ID = 'default';

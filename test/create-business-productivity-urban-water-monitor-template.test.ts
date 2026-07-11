@@ -62,7 +62,8 @@ describe('business_productivity/urban-water-monitor starter', () => {
 
     expect(manifest.navigator.type).toBe('tabs');
     expect(manifest.navigator.initialRouteName).toBe('index');
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
+    expect(manifest.infra.auth?.flow?.postSignInRoute).toBe('index');
+    expect(manifest.settings).not.toHaveProperty('authFlow');
     expect(manifest.navigator.routes).toHaveLength(1);
     expect(Object.keys(manifest.screens)).toHaveLength(1);
     expect(manifest.navigator.routes[0]).toMatchObject({

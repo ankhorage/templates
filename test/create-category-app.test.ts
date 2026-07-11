@@ -187,10 +187,14 @@ describe('createCategoryAppManifest', () => {
 
       expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
 
-      expect(manifest.settings.authFlow.signInRoute).toBe('sign-in');
-      expect(manifest.settings.authFlow.signUpRoute).toBe('sign-up');
-      expect(manifest.settings.authFlow.signOutRoute).toBe('sign-out');
-      expect(manifest.settings.authFlow.postSignInRoute).toBe('index');
+      expect(manifest.infra.auth?.flow).toMatchObject({
+        signInRoute: 'sign-in',
+        signUpRoute: 'sign-up',
+        signOutRoute: 'sign-out',
+        postSignInRoute: '/',
+      });
+      expect(manifest.infra.auth?.authorization).toBeUndefined();
+      expect(manifest.settings).not.toHaveProperty('authFlow');
       expect(manifest.infra.auth?.scope).toBe('global');
       expect(manifest.infra.storage).toEqual({
         provider: 'auto',

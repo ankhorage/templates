@@ -111,10 +111,6 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(manifest.infra.auth).toEqual({
       scope: 'global',
       provider: 'supabase',
-      authorization: {
-        kind: 'RBAC',
-        engine: 'native',
-      },
       flow: {
         signInRoute: 'sign-in',
         signUpRoute: 'sign-up',
@@ -137,8 +133,10 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         updateStrategy: 'api',
       },
     });
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('/products');
-    expect(manifest.settings.authFlow.postSignInRoute).not.toContain('products/products');
+    expect(manifest.infra.auth?.flow?.postSignInRoute).toBe('/products');
+    expect(manifest.infra.auth?.flow?.postSignInRoute).not.toContain('products/products');
+    expect(manifest.infra.auth?.authorization).toBeUndefined();
+    expect(manifest.settings).not.toHaveProperty('authFlow');
   });
 
   test('creates useful tabs plus a stack-safe products flow', () => {
@@ -622,8 +620,10 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(productsStack?.routes.find((route) => route.name === 'index')?.screenId).toBe(
       'food_drink-nutrition-catalog-scan-catalog',
     );
-    expect(manifest.settings.authFlow.postSignInRoute).toBe('/products');
-    expect(manifest.settings.authFlow.postSignInRoute).not.toContain('products/products');
+    expect(manifest.infra.auth?.flow?.postSignInRoute).toBe('/products');
+    expect(manifest.infra.auth?.flow?.postSignInRoute).not.toContain('products/products');
+    expect(manifest.infra.auth?.authorization).toBeUndefined();
+    expect(manifest.settings).not.toHaveProperty('authFlow');
     expect(productsRoute?.navigator?.routes.map((route) => route.name)).toEqual([
       'index',
       '[id]',

@@ -1,7 +1,7 @@
 import {
-  resolveAuthFlow,
   type AppCategory,
   type AppManifest,
+  resolveAuthFlow,
   type ScreenSpec,
   type ThemeConfig,
 } from '@ankhorage/contracts';

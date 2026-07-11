@@ -31,10 +31,6 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
       auth: {
         scope: 'global',
         provider: 'supabase',
-        authorization: {
-          kind: 'RBAC',
-          engine: 'native',
-        },
         flow: {
           signInRoute: 'sign-in',
           signUpRoute: 'sign-up',
@@ -56,16 +52,6 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
           createStrategy: 'trigger',
           updateStrategy: 'api',
         },
-      },
-    },
-    settings: {
-      ...manifest.settings,
-      authFlow: {
-        signInRoute: 'sign-in',
-        signUpRoute: 'sign-up',
-        signOutRoute: 'sign-out',
-        postSignInRoute: '/products',
-        unauthorizedRoute: 'sign-in',
       },
     },
   };

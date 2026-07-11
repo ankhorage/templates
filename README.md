@@ -96,9 +96,9 @@ Icons use the existing route `icon: IconSpec` property from `@ankhorage/contract
 }
 ```
 
-Auth behavior is not modeled as a visible navigation route in category templates. It remains
-controlled by the manifest `infra` and `settings.authFlow` configuration. The original generic
-starter remains available as the fallback template and preserves its existing sign-in screen.
+Auth behavior is not modeled as a visible navigation route in category templates. It is
+configured only through `infra.auth.flow`; `settings` contains no authentication configuration.
+The original generic starter remains available as the fallback template and preserves its existing sign-in screen.
 
 ## Current Templates
 
@@ -143,8 +143,8 @@ Additional variants:
   initial FEN and requires generated apps to provide `@ankhorage/zora-chess` through their
   extension registry.
 - `food_drink/nutrition-catalog-scan`: Products · Scan · Stats · Profile. This restricted product
-  barcode nutrition scanner starter uses `infra.auth.scope = "global"`, Supabase auth, native
-  RBAC, and an app-facing `profiles` table. Generated apps should keep identity in Supabase Auth,
+  barcode nutrition scanner starter uses `infra.auth.scope = "global"`, Supabase authentication
+  without implicit authorization, and an app-facing `profiles` table. Generated apps should keep identity in Supabase Auth,
   browse products through `GET /products`, look up barcodes through
   `GET /products/by-barcode/:barcode`, create missing products through `POST /products`, and
   handle duplicate barcode conflicts by opening the existing product id. Native barcode scanning
