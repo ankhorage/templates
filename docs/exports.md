@@ -26,15 +26,15 @@ Source: `src/presets/category-presets.ts:3:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| defaultName | property | `string` | yes |  |
-| defaultSlug | property | `string` | yes |  |
-| focusAreas | property | `readonly [string, string, string]` | yes |  |
-| harmony | property | `"monochromatic" \| "analogous" \| "complementary" \| "triadic" \| "tetradic" \| "splitComplementary"` | yes |  |
-| label | property | `string` | yes |  |
-| primaryColor | property | `string` | yes |  |
-| summary | property | `string` | yes |  |
+| Name         | Kind     | Type                                                                                                   | Required | Description |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------ | -------- | ----------- |
+| defaultName  | property | `string`                                                                                               | yes      |             |
+| defaultSlug  | property | `string`                                                                                               | yes      |             |
+| focusAreas   | property | `readonly [string, string, string]`                                                                    | yes      |             |
+| harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "triadic" \| "tetradic" \| "splitComplementary"` | yes      |             |
+| label        | property | `string`                                                                                               | yes      |             |
+| primaryColor | property | `string`                                                                                               | yes      |             |
+| summary      | property | `string`                                                                                               | yes      |             |
 
 ## CategoryStarterTemplateDefinition
 
@@ -44,12 +44,12 @@ Source: `src/templates/starter/starter.types.ts:48:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| create | property | `StarterTemplateFactory` | yes |  |
-| description | property | `string` | yes |  |
-| id | property | `string` | yes |  |
-| label | property | `string` | yes |  |
+| Name        | Kind     | Type                     | Required | Description |
+| ----------- | -------- | ------------------------ | -------- | ----------- |
+| create      | property | `StarterTemplateFactory` | yes      |             |
+| description | property | `string`                 | yes      |             |
+| id          | property | `string`                 | yes      |             |
+| label       | property | `string`                 | yes      |             |
 
 ## createCategoryAppManifest
 
@@ -140,13 +140,13 @@ Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:176:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| backgroundColor | property | `string` | no |  |
-| dark | property | `SplashScreenModeSpec` | no |  |
-| image | property | `string` | no |  |
-| imageWidth | property | `number` | no |  |
-| resizeMode | property | `SplashScreenResizeMode` | no |  |
+| Name            | Kind     | Type                     | Required | Description |
+| --------------- | -------- | ------------------------ | -------- | ----------- |
+| backgroundColor | property | `string`                 | no       |             |
+| dark            | property | `SplashScreenModeSpec`   | no       |             |
+| image           | property | `string`                 | no       |             |
+| imageWidth      | property | `number`                 | no       |             |
+| resizeMode      | property | `SplashScreenResizeMode` | no       |             |
 
 ## StarterTemplateFactory
 
@@ -168,9 +168,9 @@ Source: `src/templates/starter/starter.types.ts:39:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| templateId | property | `string` | no |  |
+| Name       | Kind     | Type     | Required | Description |
+| ---------- | -------- | -------- | -------- | ----------- |
+| templateId | property | `string` | no       |             |
 
 ## StarterTemplateSelection
 
@@ -180,10 +180,10 @@ Source: `src/templates/starter/starter.types.ts:13:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| category | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes |  |
-| templateId | property | `string` | no |  |
+| Name       | Kind     | Type                                                                                                                                                                                                                                                                                                                                                                                                                                          | Required | Description |
+| ---------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| category   | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes      |             |
+| templateId | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
 
 ## StarterTemplateSummary
 
@@ -193,12 +193,12 @@ Source: `src/templates/starter/starter.types.ts:18:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| category | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes |  |
-| description | property | `string` | yes |  |
-| id | property | `string` | yes |  |
-| label | property | `string` | yes |  |
+| Name        | Kind     | Type                                                                                                                                                                                                                                                                                                                                                                                                                                          | Required | Description |
+| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| category    | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes      |             |
+| description | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
+| id          | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
+| label       | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
 
 ## TEMPLATE_KINDS
 
@@ -220,16 +220,16 @@ Source: `src/templates/starter/starter.types.ts:25:1`
 
 ### Members
 
-| Name | Kind | Type | Required | Description |
-| --- | --- | --- | --- | --- |
-| appName | property | `string` | yes |  |
-| category | property | `StarterTemplateCategory` | yes |  |
-| categoryLabel | property | `string` | yes |  |
-| focusAreas | property | `readonly [string, string, string]` | no |  |
-| harmony | property | `"monochromatic" \| "analogous" \| "complementary" \| "triadic" \| "tetradic" \| "splitComplementary"` | yes |  |
-| primaryColor | property | `string` | yes |  |
-| slug | property | `string` | yes |  |
-| summary | property | `string` | yes |  |
-| themeId | property | `string` | no |  |
-| themeName | property | `string` | no |  |
-| version | property | `string` | no |  |
+| Name          | Kind     | Type                                                                                                   | Required | Description |
+| ------------- | -------- | ------------------------------------------------------------------------------------------------------ | -------- | ----------- |
+| appName       | property | `string`                                                                                               | yes      |             |
+| category      | property | `StarterTemplateCategory`                                                                              | yes      |             |
+| categoryLabel | property | `string`                                                                                               | yes      |             |
+| focusAreas    | property | `readonly [string, string, string]`                                                                    | no       |             |
+| harmony       | property | `"monochromatic" \| "analogous" \| "complementary" \| "triadic" \| "tetradic" \| "splitComplementary"` | yes      |             |
+| primaryColor  | property | `string`                                                                                               | yes      |             |
+| slug          | property | `string`                                                                                               | yes      |             |
+| summary       | property | `string`                                                                                               | yes      |             |
+| themeId       | property | `string`                                                                                               | no       |             |
+| themeName     | property | `string`                                                                                               | no       |             |
+| version       | property | `string`                                                                                               | no       |             |
