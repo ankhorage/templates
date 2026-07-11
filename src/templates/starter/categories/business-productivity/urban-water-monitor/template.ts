@@ -1,4 +1,5 @@
 import type { AppManifest } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts/auth';
 
 import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
 import { createManifestShell, createTheme } from '../../../../shared';
@@ -18,13 +19,21 @@ export function createUrbanWaterMonitorStarterTemplate(seed: TemplateSeed): AppM
     screens: createUrbanWaterMonitorScreens(idPrefix, screenIds),
   });
 
+  const auth = manifest.infra.auth;
+  if (auth === undefined) {
+    return manifest;
+  }
+
   return {
     ...manifest,
-    settings: {
-      ...manifest.settings,
-      authFlow: {
-        ...manifest.settings.authFlow,
-        postSignInRoute: 'index',
+    infra: {
+      ...manifest.infra,
+      auth: {
+        ...auth,
+        flow: {
+          ...resolveAuthFlow(auth.flow),
+          postSignInRoute: 'index',
+        },
       },
     },
   };

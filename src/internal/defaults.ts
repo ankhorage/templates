@@ -1,4 +1,4 @@
-import type { AppManifest, InfraManifest } from '@ankhorage/contracts';
+import { type AppManifest, DEFAULT_AUTH_FLOW, type InfraManifest } from '@ankhorage/contracts';
 
 export const DEFAULT_TEMPLATE_VERSION = '1.0.0';
 export const DEFAULT_THEME_ID = 'default';
@@ -20,10 +20,7 @@ export const BASE_INFRA: InfraManifest = {
   auth: {
     provider: 'supabase',
     scope: 'global',
-    authorization: {
-      kind: 'ABAC',
-      engine: 'cerbos',
-    },
+    flow: { ...DEFAULT_AUTH_FLOW },
     signIn: {
       identifiers: ['email'],
     },
@@ -43,13 +40,6 @@ export const BASE_INFRA: InfraManifest = {
 };
 
 export const BASE_SETTINGS: AppManifest['settings'] = {
-  authFlow: {
-    unauthorizedRoute: 'sign-in',
-    signInRoute: 'sign-in',
-    signUpRoute: 'sign-up',
-    signOutRoute: 'sign-out',
-    postSignInRoute: 'index',
-  },
   localization: {
     defaultLocale: 'en',
     locales: ['en'],

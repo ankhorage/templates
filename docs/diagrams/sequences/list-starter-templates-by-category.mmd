@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_listStarterTemplates as listStarterTemplates
+  participant participant_listStarterTemplatesByCategory as listStarterTemplatesByCategory
+  participant_listStarterTemplatesByCategory->>participant_listStarterTemplates: listStarterTemplates()
+  participant_listStarterTemplates-->>participant_listStarterTemplatesByCategory: return

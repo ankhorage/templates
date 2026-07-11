@@ -4,7 +4,7 @@ export default defineParadoxConfig({
   mode: 'write',
 
   docs: {
-    title: 'TEMPLATES'
+    title: 'TEMPLATES',
   },
 
   package: {

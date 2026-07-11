@@ -1,4 +1,10 @@
-import type { AppCategory, AppManifest, ScreenSpec, ThemeConfig } from '@ankhorage/contracts';
+import {
+  type AppCategory,
+  type AppManifest,
+  resolveAuthFlow,
+  type ScreenSpec,
+  type ThemeConfig,
+} from '@ankhorage/contracts';
 
 import { mergeAppManifest } from '../internal/merge';
 import type { AppManifestOverrides } from '../internal/overrides';
@@ -87,7 +93,7 @@ function addProviderEntryScreen(manifest: AppManifest): AppManifest {
     return manifest;
   }
 
-  const screenId = manifest.settings.authFlow.signInRoute;
+  const screenId = resolveAuthFlow(manifest.infra.auth.flow).signInRoute;
 
   if (manifest.screens[screenId] !== undefined) {
     return manifest;

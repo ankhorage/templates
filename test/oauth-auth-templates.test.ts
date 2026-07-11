@@ -1,4 +1,5 @@
 import type { AppManifest, UiNode } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts/auth';
 import { describe, expect, test } from 'bun:test';
 
 import { createCategoryAppManifest } from '../src/index';
@@ -42,7 +43,7 @@ function createOauthManifest() {
 describe('OAuth auth template generation', () => {
   test('adds an OAuth provider entry screen outside navigation when enabled', () => {
     const manifest = createOauthManifest();
-    const { signInRoute } = manifest.settings.authFlow;
+    const { signInRoute } = resolveAuthFlow(manifest.infra.auth?.flow);
     const screen = manifest.screens[signInRoute];
 
     expect(screen).toBeDefined();
@@ -81,7 +82,8 @@ describe('OAuth auth template generation', () => {
       },
     });
 
-    expect(manifest.screens[manifest.settings.authFlow.signInRoute]).toBeUndefined();
+    const { signInRoute } = resolveAuthFlow(manifest.infra.auth?.flow);
+    expect(manifest.screens[signInRoute]).toBeUndefined();
   });
 
   test('does not add an OAuth provider entry screen when all providers are disabled', () => {
@@ -100,6 +102,7 @@ describe('OAuth auth template generation', () => {
       },
     });
 
-    expect(manifest.screens[manifest.settings.authFlow.signInRoute]).toBeUndefined();
+    const { signInRoute } = resolveAuthFlow(manifest.infra.auth?.flow);
+    expect(manifest.screens[signInRoute]).toBeUndefined();
   });
 });
