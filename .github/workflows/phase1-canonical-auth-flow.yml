@@ -65,7 +65,12 @@ jobs:
 
       - name: Test first failure
         working-directory: repo
-        run: bun test --bail
+        run: |
+          set +e
+          bun test --bail > /tmp/templates-test.log 2>&1
+          status=$?
+          tail -n 80 /tmp/templates-test.log
+          exit $status
 
       - name: Build
         working-directory: repo
