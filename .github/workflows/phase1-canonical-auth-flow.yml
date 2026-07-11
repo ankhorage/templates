@@ -92,6 +92,10 @@ jobs:
         working-directory: repo
         run: bun run lint:fix >/dev/null || true
 
+      - name: Format lint fixes
+        working-directory: repo
+        run: bun run format >/dev/null
+
       - name: Lint
         working-directory: repo
         run: bun run lint
