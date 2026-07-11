@@ -69,7 +69,7 @@ jobs:
           set +e
           bun test --bail > /tmp/templates-test.log 2>&1
           status=$?
-          tail -n 80 /tmp/templates-test.log
+          tail -n 12 /tmp/templates-test.log
           exit $status
 
       - name: Build
