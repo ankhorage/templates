@@ -23,7 +23,7 @@ jobs:
 
       - name: Apply canonical auth flow migration
         working-directory: repo
-        run: python3 .github/phase1-migrate.py
+        run: python3 .github/phase1-migrate.py >/dev/null
 
       - name: Assert removed property is absent
         working-directory: repo
@@ -53,7 +53,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: repo
-        run: bun install --frozen-lockfile
+        run: bun install --frozen-lockfile >/dev/null
 
       - name: Format migration
         working-directory: repo
@@ -67,15 +67,15 @@ jobs:
             test/create-business-productivity-urban-water-monitor-template.test.ts \
             test/canonical-auth-flow-contract.test.ts \
             README.md \
-            .changeset/canonical-auth-flow.md
+            .changeset/canonical-auth-flow.md >/dev/null
 
       - name: Build
         working-directory: repo
-        run: bun run build
+        run: bun run build >/dev/null
 
       - name: Typecheck
         working-directory: repo
-        run: bun run typecheck
+        run: bun run typecheck >/dev/null
 
       - name: Lint
         working-directory: repo
