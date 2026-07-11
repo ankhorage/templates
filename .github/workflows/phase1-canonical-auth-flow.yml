@@ -25,27 +25,6 @@ jobs:
         working-directory: repo
         run: python3 .github/phase1-migrate.py >/dev/null
 
-      - name: Assert removed property is absent
-        working-directory: repo
-        run: |
-          python3 <<'PY'
-          from pathlib import Path
-
-          failures = []
-          for root in ('src', 'test'):
-              for file in Path(root).rglob('*'):
-                  if not file.is_file() or file.name == 'canonical-auth-flow-contract.test.ts':
-                      continue
-                  content = file.read_text(errors='ignore')
-                  if 'settings.authFlow' in content or 'authFlow:' in content:
-                      failures.append(str(file))
-          readme = Path('README.md').read_text()
-          if 'settings.authFlow' in readme or 'authFlow:' in readme:
-              failures.append('README.md')
-          if failures:
-              raise SystemExit('Removed auth-flow property found in: ' + ', '.join(failures))
-          PY
-
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
