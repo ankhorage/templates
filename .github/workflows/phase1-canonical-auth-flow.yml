@@ -25,6 +25,21 @@ jobs:
         working-directory: repo
         run: python3 .github/phase1-migrate.py >/dev/null
 
+      - name: Make guard lint-safe
+        working-directory: repo
+        run: |
+          python3 <<'PY'
+          from pathlib import Path
+
+          file = Path('test/canonical-auth-flow-contract.test.ts')
+          content = file.read_text()
+          old = r"expect(content, file).not.toMatch(new RegExp(`${removedKey}\s*:`));"
+          new = r"expect(content.replaceAll(/\s/g, ''), file).not.toContain(`${removedKey}:`);"
+          if content.count(old) != 1:
+              raise SystemExit('Expected canonical auth-flow guard assertion once.')
+          file.write_text(content.replace(old, new))
+          PY
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
