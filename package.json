@@ -22,7 +22,10 @@
     "manifest",
     "app-generator",
     "react-native",
-    "expo"
+    "expo",
+    "supabase",
+    "vault",
+    "secret-store"
   ],
   "sideEffects": false,
   "files": [
@@ -71,7 +74,7 @@
     "version-packages": "changeset version"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^2.0.0",
+    "@ankhorage/contracts": "^2.1.0",
     "@ankhorage/zora": "^2.8.0"
   },
   "devDependencies": {
