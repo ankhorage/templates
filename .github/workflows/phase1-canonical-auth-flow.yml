@@ -77,6 +77,10 @@ jobs:
         working-directory: repo
         run: bun run typecheck >/dev/null
 
+      - name: Autofix lint
+        working-directory: repo
+        run: bun run lint:fix >/dev/null
+
       - name: Lint
         working-directory: repo
         run: bun run lint
