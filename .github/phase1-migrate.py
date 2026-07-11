@@ -22,8 +22,13 @@ replace(
 )
 replace(
     'src/templates/starter/categories/business-productivity/urban-water-monitor/template.ts',
+    "import type { AppManifest } from '@ankhorage/contracts';\n",
+    "import type { AppManifest } from '@ankhorage/contracts';\nimport { resolveAuthFlow } from '@ankhorage/contracts/auth';\n",
+)
+replace(
+    'src/templates/starter/categories/business-productivity/urban-water-monitor/template.ts',
     "  return {\n    ...manifest,\n    settings: {\n      ...manifest.settings,\n      authFlow: {\n        ...manifest.settings.authFlow,\n        postSignInRoute: 'index',\n      },\n    },\n  };",
-    "  const auth = manifest.infra.auth;\n  if (auth === undefined) {\n    return manifest;\n  }\n\n  return {\n    ...manifest,\n    infra: {\n      ...manifest.infra,\n      auth: {\n        ...auth,\n        flow: {\n          ...auth.flow,\n          postSignInRoute: 'index',\n        },\n      },\n    },\n  };",
+    "  const auth = manifest.infra.auth;\n  if (auth === undefined) {\n    return manifest;\n  }\n\n  return {\n    ...manifest,\n    infra: {\n      ...manifest.infra,\n      auth: {\n        ...auth,\n        flow: {\n          ...resolveAuthFlow(auth.flow),\n          postSignInRoute: 'index',\n        },\n      },\n    },\n  };",
 )
 replace(
     'test/create-category-app.test.ts',
