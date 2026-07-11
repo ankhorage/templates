@@ -79,7 +79,7 @@ jobs:
 
       - name: Autofix lint
         working-directory: repo
-        run: bun run lint:fix >/dev/null
+        run: bun run lint:fix >/dev/null || true
 
       - name: Lint
         working-directory: repo
