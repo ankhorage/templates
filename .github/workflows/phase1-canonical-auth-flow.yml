@@ -63,6 +63,10 @@ jobs:
             README.md \
             .changeset/canonical-auth-flow.md >/dev/null
 
+      - name: Test first failure
+        working-directory: repo
+        run: bun test --bail
+
       - name: Build
         working-directory: repo
         run: bun run build >/dev/null
@@ -79,7 +83,7 @@ jobs:
         working-directory: repo
         run: bun run lint
 
-      - name: Test
+      - name: Test full suite
         working-directory: repo
         run: bun run test
 
