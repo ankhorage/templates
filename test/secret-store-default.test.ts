@@ -1,6 +1,5 @@
-import { describe, expect, test } from 'bun:test';
-
 import { APP_CATEGORIES } from '@ankhorage/contracts';
+import { describe, expect, test } from 'bun:test';
 
 import { createCategoryAppManifest } from '../src/generators/create-category-app';
 import { BASE_INFRA } from '../src/internal/defaults';
@@ -36,9 +35,7 @@ describe('canonical secret-store template default', () => {
       },
     });
 
-    expect(manifest.infra.auth?.oauth?.providers[0]?.credentialsRef).toBe(
-      'auth/oauth/google',
-    );
+    expect(manifest.infra.auth?.oauth?.providers[0]?.credentialsRef).toBe('auth/oauth/google');
 
     const serialized = JSON.stringify(manifest);
     expect(serialized).not.toContain('clientSecret');
