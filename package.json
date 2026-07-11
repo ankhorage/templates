@@ -62,7 +62,7 @@
     "build": "bun x tsc -p tsconfig.json",
     "changeset": "changeset",
     "changeset:status": "changeset status --since=origin/main",
-    "docs": "bunx @ankhorage/paradox@0.1.16",
+    "docs": "bunx @ankhorage/paradox@0.1.16 && ankhorage-prettier --write docs README.md",
     "knip": "ankhorage-knip",
     "lint": "ankhorage-eslint . --max-warnings=0",
     "lint:fix": "ankhorage-eslint . --max-warnings=0 --fix",
