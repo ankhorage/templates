@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 2.1.0
+
+### Minor Changes
+
+- cbf1c5a: Emit the canonical `infra.secretStore.provider = "supabase-vault"` selection from one shared Supabase infra preset across every generated first-party category manifest.
+
 ## 2.0.0
 
 ### Major Changes
