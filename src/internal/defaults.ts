@@ -13,6 +13,9 @@ export const BASE_INFRA: InfraManifest = {
     provider: 'auto',
     buckets: ['media'],
   },
+  secretStore: {
+    provider: 'supabase-vault',
+  },
   deployment: {
     target: 'minikube',
     monitoring: false,
