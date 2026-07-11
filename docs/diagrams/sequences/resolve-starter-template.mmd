@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_resolveFallbackTemplate as resolveFallbackTemplate
+  participant participant_resolveStarterTemplate as resolveStarterTemplate
+  participant_resolveStarterTemplate->>participant_resolveFallbackTemplate: resolveFallbackTemplate()
+  participant_resolveFallbackTemplate-->>participant_resolveStarterTemplate: return

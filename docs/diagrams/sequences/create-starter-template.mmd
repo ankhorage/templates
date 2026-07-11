@@ -1,0 +1,11 @@
+sequenceDiagram
+  participant participant_create as create
+  participant participant_createStarterTemplate as createStarterTemplate
+  participant participant_resolveFallbackTemplate as resolveFallbackTemplate
+  participant participant_resolveStarterTemplate as resolveStarterTemplate
+  participant_createStarterTemplate->>participant_resolveStarterTemplate: resolveStarterTemplate()
+  participant_resolveStarterTemplate->>participant_resolveFallbackTemplate: resolveFallbackTemplate()
+  participant_resolveFallbackTemplate-->>participant_resolveStarterTemplate: return
+  participant_resolveStarterTemplate-->>participant_createStarterTemplate: return
+  participant_createStarterTemplate->>participant_create: template.create()
+  participant_create-->>participant_createStarterTemplate: return
