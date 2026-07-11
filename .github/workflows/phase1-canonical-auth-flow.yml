@@ -25,19 +25,27 @@ jobs:
         working-directory: repo
         run: python3 .github/phase1-migrate.py >/dev/null
 
-      - name: Make guard lint-safe
+      - name: Align canonical assertions
         working-directory: repo
         run: |
           python3 <<'PY'
           from pathlib import Path
 
-          file = Path('test/canonical-auth-flow-contract.test.ts')
-          content = file.read_text()
-          old = r"expect(content, file).not.toMatch(new RegExp(`${removedKey}\s*:`));"
-          new = r"expect(content.replaceAll(/\s/g, ''), file).not.toContain(`${removedKey}:`);"
-          if content.count(old) != 1:
+          guard_file = Path('test/canonical-auth-flow-contract.test.ts')
+          guard_content = guard_file.read_text()
+          guard_old = r"expect(content, file).not.toMatch(new RegExp(`${removedKey}\s*:`));"
+          guard_new = r"expect(content.replaceAll(/\s/g, ''), file).not.toContain(`${removedKey}:`);"
+          if guard_content.count(guard_old) != 1:
               raise SystemExit('Expected canonical auth-flow guard assertion once.')
-          file.write_text(content.replace(old, new))
+          guard_file.write_text(guard_content.replace(guard_old, guard_new))
+
+          category_file = Path('test/create-category-app.test.ts')
+          category_content = category_file.read_text()
+          category_old = "        postSignInRoute: 'index',\n      });\n      expect(manifest.infra.auth?.authorization)"
+          category_new = "        postSignInRoute: '/',\n      });\n      expect(manifest.infra.auth?.authorization)"
+          if category_content.count(category_old) != 1:
+              raise SystemExit('Expected shared category post-sign-in assertion once.')
+          category_file.write_text(category_content.replace(category_old, category_new))
           PY
 
       - name: Setup Bun
