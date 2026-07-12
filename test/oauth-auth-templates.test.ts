@@ -105,7 +105,11 @@ describe('canonical OAuth template fixtures', () => {
 
   test('returns isolated fixture definitions', () => {
     const fixture = resolveOAuthFixture('google');
-    fixture.oauth.providers[0]!.label = SECRET_SENTINEL;
+    const [provider] = fixture.oauth.providers;
+    if (!provider) {
+      throw new Error('Expected the Google OAuth fixture to contain one provider.');
+    }
+    provider.label = SECRET_SENTINEL;
 
     expect(resolveOAuthFixture('google').oauth.providers[0]?.label).toBe('Continue with Google');
     expect(serialize(listOAuthFixtures())).not.toContain(SECRET_SENTINEL);
