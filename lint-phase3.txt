@@ -1,8 +1,1 @@
 $ ankhorage-eslint . --max-warnings=0
-
-/home/runner/work/templates/templates/test/oauth-auth-templates.test.ts
-  108:5  error  Forbidden non-null assertion  @typescript-eslint/no-non-null-assertion
-
-✖ 1 problem (1 error, 0 warnings)
-
-error: script "lint" exited with code 1
