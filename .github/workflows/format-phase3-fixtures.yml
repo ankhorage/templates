@@ -1,4 +1,4 @@
-name: Format Phase 3 OAuth fixtures
+name: Capture Phase 3 lint diagnostics
 
 on:
   push:
@@ -9,7 +9,7 @@ permissions:
   contents: write
 
 jobs:
-  format:
+  diagnose:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
@@ -28,21 +28,13 @@ jobs:
       - name: Install dependencies
         run: bun install --frozen-lockfile
 
-      - name: Apply lint fixes
-        run: bun run lint:fix || true
+      - name: Capture lint output
+        run: bun run lint > lint-phase3.txt 2>&1 || true
 
-      - name: Apply formatting
-        run: bun run format
-
-      - name: Commit formatting
+      - name: Commit diagnostics
         run: |
-          if git diff --quiet; then
-            echo "Repository formatting is already current."
-            exit 0
-          fi
-
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src test package.json .changeset
-          git commit -m "style: format OAuth fixtures"
+          git add lint-phase3.txt
+          git commit -m "chore: capture lint diagnostics"
           git push
