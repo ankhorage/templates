@@ -70,22 +70,10 @@ jobs:
       - name: Run typecheck
         run: |
           if node -e "const p=require('./package.json'); process.exit(p.scripts?.typecheck ? 0 : 1)"; then
-            set +e
-            bun run typecheck > typecheck-phase3.txt 2>&1
-            status=$?
-            cat typecheck-phase3.txt
-            exit $status
+            bun run typecheck
           else
-            echo "No typecheck script found; skipping." | tee typecheck-phase3.txt
+            echo "No typecheck script found; skipping."
           fi
-
-      - name: Upload typecheck diagnostics
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: phase3-typecheck-diagnostics
-          path: typecheck-phase3.txt
-          if-no-files-found: error
 
       - name: Check changesets
         if: github.event_name == 'pull_request'
