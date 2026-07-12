@@ -1,0 +1,27 @@
+sequenceDiagram
+  participant participant___type as __type
+  participant participant_createCategoryAppManifest as createCategoryAppManifest
+  participant participant_createManifestFromTemplate as createManifestFromTemplate
+  participant participant_createOAuthFixtureManifest as createOAuthFixtureManifest
+  participant participant_isPlainObject as isPlainObject
+  participant participant_mergeAppManifest as mergeAppManifest
+  participant participant_mergeValue as mergeValue
+  participant participant_resolveOAuthFixture as resolveOAuthFixture
+  participant_createOAuthFixtureManifest->>participant_createCategoryAppManifest: createCategoryAppManifest()
+  participant_createCategoryAppManifest->>participant_createManifestFromTemplate: createManifestFromTemplate()
+  participant_createManifestFromTemplate->>participant___type: TEMPLATE_FACTORIES[template]()
+  participant___type-->>participant_createManifestFromTemplate: return
+  participant_createManifestFromTemplate-->>participant_createCategoryAppManifest: return
+  participant_createCategoryAppManifest->>participant_mergeAppManifest: mergeAppManifest()
+  participant_mergeAppManifest->>participant_mergeValue: mergeValue()
+  participant_mergeValue->>participant_isPlainObject: isPlainObject()
+  participant_isPlainObject-->>participant_mergeValue: return
+  participant_mergeValue->>participant_mergeValue: mergeValue()
+  participant_mergeValue-->>participant_mergeValue: return
+  participant_mergeValue-->>participant_mergeAppManifest: return
+  participant_mergeAppManifest-->>participant_createCategoryAppManifest: return
+  participant_createCategoryAppManifest-->>participant_createOAuthFixtureManifest: return
+  participant_createOAuthFixtureManifest->>participant_resolveOAuthFixture: resolveOAuthFixture()
+  participant_resolveOAuthFixture-->>participant_createOAuthFixtureManifest: return
+  participant_createOAuthFixtureManifest->>participant_mergeAppManifest: mergeAppManifest()
+  participant_mergeAppManifest-->>participant_createOAuthFixtureManifest: return

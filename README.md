@@ -3,7 +3,7 @@
 
 # TEMPLATES
 
-![license: MIT](././docs/badges/license.svg) ![npm: v2.0.0](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![docs: paradox](././docs/badges/docs.svg)
+![license: MIT](././docs/badges/license.svg) ![npm: v2.1.0](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![docs: paradox](././docs/badges/docs.svg)
 
 Reusable Ankhorage app templates, presets, and manifest generators.
 
@@ -22,6 +22,8 @@ bunx @ankhorage/templates
 - [Module relationships](././docs/diagrams/module-relationships.mmd)
 - [Export graph](././docs/diagrams/export-graph.mmd)
 - [ankhorage-templates sequence](././docs/diagrams/sequences/ankhorage-templates.mmd)
+- [createCategoryAppManifest sequence](././docs/diagrams/sequences/create-category-app-manifest.mmd)
+- [createOAuthFixtureManifest sequence](././docs/diagrams/sequences/create-oauth-fixture-manifest.mmd)
 - [createStarterTemplate sequence](././docs/diagrams/sequences/create-starter-template.mmd)
 - [listStarterTemplatesByCategory sequence](././docs/diagrams/sequences/list-starter-templates-by-category.mmd)
 - [resolveStarterTemplate sequence](././docs/diagrams/sequences/resolve-starter-template.mmd)

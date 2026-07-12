@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v2.0.0",
+      "value": "v2.1.0",
       "color": "cb3837"
     },
     {
@@ -145,14 +145,31 @@
       ]
     },
     {
+      "path": "src/fixtures/oauth.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/generators/create-category-app.ts",
+        "src/internal/merge.ts",
+        "src/internal/overrides.ts",
+        "src/templates/starter/index.ts"
+      ],
+      "exports": [
+        "createOAuthFixtureManifest",
+        "listOAuthFixtures",
+        "OAUTH_CALLBACK_ROUTE",
+        "OAUTH_FIXTURE_IDS",
+        "OAuthFixtureDefinition",
+        "OAuthFixtureId",
+        "resolveOAuthFixture"
+      ]
+    },
+    {
       "path": "src/generators/create-category-app.ts",
       "isEntrypoint": false,
       "dependencies": [
         "src/internal/merge.ts",
         "src/internal/overrides.ts",
         "src/presets/category-presets.ts",
-        "src/templates/shared/screen.ts",
-        "src/templates/shared/zora-node-helpers.ts",
         "src/templates/starter/index.ts"
       ],
       "exports": ["createCategoryAppManifest"]
@@ -168,10 +185,17 @@
         "CategoryPreset",
         "CategoryStarterTemplateDefinition",
         "createCategoryAppManifest",
+        "createOAuthFixtureManifest",
         "createStarterTemplate",
+        "listOAuthFixtures",
         "listStarterTemplates",
         "listStarterTemplatesByCategory",
         "listStarterTemplateSummaries",
+        "OAUTH_CALLBACK_ROUTE",
+        "OAUTH_FIXTURE_IDS",
+        "OAuthFixtureDefinition",
+        "OAuthFixtureId",
+        "resolveOAuthFixture",
         "resolveStarterTemplate",
         "SplashScreenResizeMode",
         "SplashScreenSpec",
@@ -1957,7 +1981,7 @@
       "modulePath": "src/generators/create-category-app.ts",
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 141,
+        "line": 67,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1982,6 +2006,38 @@
               "name": "template",
               "type": "\"starter\"",
               "required": false,
+              "description": null
+            }
+          ],
+          "returnType": "AppManifest",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "createOAuthFixtureManifest",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 87,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["AppCategory", "OAuthFixtureId", "TemplateKind"],
+      "signatures": [
+        {
+          "label": "(args: { category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }) => AppManifest",
+          "parameters": [
+            {
+              "name": "args",
+              "type": "{ category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }",
+              "required": true,
               "description": null
             }
           ],
@@ -2024,6 +2080,31 @@
             }
           ],
           "returnType": "AppManifest",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "listOAuthFixtures",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 79,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["OAuthFixtureDefinition"],
+      "signatures": [
+        {
+          "label": "() => OAuthFixtureDefinition[]",
+          "parameters": [],
+          "returnType": "OAuthFixtureDefinition[]",
           "returnDescription": null
         }
       ],
@@ -2113,6 +2194,139 @@
           "label": "() => readonly StarterTemplateSummary[]",
           "parameters": [],
           "returnType": "readonly StarterTemplateSummary[]",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "OAUTH_CALLBACK_ROUTE",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "value",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 8,
+        "column": 14
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "OAUTH_FIXTURE_IDS",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "value",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 9,
+        "column": 14
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "OAuthFixtureDefinition",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 16,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "description",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "id",
+          "kind": "property",
+          "type": "\"google\" | \"apple\" | \"google-apple\"",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "label",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "oauth",
+          "kind": "property",
+          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
+      "name": "OAuthFixtureId",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "unknown",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 11,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "resolveOAuthFixture",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/fixtures/oauth.ts",
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 83,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["OAuthFixtureDefinition"],
+      "signatures": [
+        {
+          "label": "(id: \"google\" | \"apple\" | \"google-apple\") => OAuthFixtureDefinition",
+          "parameters": [
+            {
+              "name": "id",
+              "type": "\"google\" | \"apple\" | \"google-apple\"",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "OAuthFixtureDefinition",
           "returnDescription": null
         }
       ],
@@ -2777,11 +2991,47 @@
       }
     },
     {
+      "name": "createOAuthConfig",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 23,
+        "column": 1
+      }
+    },
+    {
+      "name": "listOAuthFixtures",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 79,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveOAuthFixture",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 83,
+        "column": 1
+      }
+    },
+    {
+      "name": "createOAuthFixtureManifest",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/fixtures/oauth.ts",
+        "line": 87,
+        "column": 1
+      }
+    },
+    {
       "name": "resolveThemeModeValue",
       "description": null,
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 24,
+        "line": 8,
         "column": 1
       }
     },
@@ -2790,7 +3040,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 33,
+        "line": 17,
         "column": 1
       }
     },
@@ -2799,7 +3049,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 37,
+        "line": 21,
         "column": 1
       }
     },
@@ -2808,7 +3058,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 41,
+        "line": 25,
         "column": 1
       }
     },
@@ -2817,25 +3067,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 75,
-        "column": 1
-      }
-    },
-    {
-      "name": "addProviderEntryScreen",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/generators/create-category-app.ts",
-        "line": 83,
-        "column": 1
-      }
-    },
-    {
-      "name": "createProviderEntryScreen",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/generators/create-category-app.ts",
-        "line": 111,
+        "line": 59,
         "column": 1
       }
     },
@@ -2844,7 +3076,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/generators/create-category-app.ts",
-        "line": 141,
+        "line": 67,
         "column": 1
       }
     },
@@ -4434,9 +4666,25 @@
     },
     {
       "kind": "export",
+      "name": "createOAuthFixtureManifest",
+      "sourcePath": "src/fixtures/oauth.ts",
+      "symbolName": "createOAuthFixtureManifest",
+      "description": null,
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "createStarterTemplate",
       "sourcePath": "src/templates/starter/starter.template.ts",
       "symbolName": "createStarterTemplate",
+      "description": null,
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "listOAuthFixtures",
+      "sourcePath": "src/fixtures/oauth.ts",
+      "symbolName": "listOAuthFixtures",
       "description": null,
       "isReadme": false
     },
@@ -4461,6 +4709,14 @@
       "name": "listStarterTemplateSummaries",
       "sourcePath": "src/templates/starter/starter.registry.ts",
       "symbolName": "listStarterTemplateSummaries",
+      "description": null,
+      "isReadme": false
+    },
+    {
+      "kind": "export",
+      "name": "resolveOAuthFixture",
+      "sourcePath": "src/fixtures/oauth.ts",
+      "symbolName": "resolveOAuthFixture",
       "description": null,
       "isReadme": false
     },
@@ -4537,6 +4793,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/fixtures/oauth.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/generators/create-category-app.ts",
         "sourcePath": "src/index.ts"
       },
@@ -4586,6 +4847,26 @@
         "sourcePath": "src/cli/standalone.ts"
       },
       {
+        "fromPath": "src/fixtures/oauth.ts",
+        "toPath": "src/generators/create-category-app.ts",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromPath": "src/fixtures/oauth.ts",
+        "toPath": "src/internal/merge.ts",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromPath": "src/fixtures/oauth.ts",
+        "toPath": "src/internal/overrides.ts",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromPath": "src/fixtures/oauth.ts",
+        "toPath": "src/templates/starter/index.ts",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
         "fromPath": "src/generators/create-category-app.ts",
         "toPath": "src/internal/merge.ts",
         "sourcePath": "src/generators/create-category-app.ts"
@@ -4598,16 +4879,6 @@
       {
         "fromPath": "src/generators/create-category-app.ts",
         "toPath": "src/presets/category-presets.ts",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromPath": "src/generators/create-category-app.ts",
-        "toPath": "src/templates/shared/screen.ts",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromPath": "src/generators/create-category-app.ts",
-        "toPath": "src/templates/shared/zora-node-helpers.ts",
         "sourcePath": "src/generators/create-category-app.ts"
       },
       {
@@ -6921,6 +7192,30 @@
         "sourcePath": "src/cli/standalone.ts"
       },
       {
+        "fromSymbol": "src/fixtures/oauth.ts",
+        "toSymbol": "createOAuthConfig",
+        "callExpression": "createOAuthConfig",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toSymbol": "createCategoryAppManifest",
+        "callExpression": "createCategoryAppManifest",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toSymbol": "resolveOAuthFixture",
+        "callExpression": "resolveOAuthFixture",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toSymbol": "mergeAppManifest",
+        "callExpression": "mergeAppManifest",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
         "fromSymbol": "resolveThemeModeValue",
         "toSymbol": "selector",
         "callExpression": "selector",
@@ -6963,51 +7258,9 @@
         "sourcePath": "src/generators/create-category-app.ts"
       },
       {
-        "fromSymbol": "addProviderEntryScreen",
-        "toSymbol": "resolveAuthFlow",
-        "callExpression": "resolveAuthFlow",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromSymbol": "addProviderEntryScreen",
-        "toSymbol": "createProviderEntryScreen",
-        "callExpression": "createProviderEntryScreen",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromSymbol": "createProviderEntryScreen",
-        "toSymbol": "createScreen",
-        "callExpression": "createScreen",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromSymbol": "createProviderEntryScreen",
-        "toSymbol": "createScreenRoot",
-        "callExpression": "createScreenRoot",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromSymbol": "createProviderEntryScreen",
-        "toSymbol": "createZoraNode",
-        "callExpression": "createZoraNode",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromSymbol": "createProviderEntryScreen",
-        "toSymbol": "createSection",
-        "callExpression": "createSection",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
         "fromSymbol": "createCategoryAppManifest",
         "toSymbol": "createManifestFromTemplate",
         "callExpression": "createManifestFromTemplate",
-        "sourcePath": "src/generators/create-category-app.ts"
-      },
-      {
-        "fromSymbol": "createCategoryAppManifest",
-        "toSymbol": "addProviderEntryScreen",
-        "callExpression": "addProviderEntryScreen",
         "sourcePath": "src/generators/create-category-app.ts"
       },
       {
@@ -9112,6 +9365,46 @@
       }
     ],
     "typeReferences": [
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toType": "AppCategory",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toType": "AppManifest",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toType": "AppManifestOverrides",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toType": "OAuthFixtureId",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createOAuthFixtureManifest",
+        "toType": "TemplateKind",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "listOAuthFixtures",
+        "toType": "OAuthFixtureDefinition",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "OAuthFixtureDefinition",
+        "toType": "AuthOAuthConfig",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "resolveOAuthFixture",
+        "toType": "OAuthFixtureDefinition",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
       {
         "fromSymbol": "createCategoryAppManifest",
         "toType": "AdapterId",
