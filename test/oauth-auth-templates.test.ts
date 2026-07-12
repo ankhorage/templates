@@ -1,108 +1,111 @@
-import type { AppManifest, UiNode } from '@ankhorage/contracts';
-import { resolveAuthFlow } from '@ankhorage/contracts/auth';
+import { APP_CATEGORIES, resolveAuthFlow } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
-import { createCategoryAppManifest } from '../src/index';
+import {
+  createCategoryAppManifest,
+  createOAuthFixtureManifest,
+  listOAuthFixtures,
+  OAUTH_CALLBACK_ROUTE,
+  OAUTH_FIXTURE_IDS,
+  resolveOAuthFixture,
+} from '../src/index';
 
-function collectNodes(node: UiNode): UiNode[] {
-  return [node, ...(node.children?.flatMap(collectNodes) ?? [])];
+const SECRET_SENTINEL = 'sentinel-phase3-template-secret-do-not-leak';
+
+function serialize(value: unknown): string {
+  return JSON.stringify(value);
 }
 
-function createOauthManifest() {
-  return createCategoryAppManifest('developer_tools', 'starter', {
-    infra: {
-      auth: {
-        oauth: {
-          enabled: true,
-          callbackRoute: '/auth/callback',
-          providers: [
-            {
-              id: 'google',
-              label: 'Google',
-              enabled: true,
-              icon: { provider: 'FontAwesome', name: 'google' },
-            },
-            {
-              id: 'github',
-              label: 'GitHub',
-              enabled: false,
-              icon: { provider: 'FontAwesome', name: 'github' },
-            },
-            {
-              id: 'custom-sso',
-              label: 'Custom SSO',
-              enabled: true,
-            },
-          ],
-        },
-      },
-    },
-  });
-}
-
-describe('OAuth auth template generation', () => {
-  test('adds an OAuth provider entry screen outside navigation when enabled', () => {
-    const manifest = createOauthManifest();
-    const { signInRoute } = resolveAuthFlow(manifest.infra.auth?.flow);
-    const screen = manifest.screens[signInRoute];
-
-    expect(screen).toBeDefined();
-    expect(manifest.navigator.routes.map((route) => route.name)).not.toContain(signInRoute);
-
-    const nodes = screen ? collectNodes(screen.root) : [];
-    const providerList = nodes.find((node) => node.type === 'OAuthProviderList');
-
-    expect(providerList?.props).toEqual({
-      providers: [
-        {
-          id: 'google',
-          label: 'Google',
-          icon: { provider: 'FontAwesome', name: 'google' },
-        },
-        {
-          id: 'custom-sso',
-          label: 'Custom SSO',
-        },
-      ],
-      layout: 'stack',
-      fullWidth: true,
-    });
-  });
-
-  test('does not add an OAuth provider entry screen when OAuth is disabled', () => {
+describe('canonical OAuth template fixtures', () => {
+  test('does not create template-owned OAuth auth screens', () => {
     const manifest = createCategoryAppManifest('developer_tools', 'starter', {
       infra: {
         auth: {
           oauth: {
-            enabled: false,
-            callbackRoute: '/auth/callback',
-            providers: [{ id: 'google', label: 'Google' }],
-          },
-        },
-      },
-    });
-
-    const { signInRoute } = resolveAuthFlow(manifest.infra.auth?.flow);
-    expect(manifest.screens[signInRoute]).toBeUndefined();
-  });
-
-  test('does not add an OAuth provider entry screen when all providers are disabled', () => {
-    const manifest: AppManifest = createCategoryAppManifest('developer_tools', 'starter', {
-      infra: {
-        auth: {
-          oauth: {
             enabled: true,
-            callbackRoute: '/auth/callback',
+            callbackRoute: OAUTH_CALLBACK_ROUTE,
             providers: [
-              { id: 'google', label: 'Google', enabled: false },
-              { id: 'github', label: 'GitHub', enabled: false },
+              {
+                id: 'google',
+                enabled: true,
+                credentialsRef: 'auth/oauth/google',
+              },
             ],
           },
         },
       },
     });
-
     const { signInRoute } = resolveAuthFlow(manifest.infra.auth?.flow);
+
     expect(manifest.screens[signInRoute]).toBeUndefined();
+    expect(manifest.navigator.routes.map((route) => route.name)).not.toContain(signInRoute);
+    expect(serialize(manifest)).not.toContain('OAuthProviderList');
+  });
+
+  test('publishes deterministic Google, Apple, and combined fixtures', () => {
+    expect(OAUTH_FIXTURE_IDS).toEqual(['google', 'apple', 'google-apple']);
+    expect(listOAuthFixtures().map((fixture) => fixture.id)).toEqual(OAUTH_FIXTURE_IDS);
+    expect(resolveOAuthFixture('google').oauth.providers.map((provider) => provider.id)).toEqual([
+      'google',
+    ]);
+    expect(resolveOAuthFixture('apple').oauth.providers.map((provider) => provider.id)).toEqual([
+      'apple',
+    ]);
+    expect(
+      resolveOAuthFixture('google-apple').oauth.providers.map((provider) => provider.id),
+    ).toEqual(['google', 'apple']);
+  });
+
+  test('uses one canonical callback and logical credential references only', () => {
+    for (const fixture of listOAuthFixtures()) {
+      expect(fixture.oauth.enabled).toBe(true);
+      expect(fixture.oauth.callbackRoute).toBe('auth/callback');
+      expect(fixture.oauth.callbackRoute).not.toStartWith('/');
+      expect(fixture.oauth.providers.length).toBeGreaterThan(0);
+
+      for (const provider of fixture.oauth.providers) {
+        expect(['google', 'apple']).toContain(provider.id);
+        expect(provider.enabled).toBe(true);
+        expect(provider.credentialsRef).toBe(`auth/oauth/${provider.id}`);
+        expect(provider.label).toBe(`Continue with ${provider.id === 'google' ? 'Google' : 'Apple'}`);
+      }
+
+      const serialized = serialize(fixture);
+      expect(serialized).not.toContain(SECRET_SENTINEL);
+      expect(serialized).not.toContain('clientSecret');
+      expect(serialized).not.toContain('privateKey');
+      expect(serialized).not.toContain('serviceRoleKey');
+      expect(serialized).not.toContain('accessToken');
+      expect(serialized).not.toContain('refreshToken');
+    }
+  });
+
+  test('creates OAuth fixture manifests without changing canonical auth flow', () => {
+    for (const category of APP_CATEGORIES) {
+      const manifest = createOAuthFixtureManifest({
+        category,
+        fixture: 'google-apple',
+      });
+      const flow = resolveAuthFlow(manifest.infra.auth?.flow);
+
+      expect(flow.signInRoute).toBe('sign-in');
+      expect(flow.signUpRoute).toBe('sign-up');
+      expect(flow.signOutRoute).toBe('sign-out');
+      expect(flow.postSignInRoute).toBe('/');
+      expect(manifest.infra.auth?.oauth?.callbackRoute).toBe(OAUTH_CALLBACK_ROUTE);
+      expect(manifest.infra.auth?.oauth?.providers.map((provider) => provider.id)).toEqual([
+        'google',
+        'apple',
+      ]);
+      expect(serialize(manifest)).not.toContain('OAuthProviderList');
+    }
+  });
+
+  test('returns isolated fixture definitions', () => {
+    const fixture = resolveOAuthFixture('google');
+    fixture.oauth.providers[0]!.label = SECRET_SENTINEL;
+
+    expect(resolveOAuthFixture('google').oauth.providers[0]?.label).toBe('Continue with Google');
+    expect(serialize(listOAuthFixtures())).not.toContain(SECRET_SENTINEL);
   });
 });
