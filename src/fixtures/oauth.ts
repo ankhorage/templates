@@ -72,7 +72,7 @@ function createOAuthConfig(providers: readonly OAuthProviderConfig[]): OAuthConf
   return {
     enabled: true,
     callbackRoute: OAUTH_CALLBACK_ROUTE,
-    providers: structuredClone(providers),
+    providers: providers.map((provider) => structuredClone(provider)),
   };
 }
 
