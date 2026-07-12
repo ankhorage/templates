@@ -44,7 +44,7 @@ describe('canonical OAuth template fixtures', () => {
 
   test('publishes deterministic Google, Apple, and combined fixtures', () => {
     expect(OAUTH_FIXTURE_IDS).toEqual(['google', 'apple', 'google-apple']);
-    expect(listOAuthFixtures().map((fixture) => fixture.id)).toEqual(OAUTH_FIXTURE_IDS);
+    expect(listOAuthFixtures().map((fixture) => fixture.id)).toEqual([...OAUTH_FIXTURE_IDS]);
     expect(resolveOAuthFixture('google').oauth.providers.map((provider) => provider.id)).toEqual([
       'google',
     ]);
