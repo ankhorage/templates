@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 2.2.0
+
+### Minor Changes
+
+- 8fcac9a: Add canonical Google, Apple, and combined OAuth manifest fixtures, and remove template-owned OAuth provider screen generation so Studio remains the single auth UI/runtime owner.
+
 ## 2.1.0
 
 ### Minor Changes
