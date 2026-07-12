@@ -22,7 +22,7 @@ describe('canonical secret-store template default', () => {
         auth: {
           oauth: {
             enabled: true,
-            callbackRoute: '/auth/callback',
+            callbackRoute: 'auth/callback',
             providers: [
               {
                 id: 'google',
