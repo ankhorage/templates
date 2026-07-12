@@ -60,7 +60,7 @@ describe('canonical OAuth template fixtures', () => {
     for (const fixture of listOAuthFixtures()) {
       expect(fixture.oauth.enabled).toBe(true);
       expect(fixture.oauth.callbackRoute).toBe('auth/callback');
-      expect(fixture.oauth.callbackRoute).not.toStartWith('/');
+      expect(fixture.oauth.callbackRoute.startsWith('/')).toBe(false);
       expect(fixture.oauth.providers.length).toBeGreaterThan(0);
 
       for (const provider of fixture.oauth.providers) {
