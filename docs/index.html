@@ -226,13 +226,19 @@
               </button>
             </li>
             <li>
+              <button class="nav-button" type="button" data-target="src/fixtures/oauth.ts">
+                src/fixtures/oauth.ts
+                <small>4 functions</small>
+              </button>
+            </li>
+            <li>
               <button
                 class="nav-button"
                 type="button"
                 data-target="src/generators/create-category-app.ts"
               >
                 src/generators/create-category-app.ts
-                <small>8 functions</small>
+                <small>6 functions</small>
               </button>
             </li>
             <li>
@@ -1249,9 +1255,9 @@
           <section class="panel">
             <h2>Package overview</h2>
             <div class="summary">
-              <div><strong>21</strong><span class="muted">public exports</span></div>
+              <div><strong>28</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>175</strong><span class="muted">modules</span></div>
+              <div><strong>176</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -1348,7 +1354,25 @@
             </article>
             <article
               class="item"
-              data-search="src/generators/create-category-app.ts src/internal/merge.ts src/internal/overrides.ts src/presets/category-presets.ts src/templates/shared/screen.ts src/templates/shared/zora-node-helpers.ts src/templates/starter/index.ts createCategoryAppManifest"
+              data-search="src/fixtures/oauth.ts src/generators/create-category-app.ts src/internal/merge.ts src/internal/overrides.ts src/templates/starter/index.ts createOAuthFixtureManifest listOAuthFixtures OAUTH_CALLBACK_ROUTE OAUTH_FIXTURE_IDS OAuthFixtureDefinition OAuthFixtureId resolveOAuthFixture"
+            >
+              <h3>src/fixtures/oauth.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/generators/create-category-app.ts</code>,
+                <code>src/internal/merge.ts</code>, <code>src/internal/overrides.ts</code>,
+                <code>src/templates/starter/index.ts</code>
+              </p>
+              <p>
+                <strong>Exports:</strong> <code>createOAuthFixtureManifest</code>,
+                <code>listOAuthFixtures</code>, <code>OAUTH_CALLBACK_ROUTE</code>,
+                <code>OAUTH_FIXTURE_IDS</code>, <code>OAuthFixtureDefinition</code>,
+                <code>OAuthFixtureId</code>, <code>resolveOAuthFixture</code>
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="src/generators/create-category-app.ts src/internal/merge.ts src/internal/overrides.ts src/presets/category-presets.ts src/templates/starter/index.ts createCategoryAppManifest"
             >
               <h3>src/generators/create-category-app.ts</h3>
               <p class="muted">Referenced module</p>
@@ -1356,15 +1380,13 @@
                 <strong>Dependencies:</strong> <code>src/internal/merge.ts</code>,
                 <code>src/internal/overrides.ts</code>,
                 <code>src/presets/category-presets.ts</code>,
-                <code>src/templates/shared/screen.ts</code>,
-                <code>src/templates/shared/zora-node-helpers.ts</code>,
                 <code>src/templates/starter/index.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>createCategoryAppManifest</code></p>
             </article>
             <article
               class="item"
-              data-search="src/index.ts APP_CATEGORIES AppCategory CATEGORY_PRESETS CategoryPreset CategoryStarterTemplateDefinition createCategoryAppManifest createStarterTemplate listStarterTemplates listStarterTemplatesByCategory listStarterTemplateSummaries resolveStarterTemplate SplashScreenResizeMode SplashScreenSpec StarterTemplateFactory StarterTemplateId StarterTemplateOptions StarterTemplateSelection StarterTemplateSummary TEMPLATE_KINDS TemplateKind TemplateSeed"
+              data-search="src/index.ts APP_CATEGORIES AppCategory CATEGORY_PRESETS CategoryPreset CategoryStarterTemplateDefinition createCategoryAppManifest createOAuthFixtureManifest createStarterTemplate listOAuthFixtures listStarterTemplates listStarterTemplatesByCategory listStarterTemplateSummaries OAUTH_CALLBACK_ROUTE OAUTH_FIXTURE_IDS OAuthFixtureDefinition OAuthFixtureId resolveOAuthFixture resolveStarterTemplate SplashScreenResizeMode SplashScreenSpec StarterTemplateFactory StarterTemplateId StarterTemplateOptions StarterTemplateSelection StarterTemplateSummary TEMPLATE_KINDS TemplateKind TemplateSeed"
             >
               <h3>src/index.ts</h3>
               <p class="muted">Configured entrypoint</p>
@@ -1373,14 +1395,17 @@
                 <strong>Exports:</strong> <code>APP_CATEGORIES</code>, <code>AppCategory</code>,
                 <code>CATEGORY_PRESETS</code>, <code>CategoryPreset</code>,
                 <code>CategoryStarterTemplateDefinition</code>,
-                <code>createCategoryAppManifest</code>, <code>createStarterTemplate</code>,
+                <code>createCategoryAppManifest</code>, <code>createOAuthFixtureManifest</code>,
+                <code>createStarterTemplate</code>, <code>listOAuthFixtures</code>,
                 <code>listStarterTemplates</code>, <code>listStarterTemplatesByCategory</code>,
-                <code>listStarterTemplateSummaries</code>, <code>resolveStarterTemplate</code>,
-                <code>SplashScreenResizeMode</code>, <code>SplashScreenSpec</code>,
-                <code>StarterTemplateFactory</code>, <code>StarterTemplateId</code>,
-                <code>StarterTemplateOptions</code>, <code>StarterTemplateSelection</code>,
-                <code>StarterTemplateSummary</code>, <code>TEMPLATE_KINDS</code>,
-                <code>TemplateKind</code>, <code>TemplateSeed</code>
+                <code>listStarterTemplateSummaries</code>, <code>OAUTH_CALLBACK_ROUTE</code>,
+                <code>OAUTH_FIXTURE_IDS</code>, <code>OAuthFixtureDefinition</code>,
+                <code>OAuthFixtureId</code>, <code>resolveOAuthFixture</code>,
+                <code>resolveStarterTemplate</code>, <code>SplashScreenResizeMode</code>,
+                <code>SplashScreenSpec</code>, <code>StarterTemplateFactory</code>,
+                <code>StarterTemplateId</code>, <code>StarterTemplateOptions</code>,
+                <code>StarterTemplateSelection</code>, <code>StarterTemplateSummary</code>,
+                <code>TEMPLATE_KINDS</code>, <code>TemplateKind</code>, <code>TemplateSeed</code>
               </p>
             </article>
             <article
@@ -3663,6 +3688,218 @@
               </article>
             </section>
             <section>
+              <h3>src/fixtures/oauth.ts</h3>
+              <article
+                class="item"
+                id="symbol-createoauthfixturemanifest"
+                data-search="createOAuthFixtureManifest function src/fixtures/oauth.ts  AppCategory OAuthFixtureId TemplateKind (args: { category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }) =&gt; AppManifest"
+              >
+                <h4>createOAuthFixtureManifest</h4>
+                <p class="muted">function • <code>src/fixtures/oauth.ts:87:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">AppCategory</li>
+                    <li class="chip">OAuthFixtureId</li>
+                    <li class="chip">TemplateKind</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>
+(args: { category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }) =&gt; AppManifest</pre
+                  >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>args</code></td>
+                        <td>
+                          <code
+                            >{ category: AppCategory; fixture: OAuthFixtureId; template?:
+                            TemplateKind; overrides?: AppManifestOverrides; }</code
+                          >
+                        </td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p><strong>Returns:</strong> <code>AppManifest</code></p>
+                </div>
+              </article>
+              <article
+                class="item"
+                id="symbol-listoauthfixtures"
+                data-search="listOAuthFixtures function src/fixtures/oauth.ts  OAuthFixtureDefinition () =&gt; OAuthFixtureDefinition[]"
+              >
+                <h4>listOAuthFixtures</h4>
+                <p class="muted">function • <code>src/fixtures/oauth.ts:79:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">OAuthFixtureDefinition</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>() =&gt; OAuthFixtureDefinition[]</pre>
+
+                  <p><strong>Returns:</strong> <code>OAuthFixtureDefinition[]</code></p>
+                </div>
+              </article>
+              <article
+                class="item"
+                id="symbol-oauth-callback-route"
+                data-search="OAUTH_CALLBACK_ROUTE value src/fixtures/oauth.ts "
+              >
+                <h4>OAUTH_CALLBACK_ROUTE</h4>
+                <p class="muted">value • <code>src/fixtures/oauth.ts:8:14</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+              </article>
+              <article
+                class="item"
+                id="symbol-oauth-fixture-ids"
+                data-search="OAUTH_FIXTURE_IDS value src/fixtures/oauth.ts "
+              >
+                <h4>OAUTH_FIXTURE_IDS</h4>
+                <p class="muted">value • <code>src/fixtures/oauth.ts:9:14</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+              </article>
+              <article
+                class="item"
+                id="symbol-oauthfixturedefinition"
+                data-search="OAuthFixtureDefinition type src/fixtures/oauth.ts "
+              >
+                <h4>OAuthFixtureDefinition</h4>
+                <p class="muted">type • <code>src/fixtures/oauth.ts:16:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>description</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>id</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;google&quot; | &quot;apple&quot; | &quot;google-apple&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>label</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>oauth</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth&quot;).AuthOAuthConfig</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+              <article
+                class="item"
+                id="symbol-oauthfixtureid"
+                data-search="OAuthFixtureId unknown src/fixtures/oauth.ts "
+              >
+                <h4>OAuthFixtureId</h4>
+                <p class="muted">unknown • <code>src/fixtures/oauth.ts:11:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+              </article>
+              <article
+                class="item"
+                id="symbol-resolveoauthfixture"
+                data-search='resolveOAuthFixture function src/fixtures/oauth.ts  OAuthFixtureDefinition (id: "google" | "apple" | "google-apple") =&gt; OAuthFixtureDefinition'
+              >
+                <h4>resolveOAuthFixture</h4>
+                <p class="muted">function • <code>src/fixtures/oauth.ts:83:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">OAuthFixtureDefinition</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>
+(id: &quot;google&quot; | &quot;apple&quot; | &quot;google-apple&quot;) =&gt; OAuthFixtureDefinition</pre
+                  >
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>id</code></td>
+                        <td>
+                          <code
+                            >&quot;google&quot; | &quot;apple&quot; | &quot;google-apple&quot;</code
+                          >
+                        </td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p><strong>Returns:</strong> <code>OAuthFixtureDefinition</code></p>
+                </div>
+              </article>
+            </section>
+            <section>
               <h3>src/generators/create-category-app.ts</h3>
               <article
                 class="item"
@@ -3671,7 +3908,7 @@
               >
                 <h4>createCategoryAppManifest</h4>
                 <p class="muted">
-                  function • <code>src/generators/create-category-app.ts:141:1</code>
+                  function • <code>src/generators/create-category-app.ts:67:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -6006,17 +6243,20 @@
                 module_src_projectSeed_ts module_src_commands_ts --&gt;
                 module_src_templates_starter_index_ts module_src_commands_ts --&gt;
                 module_src_templateSelector_ts
+                module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
+                package__ankhorage_templates -.-&gt; module_src_fixtures_oauth_ts
+                module_src_fixtures_oauth_ts --&gt; module_src_generators_create_category_app_ts
+                module_src_fixtures_oauth_ts --&gt; module_src_internal_merge_ts
+                module_src_fixtures_oauth_ts --&gt; module_src_internal_overrides_ts
+                module_src_fixtures_oauth_ts --&gt; module_src_templates_starter_index_ts
                 module_src_generators_create_category_app_ts[&quot;src/generators/create-category-app.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_generators_create_category_app_ts
                 module_src_generators_create_category_app_ts --&gt; module_src_internal_merge_ts
                 module_src_generators_create_category_app_ts --&gt; module_src_internal_overrides_ts
                 module_src_generators_create_category_app_ts --&gt;
                 module_src_presets_category_presets_ts module_src_generators_create_category_app_ts
-                --&gt; module_src_templates_shared_screen_ts
-                module_src_generators_create_category_app_ts --&gt;
-                module_src_templates_shared_zora_node_helpers_ts
-                module_src_generators_create_category_app_ts --&gt;
-                module_src_templates_starter_index_ts module_src_index_ts[&quot;src/index.ts&quot;]
+                --&gt; module_src_templates_starter_index_ts
+                module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_internal_defaults_ts
                 module_src_internal_merge_ts[&quot;src/internal/merge.ts&quot;]
@@ -7306,13 +7546,17 @@ graph TD
   module_src_commands_ts --&gt; module_src_projectSeed_ts
   module_src_commands_ts --&gt; module_src_templates_starter_index_ts
   module_src_commands_ts --&gt; module_src_templateSelector_ts
+  module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_fixtures_oauth_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_generators_create_category_app_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_internal_merge_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_internal_overrides_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_templates_starter_index_ts
   module_src_generators_create_category_app_ts[&quot;src/generators/create-category-app.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_generators_create_category_app_ts
   module_src_generators_create_category_app_ts --&gt; module_src_internal_merge_ts
   module_src_generators_create_category_app_ts --&gt; module_src_internal_overrides_ts
   module_src_generators_create_category_app_ts --&gt; module_src_presets_category_presets_ts
-  module_src_generators_create_category_app_ts --&gt; module_src_templates_shared_screen_ts
-  module_src_generators_create_category_app_ts --&gt; module_src_templates_shared_zora_node_helpers_ts
   module_src_generators_create_category_app_ts --&gt; module_src_templates_starter_index_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
@@ -8048,6 +8292,7 @@ graph TD
                 module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
                 module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
+                module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 module_src_generators_create_category_app_ts[&quot;src/generators/create-category-app.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
@@ -8233,13 +8478,14 @@ graph TD
                 module_src_packageMetadata_ts module_src_commands_ts --&gt;
                 module_src_projectSeed_ts module_src_commands_ts --&gt;
                 module_src_templates_starter_index_ts module_src_commands_ts --&gt;
-                module_src_templateSelector_ts module_src_generators_create_category_app_ts --&gt;
-                module_src_internal_merge_ts module_src_generators_create_category_app_ts --&gt;
-                module_src_internal_overrides_ts module_src_generators_create_category_app_ts --&gt;
-                module_src_presets_category_presets_ts module_src_generators_create_category_app_ts
-                --&gt; module_src_templates_shared_screen_ts
-                module_src_generators_create_category_app_ts --&gt;
-                module_src_templates_shared_zora_node_helpers_ts
+                module_src_templateSelector_ts module_src_fixtures_oauth_ts --&gt;
+                module_src_generators_create_category_app_ts module_src_fixtures_oauth_ts --&gt;
+                module_src_internal_merge_ts module_src_fixtures_oauth_ts --&gt;
+                module_src_internal_overrides_ts module_src_fixtures_oauth_ts --&gt;
+                module_src_templates_starter_index_ts module_src_generators_create_category_app_ts
+                --&gt; module_src_internal_merge_ts module_src_generators_create_category_app_ts
+                --&gt; module_src_internal_overrides_ts module_src_generators_create_category_app_ts
+                --&gt; module_src_presets_category_presets_ts
                 module_src_generators_create_category_app_ts --&gt;
                 module_src_templates_starter_index_ts module_src_internal_merge_ts --&gt;
                 module_src_internal_overrides_ts module_src_packageMetadata_ts --&gt;
@@ -9021,6 +9267,7 @@ graph LR
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
   module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
   module_src_commands_ts[&quot;src/commands.ts&quot;]
+  module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   module_src_generators_create_category_app_ts[&quot;src/generators/create-category-app.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
@@ -9206,11 +9453,13 @@ graph LR
   module_src_commands_ts --&gt; module_src_projectSeed_ts
   module_src_commands_ts --&gt; module_src_templates_starter_index_ts
   module_src_commands_ts --&gt; module_src_templateSelector_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_generators_create_category_app_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_internal_merge_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_internal_overrides_ts
+  module_src_fixtures_oauth_ts --&gt; module_src_templates_starter_index_ts
   module_src_generators_create_category_app_ts --&gt; module_src_internal_merge_ts
   module_src_generators_create_category_app_ts --&gt; module_src_internal_overrides_ts
   module_src_generators_create_category_app_ts --&gt; module_src_presets_category_presets_ts
-  module_src_generators_create_category_app_ts --&gt; module_src_templates_shared_screen_ts
-  module_src_generators_create_category_app_ts --&gt; module_src_templates_shared_zora_node_helpers_ts
   module_src_generators_create_category_app_ts --&gt; module_src_templates_starter_index_ts
   module_src_internal_merge_ts --&gt; module_src_internal_overrides_ts
   module_src_packageMetadata_ts --&gt; module_package_json
@@ -9608,6 +9857,7 @@ graph LR
                 module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
                 module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
+                module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 module_src_generators_create_category_app_ts[&quot;src/generators/create-category-app.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
@@ -9792,10 +10042,18 @@ graph LR
                 export_createCategoryAppManifest[&quot;createCategoryAppManifest&quot;]
                 module_src_generators_create_category_app_ts --&gt; export_createCategoryAppManifest
                 export_createCategoryAppManifest -.-&gt; export_SplashScreenResizeMode
+                export_createOAuthFixtureManifest[&quot;createOAuthFixtureManifest&quot;]
+                module_src_fixtures_oauth_ts --&gt; export_createOAuthFixtureManifest
+                export_createOAuthFixtureManifest -.-&gt; export_AppCategory
+                export_createOAuthFixtureManifest -.-&gt; export_OAuthFixtureId
+                export_createOAuthFixtureManifest -.-&gt; export_TemplateKind
                 export_createStarterTemplate[&quot;createStarterTemplate&quot;]
                 module_src_templates_starter_starter_template_ts --&gt; export_createStarterTemplate
                 export_createStarterTemplate -.-&gt; export_StarterTemplateOptions
                 export_createStarterTemplate -.-&gt; export_TemplateSeed
+                export_listOAuthFixtures[&quot;listOAuthFixtures&quot;] module_src_fixtures_oauth_ts
+                --&gt; export_listOAuthFixtures export_listOAuthFixtures -.-&gt;
+                export_OAuthFixtureDefinition
                 export_listStarterTemplates[&quot;listStarterTemplates&quot;]
                 module_src_templates_starter_starter_registry_ts --&gt; export_listStarterTemplates
                 export_listStarterTemplates -.-&gt; export_CategoryStarterTemplateDefinition
@@ -9807,6 +10065,17 @@ graph LR
                 module_src_templates_starter_starter_registry_ts --&gt;
                 export_listStarterTemplateSummaries export_listStarterTemplateSummaries -.-&gt;
                 export_StarterTemplateSummary
+                export_OAUTH_CALLBACK_ROUTE[&quot;OAUTH_CALLBACK_ROUTE&quot;]
+                module_src_fixtures_oauth_ts --&gt; export_OAUTH_CALLBACK_ROUTE
+                export_OAUTH_FIXTURE_IDS[&quot;OAUTH_FIXTURE_IDS&quot;] module_src_fixtures_oauth_ts
+                --&gt; export_OAUTH_FIXTURE_IDS
+                export_OAuthFixtureDefinition[&quot;OAuthFixtureDefinition&quot;]
+                module_src_fixtures_oauth_ts --&gt; export_OAuthFixtureDefinition
+                export_OAuthFixtureId[&quot;OAuthFixtureId&quot;] module_src_fixtures_oauth_ts
+                --&gt; export_OAuthFixtureId
+                export_resolveOAuthFixture[&quot;resolveOAuthFixture&quot;]
+                module_src_fixtures_oauth_ts --&gt; export_resolveOAuthFixture
+                export_resolveOAuthFixture -.-&gt; export_OAuthFixtureDefinition
                 export_resolveStarterTemplate[&quot;resolveStarterTemplate&quot;]
                 module_src_templates_starter_starter_registry_ts --&gt;
                 export_resolveStarterTemplate export_resolveStarterTemplate -.-&gt;
@@ -9845,6 +10114,7 @@ graph LR
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
   module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
   module_src_commands_ts[&quot;src/commands.ts&quot;]
+  module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   module_src_generators_create_category_app_ts[&quot;src/generators/create-category-app.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
@@ -10028,10 +10298,18 @@ graph LR
   export_createCategoryAppManifest[&quot;createCategoryAppManifest&quot;]
   module_src_generators_create_category_app_ts --&gt; export_createCategoryAppManifest
   export_createCategoryAppManifest -.-&gt; export_SplashScreenResizeMode
+  export_createOAuthFixtureManifest[&quot;createOAuthFixtureManifest&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_createOAuthFixtureManifest
+  export_createOAuthFixtureManifest -.-&gt; export_AppCategory
+  export_createOAuthFixtureManifest -.-&gt; export_OAuthFixtureId
+  export_createOAuthFixtureManifest -.-&gt; export_TemplateKind
   export_createStarterTemplate[&quot;createStarterTemplate&quot;]
   module_src_templates_starter_starter_template_ts --&gt; export_createStarterTemplate
   export_createStarterTemplate -.-&gt; export_StarterTemplateOptions
   export_createStarterTemplate -.-&gt; export_TemplateSeed
+  export_listOAuthFixtures[&quot;listOAuthFixtures&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_listOAuthFixtures
+  export_listOAuthFixtures -.-&gt; export_OAuthFixtureDefinition
   export_listStarterTemplates[&quot;listStarterTemplates&quot;]
   module_src_templates_starter_starter_registry_ts --&gt; export_listStarterTemplates
   export_listStarterTemplates -.-&gt; export_CategoryStarterTemplateDefinition
@@ -10041,6 +10319,17 @@ graph LR
   export_listStarterTemplateSummaries[&quot;listStarterTemplateSummaries&quot;]
   module_src_templates_starter_starter_registry_ts --&gt; export_listStarterTemplateSummaries
   export_listStarterTemplateSummaries -.-&gt; export_StarterTemplateSummary
+  export_OAUTH_CALLBACK_ROUTE[&quot;OAUTH_CALLBACK_ROUTE&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_OAUTH_CALLBACK_ROUTE
+  export_OAUTH_FIXTURE_IDS[&quot;OAUTH_FIXTURE_IDS&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_OAUTH_FIXTURE_IDS
+  export_OAuthFixtureDefinition[&quot;OAuthFixtureDefinition&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_OAuthFixtureDefinition
+  export_OAuthFixtureId[&quot;OAuthFixtureId&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_OAuthFixtureId
+  export_resolveOAuthFixture[&quot;resolveOAuthFixture&quot;]
+  module_src_fixtures_oauth_ts --&gt; export_resolveOAuthFixture
+  export_resolveOAuthFixture -.-&gt; export_OAuthFixtureDefinition
   export_resolveStarterTemplate[&quot;resolveStarterTemplate&quot;]
   module_src_templates_starter_starter_registry_ts --&gt; export_resolveStarterTemplate
   export_resolveStarterTemplate -.-&gt; export_CategoryStarterTemplateDefinition
@@ -10140,6 +10429,132 @@ sequenceDiagram
   participant_renderUnknownCommand--&gt;&gt;participant_runCli: return
   participant_runCli-&gt;&gt;participant_runCommand: runCommand()
   participant_runCommand--&gt;&gt;participant_runCli: return
+</pre
+                >
+              </details>
+            </article>
+            <article
+              class="item"
+              data-search="createCategoryAppManifest sequence diagrams/sequences/create-category-app-manifest.mmd"
+            >
+              <h3>createCategoryAppManifest sequence</h3>
+              <p class="muted"><code>diagrams/sequences/create-category-app-manifest.mmd</code></p>
+              <div class="mermaid">
+                sequenceDiagram participant participant___type as __type participant
+                participant_createCategoryAppManifest as createCategoryAppManifest participant
+                participant_createManifestFromTemplate as createManifestFromTemplate participant
+                participant_isPlainObject as isPlainObject participant participant_mergeAppManifest
+                as mergeAppManifest participant participant_mergeValue as mergeValue
+                participant_createCategoryAppManifest-&gt;&gt;participant_createManifestFromTemplate:
+                createManifestFromTemplate()
+                participant_createManifestFromTemplate-&gt;&gt;participant___type:
+                TEMPLATE_FACTORIES[template]()
+                participant___type--&gt;&gt;participant_createManifestFromTemplate: return
+                participant_createManifestFromTemplate--&gt;&gt;participant_createCategoryAppManifest:
+                return participant_createCategoryAppManifest-&gt;&gt;participant_mergeAppManifest:
+                mergeAppManifest() participant_mergeAppManifest-&gt;&gt;participant_mergeValue:
+                mergeValue() participant_mergeValue-&gt;&gt;participant_isPlainObject:
+                isPlainObject() participant_isPlainObject--&gt;&gt;participant_mergeValue: return
+                participant_mergeValue-&gt;&gt;participant_mergeValue: mergeValue()
+                participant_mergeValue--&gt;&gt;participant_mergeValue: return
+                participant_mergeValue--&gt;&gt;participant_mergeAppManifest: return
+                participant_mergeAppManifest--&gt;&gt;participant_createCategoryAppManifest: return
+              </div>
+              <details>
+                <summary>View Mermaid source</summary>
+                <pre>
+sequenceDiagram
+  participant participant___type as __type
+  participant participant_createCategoryAppManifest as createCategoryAppManifest
+  participant participant_createManifestFromTemplate as createManifestFromTemplate
+  participant participant_isPlainObject as isPlainObject
+  participant participant_mergeAppManifest as mergeAppManifest
+  participant participant_mergeValue as mergeValue
+  participant_createCategoryAppManifest-&gt;&gt;participant_createManifestFromTemplate: createManifestFromTemplate()
+  participant_createManifestFromTemplate-&gt;&gt;participant___type: TEMPLATE_FACTORIES[template]()
+  participant___type--&gt;&gt;participant_createManifestFromTemplate: return
+  participant_createManifestFromTemplate--&gt;&gt;participant_createCategoryAppManifest: return
+  participant_createCategoryAppManifest-&gt;&gt;participant_mergeAppManifest: mergeAppManifest()
+  participant_mergeAppManifest-&gt;&gt;participant_mergeValue: mergeValue()
+  participant_mergeValue-&gt;&gt;participant_isPlainObject: isPlainObject()
+  participant_isPlainObject--&gt;&gt;participant_mergeValue: return
+  participant_mergeValue-&gt;&gt;participant_mergeValue: mergeValue()
+  participant_mergeValue--&gt;&gt;participant_mergeValue: return
+  participant_mergeValue--&gt;&gt;participant_mergeAppManifest: return
+  participant_mergeAppManifest--&gt;&gt;participant_createCategoryAppManifest: return
+</pre
+                >
+              </details>
+            </article>
+            <article
+              class="item"
+              data-search="createOAuthFixtureManifest sequence diagrams/sequences/create-oauth-fixture-manifest.mmd"
+            >
+              <h3>createOAuthFixtureManifest sequence</h3>
+              <p class="muted"><code>diagrams/sequences/create-oauth-fixture-manifest.mmd</code></p>
+              <div class="mermaid">
+                sequenceDiagram participant participant___type as __type participant
+                participant_createCategoryAppManifest as createCategoryAppManifest participant
+                participant_createManifestFromTemplate as createManifestFromTemplate participant
+                participant_createOAuthFixtureManifest as createOAuthFixtureManifest participant
+                participant_isPlainObject as isPlainObject participant participant_mergeAppManifest
+                as mergeAppManifest participant participant_mergeValue as mergeValue participant
+                participant_resolveOAuthFixture as resolveOAuthFixture
+                participant_createOAuthFixtureManifest-&gt;&gt;participant_createCategoryAppManifest:
+                createCategoryAppManifest()
+                participant_createCategoryAppManifest-&gt;&gt;participant_createManifestFromTemplate:
+                createManifestFromTemplate()
+                participant_createManifestFromTemplate-&gt;&gt;participant___type:
+                TEMPLATE_FACTORIES[template]()
+                participant___type--&gt;&gt;participant_createManifestFromTemplate: return
+                participant_createManifestFromTemplate--&gt;&gt;participant_createCategoryAppManifest:
+                return participant_createCategoryAppManifest-&gt;&gt;participant_mergeAppManifest:
+                mergeAppManifest() participant_mergeAppManifest-&gt;&gt;participant_mergeValue:
+                mergeValue() participant_mergeValue-&gt;&gt;participant_isPlainObject:
+                isPlainObject() participant_isPlainObject--&gt;&gt;participant_mergeValue: return
+                participant_mergeValue-&gt;&gt;participant_mergeValue: mergeValue()
+                participant_mergeValue--&gt;&gt;participant_mergeValue: return
+                participant_mergeValue--&gt;&gt;participant_mergeAppManifest: return
+                participant_mergeAppManifest--&gt;&gt;participant_createCategoryAppManifest: return
+                participant_createCategoryAppManifest--&gt;&gt;participant_createOAuthFixtureManifest:
+                return
+                participant_createOAuthFixtureManifest-&gt;&gt;participant_resolveOAuthFixture:
+                resolveOAuthFixture()
+                participant_resolveOAuthFixture--&gt;&gt;participant_createOAuthFixtureManifest:
+                return participant_createOAuthFixtureManifest-&gt;&gt;participant_mergeAppManifest:
+                mergeAppManifest()
+                participant_mergeAppManifest--&gt;&gt;participant_createOAuthFixtureManifest: return
+              </div>
+              <details>
+                <summary>View Mermaid source</summary>
+                <pre>
+sequenceDiagram
+  participant participant___type as __type
+  participant participant_createCategoryAppManifest as createCategoryAppManifest
+  participant participant_createManifestFromTemplate as createManifestFromTemplate
+  participant participant_createOAuthFixtureManifest as createOAuthFixtureManifest
+  participant participant_isPlainObject as isPlainObject
+  participant participant_mergeAppManifest as mergeAppManifest
+  participant participant_mergeValue as mergeValue
+  participant participant_resolveOAuthFixture as resolveOAuthFixture
+  participant_createOAuthFixtureManifest-&gt;&gt;participant_createCategoryAppManifest: createCategoryAppManifest()
+  participant_createCategoryAppManifest-&gt;&gt;participant_createManifestFromTemplate: createManifestFromTemplate()
+  participant_createManifestFromTemplate-&gt;&gt;participant___type: TEMPLATE_FACTORIES[template]()
+  participant___type--&gt;&gt;participant_createManifestFromTemplate: return
+  participant_createManifestFromTemplate--&gt;&gt;participant_createCategoryAppManifest: return
+  participant_createCategoryAppManifest-&gt;&gt;participant_mergeAppManifest: mergeAppManifest()
+  participant_mergeAppManifest-&gt;&gt;participant_mergeValue: mergeValue()
+  participant_mergeValue-&gt;&gt;participant_isPlainObject: isPlainObject()
+  participant_isPlainObject--&gt;&gt;participant_mergeValue: return
+  participant_mergeValue-&gt;&gt;participant_mergeValue: mergeValue()
+  participant_mergeValue--&gt;&gt;participant_mergeValue: return
+  participant_mergeValue--&gt;&gt;participant_mergeAppManifest: return
+  participant_mergeAppManifest--&gt;&gt;participant_createCategoryAppManifest: return
+  participant_createCategoryAppManifest--&gt;&gt;participant_createOAuthFixtureManifest: return
+  participant_createOAuthFixtureManifest-&gt;&gt;participant_resolveOAuthFixture: resolveOAuthFixture()
+  participant_resolveOAuthFixture--&gt;&gt;participant_createOAuthFixtureManifest: return
+  participant_createOAuthFixtureManifest-&gt;&gt;participant_mergeAppManifest: mergeAppManifest()
+  participant_mergeAppManifest--&gt;&gt;participant_createOAuthFixtureManifest: return
 </pre
                 >
               </details>
@@ -10431,6 +10846,36 @@ sequenceDiagram
           </section>
         </section>
         <section
+          id="view-src-fixtures-oauth-ts"
+          class="view"
+          data-view="src/fixtures/oauth.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/fixtures/oauth.ts</h2>
+            <article class="item" data-search="createOAuthConfig src/fixtures/oauth.ts ">
+              <h3>createOAuthConfig</h3>
+              <p class="muted"><code>src/fixtures/oauth.ts:23:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article class="item" data-search="listOAuthFixtures src/fixtures/oauth.ts ">
+              <h3>listOAuthFixtures</h3>
+              <p class="muted"><code>src/fixtures/oauth.ts:79:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article class="item" data-search="resolveOAuthFixture src/fixtures/oauth.ts ">
+              <h3>resolveOAuthFixture</h3>
+              <p class="muted"><code>src/fixtures/oauth.ts:83:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article class="item" data-search="createOAuthFixtureManifest src/fixtures/oauth.ts ">
+              <h3>createOAuthFixtureManifest</h3>
+              <p class="muted"><code>src/fixtures/oauth.ts:87:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+          </section>
+        </section>
+        <section
           id="view-src-generators-create-category-app-ts"
           class="view"
           data-view="src/generators/create-category-app.ts"
@@ -10443,7 +10888,7 @@ sequenceDiagram
               data-search="resolveThemeModeValue src/generators/create-category-app.ts "
             >
               <h3>resolveThemeModeValue</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:24:1</code></p>
+              <p class="muted"><code>src/generators/create-category-app.ts:8:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article
@@ -10451,7 +10896,7 @@ sequenceDiagram
               data-search="resolveSeedName src/generators/create-category-app.ts "
             >
               <h3>resolveSeedName</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:33:1</code></p>
+              <p class="muted"><code>src/generators/create-category-app.ts:17:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article
@@ -10459,7 +10904,7 @@ sequenceDiagram
               data-search="resolveSeedSlug src/generators/create-category-app.ts "
             >
               <h3>resolveSeedSlug</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:37:1</code></p>
+              <p class="muted"><code>src/generators/create-category-app.ts:21:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article
@@ -10467,7 +10912,7 @@ sequenceDiagram
               data-search="resolveSeedThemeId src/generators/create-category-app.ts "
             >
               <h3>resolveSeedThemeId</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:41:1</code></p>
+              <p class="muted"><code>src/generators/create-category-app.ts:25:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article
@@ -10475,23 +10920,7 @@ sequenceDiagram
               data-search="createManifestFromTemplate src/generators/create-category-app.ts "
             >
               <h3>createManifestFromTemplate</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:75:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article
-              class="item"
-              data-search="addProviderEntryScreen src/generators/create-category-app.ts "
-            >
-              <h3>addProviderEntryScreen</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:83:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article
-              class="item"
-              data-search="createProviderEntryScreen src/generators/create-category-app.ts "
-            >
-              <h3>createProviderEntryScreen</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:111:1</code></p>
+              <p class="muted"><code>src/generators/create-category-app.ts:59:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article
@@ -10499,7 +10928,7 @@ sequenceDiagram
               data-search="createCategoryAppManifest src/generators/create-category-app.ts "
             >
               <h3>createCategoryAppManifest</h3>
-              <p class="muted"><code>src/generators/create-category-app.ts:141:1</code></p>
+              <p class="muted"><code>src/generators/create-category-app.ts:67:1</code></p>
               <p class="empty">No description available.</p>
             </article>
           </section>

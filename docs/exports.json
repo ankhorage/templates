@@ -177,7 +177,7 @@
     "modulePath": "src/generators/create-category-app.ts",
     "sourceLocation": {
       "filePath": "src/generators/create-category-app.ts",
-      "line": 141,
+      "line": 67,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -202,6 +202,38 @@
             "name": "template",
             "type": "\"starter\"",
             "required": false,
+            "description": null
+          }
+        ],
+        "returnType": "AppManifest",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "createOAuthFixtureManifest",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "function",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 87,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["AppCategory", "OAuthFixtureId", "TemplateKind"],
+    "signatures": [
+      {
+        "label": "(args: { category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }) => AppManifest",
+        "parameters": [
+          {
+            "name": "args",
+            "type": "{ category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }",
+            "required": true,
             "description": null
           }
         ],
@@ -244,6 +276,31 @@
           }
         ],
         "returnType": "AppManifest",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "listOAuthFixtures",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "function",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 79,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["OAuthFixtureDefinition"],
+    "signatures": [
+      {
+        "label": "() => OAuthFixtureDefinition[]",
+        "parameters": [],
+        "returnType": "OAuthFixtureDefinition[]",
         "returnDescription": null
       }
     ],
@@ -333,6 +390,139 @@
         "label": "() => readonly StarterTemplateSummary[]",
         "parameters": [],
         "returnType": "readonly StarterTemplateSummary[]",
+        "returnDescription": null
+      }
+    ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "OAUTH_CALLBACK_ROUTE",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "value",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 8,
+      "column": 14
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "OAUTH_FIXTURE_IDS",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "value",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 9,
+      "column": 14
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "OAuthFixtureDefinition",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 16,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "description",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "id",
+        "kind": "property",
+        "type": "\"google\" | \"apple\" | \"google-apple\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "label",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "oauth",
+        "kind": "property",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "OAuthFixtureId",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "unknown",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 11,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "resolveOAuthFixture",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "function",
+    "modulePath": "src/fixtures/oauth.ts",
+    "sourceLocation": {
+      "filePath": "src/fixtures/oauth.ts",
+      "line": 83,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": ["OAuthFixtureDefinition"],
+    "signatures": [
+      {
+        "label": "(id: \"google\" | \"apple\" | \"google-apple\") => OAuthFixtureDefinition",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "\"google\" | \"apple\" | \"google-apple\"",
+            "required": true,
+            "description": null
+          }
+        ],
+        "returnType": "OAuthFixtureDefinition",
         "returnDescription": null
       }
     ],

@@ -5,6 +5,7 @@ graph LR
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
   module_src_commandContext_ts["src/commandContext.ts"]
   module_src_commands_ts["src/commands.ts"]
+  module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
   module_src_generators_create_category_app_ts["src/generators/create-category-app.ts"]
   module_src_index_ts["src/index.ts"]
   module_src_internal_defaults_ts["src/internal/defaults.ts"]
@@ -188,10 +189,18 @@ graph LR
   export_createCategoryAppManifest["createCategoryAppManifest"]
   module_src_generators_create_category_app_ts --> export_createCategoryAppManifest
   export_createCategoryAppManifest -.-> export_SplashScreenResizeMode
+  export_createOAuthFixtureManifest["createOAuthFixtureManifest"]
+  module_src_fixtures_oauth_ts --> export_createOAuthFixtureManifest
+  export_createOAuthFixtureManifest -.-> export_AppCategory
+  export_createOAuthFixtureManifest -.-> export_OAuthFixtureId
+  export_createOAuthFixtureManifest -.-> export_TemplateKind
   export_createStarterTemplate["createStarterTemplate"]
   module_src_templates_starter_starter_template_ts --> export_createStarterTemplate
   export_createStarterTemplate -.-> export_StarterTemplateOptions
   export_createStarterTemplate -.-> export_TemplateSeed
+  export_listOAuthFixtures["listOAuthFixtures"]
+  module_src_fixtures_oauth_ts --> export_listOAuthFixtures
+  export_listOAuthFixtures -.-> export_OAuthFixtureDefinition
   export_listStarterTemplates["listStarterTemplates"]
   module_src_templates_starter_starter_registry_ts --> export_listStarterTemplates
   export_listStarterTemplates -.-> export_CategoryStarterTemplateDefinition
@@ -201,6 +210,17 @@ graph LR
   export_listStarterTemplateSummaries["listStarterTemplateSummaries"]
   module_src_templates_starter_starter_registry_ts --> export_listStarterTemplateSummaries
   export_listStarterTemplateSummaries -.-> export_StarterTemplateSummary
+  export_OAUTH_CALLBACK_ROUTE["OAUTH_CALLBACK_ROUTE"]
+  module_src_fixtures_oauth_ts --> export_OAUTH_CALLBACK_ROUTE
+  export_OAUTH_FIXTURE_IDS["OAUTH_FIXTURE_IDS"]
+  module_src_fixtures_oauth_ts --> export_OAUTH_FIXTURE_IDS
+  export_OAuthFixtureDefinition["OAuthFixtureDefinition"]
+  module_src_fixtures_oauth_ts --> export_OAuthFixtureDefinition
+  export_OAuthFixtureId["OAuthFixtureId"]
+  module_src_fixtures_oauth_ts --> export_OAuthFixtureId
+  export_resolveOAuthFixture["resolveOAuthFixture"]
+  module_src_fixtures_oauth_ts --> export_resolveOAuthFixture
+  export_resolveOAuthFixture -.-> export_OAuthFixtureDefinition
   export_resolveStarterTemplate["resolveStarterTemplate"]
   module_src_templates_starter_starter_registry_ts --> export_resolveStarterTemplate
   export_resolveStarterTemplate -.-> export_CategoryStarterTemplateDefinition

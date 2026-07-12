@@ -1,25 +1,9 @@
-import {
-  type AppCategory,
-  type AppManifest,
-  resolveAuthFlow,
-  type ScreenSpec,
-  type ThemeConfig,
-} from '@ankhorage/contracts';
+import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
 import { mergeAppManifest } from '../internal/merge';
 import type { AppManifestOverrides } from '../internal/overrides';
 import { CATEGORY_PRESETS } from '../presets/category-presets';
-import { createScreen } from '../templates/shared/screen';
-import {
-  createScreenRoot,
-  createSection,
-  createZoraNode,
-} from '../templates/shared/zora-node-helpers';
 import { createStarterTemplate, type TemplateKind } from '../templates/starter';
-
-type ProviderConfig = NonNullable<
-  NonNullable<AppManifest['infra']['auth']>['oauth']
->['providers'][number];
 
 function resolveThemeModeValue<TValue>(
   overrides: AppManifestOverrides | undefined,
@@ -80,69 +64,11 @@ function createManifestFromTemplate(
   return TEMPLATE_FACTORIES[template](category, overrides);
 }
 
-function addProviderEntryScreen(manifest: AppManifest): AppManifest {
-  const providers = manifest.infra.auth?.oauth?.providers.filter(
-    (provider) => provider.enabled !== false,
-  );
-
-  if (
-    manifest.infra.auth?.oauth?.enabled !== true ||
-    providers === undefined ||
-    providers.length === 0
-  ) {
-    return manifest;
-  }
-
-  const screenId = resolveAuthFlow(manifest.infra.auth.flow).signInRoute;
-
-  if (manifest.screens[screenId] !== undefined) {
-    return manifest;
-  }
-
-  return {
-    ...manifest,
-    screens: {
-      ...manifest.screens,
-      [screenId]: createProviderEntryScreen(screenId, providers),
-    },
-  };
-}
-
-function createProviderEntryScreen(
-  screenId: string,
-  providers: readonly ProviderConfig[],
-): ScreenSpec {
-  return createScreen({
-    id: screenId,
-    name: 'Provider entry',
-    title: 'Provider entry',
-    description: 'Choose a provider.',
-    root: createScreenRoot('provider-entry-screen', { width: 'default' }, [
-      createZoraNode('provider-entry-header', 'SectionHeader', {
-        eyebrow: 'Account',
-        title: 'Continue',
-        description: 'Choose a configured provider.',
-      }),
-      createSection('provider-entry-section', { title: 'Providers' }, [
-        createZoraNode('provider-entry-list', 'OAuthProviderList', {
-          providers: providers.map((provider) => ({
-            id: provider.id,
-            ...(provider.label ? { label: provider.label } : {}),
-            ...(provider.icon ? { icon: provider.icon } : {}),
-          })),
-          layout: 'stack',
-          fullWidth: true,
-        }),
-      ]),
-    ]),
-  });
-}
-
 export function createCategoryAppManifest(
   category: AppCategory,
   template: TemplateKind = 'starter',
   overrides?: AppManifestOverrides,
 ): AppManifest {
   const manifest = createManifestFromTemplate(category, template, overrides);
-  return addProviderEntryScreen(mergeAppManifest(manifest, overrides));
+  return mergeAppManifest(manifest, overrides);
 }

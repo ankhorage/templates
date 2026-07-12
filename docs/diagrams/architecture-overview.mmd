@@ -30,13 +30,17 @@ graph TD
   module_src_commands_ts --> module_src_projectSeed_ts
   module_src_commands_ts --> module_src_templates_starter_index_ts
   module_src_commands_ts --> module_src_templateSelector_ts
+  module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
+  package__ankhorage_templates -.-> module_src_fixtures_oauth_ts
+  module_src_fixtures_oauth_ts --> module_src_generators_create_category_app_ts
+  module_src_fixtures_oauth_ts --> module_src_internal_merge_ts
+  module_src_fixtures_oauth_ts --> module_src_internal_overrides_ts
+  module_src_fixtures_oauth_ts --> module_src_templates_starter_index_ts
   module_src_generators_create_category_app_ts["src/generators/create-category-app.ts"]
   package__ankhorage_templates -.-> module_src_generators_create_category_app_ts
   module_src_generators_create_category_app_ts --> module_src_internal_merge_ts
   module_src_generators_create_category_app_ts --> module_src_internal_overrides_ts
   module_src_generators_create_category_app_ts --> module_src_presets_category_presets_ts
-  module_src_generators_create_category_app_ts --> module_src_templates_shared_screen_ts
-  module_src_generators_create_category_app_ts --> module_src_templates_shared_zora_node_helpers_ts
   module_src_generators_create_category_app_ts --> module_src_templates_starter_index_ts
   module_src_index_ts["src/index.ts"]
   module_src_internal_defaults_ts["src/internal/defaults.ts"]

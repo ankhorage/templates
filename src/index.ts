@@ -1,3 +1,12 @@
+export {
+  createOAuthFixtureManifest,
+  listOAuthFixtures,
+  OAUTH_CALLBACK_ROUTE,
+  OAUTH_FIXTURE_IDS,
+  type OAuthFixtureDefinition,
+  type OAuthFixtureId,
+  resolveOAuthFixture,
+} from './fixtures/oauth';
 export { createCategoryAppManifest } from './generators/create-category-app';
 export { CATEGORY_PRESETS, type CategoryPreset } from './presets/category-presets';
 export {
