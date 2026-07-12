@@ -67,7 +67,9 @@ describe('canonical OAuth template fixtures', () => {
         expect(['google', 'apple']).toContain(provider.id);
         expect(provider.enabled).toBe(true);
         expect(provider.credentialsRef).toBe(`auth/oauth/${provider.id}`);
-        expect(provider.label).toBe(`Continue with ${provider.id === 'google' ? 'Google' : 'Apple'}`);
+        expect(provider.label).toBe(
+          `Continue with ${provider.id === 'google' ? 'Google' : 'Apple'}`,
+        );
       }
 
       const serialized = serialize(fixture);
