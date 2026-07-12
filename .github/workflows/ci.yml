@@ -75,6 +75,18 @@ jobs:
             echo "No typecheck script found; skipping."
           fi
 
+      - name: Generate documentation
+        run: bun run docs
+
+      - name: Upload generated documentation
+        uses: actions/upload-artifact@v4
+        with:
+          name: phase3-generated-docs
+          path: |
+            README.md
+            docs
+          if-no-files-found: error
+
       - name: Check changesets
         if: github.event_name == 'pull_request'
         run: |
