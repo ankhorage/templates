@@ -20,6 +20,14 @@ export interface OAuthFixtureDefinition {
   readonly oauth: OAuthConfig;
 }
 
+function createOAuthConfig(providers: readonly OAuthProviderConfig[]): OAuthConfig {
+  return {
+    enabled: true,
+    callbackRoute: OAUTH_CALLBACK_ROUTE,
+    providers: providers.map((provider) => structuredClone(provider)),
+  };
+}
+
 const GOOGLE_PROVIDER: OAuthProviderConfig = {
   id: 'google',
   label: 'Continue with Google',
@@ -67,14 +75,6 @@ const FIXTURES: Record<OAuthFixtureId, OAuthFixtureDefinition> = {
     oauth: createOAuthConfig([GOOGLE_PROVIDER, APPLE_PROVIDER]),
   },
 };
-
-function createOAuthConfig(providers: readonly OAuthProviderConfig[]): OAuthConfig {
-  return {
-    enabled: true,
-    callbackRoute: OAUTH_CALLBACK_ROUTE,
-    providers: providers.map((provider) => structuredClone(provider)),
-  };
-}
 
 export function listOAuthFixtures(): OAuthFixtureDefinition[] {
   return OAUTH_FIXTURE_IDS.map((id) => structuredClone(FIXTURES[id]));
