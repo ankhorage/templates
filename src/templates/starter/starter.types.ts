@@ -1,9 +1,5 @@
 import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
-export const FALLBACK_TEMPLATE_CATEGORY = 'fallback' as const;
-
-export type StarterTemplateCategory = AppCategory | typeof FALLBACK_TEMPLATE_CATEGORY;
-
 export const TEMPLATE_KINDS = ['starter'] as const;
 
 export type TemplateKind = (typeof TEMPLATE_KINDS)[number];
@@ -23,7 +19,7 @@ export interface StarterTemplateSummary {
 }
 
 export interface TemplateSeed {
-  category: StarterTemplateCategory;
+  category: AppCategory;
   categoryLabel: string;
   appName: string;
   slug: string;

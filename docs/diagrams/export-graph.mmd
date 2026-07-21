@@ -188,6 +188,7 @@ graph LR
   export_CategoryStarterTemplateDefinition -.-> export_StarterTemplateFactory
   export_createCategoryAppManifest["createCategoryAppManifest"]
   module_src_generators_create_category_app_ts --> export_createCategoryAppManifest
+  export_createCategoryAppManifest -.-> export_AppCategory
   export_createCategoryAppManifest -.-> export_SplashScreenResizeMode
   export_createOAuthFixtureManifest["createOAuthFixtureManifest"]
   module_src_fixtures_oauth_ts --> export_createOAuthFixtureManifest

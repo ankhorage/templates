@@ -1,5 +1,4 @@
 export {
-  FALLBACK_TEMPLATE_CATEGORY,
   createStarterTemplate,
   listStarterTemplateSummaries,
   listStarterTemplates,
@@ -8,7 +7,6 @@ export {
   TEMPLATE_KINDS,
   type CategoryStarterTemplateDefinition,
   type StarterTemplateFactory,
-  type StarterTemplateCategory,
   type StarterTemplateId,
   type StarterTemplateOptions,
   type StarterTemplateSelection,

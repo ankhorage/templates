@@ -1,6 +1,5 @@
 import type { AppCategory } from '@ankhorage/contracts';
 
-import { FALLBACK_TEMPLATE_CATEGORY } from './starter.types';
 import { fallbackStarterTemplates } from './categories/fallback';
 import { booksReadingStarterTemplates } from './categories/books-reading';
 import { businessProductivityStarterTemplates } from './categories/business-productivity';
@@ -85,10 +84,6 @@ export function resolveStarterTemplate(
   seed: TemplateSeed,
   templateId = 'default',
 ): CategoryStarterTemplateDefinition {
-  if (seed.category === FALLBACK_TEMPLATE_CATEGORY) {
-    return resolveFallbackTemplate();
-  }
-
   const categoryTemplates = STARTER_TEMPLATE_REGISTRY[seed.category];
   const selected = categoryTemplates?.find((template) => template.id === templateId);
   const categoryDefault = categoryTemplates?.find((template) => template.id === 'default');

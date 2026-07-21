@@ -28,9 +28,7 @@ describe('templates commands', () => {
 
     expect(result.exitCode).toBe(0);
     expect(output).toContain('Available templates:');
-    expect(output).toContain(
-      'fallback/default - Generic starter: The original Home, Details, and Settings starter manifest.',
-    );
+    expect(output).not.toContain('fallback/default');
     expect(output).toContain(
       'games/default - Quest loop: A home, quests, inventory, friends, and profile starter for game experiences.',
     );
@@ -74,6 +72,7 @@ describe('templates commands', () => {
       readonly templateId: string;
       readonly manifest: {
         readonly metadata: {
+          readonly category: string;
           readonly version: string;
         };
       };
@@ -82,6 +81,7 @@ describe('templates commands', () => {
     expect(inspection.selector).toBe('games/chess');
     expect(inspection.category).toBe('games');
     expect(inspection.templateId).toBe('chess');
+    expect(inspection.manifest.metadata.category).toBe('games');
     expect(typeof inspection.manifest.metadata.version).toBe('string');
   });
 
@@ -111,6 +111,7 @@ describe('templates commands', () => {
         readonly metadata: {
           readonly name: string;
           readonly slug: string;
+          readonly category: string;
           readonly version: string;
         };
       };
@@ -130,6 +131,7 @@ describe('templates commands', () => {
       expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
       expect(manifest.metadata.slug).toBe('my-app');
       expect(manifest.metadata.name).toBe('My App');
+      expect(manifest.metadata.category).toBe('games');
       expect(typeof manifest.metadata.version).toBe('string');
       expect(typeof metadata.version).toBe('string');
       expect({
@@ -152,6 +154,19 @@ describe('templates commands', () => {
     } finally {
       await rm(cwd, { recursive: true, force: true });
     }
+  });
+
+  test('rejects fallback selectors because manifests require canonical app categories', async () => {
+    const capture = createCapturedContext();
+
+    const result = await runCommand(
+      'create',
+      ['my-app', '--template', 'fallback/default'],
+      capture.context,
+    );
+
+    expect(result.exitCode).toBe(1);
+    expect(capture.readStderr()).toContain('Unknown template category "fallback"');
   });
 
   test('rejects a bare template id', async () => {
