@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 3.0.0
+
+### Major Changes
+
+- 8627bee: Emit the canonical AppManifest metadata category from generated starter manifests and update the contracts dependency to the manifest category contract.
+
 ## 2.2.0
 
 ### Minor Changes
