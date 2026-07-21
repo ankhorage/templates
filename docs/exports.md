@@ -40,7 +40,7 @@ Source: `src/presets/category-presets.ts:3:1`
 
 Kind: `type`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:48:1`
+Source: `src/templates/starter/starter.types.ts:44:1`
 
 ### Members
 
@@ -81,7 +81,7 @@ Source: `src/fixtures/oauth.ts:87:1`
 
 Kind: `function`
 Module: `src/templates/starter/starter.template.ts`
-Source: `src/templates/starter/starter.template.ts:36:1`
+Source: `src/templates/starter/starter.template.ts:29:1`
 
 ### Signatures
 
@@ -220,19 +220,19 @@ Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:176:1`
 
 Kind: `unknown`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:43:1`
+Source: `src/templates/starter/starter.types.ts:39:1`
 
 ## StarterTemplateId
 
 Kind: `unknown`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:11:1`
+Source: `src/templates/starter/starter.types.ts:7:1`
 
 ## StarterTemplateOptions
 
 Kind: `type`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:39:1`
+Source: `src/templates/starter/starter.types.ts:35:1`
 
 ### Members
 
@@ -244,7 +244,7 @@ Source: `src/templates/starter/starter.types.ts:39:1`
 
 Kind: `type`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:13:1`
+Source: `src/templates/starter/starter.types.ts:9:1`
 
 ### Members
 
@@ -257,7 +257,7 @@ Source: `src/templates/starter/starter.types.ts:13:1`
 
 Kind: `type`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:18:1`
+Source: `src/templates/starter/starter.types.ts:14:1`
 
 ### Members
 
@@ -272,19 +272,19 @@ Source: `src/templates/starter/starter.types.ts:18:1`
 
 Kind: `value`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:7:14`
+Source: `src/templates/starter/starter.types.ts:3:14`
 
 ## TemplateKind
 
 Kind: `unknown`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:9:1`
+Source: `src/templates/starter/starter.types.ts:5:1`
 
 ## TemplateSeed
 
 Kind: `type`
 Module: `src/templates/starter/starter.types.ts`
-Source: `src/templates/starter/starter.types.ts:25:1`
+Source: `src/templates/starter/starter.types.ts:21:1`
 
 ### Members
 

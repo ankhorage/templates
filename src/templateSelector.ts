@@ -1,20 +1,14 @@
 import { APP_CATEGORIES, type AppCategory } from '@ankhorage/contracts';
 
-import { FALLBACK_TEMPLATE_CATEGORY, type StarterTemplateCategory } from './templates/starter';
-
 export interface ParsedTemplateSelector {
-  readonly category: StarterTemplateCategory;
+  readonly category: AppCategory;
   readonly templateId: string;
   readonly selector: string;
 }
 
 const PROJECT_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*[a-z0-9]$/u;
 
-export function parseTemplateCategory(value: string): StarterTemplateCategory {
-  if (value === FALLBACK_TEMPLATE_CATEGORY) {
-    return value;
-  }
-
+export function parseTemplateCategory(value: string): AppCategory {
   if (isAppCategory(value)) {
     return value;
   }
@@ -74,10 +68,7 @@ export function parseProjectSlug(value: string): string {
   return normalizedValue;
 }
 
-export function createTemplateSelector(
-  category: StarterTemplateCategory,
-  templateId: string,
-): string {
+export function createTemplateSelector(category: AppCategory, templateId: string): string {
   return `${category}/${templateId}`;
 }
 

@@ -34,7 +34,7 @@ describe('standalone cli', () => {
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toContain('Available templates:');
     expect(capture.readStdout()).toContain('games/chess');
-    expect(capture.readStdout()).toContain('fallback/default');
+    expect(capture.readStdout()).not.toContain('fallback/default');
   });
 
   test('delegates commands to the shared runner', async () => {

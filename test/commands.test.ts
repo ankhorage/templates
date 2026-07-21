@@ -28,9 +28,7 @@ describe('templates commands', () => {
 
     expect(result.exitCode).toBe(0);
     expect(output).toContain('Available templates:');
-    expect(output).toContain(
-      'fallback/default - Generic starter: The original Home, Details, and Settings starter manifest.',
-    );
+    expect(output).not.toContain('fallback/default');
     expect(output).toContain(
       'games/default - Quest loop: A home, quests, inventory, friends, and profile starter for game experiences.',
     );
@@ -158,38 +156,17 @@ describe('templates commands', () => {
     }
   });
 
-  test('creates fallback selector manifests with a canonical app category', async () => {
-    const cwd = await mkdtemp(path.join(os.tmpdir(), 'templates-create-fallback-'));
+  test('rejects fallback selectors because manifests require canonical app categories', async () => {
+    const capture = createCapturedContext();
 
-    try {
-      const capture = createCapturedContext({ cwd });
-      const result = await runCommand(
-        'create',
-        ['my-fallback-app', '--template', 'fallback/default'],
-        capture.context,
-      );
+    const result = await runCommand(
+      'create',
+      ['my-app', '--template', 'fallback/default'],
+      capture.context,
+    );
 
-      expect(result.exitCode).toBe(0);
-
-      const projectPath = path.join(cwd, 'my-fallback-app');
-      const manifest = JSON.parse(
-        await readFile(path.join(projectPath, 'ankh.config.json'), 'utf8'),
-      ) as {
-        readonly metadata: {
-          readonly category: string;
-        };
-      };
-      const metadata = JSON.parse(
-        await readFile(path.join(projectPath, 'ankh.template.json'), 'utf8'),
-      ) as {
-        readonly category: string;
-      };
-
-      expect(manifest.metadata.category).toBe('developer_tools');
-      expect(metadata.category).toBe('fallback');
-    } finally {
-      await rm(cwd, { recursive: true, force: true });
-    }
+    expect(result.exitCode).toBe(1);
+    expect(capture.readStderr()).toContain('Unknown template category "fallback"');
   });
 
   test('rejects a bare template id', async () => {

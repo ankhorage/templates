@@ -1,4 +1,4 @@
-import type { AppManifest } from '@ankhorage/contracts';
+import type { AppCategory, AppManifest } from '@ankhorage/contracts';
 import type { AnkhCapabilityId, AnkhCommandDescriptor } from '@ankhorage/contracts/cli';
 
 import {
@@ -19,7 +19,6 @@ import {
   type CreateProjectSeedRequest,
   type ProjectSeedDependencies,
 } from './projectSeed.js';
-import type { StarterTemplateCategory } from './templates/starter/index.js';
 import {
   deriveDisplayNameFromSlug,
   parseProjectSlug,
@@ -59,9 +58,7 @@ interface TemplatesCommandServices {
     request: CreateProjectSeedRequest,
     dependencies?: Partial<ProjectSeedDependencies>,
   ) => Promise<{ readonly projectPath: string }>;
-  readonly listTemplateCatalog: (
-    category?: StarterTemplateCategory,
-  ) => readonly TemplateCatalogEntry[];
+  readonly listTemplateCatalog: (category?: AppCategory) => readonly TemplateCatalogEntry[];
   readonly resolveTemplateCatalogEntry: typeof resolveTemplateCatalogEntry;
 }
 
@@ -276,7 +273,7 @@ async function runCreateCommand(
   return { exitCode: 0 };
 }
 
-function parseListArguments(argv: readonly string[]): StarterTemplateCategory | undefined {
+function parseListArguments(argv: readonly string[]): AppCategory | undefined {
   if (argv.length === 0) {
     return undefined;
   }

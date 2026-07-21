@@ -130,7 +130,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 48,
+      "line": 44,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -253,7 +253,7 @@
     "modulePath": "src/templates/starter/starter.template.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.template.ts",
-      "line": 36,
+      "line": 29,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -648,7 +648,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 43,
+      "line": 39,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -666,7 +666,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 11,
+      "line": 7,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -684,7 +684,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 39,
+      "line": 35,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -710,7 +710,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 13,
+      "line": 9,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -743,7 +743,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 18,
+      "line": 14,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -790,7 +790,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 7,
+      "line": 3,
       "column": 14
     },
     "exportPaths": ["src/index.ts"],
@@ -808,7 +808,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 9,
+      "line": 5,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -826,7 +826,7 @@
     "modulePath": "src/templates/starter/starter.types.ts",
     "sourceLocation": {
       "filePath": "src/templates/starter/starter.types.ts",
-      "line": 25,
+      "line": 21,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],

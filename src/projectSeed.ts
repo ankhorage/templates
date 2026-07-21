@@ -1,16 +1,14 @@
 import { mkdir, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
-import type { AppManifest } from '@ankhorage/contracts';
-
-import type { StarterTemplateCategory } from './templates/starter/index.js';
+import type { AppCategory, AppManifest } from '@ankhorage/contracts';
 
 interface TemplateSeedMetadata {
   readonly package: string;
   readonly version: string;
   readonly projectSlug: string;
   readonly displayName: string;
-  readonly category: StarterTemplateCategory;
+  readonly category: AppCategory;
   readonly templateId: string;
   readonly selector: string;
 }

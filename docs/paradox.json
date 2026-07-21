@@ -82,8 +82,6 @@
       "isEntrypoint": false,
       "dependencies": [
         "src/presets/category-presets.ts",
-        "src/templates/starter/categories/fallback/default.template.ts",
-        "src/templates/starter/categories/fallback/index.ts",
         "src/templates/starter/index.ts",
         "src/templateSelector.ts"
       ],
@@ -128,7 +126,6 @@
         "src/commandContext.ts",
         "src/packageMetadata.ts",
         "src/projectSeed.ts",
-        "src/templates/starter/index.ts",
         "src/templateSelector.ts"
       ],
       "exports": [
@@ -259,7 +256,7 @@
     {
       "path": "src/projectSeed.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/templates/starter/index.ts"],
+      "dependencies": [],
       "exports": [
         "createProjectSeed",
         "CreateProjectSeedRequest",
@@ -1691,12 +1688,10 @@
       "exports": [
         "CategoryStarterTemplateDefinition",
         "createStarterTemplate",
-        "FALLBACK_TEMPLATE_CATEGORY",
         "listStarterTemplates",
         "listStarterTemplatesByCategory",
         "listStarterTemplateSummaries",
         "resolveStarterTemplate",
-        "StarterTemplateCategory",
         "StarterTemplateFactory",
         "StarterTemplateId",
         "StarterTemplateOptions",
@@ -1754,12 +1749,10 @@
       "exports": [
         "CategoryStarterTemplateDefinition",
         "createStarterTemplate",
-        "FALLBACK_TEMPLATE_CATEGORY",
         "listStarterTemplates",
         "listStarterTemplatesByCategory",
         "listStarterTemplateSummaries",
         "resolveStarterTemplate",
-        "StarterTemplateCategory",
         "StarterTemplateFactory",
         "StarterTemplateId",
         "StarterTemplateOptions",
@@ -1776,8 +1769,6 @@
       "dependencies": [],
       "exports": [
         "CategoryStarterTemplateDefinition",
-        "FALLBACK_TEMPLATE_CATEGORY",
-        "StarterTemplateCategory",
         "StarterTemplateFactory",
         "StarterTemplateId",
         "StarterTemplateOptions",
@@ -1791,7 +1782,7 @@
     {
       "path": "src/templateSelector.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/templates/starter/index.ts"],
+      "dependencies": [],
       "exports": [
         "createTemplateSelector",
         "deriveDisplayNameFromSlug",
@@ -1934,7 +1925,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 48,
+        "line": 44,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2057,7 +2048,7 @@
       "modulePath": "src/templates/starter/starter.template.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.template.ts",
-        "line": 36,
+        "line": 29,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2452,7 +2443,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 43,
+        "line": 39,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2470,7 +2461,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 11,
+        "line": 7,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2488,7 +2479,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 39,
+        "line": 35,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2514,7 +2505,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 13,
+        "line": 9,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2547,7 +2538,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 18,
+        "line": 14,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2594,7 +2585,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 7,
+        "line": 3,
         "column": 14
       },
       "exportPaths": ["src/index.ts"],
@@ -2612,7 +2603,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 9,
+        "line": 5,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2630,7 +2621,7 @@
       "modulePath": "src/templates/starter/starter.types.ts",
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.types.ts",
-        "line": 25,
+        "line": 21,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2725,7 +2716,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/catalog.ts",
-        "line": 29,
+        "line": 21,
         "column": 1
       }
     },
@@ -2734,7 +2725,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/catalog.ts",
-        "line": 41,
+        "line": 31,
         "column": 1
       }
     },
@@ -2743,7 +2734,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/catalog.ts",
-        "line": 65,
+        "line": 55,
         "column": 1
       }
     },
@@ -2752,7 +2743,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/catalog.ts",
-        "line": 85,
+        "line": 71,
         "column": 1
       }
     },
@@ -2761,7 +2752,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/catalog.ts",
-        "line": 99,
+        "line": 75,
         "column": 1
       }
     },
@@ -2770,7 +2761,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/catalog.ts",
-        "line": 109,
+        "line": 85,
         "column": 1
       }
     },
@@ -2824,7 +2815,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 108,
+        "line": 105,
         "column": 1
       }
     },
@@ -2833,7 +2824,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 128,
+        "line": 125,
         "column": 1
       }
     },
@@ -2842,7 +2833,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 136,
+        "line": 133,
         "column": 1
       }
     },
@@ -2851,7 +2842,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 142,
+        "line": 139,
         "column": 1
       }
     },
@@ -2860,7 +2851,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 166,
+        "line": 163,
         "column": 1
       }
     },
@@ -2869,7 +2860,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 172,
+        "line": 169,
         "column": 1
       }
     },
@@ -2878,7 +2869,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 199,
+        "line": 196,
         "column": 1
       }
     },
@@ -2887,7 +2878,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 211,
+        "line": 208,
         "column": 1
       }
     },
@@ -2896,7 +2887,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 223,
+        "line": 220,
         "column": 1
       }
     },
@@ -2905,7 +2896,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 240,
+        "line": 237,
         "column": 1
       }
     },
@@ -2914,7 +2905,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 279,
+        "line": 276,
         "column": 1
       }
     },
@@ -2923,7 +2914,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 291,
+        "line": 288,
         "column": 1
       }
     },
@@ -2932,7 +2923,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 299,
+        "line": 296,
         "column": 1
       }
     },
@@ -2941,7 +2932,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 323,
+        "line": 320,
         "column": 1
       }
     },
@@ -2950,7 +2941,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 331,
+        "line": 328,
         "column": 1
       }
     },
@@ -2959,7 +2950,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 347,
+        "line": 344,
         "column": 1
       }
     },
@@ -2968,7 +2959,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 359,
+        "line": 356,
         "column": 1
       }
     },
@@ -2977,7 +2968,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 378,
+        "line": 375,
         "column": 1
       }
     },
@@ -2986,7 +2977,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/commands.ts",
-        "line": 383,
+        "line": 380,
         "column": 1
       }
     },
@@ -3130,7 +3121,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 36,
+        "line": 34,
         "column": 1
       }
     },
@@ -3139,7 +3130,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 67,
+        "line": 65,
         "column": 1
       }
     },
@@ -3148,7 +3139,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 77,
+        "line": 75,
         "column": 1
       }
     },
@@ -3157,7 +3148,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 90,
+        "line": 88,
         "column": 1
       }
     },
@@ -4588,7 +4579,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/starter.template.ts",
-        "line": 36,
+        "line": 29,
         "column": 1
       }
     },
@@ -4597,7 +4588,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 13,
+        "line": 11,
         "column": 1
       }
     },
@@ -4606,7 +4597,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 27,
+        "line": 21,
         "column": 1
       }
     },
@@ -4615,7 +4606,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 53,
+        "line": 47,
         "column": 1
       }
     },
@@ -4624,7 +4615,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 77,
+        "line": 71,
         "column": 1
       }
     },
@@ -4633,7 +4624,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 84,
+        "line": 75,
         "column": 1
       }
     },
@@ -4642,7 +4633,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 92,
+        "line": 83,
         "column": 1
       }
     }
@@ -4738,16 +4729,6 @@
       },
       {
         "fromPath": "src/catalog.ts",
-        "toPath": "src/templates/starter/categories/fallback/default.template.ts",
-        "sourcePath": "src/catalog.ts"
-      },
-      {
-        "fromPath": "src/catalog.ts",
-        "toPath": "src/templates/starter/categories/fallback/index.ts",
-        "sourcePath": "src/catalog.ts"
-      },
-      {
-        "fromPath": "src/catalog.ts",
         "toPath": "src/templates/starter/index.ts",
         "sourcePath": "src/catalog.ts"
       },
@@ -4783,11 +4764,6 @@
       },
       {
         "fromPath": "src/commands.ts",
-        "toPath": "src/templates/starter/index.ts",
-        "sourcePath": "src/commands.ts"
-      },
-      {
-        "fromPath": "src/commands.ts",
         "toPath": "src/templateSelector.ts",
         "sourcePath": "src/commands.ts"
       },
@@ -4815,16 +4791,6 @@
         "fromPath": "src/packageMetadata.ts",
         "toPath": "package.json",
         "sourcePath": "src/packageMetadata.ts"
-      },
-      {
-        "fromPath": "src/projectSeed.ts",
-        "toPath": "src/templates/starter/index.ts",
-        "sourcePath": "src/projectSeed.ts"
-      },
-      {
-        "fromPath": "src/templateSelector.ts",
-        "toPath": "src/templates/starter/index.ts",
-        "sourcePath": "src/templateSelector.ts"
       },
       {
         "fromPath": "src/cli/index.ts",
@@ -6863,20 +6829,8 @@
       },
       {
         "fromSymbol": "createManifestForSelector",
-        "toSymbol": "createFallbackStarterTemplate",
-        "callExpression": "createFallbackStarterTemplate",
-        "sourcePath": "src/catalog.ts"
-      },
-      {
-        "fromSymbol": "createManifestForSelector",
         "toSymbol": "createStarterTemplate",
         "callExpression": "createStarterTemplate",
-        "sourcePath": "src/catalog.ts"
-      },
-      {
-        "fromSymbol": "src/catalog.ts",
-        "toSymbol": "createTemplateSelector",
-        "callExpression": "createTemplateSelector",
         "sourcePath": "src/catalog.ts"
       },
       {
