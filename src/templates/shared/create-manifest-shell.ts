@@ -1,9 +1,10 @@
-import type { AppManifest, ThemeConfig } from '@ankhorage/contracts';
+import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
 import { BASE_INFRA, BASE_SETTINGS } from '../../internal/defaults';
 import { createSplashScreen, type AppManifestWithSplashScreen } from './splash-screen';
 
 interface ManifestShellSeed {
+  category: AppCategory;
   appName: string;
   slug: string;
 }
@@ -20,6 +21,7 @@ export function createManifestShell(args: {
       name: args.seed.appName,
       slug: args.seed.slug,
       version: args.version,
+      category: args.seed.category,
       themeId: args.theme.id,
     },
     themes: [args.theme],

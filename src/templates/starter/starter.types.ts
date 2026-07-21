@@ -23,7 +23,7 @@ export interface StarterTemplateSummary {
 }
 
 export interface TemplateSeed {
-  category: StarterTemplateCategory;
+  category: AppCategory;
   categoryLabel: string;
   appName: string;
   slug: string;

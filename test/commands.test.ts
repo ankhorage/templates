@@ -74,6 +74,7 @@ describe('templates commands', () => {
       readonly templateId: string;
       readonly manifest: {
         readonly metadata: {
+          readonly category: string;
           readonly version: string;
         };
       };
@@ -82,6 +83,7 @@ describe('templates commands', () => {
     expect(inspection.selector).toBe('games/chess');
     expect(inspection.category).toBe('games');
     expect(inspection.templateId).toBe('chess');
+    expect(inspection.manifest.metadata.category).toBe('games');
     expect(typeof inspection.manifest.metadata.version).toBe('string');
   });
 
@@ -111,6 +113,7 @@ describe('templates commands', () => {
         readonly metadata: {
           readonly name: string;
           readonly slug: string;
+          readonly category: string;
           readonly version: string;
         };
       };
@@ -130,6 +133,7 @@ describe('templates commands', () => {
       expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
       expect(manifest.metadata.slug).toBe('my-app');
       expect(manifest.metadata.name).toBe('My App');
+      expect(manifest.metadata.category).toBe('games');
       expect(typeof manifest.metadata.version).toBe('string');
       expect(typeof metadata.version).toBe('string');
       expect({
@@ -149,6 +153,40 @@ describe('templates commands', () => {
       });
       expect(readme).toContain('# My App');
       expect(readme).toContain('`games/chess`');
+    } finally {
+      await rm(cwd, { recursive: true, force: true });
+    }
+  });
+
+  test('creates fallback selector manifests with a canonical app category', async () => {
+    const cwd = await mkdtemp(path.join(os.tmpdir(), 'templates-create-fallback-'));
+
+    try {
+      const capture = createCapturedContext({ cwd });
+      const result = await runCommand(
+        'create',
+        ['my-fallback-app', '--template', 'fallback/default'],
+        capture.context,
+      );
+
+      expect(result.exitCode).toBe(0);
+
+      const projectPath = path.join(cwd, 'my-fallback-app');
+      const manifest = JSON.parse(
+        await readFile(path.join(projectPath, 'ankh.config.json'), 'utf8'),
+      ) as {
+        readonly metadata: {
+          readonly category: string;
+        };
+      };
+      const metadata = JSON.parse(
+        await readFile(path.join(projectPath, 'ankh.template.json'), 'utf8'),
+      ) as {
+        readonly category: string;
+      };
+
+      expect(manifest.metadata.category).toBe('developer_tools');
+      expect(metadata.category).toBe('fallback');
     } finally {
       await rm(cwd, { recursive: true, force: true });
     }

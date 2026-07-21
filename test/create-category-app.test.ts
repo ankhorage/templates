@@ -154,6 +154,7 @@ describe('createCategoryAppManifest', () => {
 
       expect(manifest.metadata.name).toBe(preset.defaultName);
       expect(manifest.metadata.slug).toBe(preset.defaultSlug);
+      expect(manifest.metadata.category).toBe(category);
       expect(manifest.themes[0]?.light).toEqual({
         primaryColor: preset.primaryColor,
         harmony: preset.harmony,

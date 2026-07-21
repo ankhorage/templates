@@ -1,4 +1,4 @@
-import type { AppManifest, ThemeConfig } from '@ankhorage/contracts';
+import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
 import { CATEGORY_PRESETS } from './presets/category-presets.js';
 import { createFallbackStarterTemplate } from './templates/starter/categories/fallback/default.template.js';
@@ -24,6 +24,7 @@ export interface TemplateCatalogEntry {
 
 const FALLBACK_THEME_HARMONY: ThemeConfig['light']['harmony'] = 'analogous';
 const FALLBACK_FOCUS_AREAS = ['Home', 'Details', 'Settings'] as const;
+const FALLBACK_MANIFEST_CATEGORY: AppCategory = 'developer_tools';
 
 export function listTemplateCatalog(
   category?: StarterTemplateCategory,
@@ -112,7 +113,7 @@ function createTemplateSeed(args: {
 }): TemplateSeed {
   if (args.category === FALLBACK_TEMPLATE_CATEGORY) {
     return {
-      category: FALLBACK_TEMPLATE_CATEGORY,
+      category: FALLBACK_MANIFEST_CATEGORY,
       categoryLabel: 'Fallback',
       appName: args.displayName,
       slug: args.projectSlug,
