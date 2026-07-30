@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 3.0.1
+
+### Patch Changes
+
+- 3fa0176: update ZORA
+
 ## 3.0.0
 
 ### Major Changes
