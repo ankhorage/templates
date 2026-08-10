@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 4.0.0
+
+### Major Changes
+
+- d0b77f8: Migrate the nutrition catalog scanner starter to the final Contracts 4 generated API model, canonical generated/external data-source projections, and stable CRUD operation references.
+
 ## 3.0.1
 
 ### Patch Changes
