@@ -1,0 +1,419 @@
+name: Finalize ADM 5 Nutrition Template
+
+on:
+  push:
+    branches:
+      - agent/adm-5-canonical-nutrition-data
+
+permissions:
+  contents: write
+
+jobs:
+  finalize:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.3.13'
+
+      - name: Migrate nutrition template to canonical ADM 5 data model
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          pkg.dependencies['@ankhorage/contracts'] = '^4.0.2';
+          pkg.dependencies['@ankhorage/data-sources'] = '^1.0.0';
+          fs.writeFileSync('package.json', `${JSON.stringify(pkg, null, 2)}\n`);
+          NODE
+
+          rm src/templates/starter/categories/food-drink/nutrition-catalog-scan/data.ts
+
+          cat > src/templates/starter/categories/food-drink/nutrition-catalog-scan/generatedApi.ts <<'EOF'
+          import type { GeneratedApiDefinition } from '@ankhorage/contracts';
+
+          export function createNutritionCatalogScanGeneratedApi(): GeneratedApiDefinition {
+            return {
+              id: 'nutrition-products',
+              protocol: 'rest',
+              name: 'Nutrition products',
+              description: 'Generated CRUD data for the nutrition scanner product catalog.',
+              basePath: '/v1/nutrition',
+              database: {
+                id: 'primary-db',
+                kind: 'database',
+              },
+              auth: { required: true },
+              resources: [
+                {
+                  id: 'products',
+                  name: 'Products',
+                  path: '/products',
+                  collection: {
+                    name: 'nutrition_products',
+                    schema: 'public',
+                    primaryKey: 'id',
+                    fields: [
+                      { name: 'id', type: 'uuid', required: true, unique: true },
+                      { name: 'barcode', type: 'text', required: true, unique: true },
+                      { name: 'normalizedBarcode', type: 'text', required: true, unique: true },
+                      { name: 'barcodeType', type: 'text' },
+                      { name: 'name', type: 'text', required: true },
+                      { name: 'brand', type: 'text' },
+                      { name: 'packageLabel', type: 'text' },
+                      { name: 'nutritionFacts', type: 'json' },
+                      { name: 'imageRefs', type: 'json' },
+                      { name: 'createdByUserId', type: 'uuid' },
+                      { name: 'createdAt', type: 'datetime', required: true },
+                      { name: 'updatedAt', type: 'datetime', required: true },
+                      { name: 'deletedAt', type: 'datetime' },
+                    ],
+                  },
+                  operations: ['list', 'read', 'create', 'update', 'delete'],
+                },
+              ],
+            };
+          }
+          EOF
+
+          cat > src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts <<'EOF'
+          import type { AppManifest, GeneratedApiDefinition } from '@ankhorage/contracts';
+          import { createGeneratedApiDataSource } from '@ankhorage/data-sources';
+
+          export function createNutritionCatalogScanDataSources(
+            generatedApi: GeneratedApiDefinition,
+          ): NonNullable<AppManifest['dataSources']> {
+            const generated = createGeneratedApiDataSource(generatedApi);
+            if (!generated.ok) {
+              const message = generated.diagnostics.map((diagnostic) => diagnostic.message).join('; ');
+              throw new Error(`Invalid nutrition generated API: ${message}`);
+            }
+
+            return {
+              [generatedApi.id]: generated.data,
+              'nutrition-api': {
+                id: 'nutrition-api',
+                kind: 'api',
+                origin: 'external',
+                protocol: 'rest',
+                name: 'Nutrition lookup API',
+                description: 'External health and barcode lookup operations not covered by generated CRUD.',
+                baseUrl: 'https://api.ankhorage.com/v1/nutrition',
+                endpoints: {
+                  health: {
+                    id: 'health',
+                    kind: 'http',
+                    path: '/health',
+                    operations: {
+                      'nutrition.health': {
+                        id: 'nutrition.health',
+                        endpointId: 'health',
+                        name: 'Nutrition health',
+                        description: 'Checks whether the nutrition lookup API is available.',
+                        protocol: 'http',
+                        intent: 'read',
+                        method: 'GET',
+                        path: '/health',
+                      },
+                    },
+                  },
+                  products: {
+                    id: 'products',
+                    kind: 'http',
+                    path: '/products',
+                    operations: {
+                      'nutrition.products.getByBarcode': {
+                        id: 'nutrition.products.getByBarcode',
+                        endpointId: 'products',
+                        name: 'Lookup product by barcode',
+                        description: 'Looks up a product by scanned barcode.',
+                        protocol: 'http',
+                        intent: 'read',
+                        method: 'GET',
+                        path: '/products/by-barcode/:barcode',
+                      },
+                    },
+                  },
+                },
+              },
+            };
+          }
+          EOF
+
+          cat > src/templates/starter/categories/food-drink/nutrition-catalog-scan/template.ts <<'EOF'
+          import type { AppManifest } from '@ankhorage/contracts';
+
+          import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+          import { createManifestShell, createTheme } from '../../../../shared';
+          import type { TemplateSeed } from '../../../starter.types';
+          import { createNutritionCatalogScanBindings } from './bindings';
+          import { createNutritionCatalogScanDataSources } from './dataSources';
+          import { createNutritionCatalogScanGeneratedApi } from './generatedApi';
+          import { createNutritionCatalogScanNavigator, createNutritionCatalogScanScreenIds } from './routes';
+          import { createNutritionCatalogScanScreens } from './screens';
+
+          export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): AppManifest {
+            const idPrefix = `${seed.category}-nutrition-catalog-scan`;
+            const theme = createTheme(seed);
+            const screenIds = createNutritionCatalogScanScreenIds(idPrefix);
+            const generatedApi = createNutritionCatalogScanGeneratedApi();
+            const manifest = createManifestShell({
+              seed,
+              theme,
+              version: seed.version ?? DEFAULT_TEMPLATE_VERSION,
+              navigator: createNutritionCatalogScanNavigator(screenIds),
+              screens: createNutritionCatalogScanScreens(seed, idPrefix, screenIds),
+            });
+
+            return {
+              ...manifest,
+              generatedApis: { [generatedApi.id]: generatedApi },
+              dataBindings: createNutritionCatalogScanBindings(idPrefix),
+              dataSources: createNutritionCatalogScanDataSources(generatedApi),
+              infra: {
+                ...manifest.infra,
+                auth: {
+                  scope: 'global',
+                  provider: 'supabase',
+                  flow: {
+                    signInRoute: 'sign-in',
+                    signUpRoute: 'sign-up',
+                    signOutRoute: 'sign-out',
+                    postSignInRoute: '/products',
+                    unauthorizedRoute: 'sign-in',
+                  },
+                  signIn: { identifiers: ['email'] },
+                  signUp: {
+                    requiredFields: ['email', 'password', 'displayName'],
+                    signUpPolicy: 'requireVerification',
+                  },
+                  profile: {
+                    fields: ['email', 'displayName', 'avatarUrl'],
+                    table: 'profiles',
+                    primaryKey: 'authUserId',
+                    createStrategy: 'trigger',
+                    updateStrategy: 'api',
+                  },
+                },
+              },
+            };
+          }
+          EOF
+
+          node <<'NODE'
+          const fs = require('node:fs');
+          const paths = [
+            'src/templates/starter/categories/food-drink/nutrition-catalog-scan/bindings.ts',
+            'src/templates/starter/categories/food-drink/nutrition-catalog-scan/screens.ts',
+            'test/create-food-drink-nutrition-catalog-scan-template.test.ts',
+          ];
+          const replacements = new Map([
+            ['nutrition.products.list', 'products.list'],
+            ['nutrition.products.getById', 'products.read'],
+            ['nutrition.products.create', 'products.create'],
+            ['nutrition.products.update', 'products.update'],
+            ['nutrition.products.delete', 'products.delete'],
+          ]);
+          const generatedOperations = new Set(replacements.values());
+
+          for (const path of paths) {
+            let lines = fs.readFileSync(path, 'utf8').split('\n');
+            lines = lines.map((line) => {
+              for (const [before, after] of replacements) line = line.replaceAll(before, after);
+              return line;
+            });
+            for (let index = 0; index < lines.length; index += 1) {
+              const operation = [...generatedOperations].find((id) =>
+                lines[index].includes(`operationId: '${id}'`),
+              );
+              if (!operation) continue;
+              for (let previous = index - 1; previous >= Math.max(0, index - 5); previous -= 1) {
+                if (lines[previous].includes("dataSourceId: 'nutrition-api'")) {
+                  lines[previous] = lines[previous].replace(
+                    "dataSourceId: 'nutrition-api'",
+                    "dataSourceId: 'nutrition-products'",
+                  );
+                  break;
+                }
+              }
+            }
+            fs.writeFileSync(path, lines.join('\n'));
+          }
+
+          const testPath = 'test/create-food-drink-nutrition-catalog-scan-template.test.ts';
+          let testSource = fs.readFileSync(testPath, 'utf8');
+          testSource = testSource.replace(
+            "    const dataSource = manifest.dataSources?.['nutrition-api'];\n    const healthEndpoint = dataSource?.endpoints.health;\n    const productsEndpoint = dataSource?.endpoints.products;",
+            "    const generatedDataSource = manifest.dataSources?.['nutrition-products'];\n    const externalDataSource = manifest.dataSources?.['nutrition-api'];\n    const healthEndpoint = externalDataSource?.endpoints.health;\n    const lookupEndpoint = externalDataSource?.endpoints.products;\n    const productsEndpoint = generatedDataSource?.endpoints.products;",
+          );
+          testSource = testSource.replace(
+            "    expect(dataSource?.kind).toBe('rest');\n    expect(healthEndpoint?.operations['nutrition.health']?.method).toBe('GET');\n    expect(healthEndpoint?.operations['nutrition.health']?.path).toBe('/health');\n\n    expect(productsEndpoint).toBeDefined();\n\n    if (productsEndpoint === undefined) {\n      throw new Error('Expected products endpoint to be defined');\n    }\n\n    expect(productsEndpoint.operations['products.list']?.method).toBe('GET');\n    expect(productsEndpoint.operations['nutrition.products.getByBarcode']?.path).toBe(\n      '/products/by-barcode/:barcode',\n    );\n    expect(productsEndpoint.operations['products.create']?.path).toBe('/products');\n    expect(productsEndpoint.operations['products.read']?.path).toBe('/products/:id');\n    expect(productsEndpoint.operations['products.update']?.path).toBe('/products/:id');\n    expect(productsEndpoint.operations['products.delete']?.path).toBe('/products/:id');",
+            "    expect(generatedDataSource).toMatchObject({\n      kind: 'api',\n      origin: 'generated',\n      protocol: 'rest',\n      generatedApiId: 'nutrition-products',\n    });\n    expect(externalDataSource).toMatchObject({\n      kind: 'api',\n      origin: 'external',\n      protocol: 'rest',\n    });\n    expect(healthEndpoint?.operations['nutrition.health']?.method).toBe('GET');\n    expect(lookupEndpoint?.operations['nutrition.products.getByBarcode']?.path).toBe(\n      '/products/by-barcode/:barcode',\n    );\n    expect(productsEndpoint).toBeDefined();\n    expect(Object.keys(productsEndpoint?.operations ?? {})).toEqual([\n      'products.list',\n      'products.read',\n      'products.create',\n      'products.update',\n      'products.delete',\n    ]);\n    expect(productsEndpoint?.operations['products.list']?.protocol).toBe('database');\n    expect(productsEndpoint?.operations['products.read']?.request?.parameters?.[0]?.name).toBe(\n      'id',\n    );",
+          );
+          fs.writeFileSync(testPath, testSource);
+          NODE
+
+          cat > test/nutrition-domain-data.test.ts <<'EOF'
+          import { describe, expect, test } from 'bun:test';
+
+          import { CATEGORY_PRESETS, createStarterTemplate, type TemplateSeed } from '../src/index';
+
+          function createSeed(): TemplateSeed {
+            const preset = CATEGORY_PRESETS.food_drink;
+            return {
+              category: 'food_drink',
+              categoryLabel: preset.label,
+              appName: 'Nutrition Scan',
+              slug: 'nutrition-scan',
+              summary: preset.summary,
+              focusAreas: preset.focusAreas,
+              primaryColor: preset.primaryColor,
+              harmony: preset.harmony,
+            };
+          }
+
+          describe('nutrition domain data manifest', () => {
+            test('declares canonical generated API desired state and projection', () => {
+              const manifest = createStarterTemplate(createSeed(), {
+                templateId: 'nutrition-catalog-scan',
+              });
+              const generated = manifest.generatedApis?.['nutrition-products'];
+              const projection = manifest.dataSources?.['nutrition-products'];
+
+              expect(manifest).not.toHaveProperty('data');
+              expect(generated?.basePath).toBe('/v1/nutrition');
+              expect(generated?.auth?.required).toBe(true);
+              expect(projection).toMatchObject({
+                id: 'nutrition-products',
+                kind: 'api',
+                origin: 'generated',
+                protocol: 'rest',
+                generatedApiId: 'nutrition-products',
+              });
+            });
+
+            test('declares the product collection and canonical CRUD operations', () => {
+              const manifest = createStarterTemplate(createSeed(), {
+                templateId: 'nutrition-catalog-scan',
+              });
+              const resource = manifest.generatedApis?.['nutrition-products']?.resources[0];
+              const endpoint = manifest.dataSources?.['nutrition-products']?.endpoints.products;
+
+              expect(resource?.collection.name).toBe('nutrition_products');
+              expect(resource?.collection.fields.map((field) => field.name)).toContain('barcode');
+              expect(resource?.collection.fields.map((field) => field.name)).toContain('packageLabel');
+              expect(resource?.collection.fields.map((field) => field.name)).toContain('nutritionFacts');
+              expect(resource?.collection.fields.map((field) => field.name)).toContain('imageRefs');
+              expect(resource?.operations).toEqual(['list', 'read', 'create', 'update', 'delete']);
+              expect(Object.keys(endpoint?.operations ?? {})).toEqual([
+                'products.list',
+                'products.read',
+                'products.create',
+                'products.update',
+                'products.delete',
+              ]);
+            });
+
+            test('keeps only custom health and barcode lookup on the external API', () => {
+              const manifest = createStarterTemplate(createSeed(), {
+                templateId: 'nutrition-catalog-scan',
+              });
+              const external = manifest.dataSources?.['nutrition-api'];
+
+              expect(external).toMatchObject({ kind: 'api', origin: 'external', protocol: 'rest' });
+              expect(Object.keys(external?.endpoints.health?.operations ?? {})).toEqual([
+                'nutrition.health',
+              ]);
+              expect(Object.keys(external?.endpoints.products?.operations ?? {})).toEqual([
+                'nutrition.products.getByBarcode',
+              ]);
+            });
+          });
+          EOF
+
+          cat > docs/nutrition-catalog-scan-data.md <<'EOF'
+          # Nutrition catalog scan data contract
+
+          The `food_drink/nutrition-catalog-scan` starter uses the canonical ADM 5 data model.
+
+          `manifest.generatedApis['nutrition-products']` is the desired state for the DB-backed product CRUD surface. It owns the `nutrition_products` collection and the canonical operations `products.list`, `products.read`, `products.create`, `products.update`, and `products.delete`.
+
+          `manifest.dataSources['nutrition-products']` is derived through `@ankhorage/data-sources` and is the runtime/binding projection for that generated API. The starter does not duplicate generated operation normalization.
+
+          `manifest.dataSources['nutrition-api']` is a separate external REST source containing only behavior outside the initial generated CRUD contract: health and barcode lookup (`nutrition.products.getByBarcode`).
+
+          The removed `manifest.data.apis` domain and legacy `kind: 'rest'` source discriminator are not emitted.
+          EOF
+
+          mkdir -p .changeset
+          cat > .changeset/adm-5-canonical-nutrition-data.md <<'EOF'
+          ---
+          '@ankhorage/templates': major
+          ---
+
+          Migrate the nutrition catalog scanner starter to the final Contracts 4 generated API model, canonical generated/external data-source projections, and stable CRUD operation references.
+          EOF
+
+      - name: Refresh dependencies
+        run: bun install
+
+      - name: Apply lint fixes
+        run: bun run lint:fix
+
+      - name: Format
+        run: bun run format
+
+      - name: Build
+        run: bun run build
+
+      - name: Lint
+        run: bun run lint
+
+      - name: Format check
+        run: bun run format:check
+
+      - name: Knip
+        run: bun run knip
+
+      - name: Typecheck
+        run: bun run typecheck
+
+      - name: Test
+        run: bun run test
+
+      - name: Generate docs
+        run: bun run docs
+
+      - name: Final format
+        run: bun run format
+
+      - name: Final format check
+        run: bun run format:check
+
+      - name: Prepare validated commit
+        run: |
+          rm .github/workflows/finalize-adm5-nutrition.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'feat: migrate nutrition template to canonical generated APIs'
+
+      - name: Check changeset
+        env:
+          CHANGESET_BASE_SHA: origin/main
+          CHANGESET_HEAD_SHA: HEAD
+        run: |
+          if [ -f ./scripts/check-changeset-status.sh ]; then
+            bash ./scripts/check-changeset-status.sh
+          else
+            bunx changeset status --since=origin/main
+          fi
+
+      - name: Push validated migration
+        run: git push origin HEAD:agent/adm-5-canonical-nutrition-data
