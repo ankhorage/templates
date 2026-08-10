@@ -32,9 +32,9 @@ interface ScreenContent {
 }
 
 const productDetailLoaderOperation = {
-  dataSourceId: 'nutrition-api',
+  dataSourceId: 'nutrition-products',
   endpointId: 'products',
-  operationId: 'nutrition.products.getById',
+  operationId: 'products.read',
 } as const;
 
 function createContentScreen(args: {
@@ -136,11 +136,10 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
             source: {
               kind: 'operation',
               operation: {
-                dataSourceId: 'nutrition-api',
+                dataSourceId: 'nutrition-products',
                 endpointId: 'products',
-                operationId: 'nutrition.products.list',
+                operationId: 'products.list',
               },
-              path: 'products',
             },
             itemAlias: 'item',
             keyPath: 'id',
@@ -184,7 +183,8 @@ function createProductDetailBody(idPrefix: string): ZoraNode[] {
       `${idPrefix}-detail-summary-section`,
       {
         title: 'Product details',
-        description: 'Loaded from the nutrition API using the current route param product ID.',
+        description:
+          'Loaded through the generated product read operation using the current route param ID.',
       },
       [
         createDetailValueCard({
@@ -295,14 +295,15 @@ function createProductDetailBody(idPrefix: string): ZoraNode[] {
           type: 'Panel',
           props: {
             title: 'Product images',
-            description: 'Each block reflects one image ref from product.imageRefs.',
+            description:
+              'Each block reflects one image ref from the current product imageRefs field.',
             tone: 'subtle',
           },
           repeat: {
             source: {
               kind: 'operation',
               operation: productDetailLoaderOperation,
-              path: 'product.imageRefs',
+              path: 'imageRefs',
             },
             itemAlias: 'imageRef',
             keyPath: 'path',
@@ -347,7 +348,8 @@ function createProductFormPreview(idPrefix: string): ZoraNode {
     [
       createZoraNode(`${idPrefix}-create-barcode-field`, 'FormField', {
         label: 'Barcode',
-        description: 'Prefilled from scan or manual entry; normalized before API calls.',
+        description:
+          'Prefilled from scan or manual entry; normalized before the generated create operation.',
         required: true,
       }),
       createZoraNode(`${idPrefix}-create-barcode-input`, 'Input', {
@@ -412,7 +414,7 @@ function createProductFormPreview(idPrefix: string): ZoraNode {
       createZoraNode(`${idPrefix}-create-duplicate-notice`, 'Notice', {
         title: 'Duplicate barcode handling',
         description:
-          'If POST /products returns 409 with product.id, the generated binding opens the existing product instead of treating the conflict as fatal.',
+          'Barcode uniqueness is enforced by the generated database operation; duplicate inserts surface as database-operation diagnostics.',
       }),
       createZoraNode(`${idPrefix}-create-submit-button`, 'Button', {
         children: 'Create product',
@@ -423,7 +425,7 @@ function createProductFormPreview(idPrefix: string): ZoraNode {
       createZoraNode(`${idPrefix}-create-error-notice`, 'Notice', {
         title: 'Validation and availability',
         description:
-          'The generated app should show inline validation for 400 responses and retry messaging when the backend is unavailable with 503.',
+          'The generated app should surface invalid input and database-operation diagnostics without assuming HTTP status codes.',
       }),
     ],
   );

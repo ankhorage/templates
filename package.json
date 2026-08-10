@@ -74,8 +74,9 @@
     "version-packages": "changeset version"
   },
   "dependencies": {
-    "@ankhorage/contracts": "^4.0.0",
-    "@ankhorage/zora": "^2.9.0"
+    "@ankhorage/contracts": "^4.0.2",
+    "@ankhorage/zora": "^2.9.0",
+    "@ankhorage/data-sources": "^1.0.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.4.0",

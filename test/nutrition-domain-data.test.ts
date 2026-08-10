@@ -4,7 +4,6 @@ import { CATEGORY_PRESETS, createStarterTemplate, type TemplateSeed } from '../s
 
 function createSeed(): TemplateSeed {
   const preset = CATEGORY_PRESETS.food_drink;
-
   return {
     category: 'food_drink',
     categoryLabel: preset.label,
@@ -18,45 +17,63 @@ function createSeed(): TemplateSeed {
 }
 
 describe('nutrition domain data manifest', () => {
-  test('declares the generated nutrition products API only', () => {
-    const manifest = createStarterTemplate(createSeed(), { templateId: 'nutrition-catalog-scan' });
-    const apis = manifest.data?.apis;
+  test('declares canonical generated API desired state and projection', () => {
+    const manifest = createStarterTemplate(createSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const generated = manifest.generatedApis?.['nutrition-products'];
+    const projection = manifest.dataSources?.['nutrition-products'];
 
-    expect(Object.keys(apis ?? {})).toEqual(['nutritionProducts']);
-    expect(apis?.nutritionProducts?.basePath).toBe('/v1/nutrition/products');
-    expect(apis?.nutritionProducts?.auth?.required).toBe(true);
+    expect(manifest).not.toHaveProperty('data');
+    expect(generated?.basePath).toBe('/v1/nutrition');
+    expect(generated?.auth?.required).toBe(true);
+    expect(projection).toMatchObject({
+      id: 'nutrition-products',
+      kind: 'api',
+      origin: 'generated',
+      protocol: 'rest',
+      generatedApiId: 'nutrition-products',
+    });
   });
 
-  test('declares collection fields and CRUD endpoints for products', () => {
-    const manifest = createStarterTemplate(createSeed(), { templateId: 'nutrition-catalog-scan' });
-    const products = manifest.data?.apis?.nutritionProducts;
+  test('declares the product collection and canonical CRUD operations', () => {
+    const manifest = createStarterTemplate(createSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const resource = manifest.generatedApis?.['nutrition-products']?.resources[0];
+    const endpoint = manifest.dataSources?.['nutrition-products']?.endpoints.products;
 
-    const productCollection =
-      products?.kind === 'generated' && products.resource?.kind === 'collection'
-        ? products.resource.collection
-        : undefined;
-
-    expect(productCollection?.name).toBe('nutrition_products');
-    expect(productCollection?.fields.map((field) => field.name)).toContain('barcode');
-    expect(productCollection?.fields.map((field) => field.name)).toContain('packageLabel');
-    expect(productCollection?.fields.map((field) => field.name)).toContain('nutritionFacts');
-    expect(productCollection?.fields.map((field) => field.name)).toContain('imageRefs');
-    expect(productCollection?.fields.map((field) => field.name)).not.toContain('updatedByUserId');
-    expect(products?.endpoints.map((endpoint) => endpoint.id)).toEqual([
-      'listNutritionProducts',
-      'getNutritionProductById',
-      'getNutritionProductByBarcode',
-      'createNutritionProduct',
-      'updateNutritionProduct',
-      'deleteNutritionProduct',
+    expect(resource?.collection.name).toBe('nutrition_products');
+    expect(resource?.collection.fields.map((field) => field.name)).toContain('barcode');
+    expect(resource?.collection.fields.map((field) => field.name)).toContain('packageLabel');
+    expect(resource?.collection.fields.map((field) => field.name)).toContain('nutritionFacts');
+    expect(resource?.collection.fields.map((field) => field.name)).toContain('imageRefs');
+    expect(resource?.operations).toEqual(['list', 'read', 'create', 'update', 'delete']);
+    expect(
+      resource?.collection.fields.find((field) => field.name === 'createdAt')?.required,
+    ).not.toBe(true);
+    expect(
+      resource?.collection.fields.find((field) => field.name === 'updatedAt')?.required,
+    ).not.toBe(true);
+    expect(Object.keys(endpoint?.operations ?? {})).toEqual([
+      'products.list',
+      'products.read',
+      'products.create',
+      'products.update',
+      'products.delete',
     ]);
-    expect(products?.endpoints.map((endpoint) => endpoint.path)).toEqual([
-      '/',
-      '/:id',
-      '/by-barcode/:barcode',
-      '/',
-      '/:id',
-      '/:id',
+  });
+
+  test('keeps only custom health and barcode lookup on the external API', () => {
+    const manifest = createStarterTemplate(createSeed(), {
+      templateId: 'nutrition-catalog-scan',
+    });
+    const external = manifest.dataSources?.['nutrition-api'];
+
+    expect(external).toMatchObject({ kind: 'api', origin: 'external', protocol: 'rest' });
+    expect(Object.keys(external?.endpoints.health?.operations ?? {})).toEqual(['nutrition.health']);
+    expect(Object.keys(external?.endpoints.products?.operations ?? {})).toEqual([
+      'nutrition.products.getByBarcode',
     ]);
   });
 });

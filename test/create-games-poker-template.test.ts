@@ -57,6 +57,7 @@ describe('games card trainer starter', () => {
   test('does not create app-owned API resources from the starter template', () => {
     const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
 
-    expect(manifest.data).toBeUndefined();
+    expect(manifest).not.toHaveProperty('data');
+    expect(manifest.generatedApis).toBeUndefined();
   });
 });
