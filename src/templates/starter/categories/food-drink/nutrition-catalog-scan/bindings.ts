@@ -7,15 +7,15 @@ const productLookupOperation = {
 } as const satisfies BindingOperationRef;
 
 const productCreateOperation = {
-  dataSourceId: 'nutrition-api',
+  dataSourceId: 'nutrition-products',
   endpointId: 'products',
-  operationId: 'nutrition.products.create',
+  operationId: 'products.create',
 } as const satisfies BindingOperationRef;
 
 const productDetailOperation = {
-  dataSourceId: 'nutrition-api',
+  dataSourceId: 'nutrition-products',
   endpointId: 'products',
-  operationId: 'nutrition.products.getById',
+  operationId: 'products.read',
 } as const satisfies BindingOperationRef;
 
 function createProductCardBinding(args: {

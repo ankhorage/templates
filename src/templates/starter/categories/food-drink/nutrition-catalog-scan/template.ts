@@ -4,8 +4,8 @@ import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
 import { createManifestShell, createTheme } from '../../../../shared';
 import type { TemplateSeed } from '../../../starter.types';
 import { createNutritionCatalogScanBindings } from './bindings';
-import { nutritionCatalogScanData } from './data';
 import { createNutritionCatalogScanDataSources } from './dataSources';
+import { createNutritionCatalogScanGeneratedApi } from './generatedApi';
 import { createNutritionCatalogScanNavigator, createNutritionCatalogScanScreenIds } from './routes';
 import { createNutritionCatalogScanScreens } from './screens';
 
@@ -13,6 +13,7 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
   const idPrefix = `${seed.category}-nutrition-catalog-scan`;
   const theme = createTheme(seed);
   const screenIds = createNutritionCatalogScanScreenIds(idPrefix);
+  const generatedApi = createNutritionCatalogScanGeneratedApi();
   const manifest = createManifestShell({
     seed,
     theme,
@@ -23,9 +24,9 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
 
   return {
     ...manifest,
-    data: nutritionCatalogScanData,
+    generatedApis: { [generatedApi.id]: generatedApi },
     dataBindings: createNutritionCatalogScanBindings(idPrefix),
-    dataSources: createNutritionCatalogScanDataSources(),
+    dataSources: createNutritionCatalogScanDataSources(generatedApi),
     infra: {
       ...manifest.infra,
       auth: {
@@ -38,9 +39,7 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
           postSignInRoute: '/products',
           unauthorizedRoute: 'sign-in',
         },
-        signIn: {
-          identifiers: ['email'],
-        },
+        signIn: { identifiers: ['email'] },
         signUp: {
           requiredFields: ['email', 'password', 'displayName'],
           signUpPolicy: 'requireVerification',

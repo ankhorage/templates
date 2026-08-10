@@ -230,9 +230,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       source: {
         kind: 'operation',
         operation: {
-          dataSourceId: 'nutrition-api',
+          dataSourceId: 'nutrition-products',
           endpointId: 'products',
-          operationId: 'nutrition.products.list',
+          operationId: 'products.list',
         },
         path: 'products',
       },
@@ -258,9 +258,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         kind: 'operation',
         id: 'product-detail',
         operation: {
-          dataSourceId: 'nutrition-api',
+          dataSourceId: 'nutrition-products',
           endpointId: 'products',
-          operationId: 'nutrition.products.getById',
+          operationId: 'products.read',
         },
         input: {
           id: {
@@ -276,9 +276,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(detailImageRefList?.repeat?.source).toEqual({
       kind: 'operation',
       operation: {
-        dataSourceId: 'nutrition-api',
+        dataSourceId: 'nutrition-products',
         endpointId: 'products',
-        operationId: 'nutrition.products.getById',
+        operationId: 'products.read',
       },
       path: 'product.imageRefs',
     });
@@ -421,9 +421,11 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       manifest.dataBindings?.[
         'food_drink-nutrition-catalog-scan-detail-image-ref-public-url-value'
       ];
-    const dataSource = manifest.dataSources?.['nutrition-api'];
-    const healthEndpoint = dataSource?.endpoints.health;
-    const productsEndpoint = dataSource?.endpoints.products;
+    const generatedDataSource = manifest.dataSources?.['nutrition-products'];
+    const externalDataSource = manifest.dataSources?.['nutrition-api'];
+    const healthEndpoint = externalDataSource?.endpoints.health;
+    const lookupEndpoint = externalDataSource?.endpoints.products;
+    const productsEndpoint = generatedDataSource?.endpoints.products;
     const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
     const catalogRoute = productsRoute?.navigator?.routes.find((route) => route.name === 'index');
     const catalogScreen = catalogRoute?.screenId
@@ -472,9 +474,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(productsGrid?.repeat?.source).toEqual({
       kind: 'operation',
       operation: {
-        dataSourceId: 'nutrition-api',
+        dataSourceId: 'nutrition-products',
         endpointId: 'products',
-        operationId: 'nutrition.products.list',
+        operationId: 'products.list',
       },
       path: 'products',
     });
@@ -484,18 +486,18 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(detailNameBindings?.props?.title?.source).toEqual({
       kind: 'operation',
       operation: {
-        dataSourceId: 'nutrition-api',
+        dataSourceId: 'nutrition-products',
         endpointId: 'products',
-        operationId: 'nutrition.products.getById',
+        operationId: 'products.read',
       },
       path: 'product.name',
     });
     expect(detailNutritionBasisBindings?.props?.title?.source).toEqual({
       kind: 'operation',
       operation: {
-        dataSourceId: 'nutrition-api',
+        dataSourceId: 'nutrition-products',
         endpointId: 'products',
-        operationId: 'nutrition.products.getById',
+        operationId: 'products.read',
       },
       path: 'product.nutritionFacts.basis',
     });
@@ -508,9 +510,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(createButtonBindings?.events?.press?.[0]?.target).toEqual({
       kind: 'operation',
       operation: {
-        dataSourceId: 'nutrition-api',
+        dataSourceId: 'nutrition-products',
         endpointId: 'products',
-        operationId: 'nutrition.products.create',
+        operationId: 'products.create',
       },
     });
     expect(createButtonBindings?.events?.press?.[0]?.input?.packageLabel).toEqual({
@@ -544,9 +546,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(createButtonBindings?.events?.press?.[1]?.when?.source).toEqual({
       kind: 'operation',
       operation: {
-        dataSourceId: 'nutrition-api',
+        dataSourceId: 'nutrition-products',
         endpointId: 'products',
-        operationId: 'nutrition.products.create',
+        operationId: 'products.create',
       },
       path: 'product.id',
     });
@@ -558,9 +560,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
           source: {
             kind: 'operation',
             operation: {
-              dataSourceId: 'nutrition-api',
+              dataSourceId: 'nutrition-products',
               endpointId: 'products',
-              operationId: 'nutrition.products.create',
+              operationId: 'products.create',
             },
             path: 'product.id',
           },
@@ -568,24 +570,33 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
       },
     });
 
-    expect(dataSource?.kind).toBe('rest');
+    expect(generatedDataSource).toMatchObject({
+      kind: 'api',
+      origin: 'generated',
+      protocol: 'rest',
+      generatedApiId: 'nutrition-products',
+    });
+    expect(externalDataSource).toMatchObject({
+      kind: 'api',
+      origin: 'external',
+      protocol: 'rest',
+    });
     expect(healthEndpoint?.operations['nutrition.health']?.method).toBe('GET');
-    expect(healthEndpoint?.operations['nutrition.health']?.path).toBe('/health');
-
-    expect(productsEndpoint).toBeDefined();
-
-    if (productsEndpoint === undefined) {
-      throw new Error('Expected products endpoint to be defined');
-    }
-
-    expect(productsEndpoint.operations['nutrition.products.list']?.method).toBe('GET');
-    expect(productsEndpoint.operations['nutrition.products.getByBarcode']?.path).toBe(
+    expect(lookupEndpoint?.operations['nutrition.products.getByBarcode']?.path).toBe(
       '/products/by-barcode/:barcode',
     );
-    expect(productsEndpoint.operations['nutrition.products.create']?.path).toBe('/products');
-    expect(productsEndpoint.operations['nutrition.products.getById']?.path).toBe('/products/:id');
-    expect(productsEndpoint.operations['nutrition.products.update']?.path).toBe('/products/:id');
-    expect(productsEndpoint.operations['nutrition.products.delete']?.path).toBe('/products/:id');
+    expect(productsEndpoint).toBeDefined();
+    expect(Object.keys(productsEndpoint?.operations ?? {})).toEqual([
+      'products.list',
+      'products.read',
+      'products.create',
+      'products.update',
+      'products.delete',
+    ]);
+    expect(productsEndpoint?.operations['products.list']?.protocol).toBe('database');
+    expect(productsEndpoint?.operations['products.read']?.request?.parameters?.[0]?.name).toBe(
+      'id',
+    );
   });
 
   test('removes stale capture and challenge vocabulary from the generated manifest', () => {

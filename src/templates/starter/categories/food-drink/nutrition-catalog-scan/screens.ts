@@ -32,9 +32,9 @@ interface ScreenContent {
 }
 
 const productDetailLoaderOperation = {
-  dataSourceId: 'nutrition-api',
+  dataSourceId: 'nutrition-products',
   endpointId: 'products',
-  operationId: 'nutrition.products.getById',
+  operationId: 'products.read',
 } as const;
 
 function createContentScreen(args: {
@@ -136,9 +136,9 @@ function createProductsBody(idPrefix: string): ZoraNode[] {
             source: {
               kind: 'operation',
               operation: {
-                dataSourceId: 'nutrition-api',
+                dataSourceId: 'nutrition-products',
                 endpointId: 'products',
-                operationId: 'nutrition.products.list',
+                operationId: 'products.list',
               },
               path: 'products',
             },
