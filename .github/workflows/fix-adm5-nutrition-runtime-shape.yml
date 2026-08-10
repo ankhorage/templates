@@ -19,7 +19,9 @@ jobs:
         with:
           bun-version: '1.3.13'
       - name: Apply guarded runtime-shape corrections
-        run: node .adm5-fix-nutrition-runtime-shape.js
+        run: |
+          sed -i "s/              expect(resource?.operations)/    expect(resource?.operations)/" .adm5-fix-nutrition-runtime-shape.js
+          node .adm5-fix-nutrition-runtime-shape.js
       - name: Install dependencies
         run: bun install --frozen-lockfile
       - name: Format
