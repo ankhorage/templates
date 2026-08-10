@@ -1,4 +1,4 @@
-const fs = require('node:fs');
+import fs from 'node:fs';
 
 const read = (path) => fs.readFileSync(path, 'utf8');
 const write = (path, value) => fs.writeFileSync(path, value);
