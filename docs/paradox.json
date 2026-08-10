@@ -750,8 +750,16 @@
     {
       "path": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts",
       "isEntrypoint": false,
-      "dependencies": [],
+      "dependencies": [
+        "src/templates/starter/categories/food-drink/nutrition-catalog-scan/externalDataSource.ts"
+      ],
       "exports": ["createNutritionCatalogScanDataSources"]
+    },
+    {
+      "path": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/externalDataSource.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["createNutritionCatalogScanExternalDataSource"]
     },
     {
       "path": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/generatedApi.ts",
@@ -3598,7 +3606,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/bindings.ts",
-        "line": 278,
+        "line": 286,
         "column": 1
       }
     },
@@ -3607,7 +3615,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/bindings.ts",
-        "line": 297,
+        "line": 305,
         "column": 1
       }
     },
@@ -3616,7 +3624,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/bindings.ts",
-        "line": 315,
+        "line": 323,
         "column": 1
       }
     },
@@ -3625,7 +3633,16 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts",
-        "line": 4,
+        "line": 6,
+        "column": 1
+      }
+    },
+    {
+      "name": "createNutritionCatalogScanExternalDataSource",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/externalDataSource.ts",
+        "line": 3,
         "column": 1
       }
     },
@@ -3697,7 +3714,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/screens.ts",
-        "line": 161,
+        "line": 160,
         "column": 1
       }
     },
@@ -3706,7 +3723,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/screens.ts",
-        "line": 181,
+        "line": 180,
         "column": 1
       }
     },
@@ -3715,7 +3732,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/screens.ts",
-        "line": 338,
+        "line": 339,
         "column": 1
       }
     },
@@ -3724,7 +3741,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/screens.ts",
-        "line": 432,
+        "line": 434,
         "column": 1
       }
     },
@@ -6577,6 +6594,11 @@
         "sourcePath": "src/templates/starter/categories/business-productivity/urban-water-monitor/template.ts"
       },
       {
+        "fromPath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts",
+        "toPath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/externalDataSource.ts",
+        "sourcePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts"
+      },
+      {
         "fromPath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/index.ts",
         "toPath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/template.ts",
         "sourcePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/index.ts"
@@ -8910,6 +8932,12 @@
         "fromSymbol": "createNutritionCatalogScanDataSources",
         "toSymbol": "createGeneratedApiDataSource",
         "callExpression": "createGeneratedApiDataSource",
+        "sourcePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts"
+      },
+      {
+        "fromSymbol": "createNutritionCatalogScanDataSources",
+        "toSymbol": "createNutritionCatalogScanExternalDataSource",
+        "callExpression": "createNutritionCatalogScanExternalDataSource",
         "sourcePath": "src/templates/starter/categories/food-drink/nutrition-catalog-scan/dataSources.ts"
       },
       {

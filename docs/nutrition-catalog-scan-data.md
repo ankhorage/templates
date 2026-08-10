@@ -9,3 +9,5 @@ The `food_drink/nutrition-catalog-scan` starter uses the canonical ADM 5 data mo
 `manifest.dataSources['nutrition-api']` is a separate external REST source containing only behavior outside the initial generated CRUD contract: health and barcode lookup (`nutrition.products.getByBarcode`).
 
 The removed `manifest.data.apis` domain and legacy `kind: 'rest'` source discriminator are not emitted.
+
+Generated database operations return list arrays and resource records directly. Template bindings therefore use the direct result shape instead of legacy HTTP wrapper paths such as `products` or `product.*`.

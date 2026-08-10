@@ -49,6 +49,12 @@ describe('nutrition domain data manifest', () => {
     expect(resource?.collection.fields.map((field) => field.name)).toContain('nutritionFacts');
     expect(resource?.collection.fields.map((field) => field.name)).toContain('imageRefs');
     expect(resource?.operations).toEqual(['list', 'read', 'create', 'update', 'delete']);
+    expect(
+      resource?.collection.fields.find((field) => field.name === 'createdAt')?.required,
+    ).not.toBe(true);
+    expect(
+      resource?.collection.fields.find((field) => field.name === 'updatedAt')?.required,
+    ).not.toBe(true);
     expect(Object.keys(endpoint?.operations ?? {})).toEqual([
       'products.list',
       'products.read',

@@ -234,7 +234,6 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
           endpointId: 'products',
           operationId: 'products.list',
         },
-        path: 'products',
       },
       itemAlias: 'item',
       keyPath: 'id',
@@ -280,7 +279,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'products.read',
       },
-      path: 'product.imageRefs',
+      path: 'imageRefs',
     });
   });
 
@@ -478,7 +477,6 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'products.list',
       },
-      path: 'products',
     });
     expect(repeatedCardTemplate?.id).toBe(
       'food_drink-nutrition-catalog-scan-product-card-template',
@@ -490,7 +488,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'products.read',
       },
-      path: 'product.name',
+      path: 'name',
     });
     expect(detailNutritionBasisBindings?.props?.title?.source).toEqual({
       kind: 'operation',
@@ -499,7 +497,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'products.read',
       },
-      path: 'product.nutritionFacts.basis',
+      path: 'nutritionFacts.basis',
     });
     expect(detailImageRefBindings?.props?.title?.source).toEqual({
       kind: 'context',
@@ -514,6 +512,14 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'products.create',
       },
+    });
+    expect(createButtonBindings?.events?.press?.[0]?.input?.normalizedBarcode).toEqual({
+      kind: 'source',
+      source: {
+        kind: 'state',
+        path: 'forms.products.create.barcode',
+      },
+      transforms: ['trim'],
     });
     expect(createButtonBindings?.events?.press?.[0]?.input?.packageLabel).toEqual({
       kind: 'source',
@@ -550,7 +556,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
         endpointId: 'products',
         operationId: 'products.create',
       },
-      path: 'product.id',
+      path: 'id',
     });
     expect(createButtonBindings?.events?.press?.[1]?.input?.params).toEqual({
       kind: 'object',
@@ -564,7 +570,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
               endpointId: 'products',
               operationId: 'products.create',
             },
-            path: 'product.id',
+            path: 'id',
           },
         },
       },
