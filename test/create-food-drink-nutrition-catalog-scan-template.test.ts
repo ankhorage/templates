@@ -1,4 +1,4 @@
-import type { UiNode } from '@ankhorage/contracts';
+import type { RouteDefinition, UiNode } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
 import {
@@ -51,24 +51,7 @@ function findNodeByType(node: UiNode, type: string): UiNode | undefined {
   return undefined;
 }
 
-function findTopLevelRouteByName(
-  routes: readonly {
-    name: string;
-    path?: string;
-    screenId?: string;
-    hideInTabBar?: boolean;
-    navigator?: {
-      type: string;
-      initialRouteName?: string;
-      routes: readonly {
-        name: string;
-        screenId?: string;
-        hideInTabBar?: boolean;
-      }[];
-    };
-  }[],
-  name: string,
-) {
+function findTopLevelRouteByName(routes: readonly RouteDefinition[], name: string) {
   return routes.find((route) => route.name === name);
 }
 
@@ -143,7 +126,9 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     const manifest = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
-    const visibleRoutes = manifest.navigator.routes.filter((route) => route.hideInTabBar !== true);
+    const visibleRoutes = manifest.navigator.routes.filter(
+      (route) => route.showInPrimaryNavigation !== false,
+    );
     const productsRoute = findTopLevelRouteByName(manifest.navigator.routes, 'products');
     const productsStack = productsRoute?.navigator;
 
@@ -177,8 +162,12 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
     expect(productsStack?.routes.find((route) => route.name === 'create')?.screenId).toBe(
       'food_drink-nutrition-catalog-scan-create',
     );
-    expect(productsStack?.routes.find((route) => route.name === '[id]')?.hideInTabBar).toBe(true);
-    expect(productsStack?.routes.find((route) => route.name === 'create')?.hideInTabBar).toBe(true);
+    expect(
+      productsStack?.routes.find((route) => route.name === '[id]')?.showInPrimaryNavigation,
+    ).toBe(false);
+    expect(
+      productsStack?.routes.find((route) => route.name === 'create')?.showInPrimaryNavigation,
+    ).toBe(false);
   });
 
   test('declares scanner runtime requirements on the scan screen', () => {

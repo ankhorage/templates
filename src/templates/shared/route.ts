@@ -8,7 +8,7 @@ export function createRoute(args: {
   screenId?: string;
   label?: string;
   icon?: IconSpec;
-  hideInTabBar?: boolean;
+  showInPrimaryNavigation?: boolean;
   navigator?: NavigatorSpec;
 }): ManifestRoute {
   return {
@@ -17,7 +17,9 @@ export function createRoute(args: {
     ...(args.screenId ? { screenId: args.screenId } : {}),
     ...(args.label ? { label: args.label } : {}),
     ...(args.icon ? { icon: args.icon } : {}),
-    ...(args.hideInTabBar ? { hideInTabBar: args.hideInTabBar } : {}),
+    ...(args.showInPrimaryNavigation === undefined
+      ? {}
+      : { showInPrimaryNavigation: args.showInPrimaryNavigation }),
     ...(args.navigator ? { navigator: args.navigator } : {}),
   };
 }
