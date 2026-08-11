@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 5.0.0
+
+### Major Changes
+
+- c8c24fa: Generate route manifests with the canonical `showInPrimaryNavigation` contract from Contracts 5, preserving hidden routes as navigable entries for Tabs and Drawer navigation.
+
 ## 4.0.0
 
 ### Major Changes
