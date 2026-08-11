@@ -453,10 +453,12 @@ describe('createStarterTemplate', () => {
       for (const template of listStarterTemplates(category)) {
         const manifest = createStarterTemplate(createSeed(category), { templateId: template.id });
         const visibleRoutes = manifest.navigator.routes.filter(
-          (route) => route.hideInTabBar !== true,
+          (route) => route.showInPrimaryNavigation !== false,
         );
+        const obsoleteVisibilityField = ['hide', 'InTabBar'].join('');
 
         assertManifestIntegrity(manifest);
+        expect(JSON.stringify(manifest)).not.toContain(obsoleteVisibilityField);
         expect(manifest.navigator.routes.map((route) => route.name)).not.toContain('sign-in');
         expect(visibleRoutes.every((route) => route.icon)).toBe(true);
         expect(visibleRoutes.every((route) => route.icon?.provider === 'material-community')).toBe(
