@@ -39,7 +39,7 @@ export const BASE_INFRA: InfraManifest = {
   networking: {
     cdn: false,
   },
-  plugins: [],
+  modules: [],
 };
 
 export const BASE_SETTINGS: AppManifest['settings'] = {
