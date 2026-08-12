@@ -90,7 +90,6 @@ jobs:
           bun run knip
           bun run test
           bun run typecheck
-          bun run changeset:status
       - name: Commit product diff
         shell: bash
         run: |
@@ -98,4 +97,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add package.json bun.lock src test .changeset
           git commit -m "Add theme mode toggle template defaults"
-          git push origin HEAD:theme-mode-toggle-defaults
+      - name: Validate changeset
+        run: bun run changeset:status
+      - name: Push product diff
+        run: git push origin HEAD:theme-mode-toggle-defaults
