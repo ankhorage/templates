@@ -159,6 +159,14 @@ export function createFallbackScreens(
               description: 'The starter ships with a local minikube deployment target.',
               meta: 'minikube',
             }),
+            createZoraNode(`${idPrefix}-settings-appearance-header`, 'SectionHeader', {
+              title: 'Appearance',
+              description: 'Switch between light and dark appearance.',
+            }),
+            createZoraNode(`${idPrefix}-settings-theme-mode-toggle`, 'ThemeModeToggle', {
+              size: 'm',
+              testID: `${idPrefix}-settings-theme-mode-toggle`,
+            }),
           ],
         ),
       ]),

@@ -48,6 +48,14 @@ export function createSettingsSection(
           ...(row.meta ? { meta: row.meta } : {}),
         }),
       ),
+      createZoraNode(`${idPrefix}-appearance-header`, 'SectionHeader', {
+        title: 'Appearance',
+        description: 'Switch between light and dark appearance.',
+      }),
+      createZoraNode(`${idPrefix}-theme-mode-toggle`, 'ThemeModeToggle', {
+        size: 'm',
+        testID: `${idPrefix}-theme-mode-toggle`,
+      }),
     ],
   );
 }
