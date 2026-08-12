@@ -14,7 +14,7 @@ import type {
   PanelProps,
 } from '@ankhorage/zora';
 import type { ScreenProps, ScreenSectionProps } from '@ankhorage/zora';
-import type { SectionHeaderProps, SettingsRowProps } from '@ankhorage/zora';
+import type { SectionHeaderProps, SettingsRowProps, ThemeModeToggleProps } from '@ankhorage/zora';
 
 type SerializableProps<T extends object> = T & Record<string, unknown>;
 type SerializableScreenProps = Omit<ScreenProps, 'children' | 'footer'>;
@@ -106,6 +106,7 @@ type SerializableSettingsRowProps = Omit<
   description?: string;
   meta?: string;
 };
+type SerializableThemeModeToggleProps = Pick<ThemeModeToggleProps, 'disabled' | 'size' | 'testID'>;
 type SerializableEmptyStateProps = Omit<
   EmptyStateProps,
   'description' | 'eyebrow' | 'footer' | 'primaryAction' | 'secondaryAction' | 'title'
@@ -181,6 +182,7 @@ export interface ZoraNodePropsByType {
   ScreenSection: SerializableScreenSectionProps;
   SectionHeader: SerializableSectionHeaderProps;
   SettingsRow: SerializableSettingsRowProps;
+  ThemeModeToggle: SerializableThemeModeToggleProps;
 }
 
 export type ZoraNodeType = keyof ZoraNodePropsByType;

@@ -362,6 +362,20 @@ describe('createStarterTemplate', () => {
     expect(nodeTypes).not.toContain('Heading');
   });
 
+  test('keeps the theme mode switcher as template UI instead of a global requirement', () => {
+    const settingsManifest = createStarterTemplate(createSeed('developer_tools'));
+    const weatherManifest = createStarterTemplate(createSeed('weather'));
+    const settingsNodeTypes = Object.values(settingsManifest.screens).flatMap((screen) =>
+      collectNodeTypes(screen.root),
+    );
+    const weatherNodeTypes = Object.values(weatherManifest.screens).flatMap((screen) =>
+      collectNodeTypes(screen.root),
+    );
+
+    expect(settingsNodeTypes).toContain('ThemeModeToggle');
+    expect(weatherNodeTypes).not.toContain('ThemeModeToggle');
+  });
+
   test('builds a dedicated template for known AppCategory values', () => {
     const manifest = createStarterTemplate(createSeed('developer_tools'));
 
