@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 6.1.0
+
+### Minor Changes
+
+- 87febd5: Add the authorable ZORA ThemeModeToggle as a starter Settings/Profile default while leaving templates without a settings surface unchanged.
+
 ## 6.0.0
 
 ### Major Changes
