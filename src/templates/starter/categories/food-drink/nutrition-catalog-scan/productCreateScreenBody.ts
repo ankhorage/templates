@@ -7,7 +7,8 @@ export function createNutritionProductCreateBody(idPrefix: string): ZoraNode[] {
       'Panel',
       {
         title: 'Direct product create form',
-        description: 'Create a product through the Nutrition API when barcode lookup finds no match.',
+        description:
+          'Create a product through the Nutrition API when barcode lookup finds no match.',
         tone: 'subtle',
       },
       [
