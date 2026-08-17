@@ -69,11 +69,11 @@ describe('nutrition domain API manifest', () => {
       'products.update',
       'products.delete',
     ]);
-    expect(Object.values(operations ?? {}).every((operation) => operation.protocol === 'http')).toBe(
-      true,
-    );
-    expect(operations?.['products.create']?.request?.parameters?.map(({ name }) => name)).not.toContain(
-      'normalizedBarcode',
-    );
+    expect(
+      Object.values(operations ?? {}).every((operation) => operation.protocol === 'http'),
+    ).toBe(true);
+    expect(
+      operations?.['products.create']?.request?.parameters?.map(({ name }) => name),
+    ).not.toContain('normalizedBarcode');
   });
 });
