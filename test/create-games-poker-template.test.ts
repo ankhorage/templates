@@ -58,6 +58,7 @@ describe('games card trainer starter', () => {
     const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
 
     expect(manifest).not.toHaveProperty('data');
-    expect(manifest.generatedApis).toBeUndefined();
+    expect(manifest.infra.apis ?? []).toEqual([]);
+    expect(Object.keys(manifest.dataSources ?? {})).toEqual([]);
   });
 });
