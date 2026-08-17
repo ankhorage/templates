@@ -1,6 +1,7 @@
 import type { AnkhRuntimeCommandProvider } from '@ankhorage/ankh';
 
 import {
+  createProviderCommandDescriptors,
   runTemplatesCommand,
   type RunTemplatesCommandImpl,
   type RunTemplatesCommandOptions,
@@ -30,11 +31,7 @@ export function createTemplatesRuntimeProvider(
     category: TEMPLATES_COMMAND_CATEGORY,
     version: TEMPLATES_PACKAGE_VERSION,
     capabilities: [...TEMPLATES_CAPABILITIES],
-    commands: TEMPLATES_COMMANDS.map((command) => ({
-      capability: command.capability,
-      path: command.path,
-      summary: command.summary,
-    })),
+    commands: createProviderCommandDescriptors(),
     handlers: TEMPLATES_COMMANDS.map((command) => ({
       path: command.path,
       handler(request) {
