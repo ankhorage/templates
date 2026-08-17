@@ -88,6 +88,10 @@ export function createNutritionCatalogScanScreens(
       name: 'Sign Up',
       content: nutritionCatalogScanContent.signUp,
     }),
-    [screenIds.settings]: createNutritionSettingsScreen({ seed, idPrefix, screenId: screenIds.settings }),
+    [screenIds.settings]: createNutritionSettingsScreen({
+      seed,
+      idPrefix,
+      screenId: screenIds.settings,
+    }),
   };
 }
