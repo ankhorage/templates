@@ -72,12 +72,16 @@ function createSectionCards(
           'Panel',
           { title: section.title, description: section.description, tone: 'subtle' },
           section.cards.map((card, cardIndex) =>
-            createZoraNode(`${idPrefix}-${idSegment}-card-${sectionIndex + 1}-${cardIndex + 1}`, 'Card', {
-              eyebrow: card.eyebrow,
-              title: card.title,
-              description: card.description,
-              tone: 'outline',
-            }),
+            createZoraNode(
+              `${idPrefix}-${idSegment}-card-${sectionIndex + 1}-${cardIndex + 1}`,
+              'Card',
+              {
+                eyebrow: card.eyebrow,
+                title: card.title,
+                description: card.description,
+                tone: 'outline',
+              },
+            ),
           ),
         ),
       ],
