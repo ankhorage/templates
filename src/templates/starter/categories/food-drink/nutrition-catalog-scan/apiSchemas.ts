@@ -17,21 +17,30 @@ const nutritionFactsSchema: DataSchema = {
   },
 };
 
+const imageProperties = {
+  bucket: { type: 'string' },
+  path: { type: 'string' },
+  kind: {
+    type: 'string',
+    enum: ['front', 'nutrition_label', 'ingredients', 'barcode', 'other'],
+  },
+  publicUrl: { type: 'string', format: 'uri', nullable: true },
+  width: { type: 'number', nullable: true },
+  height: { type: 'number', nullable: true },
+  uploadedAt: { type: 'string', format: 'date-time' },
+  uploadedByUserId: { type: 'string', nullable: true },
+} as const;
+
 const imageRefSchema: DataSchema = {
   type: 'object',
   required: ['id', 'bucket', 'path'],
-  properties: {
-    id: { type: 'string' },
-    bucket: { type: 'string' },
-    path: { type: 'string' },
-    kind: {
-      type: 'string',
-      enum: ['front', 'nutrition_label', 'ingredients', 'barcode', 'other'],
-    },
-    publicUrl: { type: 'string', format: 'uri', nullable: true },
-    width: { type: 'number', nullable: true },
-    height: { type: 'number', nullable: true },
-  },
+  properties: { id: { type: 'string' }, ...imageProperties },
+};
+
+const imageInputSchema: DataSchema = {
+  type: 'object',
+  required: ['bucket', 'path'],
+  properties: imageProperties,
 };
 
 const productSchema: DataSchema = {
@@ -59,6 +68,7 @@ const productSchema: DataSchema = {
 
 export const nutritionApiSchemas = {
   NutritionFacts: nutritionFactsSchema,
+  NutritionProductImageInput: imageInputSchema,
   StorageImageRef: imageRefSchema,
   NutritionProduct: productSchema,
   NutritionProductListResponse: {
