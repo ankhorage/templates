@@ -6,11 +6,7 @@ import type {
 import { describe, expect, mock, test } from 'bun:test';
 
 import provider, { createTemplatesRuntimeProvider } from '../src/cli/index.js';
-import {
-  createProviderCommandDescriptors,
-  type RunTemplatesCommandImpl,
-  TEMPLATES_COMMANDS,
-} from '../src/commands.js';
+import { type RunTemplatesCommandImpl, TEMPLATES_COMMANDS } from '../src/commands.js';
 import {
   TEMPLATES_CAPABILITIES,
   TEMPLATES_COMMAND_CATEGORY,
@@ -27,7 +23,7 @@ describe('ankh provider', () => {
     expect(expectedProvider.category).toBe(TEMPLATES_COMMAND_CATEGORY);
     expect(expectedProvider.version).toBe(TEMPLATES_PACKAGE_VERSION);
     expect(expectedProvider.capabilities).toEqual([...TEMPLATES_CAPABILITIES]);
-    expect(expectedProvider.commands).toEqual(createProviderCommandDescriptors());
+    expect(expectedProvider.commands).toEqual(createRuntimeCommandDescriptors());
     expect(expectedProvider.handlers?.map((handler) => handler.path.join(' '))).toEqual(
       TEMPLATES_COMMANDS.map((command) => command.path.join(' ')),
     );
@@ -126,6 +122,14 @@ describe('ankh provider', () => {
   });
 });
 
+function createRuntimeCommandDescriptors() {
+  return TEMPLATES_COMMANDS.map((command) => ({
+    capability: command.capability,
+    path: command.path,
+    summary: command.summary,
+  }));
+}
+
 function createExecutionRequest(args: {
   readonly argv: readonly string[];
   readonly category: string;
@@ -162,7 +166,7 @@ function createExecutionRequest(args: {
         category: args.category,
         version: TEMPLATES_PACKAGE_VERSION,
         capabilities: [...TEMPLATES_CAPABILITIES],
-        commands: createProviderCommandDescriptors(),
+        commands: createRuntimeCommandDescriptors(),
       },
       providerModulePath: '/tmp/dist/cli/index.js',
       providerModuleUrl: 'file:///tmp/dist/cli/index.js',

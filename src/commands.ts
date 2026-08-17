@@ -1,5 +1,5 @@
 import type { AppCategory, AppManifest } from '@ankhorage/contracts';
-import type { AnkhCapabilityId, AnkhCommandDescriptor } from '@ankhorage/contracts/cli';
+import type { AnkhCapabilityId } from '@ankhorage/contracts/cli';
 
 import {
   createManifestForSelector,
@@ -122,7 +122,7 @@ export async function runTemplatesCommand(
   }
 }
 
-export function createProviderCommandDescriptors(): readonly AnkhCommandDescriptor[] {
+export function createProviderCommandDescriptors() {
   return TEMPLATES_COMMANDS.map((command) => ({
     capability: command.capability,
     path: command.path,

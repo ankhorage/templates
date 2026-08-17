@@ -3,9 +3,8 @@ import type { AppManifest } from '@ankhorage/contracts';
 import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
 import { createManifestShell, createTheme } from '../../../../shared';
 import type { TemplateSeed } from '../../../starter.types';
+import { createNutritionCatalogScanApi } from './api';
 import { createNutritionCatalogScanBindings } from './bindings';
-import { createNutritionCatalogScanDataSources } from './dataSources';
-import { createNutritionCatalogScanGeneratedApi } from './generatedApi';
 import { createNutritionCatalogScanNavigator, createNutritionCatalogScanScreenIds } from './routes';
 import { createNutritionCatalogScanScreens } from './screens';
 
@@ -13,7 +12,6 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
   const idPrefix = `${seed.category}-nutrition-catalog-scan`;
   const theme = createTheme(seed);
   const screenIds = createNutritionCatalogScanScreenIds(idPrefix);
-  const generatedApi = createNutritionCatalogScanGeneratedApi();
   const manifest = createManifestShell({
     seed,
     theme,
@@ -24,11 +22,10 @@ export function createNutritionCatalogScanStarterTemplate(seed: TemplateSeed): A
 
   return {
     ...manifest,
-    generatedApis: { [generatedApi.id]: generatedApi },
     dataBindings: createNutritionCatalogScanBindings(idPrefix),
-    dataSources: createNutritionCatalogScanDataSources(generatedApi),
     infra: {
       ...manifest.infra,
+      apis: [createNutritionCatalogScanApi()],
       auth: {
         scope: 'global',
         provider: 'supabase',

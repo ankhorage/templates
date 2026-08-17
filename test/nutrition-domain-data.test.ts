@@ -16,64 +16,64 @@ function createSeed(): TemplateSeed {
   };
 }
 
-describe('nutrition domain data manifest', () => {
-  test('declares canonical generated API desired state and projection', () => {
-    const manifest = createStarterTemplate(createSeed(), {
-      templateId: 'nutrition-catalog-scan',
-    });
-    const generated = manifest.generatedApis?.['nutrition-products'];
-    const projection = manifest.dataSources?.['nutrition-products'];
+function createNutritionApi() {
+  const manifest = createStarterTemplate(createSeed(), {
+    templateId: 'nutrition-catalog-scan',
+  });
+  const api = manifest.infra.apis?.find((candidate) => candidate.id === 'nutrition');
+  if (api?.origin !== 'external' || api.protocol !== 'rest') {
+    throw new Error('Expected external Nutrition REST API.');
+  }
+  return api;
+}
 
-    expect(manifest).not.toHaveProperty('data');
-    expect(generated?.basePath).toBe('/v1/nutrition');
-    expect(generated?.auth?.required).toBe(true);
-    expect(projection).toMatchObject({
-      id: 'nutrition-products',
-      kind: 'api',
-      origin: 'generated',
-      protocol: 'rest',
-      generatedApiId: 'nutrition-products',
+describe('nutrition domain API manifest', () => {
+  test('declares one canonical remote nutrition domain', () => {
+    const api = createNutritionApi();
+
+    expect(api.baseUrl).toBe('https://api.ankhorage.com/v1/nutrition');
+    expect(api.schemas?.NutritionProduct).toMatchObject({
+      type: 'object',
+      required: ['id', 'barcode', 'normalizedBarcode', 'name', 'createdAt', 'updatedAt'],
+    });
+    expect(api.schemas?.NutritionProduct?.properties).toHaveProperty('packageLabel');
+    expect(api.schemas?.NutritionProduct?.properties).toHaveProperty('nutritionFacts');
+    expect(api.schemas?.NutritionProduct?.properties).toHaveProperty('imageRefs');
+  });
+
+  test('models response and create-image schemas separately', () => {
+    const api = createNutritionApi();
+    const imageRef = api.schemas?.StorageImageRef;
+    const imageInput = api.schemas?.NutritionProductImageInput;
+
+    expect(imageRef?.required).toEqual(['id', 'bucket', 'path']);
+    expect(imageInput?.required).toEqual(['bucket', 'path']);
+    expect(imageInput?.properties).not.toHaveProperty('id');
+    expect(api.schemas?.NutritionProductListResponse?.properties?.products).toEqual({
+      type: 'array',
+      items: { ref: { id: 'NutritionProduct' } },
+    });
+    expect(api.schemas?.NutritionProductResponse?.properties?.product).toEqual({
+      ref: { id: 'NutritionProduct' },
     });
   });
 
-  test('declares the product collection and canonical CRUD operations', () => {
-    const manifest = createStarterTemplate(createSeed(), {
-      templateId: 'nutrition-catalog-scan',
-    });
-    const resource = manifest.generatedApis?.['nutrition-products']?.resources[0];
-    const endpoint = manifest.dataSources?.['nutrition-products']?.endpoints.products;
+  test('declares the complete HTTP product operation set', () => {
+    const operations = createNutritionApi().endpoints.products?.operations;
 
-    expect(resource?.collection.name).toBe('nutrition_products');
-    expect(resource?.collection.fields.map((field) => field.name)).toContain('barcode');
-    expect(resource?.collection.fields.map((field) => field.name)).toContain('packageLabel');
-    expect(resource?.collection.fields.map((field) => field.name)).toContain('nutritionFacts');
-    expect(resource?.collection.fields.map((field) => field.name)).toContain('imageRefs');
-    expect(resource?.operations).toEqual(['list', 'read', 'create', 'update', 'delete']);
-    expect(
-      resource?.collection.fields.find((field) => field.name === 'createdAt')?.required,
-    ).not.toBe(true);
-    expect(
-      resource?.collection.fields.find((field) => field.name === 'updatedAt')?.required,
-    ).not.toBe(true);
-    expect(Object.keys(endpoint?.operations ?? {})).toEqual([
+    expect(Object.keys(operations ?? {})).toEqual([
       'products.list',
       'products.read',
+      'products.getByBarcode',
       'products.create',
       'products.update',
       'products.delete',
     ]);
-  });
-
-  test('keeps only custom health and barcode lookup on the external API', () => {
-    const manifest = createStarterTemplate(createSeed(), {
-      templateId: 'nutrition-catalog-scan',
-    });
-    const external = manifest.dataSources?.['nutrition-api'];
-
-    expect(external).toMatchObject({ kind: 'api', origin: 'external', protocol: 'rest' });
-    expect(Object.keys(external?.endpoints.health?.operations ?? {})).toEqual(['nutrition.health']);
-    expect(Object.keys(external?.endpoints.products?.operations ?? {})).toEqual([
-      'nutrition.products.getByBarcode',
-    ]);
+    expect(
+      Object.values(operations ?? {}).every((operation) => operation.protocol === 'http'),
+    ).toBe(true);
+    expect(
+      operations?.['products.create']?.request?.parameters?.map(({ name }) => name),
+    ).not.toContain('normalizedBarcode');
   });
 });

@@ -1,19 +1,19 @@
 import type { AppManifest, BindingOperationRef, EventBinding } from '@ankhorage/contracts';
 
 const productLookupOperation = {
-  dataSourceId: 'nutrition-api',
+  apiId: 'nutrition',
   endpointId: 'products',
-  operationId: 'nutrition.products.getByBarcode',
+  operationId: 'products.getByBarcode',
 } as const satisfies BindingOperationRef;
 
 const productCreateOperation = {
-  dataSourceId: 'nutrition-products',
+  apiId: 'nutrition',
   endpointId: 'products',
   operationId: 'products.create',
 } as const satisfies BindingOperationRef;
 
 const productDetailOperation = {
-  dataSourceId: 'nutrition-products',
+  apiId: 'nutrition',
   endpointId: 'products',
   operationId: 'products.read',
 } as const satisfies BindingOperationRef;
@@ -25,52 +25,23 @@ function createProductCardBinding(args: {
     componentId: args.componentId,
     componentType: 'ProductCard',
     props: {
-      title: {
-        source: {
-          kind: 'context',
-          path: 'item.name',
-        },
-      },
-      brand: {
-        source: {
-          kind: 'context',
-          path: 'item.brand',
-        },
-      },
-      subtitle: {
-        source: {
-          kind: 'context',
-          path: 'item.packageLabel',
-        },
-      },
-      description: {
-        source: {
-          kind: 'context',
-          path: 'item.barcode',
-        },
-      },
+      title: { source: { kind: 'context', path: 'item.name' } },
+      brand: { source: { kind: 'context', path: 'item.brand' } },
+      subtitle: { source: { kind: 'context', path: 'item.packageLabel' } },
+      description: { source: { kind: 'context', path: 'item.barcode' } },
     },
     events: {
       press: [
         {
-          target: {
-            kind: 'action',
-            type: 'navigate',
-          },
+          target: { kind: 'action', type: 'navigate' },
           input: {
-            route: {
-              kind: 'literal',
-              value: '/products/[id]',
-            },
+            route: { kind: 'literal', value: '/products/[id]' },
             params: {
               kind: 'object',
               fields: {
                 id: {
                   kind: 'source',
-                  source: {
-                    kind: 'context',
-                    path: 'item.id',
-                  },
+                  source: { kind: 'context', path: 'item.id' },
                 },
               },
             },
@@ -84,33 +55,21 @@ function createProductCardBinding(args: {
 function createLookupNavigationBindings(barcodeSourcePath: string): readonly EventBinding[] {
   return [
     {
-      target: {
-        kind: 'operation',
-        operation: productLookupOperation,
-      },
+      target: { kind: 'operation', operation: productLookupOperation },
       input: {
         barcode: {
           kind: 'source',
-          source: {
-            kind: 'event',
-            path: barcodeSourcePath,
-          },
+          source: { kind: 'event', path: barcodeSourcePath },
           transforms: ['trim'],
         },
       },
       when: {
-        source: {
-          kind: 'event',
-          path: barcodeSourcePath,
-        },
+        source: { kind: 'event', path: barcodeSourcePath },
         operator: 'exists',
       },
     },
     {
-      target: {
-        kind: 'action',
-        type: 'navigate',
-      },
+      target: { kind: 'action', type: 'navigate' },
       when: {
         source: {
           kind: 'operation',
@@ -120,10 +79,7 @@ function createLookupNavigationBindings(barcodeSourcePath: string): readonly Eve
         operator: 'exists',
       },
       input: {
-        route: {
-          kind: 'literal',
-          value: '/products/[id]',
-        },
+        route: { kind: 'literal', value: '/products/[id]' },
         params: {
           kind: 'object',
           fields: {
@@ -140,10 +96,7 @@ function createLookupNavigationBindings(barcodeSourcePath: string): readonly Eve
       },
     },
     {
-      target: {
-        kind: 'action',
-        type: 'navigate',
-      },
+      target: { kind: 'action', type: 'navigate' },
       when: {
         source: {
           kind: 'operation',
@@ -153,19 +106,13 @@ function createLookupNavigationBindings(barcodeSourcePath: string): readonly Eve
         operator: 'notExists',
       },
       input: {
-        route: {
-          kind: 'literal',
-          value: '/products/create',
-        },
+        route: { kind: 'literal', value: '/products/create' },
         params: {
           kind: 'object',
           fields: {
             barcode: {
               kind: 'source',
-              source: {
-                kind: 'event',
-                path: barcodeSourcePath,
-              },
+              source: { kind: 'event', path: barcodeSourcePath },
               transforms: ['trim'],
             },
           },
@@ -184,85 +131,50 @@ function createProductCreateBinding(
     events: {
       press: [
         {
-          target: {
-            kind: 'operation',
-            operation: productCreateOperation,
-          },
+          target: { kind: 'operation', operation: productCreateOperation },
           input: {
             barcode: {
               kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.barcode',
-              },
-              transforms: ['trim'],
-            },
-            normalizedBarcode: {
-              kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.barcode',
-              },
+              source: { kind: 'state', path: 'forms.products.create.barcode' },
               transforms: ['trim'],
             },
             name: {
               kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.name',
-              },
+              source: { kind: 'state', path: 'forms.products.create.name' },
               transforms: ['trim'],
             },
             brand: {
               kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.brand',
-              },
+              source: { kind: 'state', path: 'forms.products.create.brand' },
               transforms: ['trim'],
             },
             packageLabel: {
               kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.packageLabel',
-              },
+              source: { kind: 'state', path: 'forms.products.create.packageLabel' },
               transforms: ['trim'],
             },
             nutritionFacts: {
               kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.nutritionFacts',
-              },
+              source: { kind: 'state', path: 'forms.products.create.nutritionFacts' },
             },
             imageRefs: {
               kind: 'source',
-              source: {
-                kind: 'state',
-                path: 'forms.products.create.imageRefs',
-              },
+              source: { kind: 'state', path: 'forms.products.create.imageRefs' },
             },
           },
         },
         {
-          target: {
-            kind: 'action',
-            type: 'navigate',
-          },
+          target: { kind: 'action', type: 'navigate' },
           when: {
             source: {
               kind: 'operation',
               operation: productCreateOperation,
-              path: 'id',
+              path: 'product.id',
             },
             operator: 'exists',
           },
           input: {
-            route: {
-              kind: 'literal',
-              value: '/products/[id]',
-            },
+            route: { kind: 'literal', value: '/products/[id]' },
             params: {
               kind: 'object',
               fields: {
@@ -271,7 +183,7 @@ function createProductCreateBinding(
                   source: {
                     kind: 'operation',
                     operation: productCreateOperation,
-                    path: 'id',
+                    path: 'product.id',
                   },
                 },
               },
@@ -295,7 +207,7 @@ function createDetailTextBinding(args: {
         source: {
           kind: 'operation',
           operation: productDetailOperation,
-          path: args.path,
+          path: `product.${args.path}`,
         },
       },
     },
@@ -310,12 +222,7 @@ function createImageRefTextBinding(args: {
     componentId: args.componentId,
     componentType: 'Card',
     props: {
-      title: {
-        source: {
-          kind: 'context',
-          path: `imageRef.${args.path}`,
-        },
-      },
+      title: { source: { kind: 'context', path: `imageRef.${args.path}` } },
     },
   };
 }
