@@ -1,6 +1,11 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { createScreen, createScreenRoot, createSettingsSection, createZoraNode } from '../../../../shared';
+import {
+  createScreen,
+  createScreenRoot,
+  createSettingsSection,
+  createZoraNode,
+} from '../../../../shared';
 import type { TemplateSeed } from '../../../starter.types';
 import { nutritionCatalogScanContent } from './content';
 
