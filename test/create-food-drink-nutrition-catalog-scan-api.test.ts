@@ -38,8 +38,11 @@ function findNodeById(node: UiNode, id: string): UiNode | undefined {
 
 function nutritionApi() {
   const api = createManifest().infra.apis?.find((candidate) => candidate.id === 'nutrition');
-  if (api?.protocol !== 'rest' || api?.origin !== 'external') {
-    throw new Error('Expected canonical external Nutrition REST API.');
+  if (api?.protocol !== 'rest') {
+    throw new Error('Expected canonical Nutrition REST API.');
+  }
+  if (api.origin !== 'external') {
+    throw new Error('Expected canonical external Nutrition API.');
   }
   return api;
 }
