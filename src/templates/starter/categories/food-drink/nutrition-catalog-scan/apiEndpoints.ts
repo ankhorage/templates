@@ -17,7 +17,7 @@ const productBodyParameters: readonly DataOperationParameter[] = [
   {
     name: 'imageRefs',
     location: 'body',
-    schema: { type: 'array', items: { ref: { id: 'StorageImageRef' } } },
+    schema: { type: 'array', items: { ref: { id: 'NutritionProductImageInput' } } },
   },
 ];
 
