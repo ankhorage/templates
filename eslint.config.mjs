@@ -1,11 +1,13 @@
-import path from 'node:path';
-import { fileURLToPath } from 'node:url';
 import { createConfig } from '@ankhorage/devtools/eslint';
+import localConfig from './eslint.local.config.mjs';
 
-const configDir = path.dirname(fileURLToPath(import.meta.url));
+const localEntries = Array.isArray(localConfig) ? localConfig : [localConfig];
 
-export default createConfig({
-  tsconfigRootDir: configDir,
-  project: ['./tsconfig.eslint.json'],
-  files: ['src/**/*.ts', 'test/**/*.ts'],
-});
+export default [
+  ...createConfig({
+    files: ['src/**/*.{ts,tsx}'],
+    project: ['./tsconfig.json'],
+    tsconfigRootDir: import.meta.dirname,
+  }),
+  ...localEntries,
+];
