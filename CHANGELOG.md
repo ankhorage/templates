@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 7.0.1
+
+### Patch Changes
+
+- 41f4528: Update Ankhorage dependencies: `@ankhorage/contracts`, `@ankhorage/paradox`, `@ankhorage/zora`.
+
 ## 7.0.0
 
 ### Major Changes
