@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.0.2
+
+### Patch Changes
+
+- 9d7b81e: Remove the Plant Journal starter template and its bundled design and runtime imagery.
+
 ## 9.0.1
 
 ### Patch Changes
