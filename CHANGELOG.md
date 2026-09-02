@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 7.0.2
+
+### Patch Changes
+
+- e950c12: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 7.0.1
 
 ### Patch Changes
