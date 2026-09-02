@@ -1,6 +1,5 @@
 import type { AppCategory } from '@ankhorage/contracts';
 
-import { fallbackStarterTemplates } from './categories/fallback';
 import { booksReadingStarterTemplates } from './categories/books-reading';
 import { businessProductivityStarterTemplates } from './categories/business-productivity';
 import { developerToolsStarterTemplates } from './categories/developer-tools';
@@ -58,16 +57,6 @@ const STARTER_TEMPLATE_REGISTRY: Partial<
   weather: weatherStarterTemplates,
 };
 
-function resolveFallbackTemplate(): CategoryStarterTemplateDefinition {
-  const fallbackDefault = fallbackStarterTemplates.find((template) => template.id === 'default');
-
-  if (!fallbackDefault) {
-    throw new Error('Fallback starter template registry is missing default template.');
-  }
-
-  return fallbackDefault;
-}
-
 function createTemplateSummary(
   category: AppCategory,
   template: CategoryStarterTemplateDefinition,
@@ -88,14 +77,16 @@ export function resolveStarterTemplate(
   const selected = categoryTemplates?.find((template) => template.id === templateId);
   const categoryDefault = categoryTemplates?.find((template) => template.id === 'default');
 
-  return selected ?? categoryDefault ?? resolveFallbackTemplate();
+  const resolved = selected ?? categoryDefault;
+  if (!resolved) throw new Error(`Category "${seed.category}" has no registered starter template.`);
+  return resolved;
 }
 
 export function listStarterTemplates(
   category?: AppCategory,
 ): readonly CategoryStarterTemplateDefinition[] {
   if (category) {
-    return STARTER_TEMPLATE_REGISTRY[category] ?? fallbackStarterTemplates;
+    return STARTER_TEMPLATE_REGISTRY[category] ?? [];
   }
 
   const registeredTemplates = Object.values(STARTER_TEMPLATE_REGISTRY)
@@ -105,7 +96,7 @@ export function listStarterTemplates(
     )
     .flatMap((templates) => templates);
 
-  return [...fallbackStarterTemplates, ...registeredTemplates];
+  return registeredTemplates;
 }
 
 export function listStarterTemplatesByCategory(

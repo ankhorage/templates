@@ -30,8 +30,8 @@ function createSeed(category: AppCategory): TemplateSeed {
     slug: preset.defaultSlug,
     summary: preset.summary,
     focusAreas: preset.focusAreas,
-    primaryColor: preset.primaryColor,
-    harmony: preset.harmony,
+    primaryColor: preset.recommendedPrimaryColors[0],
+    harmony: preset.recommendedHarmonies[0],
   };
 }
 
@@ -156,22 +156,22 @@ describe('createCategoryAppManifest', () => {
       expect(manifest.metadata.slug).toBe(preset.defaultSlug);
       expect(manifest.metadata.category).toBe(category);
       expect(manifest.themes[0]?.light).toEqual({
-        primaryColor: preset.primaryColor,
-        harmony: preset.harmony,
+        primaryColor: preset.recommendedPrimaryColors[0],
+        harmony: preset.recommendedHarmonies[0],
       });
       expect(Object.keys(manifest.themes[0]?.light ?? {}).sort()).toEqual([
         'harmony',
         'primaryColor',
       ]);
       expect(manifest.themes[0]?.dark).toEqual({
-        primaryColor: preset.primaryColor,
-        harmony: preset.harmony,
+        primaryColor: preset.recommendedPrimaryColors[0],
+        harmony: preset.recommendedHarmonies[0],
       });
       expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual([
         'harmony',
         'primaryColor',
       ]);
-      assertSplashScreen(manifest, preset.primaryColor);
+      assertSplashScreen(manifest, preset.recommendedPrimaryColors[0]);
       assertManifestIntegrity(manifest);
 
       const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
@@ -265,6 +265,16 @@ describe('createCategoryAppManifest', () => {
     });
     expect(Object.keys(manifest.themes[0]?.dark ?? {}).sort()).toEqual(['harmony', 'primaryColor']);
     assertSplashScreen(manifest, '#0F766E');
+  });
+
+  test('keeps a metadata-only explicit theme id attached to the generated theme', () => {
+    const manifest = createCategoryAppManifest('weather', 'starter', {
+      metadata: { themeId: 'weather-brand' },
+      activeThemeId: 'weather-brand',
+    });
+
+    expect(manifest.activeThemeId).toBe('weather-brand');
+    expect(manifest.themes[0]?.id).toBe('weather-brand');
   });
 });
 
@@ -389,25 +399,6 @@ describe('createStarterTemplate', () => {
       'Settings',
     ]);
     expect(manifest.screens['developer_tools-starter-sign-in']).toBeUndefined();
-  });
-
-  test('falls back to the generic starter for unknown runtime categories', () => {
-    const seed: TemplateSeed = {
-      ...createSeed('developer_tools'),
-      category: 'unknown_category' as TemplateSeed['category'],
-      categoryLabel: 'Unknown Category',
-      appName: 'Unknown App',
-      slug: 'unknown-app',
-    };
-    const manifest = createStarterTemplate(seed) as ManifestWithSplashScreen;
-
-    expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
-      'Home',
-      'Details',
-      'Settings',
-    ]);
-    expect(manifest.metadata.slug).toBe('unknown-app');
-    assertSplashScreen(manifest, seed.primaryColor);
   });
 
   test('uses category default when a requested template id is unknown', () => {

@@ -1,5 +1,6 @@
 import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
+import { resolveCategoryDesignPreset } from '../design/category-theme';
 import { mergeAppManifest } from '../internal/merge';
 import type { AppManifestOverrides } from '../internal/overrides';
 import { CATEGORY_PRESETS } from '../presets/category-presets';
@@ -35,6 +36,10 @@ const TEMPLATE_FACTORIES: Record<
     const version = overrides?.metadata?.version;
     const themeId = resolveSeedThemeId(overrides);
     const themeName = overrides?.themes?.[0]?.name;
+    const resolvedDesign = resolveCategoryDesignPreset(category, {
+      ...(themeId ? { themeId } : {}),
+      ...(themeName ? { themeName } : {}),
+    });
 
     return createStarterTemplate({
       category,
@@ -46,9 +51,14 @@ const TEMPLATE_FACTORIES: Record<
       primaryColor: resolveThemeModeValue(
         overrides,
         (theme) => theme.light.primaryColor,
-        preset.primaryColor,
+        resolvedDesign.primaryColor,
       ),
-      harmony: resolveThemeModeValue(overrides, (theme) => theme.light.harmony, preset.harmony),
+      harmony: resolveThemeModeValue(
+        overrides,
+        (theme) => theme.light.harmony,
+        resolvedDesign.harmony,
+      ),
+      theme: overrides?.themes?.[0] ?? resolvedDesign.themeConfig,
       ...(version ? { version } : {}),
       ...(themeId ? { themeId } : {}),
       ...(themeName ? { themeName } : {}),
