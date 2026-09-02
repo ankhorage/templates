@@ -62,7 +62,7 @@ const TEMPLATE_FACTORIES: Record<
       ...(version ? { version } : {}),
       ...(themeId ? { themeId } : {}),
       ...(themeName ? { themeName } : {}),
-    });
+    }).manifest;
   },
 };
 

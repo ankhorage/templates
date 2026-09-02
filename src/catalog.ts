@@ -1,10 +1,11 @@
-import type { AppCategory, AppManifest } from '@ankhorage/contracts';
+import type { AppCategory } from '@ankhorage/contracts';
 
 import { resolveCategoryDesignPreset } from './design/category-theme.js';
 import { CATEGORY_PRESETS } from './presets/category-presets.js';
 import {
   createStarterTemplate,
   listStarterTemplateSummaries,
+  type StarterTemplateArtifact,
   type StarterTemplateSummary,
   type TemplateSeed,
 } from './templates/starter/index.js';
@@ -53,11 +54,11 @@ export function resolveTemplateCatalogEntry(
   );
 }
 
-export function createManifestForSelector(args: {
+export function createTemplateArtifactForSelector(args: {
   readonly selector: ParsedTemplateSelector;
   readonly projectSlug: string;
   readonly displayName: string;
-}): AppManifest {
+}): StarterTemplateArtifact {
   const seed = createTemplateSeed({
     category: args.selector.category,
     displayName: args.displayName,

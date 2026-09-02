@@ -56,7 +56,7 @@ describe('business_productivity/urban-water-monitor starter', () => {
   });
 
   test('creates a single index route with project screen content', () => {
-    const manifest = createStarterTemplate(createBusinessProductivitySeed(), {
+    const { manifest } = createStarterTemplate(createBusinessProductivitySeed(), {
       templateId: 'urban-water-monitor',
     });
 
@@ -79,7 +79,7 @@ describe('business_productivity/urban-water-monitor starter', () => {
   });
 
   test('renders project sections as collapsed disclosure sections', () => {
-    const manifest = createStarterTemplate(createBusinessProductivitySeed(), {
+    const { manifest } = createStarterTemplate(createBusinessProductivitySeed(), {
       templateId: 'urban-water-monitor',
     });
     const screen = manifest.screens['business_productivity-urban-water-monitor-project'];
@@ -98,7 +98,7 @@ describe('business_productivity/urban-water-monitor starter', () => {
   });
 
   test('includes project concept and API strategy copy without unsupported live claims', () => {
-    const manifest = createStarterTemplate(createBusinessProductivitySeed(), {
+    const { manifest } = createStarterTemplate(createBusinessProductivitySeed(), {
       templateId: 'urban-water-monitor',
     });
     const serialized = JSON.stringify(manifest);

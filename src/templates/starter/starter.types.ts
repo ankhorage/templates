@@ -1,5 +1,7 @@
 import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
+import type { StarterTemplateArtifact, StarterTemplateAsset } from './starter.assets';
+
 export const TEMPLATE_KINDS = ['starter'] as const;
 
 export type TemplateKind = (typeof TEMPLATE_KINDS)[number];
@@ -47,4 +49,7 @@ export interface CategoryStarterTemplateDefinition {
   label: string;
   description: string;
   create: StarterTemplateFactory;
+  assets?: readonly StarterTemplateAsset[];
 }
+
+export type StarterTemplateResult = StarterTemplateArtifact;

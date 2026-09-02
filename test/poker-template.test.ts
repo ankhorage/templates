@@ -35,7 +35,7 @@ function collectNodeTypes(node: UiNode): string[] {
 
 describe('poker starter template', () => {
   test('groups trainer decision actions horizontally on mobile', () => {
-    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
+    const { manifest } = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
     const trainerScreen = Object.values(manifest.screens).find(
       (screen) => screen.name === 'Trainer',
     );
@@ -68,7 +68,7 @@ describe('poker starter template', () => {
   });
 
   test('renders visible user cards and hides feedback before answer selection', () => {
-    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
+    const { manifest } = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
     const trainerScreen = Object.values(manifest.screens).find(
       (screen) => screen.name === 'Trainer',
     );

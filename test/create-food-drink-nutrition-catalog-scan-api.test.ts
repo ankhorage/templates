@@ -20,7 +20,7 @@ function createFoodDrinkSeed(): TemplateSeed {
 function createManifest() {
   return createStarterTemplate(createFoodDrinkSeed(), {
     templateId: 'nutrition-catalog-scan',
-  });
+  }).manifest;
 }
 
 function findRoute(routes: readonly RouteDefinition[], name: string) {

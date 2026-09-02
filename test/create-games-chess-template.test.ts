@@ -24,7 +24,7 @@ function createGamesSeed() {
 
 describe('games chess starter', () => {
   test('places OpeningBook below ChessBoard on the home screen', () => {
-    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'chess' });
+    const { manifest } = createStarterTemplate(createGamesSeed(), { templateId: 'chess' });
     const home = manifest.screens['games-chess-home'];
     const nodeTypes = home ? collectNodeTypes(home.root) : [];
 
