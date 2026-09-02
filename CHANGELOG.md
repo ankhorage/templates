@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.0.0
+
+### Major Changes
+
+- 0dcc320: Return starter-template artifacts with verified bundled image descriptors and materialize their bytes into generated projects.
+
 ## 8.0.0
 
 ### Major Changes
