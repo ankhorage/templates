@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "sourceDevtoolsVersion": "1.10.2",
+  "sourceDevtoolsVersion": "1.10.3",
   "skills": {
     "ankhorage-coding-rules": {
       "files": {
@@ -27,13 +27,14 @@
       "files": {
         ".agents/skills/zora-designer/agents/openai.yaml": "sha256:dff17bee852379313ad3bb6cc7838040582bf4ba91680b12ed7b360111619577",
         ".agents/skills/zora-designer/assets/audit-rubric.json": "sha256:b623da6896ef9ae740dced94586acf973b5f8ef12ed72ea66c1e5c1d7d654437",
-        ".agents/skills/zora-designer/references/artifact.md": "sha256:4a45173d0637d6dd71fc6d95f9225031d2d345962332b5c54a476a9e51cf2433",
+        ".agents/skills/zora-designer/references/artifact.md": "sha256:c9c7105c1b670f29aff1e8ee01c7557fd81168b97edd3478b4ec34580f766da6",
         ".agents/skills/zora-designer/references/audit.md": "sha256:92495791e9b6d08a74eec2bdb8dc2506285e6db76d54f887494618f578197e98",
-        ".agents/skills/zora-designer/references/workflow.md": "sha256:35d026ea9ad9406517cbf29ff4810840068dfe9d46ca3378c605b92ada3ecc69",
-        ".agents/skills/zora-designer/scripts/audit.mjs": "sha256:8a2d84e3e6a53a3150c188551186f61ad637288d4ff8908e54bfda2441376643",
-        ".agents/skills/zora-designer/scripts/owner-api.mjs": "sha256:f0c579dc812676d3a7c5e03ce2cf0a581ae9cc9ea5d69c079a0a691e6d926ddf",
-        ".agents/skills/zora-designer/scripts/scaffold-template.mjs": "sha256:d14b4bcd9c870dbd43b7fcc24cf5b04cfbcc0443d7d500e3d611d2fece77ba34",
-        ".agents/skills/zora-designer/SKILL.md": "sha256:08eb82e6d8802b636adb747016632fba5b065df14d58c403ef02ce03dc4bc7a3"
+        ".agents/skills/zora-designer/references/workflow.md": "sha256:24c50fad942e8b4297c60e65c6f4d97fc6be60f7fc03f31f56a161db0f8c1e15",
+        ".agents/skills/zora-designer/scripts/audit.mjs": "sha256:636ca5bb7594e681f2e3a1548e46cd99f10ff064e96aed37bb9d6a03e93f4b51",
+        ".agents/skills/zora-designer/scripts/owner-api.mjs": "sha256:4cb9424c145ff8d0e2c95fe7c05e77928371ee3ec2310cccedce3aa942e5bf68",
+        ".agents/skills/zora-designer/scripts/scaffold-template.mjs": "sha256:c12c56c64bfbe8c3ccb7a041dcada10348c22972c545ee7e0ddfff9fed72c05f",
+        ".agents/skills/zora-designer/scripts/template-imagery.mjs": "sha256:866d6c62c515dfc581a3def5635020c7909a3f432bc8d31312c171a8d246586f",
+        ".agents/skills/zora-designer/SKILL.md": "sha256:97b1105c1de79116a42b8003e9440c44e4a293d1d69a78352d86bf93a3ad66fe"
       }
     }
   }
