@@ -1,1 +1,0 @@
-export { createPlantJournalStarterTemplate } from './template';
