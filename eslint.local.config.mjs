@@ -15,7 +15,11 @@ export default [
     files: ['src/**/*.ts', 'test/**/*.ts'],
   }),
   legacyRuleExceptions('complexity', ['test/create-food-drink-nutrition-catalog-scan-api.test.ts']),
-  legacyRuleExceptions('max-lines', ['src/commands.ts', 'test/create-category-app.test.ts']),
+  legacyRuleExceptions('max-lines', [
+    'src/commands.ts',
+    'src/design/category-source.ts',
+    'test/create-category-app.test.ts',
+  ]),
   legacyRuleExceptions('max-lines-per-function', [
     'test/ankh.provider.test.ts',
     'test/commands.test.ts',

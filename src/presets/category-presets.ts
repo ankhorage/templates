@@ -1,8 +1,6 @@
 import type { AppCategory } from '@ankhorage/contracts';
 
-import { CATEGORY_SOURCE_A } from '../design/category-source-a';
-import { CATEGORY_SOURCE_B } from '../design/category-source-b';
-import { CATEGORY_SOURCE_C } from '../design/category-source-c';
+import { CATEGORY_SOURCE } from '../design/category-source';
 import type {
   CategoryPreset,
   CategoryPresetFieldReconciliation,
@@ -10,11 +8,8 @@ import type {
   CategoryPresetReconciliationSource,
 } from '../design/category-types';
 
-const CATEGORY_RECONCILIATION_SOURCE: readonly CategoryPresetReconciliationSource[] = [
-  ...CATEGORY_SOURCE_A,
-  ...CATEGORY_SOURCE_B,
-  ...CATEGORY_SOURCE_C,
-];
+const CATEGORY_RECONCILIATION_SOURCE: readonly CategoryPresetReconciliationSource[] =
+  CATEGORY_SOURCE;
 
 /*** Resolve the single checked-in reconciliation source for a category. */
 function resolveSource(category: AppCategory): CategoryPresetReconciliationSource {
