@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.1.0
+
+### Minor Changes
+
+- c4654b8: Add a mobile e-banking starter with Home, Assets, Payments, Invest, and More tabs.
+
 ## 9.0.2
 
 ### Patch Changes
