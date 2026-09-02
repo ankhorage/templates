@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 7.0.3
+
+### Patch Changes
+
+- 7dc81fc: Update Ankhorage dependencies: `@ankhorage/zora`.
+
 ## 7.0.2
 
 ### Patch Changes
