@@ -1,4 +1,45 @@
 export {
+  assertTemplateManifestReady,
+  type CategoryAppManifestComposition,
+  composeCategoryAppManifest,
+  type ComposeCategoryAppManifestInput,
+  type TemplateAuthoringState,
+  type TemplateCompositionDiagnostic,
+  type TemplateCompositionDiagnosticCode,
+  type TemplateCompositionStatus,
+  validateTemplateManifest,
+} from './authoring/compose-category-manifest';
+export {
+  type CategoryDesignDiagnostic,
+  type CategoryDesignDiagnosticCode,
+  type CategoryDesignOverrides,
+  compileCategoryDesign,
+  type CompiledCategoryDesign,
+  resolveCategoryDesignPreset,
+  type ResolvedCategoryDesignPreset,
+} from './design/category-theme';
+export {
+  DESIGN_DENSITIES,
+  DESIGN_SHAPES,
+  type DesignDensity,
+  type DesignShape,
+} from './design/category-types';
+export {
+  ACCENT_TONE_FAMILIES,
+  ACCENT_TONE_TARGETS,
+  type AccentToneFamily,
+  FOUNDATION_TONE_FAMILIES,
+  FOUNDATION_TONE_TARGETS,
+  type FoundationToneFamily,
+  resolveTonePair,
+  type ThemeMode,
+  TONE_PAIR_CATALOG,
+  type TonePairClassification,
+  type TonePairDefinition,
+  type TonePairId,
+  type ToneTarget,
+} from './design/tone-catalog';
+export {
   createOAuthFixtureManifest,
   listOAuthFixtures,
   OAUTH_CALLBACK_ROUTE,
@@ -8,7 +49,14 @@ export {
   resolveOAuthFixture,
 } from './fixtures/oauth';
 export { createCategoryAppManifest } from './generators/create-category-app';
-export { CATEGORY_PRESETS, type CategoryPreset } from './presets/category-presets';
+export {
+  CATEGORY_PRESET_RECONCILIATION,
+  CATEGORY_PRESETS,
+  type CategoryPreset,
+  type CategoryPresetFieldReconciliation,
+  type CategoryPresetReconciliationDecision,
+  type CategoryPresetReconciliationReport,
+} from './presets/category-presets';
 export {
   type CategoryStarterTemplateDefinition,
   createStarterTemplate,

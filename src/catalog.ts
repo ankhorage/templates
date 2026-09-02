@@ -1,5 +1,6 @@
 import type { AppCategory, AppManifest } from '@ankhorage/contracts';
 
+import { resolveCategoryDesignPreset } from './design/category-theme.js';
 import { CATEGORY_PRESETS } from './presets/category-presets.js';
 import {
   createStarterTemplate,
@@ -88,6 +89,7 @@ function createTemplateSeed(args: {
   readonly projectSlug: string;
 }): TemplateSeed {
   const preset = CATEGORY_PRESETS[args.category];
+  const design = resolveCategoryDesignPreset(args.category);
 
   return {
     category: args.category,
@@ -96,7 +98,8 @@ function createTemplateSeed(args: {
     slug: args.projectSlug,
     summary: preset.summary,
     focusAreas: preset.focusAreas,
-    primaryColor: preset.primaryColor,
-    harmony: preset.harmony,
+    primaryColor: design.primaryColor,
+    harmony: design.harmony,
+    theme: design.themeConfig,
   };
 }

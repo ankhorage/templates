@@ -17,8 +17,8 @@ function createGamesSeed() {
     slug: preset.defaultSlug,
     summary: preset.summary,
     focusAreas: preset.focusAreas,
-    primaryColor: preset.primaryColor,
-    harmony: preset.harmony,
+    primaryColor: preset.recommendedPrimaryColors[0],
+    harmony: preset.recommendedHarmonies[0],
   };
 }
 

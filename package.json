@@ -74,8 +74,9 @@
     "knip:check": "ankhorage-knip"
   },
   "dependencies": {
+    "@ankhorage/color-theory": "^0.3.0",
     "@ankhorage/contracts": "^8.0.2",
-    "@ankhorage/zora": "^3.3.3"
+    "@ankhorage/zora": "^4.0.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.8",

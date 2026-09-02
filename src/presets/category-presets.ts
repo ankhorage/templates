@@ -1,225 +1,149 @@
-import type { AppCategory, ThemeConfig } from '@ankhorage/contracts';
+import type { AppCategory } from '@ankhorage/contracts';
 
-export interface CategoryPreset {
-  label: string;
-  defaultName: string;
-  defaultSlug: string;
-  primaryColor: string;
-  harmony: ThemeConfig['light']['harmony'];
-  summary: string;
-  focusAreas: readonly [string, string, string];
+import { CATEGORY_SOURCE_A } from '../design/category-source-a';
+import { CATEGORY_SOURCE_B } from '../design/category-source-b';
+import { CATEGORY_SOURCE_C } from '../design/category-source-c';
+import type {
+  CategoryPreset,
+  CategoryPresetFieldReconciliation,
+  CategoryPresetReconciliationReport,
+  CategoryPresetReconciliationSource,
+} from '../design/category-types';
+
+const CATEGORY_RECONCILIATION_SOURCE: readonly CategoryPresetReconciliationSource[] = [
+  ...CATEGORY_SOURCE_A,
+  ...CATEGORY_SOURCE_B,
+  ...CATEGORY_SOURCE_C,
+];
+
+/*** Resolve the single checked-in reconciliation source for a category. */
+function resolveSource(category: AppCategory): CategoryPresetReconciliationSource {
+  const source = CATEGORY_RECONCILIATION_SOURCE.find((entry) => entry.category === category);
+  if (!source) throw new Error(`Missing category reconciliation source: ${category}.`);
+  return source;
 }
 
-function createPreset(config: CategoryPreset): CategoryPreset {
-  return config;
+/*** Keep reviewed recommendations in preference order without inventing alternatives. */
+function createRecommendations<TValue>(
+  supplied: TValue,
+  existing: TValue,
+): readonly [TValue, ...TValue[]] {
+  return supplied === existing ? [supplied] : [supplied, existing];
 }
+
+/*** Reconcile existing template identity with richer supplied design direction. */
+function createCategoryPreset(source: CategoryPresetReconciliationSource): CategoryPreset {
+  return {
+    category: source.category,
+    label: source.existing.label,
+    defaultName: source.existing.defaultName,
+    defaultSlug: source.existing.defaultSlug,
+    summary: source.existing.summary,
+    focusAreas: source.existing.focusAreas,
+    designIntent: source.supplied.designIntent,
+    recommendedPrimaryColors: createRecommendations(
+      source.supplied.primaryColor,
+      source.existing.primaryColor,
+    ),
+    recommendedHarmonies: createRecommendations(source.supplied.harmony, source.existing.harmony),
+    tonePairs: { light: source.supplied.lightTonePair, dark: source.supplied.darkTonePair },
+    bodyFontCandidates: source.supplied.bodyFontCandidates,
+    headingStrategy: source.supplied.headingStrategy,
+    headingFontCandidates: source.supplied.headingFontCandidates,
+    specialistFontCandidates: source.supplied.specialistFontCandidates,
+    density: source.supplied.density,
+    shape: source.supplied.shape,
+  };
+}
+
+/*** Describe every source field decision so reconciliation cannot silently discard input. */
+function createFieldReconciliation(
+  source: CategoryPresetReconciliationSource,
+): readonly CategoryPresetFieldReconciliation[] {
+  const preserved = ['label', 'defaultName', 'defaultSlug', 'summary', 'focusAreas'].map(
+    (field) => ({
+      field: `existing.${field}`,
+      decision: 'preserved-existing' as const,
+      reason: 'Templates already owns this product and template identity field.',
+    }),
+  );
+  const adopted = [
+    'designIntent',
+    'lightTonePair',
+    'darkTonePair',
+    'bodyFontCandidates',
+    'headingStrategy',
+    'headingFontCandidates',
+    'specialistFontCandidates',
+    'density',
+    'shape',
+  ].map((field) => ({
+    field: `supplied.${field}`,
+    decision: 'adopted-supplied' as const,
+    reason: 'The existing preset had no equivalent durable authoring field.',
+  }));
+  return [
+    ...preserved,
+    createSharedFieldDecision('primaryColor', source),
+    createSharedFieldDecision('harmony', source),
+    ...adopted,
+  ];
+}
+
+/*** Preserve agreeing values once and retain conflicts as ordered recommendations. */
+function createSharedFieldDecision(
+  field: 'harmony' | 'primaryColor',
+  source: CategoryPresetReconciliationSource,
+): CategoryPresetFieldReconciliation {
+  const agrees = Reflect.get(source.existing, field) === Reflect.get(source.supplied, field);
+  return {
+    field: `existing.${field} + supplied.${field}`,
+    decision: agrees ? 'sources-agree' : 'ordered-both',
+    reason: agrees
+      ? 'Both reviewed sources specify the same value; the canonical list contains it once.'
+      : 'The richer design recommendation is first and the established template value remains an explicit second option.',
+  };
+}
+
+/*** Build one public reconciliation report entry from the canonical source. */
+function createReconciliationReport(
+  source: CategoryPresetReconciliationSource,
+): CategoryPresetReconciliationReport {
+  return { category: source.category, source, fields: createFieldReconciliation(source) };
+}
+
+export const CATEGORY_PRESET_RECONCILIATION: readonly CategoryPresetReconciliationReport[] =
+  CATEGORY_RECONCILIATION_SOURCE.map(createReconciliationReport);
 
 export const CATEGORY_PRESETS: Record<AppCategory, CategoryPreset> = {
-  books_reading: createPreset({
-    label: 'Books & Reading',
-    defaultName: 'Books & Reading',
-    defaultSlug: 'books-reading-app',
-    primaryColor: '#8B4513',
-    harmony: 'analogous',
-    summary: 'reading lists, reviews, recommendations, and subscriptions',
-    focusAreas: ['Reading queue', 'Featured picks', 'Community notes'],
-  }),
-  business_productivity: createPreset({
-    label: 'Business & Productivity',
-    defaultName: 'Business & Productivity',
-    defaultSlug: 'business-productivity-app',
-    primaryColor: '#1D4ED8',
-    harmony: 'analogous',
-    summary: 'team coordination, goals, and execution tracking',
-    focusAreas: ['Active projects', 'Weekly priorities', 'Team updates'],
-  }),
-  developer_tools: createPreset({
-    label: 'Developer Tools',
-    defaultName: 'Developer Tools',
-    defaultSlug: 'developer-tools-app',
-    primaryColor: '#7C3AED',
-    harmony: 'triadic',
-    summary: 'release workflows, observability, and engineering operations',
-    focusAreas: ['Build status', 'Incident queue', 'Developer settings'],
-  }),
-  education_learning: createPreset({
-    label: 'Education & Learning',
-    defaultName: 'Education & Learning',
-    defaultSlug: 'education-learning-app',
-    primaryColor: '#4338CA',
-    harmony: 'analogous',
-    summary: 'courses, practice loops, and learner progress',
-    focusAreas: ['Current lessons', 'Practice plan', 'Milestone tracking'],
-  }),
-  entertainment_media: createPreset({
-    label: 'Entertainment & Media',
-    defaultName: 'Entertainment & Media',
-    defaultSlug: 'entertainment-media-app',
-    primaryColor: '#F97316',
-    harmony: 'complementary',
-    summary: 'content discovery, watchlists, and editorial highlights',
-    focusAreas: ['Featured releases', 'Continue watching', 'Trending topics'],
-  }),
-  finance_money: createPreset({
-    label: 'Finance & Money',
-    defaultName: 'Finance & Money',
-    defaultSlug: 'finance-money-app',
-    primaryColor: '#15803D',
-    harmony: 'analogous',
-    summary: 'balances, budgeting, and financial operations',
-    focusAreas: ['Cash overview', 'Budget health', 'Upcoming activity'],
-  }),
-  food_drink: createPreset({
-    label: 'Food & Drink',
-    defaultName: 'Food & Drink',
-    defaultSlug: 'food-drink-app',
-    primaryColor: '#EA580C',
-    harmony: 'analogous',
-    summary: 'menus, ordering, and loyalty experiences',
-    focusAreas: ['Popular items', 'Order flow', 'Rewards status'],
-  }),
-  games: createPreset({
-    label: 'Games',
-    defaultName: 'Games',
-    defaultSlug: 'games-app',
-    primaryColor: '#7C3AED',
-    harmony: 'splitComplementary',
-    summary: 'quests, progression, and player engagement loops',
-    focusAreas: ['Daily quests', 'Progression', 'Social challenges'],
-  }),
-  graphics_design: createPreset({
-    label: 'Graphics & Design',
-    defaultName: 'Graphics & Design',
-    defaultSlug: 'graphics-design-app',
-    primaryColor: '#9333EA',
-    harmony: 'triadic',
-    summary: 'creative assets, reviews, and delivery workflows',
-    focusAreas: ['Current briefs', 'Asset review', 'Brand tokens'],
-  }),
-  health_fitness: createPreset({
-    label: 'Health & Fitness',
-    defaultName: 'Health & Fitness',
-    defaultSlug: 'health-fitness-app',
-    primaryColor: '#059669',
-    harmony: 'analogous',
-    summary: 'habits, activity tracking, and coaching plans',
-    focusAreas: ['Today plan', 'Progress rings', 'Recovery status'],
-  }),
-  kids_family: createPreset({
-    label: 'Kids & Family',
-    defaultName: 'Kids & Family',
-    defaultSlug: 'kids-family-app',
-    primaryColor: '#F97316',
-    harmony: 'splitComplementary',
-    summary: 'safe discovery, routines, and shared family coordination',
-    focusAreas: ['Daily routines', 'Favorites', 'Parent controls'],
-  }),
-  lifestyle: createPreset({
-    label: 'Lifestyle',
-    defaultName: 'Lifestyle',
-    defaultSlug: 'lifestyle-app',
-    primaryColor: '#DB2777',
-    harmony: 'analogous',
-    summary: 'memberships, routines, and curated recommendations',
-    focusAreas: ['Personal dashboard', 'Saved lists', 'Upcoming plans'],
-  }),
-  medical: createPreset({
-    label: 'Medical',
-    defaultName: 'Medical',
-    defaultSlug: 'medical-app',
-    primaryColor: '#0369A1',
-    harmony: 'analogous',
-    summary: 'care coordination, intake, and patient communication',
-    focusAreas: ['Appointments', 'Care team', 'Health records'],
-  }),
-  music_audio: createPreset({
-    label: 'Music & Audio',
-    defaultName: 'Music & Audio',
-    defaultSlug: 'music-audio-app',
-    primaryColor: '#7C3AED',
-    harmony: 'triadic',
-    summary: 'catalog browsing, playback, and creator discovery',
-    focusAreas: ['Featured mixes', 'Recent listening', 'Creator spotlight'],
-  }),
-  navigation_travel: createPreset({
-    label: 'Navigation & Travel',
-    defaultName: 'Navigation & Travel',
-    defaultSlug: 'navigation-travel-app',
-    primaryColor: '#0284C7',
-    harmony: 'analogous',
-    summary: 'planning, routing, and trip operations',
-    focusAreas: ['Trip planner', 'Saved places', 'Travel alerts'],
-  }),
-  news_magazines: createPreset({
-    label: 'News & Magazines',
-    defaultName: 'News & Magazines',
-    defaultSlug: 'news-magazines-app',
-    primaryColor: '#374151',
-    harmony: 'monochromatic',
-    summary: 'headlines, editorial curation, and subscriptions',
-    focusAreas: ['Top stories', 'Topics', 'Saved articles'],
-  }),
-  photo_video: createPreset({
-    label: 'Photo & Video',
-    defaultName: 'Photo & Video',
-    defaultSlug: 'photo-video-app',
-    primaryColor: '#6D28D9',
-    harmony: 'complementary',
-    summary: 'capture flows, asset libraries, and publishing',
-    focusAreas: ['Recent captures', 'Collections', 'Publishing queue'],
-  }),
-  reference: createPreset({
-    label: 'Reference',
-    defaultName: 'Reference',
-    defaultSlug: 'reference-app',
-    primaryColor: '#1D4ED8',
-    harmony: 'monochromatic',
-    summary: 'search, lookup, and structured knowledge discovery',
-    focusAreas: ['Quick lookup', 'Saved resources', 'Reference sets'],
-  }),
-  shopping_commerce: createPreset({
-    label: 'Shopping & Commerce',
-    defaultName: 'Shopping & Commerce',
-    defaultSlug: 'shopping-commerce-app',
-    primaryColor: '#EA580C',
-    harmony: 'analogous',
-    summary: 'catalogs, carts, and fulfillment journeys',
-    focusAreas: ['Featured products', 'Cart state', 'Order tracking'],
-  }),
-  social_community: createPreset({
-    label: 'Social & Community',
-    defaultName: 'Social & Community',
-    defaultSlug: 'social-community-app',
-    primaryColor: '#2563EB',
-    harmony: 'complementary',
-    summary: 'feeds, groups, and community participation',
-    focusAreas: ['Community feed', 'Group highlights', 'Creator actions'],
-  }),
-  sports: createPreset({
-    label: 'Sports',
-    defaultName: 'Sports',
-    defaultSlug: 'sports-app',
-    primaryColor: '#DC2626',
-    harmony: 'splitComplementary',
-    summary: 'fixtures, scores, and fan engagement',
-    focusAreas: ['Live schedule', 'Standings', 'Team updates'],
-  }),
-  utilities_tools: createPreset({
-    label: 'Utilities & Tools',
-    defaultName: 'Utilities & Tools',
-    defaultSlug: 'utilities-tools-app',
-    primaryColor: '#374151',
-    harmony: 'monochromatic',
-    summary: 'task-driven workflows, controls, and quick actions',
-    focusAreas: ['Primary utilities', 'Saved shortcuts', 'Automation settings'],
-  }),
-  weather: createPreset({
-    label: 'Weather',
-    defaultName: 'Weather',
-    defaultSlug: 'weather-app',
-    primaryColor: '#0284C7',
-    harmony: 'analogous',
-    summary: 'conditions, alerts, and forecast planning',
-    focusAreas: ['Current conditions', 'Hourly forecast', 'Alerts'],
-  }),
+  books_reading: createCategoryPreset(resolveSource('books_reading')),
+  business_productivity: createCategoryPreset(resolveSource('business_productivity')),
+  developer_tools: createCategoryPreset(resolveSource('developer_tools')),
+  education_learning: createCategoryPreset(resolveSource('education_learning')),
+  entertainment_media: createCategoryPreset(resolveSource('entertainment_media')),
+  finance_money: createCategoryPreset(resolveSource('finance_money')),
+  food_drink: createCategoryPreset(resolveSource('food_drink')),
+  games: createCategoryPreset(resolveSource('games')),
+  graphics_design: createCategoryPreset(resolveSource('graphics_design')),
+  health_fitness: createCategoryPreset(resolveSource('health_fitness')),
+  kids_family: createCategoryPreset(resolveSource('kids_family')),
+  lifestyle: createCategoryPreset(resolveSource('lifestyle')),
+  medical: createCategoryPreset(resolveSource('medical')),
+  music_audio: createCategoryPreset(resolveSource('music_audio')),
+  navigation_travel: createCategoryPreset(resolveSource('navigation_travel')),
+  news_magazines: createCategoryPreset(resolveSource('news_magazines')),
+  photo_video: createCategoryPreset(resolveSource('photo_video')),
+  reference: createCategoryPreset(resolveSource('reference')),
+  shopping_commerce: createCategoryPreset(resolveSource('shopping_commerce')),
+  social_community: createCategoryPreset(resolveSource('social_community')),
+  sports: createCategoryPreset(resolveSource('sports')),
+  utilities_tools: createCategoryPreset(resolveSource('utilities_tools')),
+  weather: createCategoryPreset(resolveSource('weather')),
 };
+
+export type {
+  CategoryPreset,
+  CategoryPresetFieldReconciliation,
+  CategoryPresetReconciliationDecision,
+  CategoryPresetReconciliationReport,
+} from '../design/category-types';

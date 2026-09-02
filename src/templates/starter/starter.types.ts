@@ -27,6 +27,7 @@ export interface TemplateSeed {
   focusAreas?: readonly [string, string, string];
   primaryColor: string;
   harmony: ThemeConfig['light']['harmony'];
+  theme?: ThemeConfig;
   version?: string;
   themeId?: string;
   themeName?: string;

@@ -1,6 +1,11 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
 import {
+  assertTemplateManifestReady,
+  validateTemplateManifest,
+} from '../../authoring/compose-category-manifest';
+
+import {
   listStarterTemplateSummaries,
   listStarterTemplates,
   listStarterTemplatesByCategory,
@@ -31,5 +36,5 @@ export function createStarterTemplate(
   options: StarterTemplateOptions = {},
 ): AppManifest {
   const template = resolveStarterTemplate(seed, options.templateId);
-  return template.create(seed, options);
+  return assertTemplateManifestReady(validateTemplateManifest(template.create(seed, options)));
 }
