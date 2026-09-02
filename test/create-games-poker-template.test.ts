@@ -37,7 +37,7 @@ describe('games card trainer starter', () => {
   });
 
   test('creates a two-tab trainer manifest with a compact tabletop trainer flow', () => {
-    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
+    const { manifest } = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
     const nodeTypes = Object.values(manifest.screens).flatMap((screen) =>
       collectNodeTypes(screen.root),
     );
@@ -55,7 +55,7 @@ describe('games card trainer starter', () => {
   });
 
   test('does not create app-owned API resources from the starter template', () => {
-    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
+    const { manifest } = createStarterTemplate(createGamesSeed(), { templateId: 'poker' });
 
     expect(manifest).not.toHaveProperty('data');
     expect(manifest.infra.apis ?? []).toEqual([]);

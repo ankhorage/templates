@@ -1,4 +1,14 @@
 export {
+  createStarterTemplateArtifact,
+  type StarterTemplateArtifact,
+  type StarterTemplateAsset,
+  type StarterTemplateAssetSummary,
+  summarizeStarterTemplateAssets,
+  TEMPLATE_IMAGE_CONTENT_TYPES,
+  type TemplateImageContentType,
+  validateStarterTemplateAssets,
+} from './starter.assets';
+export {
   createStarterTemplate,
   listStarterTemplateSummaries,
   listStarterTemplates,
@@ -11,6 +21,7 @@ export {
   type StarterTemplateOptions,
   type StarterTemplateSelection,
   type StarterTemplateSummary,
+  type StarterTemplateResult,
   type TemplateKind,
   type TemplateSeed,
 } from './starter.template';

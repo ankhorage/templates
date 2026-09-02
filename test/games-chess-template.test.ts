@@ -36,7 +36,7 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 describe('games chess starter', () => {
   test('renders a real ChessBoard node on Home and keeps Settings separate', () => {
-    const manifest = createStarterTemplate(createGamesSeed(), { templateId: 'chess' });
+    const { manifest } = createStarterTemplate(createGamesSeed(), { templateId: 'chess' });
 
     expect(manifest.navigator.type).toBe('tabs');
     expect(manifest.navigator.routes.map((route) => route.label)).toEqual(['Home', 'Settings']);

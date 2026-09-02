@@ -49,7 +49,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
   });
 
   test('creates the expected auth and navigation model', () => {
-    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+    const { manifest } = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
     const visibleRoutes = manifest.navigator.routes.filter(
@@ -76,7 +76,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
   });
 
   test('declares scanner requirements and useful product UI', () => {
-    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+    const { manifest } = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
     const scanRoute = findRoute(manifest.navigator.routes, 'scan');
@@ -101,7 +101,7 @@ describe('food_drink/nutrition-catalog-scan starter', () => {
   });
 
   test('keeps web route smoke paths stable', () => {
-    const manifest = createStarterTemplate(createFoodDrinkSeed(), {
+    const { manifest } = createStarterTemplate(createFoodDrinkSeed(), {
       templateId: 'nutrition-catalog-scan',
     });
     const productsRoute = findRoute(manifest.navigator.routes, 'products');

@@ -349,7 +349,7 @@ describe('createStarterTemplate', () => {
       focusAreas: ['Build status', 'Incident queue', 'Developer settings'],
       primaryColor: '#7C3AED',
       harmony: 'triadic',
-    }) as ManifestWithSplashScreen;
+    }).manifest as ManifestWithSplashScreen;
 
     assertSplashScreen(manifest, '#7C3AED');
 
@@ -373,8 +373,8 @@ describe('createStarterTemplate', () => {
   });
 
   test('keeps the theme mode switcher as template UI instead of a global requirement', () => {
-    const settingsManifest = createStarterTemplate(createSeed('developer_tools'));
-    const weatherManifest = createStarterTemplate(createSeed('weather'));
+    const { manifest: settingsManifest } = createStarterTemplate(createSeed('developer_tools'));
+    const { manifest: weatherManifest } = createStarterTemplate(createSeed('weather'));
     const settingsNodeTypes = Object.values(settingsManifest.screens).flatMap((screen) =>
       collectNodeTypes(screen.root),
     );
@@ -387,7 +387,7 @@ describe('createStarterTemplate', () => {
   });
 
   test('builds a dedicated template for known AppCategory values', () => {
-    const manifest = createStarterTemplate(createSeed('developer_tools'));
+    const { manifest } = createStarterTemplate(createSeed('developer_tools'));
 
     expect(manifest.navigator.type).toBe('drawer');
     expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
@@ -402,7 +402,7 @@ describe('createStarterTemplate', () => {
   });
 
   test('uses category default when a requested template id is unknown', () => {
-    const manifest = createStarterTemplate(createSeed('social_community'), {
+    const { manifest } = createStarterTemplate(createSeed('social_community'), {
       templateId: 'missing-template',
     });
 
@@ -416,8 +416,8 @@ describe('createStarterTemplate', () => {
   });
 
   test('selects the social community default and creator variants', () => {
-    const community = createStarterTemplate(createSeed('social_community'));
-    const creator = createStarterTemplate(createSeed('social_community'), {
+    const { manifest: community } = createStarterTemplate(createSeed('social_community'));
+    const { manifest: creator } = createStarterTemplate(createSeed('social_community'), {
       templateId: 'creator',
     });
 
@@ -441,7 +441,7 @@ describe('createStarterTemplate', () => {
   });
 
   test('selects the games chess template', () => {
-    const manifest = createStarterTemplate(createSeed('games'), { templateId: 'chess' });
+    const { manifest } = createStarterTemplate(createSeed('games'), { templateId: 'chess' });
 
     assertManifestIntegrity(manifest);
     expect(manifest.navigator.type).toBe('tabs');
@@ -456,7 +456,9 @@ describe('createStarterTemplate', () => {
   test('creates valid manifests for every registered category template', () => {
     for (const category of APP_CATEGORIES) {
       for (const template of listStarterTemplates(category)) {
-        const manifest = createStarterTemplate(createSeed(category), { templateId: template.id });
+        const { manifest } = createStarterTemplate(createSeed(category), {
+          templateId: template.id,
+        });
         const visibleRoutes = manifest.navigator.routes.filter(
           (route) => route.showInPrimaryNavigation !== false,
         );

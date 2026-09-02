@@ -1,8 +1,8 @@
-import type { AppCategory, AppManifest } from '@ankhorage/contracts';
+import type { AppCategory } from '@ankhorage/contracts';
 import type { AnkhCapabilityId } from '@ankhorage/contracts/cli';
 
 import {
-  createManifestForSelector,
+  createTemplateArtifactForSelector,
   listTemplateCatalog,
   resolveTemplateCatalogEntry,
   type TemplateCatalogEntry,
@@ -17,8 +17,10 @@ import {
 import {
   createProjectSeed,
   type CreateProjectSeedRequest,
+  type CreateProjectSeedResult,
   type ProjectSeedDependencies,
 } from './projectSeed.js';
+import { summarizeStarterTemplateAssets } from './templates/starter/index.js';
 import {
   deriveDisplayNameFromSlug,
   parseProjectSlug,
@@ -53,11 +55,11 @@ export interface TemplatesCommandInvocation {
 }
 
 interface TemplatesCommandServices {
-  readonly createManifestForSelector: typeof createManifestForSelector;
+  readonly createTemplateArtifactForSelector: typeof createTemplateArtifactForSelector;
   readonly createProjectSeed: (
     request: CreateProjectSeedRequest,
     dependencies?: Partial<ProjectSeedDependencies>,
-  ) => Promise<{ readonly projectPath: string }>;
+  ) => Promise<CreateProjectSeedResult>;
   readonly listTemplateCatalog: (category?: AppCategory) => readonly TemplateCatalogEntry[];
   readonly resolveTemplateCatalogEntry: typeof resolveTemplateCatalogEntry;
 }
@@ -197,7 +199,8 @@ function createTemplatesCommandServices(
   overrides: Partial<TemplatesCommandServices> = {},
 ): TemplatesCommandServices {
   return {
-    createManifestForSelector: overrides.createManifestForSelector ?? createManifestForSelector,
+    createTemplateArtifactForSelector:
+      overrides.createTemplateArtifactForSelector ?? createTemplateArtifactForSelector,
     createProjectSeed: overrides.createProjectSeed ?? createProjectSeed,
     listTemplateCatalog: overrides.listTemplateCatalog ?? listTemplateCatalog,
     resolveTemplateCatalogEntry:
@@ -224,13 +227,13 @@ function runInspectCommand(
 ): Promise<TemplatesCommandRunResult> {
   const selector = parseInspectArguments(argv);
   const entry = services.resolveTemplateCatalogEntry(selector);
-  const manifest = services.createManifestForSelector({
+  const artifact = services.createTemplateArtifactForSelector({
     selector,
     projectSlug: 'template-preview',
     displayName: 'Template Preview',
   });
 
-  request.context.writeStdout(renderTemplateInspection(entry, manifest));
+  request.context.writeStdout(renderTemplateInspection(entry, artifact));
   return Promise.resolve({ exitCode: 0 });
 }
 
@@ -242,7 +245,7 @@ async function runCreateCommand(
   const { projectSlug, selector } = parseCreateArguments(argv);
   const entry = services.resolveTemplateCatalogEntry(selector);
   const displayName = deriveDisplayNameFromSlug(projectSlug);
-  const manifest = services.createManifestForSelector({
+  const artifact = services.createTemplateArtifactForSelector({
     selector,
     projectSlug,
     displayName,
@@ -266,10 +269,11 @@ async function runCreateCommand(
       templateId: entry.templateId,
       selector: entry.selector,
     },
-    manifest,
+    manifest: artifact.manifest,
+    assets: artifact.assets,
   });
 
-  request.context.writeStdout(renderCreateSuccess(result.projectPath));
+  request.context.writeStdout(renderCreateSuccess(result.projectPath, result.createdFiles));
   return { exitCode: 0 };
 }
 
@@ -325,7 +329,10 @@ function renderTemplateList(entries: readonly TemplateCatalogEntry[]): string {
   return ['Available templates:', '', ...lines, ''].join('\n');
 }
 
-function renderTemplateInspection(entry: TemplateCatalogEntry, manifest: AppManifest): string {
+function renderTemplateInspection(
+  entry: TemplateCatalogEntry,
+  artifact: ReturnType<typeof createTemplateArtifactForSelector>,
+): string {
   return `${JSON.stringify(
     {
       selector: entry.selector,
@@ -333,22 +340,22 @@ function renderTemplateInspection(entry: TemplateCatalogEntry, manifest: AppMani
       templateId: entry.templateId,
       label: entry.label,
       description: entry.description,
-      manifestVersion: manifest.metadata.version,
-      manifest,
+      assetCount: artifact.assets.length,
+      assets: summarizeStarterTemplateAssets(artifact.assets),
+      manifestVersion: artifact.manifest.metadata.version,
+      manifest: artifact.manifest,
     },
     null,
     2,
   )}\n`;
 }
 
-function renderCreateSuccess(projectPath: string): string {
+function renderCreateSuccess(projectPath: string, createdFiles: readonly string[]): string {
   return [
     `Created manifest-first project seed at ${projectPath}`,
     '',
     'Files:',
-    '  ankh.config.json',
-    '  ankh.template.json',
-    '  README.md',
+    ...createdFiles.map((filePath) => `  ${filePath}`),
     '',
   ].join('\n');
 }

@@ -8,13 +8,16 @@ import {
   composeCategoryAppManifest,
   createCategoryAppManifest,
   createStarterTemplate,
+  createStarterTemplateArtifact,
   listStarterTemplates,
   listStarterTemplatesByCategory,
   listStarterTemplateSummaries,
   resolveCategoryDesignPreset,
   resolveStarterTemplate,
+  summarizeStarterTemplateAssets,
   TEMPLATE_KINDS,
   TONE_PAIR_CATALOG,
+  validateStarterTemplateAssets,
 } from '../src/index';
 
 describe('root exports', () => {
@@ -27,6 +30,9 @@ describe('root exports', () => {
     expect(typeof composeCategoryAppManifest).toBe('function');
     expect(typeof resolveCategoryDesignPreset).toBe('function');
     expect(typeof createStarterTemplate).toBe('function');
+    expect(typeof createStarterTemplateArtifact).toBe('function');
+    expect(typeof validateStarterTemplateAssets).toBe('function');
+    expect(typeof summarizeStarterTemplateAssets).toBe('function');
     expect(typeof createCategoryAppManifest).toBe('function');
     expect(typeof listStarterTemplates).toBe('function');
     expect(typeof listStarterTemplatesByCategory).toBe('function');
@@ -35,5 +41,17 @@ describe('root exports', () => {
 
     const manifest = createCategoryAppManifest('books_reading');
     expect(manifest.metadata.themeId).toBe(manifest.activeThemeId);
+
+    const artifact = createStarterTemplate({
+      category: 'books_reading',
+      categoryLabel: 'Books & Reading',
+      appName: 'Reading App',
+      slug: 'reading-app',
+      summary: 'reading lists and progress',
+      primaryColor: '#7C3AED',
+      harmony: 'analogous',
+    });
+    expect(artifact.assets).toEqual([]);
+    expect(artifact.manifest.metadata.category).toBe('books_reading');
   });
 });

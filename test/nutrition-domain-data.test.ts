@@ -17,7 +17,7 @@ function createSeed(): TemplateSeed {
 }
 
 function createNutritionApi() {
-  const manifest = createStarterTemplate(createSeed(), {
+  const { manifest } = createStarterTemplate(createSeed(), {
     templateId: 'nutrition-catalog-scan',
   });
   const api = manifest.infra.apis?.find((candidate) => candidate.id === 'nutrition');

@@ -1,9 +1,9 @@
-import type { AppManifest } from '@ankhorage/contracts';
-
 import {
   assertTemplateManifestReady,
   validateTemplateManifest,
 } from '../../authoring/compose-category-manifest';
+
+import { createStarterTemplateArtifact } from './starter.assets';
 
 import {
   listStarterTemplateSummaries,
@@ -11,7 +11,12 @@ import {
   listStarterTemplatesByCategory,
   resolveStarterTemplate,
 } from './starter.registry';
-import { TEMPLATE_KINDS, type StarterTemplateOptions, type TemplateSeed } from './starter.types';
+import {
+  TEMPLATE_KINDS,
+  type StarterTemplateOptions,
+  type StarterTemplateResult,
+  type TemplateSeed,
+} from './starter.types';
 
 export { TEMPLATE_KINDS };
 export {
@@ -27,6 +32,7 @@ export type {
   StarterTemplateOptions,
   StarterTemplateSelection,
   StarterTemplateSummary,
+  StarterTemplateResult,
   TemplateKind,
   TemplateSeed,
 } from './starter.types';
@@ -34,7 +40,10 @@ export type {
 export function createStarterTemplate(
   seed: TemplateSeed,
   options: StarterTemplateOptions = {},
-): AppManifest {
+): StarterTemplateResult {
   const template = resolveStarterTemplate(seed, options.templateId);
-  return assertTemplateManifestReady(validateTemplateManifest(template.create(seed, options)));
+  const manifest = assertTemplateManifestReady(
+    validateTemplateManifest(template.create(seed, options)),
+  );
+  return createStarterTemplateArtifact(manifest, template.assets);
 }
