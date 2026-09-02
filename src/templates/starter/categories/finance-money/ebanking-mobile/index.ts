@@ -1,0 +1,1 @@
+export { createEbankingMobileStarterTemplate } from './template';
