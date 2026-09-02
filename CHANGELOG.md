@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.0.1
+
+### Patch Changes
+
+- 582d560: Add the Plant Journal Lifestyle starter template with bundled botanical imagery.
+
 ## 9.0.0
 
 ### Major Changes
