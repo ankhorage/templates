@@ -4,8 +4,14 @@ graph TD
   package__ankhorage_templates --> entrypoint_src_index_ts
   module_package_json["package.json"]
   package__ankhorage_templates -.-> module_package_json
+  module_src_authoring_compose_category_manifest_ts["src/authoring/compose-category-manifest.ts"]
+  package__ankhorage_templates -.-> module_src_authoring_compose_category_manifest_ts
+  module_src_authoring_compose_category_manifest_ts --> module_src_design_category_theme_ts
+  module_src_authoring_compose_category_manifest_ts --> module_src_internal_defaults_ts
+  module_src_authoring_compose_category_manifest_ts --> module_src_templates_shared_create_manifest_shell_ts
   module_src_catalog_ts["src/catalog.ts"]
   package__ankhorage_templates -.-> module_src_catalog_ts
+  module_src_catalog_ts --> module_src_design_category_theme_ts
   module_src_catalog_ts --> module_src_presets_category_presets_ts
   module_src_catalog_ts --> module_src_templates_starter_index_ts
   module_src_catalog_ts --> module_src_templateSelector_ts
@@ -26,7 +32,21 @@ graph TD
   module_src_commands_ts --> module_src_commandContext_ts
   module_src_commands_ts --> module_src_packageMetadata_ts
   module_src_commands_ts --> module_src_projectSeed_ts
+  module_src_commands_ts --> module_src_templates_starter_index_ts
   module_src_commands_ts --> module_src_templateSelector_ts
+  module_src_design_category_source_ts["src/design/category-source.ts"]
+  package__ankhorage_templates -.-> module_src_design_category_source_ts
+  module_src_design_category_source_ts --> module_src_design_category_types_ts
+  module_src_design_category_theme_ts["src/design/category-theme.ts"]
+  package__ankhorage_templates -.-> module_src_design_category_theme_ts
+  module_src_design_category_theme_ts --> module_src_design_category_types_ts
+  module_src_design_category_theme_ts --> module_src_design_tone_catalog_ts
+  module_src_design_category_theme_ts --> module_src_presets_category_presets_ts
+  module_src_design_category_types_ts["src/design/category-types.ts"]
+  package__ankhorage_templates -.-> module_src_design_category_types_ts
+  module_src_design_category_types_ts --> module_src_design_tone_catalog_ts
+  module_src_design_tone_catalog_ts["src/design/tone-catalog.ts"]
+  package__ankhorage_templates -.-> module_src_design_tone_catalog_ts
   module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
   package__ankhorage_templates -.-> module_src_fixtures_oauth_ts
   module_src_fixtures_oauth_ts --> module_src_generators_create_category_app_ts
@@ -35,6 +55,7 @@ graph TD
   module_src_fixtures_oauth_ts --> module_src_templates_starter_index_ts
   module_src_generators_create_category_app_ts["src/generators/create-category-app.ts"]
   package__ankhorage_templates -.-> module_src_generators_create_category_app_ts
+  module_src_generators_create_category_app_ts --> module_src_design_category_theme_ts
   module_src_generators_create_category_app_ts --> module_src_internal_merge_ts
   module_src_generators_create_category_app_ts --> module_src_internal_overrides_ts
   module_src_generators_create_category_app_ts --> module_src_presets_category_presets_ts
@@ -54,8 +75,11 @@ graph TD
   module_src_packageMetadata_ts --> module_package_json
   module_src_presets_category_presets_ts["src/presets/category-presets.ts"]
   package__ankhorage_templates -.-> module_src_presets_category_presets_ts
+  module_src_presets_category_presets_ts --> module_src_design_category_source_ts
+  module_src_presets_category_presets_ts --> module_src_design_category_types_ts
   module_src_projectSeed_ts["src/projectSeed.ts"]
   package__ankhorage_templates -.-> module_src_projectSeed_ts
+  module_src_projectSeed_ts --> module_src_templates_starter_starter_assets_ts
   module_src_templates_shared_create_manifest_shell_ts["src/templates/shared/create-manifest-shell.ts"]
   package__ankhorage_templates -.-> module_src_templates_shared_create_manifest_shell_ts
   module_src_templates_shared_create_manifest_shell_ts --> module_src_internal_defaults_ts
@@ -208,25 +232,6 @@ graph TD
   module_src_templates_starter_categories_entertainment_media_screens_ts --> module_src_templates_starter_categories_entertainment_media_content_ts
   module_src_templates_starter_categories_entertainment_media_screens_ts --> module_src_templates_starter_categories_entertainment_media_routes_ts
   module_src_templates_starter_categories_entertainment_media_screens_ts --> module_src_templates_starter_starter_types_ts
-  module_src_templates_starter_categories_fallback_default_template_ts["src/templates/starter/categories/fallback/default.template.ts"]
-  package__ankhorage_templates -.-> module_src_templates_starter_categories_fallback_default_template_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_internal_defaults_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_shared_index_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_starter_categories_fallback_routes_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_starter_categories_fallback_screens_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_starter_starter_types_ts
-  module_src_templates_starter_categories_fallback_index_ts["src/templates/starter/categories/fallback/index.ts"]
-  package__ankhorage_templates -.-> module_src_templates_starter_categories_fallback_index_ts
-  module_src_templates_starter_categories_fallback_index_ts --> module_src_templates_starter_categories_fallback_default_template_ts
-  module_src_templates_starter_categories_fallback_index_ts --> module_src_templates_starter_starter_types_ts
-  module_src_templates_starter_categories_fallback_routes_ts["src/templates/starter/categories/fallback/routes.ts"]
-  package__ankhorage_templates -.-> module_src_templates_starter_categories_fallback_routes_ts
-  module_src_templates_starter_categories_fallback_routes_ts --> module_src_templates_shared_index_ts
-  module_src_templates_starter_categories_fallback_screens_ts["src/templates/starter/categories/fallback/screens.ts"]
-  package__ankhorage_templates -.-> module_src_templates_starter_categories_fallback_screens_ts
-  module_src_templates_starter_categories_fallback_screens_ts --> module_src_templates_shared_index_ts
-  module_src_templates_starter_categories_fallback_screens_ts --> module_src_templates_starter_categories_fallback_routes_ts
-  module_src_templates_starter_categories_fallback_screens_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_categories_finance_money_content_ts["src/templates/starter/categories/finance-money/content.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_content_ts
   module_src_templates_starter_categories_finance_money_default_template_ts["src/templates/starter/categories/finance-money/default.template.ts"]
@@ -236,9 +241,26 @@ graph TD
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_starter_categories_finance_money_routes_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_starter_categories_finance_money_screens_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_starter_starter_types_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_index_ts["src/templates/starter/categories/finance-money/ebanking-mobile/index.ts"]
+  package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_ebanking_mobile_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts["src/templates/starter/categories/finance-money/ebanking-mobile/routes.ts"]
+  package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts --> module_src_templates_shared_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts["src/templates/starter/categories/finance-money/ebanking-mobile/screens.ts"]
+  package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts --> module_src_templates_shared_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts["src/templates/starter/categories/finance-money/ebanking-mobile/template.ts"]
+  package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_internal_defaults_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_shared_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_categories_finance_money_index_ts["src/templates/starter/categories/finance-money/index.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_index_ts
   module_src_templates_starter_categories_finance_money_index_ts --> module_src_templates_starter_categories_finance_money_default_template_ts
+  module_src_templates_starter_categories_finance_money_index_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_index_ts
   module_src_templates_starter_categories_finance_money_index_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_categories_finance_money_routes_ts["src/templates/starter/categories/finance-money/routes.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_categories_finance_money_routes_ts
@@ -747,6 +769,8 @@ graph TD
   module_src_templates_starter_categories_weather_screens_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_index_ts["src/templates/starter/index.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_index_ts
+  module_src_templates_starter_starter_assets_ts["src/templates/starter/starter.assets.ts"]
+  package__ankhorage_templates -.-> module_src_templates_starter_starter_assets_ts
   module_src_templates_starter_starter_registry_ts["src/templates/starter/starter.registry.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_starter_registry_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_books_reading_index_ts
@@ -754,7 +778,6 @@ graph TD
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_developer_tools_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_education_learning_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_entertainment_media_index_ts
-  module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_fallback_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_finance_money_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_food_drink_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_games_index_ts
@@ -776,9 +799,12 @@ graph TD
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_starter_template_ts["src/templates/starter/starter.template.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_starter_template_ts
+  module_src_templates_starter_starter_template_ts --> module_src_authoring_compose_category_manifest_ts
+  module_src_templates_starter_starter_template_ts --> module_src_templates_starter_starter_assets_ts
   module_src_templates_starter_starter_template_ts --> module_src_templates_starter_starter_registry_ts
   module_src_templates_starter_starter_template_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_starter_types_ts["src/templates/starter/starter.types.ts"]
   package__ankhorage_templates -.-> module_src_templates_starter_starter_types_ts
+  module_src_templates_starter_starter_types_ts --> module_src_templates_starter_starter_assets_ts
   module_src_templateSelector_ts["src/templateSelector.ts"]
   package__ankhorage_templates -.-> module_src_templateSelector_ts

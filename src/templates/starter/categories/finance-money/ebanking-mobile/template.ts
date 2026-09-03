@@ -1,24 +1,41 @@
 import type { AppManifest } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts/auth';
 
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
 import type { TemplateSeed } from '../../../starter.types';
-import { AUTHORED_EBANKING_MOBILE_MANIFEST } from './manifest';
+import type { EbankingMobileScreenIds } from './routes';
+import { createEbankingMobileNavigator, createEbankingMobileScreenIds } from './routes';
+import { createEbankingMobileScreens } from './screens';
 
-/*** Create the authored starter while applying the caller's canonical app identity and theme. */
 export function createEbankingMobileStarterTemplate(seed: TemplateSeed): AppManifest {
-  const theme = seed.theme ?? AUTHORED_EBANKING_MOBILE_MANIFEST.themes[0];
-  if (theme === undefined) {
-    throw new Error('The authored template requires one resolved theme.');
+  const idPrefix = `${seed.category}-ebanking-mobile`;
+  const theme = createTheme(seed);
+  const screenIds = createEbankingMobileScreenIds(idPrefix);
+  const manifest = createManifestShell({
+    seed,
+    theme,
+    version: seed.version ?? DEFAULT_TEMPLATE_VERSION,
+    navigator: createEbankingMobileNavigator(screenIds),
+    screens: createEbankingMobileScreens(idPrefix, screenIds),
+  });
+
+  const auth = manifest.infra.auth;
+  if (auth === undefined) {
+    return manifest;
   }
+
   return {
-    ...AUTHORED_EBANKING_MOBILE_MANIFEST,
-    metadata: {
-      ...AUTHORED_EBANKING_MOBILE_MANIFEST.metadata,
-      name: seed.appName,
-      slug: seed.slug,
-      version: seed.version ?? AUTHORED_EBANKING_MOBILE_MANIFEST.metadata.version,
-      themeId: theme.id,
+    ...manifest,
+    infra: {
+      ...manifest.infra,
+      auth: {
+        ...auth,
+        flow: {
+          ...resolveAuthFlow(auth.flow),
+          postSignInRoute: 'home',
+        },
+      },
     },
-    themes: [theme],
-    activeThemeId: theme.id,
   };
 }
