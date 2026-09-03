@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.1.2
+
+### Patch Changes
+
+- 1b19bfc: fix: restructure ebanking-mobile template and update scaffold script
+
 ## 9.1.1
 
 ### Patch Changes
