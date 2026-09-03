@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.1.1
+
+### Patch Changes
+
+- 5a0f26b: Update Ankhorage dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`.
+
 ## 9.1.0
 
 ### Minor Changes
