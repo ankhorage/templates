@@ -59,14 +59,19 @@ export async function scaffoldTemplate(input) {
   const symbol = toPascalCase(input.templateId);
   const factoryBase = symbol.endsWith('Starter') ? symbol.slice(0, -'Starter'.length) : symbol;
   const factoryName = `create${factoryBase}StarterTemplate`;
-  const manifestName = `AUTHORED_${toConstantCase(input.templateId)}_MANIFEST`;
   const registrySourceUpdated = updateCategoryRegistry(registrySource, {
     templateId: input.templateId,
     label: input.label,
     description: input.description,
     factoryName,
   });
-  const files = createTemplateFiles({ manifest, manifestName, factoryName });
+  const files = createTemplateFiles({
+    manifest,
+    templateId: input.templateId,
+    category: input.category,
+    factoryName,
+    symbol,
+  });
 
   await mkdir(variantDirectory, { recursive: true });
   for (const [fileName, contents] of Object.entries(files)) {
@@ -84,42 +89,353 @@ export async function scaffoldTemplate(input) {
   };
 }
 
-/*** Create normal manifest, factory, and entrypoint source for one authored starter variant. */
-function createTemplateFiles({ manifest, manifestName, factoryName }) {
-  const manifestSource = `import type { AppManifest } from '@ankhorage/contracts';
+/*** Create the template-local design artifact that records the authored composition. */
+function createZoraDesignerArtifact({ manifest, templateId, category, navigator }) {
+  const theme = manifest.themes[0];
+  const primaryColor = theme?.light?.primaryColor || theme?.dark?.primaryColor || '#000000';
+  const harmony = theme?.light?.harmony || theme?.dark?.harmony || 'analogous';
+  const routeNames = navigator.routes.map((route) => route.name);
+  const evidenceEntries = routeNames
+    .map(
+      (name, index) => `          {
+            'id': 'concept-${name}',
+            'kind': 'generated',
+            'path': 'concepts/${templateId}/${name}.png',
+            'dimensions': [853, 1844],
+            'order': ${index + 1},
+          },`,
+    )
+    .join('\n');
+  const screenEntries = routeNames
+    .map(
+      (name) => `      {
+        'id': '${name}',
+        'purpose': '${escapeSingleQuoted(manifest.screens[navigator.routes.find(r => r.name === name)?.screenId]?.description || name)}',
+        'evidenceId': 'concept-${name}',
+        'route': '${name}',
+      },`,
+    )
+    .join('\n');
 
-export const ${manifestName} = ${JSON.stringify(manifest, null, 2)} satisfies AppManifest;
-`;
-  const templateSource = `import type { AppManifest } from '@ankhorage/contracts';
-
-import type { TemplateSeed } from '../../../starter.types';
-import { ${manifestName} } from './manifest';
-
-/*** Create the authored starter while applying the caller's canonical app identity and theme. */
-export function ${factoryName}(seed: TemplateSeed): AppManifest {
-  const theme = seed.theme ?? ${manifestName}.themes[0];
-  if (theme === undefined) {
-    throw new Error('The authored template requires one resolved theme.');
-  }
-  return {
-    ...${manifestName},
-    metadata: {
-      ...${manifestName}.metadata,
-      name: seed.appName,
-      slug: seed.slug,
-      version: seed.version ?? ${manifestName}.metadata.version,
-      themeId: theme.id,
+  return `---
+{
+  'schema': 'zora-designer/v1',
+  'documentKind': 'configuration',
+  'status': 'resolved',
+  'language': 'en',
+  'source':
+    {
+      'mode': 'template',
+      'inputs': ['interactive ${category.replaceAll('_', '-')} brief', 'generated concept screen series'],
+      'evidence':
+        [
+${evidenceEntries}
+        ],
+      'capabilityLimitations': ['Concept images are not runtime captures.'],
     },
-    themes: [theme],
-    activeThemeId: theme.id,
+  'config':
+    {
+      'category': { 'requested': '${category}', 'resolved': '${category}', 'origin': 'user' },
+      'intent': { 'value': '${escapeSingleQuoted(manifest.metadata?.name || templateId)}', 'origin': 'user' },
+      'platform': { 'value': '${navigator.type === 'tabs' ? 'mobile' : 'responsive'}', 'origin': 'user' },
+      'theme':
+        {
+          'primary': { 'value': '${primaryColor}', 'origin': 'user' },
+          'harmony': { 'value': '${harmony}', 'origin': 'user' },
+        },
+      'advancedProfile':
+        {
+          'density': { 'value': 'compact', 'origin': 'category-default' },
+          'shape': { 'value': 'neutral', 'origin': 'category-default' },
+        },
+    },
+  'derivation':
+    {
+      'provenance': ['@ankhorage/templates', '@ankhorage/zora'],
+      'diagnostics': [],
+      'assumptions': [],
+      'unsupported': [],
+      'ownerRuntimeDrift': [],
+    },
+  'components':
+    {
+      'recipeDecisions':
+        {
+          'Screen': '${navigator.type === 'tabs' ? 'narrow scrollable mobile screen' : 'responsive screen'}',
+          'SectionHeader': 'screen hierarchy',
+          'Panel': 'grouped content surface',
+          'Card': 'summary and activity item',
+        },
+      'stateRequirements':
+        [
+          'loading',
+          'empty',
+          'partial',
+          'error',
+          'offline',
+          'success',
+          'disabled',
+          'pressed',
+          'focus',
+          'selected',
+        ],
+    },
+  'screens':
+    [
+${screenEntries}
+    ],
+  'validation':
+    {
+      'scope': 'composition',
+      'status': 'pass',
+      'gates':
+        [
+          { 'name': 'owner-compilation', 'status': 'pass' },
+          { 'name': 'manifest-validation', 'status': 'pass' },
+          { 'name': 'metadata-elements', 'status': 'pass' },
+        ],
+      'applicationGate': 'pass',
+      'ownerRuntimeDrift': [],
+      'blockers': [],
+    },
+  'audit':
+    {
+      'status': 'not-run',
+      'score': null,
+      'coverage': null,
+      'applicableWeight': null,
+      'assessedWeight': null,
+      'rounding': 'half-up',
+      'confidence': { 'value': null, 'label': null },
+      'possibleRange': { 'lower': null, 'upper': null },
+      'releaseGate': 'not-assessable',
+      'releaseGateCriteria': [],
+      'ruleResults': [],
+      'findings': [],
+      'risks': [],
+      'passedRules': [],
+      'notAssessable': [],
+    },
+  'openDecisions': [],
+}
+---
+
+# ZORA Designer
+
+## Design direction
+
+## Resolved decisions and origins
+
+## Color system
+
+## Typography
+
+## Layout, shape, elevation, and motion
+
+## Component and interaction states
+
+## Screen specifications
+
+## Accessibility and validation
+
+## Audit summary
+
+## Findings and remediation
+
+## Risks needing verification
+
+## Not assessable
+
+## Open decisions
+
+## User notes
+
+${manifest.metadata?.name || templateId} ${navigator.type} starter: ${navigator.routes.map(r => r.label).join(', ')}.
+`;
+}
+
+/*** Create composable template source files for one authored starter variant. */
+function createTemplateFiles({ manifest, templateId, category, factoryName, symbol }) {
+  const navigator = manifest.navigator;
+  const screens = manifest.screens;
+  const screenIdMap = buildScreenIdMap(navigator.routes, templateId, category);
+
+  const routesSource = createRoutesSource({ navigator, screenIdMap, symbol });
+  const screensSource = createScreensSource({ manifest, navigator, screenIdMap, symbol, templateId });
+  const templateSource = createTemplateSource({
+    manifest,
+    navigator,
+    templateId,
+    category,
+    factoryName,
+    symbol,
+  });
+  const zoraDesignerSource = createZoraDesignerArtifact({ manifest, templateId, category, navigator });
+
+  return {
+    '_zora-designer.md': zoraDesignerSource,
+    'index.ts': `export { ${factoryName} } from './template';\n`,
+    'routes.ts': routesSource,
+    'screens.ts': screensSource,
+    'template.ts': templateSource,
+  };
+}
+
+function buildScreenIdMap(routes, templateId, category) {
+  const map = new Map();
+  for (const route of routes) {
+    if (route.screenId) {
+      map.set(route.screenId, route.name);
+    }
+  }
+  return map;
+}
+
+function createRoutesSource({ navigator, screenIdMap, symbol }) {
+  const routeNames = navigator.routes.map((route) => route.name);
+  const screenIdProperties = routeNames
+    .map((name) => `  ${name}: string;`)
+    .join('\n');
+  const screenIdReturnValues = routeNames
+    .map((name) => `    ${name}: \`\${idPrefix}-${name}\`,`)
+    .join('\n');
+  const routeFactories = navigator.routes
+    .map(
+      (route) => `      createRoute({
+        name: '${escapeSingleQuoted(route.name)}',
+        screenId: screenIds.${route.name},
+        label: '${escapeSingleQuoted(route.label)}',
+        icon: ${JSON.stringify(route.icon)},
+      }),`,
+    )
+    .join('\n');
+
+  return `import type { AppManifest } from '@ankhorage/contracts';
+
+import { createRoute } from '../../../../shared';
+
+export interface ${symbol}ScreenIds {
+${screenIdProperties}
+}
+
+export function create${symbol}ScreenIds(idPrefix: string): ${symbol}ScreenIds {
+  return {
+${screenIdReturnValues}
+  };
+}
+
+export function create${symbol}Navigator(
+  screenIds: ${symbol}ScreenIds,
+): AppManifest['navigator'] {
+  return {
+    type: '${navigator.type}',
+    initialRouteName: '${navigator.initialRouteName}',
+    routes: [
+${routeFactories}
+    ],
   };
 }
 `;
+}
+
+function createScreensSource({ manifest, navigator, screenIdMap, symbol, templateId }) {
+  const routeNames = navigator.routes.map((route) => route.name);
+  const screenProperties = routeNames.map((name) => `  ${name}: string;`).join('\n');
+
+  const screenCreators = navigator.routes.map((route) => {
+    const screen = manifest.screens[route.screenId];
+    if (!screen) {
+      throw new Error(`Screen not found for route: ${route.name} (${route.screenId})`);
+    }
+
+    const screenVar = `${route.name}Screen`;
+    const rootId = `\`\${idPrefix}-${route.name}-screen\``;
+    const childrenJson = JSON.stringify(screen.root.children, null, 2);
+    const indentedChildren = childrenJson
+      .split('\n')
+      .map((line) => `      ${line}`)
+      .join('\n');
+
+    return `  const ${screenVar} = {
+    id: screenIds.${route.name},
+    name: ${JSON.stringify(screen.name)},
+    title: ${JSON.stringify(screen.title)},
+    description: ${JSON.stringify(screen.description)},
+    root: {
+      id: ${rootId},
+      type: 'Screen',
+      props: ${JSON.stringify(screen.root.props)},
+      children: ${indentedChildren},
+    },
+  };`;
+  });
+
+  const screenReturns = routeNames
+    .map((name) => `    [screenIds.${name}]: ${name}Screen,`)
+    .join('\n');
+
+  return `import type { AppManifest } from '@ankhorage/contracts';
+
+export function create${symbol}Screens(
+  idPrefix: string,
+  screenIds: {
+${screenProperties}
+  },
+): AppManifest['screens'] {
+${screenCreators.join('\n')}
+
   return {
-    'index.ts': `export { ${factoryName} } from './template';\n`,
-    'manifest.ts': manifestSource,
-    'template.ts': templateSource,
+${screenReturns}
   };
+}
+`;
+}
+
+function createTemplateSource({ manifest, navigator, templateId, category, factoryName, symbol }) {
+  const initialRouteName = navigator.initialRouteName || 'index';
+
+  return `import type { AppManifest } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts/auth';
+
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+import type { ${symbol}ScreenIds } from './routes';
+import { create${symbol}Navigator, create${symbol}ScreenIds } from './routes';
+import { create${symbol}Screens } from './screens';
+
+export function ${factoryName}(seed: TemplateSeed): AppManifest {
+  const idPrefix = \`\${seed.category}-${templateId}\`;
+  const theme = createTheme(seed);
+  const screenIds = create${symbol}ScreenIds(idPrefix);
+  const manifest = createManifestShell({
+    seed,
+    theme,
+    version: seed.version ?? DEFAULT_TEMPLATE_VERSION,
+    navigator: create${symbol}Navigator(screenIds),
+    screens: create${symbol}Screens(idPrefix, screenIds),
+  });
+
+  const auth = manifest.infra.auth;
+  if (auth === undefined) {
+    return manifest;
+  }
+
+  return {
+    ...manifest,
+    infra: {
+      ...manifest.infra,
+      auth: {
+        ...auth,
+        flow: {
+          ...resolveAuthFlow(auth.flow),
+          postSignInRoute: '${initialRouteName}',
+        },
+      },
+    },
+  };
+}
+`;
 }
 
 /*** Add one stable import and definition to an existing category registry. */
@@ -161,11 +477,6 @@ function toPascalCase(value) {
     .split('-')
     .map((segment) => segment[0].toUpperCase() + segment.slice(1))
     .join('');
-}
-
-/*** Convert kebab-case identifiers to an uppercase constant name. */
-function toConstantCase(value) {
-  return value.replaceAll('-', '_').toUpperCase();
 }
 
 /*** Escape content placed in generated single-quoted TypeScript strings. */

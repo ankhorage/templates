@@ -118,11 +118,11 @@ bun .agents/skills/zora-designer/scripts/scaffold-template.mjs scaffold-input.js
 ```
 
 The scaffold input provides the ready manifest, category, template ID, label, description, and
-target root. The helper verifies the Templates repository and owner validation, creates a normal
-variant `manifest.ts`, `template.ts`, and `index.ts`, and updates the category registry import and
-definition deterministically. It refuses existing targets, unsafe identifiers, blocked manifests,
-and non-Templates repositories. Review and validate the generated production diff; do not hand-hide
-a systemic skill or owner defect.
+target root. The helper verifies the Templates repository and owner validation, creates a composable
+variant `routes.ts`, `screens.ts`, `template.ts`, and `index.ts`, and updates the category registry
+import and definition deterministically. It refuses existing targets, unsafe identifiers, blocked
+manifests, and non-Templates repositories. Review and validate the generated production diff; do not
+hand-hide a systemic skill or owner defect.
 
 ## 7. Delivery gates
 
