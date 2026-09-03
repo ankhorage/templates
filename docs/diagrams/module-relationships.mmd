@@ -1,10 +1,15 @@
 graph LR
   module_package_json["package.json"]
+  module_src_authoring_compose_category_manifest_ts["src/authoring/compose-category-manifest.ts"]
   module_src_catalog_ts["src/catalog.ts"]
   module_src_cli_index_ts["src/cli/index.ts"]
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
   module_src_commandContext_ts["src/commandContext.ts"]
   module_src_commands_ts["src/commands.ts"]
+  module_src_design_category_source_ts["src/design/category-source.ts"]
+  module_src_design_category_theme_ts["src/design/category-theme.ts"]
+  module_src_design_category_types_ts["src/design/category-types.ts"]
+  module_src_design_tone_catalog_ts["src/design/tone-catalog.ts"]
   module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
   module_src_generators_create_category_app_ts["src/generators/create-category-app.ts"]
   module_src_index_ts["src/index.ts"]
@@ -53,12 +58,12 @@ graph LR
   module_src_templates_starter_categories_entertainment_media_index_ts["src/templates/starter/categories/entertainment-media/index.ts"]
   module_src_templates_starter_categories_entertainment_media_routes_ts["src/templates/starter/categories/entertainment-media/routes.ts"]
   module_src_templates_starter_categories_entertainment_media_screens_ts["src/templates/starter/categories/entertainment-media/screens.ts"]
-  module_src_templates_starter_categories_fallback_default_template_ts["src/templates/starter/categories/fallback/default.template.ts"]
-  module_src_templates_starter_categories_fallback_index_ts["src/templates/starter/categories/fallback/index.ts"]
-  module_src_templates_starter_categories_fallback_routes_ts["src/templates/starter/categories/fallback/routes.ts"]
-  module_src_templates_starter_categories_fallback_screens_ts["src/templates/starter/categories/fallback/screens.ts"]
   module_src_templates_starter_categories_finance_money_content_ts["src/templates/starter/categories/finance-money/content.ts"]
   module_src_templates_starter_categories_finance_money_default_template_ts["src/templates/starter/categories/finance-money/default.template.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_index_ts["src/templates/starter/categories/finance-money/ebanking-mobile/index.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts["src/templates/starter/categories/finance-money/ebanking-mobile/routes.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts["src/templates/starter/categories/finance-money/ebanking-mobile/screens.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts["src/templates/starter/categories/finance-money/ebanking-mobile/template.ts"]
   module_src_templates_starter_categories_finance_money_index_ts["src/templates/starter/categories/finance-money/index.ts"]
   module_src_templates_starter_categories_finance_money_routes_ts["src/templates/starter/categories/finance-money/routes.ts"]
   module_src_templates_starter_categories_finance_money_screens_ts["src/templates/starter/categories/finance-money/screens.ts"]
@@ -178,10 +183,15 @@ graph LR
   module_src_templates_starter_categories_weather_routes_ts["src/templates/starter/categories/weather/routes.ts"]
   module_src_templates_starter_categories_weather_screens_ts["src/templates/starter/categories/weather/screens.ts"]
   module_src_templates_starter_index_ts["src/templates/starter/index.ts"]
+  module_src_templates_starter_starter_assets_ts["src/templates/starter/starter.assets.ts"]
   module_src_templates_starter_starter_registry_ts["src/templates/starter/starter.registry.ts"]
   module_src_templates_starter_starter_template_ts["src/templates/starter/starter.template.ts"]
   module_src_templates_starter_starter_types_ts["src/templates/starter/starter.types.ts"]
   module_src_templateSelector_ts["src/templateSelector.ts"]
+  module_src_authoring_compose_category_manifest_ts --> module_src_design_category_theme_ts
+  module_src_authoring_compose_category_manifest_ts --> module_src_internal_defaults_ts
+  module_src_authoring_compose_category_manifest_ts --> module_src_templates_shared_create_manifest_shell_ts
+  module_src_catalog_ts --> module_src_design_category_theme_ts
   module_src_catalog_ts --> module_src_presets_category_presets_ts
   module_src_catalog_ts --> module_src_templates_starter_index_ts
   module_src_catalog_ts --> module_src_templateSelector_ts
@@ -194,17 +204,27 @@ graph LR
   module_src_commands_ts --> module_src_commandContext_ts
   module_src_commands_ts --> module_src_packageMetadata_ts
   module_src_commands_ts --> module_src_projectSeed_ts
+  module_src_commands_ts --> module_src_templates_starter_index_ts
   module_src_commands_ts --> module_src_templateSelector_ts
+  module_src_design_category_source_ts --> module_src_design_category_types_ts
+  module_src_design_category_theme_ts --> module_src_design_category_types_ts
+  module_src_design_category_theme_ts --> module_src_design_tone_catalog_ts
+  module_src_design_category_theme_ts --> module_src_presets_category_presets_ts
+  module_src_design_category_types_ts --> module_src_design_tone_catalog_ts
   module_src_fixtures_oauth_ts --> module_src_generators_create_category_app_ts
   module_src_fixtures_oauth_ts --> module_src_internal_merge_ts
   module_src_fixtures_oauth_ts --> module_src_internal_overrides_ts
   module_src_fixtures_oauth_ts --> module_src_templates_starter_index_ts
+  module_src_generators_create_category_app_ts --> module_src_design_category_theme_ts
   module_src_generators_create_category_app_ts --> module_src_internal_merge_ts
   module_src_generators_create_category_app_ts --> module_src_internal_overrides_ts
   module_src_generators_create_category_app_ts --> module_src_presets_category_presets_ts
   module_src_generators_create_category_app_ts --> module_src_templates_starter_index_ts
   module_src_internal_merge_ts --> module_src_internal_overrides_ts
   module_src_packageMetadata_ts --> module_package_json
+  module_src_presets_category_presets_ts --> module_src_design_category_source_ts
+  module_src_presets_category_presets_ts --> module_src_design_category_types_ts
+  module_src_projectSeed_ts --> module_src_templates_starter_starter_assets_ts
   module_src_templates_shared_create_manifest_shell_ts --> module_src_internal_defaults_ts
   module_src_templates_shared_create_manifest_shell_ts --> module_src_templates_shared_splash_screen_ts
   module_src_templates_shared_create_theme_ts --> module_src_internal_defaults_ts
@@ -281,23 +301,21 @@ graph LR
   module_src_templates_starter_categories_entertainment_media_screens_ts --> module_src_templates_starter_categories_entertainment_media_content_ts
   module_src_templates_starter_categories_entertainment_media_screens_ts --> module_src_templates_starter_categories_entertainment_media_routes_ts
   module_src_templates_starter_categories_entertainment_media_screens_ts --> module_src_templates_starter_starter_types_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_internal_defaults_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_shared_index_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_starter_categories_fallback_routes_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_starter_categories_fallback_screens_ts
-  module_src_templates_starter_categories_fallback_default_template_ts --> module_src_templates_starter_starter_types_ts
-  module_src_templates_starter_categories_fallback_index_ts --> module_src_templates_starter_categories_fallback_default_template_ts
-  module_src_templates_starter_categories_fallback_index_ts --> module_src_templates_starter_starter_types_ts
-  module_src_templates_starter_categories_fallback_routes_ts --> module_src_templates_shared_index_ts
-  module_src_templates_starter_categories_fallback_screens_ts --> module_src_templates_shared_index_ts
-  module_src_templates_starter_categories_fallback_screens_ts --> module_src_templates_starter_categories_fallback_routes_ts
-  module_src_templates_starter_categories_fallback_screens_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_internal_defaults_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_shared_index_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_starter_categories_finance_money_routes_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_starter_categories_finance_money_screens_ts
   module_src_templates_starter_categories_finance_money_default_template_ts --> module_src_templates_starter_starter_types_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts --> module_src_templates_shared_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts --> module_src_templates_shared_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_internal_defaults_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_shared_index_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_categories_finance_money_index_ts --> module_src_templates_starter_categories_finance_money_default_template_ts
+  module_src_templates_starter_categories_finance_money_index_ts --> module_src_templates_starter_categories_finance_money_ebanking_mobile_index_ts
   module_src_templates_starter_categories_finance_money_index_ts --> module_src_templates_starter_starter_types_ts
   module_src_templates_starter_categories_finance_money_routes_ts --> module_src_templates_shared_index_ts
   module_src_templates_starter_categories_finance_money_screens_ts --> module_src_templates_shared_index_ts
@@ -575,7 +593,6 @@ graph LR
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_developer_tools_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_education_learning_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_entertainment_media_index_ts
-  module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_fallback_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_finance_money_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_food_drink_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_games_index_ts
@@ -595,5 +612,8 @@ graph LR
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_utilities_tools_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_categories_weather_index_ts
   module_src_templates_starter_starter_registry_ts --> module_src_templates_starter_starter_types_ts
+  module_src_templates_starter_starter_template_ts --> module_src_authoring_compose_category_manifest_ts
+  module_src_templates_starter_starter_template_ts --> module_src_templates_starter_starter_assets_ts
   module_src_templates_starter_starter_template_ts --> module_src_templates_starter_starter_registry_ts
   module_src_templates_starter_starter_template_ts --> module_src_templates_starter_starter_types_ts
+  module_src_templates_starter_starter_types_ts --> module_src_templates_starter_starter_assets_ts

@@ -1,10 +1,15 @@
 graph LR
   module_package_json["package.json"]
+  module_src_authoring_compose_category_manifest_ts["src/authoring/compose-category-manifest.ts"]
   module_src_catalog_ts["src/catalog.ts"]
   module_src_cli_index_ts["src/cli/index.ts"]
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
   module_src_commandContext_ts["src/commandContext.ts"]
   module_src_commands_ts["src/commands.ts"]
+  module_src_design_category_source_ts["src/design/category-source.ts"]
+  module_src_design_category_theme_ts["src/design/category-theme.ts"]
+  module_src_design_category_types_ts["src/design/category-types.ts"]
+  module_src_design_tone_catalog_ts["src/design/tone-catalog.ts"]
   module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
   module_src_generators_create_category_app_ts["src/generators/create-category-app.ts"]
   module_src_index_ts["src/index.ts"]
@@ -53,12 +58,12 @@ graph LR
   module_src_templates_starter_categories_entertainment_media_index_ts["src/templates/starter/categories/entertainment-media/index.ts"]
   module_src_templates_starter_categories_entertainment_media_routes_ts["src/templates/starter/categories/entertainment-media/routes.ts"]
   module_src_templates_starter_categories_entertainment_media_screens_ts["src/templates/starter/categories/entertainment-media/screens.ts"]
-  module_src_templates_starter_categories_fallback_default_template_ts["src/templates/starter/categories/fallback/default.template.ts"]
-  module_src_templates_starter_categories_fallback_index_ts["src/templates/starter/categories/fallback/index.ts"]
-  module_src_templates_starter_categories_fallback_routes_ts["src/templates/starter/categories/fallback/routes.ts"]
-  module_src_templates_starter_categories_fallback_screens_ts["src/templates/starter/categories/fallback/screens.ts"]
   module_src_templates_starter_categories_finance_money_content_ts["src/templates/starter/categories/finance-money/content.ts"]
   module_src_templates_starter_categories_finance_money_default_template_ts["src/templates/starter/categories/finance-money/default.template.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_index_ts["src/templates/starter/categories/finance-money/ebanking-mobile/index.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_routes_ts["src/templates/starter/categories/finance-money/ebanking-mobile/routes.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_screens_ts["src/templates/starter/categories/finance-money/ebanking-mobile/screens.ts"]
+  module_src_templates_starter_categories_finance_money_ebanking_mobile_template_ts["src/templates/starter/categories/finance-money/ebanking-mobile/template.ts"]
   module_src_templates_starter_categories_finance_money_index_ts["src/templates/starter/categories/finance-money/index.ts"]
   module_src_templates_starter_categories_finance_money_routes_ts["src/templates/starter/categories/finance-money/routes.ts"]
   module_src_templates_starter_categories_finance_money_screens_ts["src/templates/starter/categories/finance-money/screens.ts"]
@@ -178,21 +183,73 @@ graph LR
   module_src_templates_starter_categories_weather_routes_ts["src/templates/starter/categories/weather/routes.ts"]
   module_src_templates_starter_categories_weather_screens_ts["src/templates/starter/categories/weather/screens.ts"]
   module_src_templates_starter_index_ts["src/templates/starter/index.ts"]
+  module_src_templates_starter_starter_assets_ts["src/templates/starter/starter.assets.ts"]
   module_src_templates_starter_starter_registry_ts["src/templates/starter/starter.registry.ts"]
   module_src_templates_starter_starter_template_ts["src/templates/starter/starter.template.ts"]
   module_src_templates_starter_starter_types_ts["src/templates/starter/starter.types.ts"]
   module_src_templateSelector_ts["src/templateSelector.ts"]
+  export_ACCENT_TONE_FAMILIES["ACCENT_TONE_FAMILIES"]
+  module_src_design_tone_catalog_ts --> export_ACCENT_TONE_FAMILIES
+  export_ACCENT_TONE_TARGETS["ACCENT_TONE_TARGETS"]
+  module_src_design_tone_catalog_ts --> export_ACCENT_TONE_TARGETS
+  export_AccentToneFamily["AccentToneFamily"]
+  module_src_design_tone_catalog_ts --> export_AccentToneFamily
   export_APP_CATEGORIES["APP_CATEGORIES"]
   module_node_modules__ankhorage_contracts_dist_types_d_ts --> export_APP_CATEGORIES
   export_AppCategory["AppCategory"]
   module_node_modules__ankhorage_contracts_dist_types_d_ts --> export_AppCategory
+  export_assertTemplateManifestReady["assertTemplateManifestReady"]
+  module_src_authoring_compose_category_manifest_ts --> export_assertTemplateManifestReady
+  export_assertTemplateManifestReady -.-> export_CategoryAppManifestComposition
+  export_CATEGORY_PRESET_RECONCILIATION["CATEGORY_PRESET_RECONCILIATION"]
+  module_src_presets_category_presets_ts --> export_CATEGORY_PRESET_RECONCILIATION
   export_CATEGORY_PRESETS["CATEGORY_PRESETS"]
   module_src_presets_category_presets_ts --> export_CATEGORY_PRESETS
+  export_CategoryAppManifestComposition["CategoryAppManifestComposition"]
+  module_src_authoring_compose_category_manifest_ts --> export_CategoryAppManifestComposition
+  export_CategoryAppManifestComposition -.-> export_TemplateAuthoringState
+  export_CategoryAppManifestComposition -.-> export_TemplateCompositionDiagnostic
+  export_CategoryAppManifestComposition -.-> export_TemplateCompositionStatus
+  export_CategoryDesignDiagnostic["CategoryDesignDiagnostic"]
+  module_src_design_category_theme_ts --> export_CategoryDesignDiagnostic
+  export_CategoryDesignDiagnostic -.-> export_CategoryDesignDiagnosticCode
+  export_CategoryDesignDiagnosticCode["CategoryDesignDiagnosticCode"]
+  module_src_design_category_theme_ts --> export_CategoryDesignDiagnosticCode
+  export_CategoryDesignOverrides["CategoryDesignOverrides"]
+  module_src_design_category_theme_ts --> export_CategoryDesignOverrides
+  export_CategoryDesignOverrides -.-> export_ThemeMode
   export_CategoryPreset["CategoryPreset"]
-  module_src_presets_category_presets_ts --> export_CategoryPreset
+  module_src_design_category_types_ts --> export_CategoryPreset
+  export_CategoryPresetFieldReconciliation["CategoryPresetFieldReconciliation"]
+  module_src_design_category_types_ts --> export_CategoryPresetFieldReconciliation
+  export_CategoryPresetFieldReconciliation -.-> export_CategoryPresetReconciliationDecision
+  export_CategoryPresetReconciliationDecision["CategoryPresetReconciliationDecision"]
+  module_src_design_category_types_ts --> export_CategoryPresetReconciliationDecision
+  export_CategoryPresetReconciliationReport["CategoryPresetReconciliationReport"]
+  module_src_design_category_types_ts --> export_CategoryPresetReconciliationReport
+  export_CategoryPresetReconciliationReport -.-> export_CategoryPresetFieldReconciliation
   export_CategoryStarterTemplateDefinition["CategoryStarterTemplateDefinition"]
   module_src_templates_starter_starter_types_ts --> export_CategoryStarterTemplateDefinition
+  export_CategoryStarterTemplateDefinition -.-> export_StarterTemplateAsset
   export_CategoryStarterTemplateDefinition -.-> export_StarterTemplateFactory
+  export_compileCategoryDesign["compileCategoryDesign"]
+  module_src_design_category_theme_ts --> export_compileCategoryDesign
+  export_compileCategoryDesign -.-> export_CategoryDesignOverrides
+  export_compileCategoryDesign -.-> export_CompiledCategoryDesign
+  export_CompiledCategoryDesign["CompiledCategoryDesign"]
+  module_src_design_category_theme_ts --> export_CompiledCategoryDesign
+  export_CompiledCategoryDesign -.-> export_CategoryDesignDiagnostic
+  export_CompiledCategoryDesign -.-> export_CategoryPreset
+  export_CompiledCategoryDesign -.-> export_ThemeMode
+  export_CompiledCategoryDesign -.-> export_TonePairDefinition
+  export_composeCategoryAppManifest["composeCategoryAppManifest"]
+  module_src_authoring_compose_category_manifest_ts --> export_composeCategoryAppManifest
+  export_composeCategoryAppManifest -.-> export_CategoryAppManifestComposition
+  export_composeCategoryAppManifest -.-> export_ComposeCategoryAppManifestInput
+  export_ComposeCategoryAppManifestInput["ComposeCategoryAppManifestInput"]
+  module_src_authoring_compose_category_manifest_ts --> export_ComposeCategoryAppManifestInput
+  export_ComposeCategoryAppManifestInput -.-> export_CategoryDesignOverrides
+  export_ComposeCategoryAppManifestInput -.-> export_TemplateAuthoringState
   export_createCategoryAppManifest["createCategoryAppManifest"]
   module_src_generators_create_category_app_ts --> export_createCategoryAppManifest
   export_createCategoryAppManifest -.-> export_AppCategory
@@ -204,8 +261,27 @@ graph LR
   export_createOAuthFixtureManifest -.-> export_TemplateKind
   export_createStarterTemplate["createStarterTemplate"]
   module_src_templates_starter_starter_template_ts --> export_createStarterTemplate
+  export_createStarterTemplate -.-> export_StarterTemplateArtifact
   export_createStarterTemplate -.-> export_StarterTemplateOptions
   export_createStarterTemplate -.-> export_TemplateSeed
+  export_createStarterTemplateArtifact["createStarterTemplateArtifact"]
+  module_src_templates_starter_starter_assets_ts --> export_createStarterTemplateArtifact
+  export_createStarterTemplateArtifact -.-> export_StarterTemplateArtifact
+  export_createStarterTemplateArtifact -.-> export_StarterTemplateAsset
+  export_DESIGN_DENSITIES["DESIGN_DENSITIES"]
+  module_src_design_category_types_ts --> export_DESIGN_DENSITIES
+  export_DESIGN_SHAPES["DESIGN_SHAPES"]
+  module_src_design_category_types_ts --> export_DESIGN_SHAPES
+  export_DesignDensity["DesignDensity"]
+  module_src_design_category_types_ts --> export_DesignDensity
+  export_DesignShape["DesignShape"]
+  module_src_design_category_types_ts --> export_DesignShape
+  export_FOUNDATION_TONE_FAMILIES["FOUNDATION_TONE_FAMILIES"]
+  module_src_design_tone_catalog_ts --> export_FOUNDATION_TONE_FAMILIES
+  export_FOUNDATION_TONE_TARGETS["FOUNDATION_TONE_TARGETS"]
+  module_src_design_tone_catalog_ts --> export_FOUNDATION_TONE_TARGETS
+  export_FoundationToneFamily["FoundationToneFamily"]
+  module_src_design_tone_catalog_ts --> export_FoundationToneFamily
   export_listOAuthFixtures["listOAuthFixtures"]
   module_src_fixtures_oauth_ts --> export_listOAuthFixtures
   export_listOAuthFixtures -.-> export_OAuthFixtureDefinition
@@ -226,6 +302,16 @@ graph LR
   module_src_fixtures_oauth_ts --> export_OAuthFixtureDefinition
   export_OAuthFixtureId["OAuthFixtureId"]
   module_src_fixtures_oauth_ts --> export_OAuthFixtureId
+  export_resolveCategoryDesignPreset["resolveCategoryDesignPreset"]
+  module_src_design_category_theme_ts --> export_resolveCategoryDesignPreset
+  export_resolveCategoryDesignPreset -.-> export_CategoryDesignOverrides
+  export_resolveCategoryDesignPreset -.-> export_ResolvedCategoryDesignPreset
+  export_ResolvedCategoryDesignPreset["ResolvedCategoryDesignPreset"]
+  module_src_design_category_theme_ts --> export_ResolvedCategoryDesignPreset
+  export_ResolvedCategoryDesignPreset -.-> export_CategoryDesignDiagnostic
+  export_ResolvedCategoryDesignPreset -.-> export_CategoryPreset
+  export_ResolvedCategoryDesignPreset -.-> export_ThemeMode
+  export_ResolvedCategoryDesignPreset -.-> export_TonePairDefinition
   export_resolveOAuthFixture["resolveOAuthFixture"]
   module_src_fixtures_oauth_ts --> export_resolveOAuthFixture
   export_resolveOAuthFixture -.-> export_OAuthFixtureDefinition
@@ -233,24 +319,75 @@ graph LR
   module_src_templates_starter_starter_registry_ts --> export_resolveStarterTemplate
   export_resolveStarterTemplate -.-> export_CategoryStarterTemplateDefinition
   export_resolveStarterTemplate -.-> export_TemplateSeed
+  export_resolveTonePair["resolveTonePair"]
+  module_src_design_tone_catalog_ts --> export_resolveTonePair
+  export_resolveTonePair -.-> export_TonePairDefinition
   export_SplashScreenResizeMode["SplashScreenResizeMode"]
   module_node_modules__ankhorage_contracts_dist_types_d_ts --> export_SplashScreenResizeMode
   export_SplashScreenSpec["SplashScreenSpec"]
   module_node_modules__ankhorage_contracts_dist_types_d_ts --> export_SplashScreenSpec
   export_SplashScreenSpec -.-> export_SplashScreenResizeMode
+  export_StarterTemplateArtifact["StarterTemplateArtifact"]
+  module_src_templates_starter_starter_assets_ts --> export_StarterTemplateArtifact
+  export_StarterTemplateArtifact -.-> export_StarterTemplateAsset
+  export_StarterTemplateAsset["StarterTemplateAsset"]
+  module_src_templates_starter_starter_assets_ts --> export_StarterTemplateAsset
+  export_StarterTemplateAssetSummary["StarterTemplateAssetSummary"]
+  module_src_templates_starter_starter_assets_ts --> export_StarterTemplateAssetSummary
   export_StarterTemplateFactory["StarterTemplateFactory"]
   module_src_templates_starter_starter_types_ts --> export_StarterTemplateFactory
   export_StarterTemplateId["StarterTemplateId"]
   module_src_templates_starter_starter_types_ts --> export_StarterTemplateId
   export_StarterTemplateOptions["StarterTemplateOptions"]
   module_src_templates_starter_starter_types_ts --> export_StarterTemplateOptions
+  export_StarterTemplateResult["StarterTemplateResult"]
+  module_src_templates_starter_starter_types_ts --> export_StarterTemplateResult
   export_StarterTemplateSelection["StarterTemplateSelection"]
   module_src_templates_starter_starter_types_ts --> export_StarterTemplateSelection
   export_StarterTemplateSummary["StarterTemplateSummary"]
   module_src_templates_starter_starter_types_ts --> export_StarterTemplateSummary
+  export_summarizeStarterTemplateAssets["summarizeStarterTemplateAssets"]
+  module_src_templates_starter_starter_assets_ts --> export_summarizeStarterTemplateAssets
+  export_summarizeStarterTemplateAssets -.-> export_StarterTemplateAsset
+  export_summarizeStarterTemplateAssets -.-> export_StarterTemplateAssetSummary
+  export_TEMPLATE_IMAGE_CONTENT_TYPES["TEMPLATE_IMAGE_CONTENT_TYPES"]
+  module_src_templates_starter_starter_assets_ts --> export_TEMPLATE_IMAGE_CONTENT_TYPES
   export_TEMPLATE_KINDS["TEMPLATE_KINDS"]
   module_src_templates_starter_starter_types_ts --> export_TEMPLATE_KINDS
+  export_TemplateAuthoringState["TemplateAuthoringState"]
+  module_src_authoring_compose_category_manifest_ts --> export_TemplateAuthoringState
+  export_TemplateCompositionDiagnostic["TemplateCompositionDiagnostic"]
+  module_src_authoring_compose_category_manifest_ts --> export_TemplateCompositionDiagnostic
+  export_TemplateCompositionDiagnostic -.-> export_TemplateCompositionDiagnosticCode
+  export_TemplateCompositionDiagnosticCode["TemplateCompositionDiagnosticCode"]
+  module_src_authoring_compose_category_manifest_ts --> export_TemplateCompositionDiagnosticCode
+  export_TemplateCompositionStatus["TemplateCompositionStatus"]
+  module_src_authoring_compose_category_manifest_ts --> export_TemplateCompositionStatus
+  export_TemplateImageContentType["TemplateImageContentType"]
+  module_src_templates_starter_starter_assets_ts --> export_TemplateImageContentType
   export_TemplateKind["TemplateKind"]
   module_src_templates_starter_starter_types_ts --> export_TemplateKind
   export_TemplateSeed["TemplateSeed"]
   module_src_templates_starter_starter_types_ts --> export_TemplateSeed
+  export_ThemeMode["ThemeMode"]
+  module_src_design_tone_catalog_ts --> export_ThemeMode
+  export_TONE_PAIR_CATALOG["TONE_PAIR_CATALOG"]
+  module_src_design_tone_catalog_ts --> export_TONE_PAIR_CATALOG
+  export_TonePairClassification["TonePairClassification"]
+  module_src_design_tone_catalog_ts --> export_TonePairClassification
+  export_TonePairDefinition["TonePairDefinition"]
+  module_src_design_tone_catalog_ts --> export_TonePairDefinition
+  export_TonePairDefinition -.-> export_ThemeMode
+  export_TonePairDefinition -.-> export_TonePairClassification
+  export_TonePairDefinition -.-> export_ToneTarget
+  export_TonePairId["TonePairId"]
+  module_src_design_tone_catalog_ts --> export_TonePairId
+  export_ToneTarget["ToneTarget"]
+  module_src_design_tone_catalog_ts --> export_ToneTarget
+  export_validateStarterTemplateAssets["validateStarterTemplateAssets"]
+  module_src_templates_starter_starter_assets_ts --> export_validateStarterTemplateAssets
+  export_validateStarterTemplateAssets -.-> export_StarterTemplateAsset
+  export_validateTemplateManifest["validateTemplateManifest"]
+  module_src_authoring_compose_category_manifest_ts --> export_validateTemplateManifest
+  export_validateTemplateManifest -.-> export_CategoryAppManifestComposition
+  export_validateTemplateManifest -.-> export_TemplateAuthoringState

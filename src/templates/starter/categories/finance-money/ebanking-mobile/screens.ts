@@ -38,16 +38,12 @@ interface EbankingMobileSection {
 }
 
 function createCardNode(idPrefix: string, card: EbankingMobileCard, cardIndex: number): ZoraNode {
-  return createZoraNode(
-    `${idPrefix}-card-${cardIndex + 1}`,
-    'Card',
-    {
-      eyebrow: card.eyebrow,
-      title: card.title,
-      description: card.description,
-      tone: 'outline',
-    },
-  );
+  return createZoraNode(`${idPrefix}-card-${cardIndex + 1}`, 'Card', {
+    eyebrow: card.eyebrow,
+    title: card.title,
+    description: card.description,
+    tone: 'outline',
+  });
 }
 
 function createNoticeNode(
@@ -55,21 +51,14 @@ function createNoticeNode(
   notice: EbankingMobileNotice,
   noticeIndex: number,
 ): ZoraNode {
-  return createZoraNode(
-    `${idPrefix}-notice-${noticeIndex + 1}`,
-    'Notice',
-    {
-      title: notice.title,
-      description: notice.description,
-      color: notice.color,
-    },
-  );
+  return createZoraNode(`${idPrefix}-notice-${noticeIndex + 1}`, 'Notice', {
+    title: notice.title,
+    description: notice.description,
+    color: notice.color,
+  });
 }
 
-function createSectionWithPanel(
-  idPrefix: string,
-  section: EbankingMobileSection,
-): ZoraNode {
+function createSectionWithPanel(idPrefix: string, section: EbankingMobileSection): ZoraNode {
   const idSegment = createIdSegment(section.title);
   const panelId = `${idPrefix}-${idSegment}-panel`;
 
@@ -94,11 +83,16 @@ function createSectionWithPanel(
       description: section.description,
     },
     [
-      createZoraNode(panelId, 'Panel', {
-        title: section.title,
-        description: section.description,
-        tone: 'subtle',
-      }, children),
+      createZoraNode(
+        panelId,
+        'Panel',
+        {
+          title: section.title,
+          description: section.description,
+          tone: 'subtle',
+        },
+        children,
+      ),
     ],
   );
 }
@@ -112,8 +106,16 @@ export function createEbankingMobileScreens(
       title: 'Balances',
       description: 'Your current account position.',
       items: [
-        { eyebrow: 'Balance', title: 'Total balance', description: 'Available cash and linked account value.' },
-        { eyebrow: 'Available', title: 'Available now', description: 'Spendable funds after pending activity.' },
+        {
+          eyebrow: 'Balance',
+          title: 'Total balance',
+          description: 'Available cash and linked account value.',
+        },
+        {
+          eyebrow: 'Available',
+          title: 'Available now',
+          description: 'Spendable funds after pending activity.',
+        },
       ],
     },
     {
@@ -138,7 +140,11 @@ export function createEbankingMobileScreens(
       description: 'Latest account movements.',
       items: [
         { eyebrow: 'Card', title: 'Whole Foods Market', description: 'Pending card purchase.' },
-        { eyebrow: 'Deposit', title: 'Employer payroll', description: 'Completed incoming payment.' },
+        {
+          eyebrow: 'Deposit',
+          title: 'Employer payroll',
+          description: 'Completed incoming payment.',
+        },
       ],
     },
   ];
@@ -148,7 +154,11 @@ export function createEbankingMobileScreens(
       title: 'Net worth',
       description: 'Total value across your accounts.',
       items: [
-        { eyebrow: 'Total', title: 'Net worth', description: 'Current value across linked assets.' },
+        {
+          eyebrow: 'Total',
+          title: 'Net worth',
+          description: 'Current value across linked assets.',
+        },
       ],
     },
     {
@@ -163,9 +173,7 @@ export function createEbankingMobileScreens(
     {
       title: 'Accounts',
       description: 'Manage linked accounts.',
-      items: [
-        { eyebrow: 'Add', title: 'Add account', description: 'Link a new account.' },
-      ],
+      items: [{ eyebrow: 'Add', title: 'Add account', description: 'Link a new account.' }],
     },
   ];
 
@@ -211,18 +219,24 @@ export function createEbankingMobileScreens(
     {
       title: 'Return',
       description: 'Performance summary.',
-      items: [
-        { eyebrow: 'Performance', title: 'Return', description: 'Past-year return.' },
-      ],
+      items: [{ eyebrow: 'Performance', title: 'Return', description: 'Past-year return.' }],
     },
     {
       title: 'Holdings',
       description: 'Diversified positions at a glance.',
       items: [
         { eyebrow: 'Stocks', title: 'U.S. stocks', description: 'Diversified equity position.' },
-        { eyebrow: 'Stocks', title: 'International stocks', description: 'Global equity position.' },
+        {
+          eyebrow: 'Stocks',
+          title: 'International stocks',
+          description: 'Global equity position.',
+        },
         { eyebrow: 'Stability', title: 'Bonds', description: 'Stability allocation.' },
-        { eyebrow: 'Liquidity', title: 'Cash & cash equivalents', description: 'Liquidity reserve.' },
+        {
+          eyebrow: 'Liquidity',
+          title: 'Cash & cash equivalents',
+          description: 'Liquidity reserve.',
+        },
       ],
     },
   ];
@@ -245,8 +259,16 @@ export function createEbankingMobileScreens(
       description: 'Manage preferences and trusted access.',
       items: [
         { eyebrow: 'Security', title: 'Security', description: 'Passcode and device controls.' },
-        { eyebrow: 'Notifications', title: 'Notifications', description: 'Alerts and delivery preferences.' },
-        { eyebrow: 'Beneficiaries', title: 'Beneficiaries', description: 'Manage trusted recipients.' },
+        {
+          eyebrow: 'Notifications',
+          title: 'Notifications',
+          description: 'Alerts and delivery preferences.',
+        },
+        {
+          eyebrow: 'Beneficiaries',
+          title: 'Beneficiaries',
+          description: 'Manage trusted recipients.',
+        },
         { eyebrow: 'Support', title: 'Help and support', description: 'Get assistance.' },
       ],
     },

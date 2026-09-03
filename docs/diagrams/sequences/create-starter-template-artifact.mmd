@@ -1,0 +1,22 @@
+sequenceDiagram
+  participant participant_collectBundledImageMedia as collectBundledImageMedia
+  participant participant_createStarterTemplateArtifact as createStarterTemplateArtifact
+  participant participant_isTemplateImageContentType as isTemplateImageContentType
+  participant participant_validateAssetDescriptor as validateAssetDescriptor
+  participant participant_validateMediaMatchesAsset as validateMediaMatchesAsset
+  participant participant_validateRelativePath as validateRelativePath
+  participant participant_validateStarterTemplateAssets as validateStarterTemplateAssets
+  participant_createStarterTemplateArtifact->>participant_validateStarterTemplateAssets: validateStarterTemplateAssets()
+  participant_validateStarterTemplateAssets->>participant_collectBundledImageMedia: collectBundledImageMedia()
+  participant_collectBundledImageMedia->>participant_validateRelativePath: validateRelativePath()
+  participant_validateRelativePath-->>participant_collectBundledImageMedia: return
+  participant_collectBundledImageMedia-->>participant_validateStarterTemplateAssets: return
+  participant_validateStarterTemplateAssets->>participant_validateAssetDescriptor: validateAssetDescriptor()
+  participant_validateAssetDescriptor->>participant_validateRelativePath: validateRelativePath()
+  participant_validateRelativePath-->>participant_validateAssetDescriptor: return
+  participant_validateAssetDescriptor->>participant_isTemplateImageContentType: isTemplateImageContentType()
+  participant_isTemplateImageContentType-->>participant_validateAssetDescriptor: return
+  participant_validateAssetDescriptor-->>participant_validateStarterTemplateAssets: return
+  participant_validateStarterTemplateAssets->>participant_validateMediaMatchesAsset: validateMediaMatchesAsset()
+  participant_validateMediaMatchesAsset-->>participant_validateStarterTemplateAssets: return
+  participant_validateStarterTemplateAssets-->>participant_createStarterTemplateArtifact: return

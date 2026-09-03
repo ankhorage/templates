@@ -1,0 +1,17 @@
+sequenceDiagram
+  participant participant_collectMissingElementDiagnostics as collectMissingElementDiagnostics
+  participant participant_collectRouteDiagnostics as collectRouteDiagnostics
+  participant participant_parseAppManifest as parseAppManifest
+  participant participant_validateTemplateManifest as validateTemplateManifest
+  participant participant_visitNode as visitNode
+  participant participant_visitor as visitor
+  participant_validateTemplateManifest->>participant_parseAppManifest: parseAppManifest()
+  participant_parseAppManifest-->>participant_validateTemplateManifest: return
+  participant_validateTemplateManifest->>participant_collectRouteDiagnostics: collectRouteDiagnostics()
+  participant_collectRouteDiagnostics-->>participant_validateTemplateManifest: return
+  participant_validateTemplateManifest->>participant_collectMissingElementDiagnostics: collectMissingElementDiagnostics()
+  participant_collectMissingElementDiagnostics->>participant_visitNode: visitNode()
+  participant_visitNode->>participant_visitor: visitor()
+  participant_visitor-->>participant_visitNode: return
+  participant_visitNode-->>participant_collectMissingElementDiagnostics: return
+  participant_collectMissingElementDiagnostics-->>participant_validateTemplateManifest: return

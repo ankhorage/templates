@@ -110,7 +110,7 @@ function createZoraDesignerArtifact({ manifest, templateId, category, navigator 
     .map(
       (name) => `      {
         'id': '${name}',
-        'purpose': '${escapeSingleQuoted(manifest.screens[navigator.routes.find(r => r.name === name)?.screenId]?.description || name)}',
+        'purpose': '${escapeSingleQuoted(manifest.screens[navigator.routes.find((r) => r.name === name)?.screenId]?.description || name)}',
         'evidenceId': 'concept-${name}',
         'route': '${name}',
       },`,
@@ -250,7 +250,7 @@ ${screenEntries}
 
 ## User notes
 
-${manifest.metadata?.name || templateId} ${navigator.type} starter: ${navigator.routes.map(r => r.label).join(', ')}.
+${manifest.metadata?.name || templateId} ${navigator.type} starter: ${navigator.routes.map((r) => r.label).join(', ')}.
 `;
 }
 
@@ -261,7 +261,13 @@ function createTemplateFiles({ manifest, templateId, category, factoryName, symb
   const screenIdMap = buildScreenIdMap(navigator.routes, templateId, category);
 
   const routesSource = createRoutesSource({ navigator, screenIdMap, symbol });
-  const screensSource = createScreensSource({ manifest, navigator, screenIdMap, symbol, templateId });
+  const screensSource = createScreensSource({
+    manifest,
+    navigator,
+    screenIdMap,
+    symbol,
+    templateId,
+  });
   const templateSource = createTemplateSource({
     manifest,
     navigator,
@@ -270,7 +276,12 @@ function createTemplateFiles({ manifest, templateId, category, factoryName, symb
     factoryName,
     symbol,
   });
-  const zoraDesignerSource = createZoraDesignerArtifact({ manifest, templateId, category, navigator });
+  const zoraDesignerSource = createZoraDesignerArtifact({
+    manifest,
+    templateId,
+    category,
+    navigator,
+  });
 
   return {
     '_zora-designer.md': zoraDesignerSource,
@@ -293,9 +304,7 @@ function buildScreenIdMap(routes, templateId, category) {
 
 function createRoutesSource({ navigator, screenIdMap, symbol }) {
   const routeNames = navigator.routes.map((route) => route.name);
-  const screenIdProperties = routeNames
-    .map((name) => `  ${name}: string;`)
-    .join('\n');
+  const screenIdProperties = routeNames.map((name) => `  ${name}: string;`).join('\n');
   const screenIdReturnValues = routeNames
     .map((name) => `    ${name}: \`\${idPrefix}-${name}\`,`)
     .join('\n');

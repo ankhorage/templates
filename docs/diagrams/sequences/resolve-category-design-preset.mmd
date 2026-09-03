@@ -1,0 +1,20 @@
+sequenceDiagram
+  participant participant_createProfileTokens as createProfileTokens
+  participant participant_createZoraThemeConfig as createZoraThemeConfig
+  participant participant_resolveCategoryDesignPreset as resolveCategoryDesignPreset
+  participant participant_resolveDensityTokens as resolveDensityTokens
+  participant participant_resolveModeTonePair as resolveModeTonePair
+  participant participant_resolveShapeTokens as resolveShapeTokens
+  participant participant_resolveTonePair as resolveTonePair
+  participant_resolveCategoryDesignPreset->>participant_createZoraThemeConfig: createZoraThemeConfig()
+  participant_createZoraThemeConfig-->>participant_resolveCategoryDesignPreset: return
+  participant_resolveCategoryDesignPreset->>participant_createProfileTokens: createProfileTokens()
+  participant_createProfileTokens->>participant_resolveDensityTokens: resolveDensityTokens()
+  participant_resolveDensityTokens-->>participant_createProfileTokens: return
+  participant_createProfileTokens->>participant_resolveShapeTokens: resolveShapeTokens()
+  participant_resolveShapeTokens-->>participant_createProfileTokens: return
+  participant_createProfileTokens-->>participant_resolveCategoryDesignPreset: return
+  participant_resolveCategoryDesignPreset->>participant_resolveModeTonePair: resolveModeTonePair()
+  participant_resolveModeTonePair->>participant_resolveTonePair: resolveTonePair()
+  participant_resolveTonePair-->>participant_resolveModeTonePair: return
+  participant_resolveModeTonePair-->>participant_resolveCategoryDesignPreset: return
