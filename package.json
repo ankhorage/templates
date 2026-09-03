@@ -76,13 +76,13 @@
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.0",
-    "@ankhorage/contracts": "^8.0.2",
+    "@ankhorage/contracts": "^8.2.0",
     "@ankhorage/zora": "^4.0.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.9",
     "@ankhorage/devtools": "^1.10.4",
-    "@ankhorage/doctor": "^0.10.6",
+    "@ankhorage/doctor": "^0.10.7",
     "@ankhorage/paradox": "^0.1.24",
     "@types/bun": "^1.4.0",
     "@types/node": "^25.2.3",
