@@ -33,7 +33,7 @@ describe('standalone cli', () => {
 
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toContain('Available templates:');
-    expect(capture.readStdout()).toContain('games/chess');
+    expect(capture.readStdout()).toContain('business_productivity/urban-water-monitor');
     expect(capture.readStdout()).not.toContain('fallback/default');
   });
 
@@ -41,7 +41,7 @@ describe('standalone cli', () => {
     const capture = createCapturedContext();
     const runCommandImpl = mock<RunTemplatesCommandImpl>(() => Promise.resolve({ exitCode: 9 }));
 
-    const result = await runCli(['inspect', 'games/chess'], {
+    const result = await runCli(['inspect', 'business_productivity/urban-water-monitor'], {
       context: capture.context,
       runCommandImpl,
     });
@@ -49,7 +49,7 @@ describe('standalone cli', () => {
     expect(result.exitCode).toBe(9);
     expect(runCommandImpl.mock.calls).toHaveLength(1);
     expect(runCommandImpl.mock.calls[0]?.[0].command.path).toEqual(['inspect']);
-    expect(runCommandImpl.mock.calls[0]?.[0].argv).toEqual(['games/chess']);
+    expect(runCommandImpl.mock.calls[0]?.[0].argv).toEqual(['business_productivity/urban-water-monitor']);
   });
 
   test('returns non-zero for unknown commands', async () => {

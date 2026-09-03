@@ -30,39 +30,33 @@ describe('templates commands', () => {
     expect(output).toContain('Available templates:');
     expect(output).not.toContain('fallback/default');
     expect(output).toContain(
-      'games/default - Quest loop: A home, quests, inventory, friends, and profile starter for game experiences.',
+      'business_productivity/urban-water-monitor - Urban Water Monitor: An event-based urban water quality monitoring and field-campaign concept starter.',
     );
     expect(output).toContain(
-      'games/chess - Chess: A two-tab chess starter with Home and Settings screens.',
+      'business_productivity/urban-water-monitor - Urban Water Monitor: An event-based urban water quality monitoring and field-campaign concept starter.',
     );
     expect(output).toContain(
-      'social_community/creator - Creator social: A studio, posts, audience, insights, and settings starter for creator apps.',
+      'finance_money/ebanking-mobile - E-banking mobile: A five-tab mobile e-banking starter with balances, assets, payments, investing, and secure account settings.',
     );
   });
 
   test('lists templates by category', async () => {
     const capture = createCapturedContext();
 
-    const result = await runCommand('list', ['--category', 'games'], capture.context);
+    const result = await runCommand('list', ['--category', 'business_productivity'], capture.context);
     const output = capture.readStdout();
 
     expect(result.exitCode).toBe(0);
     expect(output).toContain(
-      'games/default - Quest loop: A home, quests, inventory, friends, and profile starter for game experiences.',
+      'business_productivity/urban-water-monitor - Urban Water Monitor: An event-based urban water quality monitoring and field-campaign concept starter.',
     );
-    expect(output).toContain(
-      'games/chess - Chess: A two-tab chess starter with Home and Settings screens.',
-    );
-    expect(output).toContain(
-      'games/poker - Card trainer: A two-tab card-game trainer starter with a tabletop scenario view.',
-    );
-    expect(output).not.toContain('social_community/creator');
+    expect(output).not.toContain('finance_money/ebanking-mobile');
   });
 
   test('inspects one canonical selector', async () => {
     const capture = createCapturedContext();
 
-    const result = await runCommand('inspect', ['games/chess'], capture.context);
+    const result = await runCommand('inspect', ['business_productivity/urban-water-monitor'], capture.context);
 
     expect(result.exitCode).toBe(0);
 
@@ -78,10 +72,10 @@ describe('templates commands', () => {
       };
     };
 
-    expect(inspection.selector).toBe('games/chess');
-    expect(inspection.category).toBe('games');
-    expect(inspection.templateId).toBe('chess');
-    expect(inspection.manifest.metadata.category).toBe('games');
+    expect(inspection.selector).toBe('business_productivity/urban-water-monitor');
+    expect(inspection.category).toBe('business_productivity');
+    expect(inspection.templateId).toBe('urban-water-monitor');
+    expect(inspection.manifest.metadata.category).toBe('business_productivity');
     expect(typeof inspection.manifest.metadata.version).toBe('string');
   });
 
@@ -92,7 +86,7 @@ describe('templates commands', () => {
       const capture = createCapturedContext({ cwd });
       const result = await runCommand(
         'create',
-        ['my-app', '--template', 'games/chess'],
+        ['my-app', '--template', 'business_productivity/urban-water-monitor'],
         capture.context,
       );
 
@@ -131,16 +125,16 @@ describe('templates commands', () => {
       expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
       expect(manifest.metadata.slug).toBe('my-app');
       expect(manifest.metadata.name).toBe('My App');
-      expect(manifest.metadata.category).toBe('games');
+      expect(manifest.metadata.category).toBe('business_productivity');
       expect(typeof manifest.metadata.version).toBe('string');
       expect(typeof metadata.version).toBe('string');
       expect({
         package: '@ankhorage/templates',
         projectSlug: 'my-app',
         displayName: 'My App',
-        category: 'games',
-        templateId: 'chess',
-        selector: 'games/chess',
+        category: 'business_productivity',
+        templateId: 'urban-water-monitor',
+        selector: 'business_productivity/urban-water-monitor',
       }).toEqual({
         package: metadata.package,
         projectSlug: metadata.projectSlug,
@@ -150,7 +144,7 @@ describe('templates commands', () => {
         selector: metadata.selector,
       });
       expect(readme).toContain('# My App');
-      expect(readme).toContain('`games/chess`');
+      expect(readme).toContain('`business_productivity/urban-water-monitor`');
     } finally {
       await rm(cwd, { recursive: true, force: true });
     }
@@ -190,12 +184,11 @@ describe('templates commands', () => {
   test('rejects an unknown template in a valid category', async () => {
     const capture = createCapturedContext();
 
-    const result = await runCommand('inspect', ['games/unknown'], capture.context);
+    const result = await runCommand('inspect', ['business_productivity/unknown'], capture.context);
 
     expect(result.exitCode).toBe(1);
-    expect(capture.readStderr()).toContain('Unknown template selector "games/unknown"');
-    expect(capture.readStderr()).toContain('games/default');
-    expect(capture.readStderr()).toContain('games/chess');
+    expect(capture.readStderr()).toContain('Unknown template selector "business_productivity/unknown"');
+    expect(capture.readStderr()).toContain('business_productivity/urban-water-monitor');
   });
 
   test('rejects invalid project slugs', async () => {
@@ -216,7 +209,7 @@ describe('templates commands', () => {
         const capture = createCapturedContext({ cwd });
         const result = await runCommand(
           'create',
-          [invalidValue, '--template', 'games/chess'],
+          [invalidValue, '--template', 'business_productivity/urban-water-monitor'],
           capture.context,
         );
 
@@ -237,7 +230,7 @@ describe('templates commands', () => {
 
       const result = await runCommand(
         'create',
-        ['my-app', '--template', 'games/chess'],
+        ['my-app', '--template', 'business_productivity/urban-water-monitor'],
         capture.context,
       );
 

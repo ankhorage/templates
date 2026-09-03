@@ -1,1 +1,0 @@
-export { createPokerStarterTemplate } from './template';

@@ -39,19 +39,19 @@ describe('root exports', () => {
     expect(typeof listStarterTemplateSummaries).toBe('function');
     expect(typeof resolveStarterTemplate).toBe('function');
 
-    const manifest = createCategoryAppManifest('books_reading');
+    const manifest = createCategoryAppManifest('business_productivity');
     expect(manifest.metadata.themeId).toBe(manifest.activeThemeId);
 
     const artifact = createStarterTemplate({
-      category: 'books_reading',
-      categoryLabel: 'Books & Reading',
-      appName: 'Reading App',
-      slug: 'reading-app',
-      summary: 'reading lists and progress',
+      category: 'business_productivity',
+      categoryLabel: 'Business Productivity',
+      appName: 'Urban Water Monitor',
+      slug: 'urban-water-monitor',
+      summary: 'event-based urban water quality monitoring',
       primaryColor: '#7C3AED',
       harmony: 'analogous',
     });
     expect(artifact.assets).toEqual([]);
-    expect(artifact.manifest.metadata.category).toBe('books_reading');
+    expect(artifact.manifest.metadata.category).toBe('business_productivity');
   });
 });

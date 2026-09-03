@@ -1,7 +1,6 @@
-import { APP_CATEGORIES } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
-import { createCategoryAppManifest } from '../src/generators/create-category-app';
+import { createCategoryAppManifest, listStarterTemplatesByCategory } from '../src/index';
 import { BASE_INFRA } from '../src/internal/defaults';
 
 describe('canonical secret-store template default', () => {
@@ -10,7 +9,8 @@ describe('canonical secret-store template default', () => {
   });
 
   test('serializes the provider explicitly in every first-party category manifest', () => {
-    for (const category of APP_CATEGORIES) {
+    const categories = listStarterTemplatesByCategory().map((summary) => summary.category);
+    for (const category of categories) {
       const manifest = createCategoryAppManifest(category);
       expect(manifest.infra.secretStore).toEqual({ provider: 'supabase-vault' });
     }

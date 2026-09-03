@@ -1,1 +1,1 @@
-export { createUrbanWaterMonitorStarterTemplate } from './template';
+export { createUrbanWaterMonitorStarterTemplate } from './manifest';

@@ -1,28 +1,7 @@
 import type { AppCategory } from '@ankhorage/contracts';
 
-import { booksReadingStarterTemplates } from './categories/books-reading';
-import { businessProductivityStarterTemplates } from './categories/business-productivity';
-import { developerToolsStarterTemplates } from './categories/developer-tools';
-import { educationLearningStarterTemplates } from './categories/education-learning';
-import { entertainmentMediaStarterTemplates } from './categories/entertainment-media';
-import { financeMoneyStarterTemplates } from './categories/finance-money';
-import { foodDrinkStarterTemplates } from './categories/food-drink';
-import { gamesStarterTemplates } from './categories/games';
-import { graphicsDesignStarterTemplates } from './categories/graphics-design';
-import { healthFitnessStarterTemplates } from './categories/health-fitness';
-import { kidsFamilyStarterTemplates } from './categories/kids-family';
-import { lifestyleStarterTemplates } from './categories/lifestyle';
-import { medicalStarterTemplates } from './categories/medical';
-import { musicAudioStarterTemplates } from './categories/music-audio';
-import { navigationTravelStarterTemplates } from './categories/navigation-travel';
-import { newsMagazinesStarterTemplates } from './categories/news-magazines';
-import { photoVideoStarterTemplates } from './categories/photo-video';
-import { referenceStarterTemplates } from './categories/reference';
-import { shoppingCommerceStarterTemplates } from './categories/shopping-commerce';
-import { socialCommunityStarterTemplates } from './categories/social-community';
-import { sportsStarterTemplates } from './categories/sports';
-import { utilitiesToolsStarterTemplates } from './categories/utilities-tools';
-import { weatherStarterTemplates } from './categories/weather';
+import { createUrbanWaterMonitorStarterTemplate } from './categories/business-productivity/urban-water-monitor/manifest';
+import { createEbankingMobileStarterTemplate } from './categories/finance-money/ebanking-mobile/manifest';
 import type {
   CategoryStarterTemplateDefinition,
   StarterTemplateSummary,
@@ -32,29 +11,24 @@ import type {
 const STARTER_TEMPLATE_REGISTRY: Partial<
   Record<AppCategory, readonly CategoryStarterTemplateDefinition[]>
 > = {
-  books_reading: booksReadingStarterTemplates,
-  business_productivity: businessProductivityStarterTemplates,
-  developer_tools: developerToolsStarterTemplates,
-  education_learning: educationLearningStarterTemplates,
-  entertainment_media: entertainmentMediaStarterTemplates,
-  finance_money: financeMoneyStarterTemplates,
-  food_drink: foodDrinkStarterTemplates,
-  games: gamesStarterTemplates,
-  graphics_design: graphicsDesignStarterTemplates,
-  health_fitness: healthFitnessStarterTemplates,
-  kids_family: kidsFamilyStarterTemplates,
-  lifestyle: lifestyleStarterTemplates,
-  medical: medicalStarterTemplates,
-  music_audio: musicAudioStarterTemplates,
-  navigation_travel: navigationTravelStarterTemplates,
-  news_magazines: newsMagazinesStarterTemplates,
-  photo_video: photoVideoStarterTemplates,
-  reference: referenceStarterTemplates,
-  shopping_commerce: shoppingCommerceStarterTemplates,
-  social_community: socialCommunityStarterTemplates,
-  sports: sportsStarterTemplates,
-  utilities_tools: utilitiesToolsStarterTemplates,
-  weather: weatherStarterTemplates,
+  business_productivity: [
+    {
+      id: 'urban-water-monitor',
+      label: 'Urban Water Monitor',
+      description:
+        'An event-based urban water quality monitoring and field-campaign concept starter.',
+      create: createUrbanWaterMonitorStarterTemplate,
+    },
+  ],
+  finance_money: [
+    {
+      id: 'ebanking-mobile',
+      label: 'E-banking mobile',
+      description:
+        'A five-tab mobile e-banking starter with balances, assets, payments, investing, and secure account settings.',
+      create: createEbankingMobileStarterTemplate,
+    },
+  ],
 };
 
 function createTemplateSummary(
@@ -76,8 +50,9 @@ export function resolveStarterTemplate(
   const categoryTemplates = STARTER_TEMPLATE_REGISTRY[seed.category];
   const selected = categoryTemplates?.find((template) => template.id === templateId);
   const categoryDefault = categoryTemplates?.find((template) => template.id === 'default');
+  const categoryFirst = categoryTemplates?.[0];
 
-  const resolved = selected ?? categoryDefault;
+  const resolved = selected ?? categoryDefault ?? categoryFirst;
   if (!resolved) throw new Error(`Category "${seed.category}" has no registered starter template.`);
   return resolved;
 }
@@ -100,11 +75,15 @@ export function listStarterTemplates(
 }
 
 export function listStarterTemplatesByCategory(
-  category: AppCategory,
+  category?: AppCategory,
 ): readonly StarterTemplateSummary[] {
-  return listStarterTemplates(category).map((template) =>
-    createTemplateSummary(category, template),
-  );
+  if (category) {
+    return listStarterTemplates(category).map((template) =>
+      createTemplateSummary(category, template),
+    );
+  }
+
+  return listStarterTemplateSummaries();
 }
 
 export function listStarterTemplateSummaries(): readonly StarterTemplateSummary[] {

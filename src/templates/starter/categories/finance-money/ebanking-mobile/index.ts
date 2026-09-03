@@ -1,1 +1,1 @@
-export { createEbankingMobileStarterTemplate } from './template';
+export { createEbankingMobileStarterTemplate } from './manifest';

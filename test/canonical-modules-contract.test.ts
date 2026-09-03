@@ -3,7 +3,7 @@ import { expect, test } from 'bun:test';
 import { createCategoryAppManifest } from '../src/index';
 
 test('generates only the canonical Ankhorage module manifest fields', () => {
-  const manifest = createCategoryAppManifest('developer_tools');
+  const manifest = createCategoryAppManifest('business_productivity');
 
   expect(manifest.infra.modules).toEqual([]);
   expect(manifest.infra.modulesConfig).toBeUndefined();

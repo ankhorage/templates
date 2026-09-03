@@ -54,18 +54,19 @@ export async function scaffoldTemplate(input) {
     );
   }
 
-  const registryPath = join(categoryDirectory, 'index.ts');
+  const registryPath = resolve(targetDirectory, 'src/templates/starter/starter.registry.ts');
   const registrySource = await readFile(registryPath, 'utf8');
   const symbol = toPascalCase(input.templateId);
   const factoryBase = symbol.endsWith('Starter') ? symbol.slice(0, -'Starter'.length) : symbol;
   const factoryName = `create${factoryBase}StarterTemplate`;
-  const registrySourceUpdated = updateCategoryRegistry(registrySource, {
+  const registrySourceUpdated = updateRegistry(registrySource, {
     templateId: input.templateId,
     label: input.label,
     description: input.description,
     factoryName,
+    category: input.category,
   });
-  const files = createTemplateFiles({
+  const files = createManifestSource({
     manifest,
     templateId: input.templateId,
     category: input.category,
@@ -89,7 +90,167 @@ export async function scaffoldTemplate(input) {
   };
 }
 
-/*** Create the template-local design artifact that records the authored composition. */
+/*** Create standalone manifest source for one authored starter variant. */
+function createManifestSource({ manifest, templateId, category, factoryName, symbol }) {
+  const navigator = manifest.navigator;
+  const screens = manifest.screens;
+  const initialRouteName = navigator.initialRouteName || 'index';
+  const routeNames = navigator.routes.map((route) => route.name);
+
+  const screenIdProperties = routeNames.map((name) => `  ${name}: string;`).join('\n');
+  const screenIdReturnValues = routeNames
+    .map((name) => `    ${name}: \`\${idPrefix}-${name}\`,`)
+    .join('\n');
+  const routeFactories = navigator.routes
+    .map(
+      (route) => `      createRoute({
+        name: '${escapeSingleQuoted(route.name)}',
+        screenId: screenIds.${route.name},
+        label: '${escapeSingleQuoted(route.label)}',
+        icon: ${JSON.stringify(route.icon)},
+      }),`,
+    )
+    .join('\n');
+
+  const screenCreators = navigator.routes.map((route) => {
+    const screen = screens[route.screenId];
+    if (!screen) {
+      throw new Error(`Screen not found for route: ${route.name} (${route.screenId})`);
+    }
+
+    const screenVar = `${route.name}Screen`;
+    const rootId = `\`\${idPrefix}-${route.name}-screen\``;
+    const childrenJson = JSON.stringify(screen.root.children, null, 2);
+    const indentedChildren = childrenJson
+      .split('\n')
+      .map((line) => `      ${line}`)
+      .join('\n');
+
+    return `  const ${screenVar} = {
+    id: screenIds.${route.name},
+    name: ${JSON.stringify(screen.name)},
+    title: ${JSON.stringify(screen.title)},
+    description: ${JSON.stringify(screen.description)},
+    root: {
+      id: ${rootId},
+      type: 'Screen',
+      props: ${JSON.stringify(screen.root.props)},
+      children: ${indentedChildren},
+    },
+  };`;
+  });
+
+  const screenReturns = routeNames
+    .map((name) => `    [screenIds.${name}]: ${name}Screen,`)
+    .join('\n');
+
+  return `import type { AppManifest } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts/auth';
+
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
+import { createRoute, createScreen, createScreenRoot, createZoraNode, type ZoraNode } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+
+export interface ${symbol}ScreenIds {
+${screenIdProperties}
+}
+
+export function create${symbol}ScreenIds(idPrefix: string): ${symbol}ScreenIds {
+  return {
+${screenIdReturnValues}
+  };
+}
+
+export function create${symbol}Navigator(
+  screenIds: ${symbol}ScreenIds,
+): AppManifest['navigator'] {
+  return {
+    type: '${navigator.type}',
+    initialRouteName: '${navigator.initialRouteName}',
+    routes: [
+${routeFactories}
+    ],
+  };
+}
+
+export function create${symbol}Screens(
+  idPrefix: string,
+  screenIds: ${symbol}ScreenIds,
+): AppManifest['screens'] {
+${screenCreators.join('\n')}
+
+  return {
+${screenReturns}
+  };
+}
+
+export function ${factoryName}(seed: TemplateSeed): AppManifest {
+  const idPrefix = \`\${seed.category}-${templateId}\`;
+  const theme = createTheme(seed);
+  const screenIds = create${symbol}ScreenIds(idPrefix);
+  const manifest = createManifestShell({
+    seed,
+    theme,
+    version: seed.version ?? DEFAULT_TEMPLATE_VERSION,
+    navigator: create${symbol}Navigator(screenIds),
+    screens: create${symbol}Screens(idPrefix, screenIds),
+  });
+
+  const auth = manifest.infra.auth;
+  if (auth === undefined) {
+    return manifest;
+  }
+
+  return {
+    ...manifest,
+    infra: {
+      ...manifest.infra,
+      auth: {
+        ...auth,
+        flow: {
+          ...resolveAuthFlow(auth.flow),
+          postSignInRoute: '${initialRouteName}',
+        },
+      },
+    },
+  };
+}
+`;
+}
+
+/*** Add one stable import and definition to the starter registry. */
+function updateRegistry(source, definition) {
+  const importLine = `import { ${definition.factoryName} } from './categories/${definition.category.replaceAll('_', '-')}/${definition.templateId}/manifest';`;
+  if (source.includes(`id: '${definition.templateId}'`) || source.includes(importLine)) {
+    throw new Error(`Template is already registered: ${definition.templateId}`);
+  }
+  const exportMarker = '\nexport const ';
+  const exportIndex = source.indexOf(exportMarker);
+  if (exportIndex < 0) {
+    throw new Error('Registry does not expose its canonical template array.');
+  }
+  const prefixLines = source.slice(0, exportIndex).trimEnd().split('\n');
+  const relativeImports = [
+    ...prefixLines.filter((line) => /^import .* from '\.\//u.test(line)),
+    importLine,
+  ].sort((left, right) => left.localeCompare(right));
+  const preservedPrefix = prefixLines.filter((line) => !/^import .* from '\.\//u.test(line));
+  const withImport = `${[...preservedPrefix, ...relativeImports].join('\n')}\n${source.slice(exportIndex + 1)}`;
+  const closeMarker = '] satisfies readonly CategoryStarterTemplateDefinition[];';
+  const closeIndex = withImport.indexOf(closeMarker);
+  if (closeIndex < 0) {
+    throw new Error('Registry is missing its canonical definition-array terminator.');
+  }
+  const entry = `  {
+    id: '${escapeSingleQuoted(definition.templateId)}',
+    label: '${escapeSingleQuoted(definition.label)}',
+    description: '${escapeSingleQuoted(definition.description)}',
+    create: ${definition.factoryName},
+  },
+`;
+  return `${withImport.slice(0, closeIndex)}${entry}${withImport.slice(closeIndex)}`;
+}
 function createZoraDesignerArtifact({ manifest, templateId, category, navigator }) {
   const theme = manifest.themes[0];
   const primaryColor = theme?.light?.primaryColor || theme?.dark?.primaryColor || '#000000';
@@ -254,42 +415,133 @@ ${manifest.metadata?.name || templateId} ${navigator.type} starter: ${navigator.
 `;
 }
 
-/*** Create composable template source files for one authored starter variant. */
-function createTemplateFiles({ manifest, templateId, category, factoryName, symbol }) {
+/*** Create standalone manifest source for one authored starter variant. */
+function createManifestSource({ manifest, templateId, category, factoryName, symbol }) {
   const navigator = manifest.navigator;
   const screens = manifest.screens;
-  const screenIdMap = buildScreenIdMap(navigator.routes, templateId, category);
+  const initialRouteName = navigator.initialRouteName || 'index';
+  const routeNames = navigator.routes.map((route) => route.name);
 
-  const routesSource = createRoutesSource({ navigator, screenIdMap, symbol });
-  const screensSource = createScreensSource({
-    manifest,
-    navigator,
-    screenIdMap,
-    symbol,
-    templateId,
+  const screenIdProperties = routeNames.map((name) => `  ${name}: string;`).join('\n');
+  const screenIdReturnValues = routeNames
+    .map((name) => `    ${name}: \`\${idPrefix}-${name}\`,`)
+    .join('\n');
+  const routeFactories = navigator.routes
+    .map(
+      (route) => `      createRoute({
+        name: '${escapeSingleQuoted(route.name)}',
+        screenId: screenIds.${route.name},
+        label: '${escapeSingleQuoted(route.label)}',
+        icon: ${JSON.stringify(route.icon)},
+      }),`,
+    )
+    .join('\n');
+
+  const screenCreators = navigator.routes.map((route) => {
+    const screen = screens[route.screenId];
+    if (!screen) {
+      throw new Error(`Screen not found for route: ${route.name} (${route.screenId})`);
+    }
+
+    const screenVar = `${route.name}Screen`;
+    const rootId = `\`\${idPrefix}-${route.name}-screen\``;
+    const childrenJson = JSON.stringify(screen.root.children, null, 2);
+    const indentedChildren = childrenJson
+      .split('\n')
+      .map((line) => `      ${line}`)
+      .join('\n');
+
+    return `  const ${screenVar} = {
+    id: screenIds.${route.name},
+    name: ${JSON.stringify(screen.name)},
+    title: ${JSON.stringify(screen.title)},
+    description: ${JSON.stringify(screen.description)},
+    root: {
+      id: ${rootId},
+      type: 'Screen',
+      props: ${JSON.stringify(screen.root.props)},
+      children: ${indentedChildren},
+    },
+  };`;
   });
-  const templateSource = createTemplateSource({
-    manifest,
-    navigator,
-    templateId,
-    category,
-    factoryName,
-    symbol,
-  });
-  const zoraDesignerSource = createZoraDesignerArtifact({
-    manifest,
-    templateId,
-    category,
-    navigator,
-  });
+
+  const screenReturns = routeNames
+    .map((name) => `    [screenIds.${name}]: ${name}Screen,`)
+    .join('\n');
+
+  return `import type { AppManifest } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts/auth';
+
+import { DEFAULT_TEMPLATE_VERSION } from '../../../../../internal/defaults';
+import { createManifestShell, createTheme } from '../../../../shared';
+import { createRoute, createScreen, createScreenRoot, createZoraNode, type ZoraNode } from '../../../../shared';
+import type { TemplateSeed } from '../../../starter.types';
+
+export interface ${symbol}ScreenIds {
+${screenIdProperties}
+}
+
+export function create${symbol}ScreenIds(idPrefix: string): ${symbol}ScreenIds {
+  return {
+${screenIdReturnValues}
+  };
+}
+
+export function create${symbol}Navigator(
+  screenIds: ${symbol}ScreenIds,
+): AppManifest['navigator'] {
+  return {
+    type: '${navigator.type}',
+    initialRouteName: '${navigator.initialRouteName}',
+    routes: [
+${routeFactories}
+    ],
+  };
+}
+
+export function create${symbol}Screens(
+  idPrefix: string,
+  screenIds: ${symbol}ScreenIds,
+): AppManifest['screens'] {
+${screenCreators.join('\n')}
 
   return {
-    '_zora-designer.md': zoraDesignerSource,
-    'index.ts': `export { ${factoryName} } from './template';\n`,
-    'routes.ts': routesSource,
-    'screens.ts': screensSource,
-    'template.ts': templateSource,
+${screenReturns}
   };
+}
+
+export function ${factoryName}(seed: TemplateSeed): AppManifest {
+  const idPrefix = \`\${seed.category}-${templateId}\`;
+  const theme = createTheme(seed);
+  const screenIds = create${symbol}ScreenIds(idPrefix);
+  const manifest = createManifestShell({
+    seed,
+    theme,
+    version: seed.version ?? DEFAULT_TEMPLATE_VERSION,
+    navigator: create${symbol}Navigator(screenIds),
+    screens: create${symbol}Screens(idPrefix, screenIds),
+  });
+
+  const auth = manifest.infra.auth;
+  if (auth === undefined) {
+    return manifest;
+  }
+
+  return {
+    ...manifest,
+    infra: {
+      ...manifest.infra,
+      auth: {
+        ...auth,
+        flow: {
+          ...resolveAuthFlow(auth.flow),
+          postSignInRoute: '${initialRouteName}',
+        },
+      },
+    },
+  };
+}
+`;
 }
 
 function buildScreenIdMap(routes, templateId, category) {

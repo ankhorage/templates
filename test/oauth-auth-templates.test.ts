@@ -1,4 +1,4 @@
-import { APP_CATEGORIES, resolveAuthFlow } from '@ankhorage/contracts';
+import { resolveAuthFlow } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
 import {
@@ -8,6 +8,7 @@ import {
   OAUTH_CALLBACK_ROUTE,
   OAUTH_FIXTURE_IDS,
   resolveOAuthFixture,
+  listStarterTemplatesByCategory,
 } from '../src/index';
 
 const SECRET_SENTINEL = 'sentinel-phase3-template-secret-do-not-leak';
@@ -18,7 +19,7 @@ function serialize(value: unknown): string {
 
 describe('canonical OAuth template fixtures', () => {
   test('does not create template-owned OAuth auth screens', () => {
-    const manifest = createCategoryAppManifest('developer_tools', 'starter', {
+    const manifest = createCategoryAppManifest('business_productivity', 'starter', {
       infra: {
         auth: {
           oauth: {
@@ -83,7 +84,8 @@ describe('canonical OAuth template fixtures', () => {
   });
 
   test('creates OAuth fixture manifests without changing canonical auth flow', () => {
-    for (const category of APP_CATEGORIES) {
+    const categories = listStarterTemplatesByCategory().map((summary) => summary.category);
+    for (const category of categories) {
       const manifest = createOAuthFixtureManifest({
         category,
         fixture: 'google-apple',
@@ -93,7 +95,7 @@ describe('canonical OAuth template fixtures', () => {
       expect(flow.signInRoute).toBe('sign-in');
       expect(flow.signUpRoute).toBe('sign-up');
       expect(flow.signOutRoute).toBe('sign-out');
-      expect(flow.postSignInRoute).toBe('/');
+      expect(flow.postSignInRoute).toBe(manifest.navigator.initialRouteName ?? '');
       expect(manifest.infra.auth?.oauth?.callbackRoute).toBe(OAUTH_CALLBACK_ROUTE);
       expect(manifest.infra.auth?.oauth?.providers.map((provider) => provider.id)).toEqual([
         'google',

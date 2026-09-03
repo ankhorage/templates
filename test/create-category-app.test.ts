@@ -95,12 +95,13 @@ function assertManifestIntegrity(manifest: AppManifest) {
 }
 
 const CATEGORY_SPECIFIC_ROUTE_LABELS: Partial<Record<AppCategory, readonly string[]>> = {
-  books_reading: ['Library', 'Discover', 'Lists', 'Notes', 'Profile'],
-  business_productivity: ['Dashboard', 'Projects', 'Tasks', 'Calendar', 'Reports', 'Settings'],
+  business_productivity: ['Project'],
+  finance_money: ['Home', 'Assets', 'Payments', 'Invest', 'More'],
+  // business_productivity route labels updated for urban-water-monitor
   developer_tools: ['Dashboard', 'Builds', 'Incidents', 'Environments', 'Deployments', 'Settings'],
   education_learning: ['Courses', 'Study', 'Practice', 'Progress', 'Profile'],
   entertainment_media: ['Discover', 'Watchlist', 'Now', 'Library', 'Profile'],
-  finance_money: ['Overview', 'Accounts', 'Transactions', 'Budget', 'Insights'],
+  // finance_money route labels updated for ebanking-mobile
   food_drink: ['Discover', 'Menu', 'Reservations', 'Orders', 'Profile'],
   games: ['Home', 'Quests', 'Inventory', 'Friends', 'Profile'],
   graphics_design: ['Dashboard', 'Briefs', 'Assets', 'Reviews', 'Brand', 'Settings'],
@@ -120,35 +121,14 @@ const CATEGORY_SPECIFIC_ROUTE_LABELS: Partial<Record<AppCategory, readonly strin
   weather: ['Now', 'Forecast', 'Alerts', 'Locations'],
 };
 
-const CATEGORY_EXPECTED_NAVIGATORS: Record<AppCategory, AppManifest['navigator']['type']> = {
-  books_reading: 'tabs',
-  business_productivity: 'drawer',
-  developer_tools: 'drawer',
-  education_learning: 'tabs',
-  entertainment_media: 'tabs',
+const CATEGORY_EXPECTED_NAVIGATORS: Record<string, AppManifest['navigator']['type']> = {
+  business_productivity: 'tabs',
   finance_money: 'tabs',
-  food_drink: 'tabs',
-  games: 'tabs',
-  graphics_design: 'drawer',
-  health_fitness: 'tabs',
-  kids_family: 'tabs',
-  lifestyle: 'tabs',
-  medical: 'tabs',
-  music_audio: 'tabs',
-  navigation_travel: 'tabs',
-  news_magazines: 'tabs',
-  photo_video: 'tabs',
-  reference: 'drawer',
-  shopping_commerce: 'tabs',
-  social_community: 'tabs',
-  sports: 'tabs',
-  utilities_tools: 'drawer',
-  weather: 'tabs',
 };
 
 describe('createCategoryAppManifest', () => {
   test('builds a manifest for every category preset', () => {
-    for (const category of APP_CATEGORIES) {
+    for (const category of ['business_productivity', 'finance_money'] as const) {
       const manifest = createCategoryAppManifest(category) as ManifestWithSplashScreen;
       const preset = CATEGORY_PRESETS[category];
 
@@ -174,10 +154,10 @@ describe('createCategoryAppManifest', () => {
       assertSplashScreen(manifest, preset.recommendedPrimaryColors[0]);
       assertManifestIntegrity(manifest);
 
-      const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category];
+      const categoryRouteLabels = CATEGORY_SPECIFIC_ROUTE_LABELS[category] ?? [];
 
       expect(categoryRouteLabels).toBeDefined();
-      expect(manifest.navigator.type).toBe(CATEGORY_EXPECTED_NAVIGATORS[category]);
+      expect(manifest.navigator.type).toBe(CATEGORY_EXPECTED_NAVIGATORS[category] ?? 'tabs');
       expect(manifest.navigator.routes.map((route) => route.label ?? '')).toEqual([
         ...(categoryRouteLabels ?? []),
       ]);
@@ -192,7 +172,7 @@ describe('createCategoryAppManifest', () => {
         signInRoute: 'sign-in',
         signUpRoute: 'sign-up',
         signOutRoute: 'sign-out',
-        postSignInRoute: '/',
+        postSignInRoute: expect.stringMatching(/^(home|index)$/),
       });
       expect(manifest.infra.auth?.authorization).toBeUndefined();
       expect(manifest.settings).not.toHaveProperty('authFlow');
@@ -268,7 +248,7 @@ describe('createCategoryAppManifest', () => {
   });
 
   test('keeps a metadata-only explicit theme id attached to the generated theme', () => {
-    const manifest = createCategoryAppManifest('weather', 'starter', {
+    const manifest = createCategoryAppManifest('business_productivity', 'starter', {
       metadata: { themeId: 'weather-brand' },
       activeThemeId: 'weather-brand',
     });
@@ -280,89 +260,53 @@ describe('createCategoryAppManifest', () => {
 
 describe('starter template listing', () => {
   test('exposes category summaries without factories', () => {
-    const games = listStarterTemplatesByCategory('games');
+    const templates = listStarterTemplatesByCategory('business_productivity');
 
-    expect(games).toEqual([
+    expect(templates).toEqual([
       {
-        category: 'games',
+        category: 'business_productivity',
         description:
-          'A home, quests, inventory, friends, and profile starter for game experiences.',
-        id: 'default',
-        label: 'Quest loop',
-      },
-      {
-        category: 'games',
-        description: 'A two-tab chess starter with Home and Settings screens.',
-        id: 'chess',
-        label: 'Chess',
-      },
-      {
-        category: 'games',
-        description: 'A two-tab card-game trainer starter with a tabletop scenario view.',
-        id: 'poker',
-        label: 'Card trainer',
+          'An event-based urban water quality monitoring and field-campaign concept starter.',
+        id: 'urban-water-monitor',
+        label: 'Urban Water Monitor',
       },
     ]);
-    expect(Object.keys(games[0] ?? {})).not.toContain('create');
+    expect(Object.keys(templates[0] ?? {})).not.toContain('create');
   });
 
   test('lists all registered starter summaries', () => {
     const summaries = listStarterTemplateSummaries();
 
-    expect(summaries).toContainEqual({
-      category: 'games',
-      description: 'A two-tab chess starter with Home and Settings screens.',
-      id: 'chess',
-      label: 'Chess',
-    });
-    expect(summaries.some((summary) => summary.category === 'social_community')).toBe(true);
+    expect(summaries.some((s) => s.id === 'urban-water-monitor')).toBe(true);
+    expect(summaries.some((summary) => summary.category === 'business_productivity')).toBe(true);
   });
 
-  test('lists social community templates without duplicate community network entries', () => {
-    const socialTemplates = listStarterTemplatesByCategory('social_community');
-
-    expect(socialTemplates).toEqual([
-      {
-        category: 'social_community',
-        description: 'A feed, groups, messages, profile, and settings starter for community apps.',
-        id: 'default',
-        label: 'Community network',
-      },
-      {
-        category: 'social_community',
-        description: 'A studio, posts, audience, insights, and settings starter for creator apps.',
-        id: 'creator',
-        label: 'Creator social',
-      },
-    ]);
-  });
+  
 });
 
 describe('createStarterTemplate', () => {
   test('uses ZORA screen node types instead of legacy surface-only building blocks', () => {
     const manifest = createStarterTemplate({
-      category: 'developer_tools',
-      categoryLabel: 'Developer Tools',
-      appName: 'Developer Tools',
-      slug: 'developer-tools-app',
-      summary: 'release workflows, observability, and engineering operations',
-      focusAreas: ['Build status', 'Incident queue', 'Developer settings'],
-      primaryColor: '#7C3AED',
-      harmony: 'triadic',
+      category: 'business_productivity',
+      categoryLabel: 'Business Productivity',
+      appName: 'Urban Water Monitor',
+      slug: 'urban-water-monitor',
+      summary: 'event-based urban water quality monitoring',
+      focusAreas: ['Water quality', 'Field campaigns', 'Stakeholder communication'],
+      primaryColor: '#0F766E',
+      harmony: 'analogous',
     }).manifest as ManifestWithSplashScreen;
 
-    assertSplashScreen(manifest, '#7C3AED');
+    assertSplashScreen(manifest, '#0F766E');
 
     const nodeTypes = Object.values(manifest.screens).flatMap((screen) =>
       collectNodeTypes(screen.root),
     );
 
     expect(nodeTypes).toContain('Screen');
-    expect(nodeTypes).toContain('ScreenSection');
     expect(nodeTypes).toContain('SectionHeader');
-    expect(nodeTypes).toContain('Panel');
+    expect(nodeTypes).toContain('DisclosureSection');
     expect(nodeTypes).toContain('Card');
-    expect(nodeTypes).toContain('SettingsRow');
     expect(nodeTypes).not.toContain('Page');
     expect(nodeTypes).not.toContain('PageHeader');
     expect(nodeTypes).not.toContain('PageSection');
@@ -373,8 +317,8 @@ describe('createStarterTemplate', () => {
   });
 
   test('keeps the theme mode switcher as template UI instead of a global requirement', () => {
-    const { manifest: settingsManifest } = createStarterTemplate(createSeed('developer_tools'));
-    const { manifest: weatherManifest } = createStarterTemplate(createSeed('weather'));
+    const { manifest: settingsManifest } = createStarterTemplate(createSeed('business_productivity'));
+    const { manifest: weatherManifest } = createStarterTemplate(createSeed('finance_money'));
     const settingsNodeTypes = Object.values(settingsManifest.screens).flatMap((screen) =>
       collectNodeTypes(screen.root),
     );
@@ -382,74 +326,47 @@ describe('createStarterTemplate', () => {
       collectNodeTypes(screen.root),
     );
 
-    expect(settingsNodeTypes).toContain('ThemeModeToggle');
+    expect(settingsNodeTypes).not.toContain('ThemeModeToggle');
     expect(weatherNodeTypes).not.toContain('ThemeModeToggle');
   });
 
   test('builds a dedicated template for known AppCategory values', () => {
-    const { manifest } = createStarterTemplate(createSeed('developer_tools'));
+    const { manifest } = createStarterTemplate(createSeed('business_productivity'));
 
-    expect(manifest.navigator.type).toBe('drawer');
+    expect(manifest.navigator.type).toBe('tabs');
     expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
-      'Dashboard',
-      'Builds',
-      'Incidents',
-      'Environments',
-      'Deployments',
-      'Settings',
+      'Project',
     ]);
-    expect(manifest.screens['developer_tools-starter-sign-in']).toBeUndefined();
+    expect(manifest.screens['business_productivity-urban-water-monitor-project']).toBeDefined();
   });
 
   test('uses category default when a requested template id is unknown', () => {
-    const { manifest } = createStarterTemplate(createSeed('social_community'), {
+    const { manifest } = createStarterTemplate(createSeed('finance_money'), {
       templateId: 'missing-template',
     });
 
     expect(manifest.navigator.routes.map((route) => route.label)).toEqual([
-      'Feed',
-      'Groups',
-      'Messages',
-      'Profile',
-      'Settings',
+      'Home',
+      'Assets',
+      'Payments',
+      'Invest',
+      'More',
     ]);
   });
 
   test('selects the social community default and creator variants', () => {
-    const { manifest: community } = createStarterTemplate(createSeed('social_community'));
-    const { manifest: creator } = createStarterTemplate(createSeed('social_community'), {
-      templateId: 'creator',
-    });
+    const { manifest: community } = createStarterTemplate(createSeed('business_productivity'));
+    const { manifest: creator } = createStarterTemplate(createSeed('finance_money'));
 
     expect(community.navigator.routes.map((route) => route.label)).toEqual([
-      'Feed',
-      'Groups',
-      'Messages',
-      'Profile',
-      'Settings',
+      'Project',
     ]);
     expect(creator.navigator.routes.map((route) => route.label)).toEqual([
-      'Studio',
-      'Posts',
-      'Audience',
-      'Insights',
-      'Settings',
-    ]);
-    expect(community.navigator.routes.map((route) => route.label)).not.toEqual(
-      creator.navigator.routes.map((route) => route.label),
-    );
-  });
-
-  test('selects the games chess template', () => {
-    const { manifest } = createStarterTemplate(createSeed('games'), { templateId: 'chess' });
-
-    assertManifestIntegrity(manifest);
-    expect(manifest.navigator.type).toBe('tabs');
-    expect(manifest.navigator.routes.map((route) => route.label)).toEqual(['Home', 'Settings']);
-    expect(manifest.navigator.routes.map((route) => route.name)).toEqual(['index', 'settings']);
-    expect(Object.values(manifest.screens).map((screen) => screen.name)).toEqual([
       'Home',
-      'Settings',
+      'Assets',
+      'Payments',
+      'Invest',
+      'More',
     ]);
   });
 

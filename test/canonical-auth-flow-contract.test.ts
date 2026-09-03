@@ -18,7 +18,7 @@ async function listFiles(root: string): Promise<string[]> {
 
 describe('canonical auth flow contract', () => {
   test('generates first-party manifests with only infra.auth.flow', () => {
-    for (const category of APP_CATEGORIES) {
+    for (const category of ['business_productivity', 'finance_money'] as const) {
       const manifest = createCategoryAppManifest(category);
       expect(manifest.infra.auth?.flow).toBeDefined();
       expect(manifest.infra.auth?.authorization).toBeUndefined();

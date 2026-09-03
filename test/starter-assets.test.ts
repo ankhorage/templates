@@ -44,7 +44,7 @@ describe('starter template asset contracts', () => {
 
     expect(() => validateStarterTemplateAssets(manifest, [])).toThrow('missing its template asset');
     expect(() =>
-      validateStarterTemplateAssets(createCategoryAppManifest('graphics_design'), [asset]),
+      validateStarterTemplateAssets(createCategoryAppManifest('finance_money'), [asset]),
     ).toThrow('not referenced');
     expect(() => validateStarterTemplateAssets(manifest, [asset, asset])).toThrow(
       'target is duplicated',
@@ -77,9 +77,9 @@ describe('successful starter template asset materialization', () => {
           version: '9.0.0',
           projectSlug: 'asset-app',
           displayName: 'Asset App',
-          category: 'graphics_design',
+          category: 'finance_money',
           templateId: 'asset-proof',
-          selector: 'graphics_design/asset-proof',
+          selector: 'finance_money/asset-proof',
         },
         manifest,
         assets: [asset],
@@ -118,9 +118,9 @@ describe('starter template asset integrity rejection', () => {
             version: '9.0.0',
             projectSlug: 'asset-app',
             displayName: 'Asset App',
-            category: 'graphics_design',
+            category: 'finance_money',
             templateId: 'asset-proof',
-            selector: 'graphics_design/asset-proof',
+            selector: 'finance_money/asset-proof',
           },
           manifest: createImageManifest(),
           assets: [{ ...asset, sha256: '0'.repeat(64) }],
@@ -141,7 +141,7 @@ describe('starter template asset integrity rejection', () => {
 /*** Create one release-valid manifest whose image is backed by the capability proof asset. */
 function createImageManifest(): AppManifest {
   return {
-    ...createCategoryAppManifest('graphics_design'),
+    ...createCategoryAppManifest('finance_money'),
     media: {
       assets: {
         checker: {

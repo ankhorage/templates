@@ -69,7 +69,7 @@ describe('ankh provider', () => {
 
       const result = await handler.handler(
         createExecutionRequest({
-          argv: command.path[0] === 'list' ? [] : ['games/chess'],
+          argv: command.path[0] === 'list' ? [] : ['business_productivity/urban-water-monitor'],
           category: runtimeProvider.category,
           capability: command.capability,
           context: {
