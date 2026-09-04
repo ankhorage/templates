@@ -1,1 +1,0 @@
-export { createUrbanWaterMonitorStarterTemplate } from './template';
