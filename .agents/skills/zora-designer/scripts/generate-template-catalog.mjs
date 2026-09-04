@@ -50,11 +50,11 @@ export async function generateTemplateCatalog(targetDirectory = process.cwd()) {
   },`,
     )
     .join('\n');
+  const definitionsSource = definitions.length === 0 ? '[]' : `[\n${entries}\n]`;
 
   const source = `${imports}${imports ? '\n\n' : ''}import type { TemplateDefinition } from './catalog';
 
-export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = [
-${entries}${entries ? '\n' : ''}];
+export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = ${definitionsSource};
 `;
 
   const outputPath = join(root, 'src/templates/catalog.generated.ts');
