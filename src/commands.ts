@@ -20,7 +20,6 @@ import {
   type CreateProjectSeedResult,
   type ProjectSeedDependencies,
 } from './projectSeed.js';
-import { summarizeStarterTemplateAssets } from './templates/starter/index.js';
 import {
   deriveDisplayNameFromSlug,
   parseProjectSlug,
@@ -66,13 +65,7 @@ interface TemplatesCommandServices {
 
 export interface RunTemplatesCommandOptions {
   readonly services?: Partial<TemplatesCommandServices>;
-  readonly runCommandImpl?: RunTemplatesCommandImpl;
 }
-
-export type RunTemplatesCommandImpl = (
-  request: TemplatesCommandInvocation,
-  options?: RunTemplatesCommandOptions,
-) => Promise<TemplatesCommandRunResult>;
 
 const COMMAND_CAPABILITIES = {
   list: TEMPLATES_CAPABILITIES[0],
@@ -85,21 +78,21 @@ export const TEMPLATES_COMMANDS = [
     standaloneName: 'list',
     path: ['list'],
     capability: COMMAND_CAPABILITIES.list,
-    summary: 'List canonical template selectors from the published template catalog.',
+    summary: 'List standalone template selectors from the published template catalog.',
     run: runListCommand,
   },
   {
     standaloneName: 'inspect',
     path: ['inspect'],
     capability: COMMAND_CAPABILITIES.inspect,
-    summary: 'Inspect one canonical template selector and print its manifest metadata.',
+    summary: 'Inspect one standalone template and print its manifest.',
     run: runInspectCommand,
   },
   {
     standaloneName: 'create',
     path: ['create'],
     capability: COMMAND_CAPABILITIES.create,
-    summary: 'Create a manifest-first project seed from one canonical template selector.',
+    summary: 'Create a manifest-first project seed from one standalone template.',
     run: runCreateCommand,
   },
 ] as const satisfies readonly TemplatesCommandDefinition[];
@@ -116,7 +109,6 @@ export async function runTemplatesCommand(
       request.context.writeStdout(renderCommandHelp(request.command));
       return { exitCode: 0 };
     }
-
     return await request.command.run(request, services, request.argv);
   } catch (error) {
     request.context.writeStderr(renderCommandFailure(request.command.standaloneName, error));
@@ -154,10 +146,7 @@ export function renderRootHelp(version: string): string {
     commandLines,
     '',
     'Selector syntax:',
-    '  Use canonical template selectors shaped as <category>/<templateId>.',
-    '',
-    'Project creation:',
-    '  Create writes manifest-first project seeds only.',
+    '  Use <category>/<slug>.',
     '',
   ].join('\n');
 }
@@ -166,33 +155,6 @@ export function renderUnknownCommand(value: string): string {
   return [`Unknown templates command: ${value}`, '', 'Run ankhorage-templates --help', ''].join(
     '\n',
   );
-}
-
-function renderCommandHelp(command: TemplatesCommandDefinition): string {
-  const usageLine =
-    command.standaloneName === 'create'
-      ? `  ankhorage-templates create <projectSlug> --template <category>/<templateId>`
-      : command.standaloneName === 'inspect'
-        ? `  ankhorage-templates inspect <category>/<templateId>`
-        : '  ankhorage-templates list [--category <category>]';
-  const ankhUsageLine =
-    command.standaloneName === 'create'
-      ? `  ankh ${TEMPLATES_COMMAND_CATEGORY} create <projectSlug> --template <category>/<templateId>`
-      : command.standaloneName === 'inspect'
-        ? `  ankh ${TEMPLATES_COMMAND_CATEGORY} inspect <category>/<templateId>`
-        : `  ankh ${TEMPLATES_COMMAND_CATEGORY} list [--category <category>]`;
-
-  return [
-    command.summary,
-    '',
-    'Usage:',
-    usageLine,
-    ankhUsageLine,
-    '',
-    'Selector syntax:',
-    '  Use canonical template selectors shaped as <category>/<templateId>.',
-    '',
-  ].join('\n');
 }
 
 function createTemplatesCommandServices(
@@ -214,9 +176,7 @@ function runListCommand(
   argv: readonly string[],
 ): Promise<TemplatesCommandRunResult> {
   const category = parseListArguments(argv);
-  const entries = services.listTemplateCatalog(category);
-
-  request.context.writeStdout(renderTemplateList(entries));
+  request.context.writeStdout(renderTemplateList(services.listTemplateCatalog(category)));
   return Promise.resolve({ exitCode: 0 });
 }
 
@@ -233,7 +193,25 @@ function runInspectCommand(
     displayName: 'Template Preview',
   });
 
-  request.context.writeStdout(renderTemplateInspection(entry, artifact));
+  request.context.writeStdout(
+    `${JSON.stringify(
+      {
+        selector: entry.selector,
+        category: entry.category,
+        slug: entry.slug,
+        label: entry.label,
+        assetCount: artifact.assets.length,
+        assets: artifact.assets.map((asset) => ({
+          mediaId: asset.mediaId,
+          targetPath: asset.targetPath,
+          ...(asset.contentType === undefined ? {} : { contentType: asset.contentType }),
+        })),
+        manifest: artifact.manifest,
+      },
+      null,
+      2,
+    )}\n`,
+  );
   return Promise.resolve({ exitCode: 0 });
 }
 
@@ -245,28 +223,19 @@ async function runCreateCommand(
   const { projectSlug, selector } = parseCreateArguments(argv);
   const entry = services.resolveTemplateCatalogEntry(selector);
   const displayName = deriveDisplayNameFromSlug(projectSlug);
-  const artifact = services.createTemplateArtifactForSelector({
-    selector,
-    projectSlug,
-    displayName,
-  });
-  const readmeText = createSeedReadme({
-    displayName,
-    projectSlug,
-    selector: entry.selector,
-  });
+  const artifact = services.createTemplateArtifactForSelector({ selector, projectSlug, displayName });
 
   const result = await services.createProjectSeed({
     cwd: request.context.cwd,
     projectSlug,
-    readmeText,
+    readmeText: createSeedReadme({ displayName, projectSlug, selector: entry.selector }),
     metadata: {
       package: TEMPLATES_PACKAGE_NAME,
       version: TEMPLATES_PACKAGE_VERSION,
       projectSlug,
       displayName,
       category: entry.category,
-      templateId: entry.templateId,
+      templateSlug: entry.slug,
       selector: entry.selector,
     },
     manifest: artifact.manifest,
@@ -278,22 +247,17 @@ async function runCreateCommand(
 }
 
 function parseListArguments(argv: readonly string[]): AppCategory | undefined {
-  if (argv.length === 0) {
-    return undefined;
-  }
-
+  if (argv.length === 0) return undefined;
   if (argv.length === 2 && argv[0] === '--category') {
     return parseTemplateCategory(argv[1] ?? '');
   }
-
   throw new Error('Templates list accepts only the optional --category <category> flag.');
 }
 
 function parseInspectArguments(argv: readonly string[]) {
   if (argv.length !== 1) {
-    throw new Error('Templates inspect requires exactly one <category>/<templateId> selector.');
+    throw new Error('Templates inspect requires exactly one <category>/<slug> selector.');
   }
-
   return parseTemplateSelector(argv[0] ?? '');
 }
 
@@ -302,19 +266,9 @@ function parseCreateArguments(argv: readonly string[]): {
   readonly selector: ReturnType<typeof parseTemplateSelector>;
 } {
   const [rawProjectSlug, firstFlag, rawSelector] = argv;
-
-  if (rawProjectSlug === undefined) {
-    throw new Error(
-      'Templates create requires <projectSlug> and --template <category>/<templateId>.',
-    );
+  if (argv.length !== 3 || rawProjectSlug === undefined || firstFlag !== '--template' || rawSelector === undefined) {
+    throw new Error('Templates create requires <projectSlug> and --template <category>/<slug>.');
   }
-
-  if (argv.length !== 3 || firstFlag !== '--template' || rawSelector === undefined) {
-    throw new Error(
-      'Templates create requires <projectSlug> and --template <category>/<templateId>.',
-    );
-  }
-
   return {
     projectSlug: parseProjectSlug(rawProjectSlug),
     selector: parseTemplateSelector(rawSelector),
@@ -322,32 +276,7 @@ function parseCreateArguments(argv: readonly string[]): {
 }
 
 function renderTemplateList(entries: readonly TemplateCatalogEntry[]): string {
-  const lines = entries.map(
-    (entry) => `  ${entry.selector} - ${entry.label}: ${entry.description}`,
-  );
-
-  return ['Available templates:', '', ...lines, ''].join('\n');
-}
-
-function renderTemplateInspection(
-  entry: TemplateCatalogEntry,
-  artifact: ReturnType<typeof createTemplateArtifactForSelector>,
-): string {
-  return `${JSON.stringify(
-    {
-      selector: entry.selector,
-      category: entry.category,
-      templateId: entry.templateId,
-      label: entry.label,
-      description: entry.description,
-      assetCount: artifact.assets.length,
-      assets: summarizeStarterTemplateAssets(artifact.assets),
-      manifestVersion: artifact.manifest.metadata.version,
-      manifest: artifact.manifest,
-    },
-    null,
-    2,
-  )}\n`;
+  return ['Available templates:', '', ...entries.map((entry) => `  ${entry.selector} - ${entry.label}`), ''].join('\n');
 }
 
 function renderCreateSuccess(projectPath: string, createdFiles: readonly string[]): string {
@@ -370,13 +299,19 @@ function createSeedReadme(args: {
     '',
     `Generated from \`@ankhorage/templates\` template \`${args.selector}\`.`,
     '',
-    'This is a manifest-first Ankhorage project seed.',
-    '',
-    'Next extraction step: runnable app/workspace scaffolding.',
-    '',
     `Project slug: \`${args.projectSlug}\``,
     '',
   ].join('\n');
+}
+
+function renderCommandHelp(command: TemplatesCommandDefinition): string {
+  const standalone =
+    command.standaloneName === 'create'
+      ? 'ankhorage-templates create <projectSlug> --template <category>/<slug>'
+      : command.standaloneName === 'inspect'
+        ? 'ankhorage-templates inspect <category>/<slug>'
+        : 'ankhorage-templates list [--category <category>]';
+  return [command.summary, '', 'Usage:', `  ${standalone}`, ''].join('\n');
 }
 
 function renderCommandFailure(commandName: TemplatesCommandName, error: unknown): string {
