@@ -18,9 +18,13 @@ export async function scaffoldTemplate(input) {
   assertRecord(input.manifest, 'manifest');
 
   const targetDirectory = resolve(input.targetDirectory);
-  const packageManifest = JSON.parse(await readFile(join(targetDirectory, 'package.json'), 'utf8'));
+  const packageManifest = JSON.parse(
+    await readFile(join(targetDirectory, 'package.json'), 'utf8'),
+  );
   if (packageManifest.name !== '@ankhorage/templates') {
-    throw new Error('Template scaffolding is available only in the @ankhorage/templates repository.');
+    throw new Error(
+      'Template scaffolding is available only in the @ankhorage/templates repository.',
+    );
   }
   if (input.manifest.metadata?.category !== input.category) {
     throw new Error('Scaffold category must match manifest.metadata.category.');
@@ -43,21 +47,29 @@ export async function scaffoldTemplate(input) {
   const templateDirectory = resolve(categoryDirectory, input.slug);
   assertInside(categoryDirectory, templateDirectory);
   if (await pathExists(templateDirectory)) {
-    throw new Error(`Template source already exists: ${relative(targetDirectory, templateDirectory)}`);
+    throw new Error(
+      `Template source already exists: ${relative(targetDirectory, templateDirectory)}`,
+    );
   }
 
   const screensDirectory = join(templateDirectory, 'assets', 'screens');
   const imagesDirectory = join(templateDirectory, 'assets', 'images');
   await mkdir(screensDirectory, { recursive: true });
   await mkdir(imagesDirectory, { recursive: true });
-  await writeFile(join(templateDirectory, 'createAppManifest.ts'), createManifestSource(manifest), 'utf8');
+  await writeFile(
+    join(templateDirectory, 'createAppManifest.ts'),
+    createManifestSource(manifest),
+    'utf8',
+  );
   await rm(join(categoryDirectory, '.gitkeep'), { force: true });
   await generateTemplateCatalog(targetDirectory);
 
   return {
     targetDirectory,
     templateDirectory: relative(targetDirectory, templateDirectory),
-    createdFiles: [relative(targetDirectory, join(templateDirectory, 'createAppManifest.ts'))],
+    createdFiles: [
+      relative(targetDirectory, join(templateDirectory, 'createAppManifest.ts')),
+    ],
     assetDirectories: [
       relative(targetDirectory, screensDirectory),
       relative(targetDirectory, imagesDirectory),
