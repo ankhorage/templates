@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.1.5
+
+### Patch Changes
+
+- 2d8dee0: Run the synchronized ZORA Designer catalog through its TypeScript entrypoint.
+
 ## 9.1.4
 
 ### Patch Changes
