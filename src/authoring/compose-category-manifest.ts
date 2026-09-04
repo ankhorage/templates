@@ -1,9 +1,9 @@
 import {
   type AppCategory,
   type AppManifest,
+  type AppNavigatorManifest,
   type ComponentDataBindingRegistry,
   type DataSourceRegistry,
-  type AppNavigatorManifest,
   parseAppManifest,
   resolveAuthFlow,
   type ScreenSpec,
