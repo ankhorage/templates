@@ -20,10 +20,9 @@ describe('OAuth fixtures', () => {
     expect(resolveOAuthFixture('google').oauth.providers.map((provider) => provider.id)).toEqual([
       'google',
     ]);
-    expect(resolveOAuthFixture('google-apple').oauth.providers.map((provider) => provider.id)).toEqual([
-      'google',
-      'apple',
-    ]);
+    expect(
+      resolveOAuthFixture('google-apple').oauth.providers.map((provider) => provider.id),
+    ).toEqual(['google', 'apple']);
   });
 
   test('uses the canonical callback and logical credential references', () => {
@@ -39,7 +38,7 @@ describe('OAuth fixtures', () => {
 
   test('returns isolated fixture definitions', () => {
     const fixture = resolveOAuthFixture('google');
-    const provider = fixture.oauth.providers[0];
+    const [provider] = fixture.oauth.providers;
     if (!provider) throw new Error('Expected Google fixture provider.');
     provider.label = SECRET_SENTINEL;
 
