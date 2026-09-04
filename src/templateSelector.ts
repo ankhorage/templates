@@ -23,12 +23,16 @@ export function parseTemplateSelector(value: string): ParsedTemplateSelector {
   const segments = normalizedValue.split('/');
 
   if (segments.length !== 2 || segments.some((segment) => segment.length === 0)) {
-    throw new Error(`Invalid template selector "${value}". Use the canonical <category>/<slug> format.`);
+    throw new Error(
+      `Invalid template selector "${value}". Use the canonical <category>/<slug> format.`,
+    );
   }
 
   const [rawCategory, rawSlug] = segments;
   if (rawCategory === undefined || rawSlug === undefined) {
-    throw new Error(`Invalid template selector "${value}". Use the canonical <category>/<slug> format.`);
+    throw new Error(
+      `Invalid template selector "${value}". Use the canonical <category>/<slug> format.`,
+    );
   }
   if (!SLUG_PATTERN.test(rawSlug)) {
     throw new Error(`Invalid template slug "${rawSlug}". Use lowercase kebab-case.`);
