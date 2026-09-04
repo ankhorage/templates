@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.2.1
+
+### Patch Changes
+
+- 7250c17: Align SharkPrey's authenticated landing route with onboarding and block release manifests whose navigator initial routes or auth landing routes do not resolve.
+
 ## 9.2.0
 
 ### Minor Changes
