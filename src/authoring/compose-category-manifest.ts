@@ -5,6 +5,7 @@ import {
   type DataSourceRegistry,
   type NavigatorSpec,
   parseAppManifest,
+  resolveAuthFlow,
   type ScreenSpec,
   type UiNode,
 } from '@ankhorage/contracts';
@@ -18,7 +19,9 @@ export type TemplateAuthoringState = 'draft' | 'release';
 export type TemplateCompositionStatus = 'blocked' | 'ready';
 export type TemplateCompositionDiagnosticCode =
   | 'invalid-manifest'
+  | 'missing-auth-landing-route'
   | 'missing-element'
+  | 'missing-initial-route'
   | 'missing-route-screen'
   | 'theme-compilation-error'
   | 'theme-intent-warning';
@@ -62,6 +65,8 @@ export function validateTemplateManifest(
   const parsed = parseAppManifest(manifest);
   const diagnostics: TemplateCompositionDiagnostic[] = [
     ...collectRouteDiagnostics(manifest.navigator, manifest.screens),
+    ...collectInitialRouteDiagnostics(manifest.navigator),
+    ...collectAuthLandingRouteDiagnostics(manifest),
     ...collectMissingElementDiagnostics(manifest.screens),
     ...(parsed.ok
       ? []
@@ -80,6 +85,77 @@ export function validateTemplateManifest(
     status: diagnostics.some((diagnostic) => diagnostic.severity === 'error') ? 'blocked' : 'ready',
     authoringState,
   };
+}
+
+/*** Normalize one configured route or generated route path for exact comparison. */
+function normalizeRoutePath(value: string): string {
+  const [pathname = ''] = value.trim().split(/[?#]/u, 1);
+  return pathname.replace(/^\/+|\/+$/gu, '');
+}
+
+/*** Resolve one route's generated path relative to its parent navigator. */
+function resolveRoutePath(route: NavigatorSpec['routes'][number], parentPath: string): string {
+  const configuredPath = route.path ?? route.name;
+  const segment = normalizeRoutePath(configuredPath);
+  if (configuredPath.trim().startsWith('/')) return segment;
+  if (segment === 'index') return parentPath;
+  return [parentPath, segment].filter(Boolean).join('/');
+}
+
+/*** Collect every concrete screen path produced by a navigator tree. */
+function collectScreenRoutePaths(navigator: NavigatorSpec, parentPath = ''): readonly string[] {
+  return navigator.routes.flatMap((route) => {
+    const routePath = resolveRoutePath(route, parentPath);
+    return [
+      ...(route.screenId ? [routePath] : []),
+      ...(route.navigator ? collectScreenRoutePaths(route.navigator, routePath) : []),
+    ];
+  });
+}
+
+/*** Report navigator initial-route names that do not resolve among their sibling routes. */
+function collectInitialRouteDiagnostics(
+  navigator: NavigatorSpec,
+  path = 'navigator',
+): TemplateCompositionDiagnostic[] {
+  const { initialRouteName } = navigator;
+  const own =
+    initialRouteName && !navigator.routes.some((route) => route.name === initialRouteName)
+      ? [
+          {
+            code: 'missing-initial-route' as const,
+            severity: 'error' as const,
+            path: `${path}.initialRouteName`,
+            message: `Initial route "${initialRouteName}" does not match a sibling route.`,
+          },
+        ]
+      : [];
+  return navigator.routes.reduce<TemplateCompositionDiagnostic[]>((diagnostics, route, index) => {
+    if (!route.navigator) return diagnostics;
+    return [
+      ...diagnostics,
+      ...collectInitialRouteDiagnostics(route.navigator, `${path}.routes[${index}].navigator`),
+    ];
+  }, own);
+}
+
+/*** Report an authenticated landing route that has no concrete screen in the navigator tree. */
+function collectAuthLandingRouteDiagnostics(
+  manifest: AppManifest,
+): TemplateCompositionDiagnostic[] {
+  const { auth } = manifest.infra;
+  if (auth?.scope !== 'global') return [];
+  const { postSignInRoute } = resolveAuthFlow(auth.flow);
+  const normalized = normalizeRoutePath(postSignInRoute);
+  if (collectScreenRoutePaths(manifest.navigator).includes(normalized)) return [];
+  return [
+    {
+      code: 'missing-auth-landing-route',
+      severity: 'error',
+      path: 'infra.auth.flow.postSignInRoute',
+      message: `Auth landing route "${postSignInRoute}" does not resolve to a screen route.`,
+    },
+  ];
 }
 
 /*** Read a manifest string prop without treating arbitrary values as valid authoring metadata. */

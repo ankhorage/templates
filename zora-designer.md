@@ -60,7 +60,7 @@
         "id": "template-manifest",
         "kind": "runtime-manifest",
         "location": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "observation": "The portable SharkPrey template contains ten screens, a nested stack-and-tabs navigator, local persisted state, one bundled logo asset, supported ZORA elements and actions, and an explicit poker-table placeholder pending manifest metadata ownership."
+        "observation": "The portable SharkPrey template contains ten screens, a nested stack-and-tabs navigator, an authenticated landing route aligned to onboarding, local persisted state, one bundled logo asset, supported ZORA elements and actions, and an explicit poker-table placeholder pending manifest metadata ownership."
       }
     ],
     "limitations": [
@@ -743,7 +743,7 @@
       {
         "id": "navigator-screen-agreement",
         "status": "pass",
-        "evidence": "Root stack, nested Train stack, and five tab routes map all ten screens."
+        "evidence": "Root stack, nested Train stack, and five tab routes map all ten screens; the authenticated landing route resolves to the root navigator's onboarding initial route."
       },
       {
         "id": "concept-image-generation",

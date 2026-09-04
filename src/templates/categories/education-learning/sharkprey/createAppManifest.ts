@@ -77,7 +77,7 @@ const manifest = {
         signUpRoute: 'sign-up',
         signOutRoute: 'sign-out',
         forgotPasswordRoute: 'forgot-password',
-        postSignInRoute: '/',
+        postSignInRoute: 'onboarding',
         unauthorizedRoute: 'sign-in',
       },
       signIn: {

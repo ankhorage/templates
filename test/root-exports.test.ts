@@ -63,6 +63,7 @@ test('exposes a release-ready SharkPrey manifest and bundled logo', () => {
     diagnostics: [],
   });
   expect(sharkPrey.infra.state).toEqual({ provider: 'legend', persistence: 'local' });
+  expect(sharkPrey.infra.auth?.flow?.postSignInRoute).toBe(sharkPrey.navigator.initialRouteName);
   expect(Object.keys(sharkPrey.screens)).toHaveLength(10);
 
   const sharkPreyArtifact = createTemplateArtifact({
