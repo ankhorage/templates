@@ -132,8 +132,9 @@ const manifest = {
               name: 'train',
               label: 'Train',
               icon: {
-                name: 'school-outline',
-                provider: 'Ionicons',
+                source: {
+                  mediaId: 'sharkprey-train-icon',
+                },
               },
               navigator: {
                 type: 'stack',
@@ -165,8 +166,9 @@ const manifest = {
               name: 'history',
               label: 'History',
               icon: {
-                name: 'time-outline',
-                provider: 'Ionicons',
+                source: {
+                  mediaId: 'sharkprey-history-icon',
+                },
               },
               screenId: 'hand-history',
             },
@@ -174,8 +176,9 @@ const manifest = {
               name: 'stats',
               label: 'Stats',
               icon: {
-                name: 'stats-chart-outline',
-                provider: 'Ionicons',
+                source: {
+                  mediaId: 'sharkprey-stats-icon',
+                },
               },
               screenId: 'stats',
             },
@@ -183,8 +186,9 @@ const manifest = {
               name: 'learn',
               label: 'Learn',
               icon: {
-                name: 'book-outline',
-                provider: 'Ionicons',
+                source: {
+                  mediaId: 'sharkprey-learn-icon',
+                },
               },
               screenId: 'learn',
             },
@@ -192,8 +196,9 @@ const manifest = {
               name: 'settings',
               label: 'Settings',
               icon: {
-                name: 'settings-outline',
-                provider: 'Ionicons',
+                source: {
+                  mediaId: 'sharkprey-settings-icon',
+                },
               },
               screenId: 'settings',
             },
@@ -1460,6 +1465,81 @@ const manifest = {
   activeThemeMode: 'dark',
   media: {
     assets: {
+      'sharkprey-train-icon': {
+        id: 'sharkprey-train-icon',
+        name: 'Train navigation icon',
+        kind: 'image',
+        source: {
+          kind: 'bundled',
+          path: 'assets/images/svg/train.svg',
+        },
+        contentType: 'image/svg+xml',
+        metadata: {
+          originalFileName: 'train.svg',
+          width: 24,
+          height: 24,
+        },
+      },
+      'sharkprey-history-icon': {
+        id: 'sharkprey-history-icon',
+        name: 'History navigation icon',
+        kind: 'image',
+        source: {
+          kind: 'bundled',
+          path: 'assets/images/svg/history.svg',
+        },
+        contentType: 'image/svg+xml',
+        metadata: {
+          originalFileName: 'history.svg',
+          width: 24,
+          height: 24,
+        },
+      },
+      'sharkprey-stats-icon': {
+        id: 'sharkprey-stats-icon',
+        name: 'Stats navigation icon',
+        kind: 'image',
+        source: {
+          kind: 'bundled',
+          path: 'assets/images/svg/stats.svg',
+        },
+        contentType: 'image/svg+xml',
+        metadata: {
+          originalFileName: 'stats.svg',
+          width: 24,
+          height: 24,
+        },
+      },
+      'sharkprey-learn-icon': {
+        id: 'sharkprey-learn-icon',
+        name: 'Learn navigation icon',
+        kind: 'image',
+        source: {
+          kind: 'bundled',
+          path: 'assets/images/svg/learn.svg',
+        },
+        contentType: 'image/svg+xml',
+        metadata: {
+          originalFileName: 'learn.svg',
+          width: 24,
+          height: 24,
+        },
+      },
+      'sharkprey-settings-icon': {
+        id: 'sharkprey-settings-icon',
+        name: 'Settings navigation icon',
+        kind: 'image',
+        source: {
+          kind: 'bundled',
+          path: 'assets/images/svg/settings.svg',
+        },
+        contentType: 'image/svg+xml',
+        metadata: {
+          originalFileName: 'settings.svg',
+          width: 24,
+          height: 24,
+        },
+      },
       'sharkprey-logo': {
         id: 'sharkprey-logo',
         name: 'SharkPrey shark and graduation-cap logo',
