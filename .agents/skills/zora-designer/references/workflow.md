@@ -1,127 +1,137 @@
 # Design, Composition, and Template Workflow
 
-Use this workflow for `interactive`, `screen`, `screens`, and `template`. Audit uses the same target
-model but keeps observed evidence separate from recommendations.
+Use this workflow for `interactive`, `screen`, `screens`, and `template`. Audit uses the same
+compiled target baseline when a redesign is requested; it never fills unknown observed values with
+presets and pretends they were measured.
 
-## 1. Establish intent and evidence
+## 1. Establish mode, intent, and evidence
 
-Record the requested app/category, audience, primary tasks, screen or series, platform, viewport,
-theme modes, supplied images, and requested deliverable. Inspect installed Templates, ZORA metadata,
-theme APIs, fonts, and the current manifest when one exists.
+Record the audience, primary task, requested screen or ordered series, platform, input modes,
+viewport constraints, target theme modes, available source artifacts, and requested deliverable.
+Inspect the current manifest, theme, installed packages, ZORA metadata, fonts, and existing
+`zora-designer.md` before prompting.
 
-For screen-image input, decompose each screen into semantic regions. Preserve image order and
-original dimensions. Separate UI structure from real image content that must become an app asset.
+For an input image or series, decompose each screen into semantic regions. Give each region a stable
+evidence ID, purpose, content/data responsibility, state and interaction needs, accessibility needs,
+and its relationship to other regions. Preserve image order and original dimensions. Do not map by
+appearance alone.
 
-Do not narrow the product scope because an action, provider, realtime feature, notification, or ZORA
-element is not supported yet.
+## 2. Build the design in dependency order
 
-## 2. Resolve design owners
+Interactive questions and compiler calls follow this exact order. Skip a question only when the
+answer is already supplied or reliably discovered.
 
-Run:
+1. **Category and intent.** Read `APP_CATEGORIES` and `CATEGORY_PRESETS` from Templates. Show the
+   preset's ordered primary-color and font-family recommendations and explain that they are starting
+   points, not user stereotypes. Defer font activation until its availability and owning loader are
+   verified.
+2. **Primary color.** Offer the preset's first recommended primary color and any verified project
+   brand color. Let the user accept or supply a color. The owner normalizes and validates it.
+3. **Harmony.** Only after primary is resolved, show `recommendedHarmonies` and the installed owner
+   harmony catalog. Preserve the selected canonical identifier.
+4. **Per-mode tone combination.** Show the preset recommendation first, then read all valid choices
+   from `TONE_PAIR_CATALOG`. Resolve light and dark independently with `resolveTonePair`; do not copy
+   a list into prose or code.
+5. **Generated colors.** Call `resolveCategoryDesignPreset` or `compileCategoryDesign`. Inspect
+   generated owner roles and diagnostics; never hand-calculate secondary, accent, severity,
+   background, neutral, or on-colors.
+6. **Computed Surface output.** Inspect `computedTheme.light.surfaceTheme` and
+   `computedTheme.dark.surfaceTheme`, including `ThemeTokens.colors`, `ThemeSemantics`, provenance,
+   selections, and diagnostics. Record `GeneratedColorRole` and `SemanticColorToken` names exactly.
+7. **Composition.** Resolve density, shape, layout, navigation, content hierarchy, states, and exact
+   ZORA elements from metadata. Typography recommendations remain advisory until the chosen font is
+   verified and the owning app/module can load it; never install or bundle a font implicitly.
+8. **Confirmation and output.** Show high-impact choices, their origins, diagnostics, gaps, and the
+   requested artifact. Persist runtime state only through the canonical manifest/contracts.
+
+Use separate light/dark tone pairs and owner compilation even when the two modes share a primary
+seed. Never generate dark mode by inversion.
+
+## 3. Inspect installed owner APIs
+
+Run from the target repository:
 
 ```text
 bun .agents/skills/zora-designer/scripts/owner-api.mjs inspect
 ```
 
-Resolve category/theme choices through current owner APIs. Treat category presets as starting points,
-not stereotypes or mandatory layouts. Resolve light and dark independently and use exact metadata
-names for ZORA components and recipes.
+The output reports installed versions, category presets, tone pairs, component metadata, recipe
+metadata, and required exports. An error names the missing package/export, minimum owner release,
+and update action. There is no fallback calculation.
 
-## 3. Compose the full screen model
-
-For each screen define purpose, hierarchy, navigation relationship, data needs, interaction states,
-and narrow/wide behavior where relevant. For a series define the shared shell, route topology,
-continuity, back/cancel behavior, and one coherent theme.
-
-Map each region to the exact supported ZORA element when one exists. If none exists, select an
-obvious supported placeholder such as `Box`, keep the intended capability in the design notes, and
-continue. Do not send an unresolved region to composition as though it were a real element.
-
-## 4. Bind actions that exist today
-
-Inspect the installed action/event contracts rather than relying on remembered capabilities.
-
-For every requested interaction:
-
-1. Bind it when the current owner model can express it.
-2. Keep the control and destination flow when the action itself is unavailable.
-3. Mark that one behavior as unbound/unsupported without blocking unrelated screens.
-4. Never invent action contracts or claim execution that cannot occur.
-
-For example, a chat overview may bind item press to navigation into a chat view even when the
-composer's send operation or push notifications are not supported yet.
-
-## 5. Handle images
-
-### Design-first
-
-Store generated/provided reference screens in:
+For deterministic composition, provide JSON to:
 
 ```text
-assets/screens/
+bun .agents/skills/zora-designer/scripts/owner-api.mjs compose design-input.json
 ```
 
-When converting them into a template, extract/crop only real image content needed by the app and
-save it under:
+The input contains `category`, optional `theme` overrides, `navigator`, `screens`, and optional
+`regions`. Each region has `id`, `requestedCapability`, `screenId`, `parentNodeId`, an optional exact
+`component`, explicit `props`, and `evidenceId`. The helper:
+
+- compiles the category through Templates and the released ZORA compiler;
+- validates exact component names and props against `ZORA_COMPONENT_META`;
+- emits metadata-derived `MissingElement` nodes for unresolved regions;
+- composes the canonical manifest in draft mode while a gap exists;
+- reports `applicationGate: blocked` and owner actions for every gap;
+- preserves Templates and ZORA diagnostics.
+
+The agent remains responsible for semantic matching. A requested component name is an explicit
+decision to validate, not a fuzzy-search request.
+
+## 4. Design one screen or a series
+
+For each screen define purpose, information hierarchy, primary action, navigation relationship,
+data needs, and relevant default/loading/empty/partial/error/offline/success/disabled/hover/pressed/
+selected/focus states. Define narrow and wide behavior where applicable.
+
+For a series also define the shared shell, canonical route topology, state continuity, back/cancel
+behavior, shared recipes and terminology, and one common theme. A concept image series must remain
+ordered and visually coherent. Label every generated image as a concept; replace it with an actual
+runtime capture only after running the manifest.
+
+## 5. Audit a URL, image, or series
+
+For a URL, capture the relevant modes, viewports, and states using a browser/runtime tool. For one
+image or a series, retain original dimensions and input order. Every evidence item records location,
+observation, evidence level, confidence factor, reproduction, and limitations.
+
+Read [audit.md](audit.md), create a criterion input JSON, and run:
 
 ```text
-assets/images/
+bun .agents/skills/zora-designer/scripts/audit.mjs audit-input.json zora-designer.md
 ```
 
-Rebuild text, controls, icons, surfaces, layout, and other UI with ZORA.
+Invisible behavior remains `not-assessable` unless source, accessibility-tree, browser, or runtime
+evidence supports it. A recommended redesign baseline may use the category workflow but must be
+clearly separated from observed implementation.
 
-### Direct template authoring
+## 6. Author a canonical template
 
-No screen step is required. Generate/save application images directly under `assets/images/` and
-reference them from `AppManifest.media.assets` as bundled media paths such as
-`assets/images/hero.webp`.
+Use `composeCategoryAppManifest`, `validateTemplateManifest`, and
+`assertTemplateManifestReady`. Draft output may contain `MissingElement`; release output may not.
 
-`assets/screens/` is never a runtime media source.
-
-## 6. Author the portable template
-
-The canonical source is:
-
-```text
-src/templates/categories/{appCategory}/{slug}/
-  createAppManifest.ts
-  assets/
-    screens/
-    images/
-```
-
-The module contract is uniform:
-
-```ts
-export default function createAppManifest(): AppManifest {
-  return completeManifest;
-}
-```
-
-When working in `@ankhorage/templates`, scaffold reviewed output with:
+When the target repository is `@ankhorage/templates`, scaffold reviewed composition output with:
 
 ```text
 bun .agents/skills/zora-designer/scripts/scaffold-template.mjs scaffold-input.json
 ```
 
-Input fields are `targetDirectory`, `category`, `slug`, and the complete `manifest`. The helper
-validates the manifest, creates the template directory and asset folders, and regenerates the package
-catalog by scanning the filesystem. There is no manually maintained per-category registry.
+The scaffold input provides the ready manifest, category, template ID, label, description, and
+target root. The helper verifies the Templates repository and owner validation, creates a normal
+variant `manifest.ts`, `template.ts`, and `index.ts`, and updates the category registry import and
+definition deterministically. It refuses existing targets, unsafe identifiers, blocked manifests,
+and non-Templates repositories. Review and validate the generated production diff; do not hand-hide
+a systemic skill or owner defect.
 
-Generated/cropped image and screen files are part of the authoring task and must be written into the
-created asset folders before handoff.
+## 7. Delivery gates
 
-## 7. Delivery checks
+Before application or release:
 
-- complete manifest validates against installed Contracts;
-- every selected ZORA element/prop is metadata-supported;
-- supported interactions are bound where the owner contracts allow it;
-- unsupported interactions remain represented and clearly recorded rather than removed;
-- required application images exist under `assets/images/` and match bundled manifest paths;
-- reference screens, when present, remain under `assets/screens/` only;
-- both theme modes compile without owner errors;
-- concept images and runtime evidence are clearly distinguished.
-
-Keep tests focused on the portable template contract and scaffolding/catalog behavior. Individual
-visual templates will be exercised through real generated designs rather than large synthetic test
-matrices.
+- every visible/interactive region has an exact metadata-supported element;
+- every gap has evidence and a linked ZORA owner issue;
+- both modes compile without owner errors;
+- the manifest is owner-validated and release-ready;
+- required concept-image, runtime-capture, or supplied-image capabilities were actually available;
+- target and observed state are clearly separated;
+- `zora-designer.md` is deterministic and contains no runtime authority or copied owner catalogs.

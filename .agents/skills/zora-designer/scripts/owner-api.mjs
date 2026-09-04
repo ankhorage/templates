@@ -73,7 +73,7 @@ export async function inspectOwnerApis(targetDirectory = process.cwd()) {
   };
 }
 
-/*** Compose one design without turning missing runtime/UI capabilities into an application blocker. */
+/*** Compile category design, validate region nodes, and compose one canonical draft or release manifest. */
 export async function composeDesign(input, targetDirectory = process.cwd()) {
   const owners = await loadOwnerApis(targetDirectory);
   assertRecord(input, 'Design input');
@@ -90,6 +90,7 @@ export async function composeDesign(input, targetDirectory = process.cwd()) {
   const design = owners.templates.compileCategoryDesign(input.category, input.theme ?? {});
   const { computedTheme, ...resolvedDesign } = design;
   const requestedAuthoringState = input.authoringState === 'release' ? 'release' : 'draft';
+  const authoringState = regionResult.gaps.length === 0 ? requestedAuthoringState : 'draft';
   const composition = owners.templates.composeCategoryAppManifest({
     category: input.category,
     name: input.name,
@@ -102,14 +103,14 @@ export async function composeDesign(input, targetDirectory = process.cwd()) {
     modules: input.modules,
     modulesConfig: input.modulesConfig,
     theme: input.theme,
-    authoringState: requestedAuthoringState,
+    authoringState,
   });
   const ownerDiagnostics = [
     ...design.diagnostics,
     ...computedTheme.diagnostics,
     ...composition.diagnostics,
   ];
-  const blockers = ownerDiagnostics.filter((diagnostic) => diagnostic.severity === 'error');
+  const blocked = regionResult.gaps.length > 0 || composition.status === 'blocked';
 
   return {
     owners: owners.versions,
@@ -117,15 +118,14 @@ export async function composeDesign(input, targetDirectory = process.cwd()) {
     computedTheme,
     composition,
     regionDiagnostics: regionResult.diagnostics,
-    capabilityGaps: regionResult.gaps,
     ownerDiagnostics,
     requestedAuthoringState,
-    applicationGate: composition.status === 'blocked' ? 'blocked' : 'pass',
-    blockers,
+    applicationGate: blocked ? 'blocked' : 'pass',
+    blockers: regionResult.gaps,
   };
 }
 
-/*** Resolve explicit region decisions using exact metadata or a visible non-blocking Box placeholder. */
+/*** Resolve explicit region-to-component decisions and insert validated nodes into cloned screens. */
 export function resolveRegionNodes(screens, regions, componentMeta) {
   const resolvedScreens = structuredClone(screens);
   const diagnostics = [];
@@ -144,12 +144,15 @@ export function resolveRegionNodes(screens, regions, componentMeta) {
     const resolution = resolveRegionNode(region, componentMeta);
     insertRegionNode(screen, region.parentNodeId, resolution.node, componentMeta);
     diagnostics.push(resolution.diagnostic);
-    if (resolution.gap !== null) gaps.push(resolution.gap);
+    if (resolution.gap !== null) {
+      gaps.push(resolution.gap);
+    }
   }
 
   return { screens: resolvedScreens, diagnostics, gaps };
 }
 
+/*** Resolve one exact metadata-backed component or the owner-defined MissingElement placeholder. */
 function resolveRegionNode(region, componentMeta) {
   const component = typeof region.component === 'string' ? region.component : null;
   const meta = component === null ? null : componentMeta[component];
@@ -167,34 +170,41 @@ function resolveRegionNode(region, componentMeta) {
     };
   }
 
-  const placeholderMeta = componentMeta.Box;
-  if (!placeholderMeta?.directManifestNode) {
-    throw new Error('Installed @ankhorage/zora metadata does not expose Box as a manifest node.');
+  const missingMeta = componentMeta.MissingElement;
+  if (!missingMeta || missingMeta.manifestPolicy?.kind !== 'unresolved-element') {
+    throw new Error(
+      'Installed @ankhorage/zora metadata does not expose the canonical MissingElement contract.',
+    );
   }
-  const reason =
-    typeof region.reason === 'string' && region.reason.trim() !== ''
-      ? region.reason
-      : `No exact metadata-supported ZORA element was selected for region "${region.id}".`;
+  const props = {
+    ...(missingMeta.blueprint?.defaultProps ?? {}),
+    requestedCapability: region.requestedCapability,
+    reason:
+      typeof region.reason === 'string' && region.reason.trim() !== ''
+        ? region.reason
+        : `No exact metadata-supported ZORA element was selected for region "${region.id}".`,
+    ...(typeof region.evidenceId === 'string' ? { evidenceId: region.evidenceId } : {}),
+  };
+  assertSupportedProps(props, missingMeta, region.id);
   const gap = {
-    id: `capability-gap:${region.id}`,
-    scope: 'capability',
+    id: `missing-element:${region.id}`,
+    scope: 'composition',
+    owner: '@ankhorage/zora',
     regionId: region.id,
     requestedCapability: region.requestedCapability,
     evidenceId: region.evidenceId ?? null,
-    reason,
+    ownerIssueUrl: region.ownerIssueUrl ?? null,
+    reason: props.reason,
+    unblockCondition: 'Replace MissingElement with a released exact ZORA element and revalidate.',
   };
   return {
-    node: { id: region.id, type: placeholderMeta.name, props: {} },
-    diagnostic: {
-      regionId: region.id,
-      status: 'placeholder',
-      component: placeholderMeta.name,
-      ...gap,
-    },
+    node: { id: region.id, type: missingMeta.name, props },
+    diagnostic: { regionId: region.id, status: 'missing', component: missingMeta.name, ...gap },
     gap,
   };
 }
 
+/*** Validate that manifest props are declared by the selected component metadata. */
 function assertSupportedProps(props, meta, regionId) {
   assertRecord(props, `props for region "${regionId}"`);
   const unsupported = Object.keys(props).filter((name) => !(name in meta.props));
@@ -206,15 +216,17 @@ function assertSupportedProps(props, meta, regionId) {
   return props;
 }
 
+/*** Insert a region node under the declared parent or the target screen root. */
 function insertRegionNode(screen, parentNodeId, node, componentMeta) {
   const parent =
     typeof parentNodeId === 'string' && parentNodeId !== ''
       ? findNode(screen.root, parentNodeId)
       : screen.root;
-  if (!parent) throw new Error(`Region parent node not found: ${String(parentNodeId)}`);
-
+  if (!parent) {
+    throw new Error(`Region parent node not found: ${String(parentNodeId)}`);
+  }
   const parentMeta = componentMeta[parent.type];
-  if (!parentMeta?.directManifestNode) {
+  if (!parentMeta || !parentMeta.directManifestNode) {
     throw new Error(`Region parent "${parent.id}" is absent from direct ZORA manifest metadata.`);
   }
   if (!parentMeta.allowedChildren.includes(node.type)) {
@@ -225,6 +237,7 @@ function insertRegionNode(screen, parentNodeId, node, componentMeta) {
   parent.children = [...(Array.isArray(parent.children) ? parent.children : []), node];
 }
 
+/*** Validate persisted component and pattern recipe overrides against exact ZORA metadata fields. */
 function assertSupportedThemeRecipes(recipes, recipeMeta) {
   if (recipes === undefined) return;
   assertRecord(recipes, 'theme.recipes');
@@ -251,12 +264,14 @@ function assertSupportedThemeRecipes(recipes, recipeMeta) {
   }
 }
 
+/*** Validate one recipe value using its owner-defined boolean, choice, or token field metadata. */
 function isRecipeValueSupported(value, fieldMeta) {
   if (fieldMeta.type === 'boolean') return typeof value === 'boolean';
   if (typeof value !== 'string') return false;
   return fieldMeta.type !== 'choice' || fieldMeta.options.includes(value);
 }
 
+/*** Find a manifest node recursively by stable node ID. */
 function findNode(node, nodeId) {
   if (node.id === nodeId) return node;
   for (const child of Array.isArray(node.children) ? node.children : []) {
@@ -266,6 +281,7 @@ function findNode(node, nodeId) {
   return null;
 }
 
+/*** Resolve, version-check, and import one public owner module from the target repository. */
 async function loadOwnerModule(targetDirectory, requirement) {
   let packageManifestPath;
   try {
@@ -303,6 +319,7 @@ async function loadOwnerModule(targetDirectory, requirement) {
   return { module: ownerModule, version };
 }
 
+/*** Find the nearest installed package manifest without falling back to the skill's own tree. */
 async function findInstalledPackageManifest(targetDirectory, packageName) {
   const resolvedTarget = resolve(targetDirectory);
   const selfManifestPath = join(resolvedTarget, 'package.json');
@@ -329,6 +346,7 @@ async function findInstalledPackageManifest(targetDirectory, packageName) {
   throw new Error(`Package not installed from target root: ${packageName}`);
 }
 
+/*** Resolve one import-condition public export from an installed package manifest. */
 function resolvePublicExportPath(packageManifest, packageManifestPath, specifier, requirement) {
   const exportKey =
     specifier === requirement.packageName
@@ -343,6 +361,7 @@ function resolvePublicExportPath(packageManifest, packageManifestPath, specifier
   return resolve(dirname(packageManifestPath), exportTarget);
 }
 
+/*** Select the canonical ESM import target without resolving a CommonJS compatibility condition. */
 function selectImportExportTarget(rawExport) {
   if (typeof rawExport === 'string') return rawExport;
   if (!isRecord(rawExport)) return null;
@@ -352,14 +371,16 @@ function selectImportExportTarget(rawExport) {
   return null;
 }
 
+/*** Create an actionable released-owner diagnostic without offering a compatibility fallback. */
 function ownerError(requirement, detail, cause) {
   return new Error(
     `zora-designer requires ${requirement.packageName} >=${requirement.minimumVersion}; ${detail}. ` +
-      'Update the target dependency through its normal Renovate/release workflow and rerun inspection.',
+      `Update the target dependency through its normal Renovate/release workflow and rerun inspection.`,
     cause === undefined ? undefined : { cause },
   );
 }
 
+/*** Compare stable semantic versions needed by the released public API gates. */
 function compareVersions(left, right) {
   const leftParts = parseVersion(left);
   const rightParts = parseVersion(right);
@@ -370,28 +391,33 @@ function compareVersions(left, right) {
   return 0;
 }
 
+/*** Parse the numeric major, minor, and patch tuple from a semantic version. */
 function parseVersion(version) {
   const match = /^(\d+)\.(\d+)\.(\d+)(?:[-+].*)?$/u.exec(version);
   if (!match) return [-1, -1, -1];
   return match.slice(1, 4).map(Number);
 }
 
+/*** Require an object-shaped input value. */
 function assertRecord(value, label) {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
     throw new Error(`${label} must be an object.`);
   }
 }
 
+/*** Narrow unknown package export metadata to a record. */
 function isRecord(value) {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+/*** Require a non-empty string input field. */
 function assertNonEmptyString(value, label) {
   if (typeof value !== 'string' || value.trim() === '') {
     throw new Error(`${label} must be a non-empty string.`);
   }
 }
 
+/*** Run the portable command-line interface when this file is executed directly. */
 async function main() {
   const [command, inputPath] = process.argv.slice(2);
   if (command === 'inspect') {
