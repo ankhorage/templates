@@ -13,6 +13,7 @@ import {
   FOUNDATION_TONE_FAMILIES,
   resolveCategoryDesignPreset,
   TONE_PAIR_CATALOG,
+  validateTemplateManifest,
 } from '../src';
 
 const baseNavigator: NavigatorSpec = {
@@ -222,5 +223,29 @@ describe('blocked manifest composition', () => {
     });
     expect(result.status).toBe('blocked');
     expect(result.diagnostics.map(({ code }) => code)).toContain('missing-route-screen');
+  });
+
+  test('blocks missing navigator initial routes and authenticated landing screens', () => {
+    const { manifest } = composeCategoryAppManifest({
+      category: 'reference',
+      navigator: baseNavigator,
+      screens: baseScreens,
+      authoringState: 'release',
+    });
+    manifest.navigator.initialRouteName = 'missing';
+    manifest.infra.auth = {
+      provider: 'supabase',
+      scope: 'global',
+      flow: {
+        signInRoute: 'sign-in',
+        postSignInRoute: '/missing',
+      },
+    };
+
+    const result = validateTemplateManifest(manifest, 'release');
+
+    expect(result.status).toBe('blocked');
+    expect(result.diagnostics.map(({ code }) => code)).toContain('missing-initial-route');
+    expect(result.diagnostics.map(({ code }) => code)).toContain('missing-auth-landing-route');
   });
 });
