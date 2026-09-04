@@ -82,12 +82,12 @@
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.10",
-    "@ankhorage/devtools": "^1.10.14",
+    "@ankhorage/devtools": "^1.10.16",
     "@ankhorage/doctor": "^0.10.7",
     "@ankhorage/paradox": "^0.1.24",
-    "@types/bun": "^1.4.0",
+    "@types/bun": "^1.4.1",
     "@types/node": "^25.2.3",
     "typescript": "^5.9.3"
   },
-  "packageManager": "bun@1.4.0"
+  "packageManager": "bun@1.4.1"
 }
