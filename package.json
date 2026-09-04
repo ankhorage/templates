@@ -77,8 +77,8 @@
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.0",
-    "@ankhorage/contracts": "^10.0.0",
-    "@ankhorage/zora": "^4.0.0"
+    "@ankhorage/contracts": "^10.1.0",
+    "@ankhorage/zora": "^4.1.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.10",
