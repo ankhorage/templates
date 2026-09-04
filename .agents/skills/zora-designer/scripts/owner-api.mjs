@@ -5,11 +5,23 @@ import { dirname, join, parse, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 const OWNER_RELEASES = {
+  colorTheory: { packageName: '@ankhorage/color-theory', minimumVersion: '0.3.0' },
+  contracts: { packageName: '@ankhorage/contracts', minimumVersion: '8.2.0' },
   templates: { packageName: '@ankhorage/templates', minimumVersion: '8.0.0' },
   zora: { packageName: '@ankhorage/zora', minimumVersion: '4.0.0' },
 };
 
 const OWNER_REQUIREMENTS = {
+  colorTheory: {
+    ...OWNER_RELEASES.colorTheory,
+    specifier: '@ankhorage/color-theory',
+    exports: ['COLOR_HARMONIES', 'COLOR_HARMONY_CATALOG'],
+  },
+  contracts: {
+    ...OWNER_RELEASES.contracts,
+    specifier: '@ankhorage/contracts',
+    exports: ['APP_CATEGORIES', 'NAVIGATOR_TYPES'],
+  },
   templates: {
     ...OWNER_RELEASES.templates,
     specifier: '@ankhorage/templates',
@@ -45,35 +57,58 @@ export async function loadOwnerApis(targetDirectory = process.cwd()) {
   }
 
   return {
+    colorTheory: loaded.colorTheory.module,
+    contracts: loaded.contracts.module,
     templates: loaded.templates.module,
     zoraTheme: loaded.zoraTheme.module,
     zoraMetadata: loaded.zoraMetadata.module,
     versions: {
+      colorTheory: loaded.colorTheory.version,
+      contracts: loaded.contracts.version,
       templates: loaded.templates.version,
       zora: loaded.zoraTheme.version,
     },
   };
 }
 
+/*** Load only Contracts for tooling that runs before another owner package has been built. */
+export async function loadContractsApi(targetDirectory = process.cwd()) {
+  return (await loadOwnerModule(targetDirectory, OWNER_REQUIREMENTS.contracts)).module;
+}
+
 /*** Return installed catalogs and metadata names without copying owner definitions. */
 export async function inspectOwnerApis(targetDirectory = process.cwd()) {
   const owners = await loadOwnerApis(targetDirectory);
+  const componentMetadata = Object.values(owners.zoraMetadata.ZORA_COMPONENT_META);
   return {
     versions: owners.versions,
-    categories: Object.values(owners.templates.CATEGORY_PRESETS).map((preset) => ({
-      category: preset.category,
-      label: preset.label,
-      recommendedPrimaryColors: preset.recommendedPrimaryColors,
-      recommendedHarmonies: preset.recommendedHarmonies,
-      tonePairs: preset.tonePairs,
-    })),
+    appCategories: owners.contracts.APP_CATEGORIES,
+    categoryPresets: owners.templates.CATEGORY_PRESETS,
+    harmonyIds: owners.colorTheory.COLOR_HARMONIES,
+    harmonies: owners.colorTheory.COLOR_HARMONY_CATALOG,
     tonePairs: owners.templates.TONE_PAIR_CATALOG,
-    components: Object.keys(owners.zoraMetadata.ZORA_COMPONENT_META).sort(),
+    navigatorTypes: owners.contracts.NAVIGATOR_TYPES,
+    components: componentMetadata.map((meta) => meta.name).sort(),
+    events: componentMetadata
+      .flatMap((meta) =>
+        Object.values(meta.events ?? {}).map((event) => ({
+          component: meta.name,
+          eventType: event.eventType,
+          label: event.label,
+          description: event.description,
+          payloadFields: event.payloadFields,
+        })),
+      )
+      .sort((left, right) =>
+        `${left.component}:${left.eventType}`.localeCompare(
+          `${right.component}:${right.eventType}`,
+        ),
+      ),
     themeRecipes: Object.keys(owners.zoraMetadata.ZORA_THEME_RECIPE_META).sort(),
   };
 }
 
-/*** Compose one design without turning missing runtime/UI capabilities into an application blocker. */
+/*** Compose one design without turning missing runtime/UI capabilities into a design blocker. */
 export async function composeDesign(input, targetDirectory = process.cwd()) {
   const owners = await loadOwnerApis(targetDirectory);
   assertRecord(input, 'Design input');
@@ -144,7 +179,9 @@ export function resolveRegionNodes(screens, regions, componentMeta) {
     const resolution = resolveRegionNode(region, componentMeta);
     insertRegionNode(screen, region.parentNodeId, resolution.node, componentMeta);
     diagnostics.push(resolution.diagnostic);
-    if (resolution.gap !== null) gaps.push(resolution.gap);
+    if (resolution.gap !== null) {
+      gaps.push(resolution.gap);
+    }
   }
 
   return { screens: resolvedScreens, diagnostics, gaps };
@@ -195,6 +232,7 @@ function resolveRegionNode(region, componentMeta) {
   };
 }
 
+/*** Validate that manifest props are declared by the selected component metadata. */
 function assertSupportedProps(props, meta, regionId) {
   assertRecord(props, `props for region "${regionId}"`);
   const unsupported = Object.keys(props).filter((name) => !(name in meta.props));
@@ -206,15 +244,17 @@ function assertSupportedProps(props, meta, regionId) {
   return props;
 }
 
+/*** Insert a region node under the declared parent or the target screen root. */
 function insertRegionNode(screen, parentNodeId, node, componentMeta) {
   const parent =
     typeof parentNodeId === 'string' && parentNodeId !== ''
       ? findNode(screen.root, parentNodeId)
       : screen.root;
-  if (!parent) throw new Error(`Region parent node not found: ${String(parentNodeId)}`);
-
+  if (!parent) {
+    throw new Error(`Region parent node not found: ${String(parentNodeId)}`);
+  }
   const parentMeta = componentMeta[parent.type];
-  if (!parentMeta?.directManifestNode) {
+  if (!parentMeta || !parentMeta.directManifestNode) {
     throw new Error(`Region parent "${parent.id}" is absent from direct ZORA manifest metadata.`);
   }
   if (!parentMeta.allowedChildren.includes(node.type)) {
@@ -225,6 +265,7 @@ function insertRegionNode(screen, parentNodeId, node, componentMeta) {
   parent.children = [...(Array.isArray(parent.children) ? parent.children : []), node];
 }
 
+/*** Validate persisted component and pattern recipe overrides against exact ZORA metadata fields. */
 function assertSupportedThemeRecipes(recipes, recipeMeta) {
   if (recipes === undefined) return;
   assertRecord(recipes, 'theme.recipes');
@@ -251,12 +292,14 @@ function assertSupportedThemeRecipes(recipes, recipeMeta) {
   }
 }
 
+/*** Validate one recipe value using its owner-defined boolean, choice, or token field metadata. */
 function isRecipeValueSupported(value, fieldMeta) {
   if (fieldMeta.type === 'boolean') return typeof value === 'boolean';
   if (typeof value !== 'string') return false;
   return fieldMeta.type !== 'choice' || fieldMeta.options.includes(value);
 }
 
+/*** Find a manifest node recursively by stable node ID. */
 function findNode(node, nodeId) {
   if (node.id === nodeId) return node;
   for (const child of Array.isArray(node.children) ? node.children : []) {
@@ -266,6 +309,7 @@ function findNode(node, nodeId) {
   return null;
 }
 
+/*** Resolve, version-check, and import one public owner module from the target repository. */
 async function loadOwnerModule(targetDirectory, requirement) {
   let packageManifestPath;
   try {
@@ -303,6 +347,7 @@ async function loadOwnerModule(targetDirectory, requirement) {
   return { module: ownerModule, version };
 }
 
+/*** Find the nearest installed package manifest without falling back to the skill's own tree. */
 async function findInstalledPackageManifest(targetDirectory, packageName) {
   const resolvedTarget = resolve(targetDirectory);
   const selfManifestPath = join(resolvedTarget, 'package.json');
@@ -329,6 +374,7 @@ async function findInstalledPackageManifest(targetDirectory, packageName) {
   throw new Error(`Package not installed from target root: ${packageName}`);
 }
 
+/*** Resolve one import-condition public export from an installed package manifest. */
 function resolvePublicExportPath(packageManifest, packageManifestPath, specifier, requirement) {
   const exportKey =
     specifier === requirement.packageName
@@ -343,6 +389,7 @@ function resolvePublicExportPath(packageManifest, packageManifestPath, specifier
   return resolve(dirname(packageManifestPath), exportTarget);
 }
 
+/*** Select the canonical ESM import target without resolving a CommonJS compatibility condition. */
 function selectImportExportTarget(rawExport) {
   if (typeof rawExport === 'string') return rawExport;
   if (!isRecord(rawExport)) return null;
@@ -352,14 +399,16 @@ function selectImportExportTarget(rawExport) {
   return null;
 }
 
+/*** Create an actionable released-owner diagnostic without offering a compatibility fallback. */
 function ownerError(requirement, detail, cause) {
   return new Error(
     `zora-designer requires ${requirement.packageName} >=${requirement.minimumVersion}; ${detail}. ` +
-      'Update the target dependency through its normal Renovate/release workflow and rerun inspection.',
+      `Update the target dependency through its normal Renovate/release workflow and rerun inspection.`,
     cause === undefined ? undefined : { cause },
   );
 }
 
+/*** Compare stable semantic versions needed by the released public API gates. */
 function compareVersions(left, right) {
   const leftParts = parseVersion(left);
   const rightParts = parseVersion(right);
@@ -370,28 +419,33 @@ function compareVersions(left, right) {
   return 0;
 }
 
+/*** Parse the numeric major, minor, and patch tuple from a semantic version. */
 function parseVersion(version) {
   const match = /^(\d+)\.(\d+)\.(\d+)(?:[-+].*)?$/u.exec(version);
   if (!match) return [-1, -1, -1];
   return match.slice(1, 4).map(Number);
 }
 
+/*** Require an object-shaped input value. */
 function assertRecord(value, label) {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
     throw new Error(`${label} must be an object.`);
   }
 }
 
+/*** Narrow unknown package export metadata to a record. */
 function isRecord(value) {
   return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
+/*** Require a non-empty string input field. */
 function assertNonEmptyString(value, label) {
   if (typeof value !== 'string' || value.trim() === '') {
     throw new Error(`${label} must be a non-empty string.`);
   }
 }
 
+/*** Run the portable command-line interface when this file is executed directly. */
 async function main() {
   const [command, inputPath] = process.argv.slice(2);
   if (command === 'inspect') {

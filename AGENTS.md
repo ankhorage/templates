@@ -6,7 +6,7 @@
 
 Package: `@ankhorage/templates`
 
-Reusable Ankhorage app templates, presets, and manifest generators.
+Portable Ankhorage app templates, presets, and manifest authoring helpers.
 
 ## Current architecture only
 

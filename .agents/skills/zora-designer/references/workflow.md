@@ -1,127 +1,95 @@
-# Design, Composition, and Template Workflow
+# Owner-Backed Interactive and Template Workflow
 
-Use this workflow for `interactive`, `screen`, `screens`, and `template`. Audit uses the same target
-model but keeps observed evidence separate from recommendations.
+Use this workflow for `interactive`, `screen`, `screens`, and `template`. Ask only about unresolved
+decisions, one decision at a time. Show the owner recommendation first with a short reason. Do not
+silently accept later recommendations because an earlier answer was brief.
 
-## 1. Establish intent and evidence
+## 1. Inspect intent and owners
 
-Record the requested app/category, audience, primary tasks, screen or series, platform, viewport,
-theme modes, supplied images, and requested deliverable. Inspect installed Templates, ZORA metadata,
-theme APIs, fonts, and the current manifest when one exists.
-
-For screen-image input, decompose each screen into semantic regions. Preserve image order and
-original dimensions. Separate UI structure from real image content that must become an app asset.
-
-Do not narrow the product scope because an action, provider, realtime feature, notification, or ZORA
-element is not supported yet.
-
-## 2. Resolve design owners
-
-Run:
+Read repository instructions, an existing manifest or `zora-designer.md`, installed fonts, platform
+configuration, and relevant screens. Run:
 
 ```text
 bun .agents/skills/zora-designer/scripts/owner-api.mjs inspect
 ```
 
-Resolve category/theme choices through current owner APIs. Treat category presets as starting points,
-not stereotypes or mandatory layouts. Resolve light and dark independently and use exact metadata
-names for ZORA components and recipes.
+The output is the choice source. Do not use remembered categories, color options, tone pairs,
+navigator types, ZORA elements, or events. Resolve explicit user input before project state,
+existing brief values, category recommendations, and global defaults. Record the origin of every
+resolved decision.
 
-## 3. Compose the full screen model
+## 2. Ask in dependency order
 
-For each screen define purpose, hierarchy, navigation relationship, data needs, interaction states,
-and narrow/wide behavior where relevant. For a series define the shared shell, route topology,
-continuity, back/cancel behavior, and one coherent theme.
+Advance through this sequence. Skip only a value already supplied or reliably discovered.
 
-Map each region to the exact supported ZORA element when one exists. If none exists, select an
-obvious supported placeholder such as `Box`, keep the intended capability in the design notes, and
-continue. Do not send an unresolved region to composition as though it were a real element.
+1. **Category and intent.** Resolve the canonical app category, product name, audience, and primary
+   task. For `screen` and `screens`, audience and primary task are required.
+2. **Platform and theme coverage.** Resolve mobile, desktop, or responsive scope; technology;
+   input modes; target viewport or content constraints; light, dark, or both; and the default mode
+   when relevant.
+3. **Primary color.** Show the category recommendations in owner order and any verified project
+   brand color. Let the user accept one or supply a CSS color. Preserve the brand seed; the owner
+   compiler selects accessible functional steps.
+4. **Harmony.** After primary is resolved, show the category recommendation first and only the
+   harmony identifiers reported by Color Theory. Explain the visual energy and complexity using the
+   owner catalog descriptions.
+5. **Tone pairs.** After harmony is resolved, offer the category's separate light and dark
+   recommendations, followed by mode-compatible owner entries. Explain that `X-on-Y` means accent
+   family on foundation family; structural foregrounds remain independently resolved semantic
+   tokens.
+6. **Typography and profile.** Resolve a verified body font, optional heading pairing, density,
+   shape, motion, and contrast target. Do not install fonts. Offer the category/profile
+   recommendation first and allow the user to accept the recommended system settings together.
+7. **Screens.** Ask for the ordered screen list and purpose of each screen. Then establish the
+   primary action, essential content, required data states, and continuity across the series. Do not
+   generate images yet.
+8. **Navigator.** After the screen topology exists, offer only Contracts navigator types and map
+   every route, initial route, hidden/detail route, back/cancel path, and primary-navigation label.
+9. **Compile and confirm.** Compile both theme modes through the owner helper. Summarize high-impact
+   decisions, origins, diagnostics, unsupported capabilities, screen order, and route topology. Ask
+   for confirmation before creating screen images, code, or a template.
 
-## 4. Bind actions that exist today
+If the user changes an earlier decision, invalidate and revisit only dependent later decisions.
+Changing primary invalidates harmony-derived compilation and tone output but does not erase the
+screen brief. Changing the screen list invalidates navigator confirmation.
 
-Inspect the installed action/event contracts rather than relying on remembered capabilities.
+## 3. Compile owner output
 
-For every requested interaction:
-
-1. Bind it when the current owner model can express it.
-2. Keep the control and destination flow when the action itself is unavailable.
-3. Mark that one behavior as unbound/unsupported without blocking unrelated screens.
-4. Never invent action contracts or claim execution that cannot occur.
-
-For example, a chat overview may bind item press to navigation into a chat view even when the
-composer's send operation or push notifications are not supported yet.
-
-## 5. Handle images
-
-### Design-first
-
-Store generated/provided reference screens in:
-
-```text
-assets/screens/
-```
-
-When converting them into a template, extract/crop only real image content needed by the app and
-save it under:
-
-```text
-assets/images/
-```
-
-Rebuild text, controls, icons, surfaces, layout, and other UI with ZORA.
-
-### Direct template authoring
-
-No screen step is required. Generate/save application images directly under `assets/images/` and
-reference them from `AppManifest.media.assets` as bundled media paths such as
-`assets/images/hero.webp`.
-
-`assets/screens/` is never a runtime media source.
-
-## 6. Author the portable template
-
-The canonical source is:
+Provide the resolved `category`, theme overrides, navigator, screens, and region decisions to:
 
 ```text
-src/templates/categories/{appCategory}/{slug}/
-  createAppManifest.ts
-  assets/
-    screens/
-    images/
+bun .agents/skills/zora-designer/scripts/owner-api.mjs compose design-input.json
 ```
 
-The module contract is uniform:
+Use owner-returned theme configuration, generated roles, computed Surface themes, diagnostics,
+component metadata, and manifest composition. Light and dark are independent compilations; never
+derive dark mode by inversion. A failed owner diagnostic remains visible. Do not replace it with
+local math or an undocumented token.
 
-```ts
-export default function createAppManifest(): AppManifest {
-  return completeManifest;
-}
-```
+For every region, validate its exact component name, props, allowed-parent relationship, and event
+metadata. Use supported navigation and actions when available. Represent missing capability without
+removing the intended flow or inventing a contract.
 
-When working in `@ankhorage/templates`, scaffold reviewed output with:
+## 4. Produce the requested deliverable
 
-```text
-bun .agents/skills/zora-designer/scripts/scaffold-template.mjs scaffold-input.json
-```
+- `interactive`: write or return the confirmed `zora-designer.md`; do not produce screen images or
+  implementation unless requested.
+- `screen` or `screens`: read [screens.md](screens.md), create the screen specification, then produce
+  only the requested image, code, or manifest deliverable.
+- `template`: author a complete `AppManifest`, validate it in release mode, generate or extract every
+  required runtime image, and run the Templates scaffolder.
 
-Input fields are `targetDirectory`, `category`, `slug`, and the complete `manifest`. The helper
-validates the manifest, creates the template directory and asset folders, and regenerates the package
-catalog by scanning the filesystem. There is no manually maintained per-category registry.
+For design-first templates, store reference images under `assets/screens/` and crop only real image
+content into `assets/images/`. For direct authoring, generate application images directly under
+`assets/images/`. Runtime media never references a complete screen image.
 
-Generated/cropped image and screen files are part of the authoring task and must be written into the
-created asset folders before handoff.
+## 5. Delivery checks
 
-## 7. Delivery checks
-
-- complete manifest validates against installed Contracts;
-- every selected ZORA element/prop is metadata-supported;
-- supported interactions are bound where the owner contracts allow it;
-- unsupported interactions remain represented and clearly recorded rather than removed;
-- required application images exist under `assets/images/` and match bundled manifest paths;
-- reference screens, when present, remain under `assets/screens/` only;
-- both theme modes compile without owner errors;
-- concept images and runtime evidence are clearly distinguished.
-
-Keep tests focused on the portable template contract and scaffolding/catalog behavior. Individual
-visual templates will be exercised through real generated designs rather than large synthetic test
-matrices.
+- every decision is explicit, discovered, or carries a recorded default origin;
+- both theme modes compile without hidden local fallback calculations;
+- the screen model and navigator agree;
+- every selected ZORA node and prop is metadata-supported;
+- supported events/actions are bound and unsupported behavior is recorded;
+- screen generation passes the composition gate;
+- release templates contain one default-exported `createAppManifest()` and bundled media paths;
+- the complete manifest validates against the installed owner contract.

@@ -1,12 +1,13 @@
 #!/usr/bin/env bun
 
-import { access, mkdir, readFile, relative, resolve, rm, writeFile } from 'node:fs/promises';
-import { dirname, join, sep } from 'node:path';
+import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { join, relative, resolve, sep } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
 import { generateTemplateCatalog } from './generate-template-catalog.mjs';
 import { loadOwnerApis } from './owner-api.mjs';
 
+/*** Scaffold one complete portable template and refresh filesystem discovery. */
 export async function scaffoldTemplate(input) {
   assertRecord(input, 'Scaffold input');
   for (const field of ['targetDirectory', 'category', 'slug']) {
@@ -60,7 +61,7 @@ export async function scaffoldTemplate(input) {
     'utf8',
   );
   await rm(join(categoryDirectory, '.gitkeep'), { force: true });
-  await generateTemplateCatalog(targetDirectory);
+  await generateTemplateCatalog(targetDirectory, owners.contracts.APP_CATEGORIES);
 
   return {
     targetDirectory,
@@ -73,6 +74,7 @@ export async function scaffoldTemplate(input) {
   };
 }
 
+/*** Serialize one complete manifest as the template's canonical default export. */
 function createManifestSource(manifest) {
   return `import type { AppManifest } from '@ankhorage/contracts';
 
@@ -85,6 +87,7 @@ export default function createAppManifest(): AppManifest {
 `;
 }
 
+/*** Assert that a resolved output remains inside its declared owner directory. */
 function assertInside(parentPath, childPath) {
   const relativePath = relative(parentPath, childPath);
   if (
@@ -97,6 +100,7 @@ function assertInside(parentPath, childPath) {
   }
 }
 
+/*** Return whether a filesystem path exists. */
 async function pathExists(filePath) {
   try {
     await access(filePath);
@@ -106,18 +110,21 @@ async function pathExists(filePath) {
   }
 }
 
+/*** Require a non-array object input. */
 function assertRecord(value, label) {
   if (typeof value !== 'object' || value === null || Array.isArray(value)) {
     throw new Error(`${label} must be an object.`);
   }
 }
 
+/*** Require a non-empty string input field. */
 function assertNonEmptyString(value, label) {
   if (typeof value !== 'string' || value.trim() === '') {
     throw new Error(`${label} must be a non-empty string.`);
   }
 }
 
+/*** Run deterministic Templates source scaffolding from one JSON input. */
 async function main() {
   const [inputPath] = process.argv.slice(2);
   if (!inputPath) {

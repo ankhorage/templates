@@ -1,30 +1,33 @@
 ---
 name: zora-designer
 description: >
-  Design one application screen or an ordered screen series, audit supplied evidence, and author
-  portable Ankhorage templates using installed ZORA metadata, theme APIs, manifest contracts, and
-  supported action bindings. Use for any app category; missing runtime capabilities do not restrict
-  what may be designed.
+  Configure an owner-backed application design, generate one screen or a coherent screen series,
+  audit supplied evidence, and author portable Ankhorage templates. Use for category-driven design
+  decisions, ZORA screen generation, visual audits, or template creation.
 ---
 
 # ZORA Designer
 
 Design, audit, and author through the target repository's released owner APIs. The complete
-`AppManifest` is runtime authority; generated screen images are design evidence.
+`AppManifest` is runtime authority; `zora-designer.md` and generated screen images are design
+evidence.
 
 ## Route the request
 
-- `interactive`: resolve design decisions without silently creating implementation artifacts.
-- `screen`: design one screen and, when requested, generate its concept image.
-- `screens`: design a coherent ordered screen series with shared navigation, state, and tokens.
-- `audit`: evaluate supplied image evidence or a URL/runtime when the required capability exists.
-- `template`: create one portable template with a complete default-exported `createAppManifest()`.
+- `interactive`: run the progressive configuration conversation in
+  [workflow.md](references/workflow.md). Do not create code or images before confirmation.
+- `screen`: resolve the configuration, then read [screens.md](references/screens.md) and design one
+  screen.
+- `screens`: resolve the configuration, then read [screens.md](references/screens.md) and design an
+  ordered series with shared navigation, state, geometry, and tokens.
+- `audit`: read [audit.md](references/audit.md) and evaluate supplied image or runtime evidence.
+- `template`: resolve the configuration and screen model, then author one portable template through
+  the workflow below.
 
-Natural language is enough. Do not reject an app type because some behavior is not executable yet.
-A chat, marketplace, social app, editor, dashboard, game, or other product may still be designed
-completely while unsupported behavior remains visibly present and explicitly unbound.
-
-Read [workflow.md](references/workflow.md) for the ordered process and capability rules.
+Natural language is enough. Treat short replies as answers to the current question, not permission
+to infer later decisions. A reply such as “go on” advances to the next unresolved decision. Only an
+explicit request such as “accept all recommended values” resolves the remaining recommendations at
+once.
 
 ## Start with the owners
 
@@ -34,41 +37,29 @@ From the target repository, run:
 bun .agents/skills/zora-designer/scripts/owner-api.mjs inspect
 ```
 
-Use public exports from installed `@ankhorage/templates`, `@ankhorage/zora/theme`, and
-`@ankhorage/zora/metadata`. Never copy owner catalogs, component schemas, token inventories, or
-manifest implementations into this skill.
+Use its installed owner output for categories, recommendations, harmonies, tone pairs, navigation
+types, ZORA elements, events, recipes, and version provenance. Never copy owner catalogs, component
+schemas, token inventories, color algorithms, action types, or manifest implementations into this
+skill.
 
-## Map the complete UX
+Compile chosen values with the same helper before composing screens. Inspect both computed modes,
+including their resolved Surface themes and all owner diagnostics. Never hand-calculate a value the
+owner exposes.
+
+## Preserve the complete UX
 
 For every screen region, prefer the exact semantic ZORA element supported by current metadata.
-Visual resemblance alone is insufficient.
+Visual resemblance alone is insufficient. If no exact element exists, preserve the requested UX
+with an obvious supported placeholder such as a secondary-surface `Box`, and record the capability
+gap. Do not invent props, application components, or successful behavior.
 
-If no exact ZORA element exists, keep the requested UX and use an obvious supported placeholder,
-for example a secondary-surface `Box`. Record what capability the placeholder represents. Do not
-invent props, custom application components, or pretend the missing element works.
-
-A missing ZORA element is not permission to remove the flow and is not a reason to reject the app.
-
-## Bind supported actions progressively
-
-Inspect the installed Contracts/ZORA action and event model while authoring interactions.
-
-- Bind every requested interaction that current owner contracts can express.
-- Prefer real action bindings for supported behavior such as navigation from a collection/list item
-  to a detail or chat screen.
-- Preserve controls and flows whose action is not supported yet, but leave that behavior explicitly
-  unbound and record the capability gap.
-- Never invent action types or fake successful behavior.
-- Unsupported sending, realtime behavior, push notifications, provider operations, or similar
-  capabilities do not invalidate the surrounding screen series.
-
-Example: a chat template may contain a conversation overview, navigate from a colleague to a chat
-view, show the composer and send control, and bind the navigation now. If message sending is not in
-the installed action model, the send interaction remains unbound until that owner capability exists.
+Bind every interaction expressible by installed Contracts and ZORA event metadata. Leave an
+unsupported interaction visibly present and explicitly unbound without blocking unrelated design
+work. Release validation still decides whether the complete manifest is shippable.
 
 ## Template output
 
-A template is exactly one portable unit:
+A Templates repository template is exactly one portable unit:
 
 ```text
 src/templates/categories/{appCategory}/{slug}/
@@ -79,41 +70,27 @@ src/templates/categories/{appCategory}/{slug}/
 ```
 
 `createAppManifest.ts` default-exports a function returning the complete `AppManifest`.
+`assets/screens/` contains design evidence only. Runtime media uses real application image regions
+under `assets/images/`; rebuild text, controls, icons, surfaces, and layout with ZORA.
 
-Two authoring paths are valid:
-
-1. Design-first: generate or receive screens, keep them in `assets/screens/`, then reconstruct the
-   UI and extract/crop real application image regions into `assets/images/`.
-2. Direct: author the template immediately and generate/save every required application image into
-   `assets/images/`; reference screens are optional.
-
-`assets/screens/` is evidence only. Runtime manifest media must never reference those screenshots.
-Text, controls, icons, surfaces, and other UI are reconstructed with ZORA rather than cropped from a
-screen. Only real image content is extracted as an application asset.
-
-When the target is `@ankhorage/templates`, scaffold with:
+Scaffold only a reviewed, release-valid manifest:
 
 ```text
 bun .agents/skills/zora-designer/scripts/scaffold-template.mjs scaffold-input.json
 ```
 
-The scaffold creates the uniform template directory and regenerates discovery from the filesystem.
-Do not add category registries, seed definitions, fallback templates, or per-template barrels.
-
-## Capability truthfulness
-
-Concept image output requires an image-generation capability. URL/runtime evidence requires a
-browser/runtime capability. Image extraction requires the supplied/generated screen bytes.
-
-When a capability is unavailable, mark only that behavior or evidence as unavailable. Continue the
-rest of the requested design whenever it can be represented truthfully.
+The helper creates the template directory and regenerates discovery from the filesystem. Do not add
+category registries, seed definitions, fallback templates, compatibility paths, or per-template
+barrels.
 
 ## Validate before handoff
 
-- Compile both theme modes through installed owner APIs.
-- Validate the complete manifest and all selected ZORA nodes against current metadata.
-- Confirm supported interactions are actually bound and unsupported ones are explicitly recorded.
-- Confirm runtime images live under the template's `assets/images/` and are referenced as bundled
-  media from the manifest.
-- Keep generated concept screens separate from runtime assets.
-- Run focused validation; do not create exhaustive fixture suites for individual design templates.
+- confirm the interactive decision sequence completed or the user explicitly accepted remaining
+  recommendations;
+- compile light and dark independently through installed owner APIs;
+- validate selected ZORA nodes, props, events, actions, and complete manifest contracts;
+- run the screen composition gate from [screens.md](references/screens.md) before returning screen
+  output;
+- keep unsupported interactions and capability gaps explicit;
+- keep concept screens separate from runtime assets;
+- for deterministic artifact shape, read [artifact.md](references/artifact.md).
