@@ -23,6 +23,16 @@ describe('root exports', () => {
     expect(typeof resolveCategoryDesignPreset).toBe('function');
     expect(typeof createTemplateArtifact).toBe('function');
     expect(typeof resolveTemplate).toBe('function');
-    expect(listTemplates()).toEqual([]);
+
+    const templates = listTemplates();
+    expect(templates).toHaveLength(1);
+    expect(templates[0]).toMatchObject({
+      category: 'lifestyle',
+      name: 'Stillpath',
+      selector: 'lifestyle/stillpath',
+      slug: 'stillpath',
+      sourceRoot: 'src/templates/categories/lifestyle/stillpath',
+    });
+    expect(typeof templates[0]?.createAppManifest).toBe('function');
   });
 });

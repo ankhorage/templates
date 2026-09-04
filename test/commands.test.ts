@@ -16,12 +16,14 @@ describe('templates commands', () => {
     ]);
   });
 
-  test('lists an empty catalog while categories wait for real templates', async () => {
+  test('lists available standalone templates', async () => {
     const capture = createCapturedContext();
     const result = await runCommand('list', [], capture.context);
 
     expect(result.exitCode).toBe(0);
-    expect(capture.readStdout()).toBe('Available templates:\n\n');
+    expect(capture.readStdout()).toBe(
+      'Available templates:\n\n  lifestyle/stillpath - Stillpath\n',
+    );
   });
 
   test('rejects unknown selectors without a default fallback', async () => {
