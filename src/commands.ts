@@ -67,6 +67,11 @@ export interface RunTemplatesCommandOptions {
   readonly services?: Partial<TemplatesCommandServices>;
 }
 
+export type RunTemplatesCommandImpl = (
+  request: TemplatesCommandInvocation,
+  options?: RunTemplatesCommandOptions,
+) => Promise<TemplatesCommandRunResult>;
+
 const COMMAND_CAPABILITIES = {
   list: TEMPLATES_CAPABILITIES[0],
   inspect: TEMPLATES_CAPABILITIES[1],
@@ -223,7 +228,11 @@ async function runCreateCommand(
   const { projectSlug, selector } = parseCreateArguments(argv);
   const entry = services.resolveTemplateCatalogEntry(selector);
   const displayName = deriveDisplayNameFromSlug(projectSlug);
-  const artifact = services.createTemplateArtifactForSelector({ selector, projectSlug, displayName });
+  const artifact = services.createTemplateArtifactForSelector({
+    selector,
+    projectSlug,
+    displayName,
+  });
 
   const result = await services.createProjectSeed({
     cwd: request.context.cwd,
@@ -266,7 +275,12 @@ function parseCreateArguments(argv: readonly string[]): {
   readonly selector: ReturnType<typeof parseTemplateSelector>;
 } {
   const [rawProjectSlug, firstFlag, rawSelector] = argv;
-  if (argv.length !== 3 || rawProjectSlug === undefined || firstFlag !== '--template' || rawSelector === undefined) {
+  if (
+    argv.length !== 3 ||
+    rawProjectSlug === undefined ||
+    firstFlag !== '--template' ||
+    rawSelector === undefined
+  ) {
     throw new Error('Templates create requires <projectSlug> and --template <category>/<slug>.');
   }
   return {
@@ -276,7 +290,12 @@ function parseCreateArguments(argv: readonly string[]): {
 }
 
 function renderTemplateList(entries: readonly TemplateCatalogEntry[]): string {
-  return ['Available templates:', '', ...entries.map((entry) => `  ${entry.selector} - ${entry.label}`), ''].join('\n');
+  return [
+    'Available templates:',
+    '',
+    ...entries.map((entry) => `  ${entry.selector} - ${entry.label}`),
+    '',
+  ].join('\n');
 }
 
 function renderCreateSuccess(projectPath: string, createdFiles: readonly string[]): string {
