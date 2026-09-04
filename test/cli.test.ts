@@ -29,6 +29,7 @@ describe('standalone cli', () => {
 
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toContain('Available templates:');
+    expect(capture.readStdout()).toContain('education_learning/sharkprey - SharkPrey');
     expect(capture.readStdout()).toContain('lifestyle/stillpath - Stillpath');
     expect(capture.readStdout()).not.toContain('/default');
   });

@@ -22,7 +22,7 @@ describe('templates commands', () => {
 
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toBe(
-      'Available templates:\n\n  lifestyle/stillpath - Stillpath\n',
+      'Available templates:\n\n  education_learning/sharkprey - SharkPrey\n  lifestyle/stillpath - Stillpath\n',
     );
   });
 
