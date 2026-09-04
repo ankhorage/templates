@@ -60,7 +60,7 @@
     ]
   },
   "scripts": {
-    "templates:catalog": "bun .agents/skills/zora-designer/scripts/generate-template-catalog.mjs .",
+    "templates:catalog": "bun .agents/skills/zora-designer/scripts/generate-template-catalog.ts .",
     "build": "bun run templates:catalog && bun x tsc -p tsconfig.json",
     "changeset": "ankhorage-changeset",
     "changeset:status": "ankhorage-changeset status --since=origin/main",
@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.10",
-    "@ankhorage/devtools": "^1.10.13",
+    "@ankhorage/devtools": "^1.10.14",
     "@ankhorage/doctor": "^0.10.7",
     "@ankhorage/paradox": "^0.1.24",
     "@types/bun": "^1.4.0",
