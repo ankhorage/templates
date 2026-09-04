@@ -12,7 +12,7 @@ import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 
 import { type CategoryDesignOverrides, compileCategoryDesign } from '../design/category-theme';
 import { BASE_INFRA, BASE_SETTINGS, DEFAULT_TEMPLATE_VERSION } from '../internal/defaults';
-import { createManifestShell } from '../templates/shared/create-manifest-shell';
+import { createManifestShell } from './create-manifest-shell';
 
 export type TemplateAuthoringState = 'draft' | 'release';
 export type TemplateCompositionStatus = 'blocked' | 'ready';

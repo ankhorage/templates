@@ -1,6 +1,6 @@
 import type { AppCategory, AppManifest, ThemeConfig } from '@ankhorage/contracts';
 
-import { BASE_INFRA, BASE_SETTINGS } from '../../internal/defaults';
+import { BASE_INFRA, BASE_SETTINGS } from '../internal/defaults';
 import { createSplashScreen, type AppManifestWithSplashScreen } from './splash-screen';
 
 interface ManifestShellSeed {
