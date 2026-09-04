@@ -23,12 +23,13 @@ describe('standalone cli', () => {
     expect(capture.readStdout()).toBe(`${packageJson.version}\n`);
   });
 
-  test('lists the currently empty standalone catalog', async () => {
+  test('lists the standalone template catalog', async () => {
     const capture = createCapturedContext();
     const result = await runCli(['list'], { context: capture.context });
 
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toContain('Available templates:');
+    expect(capture.readStdout()).toContain('lifestyle/stillpath - Stillpath');
     expect(capture.readStdout()).not.toContain('/default');
   });
 
