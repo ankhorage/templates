@@ -53,8 +53,8 @@ export async function generateTemplateCatalog(targetDirectory = process.cwd()) {
 
   const source = `${imports}${imports ? '\n\n' : ''}import type { TemplateDefinition } from './catalog';
 
-export const TEMPLATE_DEFINITIONS = [
-${entries}${entries ? '\n' : ''}] as const satisfies readonly TemplateDefinition[];
+export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = [
+${entries}${entries ? '\n' : ''}];
 `;
 
   const outputPath = join(root, 'src/templates/catalog.generated.ts');
