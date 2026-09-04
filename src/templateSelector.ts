@@ -2,11 +2,11 @@ import { APP_CATEGORIES, type AppCategory } from '@ankhorage/contracts';
 
 export interface ParsedTemplateSelector {
   readonly category: AppCategory;
-  readonly templateId: string;
+  readonly slug: string;
   readonly selector: string;
 }
 
-const PROJECT_SLUG_PATTERN = /^[a-z0-9][a-z0-9-]*[a-z0-9]$/u;
+const SLUG_PATTERN = /^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/u;
 
 export function parseTemplateCategory(value: string): AppCategory {
   if (isAppCategory(value)) {
@@ -23,24 +23,23 @@ export function parseTemplateSelector(value: string): ParsedTemplateSelector {
   const segments = normalizedValue.split('/');
 
   if (segments.length !== 2 || segments.some((segment) => segment.length === 0)) {
-    throw new Error(
-      `Invalid template selector "${value}". Use the canonical <category>/<templateId> format.`,
-    );
+    throw new Error(`Invalid template selector "${value}". Use the canonical <category>/<slug> format.`);
   }
 
-  const [rawCategory, rawTemplateId] = segments;
-  if (rawCategory === undefined || rawTemplateId === undefined) {
-    throw new Error(
-      `Invalid template selector "${value}". Use the canonical <category>/<templateId> format.`,
-    );
+  const [rawCategory, rawSlug] = segments;
+  if (rawCategory === undefined || rawSlug === undefined) {
+    throw new Error(`Invalid template selector "${value}". Use the canonical <category>/<slug> format.`);
+  }
+  if (!SLUG_PATTERN.test(rawSlug)) {
+    throw new Error(`Invalid template slug "${rawSlug}". Use lowercase kebab-case.`);
   }
 
   const category = parseTemplateCategory(rawCategory);
 
   return {
     category,
-    templateId: rawTemplateId,
-    selector: createTemplateSelector(category, rawTemplateId),
+    slug: rawSlug,
+    selector: createTemplateSelector(category, rawSlug),
   };
 }
 
@@ -51,25 +50,15 @@ export function parseProjectSlug(value: string): string {
     throw new Error('Project slug is required.');
   }
 
-  if (
-    normalizedValue === '.' ||
-    normalizedValue === '..' ||
-    normalizedValue.startsWith('.') ||
-    normalizedValue.includes('/') ||
-    normalizedValue.includes('\\')
-  ) {
-    throw new Error(`Invalid project slug "${value}". Use a single lowercase slug like "my-app".`);
-  }
-
-  if (!PROJECT_SLUG_PATTERN.test(normalizedValue)) {
+  if (!SLUG_PATTERN.test(normalizedValue)) {
     throw new Error(`Invalid project slug "${value}". Use a single lowercase slug like "my-app".`);
   }
 
   return normalizedValue;
 }
 
-export function createTemplateSelector(category: AppCategory, templateId: string): string {
-  return `${category}/${templateId}`;
+export function createTemplateSelector(category: AppCategory, slug: string): string {
+  return `${category}/${slug}`;
 }
 
 export function deriveDisplayNameFromSlug(projectSlug: string): string {
