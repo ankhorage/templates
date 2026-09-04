@@ -18,9 +18,7 @@ export async function scaffoldTemplate(input) {
   assertRecord(input.manifest, 'manifest');
 
   const targetDirectory = resolve(input.targetDirectory);
-  const packageManifest = JSON.parse(
-    await readFile(join(targetDirectory, 'package.json'), 'utf8'),
-  );
+  const packageManifest = JSON.parse(await readFile(join(targetDirectory, 'package.json'), 'utf8'));
   if (packageManifest.name !== '@ankhorage/templates') {
     throw new Error(
       'Template scaffolding is available only in the @ankhorage/templates repository.',
@@ -67,9 +65,7 @@ export async function scaffoldTemplate(input) {
   return {
     targetDirectory,
     templateDirectory: relative(targetDirectory, templateDirectory),
-    createdFiles: [
-      relative(targetDirectory, join(templateDirectory, 'createAppManifest.ts')),
-    ],
+    createdFiles: [relative(targetDirectory, join(templateDirectory, 'createAppManifest.ts'))],
     assetDirectories: [
       relative(targetDirectory, screensDirectory),
       relative(targetDirectory, imagesDirectory),
