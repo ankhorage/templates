@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.1.3
+
+### Patch Changes
+
+- acd44d4: Replace the generated starter/default catalog with portable standalone templates, filesystem-generated discovery, template-local image assets, and the simplified ZORA designer authoring workflow.
+
 ## 9.1.2
 
 ### Patch Changes
