@@ -1,8 +1,6 @@
 import { type AppManifest, DEFAULT_AUTH_FLOW, type InfraManifest } from '@ankhorage/contracts';
 
 export const DEFAULT_TEMPLATE_VERSION = '1.0.0';
-export const DEFAULT_THEME_ID = 'default';
-export const DEFAULT_THEME_NAME = 'Default';
 
 export const BASE_INFRA: InfraManifest = {
   database: {

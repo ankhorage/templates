@@ -1,7 +1,7 @@
 {
   "name": "@ankhorage/templates",
   "version": "9.1.2",
-  "description": "Reusable Ankhorage app templates, presets, and manifest generators.",
+  "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
   "homepage": "https://github.com/ankhorage/templates#readme",
   "bugs": {
     "url": "https://github.com/ankhorage/templates/issues"
@@ -30,7 +30,7 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "assets",
+    "src/templates/categories/**/assets",
     "CHANGELOG.md"
   ],
   "exports": {
@@ -60,7 +60,8 @@
     ]
   },
   "scripts": {
-    "build": "bun x tsc -p tsconfig.json",
+    "templates:catalog": "bun .agents/skills/zora-designer/scripts/generate-template-catalog.mjs .",
+    "build": "bun run templates:catalog && bun x tsc -p tsconfig.json",
     "changeset": "ankhorage-changeset",
     "changeset:status": "ankhorage-changeset status --since=origin/main",
     "docs": "bunx @ankhorage/paradox@0.1.16 && ankhorage-prettier --write docs README.md",
@@ -68,7 +69,7 @@
     "lint:fix": "ankhorage-eslint . --fix --max-warnings=0",
     "format": "ankhorage-prettier --write .",
     "format:check": "ankhorage-prettier --check .",
-    "typecheck": "bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
+    "typecheck": "bun run templates:catalog && bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
     "test": "bun test",
     "prepublishOnly": "bun run typecheck && bun run build && bun test",
     "version-packages": "ankhorage-changeset version",
@@ -86,7 +87,6 @@
     "@ankhorage/paradox": "^0.1.24",
     "@types/bun": "^1.4.0",
     "@types/node": "^25.2.3",
-    "@types/react": "^19.2.14",
     "typescript": "^5.9.3"
   },
   "packageManager": "bun@1.4.0"

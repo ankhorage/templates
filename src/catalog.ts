@@ -1,40 +1,34 @@
 import type { AppCategory } from '@ankhorage/contracts';
 
-import { resolveCategoryDesignPreset } from './design/category-theme.js';
-import { CATEGORY_PRESETS } from './presets/category-presets.js';
 import {
-  createStarterTemplate,
-  listStarterTemplateSummaries,
-  type StarterTemplateArtifact,
-  type StarterTemplateSummary,
-  type TemplateSeed,
-} from './templates/starter/index.js';
+  createTemplateArtifact,
+  listTemplates,
+  type TemplateArtifact,
+} from './templates/catalog.js';
 import type { ParsedTemplateSelector } from './templateSelector.js';
 import { createTemplateSelector } from './templateSelector.js';
 
 export interface TemplateCatalogEntry {
   readonly selector: string;
   readonly category: AppCategory;
-  readonly templateId: string;
+  readonly slug: string;
   readonly label: string;
-  readonly description: string;
 }
 
 export function listTemplateCatalog(category?: AppCategory): readonly TemplateCatalogEntry[] {
-  const entries = createTemplateCatalogEntries();
-
-  if (category === undefined) {
-    return entries;
-  }
-
-  return entries.filter((entry) => entry.category === category);
+  return listTemplates(category).map((template) => ({
+    selector: createTemplateSelector(template.category, template.slug),
+    category: template.category,
+    slug: template.slug,
+    label: template.name,
+  }));
 }
 
 export function resolveTemplateCatalogEntry(
   selector: ParsedTemplateSelector,
 ): TemplateCatalogEntry {
   const entry = listTemplateCatalog(selector.category).find(
-    (candidate) => candidate.templateId === selector.templateId,
+    (candidate) => candidate.slug === selector.slug,
   );
 
   if (entry !== undefined) {
@@ -58,49 +52,11 @@ export function createTemplateArtifactForSelector(args: {
   readonly selector: ParsedTemplateSelector;
   readonly projectSlug: string;
   readonly displayName: string;
-}): StarterTemplateArtifact {
-  const seed = createTemplateSeed({
+}): TemplateArtifact {
+  return createTemplateArtifact({
     category: args.selector.category,
-    displayName: args.displayName,
+    slug: args.selector.slug,
+    name: args.displayName,
     projectSlug: args.projectSlug,
   });
-
-  return createStarterTemplate(seed, {
-    templateId: args.selector.templateId,
-  });
-}
-
-function createTemplateCatalogEntries(): readonly TemplateCatalogEntry[] {
-  return listStarterTemplateSummaries().map(createTemplateCatalogEntry);
-}
-
-function createTemplateCatalogEntry(summary: StarterTemplateSummary): TemplateCatalogEntry {
-  return {
-    selector: createTemplateSelector(summary.category, summary.id),
-    category: summary.category,
-    templateId: summary.id,
-    label: summary.label,
-    description: summary.description,
-  };
-}
-
-function createTemplateSeed(args: {
-  readonly category: AppCategory;
-  readonly displayName: string;
-  readonly projectSlug: string;
-}): TemplateSeed {
-  const preset = CATEGORY_PRESETS[args.category];
-  const design = resolveCategoryDesignPreset(args.category);
-
-  return {
-    category: args.category,
-    categoryLabel: preset.label,
-    appName: args.displayName,
-    slug: args.projectSlug,
-    summary: preset.summary,
-    focusAreas: preset.focusAreas,
-    primaryColor: design.primaryColor,
-    harmony: design.harmony,
-    theme: design.themeConfig,
-  };
 }

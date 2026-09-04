@@ -40,7 +40,6 @@ export {
   type ToneTarget,
 } from './design/tone-catalog';
 export {
-  createOAuthFixtureManifest,
   listOAuthFixtures,
   OAUTH_CALLBACK_ROUTE,
   OAUTH_FIXTURE_IDS,
@@ -48,7 +47,6 @@ export {
   type OAuthFixtureId,
   resolveOAuthFixture,
 } from './fixtures/oauth';
-export { createCategoryAppManifest } from './generators/create-category-app';
 export {
   CATEGORY_PRESET_RECONCILIATION,
   CATEGORY_PRESETS,
@@ -58,30 +56,14 @@ export {
   type CategoryPresetReconciliationReport,
 } from './presets/category-presets';
 export {
-  type CategoryStarterTemplateDefinition,
-  createStarterTemplate,
-  createStarterTemplateArtifact,
-  listStarterTemplates,
-  listStarterTemplatesByCategory,
-  listStarterTemplateSummaries,
-  resolveStarterTemplate,
-  type StarterTemplateArtifact,
-  type StarterTemplateAsset,
-  type StarterTemplateAssetSummary,
-  type StarterTemplateFactory,
-  type StarterTemplateId,
-  type StarterTemplateOptions,
-  type StarterTemplateResult,
-  type StarterTemplateSelection,
-  type StarterTemplateSummary,
-  summarizeStarterTemplateAssets,
-  TEMPLATE_IMAGE_CONTENT_TYPES,
-  TEMPLATE_KINDS,
-  type TemplateImageContentType,
-  type TemplateKind,
-  type TemplateSeed,
-  validateStarterTemplateAssets,
-} from './templates/starter';
+  createTemplateArtifact,
+  listTemplates,
+  resolveTemplate,
+  type TemplateArtifact,
+  type TemplateCatalogEntry,
+  type TemplateDefinition,
+  type TemplateImageAsset,
+} from './templates/catalog';
 export {
   APP_CATEGORIES,
   type AppCategory,
