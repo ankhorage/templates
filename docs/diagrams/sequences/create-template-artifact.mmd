@@ -1,0 +1,14 @@
+sequenceDiagram
+  participant participant_collectTemplateImageAssets as collectTemplateImageAssets
+  participant participant_createAppManifest as createAppManifest
+  participant participant_createTemplateArtifact as createTemplateArtifact
+  participant participant_listTemplates as listTemplates
+  participant participant_resolveTemplate as resolveTemplate
+  participant_createTemplateArtifact->>participant_resolveTemplate: resolveTemplate()
+  participant_resolveTemplate->>participant_listTemplates: listTemplates()
+  participant_listTemplates-->>participant_resolveTemplate: return
+  participant_resolveTemplate-->>participant_createTemplateArtifact: return
+  participant_createTemplateArtifact->>participant_createAppManifest: template.createAppManifest()
+  participant_createAppManifest-->>participant_createTemplateArtifact: return
+  participant_createTemplateArtifact->>participant_collectTemplateImageAssets: collectTemplateImageAssets()
+  participant_collectTemplateImageAssets-->>participant_createTemplateArtifact: return

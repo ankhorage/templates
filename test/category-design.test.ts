@@ -1,4 +1,4 @@
-import type { NavigatorSpec, ScreenSpec } from '@ankhorage/contracts';
+import type { AppNavigatorManifest, ScreenSpec } from '@ankhorage/contracts';
 import { describe, expect, test } from 'bun:test';
 
 import {
@@ -16,7 +16,7 @@ import {
   validateTemplateManifest,
 } from '../src';
 
-const baseNavigator: NavigatorSpec = {
+const baseNavigator: AppNavigatorManifest = {
   type: 'stack',
   initialRouteName: 'home',
   routes: [{ name: 'home', path: '/', screenId: 'home' }],
