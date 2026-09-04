@@ -1,18 +1,13 @@
-import { createHash } from 'node:crypto';
 import { lstat, mkdir, readFile, realpath, stat, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { AppCategory, AppManifest } from '@ankhorage/contracts';
 
-import {
-  type StarterTemplateAsset,
-  summarizeStarterTemplateAssets,
-  validateStarterTemplateAssets,
-} from './templates/starter/starter.assets';
+import type { TemplateImageAsset } from './templates/catalog.js';
 
 const PACKAGE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const PACKAGED_TEMPLATE_ASSET_ROOT = path.join(PACKAGE_ROOT, 'assets', 'templates');
+const PACKAGED_TEMPLATE_ROOT = path.join(PACKAGE_ROOT, 'src', 'templates', 'categories');
 
 interface TemplateSeedMetadata {
   readonly package: string;
@@ -20,12 +15,12 @@ interface TemplateSeedMetadata {
   readonly projectSlug: string;
   readonly displayName: string;
   readonly category: AppCategory;
-  readonly templateId: string;
+  readonly templateSlug: string;
   readonly selector: string;
 }
 
 interface MaterializedTemplateAsset {
-  readonly asset: StarterTemplateAsset;
+  readonly asset: TemplateImageAsset;
   readonly contents: Uint8Array;
 }
 
@@ -35,7 +30,7 @@ export interface CreateProjectSeedRequest {
   readonly readmeText: string;
   readonly metadata: TemplateSeedMetadata;
   readonly manifest: AppManifest;
-  readonly assets: readonly StarterTemplateAsset[];
+  readonly assets: readonly TemplateImageAsset[];
 }
 
 export interface CreateProjectSeedResult {
@@ -46,7 +41,7 @@ export interface CreateProjectSeedResult {
 export interface ProjectSeedDependencies {
   readonly mkdir: typeof mkdir;
   readonly pathExists: (targetPath: string) => Promise<boolean>;
-  readonly readTemplateAsset: (asset: StarterTemplateAsset) => Promise<Uint8Array>;
+  readonly readTemplateAsset: (asset: TemplateImageAsset) => Promise<Uint8Array>;
   readonly writeFile: typeof writeFile;
 }
 
@@ -61,14 +56,15 @@ export async function createProjectSeed(
     throw new Error(`Project path already exists: ${projectPath}`);
   }
 
-  const assets = validateStarterTemplateAssets(request.manifest, request.assets);
-  const materializedAssets = await materializeTemplateAssets(
-    assets,
-    resolvedDependencies.readTemplateAsset,
+  const materializedAssets = await Promise.all(
+    request.assets.map(async (asset) => ({
+      asset,
+      contents: await resolvedDependencies.readTemplateAsset(asset),
+    })),
   );
 
   await resolvedDependencies.mkdir(projectPath, { recursive: false });
-  await writeProjectMetadata(projectPath, request, assets, resolvedDependencies.writeFile);
+  await writeProjectMetadata(projectPath, request, resolvedDependencies.writeFile);
   await writeMaterializedAssets(projectPath, materializedAssets, resolvedDependencies);
 
   return {
@@ -77,16 +73,14 @@ export async function createProjectSeed(
       'ankh.config.json',
       'ankh.template.json',
       'README.md',
-      ...assets.map((asset) => asset.targetPath),
+      ...request.assets.map((asset) => asset.targetPath),
     ],
   };
 }
 
-/*** Write the manifest, template provenance, and readme for one generated project seed. */
 async function writeProjectMetadata(
   projectPath: string,
   request: CreateProjectSeedRequest,
-  assets: readonly StarterTemplateAsset[],
   writeProjectFile: typeof writeFile,
 ): Promise<void> {
   await writeProjectFile(
@@ -99,7 +93,11 @@ async function writeProjectMetadata(
     `${JSON.stringify(
       {
         ...request.metadata,
-        assets: summarizeStarterTemplateAssets(assets),
+        assets: request.assets.map((asset) => ({
+          mediaId: asset.mediaId,
+          targetPath: asset.targetPath,
+          ...(asset.contentType === undefined ? {} : { contentType: asset.contentType }),
+        })),
       },
       null,
       2,
@@ -109,7 +107,6 @@ async function writeProjectMetadata(
   await writeProjectFile(path.join(projectPath, 'README.md'), request.readmeText, 'utf8');
 }
 
-/*** Write preverified template assets below their app-relative manifest paths. */
 async function writeMaterializedAssets(
   projectPath: string,
   materializedAssets: readonly MaterializedTemplateAsset[],
@@ -123,19 +120,6 @@ async function writeMaterializedAssets(
   }
 }
 
-/*** Resolve and byte-verify every asset before project creation starts. */
-async function materializeTemplateAssets(
-  assets: readonly StarterTemplateAsset[],
-  readTemplateAsset: ProjectSeedDependencies['readTemplateAsset'],
-): Promise<readonly MaterializedTemplateAsset[]> {
-  return Promise.all(
-    assets.map(async (asset) => ({
-      asset,
-      contents: await readTemplateAsset(asset),
-    })),
-  );
-}
-
 function createProjectSeedDependencies(
   overrides: Partial<ProjectSeedDependencies>,
 ): ProjectSeedDependencies {
@@ -147,28 +131,18 @@ function createProjectSeedDependencies(
   };
 }
 
-/*** Read and verify one immutable image from the published Templates asset inventory. */
-async function readPackagedTemplateAsset(asset: StarterTemplateAsset): Promise<Uint8Array> {
+async function readPackagedTemplateAsset(asset: TemplateImageAsset): Promise<Uint8Array> {
   const sourcePath = path.resolve(PACKAGE_ROOT, asset.sourcePath);
-  assertInside(PACKAGED_TEMPLATE_ASSET_ROOT, sourcePath, 'Template asset source');
+  assertInside(PACKAGED_TEMPLATE_ROOT, sourcePath, 'Template asset source');
   const sourceStats = await lstat(sourcePath);
   if (!sourceStats.isFile() || sourceStats.isSymbolicLink()) {
     throw new Error(`Template asset source must be a regular file: ${asset.sourcePath}`);
   }
   const canonicalSourcePath = await realpath(sourcePath);
-  assertInside(PACKAGED_TEMPLATE_ASSET_ROOT, canonicalSourcePath, 'Template asset source');
-  const contents = await readFile(canonicalSourcePath);
-  if (contents.byteLength !== asset.sizeBytes) {
-    throw new Error(`Template asset byte size does not match its descriptor: ${asset.sourcePath}`);
-  }
-  const sha256 = createHash('sha256').update(contents).digest('hex');
-  if (sha256 !== asset.sha256) {
-    throw new Error(`Template asset sha256 does not match its descriptor: ${asset.sourcePath}`);
-  }
-  return contents;
+  assertInside(PACKAGED_TEMPLATE_ROOT, canonicalSourcePath, 'Template asset source');
+  return readFile(canonicalSourcePath);
 }
 
-/*** Require a resolved path to remain strictly below its declared owner directory. */
 function assertInside(parentPath: string, childPath: string, label: string): void {
   const relativePath = path.relative(parentPath, childPath);
   if (
@@ -189,7 +163,6 @@ async function pathExists(targetPath: string): Promise<boolean> {
     if (isNotFoundError(error)) {
       return false;
     }
-
     throw error;
   }
 }
