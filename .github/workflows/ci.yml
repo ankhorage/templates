@@ -53,7 +53,7 @@ jobs:
           fi
 
       - name: Format Stillpath diagnostic
-        run: ankhorage-prettier --write src/templates/categories/lifestyle/stillpath/createAppManifest.ts
+        run: bun run format
 
       - name: Upload formatted Stillpath source
         uses: actions/upload-artifact@v4
