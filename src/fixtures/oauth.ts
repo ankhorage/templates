@@ -1,9 +1,4 @@
-import type { AppCategory, AppManifest } from '@ankhorage/contracts';
-
-import { createCategoryAppManifest } from '../generators/create-category-app';
-import { mergeAppManifest } from '../internal/merge';
-import type { AppManifestOverrides } from '../internal/overrides';
-import type { TemplateKind } from '../templates/starter';
+import type { AppManifest } from '@ankhorage/contracts';
 
 export const OAUTH_CALLBACK_ROUTE = 'auth/callback';
 export const OAUTH_FIXTURE_IDS = ['google', 'apple', 'google-apple'] as const;
@@ -82,26 +77,4 @@ export function listOAuthFixtures(): OAuthFixtureDefinition[] {
 
 export function resolveOAuthFixture(id: OAuthFixtureId): OAuthFixtureDefinition {
   return structuredClone(FIXTURES[id]);
-}
-
-export function createOAuthFixtureManifest(args: {
-  category: AppCategory;
-  fixture: OAuthFixtureId;
-  template?: TemplateKind;
-  overrides?: AppManifestOverrides;
-}): AppManifest {
-  const manifest = createCategoryAppManifest(
-    args.category,
-    args.template ?? 'starter',
-    args.overrides,
-  );
-  const fixture = resolveOAuthFixture(args.fixture);
-
-  return mergeAppManifest(manifest, {
-    infra: {
-      auth: {
-        oauth: fixture.oauth,
-      },
-    },
-  });
 }
