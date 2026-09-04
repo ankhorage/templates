@@ -1,5 +1,15 @@
 # @ankhorage/templates
 
+## 9.3.0
+
+### Minor Changes
+
+- 6c6d967: Bundle the SharkPrey navigation icons as SVG assets and reference them through manifest media.
+
+### Patch Changes
+
+- 5205185: Adopt the released `AppNavigatorManifest` contract from `@ankhorage/contracts@10` while preserving template and category manifest behavior.
+
 ## 9.2.1
 
 ### Patch Changes
