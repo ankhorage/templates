@@ -1,0 +1,5 @@
+sequenceDiagram
+  participant participant_listTemplates as listTemplates
+  participant participant_resolveTemplate as resolveTemplate
+  participant_resolveTemplate->>participant_listTemplates: listTemplates()
+  participant_listTemplates-->>participant_resolveTemplate: return

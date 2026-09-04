@@ -98,7 +98,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 219,
+      "line": 301,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -166,7 +166,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 50,
+      "line": 53,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -292,7 +292,7 @@
       {
         "name": "dark",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -313,7 +313,7 @@
       {
         "name": "light",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -327,7 +327,7 @@
       {
         "name": "recipes",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -355,7 +355,7 @@
       {
         "name": "tokens",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -599,60 +599,6 @@
     "structuredRows": []
   },
   {
-    "name": "CategoryStarterTemplateDefinition",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "type",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 47,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateAsset", "StarterTemplateFactory"],
-    "signatures": [],
-    "members": [
-      {
-        "name": "assets",
-        "kind": "property",
-        "type": "readonly StarterTemplateAsset[]",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "create",
-        "kind": "property",
-        "type": "StarterTemplateFactory",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "description",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "id",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "label",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      }
-    ],
-    "structuredRows": []
-  },
-  {
     "name": "compileCategoryDesign",
     "description": "Resolve and compile a category theme through the released ZORA owner pipeline.",
     "isReadme": false,
@@ -749,7 +695,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").CategoryPreset",
+        "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -793,7 +739,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 179,
+      "line": 261,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -825,7 +771,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 35,
+      "line": 38,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -849,14 +795,14 @@
       {
         "name": "dataBindings",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
         "required": false,
         "description": null
       },
       {
         "name": "dataSources",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
         "required": false,
         "description": null
       },
@@ -884,7 +830,7 @@
       {
         "name": "navigator",
         "kind": "property",
-        "type": "NavigatorSpec",
+        "type": "AppNavigatorManifest",
         "required": true,
         "description": null
       },
@@ -920,151 +866,31 @@
     "structuredRows": []
   },
   {
-    "name": "createCategoryAppManifest",
-    "description": null,
+    "name": "createTemplateArtifact",
+    "description": "Create an isolated manifest and the local image files referenced by that template.",
     "isReadme": false,
     "examples": [],
     "kind": "function",
-    "modulePath": "src/generators/create-category-app.ts",
+    "modulePath": "src/templates/catalog.ts",
     "sourceLocation": {
-      "filePath": "src/generators/create-category-app.ts",
-      "line": 77,
+      "filePath": "src/templates/catalog.ts",
+      "line": 46,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["AppCategory", "SplashScreenResizeMode"],
+    "relatedSymbols": ["AppCategory", "TemplateArtifact"],
     "signatures": [
       {
-        "label": "(category: \"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\", template?: \"starter\", overrides?: { metadata?: { name?: string; slug?: string; version?: string; category?: AppCategory; themeId?: string; created?: string; updated?: string; }; themes?: ThemeConfig[]; activeThemeId?: string; activeThemeMode?: \"dark\" | \"light\"; splashScreen?: { readonly dark?: { readonly backgroundColor?: string; readonly image?: string; readonly imageWidth?: number; readonly resizeMode?: import(\"/Users/a_rtiphishl_e/git/templates/src/index\").SplashScreenResizeMode; }; readonly backgroundColor?: string; readonly image?: string; readonly imageWidth?: number; readonly resizeMode?: import(\"/Users/a_rtiphishl_e/git/templates/src/index\").SplashScreenResizeMode; }; media?: { readonly assets?: { readonly [x: string]: { readonly id?: string; readonly name?: string; readonly kind?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/media\").MediaAssetKind; readonly source?: { readonly kind?: \"storage\"; readonly storageId?: string; readonly bucket?: string; readonly path?: string; } | { readonly kind?: \"url\"; readonly url?: string; } | { readonly kind?: \"bundled\"; readonly path?: string; }; readonly contentType?: string; readonly metadata?: { readonly originalFileName?: string; readonly sizeBytes?: number; readonly createdAt?: string; readonly width?: number; readonly height?: number; readonly durationMs?: number; }; } | undefined; }; }; deploy?: { readonly targets?: { readonly web?: { readonly enabled?: boolean; readonly providers?: { readonly build?: string; readonly publish?: string; }; }; readonly android?: { readonly enabled?: boolean; readonly package?: string; readonly scheme?: string; readonly providers?: { readonly build?: string; readonly publish?: string; }; }; readonly ios?: { readonly enabled?: boolean; readonly bundleIdentifier?: string; readonly scheme?: string; readonly providers?: { readonly build?: string; readonly publish?: string; }; }; }; }; infra?: { deployment?: { target?: \"minikube\" | { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; }; monitoring?: boolean; }; auth?: { scope?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthScope; provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"supabase\"; authorization?: { kind?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthzKind; engine?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthzEngine; }; flow?: { signInRoute?: string; signUpRoute?: string; signOutRoute?: string; forgotPasswordRoute?: string; otpRoute?: string; postSignInRoute?: string; unauthorizedRoute?: string; }; signIn?: { identifiers?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthSignInIdentifier[]; }; signUp?: { requiredFields?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthSignUpField[]; optionalFields?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthSignUpField[]; signUpPolicy?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthSignUpPolicy; }; oauth?: { enabled?: boolean; callbackRoute?: string; providers?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthProviderConfig[]; }; profile?: { fields?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfileField[]; table?: string; primaryKey?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfilePrimaryKeyStrategy; createStrategy?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfileCreateStrategy; updateStrategy?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfileUpdateStrategy; }; }; database?: { provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"supabase\"; tier?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").DatabaseTier; }; storage?: { provider?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").StorageProvider; buckets?: string[]; }; state?: { readonly provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"legend\"; readonly persistence?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").StatePersistenceMode; }; networking?: { domain?: string; cdn?: boolean; }; apis?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiDefinitionList; modules?: string[]; modulesConfig?: { [x: string]: unknown; }; secretStore?: { provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"supabase-vault\"; }; }; navigator?: { type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").NavigatorType; initialRouteName?: string; routes?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").RouteDefinition[]; options?: { [x: string]: unknown; }; }; screens?: { [x: string]: { id?: string; name?: string; title?: string; description?: string; root?: { id?: string; type?: string; alias?: string; props?: { [x: string]: unknown; }; children?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").UiNode[]; style?: { [x: string]: string | number | undefined; }; repeat?: { source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; itemAlias?: string; keyPath?: string; empty?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").UiNode[]; }; }; dataLoaders?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ScreenDataLoaderDefinition[]; requires?: { readonly permissions?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/requirements\").ScreenPermissionRequirement[]; readonly capabilities?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/requirements\").ScreenCapabilityRequirement[]; }; } | undefined; }; dataSources?: { readonly [x: string]: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSourceId; readonly kind?: \"database\"; readonly name?: string; readonly description?: string; readonly credential?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialId; readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialKind; readonly label?: string; readonly scope?: string; }; readonly adapter?: { readonly kind?: \"database\"; readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").AdapterId; readonly packageName?: string; readonly exportName?: string; readonly config?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; }; readonly endpoints?: { readonly [x: string]: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; readonly kind?: \"database\" | { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"graphql\" | \"http\"; readonly name?: string; readonly description?: string; readonly baseUrl?: string; readonly path?: string; readonly credential?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialId; readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialKind; readonly label?: string; readonly scope?: string; }; readonly operations?: { readonly [x: string]: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; readonly name?: string; readonly description?: string; readonly protocol?: \"database\" | { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"graphql\" | \"http\"; readonly intent?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataOperationIntent; readonly method?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"DELETE\" | \"GET\" | \"HEAD\" | \"OPTIONS\" | \"PATCH\" | \"POST\" | \"PUT\"; readonly path?: string; readonly request?: { readonly parameters?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataOperationParameter[]; readonly contentType?: string; readonly schema?: { readonly type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType[]; readonly title?: string; readonly description?: string; readonly enum?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[]; readonly const?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly default?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly format?: string; readonly nullable?: boolean; readonly required?: readonly string[]; readonly properties?: { readonly [x: string]: any | undefined; }; readonly additionalProperties?: boolean | any; readonly items?: any; readonly allOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly anyOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly oneOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly ref?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly schemaRef?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly response?: { readonly status?: number | string; readonly contentType?: string; readonly description?: string; readonly schema?: { readonly type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType[]; readonly title?: string; readonly description?: string; readonly enum?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[]; readonly const?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly default?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly format?: string; readonly nullable?: boolean; readonly required?: readonly string[]; readonly properties?: { readonly [x: string]: any | undefined; }; readonly additionalProperties?: boolean | any; readonly items?: any; readonly allOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly anyOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly oneOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly ref?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly schemaRef?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly pagination?: { readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"cursor\" | \"limit-offset\" | \"page\" | \"unknown\"; readonly cursorPath?: string; readonly limitParameter?: string; readonly offsetParameter?: string; readonly pageParameter?: string; readonly pageSizeParameter?: string; }; readonly credential?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialId; readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialKind; readonly label?: string; readonly scope?: string; }; readonly metadata?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; } | undefined; }; readonly metadata?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; } | undefined; }; readonly schemas?: { readonly [x: string]: { readonly type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType[]; readonly title?: string; readonly description?: string; readonly enum?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[]; readonly const?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly default?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly format?: string; readonly nullable?: boolean; readonly required?: readonly string[]; readonly properties?: { readonly [x: string]: any | undefined; }; readonly additionalProperties?: boolean | any; readonly items?: any; readonly allOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly anyOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly oneOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly ref?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; } | undefined; }; readonly metadata?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; } | undefined; }; dataBindings?: { readonly [x: string]: { readonly componentId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentInstanceId; readonly componentType?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentTypeId; readonly props?: { readonly [x: string]: { readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly loading?: { readonly state?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingLifecycleState; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly message?: string; }; readonly error?: { readonly state?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingLifecycleState; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly message?: string; }; readonly empty?: { readonly state?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingLifecycleState; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly message?: string; }; readonly transforms?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValueTransform[]; } | undefined; }; readonly events?: { readonly [x: string]: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").EventBinding[] | undefined; }; } | undefined; }; settings?: { localization?: { defaultLocale?: string; locales?: string[]; }; }; } | undefined) => AppManifest",
-        "parameters": [
-          {
-            "name": "category",
-            "type": "\"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\"",
-            "required": true,
-            "description": null
-          },
-          {
-            "name": "overrides",
-            "type": "{ metadata?: { name?: string; slug?: string; version?: string; category?: AppCategory; themeId?: string; created?: string; updated?: string; }; themes?: ThemeConfig[]; activeThemeId?: string; activeThemeMode?: \"dark\" | \"light\"; splashScreen?: { readonly dark?: { readonly backgroundColor?: string; readonly image?: string; readonly imageWidth?: number; readonly resizeMode?: import(\"/Users/a_rtiphishl_e/git/templates/src/index\").SplashScreenResizeMode; }; readonly backgroundColor?: string; readonly image?: string; readonly imageWidth?: number; readonly resizeMode?: import(\"/Users/a_rtiphishl_e/git/templates/src/index\").SplashScreenResizeMode; }; media?: { readonly assets?: { readonly [x: string]: { readonly id?: string; readonly name?: string; readonly kind?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/media\").MediaAssetKind; readonly source?: { readonly kind?: \"storage\"; readonly storageId?: string; readonly bucket?: string; readonly path?: string; } | { readonly kind?: \"url\"; readonly url?: string; } | { readonly kind?: \"bundled\"; readonly path?: string; }; readonly contentType?: string; readonly metadata?: { readonly originalFileName?: string; readonly sizeBytes?: number; readonly createdAt?: string; readonly width?: number; readonly height?: number; readonly durationMs?: number; }; } | undefined; }; }; deploy?: { readonly targets?: { readonly web?: { readonly enabled?: boolean; readonly providers?: { readonly build?: string; readonly publish?: string; }; }; readonly android?: { readonly enabled?: boolean; readonly package?: string; readonly scheme?: string; readonly providers?: { readonly build?: string; readonly publish?: string; }; }; readonly ios?: { readonly enabled?: boolean; readonly bundleIdentifier?: string; readonly scheme?: string; readonly providers?: { readonly build?: string; readonly publish?: string; }; }; }; }; infra?: { deployment?: { target?: \"minikube\" | { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; }; monitoring?: boolean; }; auth?: { scope?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthScope; provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"supabase\"; authorization?: { kind?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthzKind; engine?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthzEngine; }; flow?: { signInRoute?: string; signUpRoute?: string; signOutRoute?: string; forgotPasswordRoute?: string; otpRoute?: string; postSignInRoute?: string; unauthorizedRoute?: string; }; signIn?: { identifiers?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthSignInIdentifier[]; }; signUp?: { requiredFields?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthSignUpField[]; optionalFields?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthSignUpField[]; signUpPolicy?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthSignUpPolicy; }; oauth?: { enabled?: boolean; callbackRoute?: string; providers?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthProviderConfig[]; }; profile?: { fields?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfileField[]; table?: string; primaryKey?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfilePrimaryKeyStrategy; createStrategy?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfileCreateStrategy; updateStrategy?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").AuthProfileUpdateStrategy; }; }; database?: { provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"supabase\"; tier?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").DatabaseTier; }; storage?: { provider?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").StorageProvider; buckets?: string[]; }; state?: { readonly provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"legend\"; readonly persistence?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").StatePersistenceMode; }; networking?: { domain?: string; cdn?: boolean; }; apis?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiDefinitionList; modules?: string[]; modulesConfig?: { [x: string]: unknown; }; secretStore?: { provider?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"supabase-vault\"; }; }; navigator?: { type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").NavigatorType; initialRouteName?: string; routes?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").RouteDefinition[]; options?: { [x: string]: unknown; }; }; screens?: { [x: string]: { id?: string; name?: string; title?: string; description?: string; root?: { id?: string; type?: string; alias?: string; props?: { [x: string]: unknown; }; children?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").UiNode[]; style?: { [x: string]: string | number | undefined; }; repeat?: { source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; itemAlias?: string; keyPath?: string; empty?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").UiNode[]; }; }; dataLoaders?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ScreenDataLoaderDefinition[]; requires?: { readonly permissions?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/requirements\").ScreenPermissionRequirement[]; readonly capabilities?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/requirements\").ScreenCapabilityRequirement[]; }; } | undefined; }; dataSources?: { readonly [x: string]: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSourceId; readonly kind?: \"database\"; readonly name?: string; readonly description?: string; readonly credential?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialId; readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialKind; readonly label?: string; readonly scope?: string; }; readonly adapter?: { readonly kind?: \"database\"; readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").AdapterId; readonly packageName?: string; readonly exportName?: string; readonly config?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; }; readonly endpoints?: { readonly [x: string]: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; readonly kind?: \"database\" | { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"graphql\" | \"http\"; readonly name?: string; readonly description?: string; readonly baseUrl?: string; readonly path?: string; readonly credential?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialId; readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialKind; readonly label?: string; readonly scope?: string; }; readonly operations?: { readonly [x: string]: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; readonly name?: string; readonly description?: string; readonly protocol?: \"database\" | { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"graphql\" | \"http\"; readonly intent?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataOperationIntent; readonly method?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"DELETE\" | \"GET\" | \"HEAD\" | \"OPTIONS\" | \"PATCH\" | \"POST\" | \"PUT\"; readonly path?: string; readonly request?: { readonly parameters?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataOperationParameter[]; readonly contentType?: string; readonly schema?: { readonly type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType[]; readonly title?: string; readonly description?: string; readonly enum?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[]; readonly const?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly default?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly format?: string; readonly nullable?: boolean; readonly required?: readonly string[]; readonly properties?: { readonly [x: string]: any | undefined; }; readonly additionalProperties?: boolean | any; readonly items?: any; readonly allOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly anyOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly oneOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly ref?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly schemaRef?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly response?: { readonly status?: number | string; readonly contentType?: string; readonly description?: string; readonly schema?: { readonly type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType[]; readonly title?: string; readonly description?: string; readonly enum?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[]; readonly const?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly default?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly format?: string; readonly nullable?: boolean; readonly required?: readonly string[]; readonly properties?: { readonly [x: string]: any | undefined; }; readonly additionalProperties?: boolean | any; readonly items?: any; readonly allOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly anyOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly oneOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly ref?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly schemaRef?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; }; readonly pagination?: { readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | \"cursor\" | \"limit-offset\" | \"page\" | \"unknown\"; readonly cursorPath?: string; readonly limitParameter?: string; readonly offsetParameter?: string; readonly pageParameter?: string; readonly pageSizeParameter?: string; }; readonly credential?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialId; readonly kind?: { readonly [x: number]: string | undefined; toString?: {}; charAt?: {}; charCodeAt?: {}; concat?: {}; indexOf?: {}; lastIndexOf?: {}; localeCompare?: {}; match?: {}; replace?: {}; search?: {}; slice?: {}; split?: {}; substring?: {}; toLowerCase?: {}; toLocaleLowerCase?: {}; toUpperCase?: {}; toLocaleUpperCase?: {}; trim?: {}; readonly length?: number; substr?: {}; valueOf?: {}; codePointAt?: {}; includes?: {}; endsWith?: {}; normalize?: {}; repeat?: {}; startsWith?: {}; anchor?: {}; big?: {}; blink?: {}; bold?: {}; fixed?: {}; fontcolor?: {}; fontsize?: {}; italics?: {}; link?: {}; small?: {}; strike?: {}; sub?: {}; sup?: {}; padStart?: {}; padEnd?: {}; trimEnd?: {}; trimStart?: {}; trimLeft?: {}; trimRight?: {}; matchAll?: {}; replaceAll?: {}; at?: {}; [Symbol.iterator]?: {}; } | import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").CredentialKind; readonly label?: string; readonly scope?: string; }; readonly metadata?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; } | undefined; }; readonly metadata?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; } | undefined; }; readonly schemas?: { readonly [x: string]: { readonly type?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchemaPrimitiveType[]; readonly title?: string; readonly description?: string; readonly enum?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[]; readonly const?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly default?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; readonly format?: string; readonly nullable?: boolean; readonly required?: readonly string[]; readonly properties?: { readonly [x: string]: any | undefined; }; readonly additionalProperties?: boolean | any; readonly items?: any; readonly allOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly anyOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly oneOf?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataSchema[]; readonly ref?: { readonly id?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").SchemaId; }; } | undefined; }; readonly metadata?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DataContractValue[] | any | null | undefined; } | null; } | undefined; }; dataBindings?: { readonly [x: string]: { readonly componentId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentInstanceId; readonly componentType?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentTypeId; readonly props?: { readonly [x: string]: { readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly loading?: { readonly state?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingLifecycleState; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly message?: string; }; readonly error?: { readonly state?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingLifecycleState; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly message?: string; }; readonly empty?: { readonly state?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingLifecycleState; readonly fallback?: { readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; readonly source?: { readonly kind?: \"context\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"event\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"literal\"; readonly value?: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | { readonly [x: string]: string | number | boolean | readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValue[] | any | null | undefined; } | null; } | { readonly kind?: \"operation\"; readonly operation?: { readonly apiId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").ApiId; readonly operationId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").OperationId; readonly endpointId?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").EndpointId; }; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; } | { readonly kind?: \"state\"; readonly path?: import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingDataPath; }; }; readonly message?: string; }; readonly transforms?: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").BindingValueTransform[]; } | undefined; }; readonly events?: { readonly [x: string]: readonly import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").EventBinding[] | undefined; }; } | undefined; }; settings?: { localization?: { defaultLocale?: string; locales?: string[]; }; }; } | undefined",
-            "required": false,
-            "description": null
-          },
-          {
-            "name": "template",
-            "type": "\"starter\"",
-            "required": false,
-            "description": null
-          }
-        ],
-        "returnType": "AppManifest",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "createOAuthFixtureManifest",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/fixtures/oauth.ts",
-    "sourceLocation": {
-      "filePath": "src/fixtures/oauth.ts",
-      "line": 87,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["AppCategory", "OAuthFixtureId", "TemplateKind"],
-    "signatures": [
-      {
-        "label": "(args: { category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }) => AppManifest",
+        "label": "(args: { readonly category: AppCategory; readonly slug: string; readonly name?: string; readonly projectSlug?: string; }) => TemplateArtifact",
         "parameters": [
           {
             "name": "args",
-            "type": "{ category: AppCategory; fixture: OAuthFixtureId; template?: TemplateKind; overrides?: AppManifestOverrides; }",
+            "type": "{ readonly category: AppCategory; readonly slug: string; readonly name?: string; readonly projectSlug?: string; }",
             "required": true,
             "description": null
           }
         ],
-        "returnType": "AppManifest",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "createStarterTemplate",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/templates/starter/starter.template.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.template.ts",
-      "line": 40,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateArtifact", "StarterTemplateOptions", "TemplateSeed"],
-    "signatures": [
-      {
-        "label": "(seed: TemplateSeed, options?: StarterTemplateOptions) => import(\"/Users/a_rtiphishl_e/git/templates/src/index\").StarterTemplateArtifact",
-        "parameters": [
-          {
-            "name": "options",
-            "type": "StarterTemplateOptions",
-            "required": false,
-            "description": null
-          },
-          {
-            "name": "seed",
-            "type": "TemplateSeed",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").StarterTemplateArtifact",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "createStarterTemplateArtifact",
-    "description": "Compose one canonical starter artifact from a manifest and its distributable image files.",
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 41,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateArtifact", "StarterTemplateAsset"],
-    "signatures": [
-      {
-        "label": "(manifest: AppManifest, assets?: readonly StarterTemplateAsset[]) => StarterTemplateArtifact",
-        "parameters": [
-          {
-            "name": "assets",
-            "type": "readonly StarterTemplateAsset[]",
-            "required": false,
-            "description": null
-          },
-          {
-            "name": "manifest",
-            "type": "AppManifest",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "StarterTemplateArtifact",
+        "returnType": "TemplateArtifact",
         "returnDescription": null
       }
     ],
@@ -1206,7 +1032,7 @@
     "modulePath": "src/fixtures/oauth.ts",
     "sourceLocation": {
       "filePath": "src/fixtures/oauth.ts",
-      "line": 79,
+      "line": 74,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1223,22 +1049,22 @@
     "structuredRows": []
   },
   {
-    "name": "listStarterTemplates",
-    "description": null,
+    "name": "listTemplates",
+    "description": "List the standalone templates discovered from the canonical template directory tree.",
     "isReadme": false,
     "examples": [],
     "kind": "function",
-    "modulePath": "src/templates/starter/starter.registry.ts",
+    "modulePath": "src/templates/catalog.ts",
     "sourceLocation": {
-      "filePath": "src/templates/starter/starter.registry.ts",
-      "line": 85,
+      "filePath": "src/templates/catalog.ts",
+      "line": 30,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["CategoryStarterTemplateDefinition"],
+    "relatedSymbols": ["TemplateCatalogEntry"],
     "signatures": [
       {
-        "label": "(category?: \"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\" | undefined) => readonly CategoryStarterTemplateDefinition[]",
+        "label": "(category?: \"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\" | undefined) => readonly TemplateCatalogEntry[]",
         "parameters": [
           {
             "name": "category",
@@ -1247,64 +1073,7 @@
             "description": null
           }
         ],
-        "returnType": "readonly CategoryStarterTemplateDefinition[]",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "listStarterTemplatesByCategory",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/templates/starter/starter.registry.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.registry.ts",
-      "line": 102,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateSummary"],
-    "signatures": [
-      {
-        "label": "(category: \"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\") => readonly StarterTemplateSummary[]",
-        "parameters": [
-          {
-            "name": "category",
-            "type": "\"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\"",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "readonly StarterTemplateSummary[]",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "listStarterTemplateSummaries",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/templates/starter/starter.registry.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.registry.ts",
-      "line": 110,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateSummary"],
-    "signatures": [
-      {
-        "label": "() => readonly StarterTemplateSummary[]",
-        "parameters": [],
-        "returnType": "readonly StarterTemplateSummary[]",
+        "returnType": "readonly TemplateCatalogEntry[]",
         "returnDescription": null
       }
     ],
@@ -1320,7 +1089,7 @@
     "modulePath": "src/fixtures/oauth.ts",
     "sourceLocation": {
       "filePath": "src/fixtures/oauth.ts",
-      "line": 8,
+      "line": 3,
       "column": 14
     },
     "exportPaths": ["src/index.ts"],
@@ -1338,7 +1107,7 @@
     "modulePath": "src/fixtures/oauth.ts",
     "sourceLocation": {
       "filePath": "src/fixtures/oauth.ts",
-      "line": 9,
+      "line": 4,
       "column": 14
     },
     "exportPaths": ["src/index.ts"],
@@ -1356,7 +1125,7 @@
     "modulePath": "src/fixtures/oauth.ts",
     "sourceLocation": {
       "filePath": "src/fixtures/oauth.ts",
-      "line": 16,
+      "line": 11,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1387,7 +1156,7 @@
       {
         "name": "oauth",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
         "required": true,
         "description": null
       }
@@ -1403,7 +1172,7 @@
     "modulePath": "src/fixtures/oauth.ts",
     "sourceLocation": {
       "filePath": "src/fixtures/oauth.ts",
-      "line": 11,
+      "line": 6,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1502,7 +1271,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").CategoryPreset",
+        "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -1546,7 +1315,7 @@
     "modulePath": "src/fixtures/oauth.ts",
     "sourceLocation": {
       "filePath": "src/fixtures/oauth.ts",
-      "line": 83,
+      "line": 78,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1570,37 +1339,37 @@
     "structuredRows": []
   },
   {
-    "name": "resolveStarterTemplate",
-    "description": null,
+    "name": "resolveTemplate",
+    "description": "Resolve one standalone template by category and slug.",
     "isReadme": false,
     "examples": [],
     "kind": "function",
-    "modulePath": "src/templates/starter/starter.registry.ts",
+    "modulePath": "src/templates/catalog.ts",
     "sourceLocation": {
-      "filePath": "src/templates/starter/starter.registry.ts",
-      "line": 72,
+      "filePath": "src/templates/catalog.ts",
+      "line": 37,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["CategoryStarterTemplateDefinition", "TemplateSeed"],
+    "relatedSymbols": ["TemplateCatalogEntry"],
     "signatures": [
       {
-        "label": "(seed: TemplateSeed, templateId?: string) => CategoryStarterTemplateDefinition",
+        "label": "(category: \"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\", slug: string) => TemplateCatalogEntry",
         "parameters": [
           {
-            "name": "seed",
-            "type": "TemplateSeed",
+            "name": "category",
+            "type": "\"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\"",
             "required": true,
             "description": null
           },
           {
-            "name": "templateId",
+            "name": "slug",
             "type": "string",
-            "required": false,
+            "required": true,
             "description": null
           }
         ],
-        "returnType": "CategoryStarterTemplateDefinition",
+        "returnType": "TemplateCatalogEntry",
         "returnDescription": null
       }
     ],
@@ -1648,7 +1417,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 181,
+      "line": 158,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1666,7 +1435,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 190,
+      "line": 167,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1712,25 +1481,25 @@
     "structuredRows": []
   },
   {
-    "name": "StarterTemplateArtifact",
+    "name": "TemplateArtifact",
     "description": null,
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "src/templates/starter/starter.assets.ts",
+    "modulePath": "src/templates/catalog.ts",
     "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 26,
+      "filePath": "src/templates/catalog.ts",
+      "line": 24,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateAsset"],
+    "relatedSymbols": ["TemplateImageAsset"],
     "signatures": [],
     "members": [
       {
         "name": "assets",
         "kind": "property",
-        "type": "readonly StarterTemplateAsset[]",
+        "type": "readonly TemplateImageAsset[]",
         "required": true,
         "description": null
       },
@@ -1745,306 +1514,6 @@
     "structuredRows": []
   },
   {
-    "name": "StarterTemplateAsset",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "type",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 16,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [
-      {
-        "name": "contentType",
-        "kind": "property",
-        "type": "\"image/avif\" | \"image/gif\" | \"image/jpeg\" | \"image/png\" | \"image/svg+xml\" | \"image/webp\"",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "sha256",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "sizeBytes",
-        "kind": "property",
-        "type": "number",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "sourcePath",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "targetPath",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      }
-    ],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateAssetSummary",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "unknown",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 24,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateFactory",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "unknown",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 42,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateId",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "unknown",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 9,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateOptions",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "type",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 38,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [
-      {
-        "name": "templateId",
-        "kind": "property",
-        "type": "string",
-        "required": false,
-        "description": null
-      }
-    ],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateResult",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "unknown",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 55,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateSelection",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "type",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 11,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [
-      {
-        "name": "category",
-        "kind": "property",
-        "type": "\"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\"",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "templateId",
-        "kind": "property",
-        "type": "string",
-        "required": false,
-        "description": null
-      }
-    ],
-    "structuredRows": []
-  },
-  {
-    "name": "StarterTemplateSummary",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "type",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 16,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [
-      {
-        "name": "category",
-        "kind": "property",
-        "type": "\"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\"",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "description",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "id",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "label",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      }
-    ],
-    "structuredRows": []
-  },
-  {
-    "name": "summarizeStarterTemplateAssets",
-    "description": "Describe distributable image assets without exposing their package-internal source paths.",
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 89,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateAsset", "StarterTemplateAssetSummary"],
-    "signatures": [
-      {
-        "label": "(assets: readonly StarterTemplateAsset[]) => readonly StarterTemplateAssetSummary[]",
-        "parameters": [
-          {
-            "name": "assets",
-            "type": "readonly StarterTemplateAsset[]",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "readonly StarterTemplateAssetSummary[]",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "TEMPLATE_IMAGE_CONTENT_TYPES",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "value",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 5,
-      "column": 14
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "TEMPLATE_KINDS",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "value",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 5,
-      "column": 14
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
     "name": "TemplateAuthoringState",
     "description": null,
     "isReadme": false,
@@ -2053,13 +1522,74 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 17,
+      "line": 18,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "TemplateCatalogEntry",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/templates/catalog.ts",
+    "sourceLocation": {
+      "filePath": "src/templates/catalog.ts",
+      "line": 12,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "category",
+        "kind": "property",
+        "type": "\"books_reading\" | \"business_productivity\" | \"developer_tools\" | \"education_learning\" | \"entertainment_media\" | \"finance_money\" | \"food_drink\" | \"games\" | \"graphics_design\" | \"health_fitness\" | \"kids_family\" | \"lifestyle\" | \"medical\" | \"music_audio\" | \"navigation_travel\" | \"news_magazines\" | \"photo_video\" | \"reference\" | \"shopping_commerce\" | \"social_community\" | \"sports\" | \"utilities_tools\" | \"weather\"",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "createAppManifest",
+        "kind": "property",
+        "type": "() => AppManifest",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "name",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "selector",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "slug",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      },
+      {
+        "name": "sourceRoot",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
     "structuredRows": []
   },
   {
@@ -2071,7 +1601,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 26,
+      "line": 29,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -2132,7 +1662,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 19,
+      "line": 20,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -2150,7 +1680,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 18,
+      "line": 19,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -2160,64 +1690,21 @@
     "structuredRows": []
   },
   {
-    "name": "TemplateImageContentType",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "unknown",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 14,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "TemplateKind",
-    "description": null,
-    "isReadme": false,
-    "examples": [],
-    "kind": "unknown",
-    "modulePath": "src/templates/starter/starter.types.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 7,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
-    "signatures": [],
-    "members": [],
-    "structuredRows": []
-  },
-  {
-    "name": "TemplateSeed",
+    "name": "TemplateDefinition",
     "description": null,
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "src/templates/starter/starter.types.ts",
+    "modulePath": "src/templates/catalog.ts",
     "sourceLocation": {
-      "filePath": "src/templates/starter/starter.types.ts",
-      "line": 23,
+      "filePath": "src/templates/catalog.ts",
+      "line": 5,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
     "relatedSymbols": [],
     "signatures": [],
     "members": [
-      {
-        "name": "appName",
-        "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
       {
         "name": "category",
         "kind": "property",
@@ -2226,30 +1713,9 @@
         "description": null
       },
       {
-        "name": "categoryLabel",
+        "name": "createAppManifest",
         "kind": "property",
-        "type": "string",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "focusAreas",
-        "kind": "property",
-        "type": "readonly [string, string, string]",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "harmony",
-        "kind": "property",
-        "type": "\"monochromatic\" | \"analogous\" | \"complementary\" | \"splitComplementary\" | \"triadic\" | \"tetradic\" | \"square\"",
-        "required": true,
-        "description": null
-      },
-      {
-        "name": "primaryColor",
-        "kind": "property",
-        "type": "string",
+        "type": "() => AppManifest",
         "required": true,
         "description": null
       },
@@ -2261,38 +1727,57 @@
         "description": null
       },
       {
-        "name": "summary",
+        "name": "sourceRoot",
+        "kind": "property",
+        "type": "string",
+        "required": true,
+        "description": null
+      }
+    ],
+    "structuredRows": []
+  },
+  {
+    "name": "TemplateImageAsset",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "type",
+    "modulePath": "src/templates/catalog.ts",
+    "sourceLocation": {
+      "filePath": "src/templates/catalog.ts",
+      "line": 17,
+      "column": 1
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
+    "members": [
+      {
+        "name": "contentType",
+        "kind": "property",
+        "type": "string",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "mediaId",
         "kind": "property",
         "type": "string",
         "required": true,
         "description": null
       },
       {
-        "name": "theme",
+        "name": "sourcePath",
         "kind": "property",
-        "type": "ThemeConfig",
-        "required": false,
+        "type": "string",
+        "required": true,
         "description": null
       },
       {
-        "name": "themeId",
+        "name": "targetPath",
         "kind": "property",
         "type": "string",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "themeName",
-        "kind": "property",
-        "type": "string",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "version",
-        "kind": "property",
-        "type": "string",
-        "required": false,
+        "required": true,
         "description": null
       }
     ],
@@ -2493,44 +1978,6 @@
     "structuredRows": []
   },
   {
-    "name": "validateStarterTemplateAssets",
-    "description": "Validate and deterministically order the bundled image files owned by one starter manifest.",
-    "isReadme": false,
-    "examples": [],
-    "kind": "function",
-    "modulePath": "src/templates/starter/starter.assets.ts",
-    "sourceLocation": {
-      "filePath": "src/templates/starter/starter.assets.ts",
-      "line": 52,
-      "column": 1
-    },
-    "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["StarterTemplateAsset"],
-    "signatures": [
-      {
-        "label": "(manifest: AppManifest, assets: readonly StarterTemplateAsset[]) => readonly StarterTemplateAsset[]",
-        "parameters": [
-          {
-            "name": "assets",
-            "type": "readonly StarterTemplateAsset[]",
-            "required": true,
-            "description": null
-          },
-          {
-            "name": "manifest",
-            "type": "AppManifest",
-            "required": true,
-            "description": null
-          }
-        ],
-        "returnType": "readonly StarterTemplateAsset[]",
-        "returnDescription": null
-      }
-    ],
-    "members": [],
-    "structuredRows": []
-  },
-  {
     "name": "validateTemplateManifest",
     "description": "Validate one canonical manifest for catalog registration or release finalization.",
     "isReadme": false,
@@ -2539,7 +1986,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 58,
+      "line": 61,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],

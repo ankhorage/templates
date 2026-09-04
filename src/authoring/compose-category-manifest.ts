@@ -3,7 +3,7 @@ import {
   type AppManifest,
   type ComponentDataBindingRegistry,
   type DataSourceRegistry,
-  type NavigatorSpec,
+  type AppNavigatorManifest,
   parseAppManifest,
   resolveAuthFlow,
   type ScreenSpec,
@@ -40,7 +40,7 @@ export interface ComposeCategoryAppManifestInput {
   readonly name?: string;
   readonly slug?: string;
   readonly version?: string;
-  readonly navigator: NavigatorSpec;
+  readonly navigator: AppNavigatorManifest;
   readonly screens: Readonly<Record<string, ScreenSpec>>;
   readonly dataSources?: DataSourceRegistry;
   readonly dataBindings?: ComponentDataBindingRegistry;
@@ -94,7 +94,10 @@ function normalizeRoutePath(value: string): string {
 }
 
 /*** Resolve one route's generated path relative to its parent navigator. */
-function resolveRoutePath(route: NavigatorSpec['routes'][number], parentPath: string): string {
+function resolveRoutePath(
+  route: AppNavigatorManifest['routes'][number],
+  parentPath: string,
+): string {
   const configuredPath = route.path ?? route.name;
   const segment = normalizeRoutePath(configuredPath);
   if (configuredPath.trim().startsWith('/')) return segment;
@@ -103,7 +106,10 @@ function resolveRoutePath(route: NavigatorSpec['routes'][number], parentPath: st
 }
 
 /*** Collect every concrete screen path produced by a navigator tree. */
-function collectScreenRoutePaths(navigator: NavigatorSpec, parentPath = ''): readonly string[] {
+function collectScreenRoutePaths(
+  navigator: AppNavigatorManifest,
+  parentPath = '',
+): readonly string[] {
   return navigator.routes.flatMap((route) => {
     const routePath = resolveRoutePath(route, parentPath);
     return [
@@ -115,7 +121,7 @@ function collectScreenRoutePaths(navigator: NavigatorSpec, parentPath = ''): rea
 
 /*** Report navigator initial-route names that do not resolve among their sibling routes. */
 function collectInitialRouteDiagnostics(
-  navigator: NavigatorSpec,
+  navigator: AppNavigatorManifest,
   path = 'navigator',
 ): TemplateCompositionDiagnostic[] {
   const { initialRouteName } = navigator;
@@ -209,7 +215,7 @@ function collectMissingElementDiagnostics(
 
 /*** Validate every route target recursively against the canonical screen registry. */
 function collectRouteDiagnostics(
-  navigator: NavigatorSpec,
+  navigator: AppNavigatorManifest,
   screens: Readonly<Record<string, ScreenSpec>>,
   path = 'navigator',
 ): TemplateCompositionDiagnostic[] {
