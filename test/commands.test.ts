@@ -21,7 +21,7 @@ describe('templates commands', () => {
     const result = await runCommand('list', [], capture.context);
 
     expect(result.exitCode).toBe(0);
-    expect(capture.readStdout()).toBe('Available templates:\n\n\n');
+    expect(capture.readStdout()).toBe('Available templates:\n\n');
   });
 
   test('rejects unknown selectors without a default fallback', async () => {
