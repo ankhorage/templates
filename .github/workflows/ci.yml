@@ -52,13 +52,17 @@ jobs:
             echo "No lint script found; skipping."
           fi
 
-      - name: Run format check
-        run: |
-          if node -e "const p=require('./package.json'); process.exit(p.scripts?.['format:check'] ? 0 : 1)"; then
-            bun run format:check
-          else
-            echo "No format:check script found; skipping."
-          fi
+      - name: Format Stillpath diagnostic
+        run: ankhorage-prettier --write src/templates/categories/lifestyle/stillpath/createAppManifest.ts
+
+      - name: Upload formatted Stillpath source
+        uses: actions/upload-artifact@v4
+        with:
+          name: formatted-stillpath
+          path: src/templates/categories/lifestyle/stillpath/createAppManifest.ts
+
+      - name: Stop diagnostic run
+        run: exit 1
 
       - name: Run Knip
         run: |
