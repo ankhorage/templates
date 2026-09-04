@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.1.4
+
+### Patch Changes
+
+- 6da9e3b: Add the Stillpath lifestyle template reconstructed from ZORA Designer screen evidence, with bundled runtime imagery kept separate from the reference screens.
+
 ## 9.1.3
 
 ### Patch Changes
