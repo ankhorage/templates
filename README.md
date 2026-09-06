@@ -3,7 +3,7 @@
 
 # TEMPLATES
 
-![license: MIT](././docs/badges/license.svg) ![npm: v9.2.1](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![docs: paradox](././docs/badges/docs.svg)
+![license: MIT](././docs/badges/license.svg) ![npm: v9.3.1](././docs/badges/npm.svg) ![runtime: bun](././docs/badges/runtime.svg) ![typescript: strict](././docs/badges/typescript.svg) ![eslint: checked](././docs/badges/eslint.svg) ![prettier: checked](././docs/badges/prettier.svg) ![build: checked](././docs/badges/build.svg) ![tests: checked](././docs/badges/tests.svg) ![docs: paradox](././docs/badges/docs.svg)
 
 Portable Ankhorage app templates, presets, and manifest authoring helpers.
 

@@ -26,5 +26,7 @@ describe('package metadata', () => {
       provider: expectedAnkhMetadata.provider,
       capabilities: [...expectedAnkhMetadata.capabilities],
     });
+    expect(packageJson.dependencies['@ankhorage/contracts']).toMatch(/^\^11\./u);
+    expect(packageJson.dependencies).not.toHaveProperty('@ankhorage/navigator');
   });
 });
