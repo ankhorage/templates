@@ -7,11 +7,11 @@
       "dependencies": {
         "@ankhorage/color-theory": "^0.3.0",
         "@ankhorage/contracts": "^10.1.0",
-        "@ankhorage/zora": "^4.1.0",
+        "@ankhorage/zora": "^4.2.0",
       },
       "devDependencies": {
         "@ankhorage/ankh": "^0.8.10",
-        "@ankhorage/devtools": "^1.10.16",
+        "@ankhorage/devtools": "^1.11.0",
         "@ankhorage/doctor": "^0.10.7",
         "@ankhorage/paradox": "^0.1.24",
         "@types/bun": "^1.4.1",
@@ -27,7 +27,7 @@
 
     "@ankhorage/contracts": ["@ankhorage/contracts@10.1.0", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.0" } }, "sha512-K6O3wfTgae0HBYAVF1DGmGO+fRybAoDe2H/kIQ+UVlzEfniJmd0mkmiXV7JWRLTpoHGu+zbRtboGKfJXZNyDoA=="],
 
-    "@ankhorage/devtools": ["@ankhorage/devtools@1.10.16", "", { "dependencies": { "@ankhorage/utility": "^0.3.0", "@changesets/cli": "^3.0.2", "@eslint/compat": "^2.1.1", "@eslint/js": "^10.0.1", "eslint": "^10.10.0", "eslint-config-prettier": "^10.1.8", "eslint-plugin-import": "^2.32.0", "eslint-plugin-prettier": "^5.5.6", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^7.1.1", "eslint-plugin-react-native": "^5.0.0", "eslint-plugin-security": "^4.0.1", "eslint-plugin-simple-import-sort": "^14.0.0", "eslint-plugin-unused-imports": "^4.4.1", "knip": "^6.34.0", "prettier": "^3.9.6", "typescript-eslint": "^8.69.0" }, "bin": { "ankhorage-changeset": "dist/cli/bin/changeset.js", "ankhorage-eslint": "dist/cli/bin/eslint.js", "ankhorage-knip": "dist/cli/bin/knip.js", "ankhorage-prettier": "dist/cli/bin/prettier.js" } }, "sha512-OkP1zjusKYRy/87aC6OVvaGWNxH0qfV7oK6MmygZEZKu4KCIzIcKOaJRt8OU1MHVWpjlEsASc57sDDDlXg+1Hg=="],
+    "@ankhorage/devtools": ["@ankhorage/devtools@1.11.0", "", { "dependencies": { "@ankhorage/utility": "^0.3.0", "@changesets/cli": "^3.0.2", "@eslint/compat": "^2.1.1", "@eslint/js": "^10.0.1", "eslint": "^10.10.0", "eslint-config-prettier": "^10.1.8", "eslint-plugin-import": "^2.32.0", "eslint-plugin-prettier": "^5.5.6", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^7.1.1", "eslint-plugin-react-native": "^5.0.0", "eslint-plugin-security": "^4.0.1", "eslint-plugin-simple-import-sort": "^14.0.0", "eslint-plugin-unused-imports": "^4.4.1", "knip": "^6.34.0", "prettier": "^3.9.6", "typescript-eslint": "^8.69.0" }, "bin": { "ankhorage-changeset": "dist/cli/bin/changeset.js", "ankhorage-eslint": "dist/cli/bin/eslint.js", "ankhorage-knip": "dist/cli/bin/knip.js", "ankhorage-prettier": "dist/cli/bin/prettier.js" } }, "sha512-/9azy4bPaAOAXTW7LbLflwv17lCP0qR2O0EA4tUpekqEMoBqNYUTycKlwbhm2TWlgJYWl1+UmRfv3UiDhHde7g=="],
 
     "@ankhorage/doctor": ["@ankhorage/doctor@0.10.7", "", { "dependencies": { "@ankhorage/contracts": "^8.1.0", "@ankhorage/supabase-auth": "^1.2.8" }, "bin": { "ankhorage-doctor": "dist/cli/standalone.js" } }, "sha512-LvYgROYJddjJ92YXYrkfg7MCrA32nIGWwiupcZnhiiEy6Z7xKXSk2bZidT6dPk8WxxM7WBYOj8MPARddvvCFhw=="],
 
@@ -39,7 +39,7 @@
 
     "@ankhorage/utility": ["@ankhorage/utility@0.3.0", "", {}, "sha512-cqmfcgXmA7NgM5FYxfVKeA3XpN4YskqGtNU45AT7G2Yr5MeN09r4a0GS8i0hthLCLMis65/tBXd7OjdfoYv7/w=="],
 
-    "@ankhorage/zora": ["@ankhorage/zora@4.1.0", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.0", "@ankhorage/contracts": "^8.0.2", "@ankhorage/surface": "^3.4.1" }, "peerDependencies": { "@react-native-picker/picker": "2.11.4", "@react-native-vector-icons/fontawesome": "^13.1.3", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.3", "@react-native-vector-icons/ionicons": "^13.1.3", "react": "19.2.3", "react-native": "0.86.x", "react-native-safe-area-context": "~5.7.0", "react-native-svg": "15.15.4", "react-native-web": "~0.21.0" } }, "sha512-8nZPXxb+Cx9+/6kQFVamPuNvA0znmAD6opYYAr8MQqc3xd7p+a3LXMJ5lZfBE2nhJoTdInltXSJQ4tSJ8XtUfQ=="],
+    "@ankhorage/zora": ["@ankhorage/zora@4.2.0", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.0", "@ankhorage/contracts": "^8.0.2", "@ankhorage/surface": "^3.4.1" }, "peerDependencies": { "@react-native-picker/picker": "2.11.4", "@react-native-vector-icons/fontawesome": "^13.1.3", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.3", "@react-native-vector-icons/ionicons": "^13.1.3", "react": "19.2.3", "react-native": "0.86.x", "react-native-safe-area-context": "~5.7.0", "react-native-svg": "15.15.4", "react-native-web": "~0.21.0" } }, "sha512-CIbrlLfG3Qxrd3w+PPvFd0pFTSBPPYTG869j2DnW1gsh5QBYYanPLJQnW9cdM6TMkUG9LAoDLAEIhE3vbpQnOw=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
 
