@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 9.3.2
+
+### Patch Changes
+
+- 145e070: Align portable template manifest authoring with the Contracts 11 navigator slice.
+- 71269c1: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 9.3.1
 
 ### Patch Changes
