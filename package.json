@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/templates",
-  "version": "9.3.0",
+  "version": "9.3.3",
   "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
   "homepage": "https://github.com/ankhorage/templates#readme",
   "bugs": {
@@ -77,17 +77,17 @@
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.0",
-    "@ankhorage/contracts": "^10.1.0",
+    "@ankhorage/contracts": "^11.0.0",
     "@ankhorage/zora": "^4.2.0"
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.8.10",
-    "@ankhorage/devtools": "^1.10.16",
+    "@ankhorage/ankh": "^0.8.11",
+    "@ankhorage/devtools": "^1.11.10",
     "@ankhorage/doctor": "^0.10.7",
     "@ankhorage/paradox": "^0.1.24",
     "@types/bun": "^1.4.1",
     "@types/node": "^25.2.3",
     "typescript": "^5.9.3"
   },
-  "packageManager": "bun@1.4.1"
+  "packageManager": "bun@1.4.2"
 }

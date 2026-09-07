@@ -126,6 +126,13 @@ const manifest = {
         showInPrimaryNavigation: false,
         navigator: {
           type: 'tabs',
+          implementation: 'custom',
+          presentation: 'responsive',
+          responsive: {
+            compact: 'bottom',
+            medium: 'rail',
+            expanded: 'sidebar',
+          },
           initialRouteName: 'train',
           routes: [
             {

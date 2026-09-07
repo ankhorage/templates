@@ -1,5 +1,24 @@
 # @ankhorage/templates
 
+## 9.3.3
+
+### Patch Changes
+
+- 67c8b8e: Use cross-platform custom tabs for SharkPrey so its bundled SVG navigation icons resolve on Android, iOS, and web.
+
+## 9.3.2
+
+### Patch Changes
+
+- 145e070: Align portable template manifest authoring with the Contracts 11 navigator slice.
+- 71269c1: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
+## 9.3.1
+
+### Patch Changes
+
+- cf5eeda: Adopt the released ZORA Designer workflow for separate SVG and image assets, checked template asset copying, and media-backed Icon/Image manifest composition.
+
 ## 9.3.0
 
 ### Minor Changes

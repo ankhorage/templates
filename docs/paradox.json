@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v9.2.1",
+      "value": "v9.3.1",
       "color": "cb3837"
     },
     {
@@ -690,7 +690,7 @@
         {
           "name": "dark",
           "kind": "property",
-          "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -711,7 +711,7 @@
         {
           "name": "light",
           "kind": "property",
-          "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -725,7 +725,7 @@
         {
           "name": "recipes",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -753,7 +753,7 @@
         {
           "name": "tokens",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -1093,7 +1093,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
+          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1193,14 +1193,14 @@
         {
           "name": "dataBindings",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+          "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
           "required": false,
           "description": null
         },
         {
           "name": "dataSources",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+          "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
           "required": false,
           "description": null
         },
@@ -1554,7 +1554,7 @@
         {
           "name": "oauth",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
           "required": true,
           "description": null
         }
@@ -1669,7 +1669,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
+          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1815,7 +1815,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 158,
+        "line": 167,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1833,7 +1833,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 167,
+        "line": 176,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -3141,7 +3141,7 @@
       "description": "Create the complete portable application manifest for this template.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 1483,
+        "line": 1563,
         "column": 1
       }
     },
@@ -4246,12 +4246,22 @@
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
+        "toType": "Codex",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
+        "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "ComponentDataBinding",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "DatabaseDataSourceConfig",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
+        "fromSymbol": "ComposeCategoryAppManifestInput",
+        "toType": "Documents",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4267,6 +4277,11 @@
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "TemplateAuthoringState",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
+        "fromSymbol": "ComposeCategoryAppManifestInput",
+        "toType": "Users",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4296,6 +4311,16 @@
       },
       {
         "fromSymbol": "CategoryDesignOverrides",
+        "toType": "Codex",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "Documents",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
         "toType": "Partial",
         "sourcePath": "src/design/category-theme.ts"
       },
@@ -4320,6 +4345,11 @@
         "sourcePath": "src/design/category-theme.ts"
       },
       {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "Users",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
         "fromSymbol": "compileCategoryDesign",
         "toType": "CategoryDesignOverrides",
         "sourcePath": "src/design/category-theme.ts"
@@ -4341,6 +4371,16 @@
       },
       {
         "fromSymbol": "CompiledCategoryDesign",
+        "toType": "Codex",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "Documents",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
         "toType": "Readonly",
         "sourcePath": "src/design/category-theme.ts"
       },
@@ -4357,6 +4397,11 @@
       {
         "fromSymbol": "CompiledCategoryDesign",
         "toType": "TonePairDefinition",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "Users",
         "sourcePath": "src/design/category-theme.ts"
       },
       {
@@ -4386,6 +4431,16 @@
       },
       {
         "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "Codex",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "Documents",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
         "toType": "Readonly",
         "sourcePath": "src/design/category-theme.ts"
       },
@@ -4402,6 +4457,11 @@
       {
         "fromSymbol": "ResolvedCategoryDesignPreset",
         "toType": "TonePairDefinition",
+        "sourcePath": "src/design/category-theme.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "Users",
         "sourcePath": "src/design/category-theme.ts"
       },
       {
@@ -4432,6 +4492,21 @@
       {
         "fromSymbol": "OAuthFixtureDefinition",
         "toType": "AuthOAuthConfig",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "OAuthFixtureDefinition",
+        "toType": "Codex",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "OAuthFixtureDefinition",
+        "toType": "Documents",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "OAuthFixtureDefinition",
+        "toType": "Users",
         "sourcePath": "src/fixtures/oauth.ts"
       },
       {
