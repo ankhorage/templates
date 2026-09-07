@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.3.3
+
+### Patch Changes
+
+- 67c8b8e: Use cross-platform custom tabs for SharkPrey so its bundled SVG navigation icons resolve on Android, iOS, and web.
+
 ## 9.3.2
 
 ### Patch Changes
