@@ -122,22 +122,23 @@ const manifest = {
         showInPrimaryNavigation: false,
       },
       {
-        name: 'app',
+        name: '(tabs)',
         showInPrimaryNavigation: false,
         navigator: {
           type: 'tabs',
-          implementation: 'custom',
+          implementation: 'headless',
           presentation: 'responsive',
           responsive: {
             compact: 'bottom',
             medium: 'rail',
             expanded: 'sidebar',
           },
-          initialRouteName: 'train',
+          initialRouteName: '(train)',
           routes: [
             {
-              name: 'train',
+              name: '(train)',
               label: 'Train',
+              path: '/training-setup',
               icon: {
                 source: {
                   mediaId: 'sharkprey-train-icon',
@@ -172,6 +173,7 @@ const manifest = {
             {
               name: 'history',
               label: 'History',
+              path: '/history',
               icon: {
                 source: {
                   mediaId: 'sharkprey-history-icon',
@@ -182,6 +184,7 @@ const manifest = {
             {
               name: 'stats',
               label: 'Stats',
+              path: '/stats',
               icon: {
                 source: {
                   mediaId: 'sharkprey-stats-icon',
@@ -192,6 +195,7 @@ const manifest = {
             {
               name: 'learn',
               label: 'Learn',
+              path: '/learn',
               icon: {
                 source: {
                   mediaId: 'sharkprey-learn-icon',
@@ -202,6 +206,7 @@ const manifest = {
             {
               name: 'settings',
               label: 'Settings',
+              path: '/settings',
               icon: {
                 source: {
                   mediaId: 'sharkprey-settings-icon',
@@ -368,7 +373,7 @@ const manifest = {
               onPress: {
                 type: 'navigate',
                 payload: {
-                  route: 'app',
+                  route: 'training-setup',
                 },
               },
             },
