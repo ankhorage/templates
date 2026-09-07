@@ -6,40 +6,54 @@ import { resolveTemplate } from '../src/index';
 describe('SharkPrey navigation', () => {
   const manifest = resolveTemplate('education_learning', 'sharkprey').createAppManifest();
 
-  test('uses layout groups while exposing the intended public screen paths', () => {
+  test('preserves Train as the initial tab with its own public route', () => {
     expect(collectPublicScreenPaths(manifest.navigator)).toEqual([
       '/splash',
       '/onboarding',
-      '/training-setup',
-      '/decision-table',
-      '/answer-explanation',
-      '/session-summary',
+      '/train',
       '/history',
       '/stats',
       '/learn',
       '/settings',
+      '/decision-table',
+      '/answer-explanation',
+      '/session-summary',
     ]);
 
     const tabs = manifest.navigator.routes.find((route) => route.name === '(tabs)')?.navigator;
     expect(tabs).toMatchObject({
       type: 'tabs',
       implementation: 'headless',
-      initialRouteName: '(train)',
+      initialRouteName: 'train',
       routes: [
-        { name: '(train)', label: 'Train', path: '/training-setup' },
+        {
+          name: 'train',
+          label: 'Train',
+          path: '/train',
+          screenId: 'training-setup',
+        },
         { name: 'history', path: '/history' },
         { name: 'stats', path: '/stats' },
         { name: 'learn', path: '/learn' },
         { name: 'settings', path: '/settings' },
       ],
     });
+    expect(tabs?.routes.find((route) => route.name === 'train')?.navigator).toBeUndefined();
   });
 
   test('targets only generated public screen paths', () => {
     const publicPaths = new Set(collectPublicScreenPaths(manifest.navigator));
     const navigationTargets = collectNavigationTargets(manifest.screens);
 
-    expect(navigationTargets).toContain('/training-setup');
+    expect(navigationTargets).toEqual([
+      '/learn',
+      '/train',
+      '/decision-table',
+      '/answer-explanation',
+      '/decision-table',
+      '/train',
+      '/train',
+    ]);
     expect(navigationTargets.every((target) => publicPaths.has(target))).toBe(true);
   });
 });

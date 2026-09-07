@@ -113,7 +113,7 @@ test('exposes a release-ready SharkPrey manifest and bundled media', () => {
     implementation: 'headless',
     presentation: 'responsive',
     responsive: { compact: 'bottom', medium: 'rail', expanded: 'sidebar' },
-    initialRouteName: '(train)',
+    initialRouteName: 'train',
   });
   expect(tabs?.routes.map((route) => route.icon)).toEqual([
     { source: { mediaId: 'sharkprey-train-icon' } },

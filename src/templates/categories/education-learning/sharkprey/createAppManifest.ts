@@ -133,42 +133,18 @@ const manifest = {
             medium: 'rail',
             expanded: 'sidebar',
           },
-          initialRouteName: '(train)',
+          initialRouteName: 'train',
           routes: [
             {
-              name: '(train)',
+              name: 'train',
               label: 'Train',
-              path: '/training-setup',
+              path: '/train',
               icon: {
                 source: {
                   mediaId: 'sharkprey-train-icon',
                 },
               },
-              navigator: {
-                type: 'stack',
-                initialRouteName: 'training-setup',
-                routes: [
-                  {
-                    name: 'training-setup',
-                    screenId: 'training-setup',
-                  },
-                  {
-                    name: 'decision-table',
-                    screenId: 'decision-table',
-                    showInPrimaryNavigation: false,
-                  },
-                  {
-                    name: 'answer-explanation',
-                    screenId: 'answer-explanation',
-                    showInPrimaryNavigation: false,
-                  },
-                  {
-                    name: 'session-summary',
-                    screenId: 'session-summary',
-                    showInPrimaryNavigation: false,
-                  },
-                ],
-              },
+              screenId: 'training-setup',
             },
             {
               name: 'history',
@@ -216,6 +192,21 @@ const manifest = {
             },
           ],
         },
+      },
+      {
+        name: 'decision-table',
+        screenId: 'decision-table',
+        showInPrimaryNavigation: false,
+      },
+      {
+        name: 'answer-explanation',
+        screenId: 'answer-explanation',
+        showInPrimaryNavigation: false,
+      },
+      {
+        name: 'session-summary',
+        screenId: 'session-summary',
+        showInPrimaryNavigation: false,
       },
     ],
   },
@@ -373,7 +364,7 @@ const manifest = {
               onPress: {
                 type: 'navigate',
                 payload: {
-                  route: 'training-setup',
+                  route: '/train',
                 },
               },
             },
@@ -521,7 +512,7 @@ const manifest = {
               onPress: {
                 type: 'navigate',
                 payload: {
-                  route: 'decision-table',
+                  route: '/decision-table',
                 },
               },
             },
@@ -680,7 +671,7 @@ const manifest = {
                   onPress: {
                     type: 'navigate',
                     payload: {
-                      route: 'answer-explanation',
+                      route: '/answer-explanation',
                     },
                   },
                 },
@@ -784,7 +775,7 @@ const manifest = {
               onPress: {
                 type: 'navigate',
                 payload: {
-                  route: 'decision-table',
+                  route: '/decision-table',
                 },
               },
             },
@@ -887,7 +878,7 @@ const manifest = {
               onPress: {
                 type: 'navigate',
                 payload: {
-                  route: 'training-setup',
+                  route: '/train',
                 },
               },
             },
@@ -1159,7 +1150,7 @@ const manifest = {
               onPress: {
                 type: 'navigate',
                 payload: {
-                  route: 'training-setup',
+                  route: '/train',
                 },
               },
             },
