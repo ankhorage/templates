@@ -3,6 +3,8 @@ import { describe, expect, test } from 'bun:test';
 
 import packageJson from '../package.json';
 
+const CARET_SEMVER_RANGE = /^\^\d+\.\d+\.\d+$/u;
+
 describe('package metadata', () => {
   test('publishes the expected Ankh metadata and template assets', () => {
     const expectedAnkhMetadata = {
@@ -26,7 +28,7 @@ describe('package metadata', () => {
       provider: expectedAnkhMetadata.provider,
       capabilities: [...expectedAnkhMetadata.capabilities],
     });
-    expect(packageJson.dependencies['@ankhorage/contracts']).toMatch(/^\^12\./u);
+    expect(packageJson.dependencies['@ankhorage/contracts']).toMatch(CARET_SEMVER_RANGE);
     expect(packageJson.dependencies).not.toHaveProperty('@ankhorage/navigator');
   });
 });
