@@ -110,7 +110,7 @@ test('exposes a release-ready SharkPrey manifest and bundled media', () => {
   const tabs = sharkPrey.navigator.routes.find((route) => route.name === 'app')?.navigator;
   expect(tabs).toMatchObject({
     type: 'tabs',
-    implementation: 'custom',
+    implementation: 'headless',
     presentation: 'responsive',
     responsive: { compact: 'bottom', medium: 'rail', expanded: 'sidebar' },
   });

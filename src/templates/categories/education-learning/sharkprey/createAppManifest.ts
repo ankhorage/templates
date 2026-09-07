@@ -126,7 +126,7 @@ const manifest = {
         showInPrimaryNavigation: false,
         navigator: {
           type: 'tabs',
-          implementation: 'custom',
+          implementation: 'headless',
           presentation: 'responsive',
           responsive: {
             compact: 'bottom',
