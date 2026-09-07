@@ -107,11 +107,14 @@ test('exposes a release-ready SharkPrey manifest and bundled media', () => {
   expect(sharkPrey.infra.state).toEqual({ provider: 'legend', persistence: 'local' });
   expect(sharkPrey.infra.auth?.flow?.postSignInRoute).toBe(sharkPrey.navigator.initialRouteName);
   expect(Object.keys(sharkPrey.screens)).toHaveLength(10);
-  expect(
-    sharkPrey.navigator.routes
-      .find((route) => route.name === 'app')
-      ?.navigator?.routes.map((route) => route.icon),
-  ).toEqual([
+  const tabs = sharkPrey.navigator.routes.find((route) => route.name === 'app')?.navigator;
+  expect(tabs).toMatchObject({
+    type: 'tabs',
+    implementation: 'custom',
+    presentation: 'responsive',
+    responsive: { compact: 'bottom', medium: 'rail', expanded: 'sidebar' },
+  });
+  expect(tabs?.routes.map((route) => route.icon)).toEqual([
     { source: { mediaId: 'sharkprey-train-icon' } },
     { source: { mediaId: 'sharkprey-history-icon' } },
     { source: { mediaId: 'sharkprey-stats-icon' } },
