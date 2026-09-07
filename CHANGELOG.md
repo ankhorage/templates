@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.3.5
+
+### Patch Changes
+
+- 94e3573: Update Ankhorage dependencies: `@ankhorage/contracts`.
+
 ## 9.3.4
 
 ### Patch Changes
