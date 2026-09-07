@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.3.4
+
+### Patch Changes
+
+- c785197: Update Ankhorage dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/zora`.
+
 ## 9.3.3
 
 ### Patch Changes
