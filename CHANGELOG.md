@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 9.3.6
+
+### Patch Changes
+
+- fe566f6: Migrate SharkPrey to current Headless Tabs with Train as the initial tab at `/train`,
+  one direct training setup screen, and follow-up screens in the outer stack.
+
 ## 9.3.5
 
 ### Patch Changes
