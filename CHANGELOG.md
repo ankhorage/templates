@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.4.0
+
+### Minor Changes
+
+- 393eebc: Render the SharkPrey decision screen with the canonical ZORA TabletopTable plugin node.
+
 ## 9.3.6
 
 ### Patch Changes
