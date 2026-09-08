@@ -30,14 +30,12 @@ jobs:
           LANGDATA="$(find /usr/share -name eng.traineddata -print -quit)"
           test -n "$LANGDATA"
           gzip -c "$LANGDATA" > /tmp/tessdata/eng.traineddata.gz
-      - name: Analyze unresolved SharkPrey regions
+      - name: Compare sparse-text OCR
         run: |
           cat > direct-image-acceptance.ts <<'TS'
-          import {
-            analyzeScreenImageAsync,
-            createTesseractScreenOcrAsync,
-          } from '@ankhorage/utility/image';
+          import { analyzeScreenImageAsync, type ScreenImageTextObservation } from '@ankhorage/utility/image';
           import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
+          import { createWorker, OEM, PSM } from 'tesseract.js';
 
           const components = Object.values(ZORA_COMPONENT_META).filter(
             (component): component is NonNullable<typeof component> => component !== undefined,
@@ -45,7 +43,42 @@ jobs:
           const unresolvedComponentName = components.find(
             (component) => component.manifestPolicy?.kind === 'unresolved-element',
           )?.name;
-          const ocr = await createTesseractScreenOcrAsync({ langPath: '/tmp/tessdata', language: 'eng' });
+          const worker = await createWorker('eng', OEM.LSTM_ONLY, { langPath: '/tmp/tessdata' });
+          await worker.setParameters({ tessedit_pageseg_mode: PSM.SPARSE_TEXT });
+          let observations: readonly ScreenImageTextObservation[] = [];
+          const ocr = {
+            recognizeAsync: async (image: Uint8Array) => {
+              const result = await worker.recognize(Buffer.from(image), {}, { blocks: true });
+              observations = (result.data.blocks ?? []).flatMap((block) => {
+                const lines = block.paragraphs.flatMap((paragraph) => paragraph.lines).flatMap((line) => {
+                  const text = line.text.trim();
+                  if (!text) return [];
+                  return [{
+                    text,
+                    bounds: {
+                      x: line.bbox.x0,
+                      y: line.bbox.y0,
+                      width: Math.max(0, line.bbox.x1 - line.bbox.x0),
+                      height: Math.max(0, line.bbox.y1 - line.bbox.y0),
+                    },
+                  }];
+                });
+                if (lines.length > 0) return lines;
+                const text = block.text.trim();
+                if (!text) return [];
+                return [{
+                  text,
+                  bounds: {
+                    x: block.bbox.x0,
+                    y: block.bbox.y0,
+                    width: Math.max(0, block.bbox.x1 - block.bbox.x0),
+                    height: Math.max(0, block.bbox.y1 - block.bbox.y0),
+                  },
+                }];
+              });
+              return observations;
+            },
+          };
 
           try {
             const result = await analyzeScreenImageAsync(
@@ -58,29 +91,14 @@ jobs:
                 ocr,
               },
             );
-
-            const findVisual = (id: string) => {
-              const queue = [result.graph.root];
-              while (queue.length > 0) {
-                const node = queue.shift();
-                if (!node) continue;
-                if (node.id === id) return node;
-                queue.push(...node.children);
-              }
-              return undefined;
-            };
-            const radioGroup = (result.screen.root.children ?? []).find((node) => node.type === 'RadioGroup');
             console.log(JSON.stringify({
-              confidence: result.confidence,
+              observations,
+              rootText: result.graph.root.text,
               directChildren: result.screen.root.children ?? [],
-              radioGroup,
-              unresolvedVisuals: ['region-021', 'region-022'].map((id) => findVisual(id)),
-              candidates021: result.candidates.filter((candidate) => candidate.nodeId === 'region-021'),
-              candidates022: result.candidates.filter((candidate) => candidate.nodeId === 'region-022'),
               diagnostics: result.diagnostics,
             }, null, 2));
           } finally {
-            await ocr.terminateAsync?.();
+            await worker.terminate();
           }
           TS
           bun direct-image-acceptance.ts
