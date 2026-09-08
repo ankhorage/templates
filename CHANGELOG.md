@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.4.1
+
+### Patch Changes
+
+- 9abccd2: Update the released Devtools, Utility, and ZORA image-analysis dependency chain.
+
 ## 9.4.0
 
 ### Minor Changes
