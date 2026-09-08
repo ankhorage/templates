@@ -9,20 +9,26 @@ import {
   type ScreenSpec,
   type UiNode,
 } from '@ankhorage/contracts';
-import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 
 import { type CategoryDesignOverrides, compileCategoryDesign } from '../design/category-theme';
 import { BASE_INFRA, BASE_SETTINGS, DEFAULT_TEMPLATE_VERSION } from '../internal/defaults';
+import {
+  collectComponentDiagnostics,
+  isMissingElementNode,
+  visitUiNode,
+} from './component-validation';
 import { createManifestShell } from './create-manifest-shell';
 
 export type TemplateAuthoringState = 'draft' | 'release';
 export type TemplateCompositionStatus = 'blocked' | 'ready';
 export type TemplateCompositionDiagnosticCode =
   | 'invalid-manifest'
+  | 'invalid-node-placement'
   | 'missing-auth-landing-route'
   | 'missing-element'
   | 'missing-initial-route'
   | 'missing-route-screen'
+  | 'unknown-component'
   | 'theme-compilation-error'
   | 'theme-intent-warning';
 
@@ -67,6 +73,7 @@ export function validateTemplateManifest(
     ...collectRouteDiagnostics(manifest.navigator, manifest.screens),
     ...collectInitialRouteDiagnostics(manifest.navigator),
     ...collectAuthLandingRouteDiagnostics(manifest),
+    ...collectComponentDiagnostics(manifest.screens),
     ...collectMissingElementDiagnostics(manifest.screens),
     ...(parsed.ok
       ? []
@@ -170,34 +177,14 @@ function resolveStringProp(node: UiNode, key: string): string | undefined {
   return typeof value === 'string' && value.trim() ? value : undefined;
 }
 
-/*** Ask ZORA metadata whether a manifest node is the canonical draft placeholder. */
-function isMissingElement(node: UiNode): boolean {
-  const metadata = ZORA_COMPONENT_META.MissingElement;
-  if (!metadata) throw new Error('ZORA metadata does not expose MissingElement.');
-  return node.type === metadata.name;
-}
-
-/*** Visit every manifest child branch, including repeat empty-state nodes. */
-function visitNode(
-  node: UiNode,
-  path: string,
-  visitor: (node: UiNode, path: string) => void,
-): void {
-  visitor(node, path);
-  node.children?.forEach((child, index) => visitNode(child, `${path}.children[${index}]`, visitor));
-  node.repeat?.empty?.forEach((child, index) =>
-    visitNode(child, `${path}.repeat.empty[${index}]`, visitor),
-  );
-}
-
 /*** Report every canonical ZORA MissingElement with its requested capability and location. */
 function collectMissingElementDiagnostics(
   screens: Readonly<Record<string, ScreenSpec>>,
 ): TemplateCompositionDiagnostic[] {
   const diagnostics: TemplateCompositionDiagnostic[] = [];
   for (const [screenId, screen] of Object.entries(screens)) {
-    visitNode(screen.root, `screens.${screenId}.root`, (node, path) => {
-      if (!isMissingElement(node)) return;
+    visitUiNode(screen.root, `screens.${screenId}.root`, (node, path) => {
+      if (!isMissingElementNode(node)) return;
       const requestedCapability =
         resolveStringProp(node, 'requestedCapability') ?? 'Unspecified interface capability';
       diagnostics.push({

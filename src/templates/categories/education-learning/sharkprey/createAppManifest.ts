@@ -524,8 +524,7 @@ const manifest = {
       id: 'decision-table',
       name: 'Decision Table',
       title: 'Your decision',
-      description:
-        'The poker surface is a visible placeholder until @ankhorage/zora-tabletop is exposed by core manifest metadata.',
+      description: 'Interactive poker decision surface backed by ZORA Tabletop.',
       root: {
         id: 'decision-table-root',
         type: 'Screen',
@@ -565,41 +564,41 @@ const manifest = {
             },
           },
           {
-            id: 'decision-table-placeholder',
-            type: 'Box',
-            style: {
-              padding: 16,
-              borderRadius: 24,
+            id: 'decision-table',
+            type: 'TabletopTable',
+            props: {
+              shape: 'oval',
+              seatCount: 9,
+              cardSize: 'small',
+              centerLabel: 'Pot 650',
+              centerSublabel: 'Q♥ 7♣ 2♠',
+              centerCards: [
+                { rank: 'Q', suit: 'hearts' },
+                { rank: '7', suit: 'clubs' },
+                { rank: '2', suit: 'spades' },
+              ],
+              seats: [
+                { id: 'utg', label: 'UTG', faceDownCards: 2, muted: true },
+                { id: 'utg1', label: 'UTG+1', faceDownCards: 2, muted: true },
+                { id: 'mp', label: 'MP', faceDownCards: 2, muted: true },
+                { id: 'mp1', label: 'MP+1', faceDownCards: 2, muted: true },
+                { id: 'hj', label: 'HJ', faceDownCards: 2, muted: true },
+                {
+                  id: 'co',
+                  label: 'Hero · CO',
+                  sublabel: 'Stack 7,850',
+                  cards: [
+                    { rank: 'A', suit: 'spades' },
+                    { rank: 'Q', suit: 'diamonds' },
+                  ],
+                  selected: true,
+                },
+                { id: 'btn', label: 'BTN · D', faceDownCards: 2 },
+                { id: 'sb', label: 'SB', faceDownCards: 2 },
+                { id: 'bb', label: 'BB', sublabel: 'Stack 9,350', faceDownCards: 2 },
+              ],
+              accessibilityLabel: 'Nine-player poker table for the current decision',
             },
-            children: [
-              {
-                id: 'decision-table-label',
-                type: 'Heading',
-                props: {
-                  text: '9-max MTT · CO vs BB',
-                  level: 2,
-                  size: 'h3',
-                },
-              },
-              {
-                id: 'decision-table-seats',
-                type: 'Text',
-                props: {
-                  text: 'Seats: UTG · UTG+1 · MP · MP+1 · HJ · CO · BTN (D) · SB · BB',
-                  variant: 'bodySmall',
-                  emphasis: 'muted',
-                },
-              },
-              {
-                id: 'decision-table-cards',
-                type: 'Text',
-                props: {
-                  text: 'Hero CO: A♠ Q♦   Board: Q♥ 7♣ 2♠   Pot: 650',
-                  variant: 'body',
-                  weight: 'semiBold',
-                },
-              },
-            ],
           },
           {
             id: 'decision-action',

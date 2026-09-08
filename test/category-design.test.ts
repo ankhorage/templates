@@ -224,7 +224,41 @@ describe('blocked manifest composition', () => {
     expect(result.status).toBe('blocked');
     expect(result.diagnostics.map(({ code }) => code)).toContain('missing-route-screen');
   });
+});
 
+describe('plugin manifest composition', () => {
+  test('validates plugin nodes and placement through composed ZORA metadata', () => {
+    const { manifest } = composeCategoryAppManifest({
+      category: 'reference',
+      navigator: baseNavigator,
+      screens: {
+        home: {
+          ...baseScreen,
+          root: {
+            ...baseScreen.root,
+            children: [{ id: 'table', type: 'TabletopTable', props: { seats: [] } }],
+          },
+        },
+      },
+    });
+    expect(validateTemplateManifest(manifest).diagnostics).toEqual([]);
+
+    const homeScreen = manifest.screens.home;
+    if (!homeScreen) throw new Error('Expected the composed home screen.');
+    homeScreen.root.children = [
+      {
+        id: 'text-parent',
+        type: 'Text',
+        children: [{ id: 'invalid-table', type: 'TabletopTable', props: { seats: [] } }],
+      },
+    ];
+    expect(validateTemplateManifest(manifest).diagnostics.map(({ code }) => code)).toContain(
+      'invalid-node-placement',
+    );
+  });
+});
+
+describe('blocked navigation composition', () => {
   test('blocks missing navigator initial routes and authenticated landing screens', () => {
     const { manifest } = composeCategoryAppManifest({
       category: 'reference',

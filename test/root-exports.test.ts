@@ -107,6 +107,12 @@ test('exposes a release-ready SharkPrey manifest and bundled media', () => {
   expect(sharkPrey.infra.state).toEqual({ provider: 'legend', persistence: 'local' });
   expect(sharkPrey.infra.auth?.flow?.postSignInRoute).toBe(sharkPrey.navigator.initialRouteName);
   expect(Object.keys(sharkPrey.screens)).toHaveLength(10);
+  const decisionTableChildren = sharkPrey.screens['decision-table']?.root.children ?? [];
+  expect(
+    decisionTableChildren.some(
+      (node) => node.id === 'decision-table' && node.type === 'TabletopTable',
+    ),
+  ).toBe(true);
   const tabs = sharkPrey.navigator.routes.find((route) => route.name === '(tabs)')?.navigator;
   expect(tabs).toMatchObject({
     type: 'tabs',
