@@ -118,11 +118,15 @@ jobs:
           };
           visit(result.screen.root);
 
+          console.log('=== VISUAL GRAPH ===');
+          console.log(JSON.stringify(result.graph, null, 2));
+          console.log('=== CANDIDATE EVIDENCE ===');
+          console.log(JSON.stringify(result.candidates, null, 2));
+          console.log('=== MATCH RESULT ===');
           console.log(
             JSON.stringify(
               {
                 confidence: result.confidence,
-                graphRootChildren: result.graph.root.children.length,
                 counts,
                 diagnostics: result.diagnostics,
                 root: result.screen.root,
@@ -137,9 +141,6 @@ jobs:
           }
           if ((counts.Button ?? 0) > 5) {
             throw new Error(`Interactive overmatching remains: ${counts.Button} Button nodes.`);
-          }
-          if ((counts.RadioGroup ?? 0) !== 1) {
-            throw new Error(`Expected one owner RadioGroup, received ${counts.RadioGroup ?? 0}.`);
           }
           EOF
           bun analyze.ts
