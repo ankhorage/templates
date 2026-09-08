@@ -18,10 +18,8 @@ jobs:
           bun-version: 1.4.2
       - name: Install repository dependencies
         run: bun install --frozen-lockfile
-      - name: Install released recognition boundaries
-        run: |
-          bun add @ankhorage/zora@4.4.1
-          bun add --dev @ankhorage/utility@0.5.1 sharp@0.35.4 @techstark/opencv-js@5.0.0-release.1 tesseract.js@7.0.0
+      - name: Install OCR probe dependencies
+        run: bun add --dev sharp@0.35.4 tesseract.js@7.0.0
       - name: Prepare local English OCR data
         run: |
           sudo apt-get update -qq
@@ -30,75 +28,49 @@ jobs:
           LANGDATA="$(find /usr/share -name eng.traineddata -print -quit)"
           test -n "$LANGDATA"
           gzip -c "$LANGDATA" > /tmp/tessdata/eng.traineddata.gz
-      - name: Compare sparse-text OCR
+      - name: Probe CTA crop OCR
         run: |
-          cat > direct-image-acceptance.ts <<'TS'
-          import { analyzeScreenImageAsync, type ScreenImageTextObservation } from '@ankhorage/utility/image';
-          import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
+          cat > ocr-probe.ts <<'TS'
+          import sharp from 'sharp';
           import { createWorker, OEM, PSM } from 'tesseract.js';
 
-          const components = Object.values(ZORA_COMPONENT_META).filter(
-            (component): component is NonNullable<typeof component> => component !== undefined,
-          );
-          const unresolvedComponentName = components.find(
-            (component) => component.manifestPolicy?.kind === 'unresolved-element',
-          )?.name;
-          const worker = await createWorker('eng', OEM.LSTM_ONLY, { langPath: '/tmp/tessdata' });
-          await worker.setParameters({ tessedit_pageseg_mode: PSM.SPARSE_TEXT });
-          let observations: readonly ScreenImageTextObservation[] = [];
-          const ocr = {
-            recognizeAsync: async (image: Uint8Array) => {
-              const result = await worker.recognize(Buffer.from(image), {}, { blocks: true });
-              observations = (result.data.blocks ?? []).flatMap((block) => {
-                const lines = block.paragraphs.flatMap((paragraph) => paragraph.lines).flatMap((line) => {
-                  const text = line.text.trim();
-                  if (!text) return [];
-                  return [{
-                    text,
-                    bounds: {
-                      x: line.bbox.x0,
-                      y: line.bbox.y0,
-                      width: Math.max(0, line.bbox.x1 - line.bbox.x0),
-                      height: Math.max(0, line.bbox.y1 - line.bbox.y0),
-                    },
-                  }];
-                });
-                if (lines.length > 0) return lines;
-                const text = block.text.trim();
-                if (!text) return [];
-                return [{
-                  text,
-                  bounds: {
-                    x: block.bbox.x0,
-                    y: block.bbox.y0,
-                    width: Math.max(0, block.bbox.x1 - block.bbox.x0),
-                    height: Math.max(0, block.bbox.y1 - block.bbox.y0),
-                  },
-                }];
-              });
-              return observations;
-            },
+          const input = 'src/templates/categories/education-learning/sharkprey/assets/screens/02-onboarding.png';
+          const region = { left: 67, top: 1608, width: 719, height: 129 };
+          const variants = {
+            raw: await sharp(input).extract(region).png().toBuffer(),
+            upscaled: await sharp(input).extract(region).resize({ width: region.width * 2 }).png().toBuffer(),
+            normalized: await sharp(input)
+              .extract(region)
+              .resize({ width: region.width * 2 })
+              .grayscale()
+              .normalize()
+              .png()
+              .toBuffer(),
+            threshold: await sharp(input)
+              .extract(region)
+              .resize({ width: region.width * 2 })
+              .grayscale()
+              .normalize()
+              .threshold(185)
+              .negate()
+              .png()
+              .toBuffer(),
           };
 
+          const worker = await createWorker('eng', OEM.LSTM_ONLY, { langPath: '/tmp/tessdata' });
+          await worker.setParameters({ tessedit_pageseg_mode: PSM.SINGLE_LINE });
           try {
-            const result = await analyzeScreenImageAsync(
-              'src/templates/categories/education-learning/sharkprey/assets/screens/02-onboarding.png',
-              {
-                screen: { id: 'onboarding', name: 'Onboarding', title: 'Onboarding' },
-                components,
-                minConfidence: 0.42,
-                ...(unresolvedComponentName ? { unresolvedComponentName } : {}),
-                ocr,
-              },
-            );
-            console.log(JSON.stringify({
-              observations,
-              rootText: result.graph.root.text,
-              directChildren: result.screen.root.children ?? [],
-              diagnostics: result.diagnostics,
-            }, null, 2));
+            const results: Record<string, unknown> = {};
+            for (const [name, image] of Object.entries(variants)) {
+              const result = await worker.recognize(image);
+              results[name] = {
+                text: result.data.text.trim(),
+                confidence: result.data.confidence,
+              };
+            }
+            console.log(JSON.stringify(results, null, 2));
           } finally {
             await worker.terminate();
           }
           TS
-          bun direct-image-acceptance.ts
+          bun ocr-probe.ts
