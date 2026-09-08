@@ -30,7 +30,7 @@ jobs:
           LANGDATA="$(find /usr/share -name eng.traineddata -print -quit)"
           test -n "$LANGDATA"
           gzip -c "$LANGDATA" > /tmp/tessdata/eng.traineddata.gz
-      - name: Analyze original SharkPrey onboarding screen with released owners
+      - name: Analyze unresolved SharkPrey regions
         run: |
           cat > direct-image-acceptance.ts <<'TS'
           import {
@@ -45,10 +45,7 @@ jobs:
           const unresolvedComponentName = components.find(
             (component) => component.manifestPolicy?.kind === 'unresolved-element',
           )?.name;
-          const ocr = await createTesseractScreenOcrAsync({
-            langPath: '/tmp/tessdata',
-            language: 'eng',
-          });
+          const ocr = await createTesseractScreenOcrAsync({ langPath: '/tmp/tessdata', language: 'eng' });
 
           try {
             const result = await analyzeScreenImageAsync(
@@ -62,46 +59,26 @@ jobs:
               },
             );
 
-            const componentCounts: Record<string, number> = {};
-            const walkComponent = (node: typeof result.screen.root): void => {
-              componentCounts[node.type] = (componentCounts[node.type] ?? 0) + 1;
-              for (const child of node.children ?? []) walkComponent(child);
+            const findVisual = (id: string) => {
+              const queue = [result.graph.root];
+              while (queue.length > 0) {
+                const node = queue.shift();
+                if (!node) continue;
+                if (node.id === id) return node;
+                queue.push(...node.children);
+              }
+              return undefined;
             };
-            walkComponent(result.screen.root);
-
-            let visualNodeCount = 0;
-            const walkVisual = (node: typeof result.graph.root): void => {
-              visualNodeCount += 1;
-              for (const child of node.children) walkVisual(child);
-            };
-            walkVisual(result.graph.root);
-
-            const directChildren = result.screen.root.children ?? [];
-            const highlights = result.candidates.filter((candidate) =>
-              ['RadioGroup', 'Button', 'Card', 'MissingElement'].includes(candidate.componentName),
-            );
-
-            console.log(
-              JSON.stringify(
-                {
-                  releases: { utility: '0.5.1', zora: '4.4.1' },
-                  componentCatalogCount: components.length,
-                  unresolvedComponentName,
-                  confidence: result.confidence,
-                  visualRootChildCount: result.graph.root.children.length,
-                  visualNodeCount,
-                  directChildCount: directChildren.length,
-                  directChildTypes: directChildren.map((child) => child.type),
-                  componentCounts,
-                  candidateCount: result.candidates.length,
-                  candidateHighlights: highlights,
-                  diagnosticCount: result.diagnostics.length,
-                  diagnostics: result.diagnostics,
-                },
-                null,
-                2,
-              ),
-            );
+            const radioGroup = (result.screen.root.children ?? []).find((node) => node.type === 'RadioGroup');
+            console.log(JSON.stringify({
+              confidence: result.confidence,
+              directChildren: result.screen.root.children ?? [],
+              radioGroup,
+              unresolvedVisuals: ['region-021', 'region-022'].map((id) => findVisual(id)),
+              candidates021: result.candidates.filter((candidate) => candidate.nodeId === 'region-021'),
+              candidates022: result.candidates.filter((candidate) => candidate.nodeId === 'region-022'),
+              diagnostics: result.diagnostics,
+            }, null, 2));
           } finally {
             await ocr.terminateAsync?.();
           }
