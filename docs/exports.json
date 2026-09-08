@@ -98,7 +98,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 301,
+      "line": 288,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -166,7 +166,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 53,
+      "line": 59,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -292,7 +292,7 @@
       {
         "name": "dark",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -313,7 +313,7 @@
       {
         "name": "light",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -327,7 +327,7 @@
       {
         "name": "recipes",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+        "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -355,7 +355,7 @@
       {
         "name": "tokens",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+        "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -695,7 +695,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index\").CategoryPreset",
+        "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -739,7 +739,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 261,
+      "line": 248,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -771,7 +771,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 38,
+      "line": 44,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -795,14 +795,14 @@
       {
         "name": "dataBindings",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+        "type": "Readonly<Record<string, import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
         "required": false,
         "description": null
       },
       {
         "name": "dataSources",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+        "type": "Readonly<Record<string, import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
         "required": false,
         "description": null
       },
@@ -1156,7 +1156,7 @@
       {
         "name": "oauth",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+        "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
         "required": true,
         "description": null
       }
@@ -1271,7 +1271,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index\").CategoryPreset",
+        "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -1522,7 +1522,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 18,
+      "line": 22,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1601,7 +1601,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 29,
+      "line": 35,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1662,7 +1662,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 20,
+      "line": 24,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1680,7 +1680,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 19,
+      "line": 23,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1986,7 +1986,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 61,
+      "line": 67,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],

@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v9.3.1",
+      "value": "v9.4.0",
       "color": "cb3837"
     },
     {
@@ -78,9 +78,16 @@
       "exports": []
     },
     {
+      "path": "src/authoring/component-validation.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/authoring/compose-category-manifest.ts"],
+      "exports": ["collectComponentDiagnostics", "isMissingElementNode", "visitUiNode"]
+    },
+    {
       "path": "src/authoring/compose-category-manifest.ts",
       "isEntrypoint": false,
       "dependencies": [
+        "src/authoring/component-validation.ts",
         "src/authoring/create-manifest-shell.ts",
         "src/design/category-theme.ts",
         "src/internal/defaults.ts"
@@ -496,7 +503,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 301,
+        "line": 288,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -564,7 +571,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 53,
+        "line": 59,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -690,7 +697,7 @@
         {
           "name": "dark",
           "kind": "property",
-          "type": "Partial<import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -711,7 +718,7 @@
         {
           "name": "light",
           "kind": "property",
-          "type": "Partial<import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -725,7 +732,7 @@
         {
           "name": "recipes",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+          "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -753,7 +760,7 @@
         {
           "name": "tokens",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+          "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -1093,7 +1100,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index\").CategoryPreset",
+          "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1137,7 +1144,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 261,
+        "line": 248,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1169,7 +1176,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 38,
+        "line": 44,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1193,14 +1200,14 @@
         {
           "name": "dataBindings",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+          "type": "Readonly<Record<string, import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
           "required": false,
           "description": null
         },
         {
           "name": "dataSources",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+          "type": "Readonly<Record<string, import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
           "required": false,
           "description": null
         },
@@ -1554,7 +1561,7 @@
         {
           "name": "oauth",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+          "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
           "required": true,
           "description": null
         }
@@ -1669,7 +1676,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index\").CategoryPreset",
+          "type": "import(\"/workspace/scratch/4591ae3eceeb/templates/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1920,7 +1927,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 18,
+        "line": 22,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1999,7 +2006,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 29,
+        "line": 35,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2060,7 +2067,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 20,
+        "line": 24,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2078,7 +2085,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 19,
+        "line": 23,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2384,7 +2391,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 61,
+        "line": 67,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2417,11 +2424,38 @@
   "components": [],
   "sourceFunctions": [
     {
+      "name": "isMissingElementNode",
+      "description": "Ask composed ZORA metadata whether a manifest node is the canonical draft placeholder.",
+      "sourceLocation": {
+        "filePath": "src/authoring/component-validation.ts",
+        "line": 16,
+        "column": 1
+      }
+    },
+    {
+      "name": "collectComponentDiagnostics",
+      "description": "Validate component availability and plugin placement through the composed ZORA catalog.",
+      "sourceLocation": {
+        "filePath": "src/authoring/component-validation.ts",
+        "line": 23,
+        "column": 1
+      }
+    },
+    {
+      "name": "visitUiNode",
+      "description": "Visit every manifest child branch, including repeat empty-state nodes.",
+      "sourceLocation": {
+        "filePath": "src/authoring/component-validation.ts",
+        "line": 57,
+        "column": 1
+      }
+    },
+    {
       "name": "validateTemplateManifest",
       "description": "Validate one canonical manifest for catalog registration or release finalization.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 61,
+        "line": 67,
         "column": 1
       }
     },
@@ -2430,7 +2464,7 @@
       "description": "Normalize one configured route or generated route path for exact comparison.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 91,
+        "line": 98,
         "column": 1
       }
     },
@@ -2439,7 +2473,7 @@
       "description": "Resolve one route's generated path relative to its parent navigator.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 97,
+        "line": 104,
         "column": 1
       }
     },
@@ -2448,7 +2482,7 @@
       "description": "Collect every concrete screen path produced by a navigator tree.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 109,
+        "line": 116,
         "column": 1
       }
     },
@@ -2457,7 +2491,7 @@
       "description": "Report navigator initial-route names that do not resolve among their sibling routes.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 123,
+        "line": 130,
         "column": 1
       }
     },
@@ -2466,7 +2500,7 @@
       "description": "Report an authenticated landing route that has no concrete screen in the navigator tree.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 149,
+        "line": 156,
         "column": 1
       }
     },
@@ -2475,25 +2509,7 @@
       "description": "Read a manifest string prop without treating arbitrary values as valid authoring metadata.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 168,
-        "column": 1
-      }
-    },
-    {
-      "name": "isMissingElement",
-      "description": "Ask ZORA metadata whether a manifest node is the canonical draft placeholder.",
-      "sourceLocation": {
-        "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 174,
-        "column": 1
-      }
-    },
-    {
-      "name": "visitNode",
-      "description": "Visit every manifest child branch, including repeat empty-state nodes.",
-      "sourceLocation": {
-        "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 181,
+        "line": 175,
         "column": 1
       }
     },
@@ -2502,7 +2518,7 @@
       "description": "Report every canonical ZORA MissingElement with its requested capability and location.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 194,
+        "line": 181,
         "column": 1
       }
     },
@@ -2511,7 +2527,7 @@
       "description": "Validate every route target recursively against the canonical screen registry.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 217,
+        "line": 204,
         "column": 1
       }
     },
@@ -2520,7 +2536,7 @@
       "description": "Convert owner theme evidence into template composition diagnostics.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 242,
+        "line": 229,
         "column": 1
       }
     },
@@ -2529,7 +2545,7 @@
       "description": "Compose canonical manifest inputs with a category/theme shell and explicit diagnostics.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 261,
+        "line": 248,
         "column": 1
       }
     },
@@ -2538,7 +2554,7 @@
       "description": "Fail catalog registration or release finalization while any blocker remains.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 301,
+        "line": 288,
         "column": 1
       }
     },
@@ -3141,7 +3157,7 @@
       "description": "Create the complete portable application manifest for this template.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 1563,
+        "line": 1565,
         "column": 1
       }
     },
@@ -3395,6 +3411,11 @@
         "sourcePath": "src/projectSeed.ts"
       },
       {
+        "fromPath": "src/authoring/component-validation.ts",
+        "toPath": "src/authoring/compose-category-manifest.ts",
+        "sourcePath": "src/authoring/component-validation.ts"
+      },
+      {
         "fromPath": "src/authoring/compose-category-manifest.ts",
         "toPath": "src/design/category-theme.ts",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
@@ -3402,6 +3423,11 @@
       {
         "fromPath": "src/authoring/compose-category-manifest.ts",
         "toPath": "src/internal/defaults.ts",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
+        "fromPath": "src/authoring/compose-category-manifest.ts",
+        "toPath": "src/authoring/component-validation.ts",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -3803,6 +3829,30 @@
         "sourcePath": "src/templateSelector.ts"
       },
       {
+        "fromSymbol": "src/authoring/component-validation.ts",
+        "toSymbol": "composeZoraPluginMetadata",
+        "callExpression": "composeZoraPluginMetadata",
+        "sourcePath": "src/authoring/component-validation.ts"
+      },
+      {
+        "fromSymbol": "collectComponentDiagnostics",
+        "toSymbol": "visitUiNode",
+        "callExpression": "visitUiNode",
+        "sourcePath": "src/authoring/component-validation.ts"
+      },
+      {
+        "fromSymbol": "visitUiNode",
+        "toSymbol": "visitor",
+        "callExpression": "visitor",
+        "sourcePath": "src/authoring/component-validation.ts"
+      },
+      {
+        "fromSymbol": "src/authoring/component-validation.ts",
+        "toSymbol": "visitUiNode",
+        "callExpression": "visitUiNode",
+        "sourcePath": "src/authoring/component-validation.ts"
+      },
+      {
         "fromSymbol": "validateTemplateManifest",
         "toSymbol": "parseAppManifest",
         "callExpression": "parseAppManifest",
@@ -3824,6 +3874,12 @@
         "fromSymbol": "validateTemplateManifest",
         "toSymbol": "collectAuthLandingRouteDiagnostics",
         "callExpression": "collectAuthLandingRouteDiagnostics",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
+        "fromSymbol": "validateTemplateManifest",
+        "toSymbol": "collectComponentDiagnostics",
+        "callExpression": "collectComponentDiagnostics",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -3875,27 +3931,15 @@
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
-        "fromSymbol": "visitNode",
-        "toSymbol": "visitor",
-        "callExpression": "visitor",
-        "sourcePath": "src/authoring/compose-category-manifest.ts"
-      },
-      {
-        "fromSymbol": "src/authoring/compose-category-manifest.ts",
-        "toSymbol": "visitNode",
-        "callExpression": "visitNode",
-        "sourcePath": "src/authoring/compose-category-manifest.ts"
-      },
-      {
         "fromSymbol": "collectMissingElementDiagnostics",
-        "toSymbol": "visitNode",
-        "callExpression": "visitNode",
+        "toSymbol": "visitUiNode",
+        "callExpression": "visitUiNode",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
         "fromSymbol": "src/authoring/compose-category-manifest.ts",
-        "toSymbol": "isMissingElement",
-        "callExpression": "isMissingElement",
+        "toSymbol": "isMissingElementNode",
+        "callExpression": "isMissingElementNode",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4246,22 +4290,12 @@
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "Codex",
-        "sourcePath": "src/authoring/compose-category-manifest.ts"
-      },
-      {
-        "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "ComponentDataBinding",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "DatabaseDataSourceConfig",
-        "sourcePath": "src/authoring/compose-category-manifest.ts"
-      },
-      {
-        "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "Documents",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4277,11 +4311,6 @@
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "TemplateAuthoringState",
-        "sourcePath": "src/authoring/compose-category-manifest.ts"
-      },
-      {
-        "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "Users",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4311,16 +4340,6 @@
       },
       {
         "fromSymbol": "CategoryDesignOverrides",
-        "toType": "Codex",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "Documents",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
         "toType": "Partial",
         "sourcePath": "src/design/category-theme.ts"
       },
@@ -4345,11 +4364,6 @@
         "sourcePath": "src/design/category-theme.ts"
       },
       {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "Users",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
         "fromSymbol": "compileCategoryDesign",
         "toType": "CategoryDesignOverrides",
         "sourcePath": "src/design/category-theme.ts"
@@ -4371,16 +4385,6 @@
       },
       {
         "fromSymbol": "CompiledCategoryDesign",
-        "toType": "Codex",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "Documents",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
         "toType": "Readonly",
         "sourcePath": "src/design/category-theme.ts"
       },
@@ -4397,11 +4401,6 @@
       {
         "fromSymbol": "CompiledCategoryDesign",
         "toType": "TonePairDefinition",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "Users",
         "sourcePath": "src/design/category-theme.ts"
       },
       {
@@ -4431,16 +4430,6 @@
       },
       {
         "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "Codex",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "Documents",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
         "toType": "Readonly",
         "sourcePath": "src/design/category-theme.ts"
       },
@@ -4457,11 +4446,6 @@
       {
         "fromSymbol": "ResolvedCategoryDesignPreset",
         "toType": "TonePairDefinition",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "Users",
         "sourcePath": "src/design/category-theme.ts"
       },
       {
@@ -4492,21 +4476,6 @@
       {
         "fromSymbol": "OAuthFixtureDefinition",
         "toType": "AuthOAuthConfig",
-        "sourcePath": "src/fixtures/oauth.ts"
-      },
-      {
-        "fromSymbol": "OAuthFixtureDefinition",
-        "toType": "Codex",
-        "sourcePath": "src/fixtures/oauth.ts"
-      },
-      {
-        "fromSymbol": "OAuthFixtureDefinition",
-        "toType": "Documents",
-        "sourcePath": "src/fixtures/oauth.ts"
-      },
-      {
-        "fromSymbol": "OAuthFixtureDefinition",
-        "toType": "Users",
         "sourcePath": "src/fixtures/oauth.ts"
       },
       {
