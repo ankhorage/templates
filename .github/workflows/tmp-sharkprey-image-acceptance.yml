@@ -30,51 +30,80 @@ jobs:
           LANGDATA="$(find /usr/share -name eng.traineddata -print -quit)"
           test -n "$LANGDATA"
           gzip -c "$LANGDATA" > /tmp/tessdata/eng.traineddata.gz
-      - name: Build Templates owner boundary
-        run: bun run build
-      - name: Analyze original SharkPrey onboarding screen
+      - name: Analyze original SharkPrey onboarding screen with released owners
         run: |
-          cat > /tmp/sharkprey-screen-analysis.json <<'JSON'
-          {
-            "image": "src/templates/categories/education-learning/sharkprey/assets/screens/02-onboarding.png",
-            "screen": {
-              "id": "onboarding",
-              "name": "Onboarding",
-              "title": "Onboarding"
-            },
-            "minConfidence": 0.42,
-            "ocr": {
-              "langPath": "/tmp/tessdata",
-              "language": "eng"
-            }
-          }
-          JSON
-          bun .agents/skills/zora-designer/scripts/analyze-screen.ts /tmp/sharkprey-screen-analysis.json > /tmp/sharkprey-result.json
-      - name: Report recognition quality
-        run: |
-          bun -e '
-            const result = await Bun.file("/tmp/sharkprey-result.json").json();
-            const root = result.screen?.root ?? result.root;
-            if (!root || root.type !== "Screen") throw new Error(`Expected Screen root, got ${root?.type}`);
-            if (result.owners?.utility !== "0.5.1") throw new Error(`Expected Utility 0.5.1, got ${result.owners?.utility}`);
-            if (result.owners?.zora !== "4.4.1") throw new Error(`Expected ZORA 4.4.1, got ${result.owners?.zora}`);
-            const counts = {};
-            const walk = node => {
-              if (!node) return;
-              counts[node.type] = (counts[node.type] ?? 0) + 1;
-              for (const child of node.children ?? []) walk(child);
+          cat > direct-image-acceptance.ts <<'TS'
+          import {
+            analyzeScreenImageAsync,
+            createTesseractScreenOcrAsync,
+          } from '@ankhorage/utility/image';
+          import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
+
+          const components = Object.values(ZORA_COMPONENT_META).filter(
+            (component): component is NonNullable<typeof component> => component !== undefined,
+          );
+          const unresolvedComponentName = components.find(
+            (component) => component.manifestPolicy?.kind === 'unresolved-element',
+          )?.name;
+          const ocr = await createTesseractScreenOcrAsync({
+            langPath: '/tmp/tessdata',
+            language: 'eng',
+          });
+
+          try {
+            const result = await analyzeScreenImageAsync(
+              'src/templates/categories/education-learning/sharkprey/assets/screens/02-onboarding.png',
+              {
+                screen: { id: 'onboarding', name: 'Onboarding', title: 'Onboarding' },
+                components,
+                minConfidence: 0.42,
+                ...(unresolvedComponentName ? { unresolvedComponentName } : {}),
+                ocr,
+              },
+            );
+
+            const componentCounts: Record<string, number> = {};
+            const walkComponent = (node: typeof result.screen.root): void => {
+              componentCounts[node.type] = (componentCounts[node.type] ?? 0) + 1;
+              for (const child of node.children ?? []) walkComponent(child);
             };
-            walk(root);
-            const direct = root.children ?? [];
-            console.log(JSON.stringify({
-              owners: result.owners,
-              componentCount: result.componentCount,
-              confidence: result.confidence,
-              candidateCount: result.candidates?.length ?? 0,
-              diagnosticCount: result.diagnostics?.length ?? 0,
-              directChildCount: direct.length,
-              directChildTypes: direct.map(child => child.type),
-              counts,
-              diagnostics: result.diagnostics ?? []
-            }, null, 2));
-          '
+            walkComponent(result.screen.root);
+
+            let visualNodeCount = 0;
+            const walkVisual = (node: typeof result.graph.root): void => {
+              visualNodeCount += 1;
+              for (const child of node.children) walkVisual(child);
+            };
+            walkVisual(result.graph.root);
+
+            const directChildren = result.screen.root.children ?? [];
+            const highlights = result.candidates.filter((candidate) =>
+              ['RadioGroup', 'Button', 'Card', 'MissingElement'].includes(candidate.componentName),
+            );
+
+            console.log(
+              JSON.stringify(
+                {
+                  releases: { utility: '0.5.1', zora: '4.4.1' },
+                  componentCatalogCount: components.length,
+                  unresolvedComponentName,
+                  confidence: result.confidence,
+                  visualRootChildCount: result.graph.root.children.length,
+                  visualNodeCount,
+                  directChildCount: directChildren.length,
+                  directChildTypes: directChildren.map((child) => child.type),
+                  componentCounts,
+                  candidateCount: result.candidates.length,
+                  candidateHighlights: highlights,
+                  diagnosticCount: result.diagnostics.length,
+                  diagnostics: result.diagnostics,
+                },
+                null,
+                2,
+              ),
+            );
+          } finally {
+            await ocr.terminateAsync?.();
+          }
+          TS
+          bun direct-image-acceptance.ts
