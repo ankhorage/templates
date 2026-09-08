@@ -34,7 +34,7 @@ Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:90:1`
 
 Kind: `function`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:301:1`
+Source: `src/authoring/compose-category-manifest.ts:288:1`
 
 Fail catalog registration or release finalization while any blocker remains.
 
@@ -60,7 +60,7 @@ Source: `src/presets/category-presets.ts:113:14`
 
 Kind: `type`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:53:1`
+Source: `src/authoring/compose-category-manifest.ts:59:1`
 
 ### Members
 
@@ -100,19 +100,19 @@ Source: `src/design/category-theme.ts:24:1`
 
 ### Members
 
-| Name         | Kind     | Type                                                                                                                                                                                                          | Required | Description |
-| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| dark         | property | `Partial<import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
-| density      | property | `"compact" \| "comfortable" \| "spacious"`                                                                                                                                                                    | no       |             |
-| harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                                                                                            | no       |             |
-| light        | property | `Partial<import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
-| primaryColor | property | `string`                                                                                                                                                                                                      | no       |             |
-| recipes      | property | `import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme").ThemeRecipeOverrides \| undefined`      | no       |             |
-| shape        | property | `"sharp" \| "neutral" \| "soft"`                                                                                                                                                                              | no       |             |
-| themeId      | property | `string`                                                                                                                                                                                                      | no       |             |
-| themeName    | property | `string`                                                                                                                                                                                                      | no       |             |
-| tokens       | property | `import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme").ThemeGlobalTokenOverrides \| undefined` | no       |             |
-| tonePairs    | property | `Partial<Record<ThemeMode, string>>`                                                                                                                                                                          | no       |             |
+| Name         | Kind     | Type                                                                                                                               | Required | Description |
+| ------------ | -------- | ---------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| dark         | property | `Partial<import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
+| density      | property | `"compact" \| "comfortable" \| "spacious"`                                                                                         | no       |             |
+| harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                 | no       |             |
+| light        | property | `Partial<import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
+| primaryColor | property | `string`                                                                                                                           | no       |             |
+| recipes      | property | `import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme").ThemeRecipeOverrides \| undefined`      | no       |             |
+| shape        | property | `"sharp" \| "neutral" \| "soft"`                                                                                                   | no       |             |
+| themeId      | property | `string`                                                                                                                           | no       |             |
+| themeName    | property | `string`                                                                                                                           | no       |             |
+| tokens       | property | `import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme").ThemeGlobalTokenOverrides \| undefined` | no       |             |
+| tonePairs    | property | `Partial<Record<ThemeMode, string>>`                                                                                               | no       |             |
 
 ## CategoryPreset
 
@@ -205,7 +205,7 @@ Source: `src/design/category-theme.ts:50:1`
 | density       | property | `"compact" \| "comfortable" \| "spacious"`                                                                                                                                                                                                                                                                                                                                                                                                    | yes      |             |
 | diagnostics   | property | `readonly CategoryDesignDiagnostic[]`                                                                                                                                                                                                                                                                                                                                                                                                         | yes      |             |
 | harmony       | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                                                                                                                                                                                                                                                                                                                            | yes      |             |
-| preset        | property | `import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                            | yes      |             |
+| preset        | property | `import("/Users/a_rtiphishl_e/git/templates/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                                                                                                       | yes      |             |
 | primaryColor  | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
 | shape         | property | `"sharp" \| "neutral" \| "soft"`                                                                                                                                                                                                                                                                                                                                                                                                              | yes      |             |
 | themeConfig   | property | `ThemeConfig`                                                                                                                                                                                                                                                                                                                                                                                                                                 | yes      |             |
@@ -215,7 +215,7 @@ Source: `src/design/category-theme.ts:50:1`
 
 Kind: `function`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:261:1`
+Source: `src/authoring/compose-category-manifest.ts:248:1`
 
 Compose canonical manifest inputs with a category/theme shell and explicit diagnostics.
 
@@ -229,7 +229,7 @@ Compose canonical manifest inputs with a category/theme shell and explicit diagn
 
 Kind: `type`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:38:1`
+Source: `src/authoring/compose-category-manifest.ts:44:1`
 
 ### Members
 
@@ -237,8 +237,8 @@ Source: `src/authoring/compose-category-manifest.ts:38:1`
 | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
 | authoringState | property | `TemplateAuthoringState`                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
 | category       | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes      |             |
-| dataBindings   | property | `Readonly<Record<string, import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/bindings").ComponentDataBinding>>`                                                                                                                                                                                                                      | no       |             |
-| dataSources    | property | `Readonly<Record<string, import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/index").DatabaseDataSourceConfig>>`                                                                                                                                                                                                                     | no       |             |
+| dataBindings   | property | `Readonly<Record<string, import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings").ComponentDataBinding>>`                                                                                                                                                                                                                                                                                                 | no       |             |
+| dataSources    | property | `Readonly<Record<string, import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index").DatabaseDataSourceConfig>>`                                                                                                                                                                                                                                                                                                | no       |             |
 | modules        | property | `readonly string[]`                                                                                                                                                                                                                                                                                                                                                                                                                           | no       |             |
 | modulesConfig  | property | `Readonly<Record<string, unknown>>`                                                                                                                                                                                                                                                                                                                                                                                                           | no       |             |
 | name           | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
@@ -349,12 +349,12 @@ Source: `src/fixtures/oauth.ts:11:1`
 
 ### Members
 
-| Name        | Kind     | Type                                                                                                                                                                                  | Required | Description |
-| ----------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| description | property | `string`                                                                                                                                                                              | yes      |             |
-| id          | property | `"google" \| "apple" \| "google-apple"`                                                                                                                                               | yes      |             |
-| label       | property | `string`                                                                                                                                                                              | yes      |             |
-| oauth       | property | `import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/auth").AuthOAuthConfig` | yes      |             |
+| Name        | Kind     | Type                                                                                                       | Required | Description |
+| ----------- | -------- | ---------------------------------------------------------------------------------------------------------- | -------- | ----------- |
+| description | property | `string`                                                                                                   | yes      |             |
+| id          | property | `"google" \| "apple" \| "google-apple"`                                                                    | yes      |             |
+| label       | property | `string`                                                                                                   | yes      |             |
+| oauth       | property | `import("/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth").AuthOAuthConfig` | yes      |             |
 
 ## OAuthFixtureId
 
@@ -391,7 +391,7 @@ Source: `src/design/category-theme.ts:38:1`
 | density      | property | `"compact" \| "comfortable" \| "spacious"`                                                                                                                                                                                                                                                                                                                                                                                                    | yes      |             |
 | diagnostics  | property | `readonly CategoryDesignDiagnostic[]`                                                                                                                                                                                                                                                                                                                                                                                                         | yes      |             |
 | harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                                                                                                                                                                                                                                                                                                                            | yes      |             |
-| preset       | property | `import("/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                            | yes      |             |
+| preset       | property | `import("/Users/a_rtiphishl_e/git/templates/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                                                                                                       | yes      |             |
 | primaryColor | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
 | shape        | property | `"sharp" \| "neutral" \| "soft"`                                                                                                                                                                                                                                                                                                                                                                                                              | yes      |             |
 | themeConfig  | property | `ThemeConfig`                                                                                                                                                                                                                                                                                                                                                                                                                                 | yes      |             |
@@ -477,7 +477,7 @@ Source: `src/templates/catalog.ts:24:1`
 
 Kind: `unknown`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:18:1`
+Source: `src/authoring/compose-category-manifest.ts:22:1`
 
 ## TemplateCatalogEntry
 
@@ -500,7 +500,7 @@ Source: `src/templates/catalog.ts:12:1`
 
 Kind: `type`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:29:1`
+Source: `src/authoring/compose-category-manifest.ts:35:1`
 
 ### Members
 
@@ -517,13 +517,13 @@ Source: `src/authoring/compose-category-manifest.ts:29:1`
 
 Kind: `unknown`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:20:1`
+Source: `src/authoring/compose-category-manifest.ts:24:1`
 
 ## TemplateCompositionStatus
 
 Kind: `unknown`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:19:1`
+Source: `src/authoring/compose-category-manifest.ts:23:1`
 
 ## TemplateDefinition
 
@@ -617,7 +617,7 @@ Source: `src/design/tone-catalog.ts:30:1`
 
 Kind: `function`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:61:1`
+Source: `src/authoring/compose-category-manifest.ts:67:1`
 
 Validate one canonical manifest for catalog registration or release finalization.
 

@@ -199,10 +199,20 @@
               <button
                 class="nav-button"
                 type="button"
+                data-target="src/authoring/component-validation.ts"
+              >
+                src/authoring/component-validation.ts
+                <small>3 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
                 data-target="src/authoring/compose-category-manifest.ts"
               >
                 src/authoring/compose-category-manifest.ts
-                <small>14 functions</small>
+                <small>12 functions</small>
               </button>
             </li>
             <li>
@@ -327,7 +337,7 @@
             <div class="summary">
               <div><strong>56</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>24</strong><span class="muted">modules</span></div>
+              <div><strong>25</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -346,12 +356,28 @@
             </article>
             <article
               class="item"
-              data-search="src/authoring/compose-category-manifest.ts src/authoring/create-manifest-shell.ts src/design/category-theme.ts src/internal/defaults.ts assertTemplateManifestReady CategoryAppManifestComposition composeCategoryAppManifest ComposeCategoryAppManifestInput TemplateAuthoringState TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus validateTemplateManifest"
+              data-search="src/authoring/component-validation.ts src/authoring/compose-category-manifest.ts collectComponentDiagnostics isMissingElementNode visitUiNode"
+            >
+              <h3>src/authoring/component-validation.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong>
+                <code>src/authoring/compose-category-manifest.ts</code>
+              </p>
+              <p>
+                <strong>Exports:</strong> <code>collectComponentDiagnostics</code>,
+                <code>isMissingElementNode</code>, <code>visitUiNode</code>
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="src/authoring/compose-category-manifest.ts src/authoring/component-validation.ts src/authoring/create-manifest-shell.ts src/design/category-theme.ts src/internal/defaults.ts assertTemplateManifestReady CategoryAppManifestComposition composeCategoryAppManifest ComposeCategoryAppManifestInput TemplateAuthoringState TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus validateTemplateManifest"
             >
               <h3>src/authoring/compose-category-manifest.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
-                <strong>Dependencies:</strong> <code>src/authoring/create-manifest-shell.ts</code>,
+                <strong>Dependencies:</strong> <code>src/authoring/component-validation.ts</code>,
+                <code>src/authoring/create-manifest-shell.ts</code>,
                 <code>src/design/category-theme.ts</code>, <code>src/internal/defaults.ts</code>
               </p>
               <p>
@@ -815,7 +841,7 @@
               >
                 <h4>assertTemplateManifestReady</h4>
                 <p class="muted">
-                  function • <code>src/authoring/compose-category-manifest.ts:301:1</code>
+                  function • <code>src/authoring/compose-category-manifest.ts:288:1</code>
                 </p>
                 <p>Fail catalog registration or release finalization while any blocker remains.</p>
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -856,7 +882,7 @@
               >
                 <h4>CategoryAppManifestComposition</h4>
                 <p class="muted">
-                  type • <code>src/authoring/compose-category-manifest.ts:53:1</code>
+                  type • <code>src/authoring/compose-category-manifest.ts:59:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -918,7 +944,7 @@
               >
                 <h4>composeCategoryAppManifest</h4>
                 <p class="muted">
-                  function • <code>src/authoring/compose-category-manifest.ts:261:1</code>
+                  function • <code>src/authoring/compose-category-manifest.ts:248:1</code>
                 </p>
                 <p>
                   Compose canonical manifest inputs with a category/theme shell and explicit
@@ -964,7 +990,7 @@
               >
                 <h4>ComposeCategoryAppManifestInput</h4>
                 <p class="muted">
-                  type • <code>src/authoring/compose-category-manifest.ts:38:1</code>
+                  type • <code>src/authoring/compose-category-manifest.ts:44:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1021,7 +1047,7 @@
                       <td>
                         <code
                           >Readonly&lt;Record&lt;string,
-                          import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/bindings&quot;).ComponentDataBinding&gt;&gt;</code
+                          import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings&quot;).ComponentDataBinding&gt;&gt;</code
                         >
                       </td>
                       <td>no</td>
@@ -1033,7 +1059,7 @@
                       <td>
                         <code
                           >Readonly&lt;Record&lt;string,
-                          import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/index&quot;).DatabaseDataSourceConfig&gt;&gt;</code
+                          import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index&quot;).DatabaseDataSourceConfig&gt;&gt;</code
                         >
                       </td>
                       <td>no</td>
@@ -1105,7 +1131,7 @@
               >
                 <h4>TemplateAuthoringState</h4>
                 <p class="muted">
-                  unknown • <code>src/authoring/compose-category-manifest.ts:18:1</code>
+                  unknown • <code>src/authoring/compose-category-manifest.ts:22:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1118,7 +1144,7 @@
               >
                 <h4>TemplateCompositionDiagnostic</h4>
                 <p class="muted">
-                  type • <code>src/authoring/compose-category-manifest.ts:29:1</code>
+                  type • <code>src/authoring/compose-category-manifest.ts:35:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1192,7 +1218,7 @@
               >
                 <h4>TemplateCompositionDiagnosticCode</h4>
                 <p class="muted">
-                  unknown • <code>src/authoring/compose-category-manifest.ts:20:1</code>
+                  unknown • <code>src/authoring/compose-category-manifest.ts:24:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1205,7 +1231,7 @@
               >
                 <h4>TemplateCompositionStatus</h4>
                 <p class="muted">
-                  unknown • <code>src/authoring/compose-category-manifest.ts:19:1</code>
+                  unknown • <code>src/authoring/compose-category-manifest.ts:23:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1218,7 +1244,7 @@
               >
                 <h4>validateTemplateManifest</h4>
                 <p class="muted">
-                  function • <code>src/authoring/compose-category-manifest.ts:61:1</code>
+                  function • <code>src/authoring/compose-category-manifest.ts:67:1</code>
                 </p>
                 <p>
                   Validate one canonical manifest for catalog registration or release finalization.
@@ -1366,7 +1392,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >Partial&lt;import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
+                          >Partial&lt;import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
                         >
                       </td>
                       <td>no</td>
@@ -1402,7 +1428,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >Partial&lt;import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
+                          >Partial&lt;import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
                         >
                       </td>
                       <td>no</td>
@@ -1420,7 +1446,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeRecipeOverrides
+                          >import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeRecipeOverrides
                           | undefined</code
                         >
                       </td>
@@ -1455,7 +1481,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeGlobalTokenOverrides
+                          >import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeGlobalTokenOverrides
                           | undefined</code
                         >
                       </td>
@@ -1630,7 +1656,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index&quot;).CategoryPreset</code
+                          >import(&quot;/Users/a_rtiphishl_e/git/templates/src/index&quot;).CategoryPreset</code
                         >
                       </td>
                       <td>yes</td>
@@ -1825,7 +1851,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/src/index&quot;).CategoryPreset</code
+                          >import(&quot;/Users/a_rtiphishl_e/git/templates/src/index&quot;).CategoryPreset</code
                         >
                       </td>
                       <td>yes</td>
@@ -2699,7 +2725,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >import(&quot;/Users/a_rtiphishl_e/Documents/Codex/2026-09-04/referenced-chatgpt-conversation-this-is-an/work/templates-217/node_modules/@ankhorage/contracts/dist/auth&quot;).AuthOAuthConfig</code
+                          >import(&quot;/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth&quot;).AuthOAuthConfig</code
                         >
                       </td>
                       <td>yes</td>
@@ -3220,9 +3246,15 @@
                 entrypoint_src_index_ts[&quot;src/index.ts&quot;] package__ankhorage_templates
                 --&gt; entrypoint_src_index_ts module_package_json[&quot;package.json&quot;]
                 package__ankhorage_templates -.-&gt; module_package_json
+                module_src_authoring_component_validation_ts[&quot;src/authoring/component-validation.ts&quot;]
+                package__ankhorage_templates -.-&gt; module_src_authoring_component_validation_ts
+                module_src_authoring_component_validation_ts --&gt;
+                module_src_authoring_compose_category_manifest_ts
                 module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
                 module_src_authoring_compose_category_manifest_ts
+                module_src_authoring_compose_category_manifest_ts --&gt;
+                module_src_authoring_component_validation_ts
                 module_src_authoring_compose_category_manifest_ts --&gt;
                 module_src_authoring_create_manifest_shell_ts
                 module_src_authoring_compose_category_manifest_ts --&gt;
@@ -3312,8 +3344,12 @@ graph TD
   package__ankhorage_templates --&gt; entrypoint_src_index_ts
   module_package_json[&quot;package.json&quot;]
   package__ankhorage_templates -.-&gt; module_package_json
+  module_src_authoring_component_validation_ts[&quot;src/authoring/component-validation.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_authoring_component_validation_ts
+  module_src_authoring_component_validation_ts --&gt; module_src_authoring_compose_category_manifest_ts
   module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_authoring_compose_category_manifest_ts
+  module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_component_validation_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_create_manifest_shell_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_design_category_theme_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_internal_defaults_ts
@@ -3398,6 +3434,7 @@ graph TD
               <p class="muted"><code>diagrams/module-relationships.mmd</code></p>
               <div class="mermaid">
                 graph LR module_package_json[&quot;package.json&quot;]
+                module_src_authoring_component_validation_ts[&quot;src/authoring/component-validation.ts&quot;]
                 module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
                 module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
                 module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
@@ -3421,6 +3458,10 @@ graph TD
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
+                module_src_authoring_component_validation_ts --&gt;
+                module_src_authoring_compose_category_manifest_ts
+                module_src_authoring_compose_category_manifest_ts --&gt;
+                module_src_authoring_component_validation_ts
                 module_src_authoring_compose_category_manifest_ts --&gt;
                 module_src_authoring_create_manifest_shell_ts
                 module_src_authoring_compose_category_manifest_ts --&gt;
@@ -3460,6 +3501,7 @@ graph TD
                 <pre>
 graph LR
   module_package_json[&quot;package.json&quot;]
+  module_src_authoring_component_validation_ts[&quot;src/authoring/component-validation.ts&quot;]
   module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
   module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
   module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
@@ -3483,6 +3525,8 @@ graph LR
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
+  module_src_authoring_component_validation_ts --&gt; module_src_authoring_compose_category_manifest_ts
+  module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_component_validation_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_create_manifest_shell_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_design_category_theme_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_internal_defaults_ts
@@ -3521,6 +3565,7 @@ graph LR
               <p class="muted"><code>diagrams/export-graph.mmd</code></p>
               <div class="mermaid">
                 graph LR module_package_json[&quot;package.json&quot;]
+                module_src_authoring_component_validation_ts[&quot;src/authoring/component-validation.ts&quot;]
                 module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
                 module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
                 module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
@@ -3707,6 +3752,7 @@ graph LR
                 <pre>
 graph LR
   module_package_json[&quot;package.json&quot;]
+  module_src_authoring_component_validation_ts[&quot;src/authoring/component-validation.ts&quot;]
   module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
   module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
   module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
@@ -4091,6 +4137,46 @@ sequenceDiagram
           </section>
         </section>
         <section
+          id="view-src-authoring-component-validation-ts"
+          class="view"
+          data-view="src/authoring/component-validation.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/authoring/component-validation.ts</h2>
+            <article
+              class="item"
+              data-search="isMissingElementNode src/authoring/component-validation.ts Ask composed ZORA metadata whether a manifest node is the canonical draft placeholder."
+            >
+              <h3>isMissingElementNode</h3>
+              <p class="muted"><code>src/authoring/component-validation.ts:16:1</code></p>
+              <p>
+                Ask composed ZORA metadata whether a manifest node is the canonical draft
+                placeholder.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="collectComponentDiagnostics src/authoring/component-validation.ts Validate component availability and plugin placement through the composed ZORA catalog."
+            >
+              <h3>collectComponentDiagnostics</h3>
+              <p class="muted"><code>src/authoring/component-validation.ts:23:1</code></p>
+              <p>
+                Validate component availability and plugin placement through the composed ZORA
+                catalog.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="visitUiNode src/authoring/component-validation.ts Visit every manifest child branch, including repeat empty-state nodes."
+            >
+              <h3>visitUiNode</h3>
+              <p class="muted"><code>src/authoring/component-validation.ts:57:1</code></p>
+              <p>Visit every manifest child branch, including repeat empty-state nodes.</p>
+            </article>
+          </section>
+        </section>
+        <section
           id="view-src-authoring-compose-category-manifest-ts"
           class="view"
           data-view="src/authoring/compose-category-manifest.ts"
@@ -4103,7 +4189,7 @@ sequenceDiagram
               data-search="validateTemplateManifest src/authoring/compose-category-manifest.ts Validate one canonical manifest for catalog registration or release finalization."
             >
               <h3>validateTemplateManifest</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:61:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:67:1</code></p>
               <p>
                 Validate one canonical manifest for catalog registration or release finalization.
               </p>
@@ -4113,7 +4199,7 @@ sequenceDiagram
               data-search="normalizeRoutePath src/authoring/compose-category-manifest.ts Normalize one configured route or generated route path for exact comparison."
             >
               <h3>normalizeRoutePath</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:91:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:98:1</code></p>
               <p>Normalize one configured route or generated route path for exact comparison.</p>
             </article>
             <article
@@ -4121,7 +4207,7 @@ sequenceDiagram
               data-search="resolveRoutePath src/authoring/compose-category-manifest.ts Resolve one route&#39;s generated path relative to its parent navigator."
             >
               <h3>resolveRoutePath</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:97:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:104:1</code></p>
               <p>Resolve one route&#39;s generated path relative to its parent navigator.</p>
             </article>
             <article
@@ -4129,7 +4215,7 @@ sequenceDiagram
               data-search="collectScreenRoutePaths src/authoring/compose-category-manifest.ts Collect every concrete screen path produced by a navigator tree."
             >
               <h3>collectScreenRoutePaths</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:109:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:116:1</code></p>
               <p>Collect every concrete screen path produced by a navigator tree.</p>
             </article>
             <article
@@ -4137,7 +4223,7 @@ sequenceDiagram
               data-search="collectInitialRouteDiagnostics src/authoring/compose-category-manifest.ts Report navigator initial-route names that do not resolve among their sibling routes."
             >
               <h3>collectInitialRouteDiagnostics</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:123:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:130:1</code></p>
               <p>
                 Report navigator initial-route names that do not resolve among their sibling routes.
               </p>
@@ -4147,7 +4233,7 @@ sequenceDiagram
               data-search="collectAuthLandingRouteDiagnostics src/authoring/compose-category-manifest.ts Report an authenticated landing route that has no concrete screen in the navigator tree."
             >
               <h3>collectAuthLandingRouteDiagnostics</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:149:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:156:1</code></p>
               <p>
                 Report an authenticated landing route that has no concrete screen in the navigator
                 tree.
@@ -4158,7 +4244,7 @@ sequenceDiagram
               data-search="resolveStringProp src/authoring/compose-category-manifest.ts Read a manifest string prop without treating arbitrary values as valid authoring metadata."
             >
               <h3>resolveStringProp</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:168:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:175:1</code></p>
               <p>
                 Read a manifest string prop without treating arbitrary values as valid authoring
                 metadata.
@@ -4166,26 +4252,10 @@ sequenceDiagram
             </article>
             <article
               class="item"
-              data-search="isMissingElement src/authoring/compose-category-manifest.ts Ask ZORA metadata whether a manifest node is the canonical draft placeholder."
-            >
-              <h3>isMissingElement</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:174:1</code></p>
-              <p>Ask ZORA metadata whether a manifest node is the canonical draft placeholder.</p>
-            </article>
-            <article
-              class="item"
-              data-search="visitNode src/authoring/compose-category-manifest.ts Visit every manifest child branch, including repeat empty-state nodes."
-            >
-              <h3>visitNode</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:181:1</code></p>
-              <p>Visit every manifest child branch, including repeat empty-state nodes.</p>
-            </article>
-            <article
-              class="item"
               data-search="collectMissingElementDiagnostics src/authoring/compose-category-manifest.ts Report every canonical ZORA MissingElement with its requested capability and location."
             >
               <h3>collectMissingElementDiagnostics</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:194:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:181:1</code></p>
               <p>
                 Report every canonical ZORA MissingElement with its requested capability and
                 location.
@@ -4196,7 +4266,7 @@ sequenceDiagram
               data-search="collectRouteDiagnostics src/authoring/compose-category-manifest.ts Validate every route target recursively against the canonical screen registry."
             >
               <h3>collectRouteDiagnostics</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:217:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:204:1</code></p>
               <p>Validate every route target recursively against the canonical screen registry.</p>
             </article>
             <article
@@ -4204,7 +4274,7 @@ sequenceDiagram
               data-search="collectThemeDiagnostics src/authoring/compose-category-manifest.ts Convert owner theme evidence into template composition diagnostics."
             >
               <h3>collectThemeDiagnostics</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:242:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:229:1</code></p>
               <p>Convert owner theme evidence into template composition diagnostics.</p>
             </article>
             <article
@@ -4212,7 +4282,7 @@ sequenceDiagram
               data-search="composeCategoryAppManifest src/authoring/compose-category-manifest.ts Compose canonical manifest inputs with a category/theme shell and explicit diagnostics."
             >
               <h3>composeCategoryAppManifest</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:261:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:248:1</code></p>
               <p>
                 Compose canonical manifest inputs with a category/theme shell and explicit
                 diagnostics.
@@ -4223,7 +4293,7 @@ sequenceDiagram
               data-search="assertTemplateManifestReady src/authoring/compose-category-manifest.ts Fail catalog registration or release finalization while any blocker remains."
             >
               <h3>assertTemplateManifestReady</h3>
-              <p class="muted"><code>src/authoring/compose-category-manifest.ts:301:1</code></p>
+              <p class="muted"><code>src/authoring/compose-category-manifest.ts:288:1</code></p>
               <p>Fail catalog registration or release finalization while any blocker remains.</p>
             </article>
           </section>
@@ -4785,7 +4855,7 @@ sequenceDiagram
               <h3>createAppManifest</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:1563:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:1565:1</code
                 >
               </p>
               <p>Create the complete portable application manifest for this template.</p>
