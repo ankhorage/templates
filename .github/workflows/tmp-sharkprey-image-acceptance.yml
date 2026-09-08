@@ -1,0 +1,80 @@
+name: Temporary SharkPrey Image Acceptance
+
+on:
+  push:
+    branches:
+      - test/255-image-to-zora
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: 1.4.2
+      - name: Install repository dependencies
+        run: bun install --frozen-lockfile
+      - name: Install released recognition boundaries
+        run: |
+          bun add @ankhorage/zora@4.4.1
+          bun add --dev @ankhorage/utility@0.5.1 sharp@0.35.4 @techstark/opencv-js@5.0.0-release.1 tesseract.js@7.0.0
+      - name: Prepare local English OCR data
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends tesseract-ocr-eng
+          mkdir -p /tmp/tessdata
+          LANGDATA="$(find /usr/share -name eng.traineddata -print -quit)"
+          test -n "$LANGDATA"
+          gzip -c "$LANGDATA" > /tmp/tessdata/eng.traineddata.gz
+      - name: Build Templates owner boundary
+        run: bun run build
+      - name: Analyze original SharkPrey onboarding screen
+        run: |
+          cat > /tmp/sharkprey-screen-analysis.json <<'JSON'
+          {
+            "image": "src/templates/categories/education-learning/sharkprey/assets/screens/02-onboarding.png",
+            "screen": {
+              "id": "onboarding",
+              "name": "Onboarding",
+              "title": "Onboarding"
+            },
+            "minConfidence": 0.42,
+            "ocr": {
+              "langPath": "/tmp/tessdata",
+              "language": "eng"
+            }
+          }
+          JSON
+          bun .agents/skills/zora-designer/scripts/analyze-screen.ts /tmp/sharkprey-screen-analysis.json > /tmp/sharkprey-result.json
+      - name: Report recognition quality
+        run: |
+          bun -e '
+            const result = await Bun.file("/tmp/sharkprey-result.json").json();
+            const root = result.screen?.root ?? result.root;
+            if (!root || root.type !== "Screen") throw new Error(`Expected Screen root, got ${root?.type}`);
+            if (result.owners?.utility !== "0.5.1") throw new Error(`Expected Utility 0.5.1, got ${result.owners?.utility}`);
+            if (result.owners?.zora !== "4.4.1") throw new Error(`Expected ZORA 4.4.1, got ${result.owners?.zora}`);
+            const counts = {};
+            const walk = node => {
+              if (!node) return;
+              counts[node.type] = (counts[node.type] ?? 0) + 1;
+              for (const child of node.children ?? []) walk(child);
+            };
+            walk(root);
+            const direct = root.children ?? [];
+            console.log(JSON.stringify({
+              owners: result.owners,
+              componentCount: result.componentCount,
+              confidence: result.confidence,
+              candidateCount: result.candidates?.length ?? 0,
+              diagnosticCount: result.diagnostics?.length ?? 0,
+              directChildCount: direct.length,
+              directChildTypes: direct.map(child => child.type),
+              counts,
+              diagnostics: result.diagnostics ?? []
+            }, null, 2));
+          '
