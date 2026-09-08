@@ -4,8 +4,12 @@ graph TD
   package__ankhorage_templates --> entrypoint_src_index_ts
   module_package_json["package.json"]
   package__ankhorage_templates -.-> module_package_json
+  module_src_authoring_component_validation_ts["src/authoring/component-validation.ts"]
+  package__ankhorage_templates -.-> module_src_authoring_component_validation_ts
+  module_src_authoring_component_validation_ts --> module_src_authoring_compose_category_manifest_ts
   module_src_authoring_compose_category_manifest_ts["src/authoring/compose-category-manifest.ts"]
   package__ankhorage_templates -.-> module_src_authoring_compose_category_manifest_ts
+  module_src_authoring_compose_category_manifest_ts --> module_src_authoring_component_validation_ts
   module_src_authoring_compose_category_manifest_ts --> module_src_authoring_create_manifest_shell_ts
   module_src_authoring_compose_category_manifest_ts --> module_src_design_category_theme_ts
   module_src_authoring_compose_category_manifest_ts --> module_src_internal_defaults_ts
