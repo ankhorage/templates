@@ -29,6 +29,6 @@ describe('package metadata', () => {
       capabilities: [...expectedAnkhMetadata.capabilities],
     });
     expect(packageJson.dependencies['@ankhorage/contracts']).toMatch(CARET_SEMVER_RANGE);
-    expect(packageJson.dependencies).not.toHaveProperty('@ankhorage/navigator');
+    expect(packageJson.dependencies['@ankhorage/navigator']).toMatch(CARET_SEMVER_RANGE);
   });
 });
