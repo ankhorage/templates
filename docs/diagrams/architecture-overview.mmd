@@ -72,11 +72,14 @@ graph TD
   module_src_templates_catalog_generated_ts["src/templates/catalog.generated.ts"]
   package__ankhorage_templates -.-> module_src_templates_catalog_generated_ts
   module_src_templates_catalog_generated_ts --> module_src_templates_catalog_ts
+  module_src_templates_catalog_generated_ts --> module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_catalog_generated_ts --> module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_catalog_generated_ts --> module_src_templates_categories_social_community_chat_createAppManifest_ts
   module_src_templates_catalog_ts["src/templates/catalog.ts"]
   package__ankhorage_templates -.-> module_src_templates_catalog_ts
   module_src_templates_catalog_ts --> module_src_templates_catalog_generated_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts["src/templates/categories/education-learning/sharkprey/createAppManifest.ts"]
+  package__ankhorage_templates -.-> module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts["src/templates/categories/lifestyle/stillpath/createAppManifest.ts"]
   package__ankhorage_templates -.-> module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts["src/templates/categories/social-community/chat/createAppManifest.ts"]
