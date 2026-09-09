@@ -79,7 +79,7 @@
     "@ankhorage/color-theory": "^0.3.0",
     "@ankhorage/contracts": "^12.0.1",
     "@ankhorage/navigator": "^3.2.2",
-    "@ankhorage/zora": "^4.4.1",
+    "@ankhorage/zora": "^4.5.0",
     "@ankhorage/zora-tabletop": "^0.1.0"
   },
   "devDependencies": {

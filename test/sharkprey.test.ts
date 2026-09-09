@@ -1,5 +1,6 @@
 import type { UiNode } from '@ankhorage/contracts';
 import { validateNavigatorManifest } from '@ankhorage/navigator';
+import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 import { compileZoraTheme } from '@ankhorage/zora/theme';
 import { expect, test } from 'bun:test';
 
@@ -24,6 +25,18 @@ test('SharkPrey compiles both theme modes and validates navigation on every targ
 });
 
 test('SharkPrey keeps single-choice values valid and node identities unique per screen', () => {
+  const radioGroupMeta = ZORA_COMPONENT_META.RadioGroup;
+  if (radioGroupMeta === undefined) throw new Error('ZORA does not expose RadioGroup metadata.');
+  expect(radioGroupMeta.props.columns?.type).toBe('enum');
+  expect(radioGroupMeta.props.contentOrientation?.type).toBe('enum');
+  expect(radioGroupMeta.props.defaultValue?.type).toBe('string');
+  const optionsMeta = radioGroupMeta.props.options;
+  if (optionsMeta?.type !== 'array') throw new Error('RadioGroup options metadata is unavailable.');
+  const { itemSchema } = optionsMeta;
+  if (itemSchema === undefined) throw new Error('RadioGroup option fields are unavailable.');
+  expect(itemSchema.find(({ key }) => key === 'iconSource')).toMatchObject({
+    schema: { type: 'media' },
+  });
   const manifest = createAppManifest();
   for (const screen of Object.values(manifest.screens)) {
     const ids = new Set<string>();
