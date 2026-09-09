@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.7.1
+
+### Patch Changes
+
+- bc38ab7: Require ZORA 4.5 so SharkPrey's icon radio groups use their released authoring and runtime API.
+
 ## 9.7.0
 
 ### Minor Changes
