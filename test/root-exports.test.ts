@@ -37,6 +37,13 @@ test('discovers each portable template from the canonical directory tree', () =>
     })),
   ).toEqual([
     {
+      category: 'education_learning',
+      name: 'SharkPrey',
+      selector: 'education_learning/sharkprey',
+      slug: 'sharkprey',
+      sourceRoot: 'src/templates/categories/education-learning/sharkprey',
+    },
+    {
       category: 'lifestyle',
       name: 'Stillpath',
       selector: 'lifestyle/stillpath',
