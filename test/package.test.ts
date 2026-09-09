@@ -17,7 +17,7 @@ describe('package metadata', () => {
     expect(packageJson.type).toBe('module');
     expect(packageJson.files).toEqual([
       'dist',
-      'src/templates/categories/**/assets',
+      'src/templates/categories/**/assets/**',
       'CHANGELOG.md',
     ]);
     expect(packageJson.bin).toEqual({

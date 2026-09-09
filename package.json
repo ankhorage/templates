@@ -30,7 +30,7 @@
   "sideEffects": false,
   "files": [
     "dist",
-    "src/templates/categories/**/assets",
+    "src/templates/categories/**/assets/**",
     "CHANGELOG.md"
   ],
   "exports": {
