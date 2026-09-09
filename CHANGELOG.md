@@ -1,5 +1,17 @@
 # @ankhorage/templates
 
+## 9.7.0
+
+### Minor Changes
+
+- 1e84d2c: Add the SharkPrey education template with ten ZORA screens, reusable SVG media, Navigator routes and the Tabletop poker table.
+
+  Include the contents of template asset directories in published packages so bundled media can be materialized after installation.
+
+### Patch Changes
+
+- 1e84d2c: Make the Close chat template navigation responsive and move direct-chat back navigation into the native app bar.
+
 ## 9.6.0
 
 ### Minor Changes
