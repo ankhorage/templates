@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.5.0
+
+### Minor Changes
+
+- 319dc7a: Add the Close mobile social/chat manifest with generated screen concepts, reusable lake media, and Navigator-owned stack and tabs. Document unsupported social operations and messaging interactions for subsequent implementation.
+
 ## 9.4.1
 
 ### Patch Changes
