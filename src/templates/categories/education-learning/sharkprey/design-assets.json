@@ -1,0 +1,307 @@
+{
+  "assets": [
+    {
+      "mediaId": "sharkprey-train-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/train.svg",
+      "targetPath": "assets/images/svg/train.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/2/navigator/routes/0/icon/source"]
+    },
+    {
+      "mediaId": "sharkprey-history-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/history.svg",
+      "targetPath": "assets/images/svg/history.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/navigator/routes/2/navigator/routes/1/icon/source",
+        "/screens/training-setup/root/children/0/children/5/children/1/props/options/0/iconSource"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-stats-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/stats.svg",
+      "targetPath": "assets/images/svg/stats.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/navigator/routes/2/navigator/routes/2/icon/source",
+        "/screens/onboarding/root/children/0/children/3/props/options/1/iconSource"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-learn-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/learn.svg",
+      "targetPath": "assets/images/svg/learn.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/navigator/routes/2/navigator/routes/3/icon/source",
+        "/screens/onboarding/root/children/0/children/4/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-settings-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/settings.svg",
+      "targetPath": "assets/images/svg/settings.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/2/navigator/routes/4/icon/source"]
+    },
+    {
+      "mediaId": "sharkprey-logo",
+      "role": "image",
+      "sourcePath": "assets/images/sharkprey-logo.png",
+      "targetPath": "assets/images/sharkprey-logo.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/splash/root/children/0/children/0/props/source",
+        "/screens/onboarding/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/onboarding/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/training-setup/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/training-setup/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/decision-table/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/decision-table/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/answer-explanation/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/answer-explanation/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/session-summary/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/session-summary/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/hand-history/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/hand-history/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/stats/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/stats/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/learn/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/learn/root/children/0/children/0/children/1/children/0/props/source",
+        "/screens/settings/root/children/0/children/0/children/0/children/0/props/source",
+        "/screens/settings/root/children/0/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-target-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/target.svg",
+      "targetPath": "assets/images/svg/target.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/training-setup/root/children/0/children/4/children/1/props/options/0/iconSource",
+        "/screens/session-summary/root/children/0/children/4/children/1/children/1/children/0/props/source",
+        "/screens/stats/root/children/0/children/7/children/0/children/0/props/source",
+        "/screens/learn/root/children/0/children/4/children/0/children/1/props/source",
+        "/screens/settings/root/children/0/children/5/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-reset-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/reset.svg",
+      "targetPath": "assets/images/svg/reset.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/settings/root/children/0/children/7/children/0/children/0/props/source"]
+    },
+    {
+      "mediaId": "sharkprey-chip-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/chip.svg",
+      "targetPath": "assets/images/svg/chip.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/training-setup/root/children/0/children/2/children/1/props/options/0/iconSource"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-position-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/position.svg",
+      "targetPath": "assets/images/svg/position.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stats/root/children/0/children/5/children/0/children/0/props/source",
+        "/screens/learn/root/children/0/children/7/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-haptics-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/haptics.svg",
+      "targetPath": "assets/images/svg/haptics.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/settings/root/children/0/children/3/children/6/children/0/props/source"]
+    },
+    {
+      "mediaId": "sharkprey-correct-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/correct.svg",
+      "targetPath": "assets/images/svg/correct.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/answer-explanation/root/children/0/children/5/children/0/children/0/props/source",
+        "/screens/hand-history/root/children/0/children/5/children/0/children/1/children/0/props/source",
+        "/screens/hand-history/root/children/0/children/6/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-trophy-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/trophy.svg",
+      "targetPath": "assets/images/svg/trophy.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/training-setup/root/children/0/children/2/children/1/props/options/2/iconSource"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-warning-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/warning.svg",
+      "targetPath": "assets/images/svg/warning.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/stats/root/children/0/children/8/children/0/children/0/props/source"]
+    },
+    {
+      "mediaId": "sharkprey-players-two-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/players-two.svg",
+      "targetPath": "assets/images/svg/players-two.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/training-setup/root/children/0/children/3/children/1/props/options/0/iconSource"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-players-four-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/players-four.svg",
+      "targetPath": "assets/images/svg/players-four.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/training-setup/root/children/0/children/3/children/1/props/options/1/iconSource"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-appearance-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/appearance.svg",
+      "targetPath": "assets/images/svg/appearance.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/settings/root/children/0/children/3/children/0/children/0/props/source"]
+    },
+    {
+      "mediaId": "sharkprey-fundamentals-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/fundamentals.svg",
+      "targetPath": "assets/images/svg/fundamentals.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/learn/root/children/0/children/2/children/0/children/0/props/source"]
+    },
+    {
+      "mediaId": "sharkprey-incorrect-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/incorrect.svg",
+      "targetPath": "assets/images/svg/incorrect.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/answer-explanation/root/children/0/children/4/children/0/children/0/props/source",
+        "/screens/hand-history/root/children/0/children/4/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-star-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/star.svg",
+      "targetPath": "assets/images/svg/star.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/onboarding/root/children/0/children/3/props/options/2/iconSource"]
+    },
+    {
+      "mediaId": "sharkprey-graduation-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/graduation.svg",
+      "targetPath": "assets/images/svg/graduation.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/onboarding/root/children/0/children/3/props/options/0/iconSource"]
+    },
+    {
+      "mediaId": "sharkprey-globe-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/globe.svg",
+      "targetPath": "assets/images/svg/globe.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/settings/root/children/0/children/3/children/4/children/0/props/source"]
+    },
+    {
+      "mediaId": "sharkprey-trend-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/trend.svg",
+      "targetPath": "assets/images/svg/trend.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/session-summary/root/children/0/children/4/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-cards-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/cards.svg",
+      "targetPath": "assets/images/svg/cards.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stats/root/children/0/children/4/children/0/children/0/props/source",
+        "/screens/learn/root/children/0/children/6/children/0/children/0/props/source",
+        "/screens/settings/root/children/0/children/3/children/2/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sharkprey-timer-icon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/timer.svg",
+      "targetPath": "assets/images/svg/timer.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/training-setup/root/children/0/children/2/children/1/props/options/1/iconSource"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "sourcePath": "assets/screens/01-splash.png",
+      "targetPath": "assets/screens/01-splash.png"
+    },
+    {
+      "sourcePath": "assets/screens/02-onboarding.png",
+      "targetPath": "assets/screens/02-onboarding.png"
+    },
+    {
+      "sourcePath": "assets/screens/03-training-setup.png",
+      "targetPath": "assets/screens/03-training-setup.png"
+    },
+    {
+      "sourcePath": "assets/screens/04-decision-table.png",
+      "targetPath": "assets/screens/04-decision-table.png"
+    },
+    {
+      "sourcePath": "assets/screens/05-answer-explanation.png",
+      "targetPath": "assets/screens/05-answer-explanation.png"
+    },
+    {
+      "sourcePath": "assets/screens/06-session-summary.png",
+      "targetPath": "assets/screens/06-session-summary.png"
+    },
+    {
+      "sourcePath": "assets/screens/07-hand-history.png",
+      "targetPath": "assets/screens/07-hand-history.png"
+    },
+    {
+      "sourcePath": "assets/screens/08-stats.png",
+      "targetPath": "assets/screens/08-stats.png"
+    },
+    {
+      "sourcePath": "assets/screens/09-learn.png",
+      "targetPath": "assets/screens/09-learn.png"
+    },
+    {
+      "sourcePath": "assets/screens/10-settings.png",
+      "targetPath": "assets/screens/10-settings.png"
+    }
+  ]
+}
