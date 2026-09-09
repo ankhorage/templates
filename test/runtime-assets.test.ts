@@ -3,7 +3,7 @@ import { expect, test } from 'bun:test';
 import { resolveTemplate, validateTemplateManifest } from '../src/index';
 
 test('release validation accepts separate SVG Icon and Image references inside screen content', () => {
-  const manifest = resolveTemplate('education_learning', 'sharkprey').createAppManifest();
+  const manifest = resolveTemplate('social_community', 'chat').createAppManifest();
   manifest.screens['asset-content'] = {
     id: 'asset-content',
     name: 'Asset content',
@@ -11,11 +11,11 @@ test('release validation accepts separate SVG Icon and Image references inside s
       id: 'asset-content-root',
       type: 'Box',
       children: [
-        { id: 'asset-icon', type: 'Icon', props: { source: { mediaId: 'sharkprey-train-icon' } } },
+        { id: 'asset-icon', type: 'Icon', props: { source: { mediaId: 'friends' } } },
         {
           id: 'asset-image',
           type: 'Image',
-          props: { source: { mediaId: 'sharkprey-logo' }, alt: 'SharkPrey' },
+          props: { source: { mediaId: 'lake' }, alt: 'Alpine lake' },
         },
       ],
     },

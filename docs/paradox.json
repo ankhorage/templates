@@ -358,8 +358,8 @@
       "isEntrypoint": false,
       "dependencies": [
         "src/templates/catalog.ts",
-        "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "src/templates/categories/lifestyle/stillpath/createAppManifest.ts"
+        "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
+        "src/templates/categories/social-community/chat/createAppManifest.ts"
       ],
       "exports": ["TEMPLATE_DEFINITIONS"]
     },
@@ -378,13 +378,13 @@
       ]
     },
     {
-      "path": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+      "path": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
       "isEntrypoint": false,
       "dependencies": [],
       "exports": ["default"]
     },
     {
-      "path": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
+      "path": "src/templates/categories/social-community/chat/createAppManifest.ts",
       "isEntrypoint": false,
       "dependencies": [],
       "exports": ["default"]
@@ -3154,19 +3154,19 @@
     },
     {
       "name": "createAppManifest",
-      "description": "Create the complete portable application manifest for this template.",
+      "description": "Create the complete portable application manifest for the Stillpath lifestyle template.",
       "sourceLocation": {
-        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 1565,
+        "filePath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
+        "line": 998,
         "column": 1
       }
     },
     {
       "name": "createAppManifest",
-      "description": "Create the complete portable application manifest for the Stillpath lifestyle template.",
+      "description": "Return the portable Close social and direct-chat design with owner-validated mobile navigation.",
       "sourceLocation": {
-        "filePath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
-        "line": 998,
+        "filePath": "src/templates/categories/social-community/chat/createAppManifest.ts",
+        "line": 5,
         "column": 1
       }
     },
@@ -3502,12 +3502,12 @@
       },
       {
         "fromPath": "src/templates/catalog.generated.ts",
-        "toPath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toPath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
         "sourcePath": "src/templates/catalog.generated.ts"
       },
       {
         "fromPath": "src/templates/catalog.generated.ts",
-        "toPath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
+        "toPath": "src/templates/categories/social-community/chat/createAppManifest.ts",
         "sourcePath": "src/templates/catalog.generated.ts"
       },
       {
@@ -4235,6 +4235,12 @@
         "toSymbol": "assertTemplateImagePath",
         "callExpression": "assertTemplateImagePath",
         "sourcePath": "src/templates/catalog.ts"
+      },
+      {
+        "fromSymbol": "createAppManifest",
+        "toSymbol": "validateNavigatorManifest",
+        "callExpression": "validateNavigatorManifest",
+        "sourcePath": "src/templates/categories/social-community/chat/createAppManifest.ts"
       }
     ],
     "typeReferences": [
