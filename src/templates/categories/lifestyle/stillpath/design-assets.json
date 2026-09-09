@@ -1,0 +1,425 @@
+{
+  "assets": [
+    {
+      "mediaId": "home",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/home.svg",
+      "targetPath": "assets/images/svg/home.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/icon/source"]
+    },
+    {
+      "mediaId": "journal",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/journal.svg",
+      "targetPath": "assets/images/svg/journal.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/navigator/routes/1/icon/source",
+        "/screens/stillpath-profile/root/children/0/children/2/children/0/children/1/children/4/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "rituals",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/rituals.svg",
+      "targetPath": "assets/images/svg/rituals.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/2/icon/source"]
+    },
+    {
+      "mediaId": "profile",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/profile.svg",
+      "targetPath": "assets/images/svg/profile.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/3/icon/source"]
+    },
+    {
+      "mediaId": "sun",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/sun.svg",
+      "targetPath": "assets/images/svg/sun.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/0/children/1/props/source",
+        "/screens/stillpath-journal/root/children/0/children/0/children/1/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/0/children/2/props/source",
+        "/screens/stillpath-profile/root/children/0/children/0/children/1/props/source"
+      ]
+    },
+    {
+      "mediaId": "fabio",
+      "role": "image",
+      "sourcePath": "assets/images/fabio.png",
+      "targetPath": "assets/images/fabio.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/0/children/3/props/source",
+        "/screens/stillpath-journal/root/children/0/children/0/children/3/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/0/children/4/props/source",
+        "/screens/stillpath-profile/root/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sprig",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/sprig.svg",
+      "targetPath": "assets/images/svg/sprig.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/1/children/0/children/0/props/source",
+        "/screens/stillpath-home/root/children/0/children/2/children/1/children/3/children/0/children/1/children/0/props/source",
+        "/screens/stillpath-journal/root/children/0/children/1/children/0/children/0/children/0/props/source",
+        "/screens/stillpath-journal/root/children/0/children/4/children/0/children/0/props/source",
+        "/screens/stillpath-journal/root/children/0/children/5/children/1/children/0/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/1/children/0/children/0/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/6/children/1/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/10/children/1/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/2/children/0/children/0/children/1/children/2/props/source"
+      ]
+    },
+    {
+      "mediaId": "home-hero",
+      "role": "image",
+      "sourcePath": "assets/images/home-hero.png",
+      "targetPath": "assets/images/home-hero.png",
+      "contentType": "image/png",
+      "usages": ["/screens/stillpath-home/root/children/0/children/2/children/0/props/source"]
+    },
+    {
+      "mediaId": "bookmark",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/bookmark.svg",
+      "targetPath": "assets/images/svg/bookmark.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/2/children/1/children/3/children/1/children/1/children/0/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/11/children/1/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/4/children/0/children/1/children/2/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/4/children/1/children/1/children/2/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "mood",
+      "role": "image",
+      "sourcePath": "assets/images/mood.png",
+      "targetPath": "assets/images/mood.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/4/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "smile",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/smile.svg",
+      "targetPath": "assets/images/svg/smile.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/4/children/0/children/1/children/0/children/0/props/source",
+        "/screens/stillpath-journal/root/children/0/children/3/props/options/0/iconSource"
+      ]
+    },
+    {
+      "mediaId": "clock",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/clock.svg",
+      "targetPath": "assets/images/svg/clock.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/4/children/0/children/1/children/3/children/0/props/source",
+        "/screens/stillpath-home/root/children/0/children/4/children/1/children/1/children/3/children/0/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/4/children/0/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/2/children/0/children/1/children/3/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/6/children/2/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "breath",
+      "role": "image",
+      "sourcePath": "assets/images/breath.png",
+      "targetPath": "assets/images/breath.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/4/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "wind",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/wind.svg",
+      "targetPath": "assets/images/svg/wind.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/4/children/1/children/1/children/0/children/0/props/source",
+        "/screens/stillpath-rituals/root/children/0/children/7/children/1/props/source"
+      ]
+    },
+    {
+      "mediaId": "sleep",
+      "role": "image",
+      "sourcePath": "assets/images/sleep.png",
+      "targetPath": "assets/images/sleep.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/6/children/0/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "moon",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/moon.svg",
+      "targetPath": "assets/images/svg/moon.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/6/children/0/children/0/children/1/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/4/children/0/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "focus",
+      "role": "image",
+      "sourcePath": "assets/images/focus.png",
+      "targetPath": "assets/images/focus.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/6/children/1/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "target",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/target.svg",
+      "targetPath": "assets/images/svg/target.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/6/children/1/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "ocean-release",
+      "role": "image",
+      "sourcePath": "assets/images/ocean-release.png",
+      "targetPath": "assets/images/ocean-release.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/6/children/2/children/0/children/0/props/source",
+        "/screens/stillpath-profile/root/children/0/children/4/children/1/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "leaf",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/leaf.svg",
+      "targetPath": "assets/images/svg/leaf.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-home/root/children/0/children/6/children/2/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "calendar",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/calendar.svg",
+      "targetPath": "assets/images/svg/calendar.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-journal/root/children/0/children/1/children/1/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "cloud",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/cloud.svg",
+      "targetPath": "assets/images/svg/cloud.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/stillpath-journal/root/children/0/children/3/props/options/1/iconSource"]
+    },
+    {
+      "mediaId": "heart",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/heart.svg",
+      "targetPath": "assets/images/svg/heart.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-journal/root/children/0/children/3/props/options/2/iconSource",
+        "/screens/stillpath-rituals/root/children/0/children/8/children/1/props/source",
+        "/screens/stillpath-profile/root/children/0/children/7/children/1/props/source"
+      ]
+    },
+    {
+      "mediaId": "waves",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/waves.svg",
+      "targetPath": "assets/images/svg/waves.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-journal/root/children/0/children/3/props/options/3/iconSource",
+        "/screens/stillpath-profile/root/children/0/children/4/children/1/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "photo",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/photo.svg",
+      "targetPath": "assets/images/svg/photo.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-journal/root/children/0/children/6/children/0/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "microphone",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/microphone.svg",
+      "targetPath": "assets/images/svg/microphone.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-journal/root/children/0/children/6/children/1/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "reflection-rest",
+      "role": "image",
+      "sourcePath": "assets/images/reflection-rest.png",
+      "targetPath": "assets/images/reflection-rest.png",
+      "contentType": "image/png",
+      "usages": ["/screens/stillpath-journal/root/children/0/children/8/children/0/props/source"]
+    },
+    {
+      "mediaId": "chevron-right",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/chevron-right.svg",
+      "targetPath": "assets/images/svg/chevron-right.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-journal/root/children/0/children/8/children/3/props/source",
+        "/screens/stillpath-journal/root/children/0/children/9/children/3/props/source",
+        "/screens/stillpath-journal/root/children/0/children/10/children/3/props/source",
+        "/screens/stillpath-profile/root/children/0/children/6/children/1/children/2/props/source",
+        "/screens/stillpath-profile/root/children/0/children/6/children/2/children/2/props/source"
+      ]
+    },
+    {
+      "mediaId": "reflection-mountains",
+      "role": "image",
+      "sourcePath": "assets/images/reflection-mountains.png",
+      "targetPath": "assets/images/reflection-mountains.png",
+      "contentType": "image/png",
+      "usages": ["/screens/stillpath-journal/root/children/0/children/9/children/0/props/source"]
+    },
+    {
+      "mediaId": "reflection-stones",
+      "role": "image",
+      "sourcePath": "assets/images/reflection-stones.png",
+      "targetPath": "assets/images/reflection-stones.png",
+      "contentType": "image/png",
+      "usages": ["/screens/stillpath-journal/root/children/0/children/10/children/0/props/source"]
+    },
+    {
+      "mediaId": "ritual-hero",
+      "role": "image",
+      "sourcePath": "assets/images/ritual-hero.png",
+      "targetPath": "assets/images/ritual-hero.png",
+      "contentType": "image/png",
+      "usages": ["/screens/stillpath-rituals/root/children/0/children/2/children/0/props/source"]
+    },
+    {
+      "mediaId": "level",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/level.svg",
+      "targetPath": "assets/images/svg/level.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-rituals/root/children/0/children/4/children/1/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "headphones",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/headphones.svg",
+      "targetPath": "assets/images/svg/headphones.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-rituals/root/children/0/children/4/children/2/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "sunrise",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/sunrise.svg",
+      "targetPath": "assets/images/svg/sunrise.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/screens/stillpath-rituals/root/children/0/children/9/children/1/props/source"]
+    },
+    {
+      "mediaId": "settings",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/settings.svg",
+      "targetPath": "assets/images/svg/settings.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-profile/root/children/0/children/0/children/3/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "flame",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/flame.svg",
+      "targetPath": "assets/images/svg/flame.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-profile/root/children/0/children/2/children/0/children/1/children/2/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "evening-reset",
+      "role": "image",
+      "sourcePath": "assets/images/evening-reset.png",
+      "targetPath": "assets/images/evening-reset.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/stillpath-profile/root/children/0/children/4/children/0/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "palette",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/palette.svg",
+      "targetPath": "assets/images/svg/palette.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-profile/root/children/0/children/6/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "bell",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/bell.svg",
+      "targetPath": "assets/images/svg/bell.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/stillpath-profile/root/children/0/children/6/children/1/children/0/props/source"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "sourcePath": "assets/screens/01-Home.png",
+      "targetPath": "assets/screens/01-Home.png"
+    },
+    {
+      "sourcePath": "assets/screens/02-Journal.png",
+      "targetPath": "assets/screens/02-Journal.png"
+    },
+    {
+      "sourcePath": "assets/screens/03-Rituals.png",
+      "targetPath": "assets/screens/03-Rituals.png"
+    },
+    {
+      "sourcePath": "assets/screens/04-Profile.png",
+      "targetPath": "assets/screens/04-Profile.png"
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "image": "src/templates/categories/lifestyle/stillpath/assets/screens/03-Rituals.png",
+  "screen": {
+    "id": "stillpath-rituals",
+    "name": "Rituals",
+    "title": "Rituals"
+  },
+  "minConfidence": 0.42
+}

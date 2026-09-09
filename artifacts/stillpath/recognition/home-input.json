@@ -1,0 +1,9 @@
+{
+  "image": "src/templates/categories/lifestyle/stillpath/assets/screens/01-Home.png",
+  "screen": {
+    "id": "stillpath-home",
+    "name": "Home",
+    "title": "Home"
+  },
+  "minConfidence": 0.42
+}

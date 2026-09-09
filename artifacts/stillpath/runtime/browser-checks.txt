@@ -1,0 +1,38 @@
+✓ Stillpath review
+  http://localhost:8093/
+✓ Done
+"reset"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/home-compact.png
+"{\"width\":430,\"height\":911,\"overflow\":false,\"navigation\":true,\"images\":[{\"src\":\"http://localhost:8093/media/images/fabio.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/home-hero.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/mood.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/breath.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/sleep.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/focus.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/ocean-release.png\",\"loaded\":true}]}"
+"bottom"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/home-compact-bottom.png
+✓ Stillpath review
+  http://localhost:8093/journal
+✓ Done
+"reset"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/journal-compact.png
+"{\"width\":430,\"height\":911,\"overflow\":false,\"navigation\":true,\"images\":[{\"src\":\"http://localhost:8093/media/images/fabio.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/reflection-rest.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/reflection-mountains.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/reflection-stones.png\",\"loaded\":true}]}"
+"bottom"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/journal-compact-bottom.png
+✓ Stillpath review
+  http://localhost:8093/rituals
+✓ Done
+"reset"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/rituals-compact.png
+"{\"width\":430,\"height\":911,\"overflow\":false,\"navigation\":true,\"images\":[{\"src\":\"http://localhost:8093/media/images/fabio.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/ritual-hero.png\",\"loaded\":true}]}"
+"bottom"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/rituals-compact-bottom.png
+✓ Stillpath review
+  http://localhost:8093/profile
+✓ Done
+"reset"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/profile-compact.png
+"{\"width\":430,\"height\":911,\"overflow\":false,\"navigation\":true,\"images\":[{\"src\":\"http://localhost:8093/media/images/fabio.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/evening-reset.png\",\"loaded\":true},{\"src\":\"http://localhost:8093/media/images/ocean-release.png\",\"loaded\":true}]}"
+"bottom"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/profile-compact-bottom.png
+✓ Done
+"{\"width\":900,\"rail\":true,\"overflow\":false}"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/profile-medium.png
+✓ Done
+"{\"width\":1440,\"sidebar\":true,\"overflow\":false}"
+✓ Screenshot saved to /tmp/templates-stillpath/artifacts/stillpath/runtime/profile-expanded.png

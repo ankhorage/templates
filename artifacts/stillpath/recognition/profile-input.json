@@ -1,0 +1,9 @@
+{
+  "image": "src/templates/categories/lifestyle/stillpath/assets/screens/04-Profile.png",
+  "screen": {
+    "id": "stillpath-profile",
+    "name": "Profile",
+    "title": "Profile"
+  },
+  "minConfidence": 0.42
+}

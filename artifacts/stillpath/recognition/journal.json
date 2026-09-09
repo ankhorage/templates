@@ -1,0 +1,1771 @@
+{
+  "owners": {
+    "colorTheory": "0.3.0",
+    "contracts": "12.0.1",
+    "templates": "9.7.1",
+    "zora": "4.5.0",
+    "plugins": {
+      "@ankhorage/zora-tabletop": "0.1.0"
+    },
+    "utility": "0.5.5"
+  },
+  "componentCount": 117,
+  "componentNames": [
+    "ActionSheet",
+    "ActionSheetItem",
+    "AppBar",
+    "AppShell",
+    "Avatar",
+    "AvatarGroup",
+    "Badge",
+    "BarcodeScannerView",
+    "Box",
+    "Breadcrumbs",
+    "Button",
+    "ButtonGroup",
+    "CameraPermissionView",
+    "Card",
+    "Center",
+    "ChatListItem",
+    "Checkbox",
+    "CheckboxGroup",
+    "Chip",
+    "ChipGroup",
+    "CollectionEditor",
+    "ConfirmDialog",
+    "Container",
+    "ContentRail",
+    "DataTable",
+    "DatePicker",
+    "DisclosureSection",
+    "Divider",
+    "Drawer",
+    "DropdownMenu",
+    "EmptyState",
+    "FilterBar",
+    "ForgotPasswordForm",
+    "Form",
+    "FormActions",
+    "FormError",
+    "FormField",
+    "Gradient",
+    "Grid",
+    "Heading",
+    "Hero",
+    "Icon",
+    "IconButton",
+    "Image",
+    "ImagePreview",
+    "ImageUploadField",
+    "Inline",
+    "Input",
+    "InspectorField",
+    "List",
+    "ListRow",
+    "ListSection",
+    "MediaCard",
+    "Menu",
+    "MessageBubble",
+    "MetricCard",
+    "MissingElement",
+    "Modal",
+    "NavigationItem",
+    "NavigationList",
+    "Notice",
+    "OAuthProviderButton",
+    "OAuthProviderList",
+    "OtpForm",
+    "Pagination",
+    "PaletteItem",
+    "Panel",
+    "PostCard",
+    "ProductCard",
+    "Progress",
+    "ProgressRing",
+    "Radio",
+    "RadioGroup",
+    "Rating",
+    "ReaderSurface",
+    "ResponsivePanel",
+    "ScanOverlay",
+    "Screen",
+    "ScreenSection",
+    "SearchBar",
+    "SectionHeader",
+    "Select",
+    "SelectableItem",
+    "SelectionProvider",
+    "SettingsLayout",
+    "SettingsRow",
+    "Show",
+    "SidebarLayout",
+    "SignInForm",
+    "SignUpForm",
+    "Skeleton",
+    "SkeletonCard",
+    "SkeletonList",
+    "SkeletonText",
+    "Spacer",
+    "SplashScreen",
+    "Stack",
+    "Surface",
+    "SwitchField",
+    "TabletopTable",
+    "Tabs",
+    "Text",
+    "Textarea",
+    "ThemeComposer",
+    "ThemeModeToggle",
+    "TileGrid",
+    "TimePicker",
+    "Timeline",
+    "Toast",
+    "ToastProvider",
+    "Toolbar",
+    "ToolbarAction",
+    "TopbarLayout",
+    "TreeItem",
+    "TreeView",
+    "ZoraDrawerContent",
+    "ZoraTabBar"
+  ],
+  "unresolvedComponentName": "MissingElement",
+  "screen": {
+    "id": "stillpath-journal",
+    "name": "Journal",
+    "root": {
+      "id": "stillpath-journal-screen",
+      "type": "Screen",
+      "children": [
+        {
+          "id": "stillpath-journal-region-001",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-002",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-003",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-004",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-006",
+          "type": "ScreenSection",
+          "children": [
+            {
+              "id": "stillpath-journal-region-007",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-008",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            }
+          ]
+        },
+        {
+          "id": "stillpath-journal-region-009",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-010",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-012",
+          "type": "MessageBubble",
+          "children": [
+            {
+              "id": "stillpath-journal-region-013",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-015",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-018",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-019",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            }
+          ]
+        },
+        {
+          "id": "stillpath-journal-region-014",
+          "type": "MessageBubble",
+          "children": [
+            {
+              "id": "stillpath-journal-region-016",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-017",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            }
+          ]
+        },
+        {
+          "id": "stillpath-journal-region-021",
+          "type": "ScreenSection",
+          "children": [
+            {
+              "id": "stillpath-journal-region-020",
+              "type": "MessageBubble",
+              "children": [
+                {
+                  "id": "stillpath-journal-region-023",
+                  "type": "MissingElement",
+                  "props": {
+                    "requestedCapability": "Unresolved interface capability",
+                    "reason": "No matching ZORA element is available.",
+                    "minimumWidth": 240,
+                    "minimumHeight": 160
+                  }
+                },
+                {
+                  "id": "stillpath-journal-region-024",
+                  "type": "MissingElement",
+                  "props": {
+                    "requestedCapability": "Unresolved interface capability",
+                    "reason": "No matching ZORA element is available.",
+                    "minimumWidth": 240,
+                    "minimumHeight": 160
+                  }
+                }
+              ]
+            },
+            {
+              "id": "stillpath-journal-region-022",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            }
+          ]
+        },
+        {
+          "id": "stillpath-journal-region-026",
+          "type": "Grid",
+          "children": [
+            {
+              "id": "stillpath-journal-region-027",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-028",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-029",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-030",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-031",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-032",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-033",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-034",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-035",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-036",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            },
+            {
+              "id": "stillpath-journal-region-037",
+              "type": "MissingElement",
+              "props": {
+                "requestedCapability": "Unresolved interface capability",
+                "reason": "No matching ZORA element is available.",
+                "minimumWidth": 240,
+                "minimumHeight": 160
+              }
+            }
+          ]
+        },
+        {
+          "id": "stillpath-journal-region-038",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-039",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        },
+        {
+          "id": "stillpath-journal-region-040",
+          "type": "MissingElement",
+          "props": {
+            "requestedCapability": "Unresolved interface capability",
+            "reason": "No matching ZORA element is available.",
+            "minimumWidth": 240,
+            "minimumHeight": 160
+          }
+        }
+      ]
+    },
+    "title": "Journal"
+  },
+  "graph": {
+    "width": 863,
+    "height": 1822,
+    "root": {
+      "id": "screen",
+      "bounds": {
+        "x": 0,
+        "y": 0,
+        "width": 863,
+        "height": 1822
+      },
+      "arrangement": "grid",
+      "repeated": true,
+      "children": [
+        {
+          "id": "region-001",
+          "bounds": {
+            "x": 746,
+            "y": 27,
+            "width": 76,
+            "height": 81
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        },
+        {
+          "id": "region-002",
+          "bounds": {
+            "x": 37,
+            "y": 121,
+            "width": 621,
+            "height": 99
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        },
+        {
+          "id": "region-003",
+          "bounds": {
+            "x": 34,
+            "y": 316,
+            "width": 440,
+            "height": 83
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        },
+        {
+          "id": "region-004",
+          "bounds": {
+            "x": 35,
+            "y": 435,
+            "width": 788,
+            "height": 152
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": [
+            {
+              "id": "region-005",
+              "bounds": {
+                "x": 86,
+                "y": 495,
+                "width": 27,
+                "height": 41
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "region-006",
+          "bounds": {
+            "x": 35,
+            "y": 609,
+            "width": 787,
+            "height": 396
+          },
+          "arrangement": "vertical",
+          "repeated": false,
+          "children": [
+            {
+              "id": "region-007",
+              "bounds": {
+                "x": 37,
+                "y": 611,
+                "width": 783,
+                "height": 392
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-008",
+              "bounds": {
+                "x": 61,
+                "y": 1001,
+                "width": 741,
+                "height": 4
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "region-009",
+          "bounds": {
+            "x": 35,
+            "y": 1026,
+            "width": 385,
+            "height": 69
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": [
+            {
+              "id": "region-011",
+              "bounds": {
+                "x": 142,
+                "y": 1045,
+                "width": 32,
+                "height": 32
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "region-010",
+          "bounds": {
+            "x": 437,
+            "y": 1026,
+            "width": 386,
+            "height": 69
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        },
+        {
+          "id": "region-012",
+          "bounds": {
+            "x": 35,
+            "y": 1182,
+            "width": 203,
+            "height": 145
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": [
+            {
+              "id": "region-013",
+              "bounds": {
+                "x": 36,
+                "y": 1182,
+                "width": 64,
+                "height": 64
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-015",
+              "bounds": {
+                "x": 128,
+                "y": 1211,
+                "width": 66,
+                "height": 28
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-018",
+              "bounds": {
+                "x": 128,
+                "y": 1232,
+                "width": 37,
+                "height": 31
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-019",
+              "bounds": {
+                "x": 126,
+                "y": 1250,
+                "width": 30,
+                "height": 30
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "region-014",
+          "bounds": {
+            "x": 178,
+            "y": 1183,
+            "width": 61,
+            "height": 113
+          },
+          "arrangement": "horizontal",
+          "repeated": false,
+          "children": [
+            {
+              "id": "region-016",
+              "bounds": {
+                "x": 188,
+                "y": 1217,
+                "width": 31,
+                "height": 79
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-017",
+              "bounds": {
+                "x": 211,
+                "y": 1219,
+                "width": 25,
+                "height": 36
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "region-021",
+          "bounds": {
+            "x": 36,
+            "y": 1347,
+            "width": 202,
+            "height": 145
+          },
+          "arrangement": "vertical",
+          "repeated": false,
+          "children": [
+            {
+              "id": "region-020",
+              "bounds": {
+                "x": 36,
+                "y": 1347,
+                "width": 202,
+                "height": 78
+              },
+              "arrangement": "horizontal",
+              "repeated": false,
+              "children": [
+                {
+                  "id": "region-023",
+                  "bounds": {
+                    "x": 158,
+                    "y": 1394,
+                    "width": 31,
+                    "height": 29
+                  },
+                  "arrangement": "none",
+                  "repeated": false,
+                  "children": []
+                },
+                {
+                  "id": "region-024",
+                  "bounds": {
+                    "x": 89,
+                    "y": 1396,
+                    "width": 54,
+                    "height": 15
+                  },
+                  "arrangement": "none",
+                  "repeated": false,
+                  "children": []
+                }
+              ]
+            },
+            {
+              "id": "region-022",
+              "bounds": {
+                "x": 37,
+                "y": 1385,
+                "width": 201,
+                "height": 107
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": [
+                {
+                  "id": "region-025",
+                  "bounds": {
+                    "x": 62,
+                    "y": 1449,
+                    "width": 40,
+                    "height": 26
+                  },
+                  "arrangement": "none",
+                  "repeated": false,
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "region-026",
+          "bounds": {
+            "x": 37,
+            "y": 1514,
+            "width": 201,
+            "height": 145
+          },
+          "arrangement": "grid",
+          "repeated": true,
+          "children": [
+            {
+              "id": "region-027",
+              "bounds": {
+                "x": 148,
+                "y": 1518,
+                "width": 72,
+                "height": 45
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-028",
+              "bounds": {
+                "x": 102,
+                "y": 1542,
+                "width": 66,
+                "height": 48
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-029",
+              "bounds": {
+                "x": 161,
+                "y": 1549,
+                "width": 35,
+                "height": 30
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-030",
+              "bounds": {
+                "x": 203,
+                "y": 1558,
+                "width": 32,
+                "height": 36
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-031",
+              "bounds": {
+                "x": 192,
+                "y": 1569,
+                "width": 33,
+                "height": 32
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-032",
+              "bounds": {
+                "x": 114,
+                "y": 1578,
+                "width": 53,
+                "height": 16
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-033",
+              "bounds": {
+                "x": 39,
+                "y": 1584,
+                "width": 100,
+                "height": 38
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-034",
+              "bounds": {
+                "x": 131,
+                "y": 1603,
+                "width": 43,
+                "height": 36
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-035",
+              "bounds": {
+                "x": 199,
+                "y": 1605,
+                "width": 35,
+                "height": 30
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-036",
+              "bounds": {
+                "x": 110,
+                "y": 1614,
+                "width": 36,
+                "height": 24
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            },
+            {
+              "id": "region-037",
+              "bounds": {
+                "x": 168,
+                "y": 1624,
+                "width": 51,
+                "height": 19
+              },
+              "arrangement": "none",
+              "repeated": false,
+              "children": []
+            }
+          ]
+        },
+        {
+          "id": "region-038",
+          "bounds": {
+            "x": 113,
+            "y": 1715,
+            "width": 32,
+            "height": 31
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        },
+        {
+          "id": "region-039",
+          "bounds": {
+            "x": 504,
+            "y": 1715,
+            "width": 39,
+            "height": 31
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        },
+        {
+          "id": "region-040",
+          "bounds": {
+            "x": 306,
+            "y": 1717,
+            "width": 32,
+            "height": 28
+          },
+          "arrangement": "none",
+          "repeated": false,
+          "children": []
+        }
+      ]
+    }
+  },
+  "confidence": 0.11026315789473685,
+  "candidates": [
+    {
+      "nodeId": "screen",
+      "componentName": "Screen",
+      "score": 0.8300000000000001
+    },
+    {
+      "nodeId": "screen",
+      "componentName": "ScreenSection",
+      "score": 0.8300000000000001
+    },
+    {
+      "nodeId": "region-001",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-001",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-001",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-002",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-002",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-002",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-003",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-003",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-003",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-004",
+      "componentName": "ChatListItem",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-004",
+      "componentName": "ContentRail",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-004",
+      "componentName": "EmptyState",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-006",
+      "componentName": "ChatListItem",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-006",
+      "componentName": "SectionHeader",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-006",
+      "componentName": "ScreenSection",
+      "score": 0.5800000000000001
+    },
+    {
+      "nodeId": "region-007",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-007",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-007",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-008",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-008",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-008",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "group-region-009-region-010",
+      "componentName": "ChatListItem",
+      "score": 0.8600000000000001
+    },
+    {
+      "nodeId": "group-region-009-region-010",
+      "componentName": "SettingsRow",
+      "score": 0.8600000000000001
+    },
+    {
+      "nodeId": "group-region-009-region-010",
+      "componentName": "ButtonGroup",
+      "score": 0.7
+    },
+    {
+      "nodeId": "region-009",
+      "componentName": "ChatListItem",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-009",
+      "componentName": "ContentRail",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-009",
+      "componentName": "EmptyState",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-010",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-010",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-010",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-012",
+      "componentName": "ChatListItem",
+      "score": 0.52
+    },
+    {
+      "nodeId": "region-012",
+      "componentName": "EmptyState",
+      "score": 0.52
+    },
+    {
+      "nodeId": "region-012",
+      "componentName": "MessageBubble",
+      "score": 0.52
+    },
+    {
+      "nodeId": "region-013",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-013",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-013",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-015",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-015",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-015",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-018",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-018",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-018",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-019",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-019",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-019",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-014",
+      "componentName": "ChatListItem",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-014",
+      "componentName": "SettingsRow",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-014",
+      "componentName": "ButtonGroup",
+      "score": 0.5
+    },
+    {
+      "nodeId": "region-016",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-016",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-016",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-016",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-017",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-017",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-017",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "group-region-021-region-026",
+      "componentName": "ChatListItem",
+      "score": 0.8600000000000001
+    },
+    {
+      "nodeId": "group-region-021-region-026",
+      "componentName": "ButtonGroup",
+      "score": 0.7
+    },
+    {
+      "nodeId": "group-region-021-region-026",
+      "componentName": "PostCard",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-021",
+      "componentName": "ChatListItem",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-021",
+      "componentName": "SectionHeader",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-021",
+      "componentName": "ScreenSection",
+      "score": 0.5800000000000001
+    },
+    {
+      "nodeId": "region-020",
+      "componentName": "ChatListItem",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-020",
+      "componentName": "SettingsRow",
+      "score": 0.6600000000000001
+    },
+    {
+      "nodeId": "region-020",
+      "componentName": "ButtonGroup",
+      "score": 0.5
+    },
+    {
+      "nodeId": "region-023",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-023",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-023",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-023",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-024",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-024",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-024",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-022",
+      "componentName": "ChatListItem",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-022",
+      "componentName": "ContentRail",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-022",
+      "componentName": "EmptyState",
+      "score": 0.4
+    },
+    {
+      "nodeId": "region-026",
+      "componentName": "Grid",
+      "score": 0.76
+    },
+    {
+      "nodeId": "region-026",
+      "componentName": "ChatListItem",
+      "score": 0.7500000000000001
+    },
+    {
+      "nodeId": "region-026",
+      "componentName": "PostCard",
+      "score": 0.7500000000000001
+    },
+    {
+      "nodeId": "region-027",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-027",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-027",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-028",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-028",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-028",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-029",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-029",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-029",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-030",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-030",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-030",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-031",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-031",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-031",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-032",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-032",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-032",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-033",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-033",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-033",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-034",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-034",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-034",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-035",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-035",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-035",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-036",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-036",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-036",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-037",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-037",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-037",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-038",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-038",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-038",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-039",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-039",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-039",
+      "componentName": "Card",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-040",
+      "componentName": "Button",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-040",
+      "componentName": "ButtonGroup",
+      "score": 0.28
+    },
+    {
+      "nodeId": "region-040",
+      "componentName": "Card",
+      "score": 0.28
+    }
+  ],
+  "diagnostics": [
+    {
+      "kind": "unresolved",
+      "nodeId": "region-001",
+      "message": "Region region-001 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-002",
+      "message": "Region region-002 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-003",
+      "message": "Region region-003 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-004",
+      "message": "Region region-004 remained unresolved; best candidate ChatListItem scored 0.40."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-007",
+      "message": "Region region-007 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-008",
+      "message": "Region region-008 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-009",
+      "message": "Region region-009 remained unresolved; best candidate ChatListItem scored 0.40."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-010",
+      "message": "Region region-010 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-013",
+      "message": "Region region-013 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-015",
+      "message": "Region region-015 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-018",
+      "message": "Region region-018 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-019",
+      "message": "Region region-019 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "structure",
+      "nodeId": "region-016",
+      "message": "No component candidate can satisfy the confidence and parent/child constraints for region-016."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-016",
+      "message": "Region region-016 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-017",
+      "message": "Region region-017 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "structure",
+      "nodeId": "region-023",
+      "message": "No component candidate can satisfy the confidence and parent/child constraints for region-023."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-023",
+      "message": "Region region-023 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-024",
+      "message": "Region region-024 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-022",
+      "message": "Region region-022 remained unresolved; best candidate ChatListItem scored 0.40."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-027",
+      "message": "Region region-027 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-028",
+      "message": "Region region-028 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-029",
+      "message": "Region region-029 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-030",
+      "message": "Region region-030 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-031",
+      "message": "Region region-031 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-032",
+      "message": "Region region-032 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-033",
+      "message": "Region region-033 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-034",
+      "message": "Region region-034 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-035",
+      "message": "Region region-035 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-036",
+      "message": "Region region-036 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-037",
+      "message": "Region region-037 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-038",
+      "message": "Region region-038 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-039",
+      "message": "Region region-039 remained unresolved; best candidate Button scored 0.28."
+    },
+    {
+      "kind": "unresolved",
+      "nodeId": "region-040",
+      "message": "Region region-040 remained unresolved; best candidate Button scored 0.28."
+    }
+  ]
+}
