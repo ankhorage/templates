@@ -1,0 +1,9 @@
+{
+  "image": "src/templates/categories/lifestyle/stillpath/assets/screens/02-Journal.png",
+  "screen": {
+    "id": "stillpath-journal",
+    "name": "Journal",
+    "title": "Journal"
+  },
+  "minConfidence": 0.42
+}
