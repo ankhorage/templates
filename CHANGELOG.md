@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.7.2
+
+### Patch Changes
+
+- 4e1ca4a: Reconstruct the four Stillpath screens with responsive Navigator tabs, regenerated runtime media, and documented owner API limitations.
+
 ## 9.7.1
 
 ### Patch Changes
