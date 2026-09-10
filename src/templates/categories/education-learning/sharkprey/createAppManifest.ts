@@ -86,6 +86,108 @@ const manifest: AppManifest = {
     },
   ],
   activeThemeId: 'sharkprey',
+  dataBindings: {
+    'decision-poker-table': {
+      componentId: 'decision-poker-table',
+      componentType: 'PokerTrainingTable',
+      props: {
+        task: {
+          source: {
+            kind: 'operation',
+            operation: {
+              apiId: 'poker-training',
+              endpointId: 'tasks',
+              operationId: 'listPokerTrainingTasks',
+            },
+            path: '0',
+          },
+          fallback: { value: {} },
+          loading: {
+            state: 'loading',
+            fallback: { value: {} },
+            message: 'Loading training task.',
+          },
+          empty: {
+            state: 'empty',
+            fallback: { value: {} },
+            message: 'No published training task is available.',
+          },
+          error: {
+            state: 'error',
+            fallback: { value: {} },
+            message: 'The training task could not be loaded.',
+          },
+        },
+      },
+    },
+    'decision-question': {
+      componentId: 'decision-question',
+      componentType: 'Heading',
+      props: {
+        text: {
+          source: {
+            kind: 'operation',
+            operation: {
+              apiId: 'poker-training',
+              endpointId: 'tasks',
+              operationId: 'listPokerTrainingTasks',
+            },
+            path: '0.prompt',
+          },
+          fallback: { value: 'No task loaded.' },
+          loading: {
+            state: 'loading',
+            fallback: { value: 'Loading training task…' },
+          },
+          empty: {
+            state: 'empty',
+            fallback: { value: 'No published training task is available.' },
+          },
+          error: {
+            state: 'error',
+            fallback: { value: 'The training task could not be loaded.' },
+          },
+        },
+      },
+    },
+    'decision-action': {
+      componentId: 'decision-action',
+      componentType: 'Text',
+      props: {
+        text: {
+          source: {
+            kind: 'operation',
+            operation: {
+              apiId: 'poker-training',
+              endpointId: 'tasks',
+              operationId: 'listPokerTrainingTasks',
+            },
+            path: '0.previousAction',
+          },
+          fallback: { value: '' },
+        },
+      },
+    },
+    'decision-category': {
+      componentId: 'decision-category',
+      componentType: 'Text',
+      props: {
+        text: {
+          source: {
+            kind: 'operation',
+            operation: {
+              apiId: 'poker-training',
+              endpointId: 'tasks',
+              operationId: 'listPokerTrainingTasks',
+            },
+            path: '0.street',
+          },
+          fallback: { value: '' },
+          transforms: ['uppercase'],
+        },
+      },
+    },
+  },
   splashScreen: {
     backgroundColor: '#060806',
     image: './assets/images/sharkprey-logo.png',
@@ -99,6 +201,47 @@ const manifest: AppManifest = {
     },
   },
   infra: {
+    apis: [
+      {
+        id: 'poker-training',
+        name: 'Poker training',
+        origin: 'external',
+        protocol: 'rest',
+        baseUrl: 'https://api.ankhorage.com/v1/poker',
+        openApi: { url: 'https://api.ankhorage.com/openapi.json' },
+        endpoints: {
+          tasks: {
+            id: 'tasks',
+            kind: 'http',
+            path: '/training/tasks',
+            operations: {
+              listPokerTrainingTasks: {
+                id: 'listPokerTrainingTasks',
+                endpointId: 'tasks',
+                protocol: 'http',
+                intent: 'read',
+                method: 'GET',
+                path: '/training/tasks',
+                request: {
+                  parameters: [
+                    {
+                      name: 'limit',
+                      location: 'query',
+                      schema: { type: 'integer' },
+                    },
+                  ],
+                },
+                response: {
+                  status: 200,
+                  contentType: 'application/json',
+                  schema: { type: 'array', items: { type: 'object' } },
+                },
+              },
+            },
+          },
+        },
+      },
+    ],
     database: {
       provider: 'supabase',
       tier: 'dev',
@@ -925,8 +1068,19 @@ const manifest: AppManifest = {
       id: 'decision-table',
       name: 'Your decision',
       title: 'Your decision',
+      dataLoaders: [
+        {
+          kind: 'operation',
+          operation: {
+            apiId: 'poker-training',
+            endpointId: 'tasks',
+            operationId: 'listPokerTrainingTasks',
+          },
+          input: { limit: { kind: 'literal', value: 1 } },
+        },
+      ],
       description:
-        'Sample hand from the supplied design. Answer evaluation and session progression require application-owned poker operations.',
+        'Loads a published poker training task and presents its table state, action history, and decision prompt. Answer evaluation and session progression require application-owned poker operations.',
       root: {
         id: 'decision-table-screen',
         type: 'Screen',
@@ -1033,201 +1187,16 @@ const manifest: AppManifest = {
                 },
               },
               {
-                id: 'decision-progress-row',
-                type: 'Box',
-                props: {},
-                children: [
-                  {
-                    id: 'decision-hand-count',
-                    type: 'Text',
-                    props: {
-                      text: 'Hand 3 of 10',
-                      variant: 'body',
-                    },
-                  },
-                  {
-                    id: 'decision-progress-wrap',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'decision-progress',
-                        type: 'Progress',
-                        props: {
-                          value: 30,
-                          max: 100,
-                          color: 'secondary',
-                          size: 's',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flex: 1,
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                },
-              },
-              {
-                id: 'decision-facts',
-                type: 'Box',
-                props: {},
-                children: [
-                  {
-                    id: 'decision-blinds',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'decision-blinds-text',
-                        type: 'Text',
-                        props: {
-                          text: 'Blinds 50 / 100',
-                          variant: 'body',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      padding: 10,
-                      borderRadius: 12,
-                      borderWidth: 1,
-                      borderColor: '#303632',
-                      backgroundColor: '#101410',
-                      flex: 1,
-                    },
-                  },
-                  {
-                    id: 'decision-pot',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'decision-pot-text',
-                        type: 'Text',
-                        props: {
-                          text: 'Pot 650',
-                          variant: 'body',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      padding: 10,
-                      borderRadius: 12,
-                      borderWidth: 1,
-                      borderColor: '#303632',
-                      backgroundColor: '#101410',
-                      flex: 1,
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                },
-              },
-              {
                 id: 'decision-table-space',
                 type: 'Box',
                 props: {},
                 children: [
                   {
                     id: 'decision-poker-table',
-                    type: 'TabletopTable',
+                    type: 'PokerTrainingTable',
                     props: {
                       shape: 'oval',
-                      seatCount: 9,
                       cardSize: 'small',
-                      centerLabel: 'Pot 650',
-                      centerCards: [
-                        {
-                          rank: 'Q',
-                          suit: 'hearts',
-                        },
-                        {
-                          rank: '7',
-                          suit: 'clubs',
-                        },
-                        {
-                          rank: '2',
-                          suit: 'spades',
-                        },
-                      ],
-                      seats: [
-                        {
-                          id: 'co',
-                          label: 'CO',
-                          cards: [
-                            {
-                              rank: 'A',
-                              suit: 'spades',
-                            },
-                            {
-                              rank: 'Q',
-                              suit: 'diamonds',
-                            },
-                          ],
-                          selected: true,
-                        },
-                        {
-                          id: 'btn',
-                          label: 'BTN',
-                          faceDownCards: 2,
-                          muted: true,
-                          tokenLabel: 'D',
-                        },
-                        {
-                          id: 'sb',
-                          label: 'SB',
-                          faceDownCards: 2,
-                          muted: true,
-                        },
-                        {
-                          id: 'bb',
-                          label: 'BB',
-                          faceDownCards: 2,
-                          muted: false,
-                        },
-                        {
-                          id: 'utg',
-                          label: 'UTG',
-                          faceDownCards: 2,
-                          muted: true,
-                        },
-                        {
-                          id: 'utg-1',
-                          label: 'UTG+1',
-                          faceDownCards: 2,
-                          muted: true,
-                        },
-                        {
-                          id: 'mp',
-                          label: 'MP',
-                          faceDownCards: 2,
-                          muted: true,
-                        },
-                        {
-                          id: 'mp-1',
-                          label: 'MP+1',
-                          faceDownCards: 2,
-                          muted: true,
-                        },
-                        {
-                          id: 'hj',
-                          label: 'HJ',
-                          faceDownCards: 2,
-                          muted: true,
-                        },
-                      ],
-                      accessibilityLabel:
-                        'Nine-player flop. You hold ace of spades and queen of diamonds in the cutoff. Board queen of hearts, seven of clubs, two of spades. Pot 650.',
                       colorScheme: {
                         tableFelt: '#06150e',
                         tableBorder: '#202a25',
