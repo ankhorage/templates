@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.7.3
+
+### Patch Changes
+
+- e1cf3a1: Bind SharkPrey to live poker training tasks through PokerTrainingTable.
+
 ## 9.7.2
 
 ### Patch Changes
