@@ -1,4 +1,10 @@
-import type { UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  ComponentDataBinding,
+  EventBinding,
+  ScreenSpec,
+  UiNode,
+} from '@ankhorage/contracts';
 import { expect, test } from 'bun:test';
 
 import createAppManifest from '../src/templates/categories/education-learning/sharkprey/createAppManifest';
@@ -91,15 +97,13 @@ test('SharkPrey resolves a listed task before entering the decision screen', () 
     },
   ]);
 
-  const screen = manifest.screens['training-setup'];
-  if (!screen) throw new Error('Missing training setup screen.');
+  const screen = requireScreen(manifest, 'training-setup');
   expect(findNode(screen.root, 'setup-start').props).not.toHaveProperty('onPress');
 });
 
 test('SharkPrey loads task detail from the route and binds all decision content', () => {
   const manifest = createAppManifest();
-  const screen = manifest.screens['decision-table'];
-  if (!screen) throw new Error('Missing decision table screen.');
+  const screen = requireScreen(manifest, 'decision-table');
 
   expect(screen.dataLoaders?.[0]).toEqual({
     kind: 'operation',
@@ -112,22 +116,22 @@ test('SharkPrey loads task detail from the route and binds all decision content'
     },
   });
   expect(findNode(screen.root, 'decision-poker-table').type).toBe('PokerTrainingTable');
-  expect(manifest.dataBindings?.['decision-poker-table']?.props?.task?.source).toEqual({
+  expect(requireBinding(manifest, 'decision-poker-table').props?.task?.source).toEqual({
     kind: 'operation',
     operation: detailOperation,
     path: 'task',
   });
-  expect(manifest.dataBindings?.['decision-question']?.props?.text?.source).toEqual({
+  expect(requireBinding(manifest, 'decision-question').props?.text?.source).toEqual({
     kind: 'operation',
     operation: detailOperation,
     path: 'task.prompt',
   });
-  expect(manifest.dataBindings?.['decision-action']?.props?.text?.source).toEqual({
+  expect(requireBinding(manifest, 'decision-action').props?.text?.source).toEqual({
     kind: 'operation',
     operation: detailOperation,
     path: 'task.previousAction',
   });
-  expect(manifest.dataBindings?.['decision-category']?.props?.text).toMatchObject({
+  expect(requireBinding(manifest, 'decision-category').props?.text).toMatchObject({
     source: { kind: 'operation', operation: detailOperation, path: 'task.street' },
     transforms: ['uppercase'],
   });
@@ -135,12 +139,11 @@ test('SharkPrey loads task detail from the route and binds all decision content'
 
 test('SharkPrey repeats discovered options and evaluates every answer before navigation', () => {
   const manifest = createAppManifest();
-  const screen = manifest.screens['decision-table'];
-  if (!screen) throw new Error('Missing decision table screen.');
+  const screen = requireScreen(manifest, 'decision-table');
   const answers = findNode(screen.root, 'decision-answers');
   const answerButton = findNode(screen.root, 'decision-answer-button');
-  const bindings = manifest.dataBindings?.['decision-answer-button'];
-  const events = bindings?.events?.press;
+  const bindings = requireBinding(manifest, 'decision-answer-button');
+  const events = requireEvents(bindings, 'press');
 
   expect(answers.type).toBe('FlatList');
   expect(answers.repeat).toEqual({
@@ -149,11 +152,11 @@ test('SharkPrey repeats discovered options and evaluates every answer before nav
     keyPath: 'id',
   });
   expect(answerButton.props).not.toHaveProperty('onPress');
-  expect(bindings?.props?.children?.source).toEqual({
+  expect(bindings.props?.children?.source).toEqual({
     kind: 'context',
     path: 'option.label',
   });
-  expect(events?.[0]).toEqual({
+  expect(events[0]).toEqual({
     target: { kind: 'operation', operation: answerOperation },
     input: {
       taskId: {
@@ -166,7 +169,11 @@ test('SharkPrey repeats discovered options and evaluates every answer before nav
       },
     },
   });
-  expect(events?.slice(1).map((binding) => binding.when)).toEqual([
+  expectAnswerNavigationEvents(events.slice(1));
+});
+
+function expectAnswerNavigationEvents(events: readonly EventBinding[]): void {
+  expect(events.map((binding) => binding.when)).toEqual([
     {
       source: { kind: 'operation', operation: answerOperation, path: 'correct' },
       operator: 'eq',
@@ -178,19 +185,18 @@ test('SharkPrey repeats discovered options and evaluates every answer before nav
       value: false,
     },
   ]);
-  for (const binding of events?.slice(1) ?? []) {
+  for (const binding of events) {
     expect(binding.target).toEqual({ kind: 'action', type: 'navigate' });
     expect(binding.input?.route).toEqual({
       kind: 'literal',
       value: '/answer-explanation',
     });
   }
-});
+}
 
 test('SharkPrey renders review task and outcome from API-backed route data', () => {
   const manifest = createAppManifest();
-  const screen = manifest.screens['answer-explanation'];
-  if (!screen) throw new Error('Missing answer explanation screen.');
+  const screen = requireScreen(manifest, 'answer-explanation');
 
   expect(screen.dataLoaders?.[0]).toEqual({
     kind: 'operation',
@@ -203,24 +209,24 @@ test('SharkPrey renders review task and outcome from API-backed route data', () 
     },
   });
   expect(findNode(screen.root, 'review-poker-table').type).toBe('PokerTrainingTable');
-  expect(manifest.dataBindings?.['review-poker-table']?.props?.task?.source).toEqual({
+  expect(requireBinding(manifest, 'review-poker-table').props?.task?.source).toEqual({
     kind: 'operation',
     operation: detailOperation,
     path: 'task',
   });
-  expect(manifest.dataBindings?.['review-verdict']?.props?.text?.source).toEqual({
+  expect(requireBinding(manifest, 'review-verdict').props?.text?.source).toEqual({
     kind: 'context',
     path: 'route.params.verdict',
   });
-  expect(manifest.dataBindings?.['review-chosen-value']?.props?.text?.source).toEqual({
+  expect(requireBinding(manifest, 'review-chosen-value').props?.text?.source).toEqual({
     kind: 'context',
     path: 'route.params.selectedOptionLabel',
   });
-  expect(manifest.dataBindings?.['review-best-value']?.props?.text?.source).toEqual({
+  expect(requireBinding(manifest, 'review-best-value').props?.text?.source).toEqual({
     kind: 'context',
     path: 'route.params.correctOptionValue',
   });
-  expect(manifest.dataBindings?.['review-why-copy']?.props?.text?.source).toEqual({
+  expect(requireBinding(manifest, 'review-why-copy').props?.text?.source).toEqual({
     kind: 'context',
     path: 'route.params.explanation',
   });
@@ -228,7 +234,7 @@ test('SharkPrey renders review task and outcome from API-backed route data', () 
 
 test('SharkPrey keeps task loading states and removes the previous sample hand and answer data', () => {
   const manifest = createAppManifest();
-  const taskBinding = manifest.dataBindings?.['decision-poker-table']?.props?.task;
+  const taskBinding = requireBinding(manifest, 'decision-poker-table').props?.task;
   const serialized = JSON.stringify(manifest);
 
   expect(taskBinding?.loading).toMatchObject({ state: 'loading', fallback: { value: {} } });
@@ -249,4 +255,24 @@ function findNode(root: UiNode, id: string): UiNode {
     nodes.push(...(node.children ?? []));
   }
   throw new Error(`Missing node ${id}.`);
+}
+
+function requireScreen(manifest: AppManifest, id: string): ScreenSpec {
+  const screen = Object.values(manifest.screens).find((candidate) => candidate.id === id);
+  if (!screen) throw new Error(`Missing screen ${id}.`);
+  return screen;
+}
+
+function requireBinding(manifest: AppManifest, id: string): ComponentDataBinding {
+  const binding = Object.values(manifest.dataBindings ?? {}).find(
+    (candidate) => candidate.componentId === id,
+  );
+  if (!binding) throw new Error(`Missing binding ${id}.`);
+  return binding;
+}
+
+function requireEvents(binding: ComponentDataBinding, event: string): readonly EventBinding[] {
+  const events = Object.entries(binding.events ?? {}).find(([name]) => name === event)?.[1];
+  if (!events) throw new Error(`Missing ${event} events for binding ${binding.componentId}.`);
+  return events;
 }
