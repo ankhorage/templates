@@ -85,6 +85,25 @@ test('exports an isolated chat manifest with portable runtime media', () => {
   expect(fresh.metadata.name).toBe('Close');
 });
 
+test('native splash artwork resolves through bundled template media', () => {
+  for (const template of listTemplates()) {
+    const artifact = createTemplateArtifact({ category: template.category, slug: template.slug });
+    for (const mode of [artifact.manifest.splashScreen, artifact.manifest.splashScreen?.dark]) {
+      const mediaId = mode?.image?.mediaId;
+      if (mediaId === undefined) continue;
+      const mediaAsset = Object.values(artifact.manifest.media?.assets ?? {}).find(
+        (asset) => asset.id === mediaId,
+      );
+      expect(mediaAsset).toMatchObject({
+        id: mediaId,
+        kind: 'image',
+        source: { kind: 'bundled' },
+      });
+      expect(artifact.assets.some((asset) => asset.mediaId === mediaId)).toBe(true);
+    }
+  }
+});
+
 test('every published template validates against the current owner component catalog', () => {
   for (const template of listTemplates()) {
     expect(validateTemplateManifest(template.createAppManifest(), 'release')).toMatchObject({

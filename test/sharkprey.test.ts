@@ -64,6 +64,9 @@ test('SharkPrey exports runtime media without rendering reference screenshots', 
   expect(artifact.assets.every(({ targetPath }) => targetPath.startsWith('assets/images/'))).toBe(
     true,
   );
+  expect(artifact.manifest.splashScreen?.image).toEqual({ mediaId: 'sharkprey-logo' });
+  expect(artifact.manifest.splashScreen?.dark?.image).toEqual({ mediaId: 'sharkprey-logo' });
+  expect(artifact.assets.some(({ mediaId }) => mediaId === 'sharkprey-logo')).toBe(true);
   artifact.manifest.metadata.name = 'Consumer edit';
   expect(createAppManifest().metadata.name).toBe('SharkPrey');
 });
