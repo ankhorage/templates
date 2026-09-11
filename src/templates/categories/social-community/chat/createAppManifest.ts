@@ -211,7 +211,7 @@ const manifest: AppManifest = {
             children: [
               {
                 id: 'post-draft',
-                type: 'Input',
+                type: 'TextInput',
                 props: {
                   placeholder: 'What\u2019s on your mind?',
                   value: '',
@@ -366,7 +366,7 @@ const manifest: AppManifest = {
           },
           {
             id: 'chat-search',
-            type: 'Input',
+            type: 'TextInput',
             props: {
               placeholder: 'Search conversations',
               value: '',
@@ -558,7 +558,7 @@ const manifest: AppManifest = {
             children: [
               {
                 id: 'message-draft',
-                type: 'Input',
+                type: 'TextInput',
                 props: {
                   placeholder: 'Message Maya\u2026',
                   value: '',
