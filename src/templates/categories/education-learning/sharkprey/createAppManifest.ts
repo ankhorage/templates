@@ -1,4 +1,9 @@
-import type { AppManifest } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  BindingValueTransform,
+  ComponentDataBinding,
+  EventBinding,
+} from '@ankhorage/contracts';
 import { validateNavigatorManifest } from '@ankhorage/navigator';
 
 /*** Create SharkPrey's portable ZORA screen composition with owner-validated navigation. */
@@ -11,6 +16,84 @@ export default function createAppManifest(): AppManifest {
     throw new Error(diagnostics.map((diagnostic) => diagnostic.message).join(' '));
   }
   return structuredClone(manifest);
+}
+
+function createAnswerNavigationBinding(correct: boolean, verdict: string): EventBinding {
+  const answerOperation = {
+    apiId: 'poker-training',
+    endpointId: 'tasks',
+    operationId: 'checkPokerTrainingTaskAnswer',
+  } as const;
+
+  return {
+    target: { kind: 'action', type: 'navigate' },
+    when: {
+      source: { kind: 'operation', operation: answerOperation, path: 'correct' },
+      operator: 'eq',
+      value: correct,
+    },
+    input: {
+      route: { kind: 'literal', value: '/answer-explanation' },
+      params: {
+        kind: 'object',
+        fields: {
+          taskId: {
+            kind: 'source',
+            source: { kind: 'operation', operation: answerOperation, path: 'taskId' },
+          },
+          selectedOptionLabel: {
+            kind: 'source',
+            source: { kind: 'context', path: 'option.label' },
+          },
+          correctOptionValue: {
+            kind: 'source',
+            source: { kind: 'operation', operation: answerOperation, path: 'correctOptionValue' },
+          },
+          explanation: {
+            kind: 'source',
+            source: { kind: 'operation', operation: answerOperation, path: 'explanation' },
+          },
+          verdict: { kind: 'literal', value: verdict },
+        },
+      },
+    },
+  };
+}
+
+function createOperationTextBinding(
+  componentId: string,
+  path: string,
+  operationId: string,
+  transforms?: readonly BindingValueTransform[],
+): ComponentDataBinding {
+  return {
+    componentId,
+    componentType: 'Text',
+    props: {
+      text: {
+        source: {
+          kind: 'operation',
+          operation: { apiId: 'poker-training', endpointId: 'tasks', operationId },
+          path,
+        },
+        fallback: { value: '' },
+        ...(transforms ? { transforms } : {}),
+      },
+    },
+  };
+}
+
+function createRouteTextBinding(componentId: string, path: string): ComponentDataBinding {
+  return {
+    componentId,
+    componentType: 'Text',
+    props: {
+      text: {
+        source: { kind: 'context', path: `route.params.${path}` },
+        fallback: { value: '' },
+      },
+    },
+  };
 }
 
 const manifest: AppManifest = {
@@ -87,6 +170,49 @@ const manifest: AppManifest = {
   ],
   activeThemeId: 'sharkprey',
   dataBindings: {
+    'setup-start': {
+      componentId: 'setup-start',
+      componentType: 'Button',
+      events: {
+        press: [
+          {
+            target: { kind: 'action', type: 'navigate' },
+            when: {
+              source: {
+                kind: 'operation',
+                operation: {
+                  apiId: 'poker-training',
+                  endpointId: 'tasks',
+                  operationId: 'listPokerTrainingTasks',
+                },
+                path: '0.id',
+              },
+              operator: 'exists',
+            },
+            input: {
+              route: { kind: 'literal', value: '/decision-table' },
+              params: {
+                kind: 'object',
+                fields: {
+                  taskId: {
+                    kind: 'source',
+                    source: {
+                      kind: 'operation',
+                      operation: {
+                        apiId: 'poker-training',
+                        endpointId: 'tasks',
+                        operationId: 'listPokerTrainingTasks',
+                      },
+                      path: '0.id',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
     'decision-poker-table': {
       componentId: 'decision-poker-table',
       componentType: 'PokerTrainingTable',
@@ -97,9 +223,9 @@ const manifest: AppManifest = {
             operation: {
               apiId: 'poker-training',
               endpointId: 'tasks',
-              operationId: 'listPokerTrainingTasks',
+              operationId: 'getPokerTrainingTaskById',
             },
-            path: '0',
+            path: 'task',
           },
           fallback: { value: {} },
           loading: {
@@ -130,9 +256,9 @@ const manifest: AppManifest = {
             operation: {
               apiId: 'poker-training',
               endpointId: 'tasks',
-              operationId: 'listPokerTrainingTasks',
+              operationId: 'getPokerTrainingTaskById',
             },
-            path: '0.prompt',
+            path: 'task.prompt',
           },
           fallback: { value: 'No task loaded.' },
           loading: {
@@ -160,9 +286,9 @@ const manifest: AppManifest = {
             operation: {
               apiId: 'poker-training',
               endpointId: 'tasks',
-              operationId: 'listPokerTrainingTasks',
+              operationId: 'getPokerTrainingTaskById',
             },
-            path: '0.previousAction',
+            path: 'task.previousAction',
           },
           fallback: { value: '' },
         },
@@ -178,15 +304,102 @@ const manifest: AppManifest = {
             operation: {
               apiId: 'poker-training',
               endpointId: 'tasks',
-              operationId: 'listPokerTrainingTasks',
+              operationId: 'getPokerTrainingTaskById',
             },
-            path: '0.street',
+            path: 'task.street',
           },
           fallback: { value: '' },
           transforms: ['uppercase'],
         },
       },
     },
+    'decision-answer-button': {
+      componentId: 'decision-answer-button',
+      componentType: 'Button',
+      props: {
+        children: {
+          source: { kind: 'context', path: 'option.label' },
+          fallback: { value: 'Choose answer' },
+        },
+      },
+      events: {
+        press: [
+          {
+            target: {
+              kind: 'operation',
+              operation: {
+                apiId: 'poker-training',
+                endpointId: 'tasks',
+                operationId: 'checkPokerTrainingTaskAnswer',
+              },
+            },
+            input: {
+              taskId: {
+                kind: 'source',
+                source: {
+                  kind: 'operation',
+                  operation: {
+                    apiId: 'poker-training',
+                    endpointId: 'tasks',
+                    operationId: 'getPokerTrainingTaskById',
+                  },
+                  path: 'task.id',
+                },
+              },
+              selectedOptionValue: {
+                kind: 'source',
+                source: { kind: 'context', path: 'option.value' },
+              },
+            },
+          },
+          createAnswerNavigationBinding(true, 'Correct'),
+          createAnswerNavigationBinding(false, 'Not quite'),
+        ],
+      },
+    },
+    'review-poker-table': {
+      componentId: 'review-poker-table',
+      componentType: 'PokerTrainingTable',
+      props: {
+        task: {
+          source: {
+            kind: 'operation',
+            operation: {
+              apiId: 'poker-training',
+              endpointId: 'tasks',
+              operationId: 'getPokerTrainingTaskById',
+            },
+            path: 'task',
+          },
+          fallback: { value: {} },
+          loading: {
+            state: 'loading',
+            fallback: { value: {} },
+            message: 'Loading reviewed hand.',
+          },
+          empty: {
+            state: 'empty',
+            fallback: { value: {} },
+            message: 'The reviewed hand is unavailable.',
+          },
+          error: {
+            state: 'error',
+            fallback: { value: {} },
+            message: 'The reviewed hand could not be loaded.',
+          },
+        },
+      },
+    },
+    'review-category': createOperationTextBinding(
+      'review-category',
+      'task.street',
+      'getPokerTrainingTaskById',
+      ['uppercase'],
+    ),
+    'review-verdict': createRouteTextBinding('review-verdict', 'verdict'),
+    'review-chosen-value': createRouteTextBinding('review-chosen-value', 'selectedOptionLabel'),
+    'review-best-value': createRouteTextBinding('review-best-value', 'correctOptionValue'),
+    'review-why-copy': createRouteTextBinding('review-why-copy', 'explanation'),
   },
   splashScreen: {
     backgroundColor: '#060806',
@@ -235,6 +448,119 @@ const manifest: AppManifest = {
                   status: 200,
                   contentType: 'application/json',
                   schema: { type: 'array', items: { type: 'object' } },
+                },
+              },
+              getPokerTrainingTaskById: {
+                id: 'getPokerTrainingTaskById',
+                endpointId: 'tasks',
+                protocol: 'http',
+                intent: 'read',
+                method: 'GET',
+                path: '/training/tasks/{taskId}',
+                request: {
+                  parameters: [
+                    {
+                      name: 'taskId',
+                      location: 'path',
+                      required: true,
+                      schema: { type: 'string', format: 'uuid' },
+                    },
+                  ],
+                },
+                response: {
+                  status: 200,
+                  contentType: 'application/json',
+                  schema: {
+                    type: 'object',
+                    required: ['task', 'options'],
+                    properties: {
+                      task: { type: 'object' },
+                      options: { type: 'array', items: { type: 'object' } },
+                    },
+                  },
+                },
+              },
+              getPokerTrainingTaskBySlug: {
+                id: 'getPokerTrainingTaskBySlug',
+                endpointId: 'tasks',
+                protocol: 'http',
+                intent: 'read',
+                method: 'GET',
+                path: '/training/tasks/by-slug/{slug}',
+                request: {
+                  parameters: [
+                    {
+                      name: 'slug',
+                      location: 'path',
+                      required: true,
+                      schema: { type: 'string' },
+                    },
+                  ],
+                },
+                response: {
+                  status: 200,
+                  contentType: 'application/json',
+                  schema: {
+                    type: 'object',
+                    required: ['task', 'options'],
+                    properties: {
+                      task: { type: 'object' },
+                      options: { type: 'array', items: { type: 'object' } },
+                    },
+                  },
+                },
+              },
+              checkPokerTrainingTaskAnswer: {
+                id: 'checkPokerTrainingTaskAnswer',
+                endpointId: 'tasks',
+                protocol: 'http',
+                intent: 'action',
+                method: 'POST',
+                path: '/training/tasks/{taskId}/answer',
+                request: {
+                  contentType: 'application/json',
+                  parameters: [
+                    {
+                      name: 'taskId',
+                      location: 'path',
+                      required: true,
+                      schema: { type: 'string', format: 'uuid' },
+                    },
+                    {
+                      name: 'selectedOptionValue',
+                      location: 'body',
+                      required: true,
+                      schema: { type: 'string' },
+                    },
+                  ],
+                  schema: {
+                    type: 'object',
+                    required: ['selectedOptionValue'],
+                    properties: { selectedOptionValue: { type: 'string' } },
+                  },
+                },
+                response: {
+                  status: 200,
+                  contentType: 'application/json',
+                  schema: {
+                    type: 'object',
+                    required: [
+                      'taskId',
+                      'selectedOptionValue',
+                      'correct',
+                      'correctOptionValue',
+                      'explanation',
+                    ],
+                    properties: {
+                      taskId: { type: 'string', format: 'uuid' },
+                      selectedOptionValue: { type: 'string' },
+                      correct: { type: 'boolean' },
+                      correctOptionValue: { type: 'string' },
+                      explanation: { type: 'string' },
+                      selectedOptionExplanation: { type: ['string', 'null'] },
+                      correctOptionExplanation: { type: ['string', 'null'] },
+                    },
+                  },
                 },
               },
             },
@@ -749,7 +1075,18 @@ const manifest: AppManifest = {
       id: 'training-setup',
       name: 'Build your session',
       title: 'Build your session',
-      description: 'Reference design populated with sample training content.',
+      dataLoaders: [
+        {
+          kind: 'operation',
+          operation: {
+            apiId: 'poker-training',
+            endpointId: 'tasks',
+            operationId: 'listPokerTrainingTasks',
+          },
+          input: { limit: { kind: 'literal', value: 1 } },
+        },
+      ],
+      description: 'Loads the next published poker training task before starting the session.',
       root: {
         id: 'training-setup-screen',
         type: 'Screen',
@@ -1041,12 +1378,6 @@ const manifest: AppManifest = {
                   color: 'secondary',
                   variant: 'solid',
                   size: 'l',
-                  onPress: {
-                    type: 'navigate',
-                    payload: {
-                      route: '/decision-table',
-                    },
-                  },
                   fullWidth: true,
                 },
                 style: {
@@ -1074,13 +1405,18 @@ const manifest: AppManifest = {
           operation: {
             apiId: 'poker-training',
             endpointId: 'tasks',
-            operationId: 'listPokerTrainingTasks',
+            operationId: 'getPokerTrainingTaskById',
           },
-          input: { limit: { kind: 'literal', value: 1 } },
+          input: {
+            taskId: {
+              kind: 'source',
+              source: { kind: 'context', path: 'route.params.taskId' },
+            },
+          },
         },
       ],
       description:
-        'Loads a published poker training task and presents its table state, action history, and decision prompt. Answer evaluation and session progression require application-owned poker operations.',
+        'Loads one published poker training task with its answer options and evaluates every selection through the poker API before review.',
       root: {
         id: 'decision-table-screen',
         type: 'Screen',
@@ -1181,7 +1517,7 @@ const manifest: AppManifest = {
                 id: 'decision-category',
                 type: 'Text',
                 props: {
-                  text: 'Flop · C-bet sizing',
+                  text: 'Loading street…',
                   variant: 'body',
                   emphasis: 'muted',
                 },
@@ -1225,7 +1561,7 @@ const manifest: AppManifest = {
                 id: 'decision-action',
                 type: 'Text',
                 props: {
-                  text: 'You raised from CO. BB called.',
+                  text: 'Loading action history…',
                   variant: 'body',
                   align: 'center',
                   emphasis: 'muted',
@@ -1235,7 +1571,7 @@ const manifest: AppManifest = {
                 id: 'decision-question',
                 type: 'Heading',
                 props: {
-                  text: 'What’s the best default\ncontinuation-bet size?',
+                  text: 'Loading decision…',
                   level: 2,
                   size: 'h2',
                   align: 'center',
@@ -1243,95 +1579,54 @@ const manifest: AppManifest = {
               },
               {
                 id: 'decision-answers',
-                type: 'Box',
-                props: {},
+                type: 'FlatList',
+                props: {
+                  horizontal: true,
+                  showsScrollIndicator: false,
+                  emptyText: 'No answer options are available for this task.',
+                  accessibilityLabel: 'Answer options',
+                },
+                repeat: {
+                  source: {
+                    kind: 'operation',
+                    operation: {
+                      apiId: 'poker-training',
+                      endpointId: 'tasks',
+                      operationId: 'getPokerTrainingTaskById',
+                    },
+                    path: 'options',
+                  },
+                  itemAlias: 'option',
+                  keyPath: 'id',
+                },
                 children: [
                   {
-                    id: 'decision-answer-0',
+                    id: 'decision-answer-option',
                     type: 'Box',
                     props: {},
                     children: [
                       {
-                        id: 'decision-answer-button-0',
+                        id: 'decision-answer-button',
                         type: 'Button',
                         props: {
-                          children: 'Check',
+                          children: 'Choose answer',
                           color: 'secondary',
                           variant: 'outline',
                           size: 's',
-                          fullWidth: true,
                         },
                         style: {
                           minHeight: 48,
+                          minWidth: 150,
                         },
                       },
                     ],
                     style: {
-                      gap: 12,
-                      flex: 1,
-                    },
-                  },
-                  {
-                    id: 'decision-answer-1',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'decision-answer-button-1',
-                        type: 'Button',
-                        props: {
-                          children: 'Bet ~33% pot',
-                          color: 'secondary',
-                          variant: 'outline',
-                          size: 's',
-                          fullWidth: true,
-                        },
-                        style: {
-                          minHeight: 48,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flex: 1,
-                    },
-                  },
-                  {
-                    id: 'decision-answer-2',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'decision-answer-button-2',
-                        type: 'Button',
-                        props: {
-                          children: 'Bet ~75% pot',
-                          color: 'secondary',
-                          variant: 'outline',
-                          size: 's',
-                          onPress: {
-                            type: 'navigate',
-                            payload: {
-                              route: '/answer-explanation',
-                            },
-                          },
-                          fullWidth: true,
-                        },
-                        style: {
-                          minHeight: 48,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flex: 1,
+                      paddingRight: 12,
                     },
                   },
                 ],
                 style: {
-                  gap: 12,
-                  flexDirection: 'row',
-                  alignItems: 'center',
+                  minHeight: 48,
                 },
               },
             ],
@@ -1350,7 +1645,23 @@ const manifest: AppManifest = {
       name: 'Review the decision',
       title: 'Review the decision',
       description:
-        'The supplied explanation depicts the 75 percent answer. Poker evaluation is not fabricated by this visual template.',
+        'Reloads the reviewed task and renders the submitted answer outcome returned by the poker API.',
+      dataLoaders: [
+        {
+          kind: 'operation',
+          operation: {
+            apiId: 'poker-training',
+            endpointId: 'tasks',
+            operationId: 'getPokerTrainingTaskById',
+          },
+          input: {
+            taskId: {
+              kind: 'source',
+              source: { kind: 'context', path: 'route.params.taskId' },
+            },
+          },
+        },
+      ],
       root: {
         id: 'answer-explanation-screen',
         type: 'Screen',
@@ -1451,385 +1762,116 @@ const manifest: AppManifest = {
                 id: 'review-category',
                 type: 'Text',
                 props: {
-                  text: 'Flop · C-bet sizing',
+                  text: 'Street',
                   variant: 'body',
                   emphasis: 'muted',
                 },
               },
               {
-                id: 'review-hand',
+                id: 'review-table-space',
                 type: 'Box',
                 props: {},
                 children: [
                   {
-                    id: 'review-hand-row',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'review-hero',
-                        type: 'Box',
-                        props: {},
-                        children: [
-                          {
-                            id: 'review-hero-label',
-                            type: 'Text',
-                            props: {
-                              text: 'Hero (CO)',
-                              variant: 'body',
-                            },
-                          },
-                          {
-                            id: 'review-hero-cards',
-                            type: 'Box',
-                            props: {},
-                            children: [
-                              {
-                                id: 'review-hero-cards-0',
-                                type: 'Box',
-                                props: {},
-                                children: [
-                                  {
-                                    id: 'review-hero-cards-0-value',
-                                    type: 'Text',
-                                    props: {
-                                      text: 'A\n♠',
-                                      variant: 'body',
-                                      weight: 'bold',
-                                      align: 'center',
-                                    },
-                                    style: {
-                                      color: '#080908',
-                                      fontSize: 22,
-                                      lineHeight: 24,
-                                    },
-                                  },
-                                ],
-                                style: {
-                                  gap: 12,
-                                  padding: 4,
-                                  width: 34,
-                                  height: 50,
-                                  backgroundColor: '#fafbf9',
-                                  borderRadius: 4,
-                                  justifyContent: 'center',
-                                },
-                              },
-                              {
-                                id: 'review-hero-cards-1',
-                                type: 'Box',
-                                props: {},
-                                children: [
-                                  {
-                                    id: 'review-hero-cards-1-value',
-                                    type: 'Text',
-                                    props: {
-                                      text: 'Q\n♦',
-                                      variant: 'body',
-                                      weight: 'bold',
-                                      align: 'center',
-                                    },
-                                    style: {
-                                      color: '#c62525',
-                                      fontSize: 22,
-                                      lineHeight: 24,
-                                    },
-                                  },
-                                ],
-                                style: {
-                                  gap: 12,
-                                  padding: 4,
-                                  width: 34,
-                                  height: 50,
-                                  backgroundColor: '#fafbf9',
-                                  borderRadius: 4,
-                                  justifyContent: 'center',
-                                },
-                              },
-                            ],
-                            style: {
-                              gap: 5,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                        },
+                    id: 'review-poker-table',
+                    type: 'PokerTrainingTable',
+                    props: {
+                      shape: 'oval',
+                      cardSize: 'small',
+                      colorScheme: {
+                        tableFelt: '#06150e',
+                        tableBorder: '#202a25',
+                        tableInnerBorder: '#3f5147',
+                        cardBack: '#141a17',
+                        cardBackBorder: '#4b5952',
+                        cardSurface: '#f7f8f5',
+                        cardText: '#080a09',
+                        redSuitText: '#d42e35',
+                        seatSurface: '#0e1410',
+                        seatBorder: '#344239',
+                        seatSelectedBorder: '#0060ff',
+                        tokenSurface: '#e0e7e1',
+                        tokenText: '#0c100e',
                       },
-                      {
-                        id: 'review-board',
-                        type: 'Box',
-                        props: {},
-                        children: [
-                          {
-                            id: 'review-board-label',
-                            type: 'Text',
-                            props: {
-                              text: 'Board',
-                              variant: 'body',
-                            },
-                          },
-                          {
-                            id: 'review-board-cards',
-                            type: 'Box',
-                            props: {},
-                            children: [
-                              {
-                                id: 'review-board-cards-0',
-                                type: 'Box',
-                                props: {},
-                                children: [
-                                  {
-                                    id: 'review-board-cards-0-value',
-                                    type: 'Text',
-                                    props: {
-                                      text: 'Q\n♥',
-                                      variant: 'body',
-                                      weight: 'bold',
-                                      align: 'center',
-                                    },
-                                    style: {
-                                      color: '#c62525',
-                                      fontSize: 22,
-                                      lineHeight: 24,
-                                    },
-                                  },
-                                ],
-                                style: {
-                                  gap: 12,
-                                  padding: 4,
-                                  width: 34,
-                                  height: 50,
-                                  backgroundColor: '#fafbf9',
-                                  borderRadius: 4,
-                                  justifyContent: 'center',
-                                },
-                              },
-                              {
-                                id: 'review-board-cards-1',
-                                type: 'Box',
-                                props: {},
-                                children: [
-                                  {
-                                    id: 'review-board-cards-1-value',
-                                    type: 'Text',
-                                    props: {
-                                      text: '7\n♣',
-                                      variant: 'body',
-                                      weight: 'bold',
-                                      align: 'center',
-                                    },
-                                    style: {
-                                      color: '#080908',
-                                      fontSize: 22,
-                                      lineHeight: 24,
-                                    },
-                                  },
-                                ],
-                                style: {
-                                  gap: 12,
-                                  padding: 4,
-                                  width: 34,
-                                  height: 50,
-                                  backgroundColor: '#fafbf9',
-                                  borderRadius: 4,
-                                  justifyContent: 'center',
-                                },
-                              },
-                              {
-                                id: 'review-board-cards-2',
-                                type: 'Box',
-                                props: {},
-                                children: [
-                                  {
-                                    id: 'review-board-cards-2-value',
-                                    type: 'Text',
-                                    props: {
-                                      text: '2\n♠',
-                                      variant: 'body',
-                                      weight: 'bold',
-                                      align: 'center',
-                                    },
-                                    style: {
-                                      color: '#080908',
-                                      fontSize: 22,
-                                      lineHeight: 24,
-                                    },
-                                  },
-                                ],
-                                style: {
-                                  gap: 12,
-                                  padding: 4,
-                                  width: 34,
-                                  height: 50,
-                                  backgroundColor: '#fafbf9',
-                                  borderRadius: 4,
-                                  justifyContent: 'center',
-                                },
-                              },
-                            ],
-                            style: {
-                              gap: 5,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                        },
-                      },
-                      {
-                        id: 'review-pot',
-                        type: 'Box',
-                        props: {},
-                        children: [
-                          {
-                            id: 'review-pot-label',
-                            type: 'Text',
-                            props: {
-                              text: 'Pot',
-                              variant: 'body',
-                            },
-                          },
-                          {
-                            id: 'review-pot-number',
-                            type: 'Text',
-                            props: {
-                              text: '650',
-                              variant: 'body',
-                              weight: 'bold',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flexDirection: 'row',
-                      alignItems: 'center',
                     },
                   },
                 ],
                 style: {
-                  gap: 12,
+                  paddingHorizontal: 12,
+                  paddingVertical: 24,
+                },
+              },
+              {
+                id: 'review-outcome',
+                type: 'Box',
+                props: {},
+                children: [
+                  {
+                    id: 'review-result-label',
+                    type: 'Text',
+                    props: {
+                      text: 'Result',
+                      variant: 'caption',
+                      emphasis: 'muted',
+                    },
+                  },
+                  {
+                    id: 'review-verdict',
+                    type: 'Text',
+                    props: {
+                      text: 'Result unavailable',
+                      variant: 'body',
+                      weight: 'bold',
+                    },
+                    style: {
+                      fontSize: 20,
+                    },
+                  },
+                  {
+                    id: 'review-chosen-label',
+                    type: 'Text',
+                    props: {
+                      text: 'Your answer',
+                      variant: 'caption',
+                      emphasis: 'muted',
+                    },
+                  },
+                  {
+                    id: 'review-chosen-value',
+                    type: 'Text',
+                    props: {
+                      text: 'Answer unavailable',
+                      variant: 'body',
+                      weight: 'semiBold',
+                    },
+                  },
+                  {
+                    id: 'review-best-label',
+                    type: 'Text',
+                    props: {
+                      text: 'Correct answer',
+                      variant: 'caption',
+                      emphasis: 'muted',
+                    },
+                  },
+                  {
+                    id: 'review-best-value',
+                    type: 'Text',
+                    props: {
+                      text: 'Answer unavailable',
+                      variant: 'body',
+                      color: 'success',
+                      weight: 'semiBold',
+                    },
+                  },
+                ],
+                style: {
+                  gap: 8,
                   padding: 16,
                   borderRadius: 12,
                   borderWidth: 1,
                   borderColor: '#303632',
                   backgroundColor: '#101410',
-                },
-              },
-              {
-                id: 'review-wrong',
-                type: 'Box',
-                props: {},
-                children: [
-                  {
-                    id: 'review-wrong-heading',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'review-wrong-icon',
-                        type: 'Icon',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-incorrect-icon',
-                          },
-                          size: 28,
-                          color: '#ef4444',
-                        },
-                      },
-                      {
-                        id: 'review-wrong-title',
-                        type: 'Text',
-                        props: {
-                          text: 'Not quite',
-                          variant: 'body',
-                          color: 'error',
-                          weight: 'bold',
-                        },
-                        style: {
-                          fontSize: 20,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    },
-                  },
-                  {
-                    id: 'review-chosen',
-                    type: 'Text',
-                    props: {
-                      text: 'You chose Bet ~75% pot',
-                      variant: 'body',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  padding: 16,
-                  borderRadius: 12,
-                  borderWidth: 1,
-                  borderColor: '#ef4444',
-                  backgroundColor: '#100707',
-                },
-              },
-              {
-                id: 'review-best',
-                type: 'Box',
-                props: {},
-                children: [
-                  {
-                    id: 'review-best-row',
-                    type: 'Box',
-                    props: {},
-                    children: [
-                      {
-                        id: 'review-best-icon',
-                        type: 'Icon',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-correct-icon',
-                          },
-                          size: 28,
-                          color: '#22c55e',
-                        },
-                      },
-                      {
-                        id: 'review-best-copy',
-                        type: 'Text',
-                        props: {
-                          text: 'Best default: Bet ~33% pot',
-                          variant: 'body',
-                          color: 'success',
-                          weight: 'semiBold',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  padding: 16,
-                  borderRadius: 12,
-                  borderWidth: 1,
-                  borderColor: '#22c55e',
-                  backgroundColor: '#061009',
                 },
               },
               {
@@ -1850,7 +1892,7 @@ const manifest: AppManifest = {
                     id: 'review-why-copy',
                     type: 'Text',
                     props: {
-                      text: 'A small continuation bet gains value from worse Qx and denies equity efficiently.\nA large size is unnecessary as a baseline.',
+                      text: 'Explanation unavailable.',
                       variant: 'body',
                     },
                   },
@@ -1868,14 +1910,14 @@ const manifest: AppManifest = {
                     id: 'review-next',
                     type: 'Button',
                     props: {
-                      children: 'Next hand',
+                      children: 'Choose next hand',
                       color: 'secondary',
                       variant: 'solid',
                       size: 'l',
                       onPress: {
                         type: 'navigate',
                         payload: {
-                          route: '/decision-table',
+                          route: '/training-setup',
                         },
                       },
                       fullWidth: true,

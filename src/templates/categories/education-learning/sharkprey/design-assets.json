@@ -135,7 +135,6 @@
       "targetPath": "assets/images/svg/correct.svg",
       "contentType": "image/svg+xml",
       "usages": [
-        "/screens/answer-explanation/root/children/0/children/5/children/0/children/0/props/source",
         "/screens/hand-history/root/children/0/children/5/children/0/children/1/children/0/props/source",
         "/screens/hand-history/root/children/0/children/6/children/0/children/1/children/0/props/source"
       ]
@@ -201,7 +200,6 @@
       "targetPath": "assets/images/svg/incorrect.svg",
       "contentType": "image/svg+xml",
       "usages": [
-        "/screens/answer-explanation/root/children/0/children/4/children/0/children/0/props/source",
         "/screens/hand-history/root/children/0/children/4/children/0/children/1/children/0/props/source"
       ]
     },
