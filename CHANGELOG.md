@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.7.4
+
+### Patch Changes
+
+- 22436fc: Align template manifests and validation with ZORA 9 and the current Navigator release, using TextInput for text entry.
+
 ## 9.7.3
 
 ### Patch Changes
