@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 9.7.5
+
+### Patch Changes
+
+- ed68a21: Preconfigure SharkPrey's complete poker training API and replace hardcoded task, answer, and review data with canonical runtime bindings.
+
 ## 9.7.4
 
 ### Patch Changes
