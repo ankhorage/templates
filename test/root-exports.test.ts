@@ -84,3 +84,12 @@ test('exports an isolated chat manifest with portable runtime media', () => {
   const fresh = resolveTemplate('social_community', 'chat').createAppManifest();
   expect(fresh.metadata.name).toBe('Close');
 });
+
+test('every published template validates against the current owner component catalog', () => {
+  for (const template of listTemplates()) {
+    expect(validateTemplateManifest(template.createAppManifest(), 'release')).toMatchObject({
+      status: 'ready',
+      diagnostics: [],
+    });
+  }
+});

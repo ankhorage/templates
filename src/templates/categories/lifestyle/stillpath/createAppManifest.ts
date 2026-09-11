@@ -2040,8 +2040,9 @@ const manifest = {
                 children: [
                   {
                     id: 'journal-entry',
-                    type: 'Textarea',
+                    type: 'TextInput',
                     props: {
+                      multiline: true,
                       value:
                         'This morning feels quiet and spacious.\n\nI’m grateful for the slow start and the sunlight coming through the window.\n\nI want to be present with what matters and let go of what doesn’t.',
                       readOnly: true,
