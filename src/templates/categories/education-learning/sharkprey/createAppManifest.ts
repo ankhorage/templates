@@ -403,12 +403,12 @@ const manifest: AppManifest = {
   },
   splashScreen: {
     backgroundColor: '#060806',
-    image: './assets/images/sharkprey-logo.png',
+    image: { mediaId: 'sharkprey-logo' },
     imageWidth: 280,
     resizeMode: 'contain',
     dark: {
       backgroundColor: '#060806',
-      image: './assets/images/sharkprey-logo.png',
+      image: { mediaId: 'sharkprey-logo' },
       imageWidth: 280,
       resizeMode: 'contain',
     },

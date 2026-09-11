@@ -56,14 +56,8 @@ const manifest: AppManifest = {
   activeThemeId: 'close',
   splashScreen: {
     backgroundColor: '#4F46E5',
-    image: './assets/splash/icon.png',
-    imageWidth: 160,
-    resizeMode: 'contain',
     dark: {
       backgroundColor: '#4F46E5',
-      image: './assets/splash/icon-dark.png',
-      imageWidth: 160,
-      resizeMode: 'contain',
     },
   },
   infra: {
