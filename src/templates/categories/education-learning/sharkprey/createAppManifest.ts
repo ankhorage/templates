@@ -402,15 +402,13 @@ const manifest: AppManifest = {
     'review-why-copy': createRouteTextBinding('review-why-copy', 'explanation'),
   },
   splashScreen: {
-    backgroundColor: '#060806',
-    image: { mediaId: 'sharkprey-logo' },
+    backgroundColor: '#040404',
+    image: { mediaId: 'sharkprey-splash' },
     imageWidth: 280,
     resizeMode: 'contain',
     dark: {
-      backgroundColor: '#060806',
-      image: { mediaId: 'sharkprey-logo' },
-      imageWidth: 280,
-      resizeMode: 'contain',
+      backgroundColor: '#040404',
+      image: { mediaId: 'sharkprey-splash' },
     },
   },
   infra: {
@@ -4587,6 +4585,21 @@ const manifest: AppManifest = {
         metadata: {
           originalFileName: '00-logo.png',
           width: 1536,
+          height: 1024,
+        },
+      },
+      'sharkprey-splash': {
+        id: 'sharkprey-splash',
+        name: 'SharkPrey Android-safe splash logo',
+        kind: 'image',
+        source: {
+          kind: 'bundled',
+          path: 'assets/images/sharkprey-splash.png',
+        },
+        contentType: 'image/png',
+        metadata: {
+          originalFileName: 'sharkprey-splash.png',
+          width: 1024,
           height: 1024,
         },
       },
