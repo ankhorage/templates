@@ -56,7 +56,6 @@
       "targetPath": "assets/images/sharkprey-logo.png",
       "contentType": "image/png",
       "usages": [
-        "/screens/splash/root/children/0/children/0/props/source",
         "/screens/onboarding/root/children/0/children/0/children/0/children/0/props/source",
         "/screens/onboarding/root/children/0/children/0/children/1/children/0/props/source",
         "/screens/training-setup/root/children/0/children/0/children/0/children/0/props/source",

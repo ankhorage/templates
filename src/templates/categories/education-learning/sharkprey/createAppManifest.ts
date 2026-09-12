@@ -630,10 +630,6 @@ const manifest: AppManifest = {
     initialRouteName: 'onboarding',
     routes: [
       {
-        name: 'splash',
-        screenId: 'splash',
-      },
-      {
         name: 'onboarding',
         screenId: 'onboarding',
       },
@@ -740,79 +736,6 @@ const manifest: AppManifest = {
     ],
   },
   screens: {
-    splash: {
-      id: 'splash',
-      name: 'Splash',
-      title: 'SharkPrey',
-      root: {
-        id: 'splash-screen',
-        type: 'Screen',
-        props: {
-          scroll: false,
-        },
-        children: [
-          {
-            id: 'splash-content',
-            type: 'Box',
-            props: {},
-            children: [
-              {
-                id: 'splash-logo',
-                type: 'Image',
-                props: {
-                  source: {
-                    mediaId: 'sharkprey-logo',
-                  },
-                  alt: 'SharkPrey',
-                },
-                style: {
-                  width: '100%',
-                  height: 246,
-                },
-              },
-              {
-                id: 'splash-tagline',
-                type: 'Text',
-                props: {
-                  text: 'Improve your game. Become the shark.',
-                  variant: 'body',
-                  align: 'center',
-                },
-                style: {
-                  fontSize: 14,
-                },
-              },
-              {
-                id: 'splash-loading',
-                type: 'ProgressRing',
-                props: {
-                  value: 75,
-                  max: 100,
-                  size: 34,
-                  thickness: 3,
-                  color: 'secondary',
-                  accessibilityLabel: 'Loading',
-                },
-                style: {
-                  marginTop: 220,
-                  alignSelf: 'center',
-                },
-              },
-            ],
-            style: {
-              gap: 20,
-              flex: 1,
-              justifyContent: 'center',
-              padding: 28,
-              backgroundColor: '#060806',
-              paddingHorizontal: 10,
-              paddingTop: 14,
-              minHeight: 710,
-            },
-          },
-        ],
-      },
-    },
     onboarding: {
       id: 'onboarding',
       name: 'Where are you starting?',
