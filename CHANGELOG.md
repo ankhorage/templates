@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 10.0.2
+
+### Patch Changes
+
+- eaaef2c: Remove the unused SharkPrey React splash screen and navigator route while retaining the native splash configuration and design evidence.
+
 ## 10.0.1
 
 ### Patch Changes
