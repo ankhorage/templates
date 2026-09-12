@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 10.0.1
+
+### Patch Changes
+
+- a116528: Use package metadata as the default Paradox documentation title and description.
+
 ## 10.0.0
 
 ### Major Changes
