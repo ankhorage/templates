@@ -61,46 +61,47 @@ const manifest: AppManifest = {
     },
   },
   infra: {
-    database: {
-      provider: 'supabase',
-      tier: 'dev',
-    },
-    storage: {
-      provider: 'auto',
-      buckets: ['media'],
-    },
-    secretStore: {
-      provider: 'supabase-vault',
-    },
-    deployment: {
-      target: 'minikube',
-      monitoring: false,
-    },
-    auth: {
-      provider: 'supabase',
-      scope: 'global',
-      flow: {
-        signInRoute: 'sign-in',
-        signUpRoute: 'sign-up',
-        signOutRoute: 'sign-out',
-        forgotPasswordRoute: 'forgot-password',
-        postSignInRoute: '/',
-        unauthorizedRoute: 'sign-in',
+    environments: {
+      local: {
+        deployment: {
+          compute: { provider: 'local' },
+          runtime: { provider: 'minikube' },
+        },
+        database: {
+          provider: 'supabase',
+          tier: 'dev',
+        },
+        objectStorage: {
+          provider: 'supabase',
+          buckets: ['media'],
+        },
+        secretStore: {
+          provider: 'supabase-vault',
+        },
+        auth: {
+          provider: 'supabase',
+          scope: 'global',
+          flow: {
+            signInRoute: 'sign-in',
+            signUpRoute: 'sign-up',
+            signOutRoute: 'sign-out',
+            forgotPasswordRoute: 'forgot-password',
+            postSignInRoute: '/',
+            unauthorizedRoute: 'sign-in',
+          },
+          signIn: {
+            identifiers: ['email'],
+          },
+          signUp: {
+            requiredFields: ['email', 'password'],
+            optionalFields: ['firstName', 'lastName'],
+            signUpPolicy: 'autoSignIn',
+          },
+          profile: {
+            fields: ['email', 'firstName', 'lastName'],
+          },
+        },
       },
-      signIn: {
-        identifiers: ['email'],
-      },
-      signUp: {
-        requiredFields: ['email', 'password'],
-        optionalFields: ['firstName', 'lastName'],
-        signUpPolicy: 'autoSignIn',
-      },
-      profile: {
-        fields: ['email', 'firstName', 'lastName'],
-      },
-    },
-    networking: {
-      cdn: false,
     },
     modules: [],
   },

@@ -112,3 +112,24 @@ test('every published template validates against the current owner component cat
     });
   }
 });
+
+test('every published template uses the environment-aware infrastructure contract', () => {
+  for (const template of listTemplates()) {
+    const { infra } = template.createAppManifest();
+    const { local } = infra.environments;
+
+    expect(local.deployment).toEqual({
+      compute: { provider: 'local' },
+      runtime: { provider: 'minikube' },
+    });
+    expect(local.objectStorage).toEqual({ provider: 'supabase', buckets: ['media'] });
+    expect(Reflect.has(infra, 'storage')).toBe(false);
+    expect(Reflect.has(local.deployment, 'target')).toBe(false);
+    expect(Reflect.has(local.deployment, 'monitoring')).toBe(false);
+  }
+
+  expect(resolveTemplate('education_learning', 'sharkprey').createAppManifest().state).toEqual({
+    provider: 'legend',
+    persistence: false,
+  });
+});

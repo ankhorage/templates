@@ -1,11 +1,11 @@
-import type { AppManifest } from '@ankhorage/contracts';
+import type { InfraAuthSpec } from '@ankhorage/contracts';
 
 export const OAUTH_CALLBACK_ROUTE = 'auth/callback';
 export const OAUTH_FIXTURE_IDS = ['google', 'apple', 'google-apple'] as const;
 
 export type OAuthFixtureId = (typeof OAUTH_FIXTURE_IDS)[number];
 
-type OAuthConfig = NonNullable<NonNullable<AppManifest['infra']['auth']>['oauth']>;
+type OAuthConfig = NonNullable<InfraAuthSpec['oauth']>;
 type OAuthProviderConfig = OAuthConfig['providers'][number];
 
 export interface OAuthFixtureDefinition {

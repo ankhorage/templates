@@ -22,19 +22,19 @@ Source: `src/design/tone-catalog.ts:24:1`
 
 Kind: `value`
 Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:89:22`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:92:22`
 
 ## AppCategory
 
 Kind: `unknown`
 Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:90:1`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:93:1`
 
 ## assertTemplateManifestReady
 
 Kind: `function`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:288:1`
+Source: `src/authoring/compose-category-manifest.ts:290:1`
 
 Fail catalog registration or release finalization while any blocker remains.
 
@@ -100,19 +100,19 @@ Source: `src/design/category-theme.ts:24:1`
 
 ### Members
 
-| Name         | Kind     | Type                                                                                                                                          | Required | Description |
-| ------------ | -------- | --------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| dark         | property | `Partial<import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
-| density      | property | `"compact" \| "comfortable" \| "spacious"`                                                                                                    | no       |             |
-| harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                            | no       |             |
-| light        | property | `Partial<import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
-| primaryColor | property | `string`                                                                                                                                      | no       |             |
-| recipes      | property | `import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/theme").ThemeRecipeOverrides \| undefined`      | no       |             |
-| shape        | property | `"sharp" \| "neutral" \| "soft"`                                                                                                              | no       |             |
-| themeId      | property | `string`                                                                                                                                      | no       |             |
-| themeName    | property | `string`                                                                                                                                      | no       |             |
-| tokens       | property | `import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/theme").ThemeGlobalTokenOverrides \| undefined` | no       |             |
-| tonePairs    | property | `Partial<Record<ThemeMode, string>>`                                                                                                          | no       |             |
+| Name         | Kind     | Type                                                                                                                     | Required | Description |
+| ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------ | -------- | ----------- |
+| dark         | property | `Partial<import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
+| density      | property | `"compact" \| "comfortable" \| "spacious"`                                                                               | no       |             |
+| harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`       | no       |             |
+| light        | property | `Partial<import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/types").ThemeModeConfig>`               | no       |             |
+| primaryColor | property | `string`                                                                                                                 | no       |             |
+| recipes      | property | `import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/theme").ThemeRecipeOverrides \| undefined`      | no       |             |
+| shape        | property | `"sharp" \| "neutral" \| "soft"`                                                                                         | no       |             |
+| themeId      | property | `string`                                                                                                                 | no       |             |
+| themeName    | property | `string`                                                                                                                 | no       |             |
+| tokens       | property | `import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/theme").ThemeGlobalTokenOverrides \| undefined` | no       |             |
+| tonePairs    | property | `Partial<Record<ThemeMode, string>>`                                                                                     | no       |             |
 
 ## CategoryPreset
 
@@ -205,7 +205,7 @@ Source: `src/design/category-theme.ts:50:1`
 | density       | property | `"compact" \| "comfortable" \| "spacious"`                                                                                                                                                                                                                                                                                                                                                                                                    | yes      |             |
 | diagnostics   | property | `readonly CategoryDesignDiagnostic[]`                                                                                                                                                                                                                                                                                                                                                                                                         | yes      |             |
 | harmony       | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                                                                                                                                                                                                                                                                                                                            | yes      |             |
-| preset        | property | `import("/private/tmp/zora9-consumers-kApUhL/templates/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                                                                                            | yes      |             |
+| preset        | property | `import("/tmp/templates-infra-145/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                                                                                                                 | yes      |             |
 | primaryColor  | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
 | shape         | property | `"sharp" \| "neutral" \| "soft"`                                                                                                                                                                                                                                                                                                                                                                                                              | yes      |             |
 | themeConfig   | property | `ThemeConfig`                                                                                                                                                                                                                                                                                                                                                                                                                                 | yes      |             |
@@ -215,7 +215,7 @@ Source: `src/design/category-theme.ts:50:1`
 
 Kind: `function`
 Module: `src/authoring/compose-category-manifest.ts`
-Source: `src/authoring/compose-category-manifest.ts:248:1`
+Source: `src/authoring/compose-category-manifest.ts:250:1`
 
 Compose canonical manifest inputs with a category/theme shell and explicit diagnostics.
 
@@ -237,8 +237,8 @@ Source: `src/authoring/compose-category-manifest.ts:44:1`
 | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
 | authoringState | property | `TemplateAuthoringState`                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
 | category       | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes      |             |
-| dataBindings   | property | `Readonly<Record<string, import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/bindings").ComponentDataBinding>>`                                                                                                                                                                                                                                                                                      | no       |             |
-| dataSources    | property | `Readonly<Record<string, import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/index").DatabaseDataSourceConfig>>`                                                                                                                                                                                                                                                                                     | no       |             |
+| dataBindings   | property | `Readonly<Record<string, import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/bindings").ComponentDataBinding>>`                                                                                                                                                                                                                                                                                                           | no       |             |
+| dataSources    | property | `Readonly<Record<string, import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/index").DatabaseDataSourceConfig>>`                                                                                                                                                                                                                                                                                                          | no       |             |
 | modules        | property | `readonly string[]`                                                                                                                                                                                                                                                                                                                                                                                                                           | no       |             |
 | modulesConfig  | property | `Readonly<Record<string, unknown>>`                                                                                                                                                                                                                                                                                                                                                                                                           | no       |             |
 | name           | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
@@ -349,12 +349,12 @@ Source: `src/fixtures/oauth.ts:11:1`
 
 ### Members
 
-| Name        | Kind     | Type                                                                                                                  | Required | Description |
-| ----------- | -------- | --------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
-| description | property | `string`                                                                                                              | yes      |             |
-| id          | property | `"google" \| "apple" \| "google-apple"`                                                                               | yes      |             |
-| label       | property | `string`                                                                                                              | yes      |             |
-| oauth       | property | `import("/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/auth").AuthOAuthConfig` | yes      |             |
+| Name        | Kind     | Type                                                                                             | Required | Description |
+| ----------- | -------- | ------------------------------------------------------------------------------------------------ | -------- | ----------- |
+| description | property | `string`                                                                                         | yes      |             |
+| id          | property | `"google" \| "apple" \| "google-apple"`                                                          | yes      |             |
+| label       | property | `string`                                                                                         | yes      |             |
+| oauth       | property | `import("/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/auth").AuthOAuthConfig` | yes      |             |
 
 ## OAuthFixtureId
 
@@ -391,7 +391,7 @@ Source: `src/design/category-theme.ts:38:1`
 | density      | property | `"compact" \| "comfortable" \| "spacious"`                                                                                                                                                                                                                                                                                                                                                                                                    | yes      |             |
 | diagnostics  | property | `readonly CategoryDesignDiagnostic[]`                                                                                                                                                                                                                                                                                                                                                                                                         | yes      |             |
 | harmony      | property | `"monochromatic" \| "analogous" \| "complementary" \| "splitComplementary" \| "triadic" \| "tetradic" \| "square"`                                                                                                                                                                                                                                                                                                                            | yes      |             |
-| preset       | property | `import("/private/tmp/zora9-consumers-kApUhL/templates/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                                                                                            | yes      |             |
+| preset       | property | `import("/tmp/templates-infra-145/src/index").CategoryPreset`                                                                                                                                                                                                                                                                                                                                                                                 | yes      |             |
 | primaryColor | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | yes      |             |
 | shape        | property | `"sharp" \| "neutral" \| "soft"`                                                                                                                                                                                                                                                                                                                                                                                                              | yes      |             |
 | themeConfig  | property | `ThemeConfig`                                                                                                                                                                                                                                                                                                                                                                                                                                 | yes      |             |
@@ -441,24 +441,14 @@ Resolve a reviewed tone pair or report that the identifier is not canonical.
 ## SplashScreenResizeMode
 
 Kind: `unknown`
-Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:167:1`
+Module: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts`
+Source: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts:9:1`
 
 ## SplashScreenSpec
 
-Kind: `type`
-Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:176:1`
-
-### Members
-
-| Name            | Kind     | Type                     | Required | Description |
-| --------------- | -------- | ------------------------ | -------- | ----------- |
-| backgroundColor | property | `string`                 | no       |             |
-| dark            | property | `SplashScreenModeSpec`   | no       |             |
-| image           | property | `string`                 | no       |             |
-| imageWidth      | property | `number`                 | no       |             |
-| resizeMode      | property | `SplashScreenResizeMode` | no       |             |
+Kind: `unknown`
+Module: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts`
+Source: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts:11:1`
 
 ## TemplateArtifact
 

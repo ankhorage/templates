@@ -62,7 +62,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 89,
+      "line": 92,
       "column": 22
     },
     "exportPaths": ["src/index.ts"],
@@ -80,7 +80,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 90,
+      "line": 93,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -98,7 +98,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 288,
+      "line": 290,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -292,7 +292,7 @@
       {
         "name": "dark",
         "kind": "property",
-        "type": "Partial<import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -313,7 +313,7 @@
       {
         "name": "light",
         "kind": "property",
-        "type": "Partial<import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -327,7 +327,7 @@
       {
         "name": "recipes",
         "kind": "property",
-        "type": "import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+        "type": "import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -355,7 +355,7 @@
       {
         "name": "tokens",
         "kind": "property",
-        "type": "import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+        "type": "import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -695,7 +695,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/private/tmp/zora9-consumers-kApUhL/templates/src/index\").CategoryPreset",
+        "type": "import(\"/tmp/templates-infra-145/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -739,7 +739,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 248,
+      "line": 250,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -795,14 +795,14 @@
       {
         "name": "dataBindings",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+        "type": "Readonly<Record<string, import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
         "required": false,
         "description": null
       },
       {
         "name": "dataSources",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+        "type": "Readonly<Record<string, import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
         "required": false,
         "description": null
       },
@@ -1156,7 +1156,7 @@
       {
         "name": "oauth",
         "kind": "property",
-        "type": "import(\"/private/tmp/zora9-consumers-kApUhL/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+        "type": "import(\"/tmp/templates-infra-145/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
         "required": true,
         "description": null
       }
@@ -1271,7 +1271,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/private/tmp/zora9-consumers-kApUhL/templates/src/index\").CategoryPreset",
+        "type": "import(\"/tmp/templates-infra-145/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -1414,10 +1414,10 @@
     "isReadme": false,
     "examples": [],
     "kind": "unknown",
-    "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
+    "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
     "sourceLocation": {
-      "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 167,
+      "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
+      "line": 9,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1431,53 +1431,17 @@
     "description": null,
     "isReadme": false,
     "examples": [],
-    "kind": "type",
-    "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
+    "kind": "unknown",
+    "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
     "sourceLocation": {
-      "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 176,
+      "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
+      "line": 11,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": ["SplashScreenResizeMode"],
+    "relatedSymbols": [],
     "signatures": [],
-    "members": [
-      {
-        "name": "backgroundColor",
-        "kind": "property",
-        "type": "string",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "dark",
-        "kind": "property",
-        "type": "SplashScreenModeSpec",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "image",
-        "kind": "property",
-        "type": "string",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "imageWidth",
-        "kind": "property",
-        "type": "number",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "resizeMode",
-        "kind": "property",
-        "type": "SplashScreenResizeMode",
-        "required": false,
-        "description": null
-      }
-    ],
+    "members": [],
     "structuredRows": []
   },
   {
