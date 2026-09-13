@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 10.0.3
+
+### Patch Changes
+
+- fda4e6f: Use a dedicated Android-safe SharkPrey splash asset and keep theme overrides within the supported splash-screen contract.
+
 ## 10.0.2
 
 ### Patch Changes
