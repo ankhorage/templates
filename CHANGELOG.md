@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 11.0.0
+
+### Major Changes
+
+- e2c2084: Generate environment-aware infrastructure manifests against `@ankhorage/contracts` 15, use explicit compute/runtime and object-storage providers, and declare Legend state only through the application-level state contract.
+
 ## 10.0.3
 
 ### Patch Changes
