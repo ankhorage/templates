@@ -156,19 +156,21 @@ function collectInitialRouteDiagnostics(
 function collectAuthLandingRouteDiagnostics(
   manifest: AppManifest,
 ): TemplateCompositionDiagnostic[] {
-  const { auth } = manifest.infra;
-  if (auth?.scope !== 'global') return [];
-  const { postSignInRoute } = resolveAuthFlow(auth.flow);
-  const normalized = normalizeRoutePath(postSignInRoute);
-  if (collectScreenRoutePaths(manifest.navigator).includes(normalized)) return [];
-  return [
-    {
-      code: 'missing-auth-landing-route',
-      severity: 'error',
-      path: 'infra.auth.flow.postSignInRoute',
-      message: `Auth landing route "${postSignInRoute}" does not resolve to a screen route.`,
-    },
-  ];
+  const screenRoutePaths = collectScreenRoutePaths(manifest.navigator);
+  return Object.entries(manifest.infra.environments).flatMap(([environmentId, environment]) => {
+    const { auth } = environment;
+    if (auth?.scope !== 'global') return [];
+    const { postSignInRoute } = resolveAuthFlow(auth.flow);
+    if (screenRoutePaths.includes(normalizeRoutePath(postSignInRoute))) return [];
+    return [
+      {
+        code: 'missing-auth-landing-route' as const,
+        severity: 'error' as const,
+        path: `infra.environments.${environmentId}.auth.flow.postSignInRoute`,
+        message: `Auth landing route "${postSignInRoute}" does not resolve to a screen route.`,
+      },
+    ];
+  });
 }
 
 /*** Read a manifest string prop without treating arbitrary values as valid authoring metadata. */

@@ -267,14 +267,9 @@ describe('blocked navigation composition', () => {
       authoringState: 'release',
     });
     manifest.navigator.initialRouteName = 'missing';
-    manifest.infra.auth = {
-      provider: 'supabase',
-      scope: 'global',
-      flow: {
-        signInRoute: 'sign-in',
-        postSignInRoute: '/missing',
-      },
-    };
+    const authFlow = manifest.infra.environments.local.auth?.flow;
+    if (!authFlow) throw new Error('Expected the local auth flow.');
+    authFlow.postSignInRoute = '/missing';
 
     const result = validateTemplateManifest(manifest, 'release');
 
