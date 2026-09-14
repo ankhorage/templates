@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 11.0.1
+
+### Patch Changes
+
+- c4c5c1d: Remove the SharkScope account connection setting from the SharkPrey education template.
+
 ## 11.0.0
 
 ### Major Changes
