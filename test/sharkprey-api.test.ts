@@ -37,6 +37,12 @@ test('SharkPrey declares the complete canonical poker training API', () => {
     protocol: 'rest',
   });
   expect(endpoint).toMatchObject({ id: 'tasks', path: '/training/tasks' });
+  expect(endpoint?.operations.listPokerTrainingTasks?.request?.parameters).toEqual([
+    { name: 'gameCategory', location: 'query', schema: { type: 'string' } },
+    { name: 'tableSize', location: 'query', schema: { type: 'string' } },
+    { name: 'street', location: 'query', schema: { type: 'string' } },
+    { name: 'limit', location: 'query', schema: { type: 'integer' } },
+  ]);
   expect(endpoint?.operations).toMatchObject({
     listPokerTrainingTasks: {
       endpointId: 'tasks',
@@ -73,7 +79,12 @@ test('SharkPrey resolves a listed task before entering the decision screen', () 
   expect(loader).toEqual({
     kind: 'operation',
     operation: listOperation,
-    input: { limit: { kind: 'literal', value: 1 } },
+    input: {
+      gameCategory: { kind: 'literal', value: 'mtt' },
+      tableSize: { kind: 'literal', value: '9max' },
+      street: { kind: 'literal', value: 'preflop' },
+      limit: { kind: 'literal', value: 1 },
+    },
   });
   expect(start?.events?.press).toEqual([
     {
@@ -99,6 +110,31 @@ test('SharkPrey resolves a listed task before entering the decision screen', () 
 
   const screen = requireScreen(manifest, 'training-setup');
   expect(findNode(screen.root, 'setup-start').props).not.toHaveProperty('onPress');
+});
+
+test('SharkPrey exposes only the currently published training curriculum', () => {
+  const screen = requireScreen(createAppManifest(), 'training-setup');
+
+  expect(findNode(screen.root, 'setup-game').props).toMatchObject({
+    defaultValue: 'mtt',
+    options: [
+      { value: 'cash', disabled: true },
+      { value: 'sng', disabled: true },
+      { value: 'mtt' },
+    ],
+  });
+  expect(findNode(screen.root, 'setup-table').props).toMatchObject({
+    defaultValue: '9max',
+    options: [{ value: '6max', disabled: true }, { value: '9max' }],
+  });
+  expect(findNode(screen.root, 'setup-focus').props).toMatchObject({
+    defaultValue: 'preflop',
+    options: [{ value: 'preflop', label: 'Preflop fundamentals' }],
+  });
+  expect(findNode(screen.root, 'setup-session').props).toMatchObject({
+    defaultValue: 'one',
+    options: [{ value: 'one', label: '1 hand' }],
+  });
 });
 
 test('SharkPrey loads task detail from the route and binds all decision content', () => {
@@ -129,7 +165,7 @@ test('SharkPrey loads task detail from the route and binds all decision content'
   expect(requireBinding(manifest, 'decision-action').props?.text?.source).toEqual({
     kind: 'operation',
     operation: detailOperation,
-    path: 'task.previousAction',
+    path: 'task.historyText',
   });
   expect(requireBinding(manifest, 'decision-category').props?.text).toMatchObject({
     source: { kind: 'operation', operation: detailOperation, path: 'task.street' },
