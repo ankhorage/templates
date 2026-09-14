@@ -173,6 +173,7 @@ const manifest: AppManifest = {
         type: 'Screen',
         props: {
           scroll: true,
+          width: 'default',
         },
         children: [
           {
@@ -332,6 +333,7 @@ const manifest: AppManifest = {
         type: 'Screen',
         props: {
           scroll: true,
+          width: 'default',
         },
         children: [
           {
@@ -444,6 +446,7 @@ const manifest: AppManifest = {
         type: 'Screen',
         props: {
           scroll: true,
+          width: 'default',
         },
         children: [
           {
