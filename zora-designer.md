@@ -693,7 +693,7 @@
       "order": 10,
       "id": "settings",
       "title": "Settings",
-      "purpose": "Control appearance, deck presentation, integration, language, and local learning data.",
+      "purpose": "Control appearance, deck presentation, language, and local learning data.",
       "primaryAction": "Settings save immediately; Reset stats requires confirmation.",
       "successOutcome": "Preferences persist without losing an active session.",
       "visibleCopy": [
@@ -703,17 +703,12 @@
         "SharkPrey Classic",
         "Language",
         "English",
-        "SharkScope",
-        "Not connected",
-        "Connect account",
         "Reset stats"
       ],
       "states": [
         "default",
         "saving",
         "saved",
-        "connection-loading",
-        "connection-error",
         "reset-confirmation"
       ],
       "route": "app/settings",
