@@ -110,7 +110,7 @@
         "origin": "user"
       },
       "desktopScaling": {
-        "value": "deferred to a separate issue and algorithm",
+        "value": "Use ZORA Screen content widths: narrow for onboarding and settings, default for setup and content summaries, and wide for tabletop decision and review screens.",
         "origin": "user"
       },
       "viewport": {
@@ -831,7 +831,7 @@ Owner theme and draft composition gates pass without blockers. Concepts maintain
 
 ## Audit summary
 
-Configuration and portable template are complete with non-blocking owner/runtime gaps. Ten separate portrait mobile concepts and one logo asset were generated, saved, visually inspected at original resolution, and incorporated into the template with a release-ready manifest.
+Configuration and portable template are complete with non-blocking owner/runtime gaps. Ten separate portrait mobile concepts and one logo asset were generated, saved, visually inspected at original resolution, and incorporated into the template with a release-ready manifest. Responsive web content widths are now explicit in the manifest and pair with Navigator's released bottom, rail, and sidebar presentations.
 
 ## Findings and remediation
 
@@ -843,12 +843,12 @@ Nine seats remain dense in a 390-point portrait viewport and should be usability
 
 ## Not assessable
 
-Runtime actions, keyboard/focus order, screen-reader semantics, live announcements, text scaling, and responsive web behavior.
+Runtime actions, keyboard/focus order, screen-reader semantics, live announcements, text scaling, and responsive web visual composition.
 
 ## Open decisions
 
-None for this concept-image scope. Desktop scaling and hand replay are deferred.
+Desktop screenshot evidence and hand replay remain deferred; the runtime desktop width contract is implemented.
 
 ## User notes
 
-SharkPrey should genuinely help players improve. Newcomer education exists but is not the main title. The app targets Android, iOS, and web, while this issue designs mobile screens only.
+SharkPrey should genuinely help players improve. Newcomer education exists but is not the main title. The app targets Android, iOS, and web; the concept images remain mobile evidence while the manifest owns responsive content scaling.

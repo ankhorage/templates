@@ -1013,7 +1013,7 @@ const manifest: AppManifest = {
         id: 'training-setup-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'default',
           scroll: true,
         },
         children: [
@@ -1343,7 +1343,7 @@ const manifest: AppManifest = {
         id: 'decision-table-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'wide',
           scroll: true,
         },
         children: [
@@ -1588,7 +1588,7 @@ const manifest: AppManifest = {
         id: 'answer-explanation-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'wide',
           scroll: true,
         },
         children: [
@@ -1874,7 +1874,7 @@ const manifest: AppManifest = {
         id: 'session-summary-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'default',
           scroll: true,
         },
         children: [
@@ -2275,7 +2275,7 @@ const manifest: AppManifest = {
         id: 'hand-history-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'default',
           scroll: true,
         },
         children: [
@@ -2720,7 +2720,7 @@ const manifest: AppManifest = {
         id: 'stats-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'default',
           scroll: true,
         },
         children: [
@@ -3496,7 +3496,7 @@ const manifest: AppManifest = {
         id: 'learn-screen',
         type: 'Screen',
         props: {
-          width: 'narrow',
+          width: 'default',
           scroll: true,
         },
         children: [
