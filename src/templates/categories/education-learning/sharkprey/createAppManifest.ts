@@ -288,7 +288,7 @@ const manifest: AppManifest = {
               endpointId: 'tasks',
               operationId: 'getPokerTrainingTaskById',
             },
-            path: 'task.previousAction',
+            path: 'task.historyText',
           },
           fallback: { value: '' },
         },
@@ -435,6 +435,21 @@ const manifest: AppManifest = {
                 path: '/training/tasks',
                 request: {
                   parameters: [
+                    {
+                      name: 'gameCategory',
+                      location: 'query',
+                      schema: { type: 'string' },
+                    },
+                    {
+                      name: 'tableSize',
+                      location: 'query',
+                      schema: { type: 'string' },
+                    },
+                    {
+                      name: 'street',
+                      location: 'query',
+                      schema: { type: 'string' },
+                    },
                     {
                       name: 'limit',
                       location: 'query',
@@ -1005,7 +1020,12 @@ const manifest: AppManifest = {
             endpointId: 'tasks',
             operationId: 'listPokerTrainingTasks',
           },
-          input: { limit: { kind: 'literal', value: 1 } },
+          input: {
+            gameCategory: { kind: 'literal', value: 'mtt' },
+            tableSize: { kind: 'literal', value: '9max' },
+            street: { kind: 'literal', value: 'preflop' },
+            limit: { kind: 'literal', value: 1 },
+          },
         },
       ],
       description: 'Loads the next published poker training task before starting the session.',
@@ -1125,11 +1145,12 @@ const manifest: AppManifest = {
                     props: {
                       options: [
                         {
-                          value: 'ring',
-                          label: 'Ring Game',
+                          value: 'cash',
+                          label: 'Cash Game',
                           iconSource: {
                             mediaId: 'sharkprey-chip-icon',
                           },
+                          disabled: true,
                         },
                         {
                           value: 'sng',
@@ -1137,6 +1158,7 @@ const manifest: AppManifest = {
                           iconSource: {
                             mediaId: 'sharkprey-timer-icon',
                           },
+                          disabled: true,
                         },
                         {
                           value: 'mtt',
@@ -1180,21 +1202,22 @@ const manifest: AppManifest = {
                     props: {
                       options: [
                         {
-                          value: 'six',
+                          value: '6max',
                           label: '6-max',
                           iconSource: {
                             mediaId: 'sharkprey-players-two-icon',
                           },
+                          disabled: true,
                         },
                         {
-                          value: 'nine',
+                          value: '9max',
                           label: '9-max',
                           iconSource: {
                             mediaId: 'sharkprey-players-four-icon',
                           },
                         },
                       ],
-                      defaultValue: 'nine',
+                      defaultValue: '9max',
                       presentation: 'card',
                       columns: 2,
                       contentOrientation: 'vertical',
@@ -1228,15 +1251,15 @@ const manifest: AppManifest = {
                     props: {
                       options: [
                         {
-                          value: 'adaptive',
-                          label: 'Adaptive mix',
-                          description: 'Targets the spots that will improve your game fastest.',
+                          value: 'preflop',
+                          label: 'Preflop fundamentals',
+                          description: 'Curated 9-max MTT spots before the flop.',
                           iconSource: {
                             mediaId: 'sharkprey-target-icon',
                           },
                         },
                       ],
-                      defaultValue: 'adaptive',
+                      defaultValue: 'preflop',
                       presentation: 'card',
                       columns: 1,
                       contentOrientation: 'horizontal',
@@ -1270,15 +1293,15 @@ const manifest: AppManifest = {
                     props: {
                       options: [
                         {
-                          value: 'ten',
-                          label: '10 hands',
-                          description: 'About 5 minutes',
+                          value: 'one',
+                          label: '1 hand',
+                          description: 'Quick practice',
                           iconSource: {
                             mediaId: 'sharkprey-history-icon',
                           },
                         },
                       ],
-                      defaultValue: 'ten',
+                      defaultValue: 'one',
                       presentation: 'card',
                       columns: 1,
                       contentOrientation: 'horizontal',
