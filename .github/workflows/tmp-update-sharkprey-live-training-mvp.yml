@@ -37,7 +37,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git rm .github/workflows/tmp-update-sharkprey-live-training-mvp.yml scripts/tmp-update-sharkprey-live-training-mvp.ts scripts/tmp-fix-sharkprey-live-training-test.ts
+          git rm -f .github/workflows/tmp-update-sharkprey-live-training-mvp.yml scripts/tmp-update-sharkprey-live-training-mvp.ts scripts/tmp-fix-sharkprey-live-training-test.ts
           git add -A
           git commit -m "fix: align SharkPrey with live poker training API"
           git push origin HEAD:fix/sharkprey-live-training-mvp
