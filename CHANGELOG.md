@@ -1,5 +1,13 @@
 # @ankhorage/templates
 
+## 11.0.2
+
+### Patch Changes
+
+- aac1741: Consume Navigator's deliberate responsive rail and sidebar geometry, give every published template
+  an explicit ZORA screen-width contract, and expand SharkPrey tabletop and content screens at desktop
+  sizes.
+
 ## 11.0.1
 
 ### Patch Changes
