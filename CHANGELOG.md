@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 11.0.3
+
+### Patch Changes
+
+- 852d678: Align the SharkPrey training template with the live poker API and expose only the currently published MTT 9-max preflop curriculum.
+
 ## 11.0.2
 
 ### Patch Changes
