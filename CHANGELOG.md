@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 11.0.4
+
+### Patch Changes
+
+- c43bcae: Consume the current released infrastructure contracts while keeping template manifests on the canonical `environments.local` shape.
+
 ## 11.0.3
 
 ### Patch Changes
