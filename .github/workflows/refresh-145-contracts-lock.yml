@@ -1,0 +1,50 @@
+name: Refresh Phase 8 Contracts lock
+
+on:
+  push:
+    branches:
+      - fix/145-current-infra-contracts
+    paths:
+      - '.github/workflows/refresh-145-contracts-lock.yml'
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout migration branch
+        uses: actions/checkout@v4
+        with:
+          ref: fix/145-current-infra-contracts
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+
+      - name: Refresh released Contracts dependency
+        run: |
+          bun update --lockfile-only @ankhorage/contracts
+          test -z "$(git diff --name-only | grep -v '^bun.lock$')"
+          bun install --frozen-lockfile
+          bun --eval '
+          const entry = import.meta.resolve("@ankhorage/contracts");
+          const pkg = await Bun.file(new URL("../package.json", entry)).json();
+          if (pkg.version !== "19.1.0") throw new Error(`Expected Contracts 19.1.0, got ${pkg.version}`);
+          console.log(`Contracts: ${pkg.version}`);
+          '
+
+      - name: Commit refreshed lock
+        run: |
+          rm .github/workflows/refresh-145-contracts-lock.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add bun.lock .github/workflows/refresh-145-contracts-lock.yml
+          git commit -m 'chore: consume current infrastructure contracts'
+          git push origin HEAD:fix/145-current-infra-contracts
