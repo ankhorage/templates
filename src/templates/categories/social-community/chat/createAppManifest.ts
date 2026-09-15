@@ -203,7 +203,7 @@ const manifest: AppManifest = {
           },
           {
             id: 'post-composer',
-            type: 'Box',
+            type: 'View',
             children: [
               {
                 id: 'post-draft',
@@ -269,7 +269,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'post-actions',
-                type: 'Stack',
+                type: 'View',
                 children: [
                   {
                     id: 'like-post',
@@ -552,7 +552,7 @@ const manifest: AppManifest = {
           },
           {
             id: 'message-composer',
-            type: 'Box',
+            type: 'View',
             children: [
               {
                 id: 'message-draft',

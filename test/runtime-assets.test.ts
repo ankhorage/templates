@@ -9,7 +9,7 @@ test('release validation accepts separate SVG Icon and Image references inside s
     name: 'Asset content',
     root: {
       id: 'asset-content-root',
-      type: 'Box',
+      type: 'View',
       children: [
         { id: 'asset-icon', type: 'Icon', props: { source: { mediaId: 'friends' } } },
         {
