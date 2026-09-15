@@ -11,5 +11,7 @@
   "files.trimFinalNewlines": true,
   "files.trimTrailingWhitespace": true,
   "editor.tabSize": 2,
-  "editor.detectIndentation": false
+  "editor.detectIndentation": false,
+  "antigravity.autoOpenFiles": true,
+  "antigravity.enableTelemetry": false
 }
