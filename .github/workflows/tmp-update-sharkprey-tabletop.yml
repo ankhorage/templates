@@ -1,0 +1,51 @@
+name: Update SharkPrey tabletop release
+
+on:
+  push:
+    branches:
+      - feat/sharkprey-production-training-binding
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  update:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/sharkprey-production-training-binding
+          fetch-depth: 0
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+      - run: bun install --frozen-lockfile
+      - run: bun add @ankhorage/zora-tabletop@^0.1.3
+      - run: bun test test/sharkprey-api.test.ts
+      - run: bun run build
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun run knip:check
+      - run: bun run format:check
+      - run: bun run docs
+      - run: bun run changeset:status
+      - name: Smoke selected production hand
+        run: |
+          set -euo pipefail
+          list="$(curl --fail-with-body --silent --show-error 'https://api.ankhorage.com/v1/poker/training/tasks?gameCategory=cash&tableSize=6max&street=flop&difficulty=3&limit=1')"
+          task_id="$(echo "$list" | jq -er '.[0].id')"
+          detail="$(curl --fail-with-body --silent --show-error "https://api.ankhorage.com/v1/poker/training/tasks/$task_id")"
+          echo "$detail" | jq -e '.task.tableSize == "6max" and .task.gameCategory == "cash" and .task.street == "flop" and .task.difficulty == 3 and (.task.heroCards | length == 2) and (.task.players | length == 6) and (.options | length > 1)' >/dev/null
+          echo "$detail" | jq '{slug:.task.slug,heroPosition:.task.heroPosition,heroCards:.task.heroCards,communityCards:.task.communityCards,pot:.task.pot,historyText:.task.historyText,prompt:.task.prompt,options:[.options[].label]}'
+      - name: Commit release update and remove temporary workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add package.json bun.lock
+          git rm .github/workflows/tmp-update-sharkprey-tabletop.yml
+          git commit -m "chore: use released poker table sizing"
+          git push origin HEAD:feat/sharkprey-production-training-binding
