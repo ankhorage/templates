@@ -1,0 +1,49 @@
+name: Refresh Contracts vNext lock
+
+on:
+  push:
+    branches:
+      - chore/145-contracts-vnext-consumer
+    paths:
+      - '.github/workflows/refresh-145-contracts-lock.yml'
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout consumer branch
+        uses: actions/checkout@v4
+        with:
+          ref: chore/145-contracts-vnext-consumer
+          fetch-depth: 0
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+
+      - name: Refresh released Contracts dependency
+        run: |
+          bun update --lockfile-only @ankhorage/contracts
+          bun install --frozen-lockfile
+          bun --eval '
+          const entry = import.meta.resolve("@ankhorage/contracts/package.json");
+          const pkg = await Bun.file(new URL(entry)).json();
+          if (pkg.version !== "19.1.0") throw new Error(`Expected Contracts 19.1.0, got ${pkg.version}`);
+          console.log(`Contracts: ${pkg.version}`);
+          '
+
+      - name: Commit refreshed lock
+        run: |
+          rm .github/workflows/refresh-145-contracts-lock.yml
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add bun.lock .github/workflows/refresh-145-contracts-lock.yml
+          git commit -m 'chore: resolve Contracts vNext dependency'
+          git push origin HEAD:chore/145-contracts-vnext-consumer
