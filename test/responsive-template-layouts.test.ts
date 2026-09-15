@@ -49,7 +49,10 @@ test('every published screen declares its deliberate content width', () => {
   expect(widths).toEqual({
     'education_learning/sharkprey': {
       onboarding: 'narrow',
-      'training-setup': 'default',
+      'training-setup': 'narrow',
+      'training-table-size': 'narrow',
+      'training-street': 'narrow',
+      'training-difficulty': 'narrow',
       'decision-table': 'wide',
       'answer-explanation': 'wide',
       'session-summary': 'default',
