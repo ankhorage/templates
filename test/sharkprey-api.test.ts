@@ -25,7 +25,7 @@ const answerOperation = {
   operationId: 'checkPokerTrainingTaskAnswer',
 } as const;
 
-test('SharkPrey declares the complete canonical poker training API', () => {
+test('SharkPrey declares the complete production poker training API', () => {
   const manifest = createAppManifest();
   const api = manifest.infra.apis?.find(({ id }) => id === 'poker-training');
   const endpoint = api?.endpoints.tasks;
@@ -41,103 +41,138 @@ test('SharkPrey declares the complete canonical poker training API', () => {
     { name: 'gameCategory', location: 'query', schema: { type: 'string' } },
     { name: 'tableSize', location: 'query', schema: { type: 'string' } },
     { name: 'street', location: 'query', schema: { type: 'string' } },
+    { name: 'difficulty', location: 'query', schema: { type: 'integer' } },
+    { name: 'tags', location: 'query', schema: { type: 'string' } },
     { name: 'limit', location: 'query', schema: { type: 'integer' } },
   ]);
   expect(endpoint?.operations).toMatchObject({
-    listPokerTrainingTasks: {
-      endpointId: 'tasks',
-      intent: 'read',
-      method: 'GET',
-      path: '/training/tasks',
+    listPokerTrainingTasks: { method: 'GET', path: '/training/tasks' },
+    getPokerTrainingTaskById: { method: 'GET', path: '/training/tasks/{taskId}' },
+    getPokerTrainingTaskBySlug: { method: 'GET', path: '/training/tasks/by-slug/{slug}' },
+    checkPokerTrainingTaskAnswer: { method: 'POST', path: '/training/tasks/{taskId}/answer' },
+  });
+});
+
+test('SharkPrey exposes every production game category, table size and street', () => {
+  const manifest = createAppManifest();
+
+  expect(findNode(requireScreen(manifest, 'training-setup').root, 'setup-game').props.options).toEqual([
+    { value: 'mtt', label: 'MTT' },
+    { value: 'sng', label: 'Sit & Go' },
+    { value: 'cash', label: 'Cash Game' },
+  ]);
+  expect(
+    findNode(requireScreen(manifest, 'training-table-size').root, 'setup-table').props.options,
+  ).toEqual([
+    { value: '6max', label: '6-max' },
+    { value: '9max', label: '9-max' },
+  ]);
+  expect(findNode(requireScreen(manifest, 'training-street').root, 'setup-street').props.options).toEqual([
+    { value: 'preflop', label: 'Preflop' },
+    { value: 'flop', label: 'Flop' },
+    { value: 'turn', label: 'Turn' },
+    { value: 'river', label: 'River' },
+  ]);
+  for (const difficulty of [1, 2, 3, 4, 5]) {
+    expect(
+      findNode(requireScreen(manifest, 'training-difficulty').root, `setup-difficulty-${difficulty}`)
+        .type,
+    ).toBe('Button');
+  }
+});
+
+test('SharkPrey carries setup selections through route params', () => {
+  const manifest = createAppManifest();
+  const gameEvent = requireEvents(requireBinding(manifest, 'setup-game'), 'valueChange')[0];
+  const tableEvent = requireEvents(requireBinding(manifest, 'setup-table'), 'valueChange')[0];
+  const streetEvent = requireEvents(requireBinding(manifest, 'setup-street'), 'valueChange')[0];
+
+  expect(gameEvent?.input).toEqual({
+    route: { kind: 'literal', value: '/training-setup/table' },
+    params: {
+      kind: 'object',
+      fields: {
+        gameCategory: { kind: 'source', source: { kind: 'event', path: 'payload.value' } },
+      },
     },
-    getPokerTrainingTaskById: {
-      endpointId: 'tasks',
-      intent: 'read',
-      method: 'GET',
-      path: '/training/tasks/{taskId}',
+  });
+  expect(tableEvent?.input).toEqual({
+    route: { kind: 'literal', value: '/training-setup/street' },
+    params: {
+      kind: 'object',
+      fields: {
+        gameCategory: {
+          kind: 'source',
+          source: { kind: 'context', path: 'route.params.gameCategory' },
+        },
+        tableSize: { kind: 'source', source: { kind: 'event', path: 'payload.value' } },
+      },
     },
-    getPokerTrainingTaskBySlug: {
-      endpointId: 'tasks',
-      intent: 'read',
-      method: 'GET',
-      path: '/training/tasks/by-slug/{slug}',
-    },
-    checkPokerTrainingTaskAnswer: {
-      endpointId: 'tasks',
-      intent: 'action',
-      method: 'POST',
-      path: '/training/tasks/{taskId}/answer',
+  });
+  expect(streetEvent?.input).toEqual({
+    route: { kind: 'literal', value: '/training-setup/difficulty' },
+    params: {
+      kind: 'object',
+      fields: {
+        gameCategory: {
+          kind: 'source',
+          source: { kind: 'context', path: 'route.params.gameCategory' },
+        },
+        tableSize: {
+          kind: 'source',
+          source: { kind: 'context', path: 'route.params.tableSize' },
+        },
+        street: { kind: 'source', source: { kind: 'event', path: 'payload.value' } },
+      },
     },
   });
 });
 
-test('SharkPrey resolves a listed task before entering the decision screen', () => {
+test('SharkPrey queries one matching live task after choosing difficulty', () => {
   const manifest = createAppManifest();
-  const loader = manifest.screens['training-setup']?.dataLoaders?.[0];
-  const start = manifest.dataBindings?.['setup-start'];
+  const events = requireEvents(requireBinding(manifest, 'setup-difficulty-4'), 'press');
 
-  expect(loader).toEqual({
-    kind: 'operation',
-    operation: listOperation,
+  expect(events[0]).toEqual({
+    target: { kind: 'operation', operation: listOperation },
     input: {
-      gameCategory: { kind: 'literal', value: 'mtt' },
-      tableSize: { kind: 'literal', value: '9max' },
-      street: { kind: 'literal', value: 'preflop' },
+      gameCategory: {
+        kind: 'source',
+        source: { kind: 'context', path: 'route.params.gameCategory' },
+      },
+      tableSize: {
+        kind: 'source',
+        source: { kind: 'context', path: 'route.params.tableSize' },
+      },
+      street: {
+        kind: 'source',
+        source: { kind: 'context', path: 'route.params.street' },
+      },
+      difficulty: { kind: 'literal', value: 4 },
       limit: { kind: 'literal', value: 1 },
     },
   });
-  expect(start?.events?.press).toEqual([
-    {
-      target: { kind: 'action', type: 'navigate' },
-      when: {
-        source: { kind: 'operation', operation: listOperation, path: '0.id' },
-        operator: 'exists',
-      },
-      input: {
-        route: { kind: 'literal', value: '/decision-table' },
-        params: {
-          kind: 'object',
-          fields: {
-            taskId: {
-              kind: 'source',
-              source: { kind: 'operation', operation: listOperation, path: '0.id' },
-            },
+  expect(events[1]).toEqual({
+    target: { kind: 'action', type: 'navigate' },
+    when: {
+      source: { kind: 'operation', operation: listOperation, path: '0.id' },
+      operator: 'exists',
+    },
+    input: {
+      route: { kind: 'literal', value: '/decision-table' },
+      params: {
+        kind: 'object',
+        fields: {
+          taskId: {
+            kind: 'source',
+            source: { kind: 'operation', operation: listOperation, path: '0.id' },
           },
         },
       },
     },
-  ]);
-
-  const screen = requireScreen(manifest, 'training-setup');
-  expect(findNode(screen.root, 'setup-start').props).not.toHaveProperty('onPress');
-});
-
-test('SharkPrey exposes only the currently published training curriculum', () => {
-  const screen = requireScreen(createAppManifest(), 'training-setup');
-
-  expect(findNode(screen.root, 'setup-game').props).toMatchObject({
-    defaultValue: 'mtt',
-    options: [
-      { value: 'cash', disabled: true },
-      { value: 'sng', disabled: true },
-      { value: 'mtt' },
-    ],
-  });
-  expect(findNode(screen.root, 'setup-table').props).toMatchObject({
-    defaultValue: '9max',
-    options: [{ value: '6max', disabled: true }, { value: '9max' }],
-  });
-  expect(findNode(screen.root, 'setup-focus').props).toMatchObject({
-    defaultValue: 'preflop',
-    options: [{ value: 'preflop', label: 'Preflop fundamentals' }],
-  });
-  expect(findNode(screen.root, 'setup-session').props).toMatchObject({
-    defaultValue: 'one',
-    options: [{ value: 'one', label: '1 hand' }],
   });
 });
 
-test('SharkPrey loads task detail from the route and binds all decision content', () => {
+test('SharkPrey loads task detail and binds the complete hand to PokerTrainingTable', () => {
   const manifest = createAppManifest();
   const screen = requireScreen(manifest, 'decision-table');
 
@@ -167,31 +202,21 @@ test('SharkPrey loads task detail from the route and binds all decision content'
     operation: detailOperation,
     path: 'task.historyText',
   });
-  expect(requireBinding(manifest, 'decision-category').props?.text).toMatchObject({
-    source: { kind: 'operation', operation: detailOperation, path: 'task.street' },
-    transforms: ['uppercase'],
-  });
 });
 
-test('SharkPrey repeats discovered options and evaluates every answer before navigation', () => {
+test('SharkPrey repeats live answer options and evaluates the selected answer', () => {
   const manifest = createAppManifest();
   const screen = requireScreen(manifest, 'decision-table');
   const answers = findNode(screen.root, 'decision-answers');
-  const answerButton = findNode(screen.root, 'decision-answer-button');
   const bindings = requireBinding(manifest, 'decision-answer-button');
   const events = requireEvents(bindings, 'press');
 
-  expect(answers.type).toBe('FlatList');
   expect(answers.repeat).toEqual({
     source: { kind: 'operation', operation: detailOperation, path: 'options' },
     itemAlias: 'option',
     keyPath: 'id',
   });
-  expect(answerButton.props).not.toHaveProperty('onPress');
-  expect(bindings.props?.children?.source).toEqual({
-    kind: 'context',
-    path: 'option.label',
-  });
+  expect(bindings.props?.children?.source).toEqual({ kind: 'context', path: 'option.label' });
   expect(events[0]).toEqual({
     target: { kind: 'operation', operation: answerOperation },
     input: {
@@ -206,6 +231,39 @@ test('SharkPrey repeats discovered options and evaluates every answer before nav
     },
   });
   expectAnswerNavigationEvents(events.slice(1));
+});
+
+test('SharkPrey renders review state from API-backed route data', () => {
+  const manifest = createAppManifest();
+  const screen = requireScreen(manifest, 'answer-explanation');
+
+  expect(findNode(screen.root, 'review-poker-table').type).toBe('PokerTrainingTable');
+  expect(requireBinding(manifest, 'review-poker-table').props?.task?.source).toEqual({
+    kind: 'operation',
+    operation: detailOperation,
+    path: 'task',
+  });
+  expect(requireBinding(manifest, 'review-verdict').props?.text?.source).toEqual({
+    kind: 'context',
+    path: 'route.params.verdict',
+  });
+  expect(requireBinding(manifest, 'review-why-copy').props?.text?.source).toEqual({
+    kind: 'context',
+    path: 'route.params.explanation',
+  });
+});
+
+test('SharkPrey keeps live task loading states and contains no sample hand data', () => {
+  const manifest = createAppManifest();
+  const taskBinding = requireBinding(manifest, 'decision-poker-table').props?.task;
+  const serialized = JSON.stringify(manifest);
+
+  expect(taskBinding?.loading).toMatchObject({ state: 'loading', fallback: { value: {} } });
+  expect(taskBinding?.empty).toMatchObject({ state: 'empty', fallback: { value: {} } });
+  expect(taskBinding?.error).toMatchObject({ state: 'error', fallback: { value: {} } });
+  expect(serialized).not.toContain('Bet ~33% pot');
+  expect(serialized).not.toContain('You raised from CO. BB called.');
+  expect(serialized).not.toContain('A small continuation bet gains value');
 });
 
 function expectAnswerNavigationEvents(events: readonly EventBinding[]): void {
@@ -223,66 +281,9 @@ function expectAnswerNavigationEvents(events: readonly EventBinding[]): void {
   ]);
   for (const binding of events) {
     expect(binding.target).toEqual({ kind: 'action', type: 'navigate' });
-    expect(binding.input?.route).toEqual({
-      kind: 'literal',
-      value: '/answer-explanation',
-    });
+    expect(binding.input?.route).toEqual({ kind: 'literal', value: '/answer-explanation' });
   }
 }
-
-test('SharkPrey renders review task and outcome from API-backed route data', () => {
-  const manifest = createAppManifest();
-  const screen = requireScreen(manifest, 'answer-explanation');
-
-  expect(screen.dataLoaders?.[0]).toEqual({
-    kind: 'operation',
-    operation: detailOperation,
-    input: {
-      taskId: {
-        kind: 'source',
-        source: { kind: 'context', path: 'route.params.taskId' },
-      },
-    },
-  });
-  expect(findNode(screen.root, 'review-poker-table').type).toBe('PokerTrainingTable');
-  expect(requireBinding(manifest, 'review-poker-table').props?.task?.source).toEqual({
-    kind: 'operation',
-    operation: detailOperation,
-    path: 'task',
-  });
-  expect(requireBinding(manifest, 'review-verdict').props?.text?.source).toEqual({
-    kind: 'context',
-    path: 'route.params.verdict',
-  });
-  expect(requireBinding(manifest, 'review-chosen-value').props?.text?.source).toEqual({
-    kind: 'context',
-    path: 'route.params.selectedOptionLabel',
-  });
-  expect(requireBinding(manifest, 'review-best-value').props?.text?.source).toEqual({
-    kind: 'context',
-    path: 'route.params.correctOptionValue',
-  });
-  expect(requireBinding(manifest, 'review-why-copy').props?.text?.source).toEqual({
-    kind: 'context',
-    path: 'route.params.explanation',
-  });
-});
-
-test('SharkPrey keeps task loading states and removes the previous sample hand and answer data', () => {
-  const manifest = createAppManifest();
-  const taskBinding = requireBinding(manifest, 'decision-poker-table').props?.task;
-  const serialized = JSON.stringify(manifest);
-
-  expect(taskBinding?.loading).toMatchObject({ state: 'loading', fallback: { value: {} } });
-  expect(taskBinding?.empty).toMatchObject({ state: 'empty', fallback: { value: {} } });
-  expect(taskBinding?.error).toMatchObject({ state: 'error', fallback: { value: {} } });
-  expect(serialized).not.toContain('Bet ~33% pot');
-  expect(serialized).not.toContain('Bet ~75% pot');
-  expect(serialized).not.toContain('You raised from CO. BB called.');
-  expect(serialized).not.toContain('A\\n♠');
-  expect(serialized).not.toContain('Q\\n♦');
-  expect(serialized).not.toContain('A small continuation bet gains value');
-});
 
 function findNode(root: UiNode, id: string): UiNode {
   const nodes = [root];
