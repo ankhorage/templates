@@ -2,4 +2,4 @@
 '@ankhorage/templates': patch
 ---
 
-Update the Templates runtime dependency and generated owner validation to the released ZORA 19 boundary.
+Update Templates to the released ZORA 19 boundary and require ZORA Tabletop 0.1.2 so composed authoring metadata uses only current ZORA extension hosts.
