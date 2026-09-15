@@ -44,9 +44,19 @@ jobs:
           test_source = test_path.read_text()
           if test_source.count('.props.options') != 3:
               raise SystemExit('Expected exactly three strict props.options accesses.')
-          test_path.write_text(test_source.replace('.props.options', '.props?.options'))
+          test_source = test_source.replace('.props.options', '.props?.options')
+          test_source = test_source.replace(
+              "  const gameEvent = requireEvents(requireBinding(manifest, 'setup-game'), 'valueChange')[0];\n"
+              "  const tableEvent = requireEvents(requireBinding(manifest, 'setup-table'), 'valueChange')[0];\n"
+              "  const streetEvent = requireEvents(requireBinding(manifest, 'setup-street'), 'valueChange')[0];",
+              "  const [gameEvent] = requireEvents(requireBinding(manifest, 'setup-game'), 'valueChange');\n"
+              "  const [tableEvent] = requireEvents(requireBinding(manifest, 'setup-table'), 'valueChange');\n"
+              "  const [streetEvent] = requireEvents(requireBinding(manifest, 'setup-street'), 'valueChange');",
+          )
+          test_path.write_text(test_source)
           PY
       - run: bun install --frozen-lockfile
+      - run: bun x ankhorage-prettier --write test/sharkprey-api.test.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts
       - run: bun test test/sharkprey-api.test.ts
       - run: bun run build
       - run: bun run typecheck
