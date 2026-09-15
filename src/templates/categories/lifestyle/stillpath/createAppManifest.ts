@@ -725,7 +725,7 @@ const manifest = {
         children: [
           {
             id: 'stillpath-home-root-content',
-            type: 'Box',
+            type: 'View',
             style: {
               gap: 12,
               paddingHorizontal: 0,
@@ -734,7 +734,7 @@ const manifest = {
             children: [
               {
                 id: 'home-greeting',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -765,7 +765,7 @@ const manifest = {
                   },
                   {
                     id: 'home-spacer',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                     },
@@ -790,14 +790,14 @@ const manifest = {
               },
               {
                 id: 'home-title-block',
-                type: 'Box',
+                type: 'View',
                 style: {
                   gap: 12,
                 },
                 children: [
                   {
                     id: 'home-title-row',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -848,7 +848,7 @@ const manifest = {
               },
               {
                 id: 'home-hero',
-                type: 'Box',
+                type: 'View',
                 style: {
                   borderRadius: 18,
                   overflow: 'hidden',
@@ -873,7 +873,7 @@ const manifest = {
                   },
                   {
                     id: 'home-hero-content',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       padding: 22,
                       gap: 12,
@@ -901,7 +901,7 @@ const manifest = {
                       },
                       {
                         id: 'home-hero-rule',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           width: 28,
                           height: 2,
@@ -925,7 +925,7 @@ const manifest = {
                       },
                       {
                         id: 'home-hero-actions',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           flexDirection: 'row',
                           alignItems: 'center',
@@ -936,7 +936,7 @@ const manifest = {
                         children: [
                           {
                             id: 'home-begin-wrap',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               minWidth: 120,
                               flexGrow: 1,
@@ -960,7 +960,7 @@ const manifest = {
                               },
                               {
                                 id: 'home-begin-icon',
-                                type: 'Box',
+                                type: 'View',
                                 style: {
                                   position: 'absolute',
                                   left: 20,
@@ -985,7 +985,7 @@ const manifest = {
                           },
                           {
                             id: 'home-save-wrap',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               minWidth: 120,
                               flexGrow: 1,
@@ -1009,7 +1009,7 @@ const manifest = {
                               },
                               {
                                 id: 'home-save-icon',
-                                type: 'Box',
+                                type: 'View',
                                 style: {
                                   position: 'absolute',
                                   left: 20,
@@ -1040,7 +1040,7 @@ const manifest = {
               },
               {
                 id: 'home-today',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -1082,7 +1082,7 @@ const manifest = {
               },
               {
                 id: 'home-today-cards',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'stretch',
@@ -1092,7 +1092,7 @@ const manifest = {
                 children: [
                   {
                     id: 'home-mood',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexBasis: 160,
                       flexGrow: 1,
@@ -1119,7 +1119,7 @@ const manifest = {
                       },
                       {
                         id: 'home-mood-content',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 13,
                           gap: 8,
@@ -1128,7 +1128,7 @@ const manifest = {
                         children: [
                           {
                             id: 'home-mood-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               width: 42,
                               height: 42,
@@ -1181,7 +1181,7 @@ const manifest = {
                           },
                           {
                             id: 'home-mood-duration',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               flexDirection: 'row',
                               alignItems: 'center',
@@ -1233,7 +1233,7 @@ const manifest = {
                   },
                   {
                     id: 'home-breath',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexBasis: 160,
                       flexGrow: 1,
@@ -1260,7 +1260,7 @@ const manifest = {
                       },
                       {
                         id: 'home-breath-content',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 13,
                           gap: 8,
@@ -1269,7 +1269,7 @@ const manifest = {
                         children: [
                           {
                             id: 'home-breath-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               width: 42,
                               height: 42,
@@ -1322,7 +1322,7 @@ const manifest = {
                           },
                           {
                             id: 'home-breath-duration',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               flexDirection: 'row',
                               alignItems: 'center',
@@ -1362,7 +1362,7 @@ const manifest = {
               },
               {
                 id: 'home-explore',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -1404,7 +1404,7 @@ const manifest = {
               },
               {
                 id: 'home-explore-cards',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'stretch',
@@ -1414,7 +1414,7 @@ const manifest = {
                 children: [
                   {
                     id: 'home-sleep',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       borderRadius: 16,
                       overflow: 'hidden',
@@ -1426,7 +1426,7 @@ const manifest = {
                     children: [
                       {
                         id: 'home-sleep-media',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           overflow: 'hidden',
                         },
@@ -1447,7 +1447,7 @@ const manifest = {
                           },
                           {
                             id: 'home-sleep-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               top: 10,
@@ -1474,7 +1474,7 @@ const manifest = {
                       },
                       {
                         id: 'home-sleep-body',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 12,
                           gap: 5,
@@ -1513,7 +1513,7 @@ const manifest = {
                   },
                   {
                     id: 'home-focus',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       borderRadius: 16,
                       overflow: 'hidden',
@@ -1525,7 +1525,7 @@ const manifest = {
                     children: [
                       {
                         id: 'home-focus-media',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           overflow: 'hidden',
                         },
@@ -1546,7 +1546,7 @@ const manifest = {
                           },
                           {
                             id: 'home-focus-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               top: 10,
@@ -1573,7 +1573,7 @@ const manifest = {
                       },
                       {
                         id: 'home-focus-body',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 12,
                           gap: 5,
@@ -1612,7 +1612,7 @@ const manifest = {
                   },
                   {
                     id: 'home-release',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       borderRadius: 16,
                       overflow: 'hidden',
@@ -1624,7 +1624,7 @@ const manifest = {
                     children: [
                       {
                         id: 'home-release-media',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           overflow: 'hidden',
                         },
@@ -1645,7 +1645,7 @@ const manifest = {
                           },
                           {
                             id: 'home-release-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               top: 10,
@@ -1672,7 +1672,7 @@ const manifest = {
                       },
                       {
                         id: 'home-release-body',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 12,
                           gap: 5,
@@ -1729,7 +1729,7 @@ const manifest = {
         children: [
           {
             id: 'stillpath-journal-root-content',
-            type: 'Box',
+            type: 'View',
             style: {
               gap: 12,
               paddingHorizontal: 0,
@@ -1738,7 +1738,7 @@ const manifest = {
             children: [
               {
                 id: 'journal-greeting',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -1769,7 +1769,7 @@ const manifest = {
                   },
                   {
                     id: 'journal-spacer',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                     },
@@ -1794,7 +1794,7 @@ const manifest = {
               },
               {
                 id: 'journal-heading',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -1805,14 +1805,14 @@ const manifest = {
                 children: [
                   {
                     id: 'journal-title-block',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       gap: 12,
                     },
                     children: [
                       {
                         id: 'journal-title-row',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           flexDirection: 'row',
                           alignItems: 'center',
@@ -1851,7 +1851,7 @@ const manifest = {
                   },
                   {
                     id: 'journal-date-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       minWidth: 120,
                       flexGrow: 1,
@@ -1875,7 +1875,7 @@ const manifest = {
                       },
                       {
                         id: 'journal-date-icon',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           position: 'absolute',
                           left: 20,
@@ -1956,7 +1956,7 @@ const manifest = {
               },
               {
                 id: 'journal-prompt',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -1970,7 +1970,7 @@ const manifest = {
                 children: [
                   {
                     id: 'journal-prompt-badge',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       padding: 12,
                       backgroundColor: 'rgba(255,255,255,0.45)',
@@ -1992,7 +1992,7 @@ const manifest = {
                   },
                   {
                     id: 'journal-prompt-copy',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                       gap: 6,
@@ -2030,7 +2030,7 @@ const manifest = {
               },
               {
                 id: 'journal-editor',
-                type: 'Box',
+                type: 'View',
                 style: {
                   padding: 18,
                   gap: 14,
@@ -2061,7 +2061,7 @@ const manifest = {
                   },
                   {
                     id: 'journal-status',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -2092,7 +2092,7 @@ const manifest = {
                       },
                       {
                         id: 'journal-status-spacer',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           flex: 1,
                         },
@@ -2115,7 +2115,7 @@ const manifest = {
               },
               {
                 id: 'journal-attachments',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2125,7 +2125,7 @@ const manifest = {
                 children: [
                   {
                     id: 'journal-photo-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       minWidth: 120,
                       flexGrow: 1,
@@ -2149,7 +2149,7 @@ const manifest = {
                       },
                       {
                         id: 'journal-photo-icon',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           position: 'absolute',
                           left: 20,
@@ -2174,7 +2174,7 @@ const manifest = {
                   },
                   {
                     id: 'journal-voice-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       minWidth: 120,
                       flexGrow: 1,
@@ -2198,7 +2198,7 @@ const manifest = {
                       },
                       {
                         id: 'journal-voice-icon',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           position: 'absolute',
                           left: 20,
@@ -2225,7 +2225,7 @@ const manifest = {
               },
               {
                 id: 'journal-recent',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2267,7 +2267,7 @@ const manifest = {
               },
               {
                 id: 'journal-reflection-rest',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2335,7 +2335,7 @@ const manifest = {
               },
               {
                 id: 'journal-reflection-mountains',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2403,7 +2403,7 @@ const manifest = {
               },
               {
                 id: 'journal-reflection-stones',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2487,7 +2487,7 @@ const manifest = {
         children: [
           {
             id: 'stillpath-rituals-root-content',
-            type: 'Box',
+            type: 'View',
             style: {
               gap: 12,
               paddingHorizontal: 0,
@@ -2496,7 +2496,7 @@ const manifest = {
             children: [
               {
                 id: 'rituals-greeting',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2543,7 +2543,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-spacer',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                     },
@@ -2568,14 +2568,14 @@ const manifest = {
               },
               {
                 id: 'rituals-title-block',
-                type: 'Box',
+                type: 'View',
                 style: {
                   gap: 12,
                 },
                 children: [
                   {
                     id: 'rituals-title-row',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -2614,7 +2614,7 @@ const manifest = {
               },
               {
                 id: 'rituals-hero',
-                type: 'Box',
+                type: 'View',
                 style: {
                   borderRadius: 20,
                   overflow: 'hidden',
@@ -2639,7 +2639,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-hero-title-block',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       padding: 26,
                       minHeight: 235,
@@ -2666,7 +2666,7 @@ const manifest = {
                       },
                       {
                         id: 'rituals-hero-rule',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           width: 30,
                           height: 2,
@@ -2692,7 +2692,7 @@ const manifest = {
               },
               {
                 id: 'rituals-details',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2702,7 +2702,7 @@ const manifest = {
                 children: [
                   {
                     id: 'rituals-time',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -2741,7 +2741,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-level',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -2780,7 +2780,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-audio',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -2836,7 +2836,7 @@ const manifest = {
               },
               {
                 id: 'rituals-step-arrive',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2849,7 +2849,7 @@ const manifest = {
                 children: [
                   {
                     id: 'rituals-step-arrive-number-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       backgroundColor: 'rgba(173,152,185,0.10)',
                       borderRadius: 999,
@@ -2890,7 +2890,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-step-arrive-copy',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                       gap: 4,
@@ -2928,7 +2928,7 @@ const manifest = {
               },
               {
                 id: 'rituals-step-breathe',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -2941,7 +2941,7 @@ const manifest = {
                 children: [
                   {
                     id: 'rituals-step-breathe-number-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       backgroundColor: 'rgba(173,152,185,0.10)',
                       borderRadius: 999,
@@ -2982,7 +2982,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-step-breathe-copy',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                       gap: 4,
@@ -3020,7 +3020,7 @@ const manifest = {
               },
               {
                 id: 'rituals-step-intention',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -3033,7 +3033,7 @@ const manifest = {
                 children: [
                   {
                     id: 'rituals-step-intention-number-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       backgroundColor: 'rgba(173,152,185,0.10)',
                       borderRadius: 999,
@@ -3074,7 +3074,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-step-intention-copy',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                       gap: 4,
@@ -3112,7 +3112,7 @@ const manifest = {
               },
               {
                 id: 'rituals-step-close',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -3125,7 +3125,7 @@ const manifest = {
                 children: [
                   {
                     id: 'rituals-step-close-number-wrap',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       backgroundColor: 'rgba(173,152,185,0.10)',
                       borderRadius: 999,
@@ -3166,7 +3166,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-step-close-copy',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                       gap: 4,
@@ -3204,7 +3204,7 @@ const manifest = {
               },
               {
                 id: 'rituals-start-wrap',
-                type: 'Box',
+                type: 'View',
                 style: {
                   minWidth: 120,
                   flexGrow: 1,
@@ -3228,7 +3228,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-start-icon',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       position: 'absolute',
                       left: 20,
@@ -3253,7 +3253,7 @@ const manifest = {
               },
               {
                 id: 'rituals-save-wrap',
-                type: 'Box',
+                type: 'View',
                 style: {
                   minWidth: 120,
                   flexGrow: 1,
@@ -3277,7 +3277,7 @@ const manifest = {
                   },
                   {
                     id: 'rituals-save-icon',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       position: 'absolute',
                       left: 20,
@@ -3318,7 +3318,7 @@ const manifest = {
         children: [
           {
             id: 'stillpath-profile-root-content',
-            type: 'Box',
+            type: 'View',
             style: {
               gap: 12,
               paddingHorizontal: 0,
@@ -3327,7 +3327,7 @@ const manifest = {
             children: [
               {
                 id: 'profile-greeting',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -3358,7 +3358,7 @@ const manifest = {
                   },
                   {
                     id: 'profile-spacer',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flex: 1,
                     },
@@ -3366,7 +3366,7 @@ const manifest = {
                   },
                   {
                     id: 'profile-settings',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       width: 44,
                       height: 44,
@@ -3391,7 +3391,7 @@ const manifest = {
               },
               {
                 id: 'profile-identity',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -3415,7 +3415,7 @@ const manifest = {
                   },
                   {
                     id: 'profile-identity-copy',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       gap: 9,
                     },
@@ -3451,7 +3451,7 @@ const manifest = {
               },
               {
                 id: 'profile-progress-card',
-                type: 'Box',
+                type: 'View',
                 style: {
                   borderRadius: 22,
                   padding: 16,
@@ -3460,7 +3460,7 @@ const manifest = {
                 children: [
                   {
                     id: 'profile-progress-content',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -3471,7 +3471,7 @@ const manifest = {
                     children: [
                       {
                         id: 'profile-ring-wrap',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           width: 145,
                           height: 145,
@@ -3493,7 +3493,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-ring-center',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               top: 30,
@@ -3545,7 +3545,7 @@ const manifest = {
                       },
                       {
                         id: 'profile-habits',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           flexGrow: 1,
                           flexBasis: 160,
@@ -3570,7 +3570,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-habit-rule',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               width: 30,
                               height: 2,
@@ -3581,7 +3581,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-streak',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               flexDirection: 'row',
                               alignItems: 'center',
@@ -3628,7 +3628,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-minutes',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               flexDirection: 'row',
                               alignItems: 'center',
@@ -3675,7 +3675,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-journal-days',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               flexDirection: 'row',
                               alignItems: 'center',
@@ -3739,7 +3739,7 @@ const manifest = {
               },
               {
                 id: 'profile-collections',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',
@@ -3781,7 +3781,7 @@ const manifest = {
               },
               {
                 id: 'profile-saved',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'stretch',
@@ -3791,7 +3791,7 @@ const manifest = {
                 children: [
                   {
                     id: 'profile-evening',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       borderRadius: 16,
                       overflow: 'hidden',
@@ -3803,7 +3803,7 @@ const manifest = {
                     children: [
                       {
                         id: 'profile-evening-media',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           overflow: 'hidden',
                         },
@@ -3824,7 +3824,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-evening-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               top: 10,
@@ -3851,7 +3851,7 @@ const manifest = {
                       },
                       {
                         id: 'profile-evening-body',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 12,
                           gap: 5,
@@ -3886,7 +3886,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-evening-save-decoration',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               right: 12,
@@ -3912,7 +3912,7 @@ const manifest = {
                   },
                   {
                     id: 'profile-ocean',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       borderRadius: 16,
                       overflow: 'hidden',
@@ -3924,7 +3924,7 @@ const manifest = {
                     children: [
                       {
                         id: 'profile-ocean-media',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           overflow: 'hidden',
                         },
@@ -3945,7 +3945,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-ocean-badge',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               top: 10,
@@ -3972,7 +3972,7 @@ const manifest = {
                       },
                       {
                         id: 'profile-ocean-body',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           padding: 12,
                           gap: 5,
@@ -4007,7 +4007,7 @@ const manifest = {
                           },
                           {
                             id: 'profile-ocean-save-decoration',
-                            type: 'Box',
+                            type: 'View',
                             style: {
                               position: 'absolute',
                               right: 12,
@@ -4050,7 +4050,7 @@ const manifest = {
               },
               {
                 id: 'profile-preferences',
-                type: 'Box',
+                type: 'View',
                 style: {
                   paddingHorizontal: 18,
                   borderWidth: 1,
@@ -4060,7 +4060,7 @@ const manifest = {
                 children: [
                   {
                     id: 'profile-theme',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -4101,7 +4101,7 @@ const manifest = {
                   },
                   {
                     id: 'profile-notifications',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -4123,14 +4123,14 @@ const manifest = {
                       },
                       {
                         id: 'profile-notifications-content',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           flex: 1,
                         },
                         children: [
                           {
                             id: 'profile-notifications-setting',
-                            type: 'SettingsRow',
+                            type: 'ListItem',
                             props: {
                               title: 'Notifications',
                               meta: 'Gentle',
@@ -4153,7 +4153,7 @@ const manifest = {
                   },
                   {
                     id: 'profile-reminder',
-                    type: 'Box',
+                    type: 'View',
                     style: {
                       flexDirection: 'row',
                       alignItems: 'center',
@@ -4175,14 +4175,14 @@ const manifest = {
                       },
                       {
                         id: 'profile-reminder-content',
-                        type: 'Box',
+                        type: 'View',
                         style: {
                           flex: 1,
                         },
                         children: [
                           {
                             id: 'profile-reminder-setting',
-                            type: 'SettingsRow',
+                            type: 'ListItem',
                             props: {
                               title: 'Daily reminder',
                               meta: '8:00 AM',
@@ -4207,7 +4207,7 @@ const manifest = {
               },
               {
                 id: 'profile-footer',
-                type: 'Box',
+                type: 'View',
                 style: {
                   flexDirection: 'row',
                   alignItems: 'center',

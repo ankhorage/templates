@@ -765,17 +765,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'onboarding-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'onboarding-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'onboarding-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -805,7 +805,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'onboarding-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -857,7 +857,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'onboarding-copy',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 style: {
                   gap: 0,
@@ -925,7 +925,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'onboarding-rules',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -968,7 +968,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'onboarding-footer',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1039,17 +1039,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'training-setup-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'training-setup-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'training-setup-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1079,7 +1079,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'training-setup-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1127,7 +1127,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'setup-game-section',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1184,7 +1184,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'setup-table-section',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1233,7 +1233,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'setup-focus-section',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1275,7 +1275,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'setup-session-section',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1372,17 +1372,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'decision-table-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'decision-table-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'decision-table-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1412,7 +1412,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'decision-table-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1469,7 +1469,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'decision-table-space',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1547,7 +1547,7 @@ const manifest: AppManifest = {
                 children: [
                   {
                     id: 'decision-answer-option',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1617,17 +1617,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'answer-explanation-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'answer-explanation-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'answer-explanation-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1657,7 +1657,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'answer-explanation-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1714,7 +1714,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'review-table-space',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1748,7 +1748,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'review-outcome',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1821,7 +1821,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'review-why',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1848,7 +1848,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'review-footer',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -1903,17 +1903,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'session-summary-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'session-summary-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'session-summary-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1943,7 +1943,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'session-summary-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -1991,7 +1991,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'summary-accuracy',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -2010,7 +2010,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'summary-accuracy-center',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2049,7 +2049,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'summary-total',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
@@ -2079,12 +2079,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'summary-scores',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'summary-score-0',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2101,7 +2101,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'summary-score-icon-wrap-0',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2163,7 +2163,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'summary-score-1',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2180,7 +2180,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'summary-score-icon-wrap-1',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2304,17 +2304,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'hand-history-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'hand-history-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'hand-history-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2344,7 +2344,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'hand-history-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2428,17 +2428,17 @@ const manifest: AppManifest = {
               },
               {
                 id: 'history-hand-0',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'history-hand-row-0',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
                         id: 'history-hand-copy-0',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2478,7 +2478,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'history-hand-result-0',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2527,17 +2527,17 @@ const manifest: AppManifest = {
               },
               {
                 id: 'history-hand-1',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'history-hand-row-1',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
                         id: 'history-hand-copy-1',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2577,7 +2577,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'history-hand-result-1',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2626,17 +2626,17 @@ const manifest: AppManifest = {
               },
               {
                 id: 'history-hand-2',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'history-hand-row-2',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
                         id: 'history-hand-copy-2',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2676,7 +2676,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'history-hand-result-2',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2749,17 +2749,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'stats-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'stats-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'stats-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2789,7 +2789,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'stats-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2837,17 +2837,17 @@ const manifest: AppManifest = {
               },
               {
                 id: 'stats-overall',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'stats-overall-row',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
                         id: 'stats-ring',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2866,7 +2866,7 @@ const manifest: AppManifest = {
                           },
                           {
                             id: 'stats-ring-center',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -2905,7 +2905,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'stats-overall-copy',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -2963,12 +2963,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'stats-metric-0-0',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'stats-metric-row-0-0',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -2984,12 +2984,12 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'stats-metric-content-0-0',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
                             id: 'stats-metric-top-0-0',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3034,7 +3034,7 @@ const manifest: AppManifest = {
                           },
                           {
                             id: 'stats-metric-range-0-0',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3090,12 +3090,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'stats-metric-0-1',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'stats-metric-row-0-1',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3111,12 +3111,12 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'stats-metric-content-0-1',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
                             id: 'stats-metric-top-0-1',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3161,7 +3161,7 @@ const manifest: AppManifest = {
                           },
                           {
                             id: 'stats-metric-range-0-1',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3226,12 +3226,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'stats-metric-1-0',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'stats-metric-row-1-0',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3247,12 +3247,12 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'stats-metric-content-1-0',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
                             id: 'stats-metric-top-1-0',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3297,7 +3297,7 @@ const manifest: AppManifest = {
                           },
                           {
                             id: 'stats-metric-range-1-0',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3353,12 +3353,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'stats-metric-1-1',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'stats-metric-row-1-1',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3374,12 +3374,12 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'stats-metric-content-1-1',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
                             id: 'stats-metric-top-1-1',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3424,7 +3424,7 @@ const manifest: AppManifest = {
                           },
                           {
                             id: 'stats-metric-range-1-1',
-                            type: 'Box',
+                            type: 'View',
                             props: {},
                             children: [
                               {
@@ -3525,17 +3525,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'learn-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'learn-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'learn-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3565,7 +3565,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'learn-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3613,12 +3613,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'learn-rules',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'learn-rules-row',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3634,7 +3634,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'learn-rules-content',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -3712,17 +3712,17 @@ const manifest: AppManifest = {
               },
               {
                 id: 'learn-cbet',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'learn-cbet-top',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
                         id: 'learn-cbet-copy',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
@@ -3830,12 +3830,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'learn-fundamental-0',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'learn-fundamental-row-0',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3896,12 +3896,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'learn-fundamental-1',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'learn-fundamental-row-1',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -3987,17 +3987,17 @@ const manifest: AppManifest = {
         children: [
           {
             id: 'settings-content',
-            type: 'Box',
+            type: 'View',
             props: {},
             children: [
               {
                 id: 'settings-brand',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'settings-brand-mark',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4027,7 +4027,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'settings-brand-word',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4084,12 +4084,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'settings-preferences',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'settings-row-0',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4147,7 +4147,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'settings-row-1',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4205,7 +4205,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'settings-row-2',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4263,7 +4263,7 @@ const manifest: AppManifest = {
                   },
                   {
                     id: 'settings-row-3',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4335,12 +4335,12 @@ const manifest: AppManifest = {
               },
               {
                 id: 'settings-reset',
-                type: 'Box',
+                type: 'View',
                 props: {},
                 children: [
                   {
                     id: 'settings-reset-row',
-                    type: 'Box',
+                    type: 'View',
                     props: {},
                     children: [
                       {
@@ -4356,7 +4356,7 @@ const manifest: AppManifest = {
                       },
                       {
                         id: 'settings-reset-copy',
-                        type: 'Box',
+                        type: 'View',
                         props: {},
                         children: [
                           {
