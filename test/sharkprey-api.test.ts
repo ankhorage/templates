@@ -56,18 +56,22 @@ test('SharkPrey declares the complete production poker training API', () => {
 test('SharkPrey exposes every production game category, table size and street', () => {
   const manifest = createAppManifest();
 
-  expect(findNode(requireScreen(manifest, 'training-setup').root, 'setup-game').props.options).toEqual([
+  expect(
+    findNode(requireScreen(manifest, 'training-setup').root, 'setup-game').props?.options,
+  ).toEqual([
     { value: 'mtt', label: 'MTT' },
     { value: 'sng', label: 'Sit & Go' },
     { value: 'cash', label: 'Cash Game' },
   ]);
   expect(
-    findNode(requireScreen(manifest, 'training-table-size').root, 'setup-table').props.options,
+    findNode(requireScreen(manifest, 'training-table-size').root, 'setup-table').props?.options,
   ).toEqual([
     { value: '6max', label: '6-max' },
     { value: '9max', label: '9-max' },
   ]);
-  expect(findNode(requireScreen(manifest, 'training-street').root, 'setup-street').props.options).toEqual([
+  expect(
+    findNode(requireScreen(manifest, 'training-street').root, 'setup-street').props?.options,
+  ).toEqual([
     { value: 'preflop', label: 'Preflop' },
     { value: 'flop', label: 'Flop' },
     { value: 'turn', label: 'Turn' },
@@ -75,17 +79,19 @@ test('SharkPrey exposes every production game category, table size and street', 
   ]);
   for (const difficulty of [1, 2, 3, 4, 5]) {
     expect(
-      findNode(requireScreen(manifest, 'training-difficulty').root, `setup-difficulty-${difficulty}`)
-        .type,
+      findNode(
+        requireScreen(manifest, 'training-difficulty').root,
+        `setup-difficulty-${difficulty}`,
+      ).type,
     ).toBe('Button');
   }
 });
 
 test('SharkPrey carries setup selections through route params', () => {
   const manifest = createAppManifest();
-  const gameEvent = requireEvents(requireBinding(manifest, 'setup-game'), 'valueChange')[0];
-  const tableEvent = requireEvents(requireBinding(manifest, 'setup-table'), 'valueChange')[0];
-  const streetEvent = requireEvents(requireBinding(manifest, 'setup-street'), 'valueChange')[0];
+  const [gameEvent] = requireEvents(requireBinding(manifest, 'setup-game'), 'valueChange');
+  const [tableEvent] = requireEvents(requireBinding(manifest, 'setup-table'), 'valueChange');
+  const [streetEvent] = requireEvents(requireBinding(manifest, 'setup-street'), 'valueChange');
 
   expect(gameEvent?.input).toEqual({
     route: { kind: 'literal', value: '/training-setup/table' },

@@ -314,7 +314,7 @@ const manifest: AppManifest = {
     'setup-difficulty-3': createTrainingDifficultyBinding('setup-difficulty-3', 3),
     'setup-difficulty-4': createTrainingDifficultyBinding('setup-difficulty-4', 4),
     'setup-difficulty-5': createTrainingDifficultyBinding('setup-difficulty-5', 5),
-    'decision-poker-table': {    'decision-poker-table': {
+    'decision-poker-table': {
       componentId: 'decision-poker-table',
       componentType: 'PokerTrainingTable',
       props: {
@@ -1286,17 +1286,37 @@ const manifest: AppManifest = {
                 type: 'Heading',
                 props: { text: 'How hard?', level: 1, size: 'h1' },
               },
-              { id: 'setup-difficulty-1', type: 'Button', props: { children: 'Level 1 · Fundamentals', fullWidth: true } },
-              { id: 'setup-difficulty-2', type: 'Button', props: { children: 'Level 2 · Standard spots', fullWidth: true } },
-              { id: 'setup-difficulty-3', type: 'Button', props: { children: 'Level 3 · Intermediate', fullWidth: true } },
-              { id: 'setup-difficulty-4', type: 'Button', props: { children: 'Level 4 · Advanced', fullWidth: true } },
-              { id: 'setup-difficulty-5', type: 'Button', props: { children: 'Level 5 · Expert', fullWidth: true } },
+              {
+                id: 'setup-difficulty-1',
+                type: 'Button',
+                props: { children: 'Level 1 · Fundamentals', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-2',
+                type: 'Button',
+                props: { children: 'Level 2 · Standard spots', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-3',
+                type: 'Button',
+                props: { children: 'Level 3 · Intermediate', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-4',
+                type: 'Button',
+                props: { children: 'Level 4 · Advanced', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-5',
+                type: 'Button',
+                props: { children: 'Level 5 · Expert', fullWidth: true },
+              },
             ],
           },
         ],
       },
     },
-    'decision-table': {    'decision-table': {
+    'decision-table': {
       id: 'decision-table',
       name: 'Your decision',
       title: 'Your decision',
