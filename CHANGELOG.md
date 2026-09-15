@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 11.0.6
+
+### Patch Changes
+
+- 5e7259f: Bind the SharkPrey training setup to all production poker categories, table sizes, streets, and difficulty levels.
+
 ## 11.0.5
 
 ### Patch Changes
