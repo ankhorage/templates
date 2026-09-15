@@ -23,12 +23,13 @@ jobs:
       - uses: oven-sh/setup-bun@v2
         with:
           bun-version: '1.4.2'
-      - name: Fix generated duplicate object markers
+      - name: Fix generated binding patch and strict tests
         run: |
           python - <<'PY'
           from pathlib import Path
-          path = Path('src/templates/categories/education-learning/sharkprey/createAppManifest.ts')
-          source = path.read_text()
+
+          manifest_path = Path('src/templates/categories/education-learning/sharkprey/createAppManifest.ts')
+          source = manifest_path.read_text()
           replacements = {
               "    'decision-poker-table': {    'decision-poker-table': {": "    'decision-poker-table': {",
               "    'decision-table': {    'decision-table': {": "    'decision-table': {",
@@ -37,7 +38,13 @@ jobs:
               if old not in source:
                   raise SystemExit(f'Missing expected duplicate marker: {old}')
               source = source.replace(old, new, 1)
-          path.write_text(source)
+          manifest_path.write_text(source)
+
+          test_path = Path('test/sharkprey-api.test.ts')
+          test_source = test_path.read_text()
+          if test_source.count('.props.options') != 3:
+              raise SystemExit('Expected exactly three strict props.options accesses.')
+          test_path.write_text(test_source.replace('.props.options', '.props?.options'))
           PY
       - run: bun install --frozen-lockfile
       - run: bun test test/sharkprey-api.test.ts
@@ -60,7 +67,7 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add src/templates/categories/education-learning/sharkprey/createAppManifest.ts
+          git add src/templates/categories/education-learning/sharkprey/createAppManifest.ts test/sharkprey-api.test.ts
           git rm .github/workflows/tmp-validate-sharkprey-production-training.yml
           git commit -m "chore: complete SharkPrey production binding validation"
           git push origin HEAD:feat/sharkprey-production-training-binding
