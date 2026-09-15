@@ -96,6 +96,64 @@ function createRouteTextBinding(componentId: string, path: string): ComponentDat
   };
 }
 
+function createTrainingDifficultyBinding(
+  componentId: string,
+  difficulty: number,
+): ComponentDataBinding {
+  const listOperation = {
+    apiId: 'poker-training',
+    endpointId: 'tasks',
+    operationId: 'listPokerTrainingTasks',
+  } as const;
+
+  return {
+    componentId,
+    componentType: 'Button',
+    events: {
+      press: [
+        {
+          target: { kind: 'operation', operation: listOperation },
+          input: {
+            gameCategory: {
+              kind: 'source',
+              source: { kind: 'context', path: 'route.params.gameCategory' },
+            },
+            tableSize: {
+              kind: 'source',
+              source: { kind: 'context', path: 'route.params.tableSize' },
+            },
+            street: {
+              kind: 'source',
+              source: { kind: 'context', path: 'route.params.street' },
+            },
+            difficulty: { kind: 'literal', value: difficulty },
+            limit: { kind: 'literal', value: 1 },
+          },
+        },
+        {
+          target: { kind: 'action', type: 'navigate' },
+          when: {
+            source: { kind: 'operation', operation: listOperation, path: '0.id' },
+            operator: 'exists',
+          },
+          input: {
+            route: { kind: 'literal', value: '/decision-table' },
+            params: {
+              kind: 'object',
+              fields: {
+                taskId: {
+                  kind: 'source',
+                  source: { kind: 'operation', operation: listOperation, path: '0.id' },
+                },
+              },
+            },
+          },
+        },
+      ],
+    },
+  };
+}
+
 const manifest: AppManifest = {
   metadata: {
     name: 'SharkPrey',
@@ -170,41 +228,21 @@ const manifest: AppManifest = {
   ],
   activeThemeId: 'sharkprey',
   dataBindings: {
-    'setup-start': {
-      componentId: 'setup-start',
-      componentType: 'Button',
+    'setup-game': {
+      componentId: 'setup-game',
+      componentType: 'RadioGroup',
       events: {
-        press: [
+        valueChange: [
           {
             target: { kind: 'action', type: 'navigate' },
-            when: {
-              source: {
-                kind: 'operation',
-                operation: {
-                  apiId: 'poker-training',
-                  endpointId: 'tasks',
-                  operationId: 'listPokerTrainingTasks',
-                },
-                path: '0.id',
-              },
-              operator: 'exists',
-            },
             input: {
-              route: { kind: 'literal', value: '/decision-table' },
+              route: { kind: 'literal', value: '/training-setup/table' },
               params: {
                 kind: 'object',
                 fields: {
-                  taskId: {
+                  gameCategory: {
                     kind: 'source',
-                    source: {
-                      kind: 'operation',
-                      operation: {
-                        apiId: 'poker-training',
-                        endpointId: 'tasks',
-                        operationId: 'listPokerTrainingTasks',
-                      },
-                      path: '0.id',
-                    },
+                    source: { kind: 'event', path: 'payload.value' },
                   },
                 },
               },
@@ -213,6 +251,69 @@ const manifest: AppManifest = {
         ],
       },
     },
+    'setup-table': {
+      componentId: 'setup-table',
+      componentType: 'RadioGroup',
+      events: {
+        valueChange: [
+          {
+            target: { kind: 'action', type: 'navigate' },
+            input: {
+              route: { kind: 'literal', value: '/training-setup/street' },
+              params: {
+                kind: 'object',
+                fields: {
+                  gameCategory: {
+                    kind: 'source',
+                    source: { kind: 'context', path: 'route.params.gameCategory' },
+                  },
+                  tableSize: {
+                    kind: 'source',
+                    source: { kind: 'event', path: 'payload.value' },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+    'setup-street': {
+      componentId: 'setup-street',
+      componentType: 'RadioGroup',
+      events: {
+        valueChange: [
+          {
+            target: { kind: 'action', type: 'navigate' },
+            input: {
+              route: { kind: 'literal', value: '/training-setup/difficulty' },
+              params: {
+                kind: 'object',
+                fields: {
+                  gameCategory: {
+                    kind: 'source',
+                    source: { kind: 'context', path: 'route.params.gameCategory' },
+                  },
+                  tableSize: {
+                    kind: 'source',
+                    source: { kind: 'context', path: 'route.params.tableSize' },
+                  },
+                  street: {
+                    kind: 'source',
+                    source: { kind: 'event', path: 'payload.value' },
+                  },
+                },
+              },
+            },
+          },
+        ],
+      },
+    },
+    'setup-difficulty-1': createTrainingDifficultyBinding('setup-difficulty-1', 1),
+    'setup-difficulty-2': createTrainingDifficultyBinding('setup-difficulty-2', 2),
+    'setup-difficulty-3': createTrainingDifficultyBinding('setup-difficulty-3', 3),
+    'setup-difficulty-4': createTrainingDifficultyBinding('setup-difficulty-4', 4),
+    'setup-difficulty-5': createTrainingDifficultyBinding('setup-difficulty-5', 5),
     'decision-poker-table': {
       componentId: 'decision-poker-table',
       componentType: 'PokerTrainingTable',
@@ -451,6 +552,16 @@ const manifest: AppManifest = {
                       schema: { type: 'string' },
                     },
                     {
+                      name: 'difficulty',
+                      location: 'query',
+                      schema: { type: 'integer' },
+                    },
+                    {
+                      name: 'tags',
+                      location: 'query',
+                      schema: { type: 'string' },
+                    },
+                    {
                       name: 'limit',
                       location: 'query',
                       schema: { type: 'integer' },
@@ -683,6 +794,21 @@ const manifest: AppManifest = {
                     screenId: 'training-setup',
                   },
                   {
+                    name: 'training-table-size',
+                    path: '/training-setup/table',
+                    screenId: 'training-table-size',
+                  },
+                  {
+                    name: 'training-street',
+                    path: '/training-setup/street',
+                    screenId: 'training-street',
+                  },
+                  {
+                    name: 'training-difficulty',
+                    path: '/training-setup/difficulty',
+                    screenId: 'training-difficulty',
+                  },
+                  {
                     name: 'decision-table',
                     path: '/decision-table',
                     screenId: 'decision-table',
@@ -754,7 +880,7 @@ const manifest: AppManifest = {
       id: 'onboarding',
       name: 'Where are you starting?',
       title: 'Where are you starting?',
-      description: 'Reference design populated with sample training content.',
+      description: 'Live poker training backed by the production Ankhorage gateway.',
       root: {
         id: 'onboarding-screen',
         type: 'Screen',
@@ -1010,332 +1136,182 @@ const manifest: AppManifest = {
     },
     'training-setup': {
       id: 'training-setup',
-      name: 'Build your session',
-      title: 'Build your session',
-      dataLoaders: [
-        {
-          kind: 'operation',
-          operation: {
-            apiId: 'poker-training',
-            endpointId: 'tasks',
-            operationId: 'listPokerTrainingTasks',
-          },
-          input: {
-            gameCategory: { kind: 'literal', value: 'mtt' },
-            tableSize: { kind: 'literal', value: '9max' },
-            street: { kind: 'literal', value: 'preflop' },
-            limit: { kind: 'literal', value: 1 },
-          },
-        },
-      ],
-      description: 'Loads the next published poker training task before starting the session.',
+      name: 'Choose a game',
+      title: 'Choose a game',
+      description: 'Choose which production poker-training category to practice.',
       root: {
         id: 'training-setup-screen',
         type: 'Screen',
-        props: {
-          width: 'default',
-          scroll: true,
-        },
+        props: { width: 'narrow', scroll: true },
         children: [
           {
             id: 'training-setup-content',
             type: 'View',
             props: {},
+            style: { gap: 20, paddingTop: 20 },
             children: [
-              {
-                id: 'training-setup-brand',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'training-setup-brand-mark',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'training-setup-brand-mark-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey shark',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 123,
-                          height: 82,
-                          left: -34,
-                          top: -5,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 57,
-                      height: 50,
-                      overflow: 'hidden',
-                    },
-                  },
-                  {
-                    id: 'training-setup-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'training-setup-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
-                ],
-                style: {
-                  gap: 0,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginBottom: 8,
-                },
-              },
               {
                 id: 'training-setup-title',
                 type: 'Heading',
+                props: { text: 'What do you want to train?', level: 1, size: 'h1' },
+              },
+              {
+                id: 'training-setup-copy',
+                type: 'Text',
+                props: { text: 'Every choice is backed by the live 600-hand training catalog.' },
+              },
+              {
+                id: 'setup-game',
+                type: 'RadioGroup',
                 props: {
-                  text: 'Build your session',
-                  level: 1,
-                  size: 'h1',
-                },
-              },
-              {
-                id: 'setup-game-section',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'setup-game-title',
-                    type: 'Heading',
-                    props: {
-                      text: 'Game',
-                      level: 2,
-                      size: 'h3',
-                    },
-                  },
-                  {
-                    id: 'setup-game',
-                    type: 'RadioGroup',
-                    props: {
-                      options: [
-                        {
-                          value: 'cash',
-                          label: 'Cash Game',
-                          iconSource: {
-                            mediaId: 'sharkprey-chip-icon',
-                          },
-                          disabled: true,
-                        },
-                        {
-                          value: 'sng',
-                          label: 'Sit’n’Go',
-                          iconSource: {
-                            mediaId: 'sharkprey-timer-icon',
-                          },
-                          disabled: true,
-                        },
-                        {
-                          value: 'mtt',
-                          label: 'MTT',
-                          iconSource: {
-                            mediaId: 'sharkprey-trophy-icon',
-                          },
-                        },
-                      ],
-                      defaultValue: 'mtt',
-                      presentation: 'card',
-                      columns: 3,
-                      contentOrientation: 'vertical',
-                      color: 'secondary',
-                      size: 'm',
-                      gap: 's',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                },
-              },
-              {
-                id: 'setup-table-section',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'setup-table-title',
-                    type: 'Heading',
-                    props: {
-                      text: 'Table',
-                      level: 2,
-                      size: 'h3',
-                    },
-                  },
-                  {
-                    id: 'setup-table',
-                    type: 'RadioGroup',
-                    props: {
-                      options: [
-                        {
-                          value: '6max',
-                          label: '6-max',
-                          iconSource: {
-                            mediaId: 'sharkprey-players-two-icon',
-                          },
-                          disabled: true,
-                        },
-                        {
-                          value: '9max',
-                          label: '9-max',
-                          iconSource: {
-                            mediaId: 'sharkprey-players-four-icon',
-                          },
-                        },
-                      ],
-                      defaultValue: '9max',
-                      presentation: 'card',
-                      columns: 2,
-                      contentOrientation: 'vertical',
-                      color: 'secondary',
-                      size: 'm',
-                      gap: 's',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                },
-              },
-              {
-                id: 'setup-focus-section',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'setup-focus-title',
-                    type: 'Heading',
-                    props: {
-                      text: 'Focus',
-                      level: 2,
-                      size: 'h3',
-                    },
-                  },
-                  {
-                    id: 'setup-focus',
-                    type: 'RadioGroup',
-                    props: {
-                      options: [
-                        {
-                          value: 'preflop',
-                          label: 'Preflop fundamentals',
-                          description: 'Curated 9-max MTT spots before the flop.',
-                          iconSource: {
-                            mediaId: 'sharkprey-target-icon',
-                          },
-                        },
-                      ],
-                      defaultValue: 'preflop',
-                      presentation: 'card',
-                      columns: 1,
-                      contentOrientation: 'horizontal',
-                      color: 'secondary',
-                      size: 'm',
-                      gap: 's',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                },
-              },
-              {
-                id: 'setup-session-section',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'setup-session-title',
-                    type: 'Heading',
-                    props: {
-                      text: 'Session',
-                      level: 2,
-                      size: 'h3',
-                    },
-                  },
-                  {
-                    id: 'setup-session',
-                    type: 'RadioGroup',
-                    props: {
-                      options: [
-                        {
-                          value: 'one',
-                          label: '1 hand',
-                          description: 'Quick practice',
-                          iconSource: {
-                            mediaId: 'sharkprey-history-icon',
-                          },
-                        },
-                      ],
-                      defaultValue: 'one',
-                      presentation: 'card',
-                      columns: 1,
-                      contentOrientation: 'horizontal',
-                      color: 'secondary',
-                      size: 'm',
-                      gap: 's',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                },
-              },
-              {
-                id: 'setup-start',
-                type: 'Button',
-                props: {
-                  children: 'Start training',
+                  options: [
+                    { value: 'mtt', label: 'MTT' },
+                    { value: 'sng', label: 'Sit & Go' },
+                    { value: 'cash', label: 'Cash Game' },
+                  ],
+                  presentation: 'card',
+                  columns: 1,
+                  contentOrientation: 'horizontal',
                   color: 'secondary',
-                  variant: 'solid',
                   size: 'l',
-                  fullWidth: true,
-                },
-                style: {
-                  minHeight: 48,
+                  gap: 'm',
                 },
               },
             ],
-            style: {
-              gap: 16,
-              minHeight: 710,
-              paddingHorizontal: 10,
-              paddingTop: 14,
-            },
+          },
+        ],
+      },
+    },
+    'training-table-size': {
+      id: 'training-table-size',
+      name: 'Choose table size',
+      title: 'Choose table size',
+      root: {
+        id: 'training-table-size-screen',
+        type: 'Screen',
+        props: { width: 'narrow', scroll: true },
+        children: [
+          {
+            id: 'training-table-size-content',
+            type: 'View',
+            props: {},
+            style: { gap: 20, paddingTop: 20 },
+            children: [
+              {
+                id: 'training-table-size-title',
+                type: 'Heading',
+                props: { text: 'How many players?', level: 1, size: 'h1' },
+              },
+              {
+                id: 'setup-table',
+                type: 'RadioGroup',
+                props: {
+                  options: [
+                    { value: '6max', label: '6-max' },
+                    { value: '9max', label: '9-max' },
+                  ],
+                  presentation: 'card',
+                  columns: 1,
+                  contentOrientation: 'horizontal',
+                  color: 'secondary',
+                  size: 'l',
+                  gap: 'm',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+    'training-street': {
+      id: 'training-street',
+      name: 'Choose street',
+      title: 'Choose street',
+      root: {
+        id: 'training-street-screen',
+        type: 'Screen',
+        props: { width: 'narrow', scroll: true },
+        children: [
+          {
+            id: 'training-street-content',
+            type: 'View',
+            props: {},
+            style: { gap: 20, paddingTop: 20 },
+            children: [
+              {
+                id: 'training-street-title',
+                type: 'Heading',
+                props: { text: 'Which street?', level: 1, size: 'h1' },
+              },
+              {
+                id: 'setup-street',
+                type: 'RadioGroup',
+                props: {
+                  options: [
+                    { value: 'preflop', label: 'Preflop' },
+                    { value: 'flop', label: 'Flop' },
+                    { value: 'turn', label: 'Turn' },
+                    { value: 'river', label: 'River' },
+                  ],
+                  presentation: 'card',
+                  columns: 1,
+                  contentOrientation: 'horizontal',
+                  color: 'secondary',
+                  size: 'l',
+                  gap: 'm',
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+    'training-difficulty': {
+      id: 'training-difficulty',
+      name: 'Choose difficulty',
+      title: 'Choose difficulty',
+      root: {
+        id: 'training-difficulty-screen',
+        type: 'Screen',
+        props: { width: 'narrow', scroll: true },
+        children: [
+          {
+            id: 'training-difficulty-content',
+            type: 'View',
+            props: {},
+            style: { gap: 16, paddingTop: 20 },
+            children: [
+              {
+                id: 'training-difficulty-title',
+                type: 'Heading',
+                props: { text: 'How hard?', level: 1, size: 'h1' },
+              },
+              {
+                id: 'setup-difficulty-1',
+                type: 'Button',
+                props: { children: 'Level 1 · Fundamentals', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-2',
+                type: 'Button',
+                props: { children: 'Level 2 · Standard spots', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-3',
+                type: 'Button',
+                props: { children: 'Level 3 · Intermediate', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-4',
+                type: 'Button',
+                props: { children: 'Level 4 · Advanced', fullWidth: true },
+              },
+              {
+                id: 'setup-difficulty-5',
+                type: 'Button',
+                props: { children: 'Level 5 · Expert', fullWidth: true },
+              },
+            ],
           },
         ],
       },

@@ -9,7 +9,7 @@
         "@ankhorage/contracts": "^19.1.0",
         "@ankhorage/navigator": "^3.2.5",
         "@ankhorage/zora": "^19.0.1",
-        "@ankhorage/zora-tabletop": "^0.1.2",
+        "@ankhorage/zora-tabletop": "^0.1.3",
       },
       "devDependencies": {
         "@ankhorage/ankh": "^0.8.12",
@@ -45,7 +45,7 @@
 
     "@ankhorage/zora": ["@ankhorage/zora@19.0.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.0", "@ankhorage/contracts": "^12.0.1", "@ankhorage/surface": "^9.0.1", "@ankhorage/utility": "^1.2.0", "expo-document-picker": "~57.0.1", "expo-image-picker": "~57.0.16" }, "peerDependencies": { "@react-native-vector-icons/fontawesome": "^13.1.3", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.3", "@react-native-vector-icons/ionicons": "^13.1.3", "react": "19.2.3", "react-native": "0.86.x", "react-native-gesture-handler": "~2.32.0", "react-native-reanimated": "4.5.1", "react-native-safe-area-context": "~5.7.0", "react-native-svg": "15.15.4", "react-native-web": "~0.21.0", "react-native-worklets": "0.10.1" } }, "sha512-dzJBmRNjteEt9eVfqOnRHPA+JiHSykZEb8oX7jil8+prjAZt8nYRIAoTT1wjYnY7xz41vyn2TRXe6Olpg65Utg=="],
 
-    "@ankhorage/zora-tabletop": ["@ankhorage/zora-tabletop@0.1.2", "", { "peerDependencies": { "@ankhorage/zora": ">=4.2.2", "react": ">=18.2.0", "react-native": ">=0.72.0" } }, "sha512-rCS7Xl4oCx5p65d95pqpsicko3utDiNztdr27et5gfLcc7Ymu55d2M7JYPJmSCW+247MCNQUJN2x73jdfSkpxQ=="],
+    "@ankhorage/zora-tabletop": ["@ankhorage/zora-tabletop@0.1.3", "", { "peerDependencies": { "@ankhorage/zora": ">=4.2.2", "react": ">=18.2.0", "react-native": ">=0.72.0" } }, "sha512-ME6H9Jq9aXgH4dWDLtNV/mtZUywo86xqQ+BAN5PvWp3iocJTya6jAhhlhBIBF0uT3YnUODOPwrScpXJVC8Jd0g=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.0", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.28.5", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-9NhCeYjq9+3uxgdtp20LSiJXJvN0FeCtNGpJxuMFZ1Kv3cWUNb6DOhJwUvcVCzKGR66cw4njwM6hrJLqgOwbcw=="],
 
