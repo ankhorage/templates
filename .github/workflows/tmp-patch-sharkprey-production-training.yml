@@ -1,0 +1,33 @@
+name: Patch SharkPrey production training binding
+
+on:
+  push:
+    branches:
+      - feat/sharkprey-production-training-binding
+
+permissions:
+  contents: write
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/sharkprey-production-training-binding
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+      - run: bun tmp/patch-sharkprey-production-training.ts
+      - name: Commit manifest update
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add src/templates/categories/education-learning/sharkprey/createAppManifest.ts
+          git rm tmp/patch-sharkprey-production-training.ts .github/workflows/tmp-patch-sharkprey-production-training.yml
+          git commit -m "feat(sharkprey): bind setup to production training catalog"
+          git push origin HEAD:feat/sharkprey-production-training-binding
