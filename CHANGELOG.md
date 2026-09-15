@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 11.0.5
+
+### Patch Changes
+
+- 91ba740: Update Templates to the released ZORA 19 boundary and require ZORA Tabletop 0.1.2 so composed authoring metadata uses only current ZORA extension hosts.
+
 ## 11.0.4
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/templates",
-  "version": "11.0.4",
+  "version": "11.0.5",
   "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
   "homepage": "https://github.com/ankhorage/templates#readme",
   "bugs": {
