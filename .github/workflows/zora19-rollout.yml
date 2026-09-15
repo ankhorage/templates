@@ -25,9 +25,9 @@ jobs:
           node-version: '24'
       - name: Refresh dependencies
         run: bun install
+      - run: bun run build
       - name: Inspect released owner APIs
         run: bun .agents/skills/zora-designer/scripts/owner-api.ts inspect
-      - run: bun run build
       - run: bun run typecheck
       - run: bun run lint
       - run: bun run knip:check
