@@ -1,0 +1,49 @@
+name: ZORA 19 rollout
+
+on:
+  push:
+    branches:
+      - chore/zora-19-rollout
+
+permissions:
+  contents: write
+
+jobs:
+  validate:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ github.token }}
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      - name: Refresh dependencies
+        run: bun install
+      - name: Inspect released owner APIs
+        run: bun .agents/skills/zora-designer/scripts/owner-api.ts inspect
+      - run: bun run build
+      - run: bun run typecheck
+      - run: bun run lint
+      - run: bun run knip:check
+      - run: bun run test
+      - run: bun run changeset:status
+      - run: bun run docs
+      - run: bun run format
+      - run: bun run format:check
+      - name: Persist generated artifacts and remove one-shot workflow
+        run: |
+          git rm .github/workflows/zora19-rollout.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          if git diff --cached --quiet; then
+            exit 0
+          fi
+          git commit -m "chore: refresh ZORA 19 rollout artifacts"
+          git push
