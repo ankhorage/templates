@@ -16,16 +16,17 @@
     "access": "public"
   },
   "keywords": [
-    "typescript",
-    "templates",
-    "app-templates",
-    "manifest",
+    "ankhorage",
     "app-generator",
-    "react-native",
+    "app-templates",
     "expo",
+    "manifest",
+    "react-native",
+    "secret-store",
     "supabase",
-    "vault",
-    "secret-store"
+    "templates",
+    "typescript",
+    "vault"
   ],
   "sideEffects": false,
   "files": [
