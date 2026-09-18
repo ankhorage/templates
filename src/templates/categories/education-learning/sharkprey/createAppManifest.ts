@@ -162,8 +162,8 @@ const manifest: AppManifest = {
     category: 'education_learning',
     themeId: 'sharkprey',
   },
-  themes: [
-    {
+  themes: {
+    sharkprey: {
       id: 'sharkprey',
       name: 'SharkPrey',
       light: {
@@ -225,7 +225,7 @@ const manifest: AppManifest = {
         },
       },
     },
-  ],
+  },
   activeThemeId: 'sharkprey',
   dataBindings: {
     'setup-game': {
@@ -513,8 +513,8 @@ const manifest: AppManifest = {
     },
   },
   infra: {
-    apis: [
-      {
+    apis: {
+      'poker-training': {
         id: 'poker-training',
         name: 'Poker training',
         origin: 'external',
@@ -691,7 +691,7 @@ const manifest: AppManifest = {
           },
         },
       },
-    ],
+    },
     environments: {
       local: {
         deployment: {
@@ -704,7 +704,7 @@ const manifest: AppManifest = {
         },
         objectStorage: {
           provider: 'supabase',
-          buckets: ['media'],
+          buckets: { media: true },
         },
         secretStore: {
           provider: 'supabase-vault',
@@ -734,7 +734,7 @@ const manifest: AppManifest = {
         },
       },
     },
-    modules: [],
+    modules: {},
   },
   state: {
     provider: 'legend',
