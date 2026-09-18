@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.0
+
+### Major Changes
+
+- 6b53ad7: Migrate template manifests and authoring inputs to Contracts 22 canonical registries and serializable sets.
+
 ## 11.0.6
 
 ### Patch Changes
