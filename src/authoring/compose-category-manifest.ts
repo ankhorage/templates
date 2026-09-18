@@ -50,8 +50,7 @@ export interface ComposeCategoryAppManifestInput {
   readonly screens: Readonly<Record<string, ScreenSpec>>;
   readonly dataSources?: DataSourceRegistry;
   readonly dataBindings?: ComponentDataBindingRegistry;
-  readonly modules?: readonly string[];
-  readonly modulesConfig?: Readonly<Record<string, unknown>>;
+  readonly modules?: AppManifest['infra']['modules'];
   readonly theme?: CategoryDesignOverrides;
   readonly authoringState?: TemplateAuthoringState;
 }
@@ -266,8 +265,7 @@ export function composeCategoryAppManifest(
     }),
     infra: {
       ...structuredClone(BASE_INFRA),
-      modules: [...(input.modules ?? [])],
-      ...(input.modulesConfig ? { modulesConfig: structuredClone(input.modulesConfig) } : {}),
+      modules: structuredClone(input.modules ?? {}),
     },
     settings: structuredClone(BASE_SETTINGS),
     ...(input.dataSources ? { dataSources: structuredClone(input.dataSources) } : {}),
