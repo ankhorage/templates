@@ -62,7 +62,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 92,
+      "line": 93,
       "column": 22
     },
     "exportPaths": ["src/index.ts"],
@@ -80,7 +80,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 93,
+      "line": 94,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -98,7 +98,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 290,
+      "line": 288,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -166,7 +166,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 59,
+      "line": 58,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -292,7 +292,7 @@
       {
         "name": "dark",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -313,7 +313,7 @@
       {
         "name": "light",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -327,7 +327,7 @@
       {
         "name": "recipes",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -355,7 +355,7 @@
       {
         "name": "tokens",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -695,7 +695,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").CategoryPreset",
+        "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -739,7 +739,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 250,
+      "line": 249,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -795,28 +795,21 @@
       {
         "name": "dataBindings",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
         "required": false,
         "description": null
       },
       {
         "name": "dataSources",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
         "required": false,
         "description": null
       },
       {
         "name": "modules",
         "kind": "property",
-        "type": "readonly string[]",
-        "required": false,
-        "description": null
-      },
-      {
-        "name": "modulesConfig",
-        "kind": "property",
-        "type": "Readonly<Record<string, unknown>>",
+        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleSpec>>",
         "required": false,
         "description": null
       },
@@ -1156,7 +1149,7 @@
       {
         "name": "oauth",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
         "required": true,
         "description": null
       }
@@ -1271,7 +1264,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").CategoryPreset",
+        "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -1417,7 +1410,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-      "line": 9,
+      "line": 2,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1431,17 +1424,53 @@
     "description": null,
     "isReadme": false,
     "examples": [],
-    "kind": "unknown",
+    "kind": "type",
     "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-      "line": 11,
+      "line": 7,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
-    "relatedSymbols": [],
+    "relatedSymbols": ["SplashScreenResizeMode"],
     "signatures": [],
-    "members": [],
+    "members": [
+      {
+        "name": "backgroundColor",
+        "kind": "property",
+        "type": "string",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "dark",
+        "kind": "property",
+        "type": "SplashScreenModeSpec",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "image",
+        "kind": "property",
+        "type": "MediaAssetReference",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "imageWidth",
+        "kind": "property",
+        "type": "number",
+        "required": false,
+        "description": null
+      },
+      {
+        "name": "resizeMode",
+        "kind": "property",
+        "type": "SplashScreenResizeMode",
+        "required": false,
+        "description": null
+      }
+    ],
     "structuredRows": []
   },
   {
@@ -1950,7 +1979,7 @@
     "modulePath": "src/authoring/compose-category-manifest.ts",
     "sourceLocation": {
       "filePath": "src/authoring/compose-category-manifest.ts",
-      "line": 67,
+      "line": 66,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
