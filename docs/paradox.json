@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v11.0.4",
+      "value": "v11.0.6",
       "color": "cb3837"
     },
     {
@@ -474,7 +474,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 92,
+        "line": 93,
         "column": 22
       },
       "exportPaths": ["src/index.ts"],
@@ -492,7 +492,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 93,
+        "line": 94,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -510,7 +510,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 290,
+        "line": 288,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -578,7 +578,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 59,
+        "line": 58,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -704,7 +704,7 @@
         {
           "name": "dark",
           "kind": "property",
-          "type": "Partial<import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -725,7 +725,7 @@
         {
           "name": "light",
           "kind": "property",
-          "type": "Partial<import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -739,7 +739,7 @@
         {
           "name": "recipes",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -767,7 +767,7 @@
         {
           "name": "tokens",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -1107,7 +1107,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").CategoryPreset",
+          "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1151,7 +1151,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 250,
+        "line": 249,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1207,28 +1207,21 @@
         {
           "name": "dataBindings",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
           "required": false,
           "description": null
         },
         {
           "name": "dataSources",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
           "required": false,
           "description": null
         },
         {
           "name": "modules",
           "kind": "property",
-          "type": "readonly string[]",
-          "required": false,
-          "description": null
-        },
-        {
-          "name": "modulesConfig",
-          "kind": "property",
-          "type": "Readonly<Record<string, unknown>>",
+          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleSpec>>",
           "required": false,
           "description": null
         },
@@ -1568,7 +1561,7 @@
         {
           "name": "oauth",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/git/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
           "required": true,
           "description": null
         }
@@ -1683,7 +1676,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/Users/a_rtiphishl_e/git/templates/src/index\").CategoryPreset",
+          "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1829,7 +1822,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-        "line": 9,
+        "line": 2,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1843,17 +1836,53 @@
       "description": null,
       "isReadme": false,
       "examples": [],
-      "kind": "unknown",
+      "kind": "type",
       "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-        "line": 11,
+        "line": 7,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
-      "relatedSymbols": [],
+      "relatedSymbols": ["SplashScreenResizeMode"],
       "signatures": [],
-      "members": [],
+      "members": [
+        {
+          "name": "backgroundColor",
+          "kind": "property",
+          "type": "string",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "dark",
+          "kind": "property",
+          "type": "SplashScreenModeSpec",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "image",
+          "kind": "property",
+          "type": "MediaAssetReference",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "imageWidth",
+          "kind": "property",
+          "type": "number",
+          "required": false,
+          "description": null
+        },
+        {
+          "name": "resizeMode",
+          "kind": "property",
+          "type": "SplashScreenResizeMode",
+          "required": false,
+          "description": null
+        }
+      ],
       "structuredRows": []
     },
     {
@@ -2362,7 +2391,7 @@
       "modulePath": "src/authoring/compose-category-manifest.ts",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 67,
+        "line": 66,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2426,7 +2455,7 @@
       "description": "Validate one canonical manifest for catalog registration or release finalization.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 67,
+        "line": 66,
         "column": 1
       }
     },
@@ -2435,7 +2464,7 @@
       "description": "Normalize one configured route or generated route path for exact comparison.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 98,
+        "line": 97,
         "column": 1
       }
     },
@@ -2444,7 +2473,7 @@
       "description": "Resolve one route's generated path relative to its parent navigator.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 104,
+        "line": 103,
         "column": 1
       }
     },
@@ -2453,7 +2482,7 @@
       "description": "Collect every concrete screen path produced by a navigator tree.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 116,
+        "line": 115,
         "column": 1
       }
     },
@@ -2462,7 +2491,7 @@
       "description": "Report navigator initial-route names that do not resolve among their sibling routes.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 130,
+        "line": 129,
         "column": 1
       }
     },
@@ -2471,7 +2500,7 @@
       "description": "Report an authenticated landing route that has no concrete screen in the navigator tree.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 156,
+        "line": 155,
         "column": 1
       }
     },
@@ -2480,7 +2509,7 @@
       "description": "Read a manifest string prop without treating arbitrary values as valid authoring metadata.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 177,
+        "line": 176,
         "column": 1
       }
     },
@@ -2489,7 +2518,7 @@
       "description": "Report every canonical ZORA MissingElement with its requested capability and location.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 183,
+        "line": 182,
         "column": 1
       }
     },
@@ -2498,7 +2527,7 @@
       "description": "Validate every route target recursively against the canonical screen registry.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 206,
+        "line": 205,
         "column": 1
       }
     },
@@ -2507,7 +2536,7 @@
       "description": "Convert owner theme evidence into template composition diagnostics.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 231,
+        "line": 230,
         "column": 1
       }
     },
@@ -2516,7 +2545,7 @@
       "description": "Compose canonical manifest inputs with a category/theme shell and explicit diagnostics.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 250,
+        "line": 249,
         "column": 1
       }
     },
@@ -2525,7 +2554,7 @@
       "description": "Fail catalog registration or release finalization while any blocker remains.",
       "sourceLocation": {
         "filePath": "src/authoring/compose-category-manifest.ts",
-        "line": 290,
+        "line": 288,
         "column": 1
       }
     },
@@ -3156,6 +3185,15 @@
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "line": 86,
+        "column": 1
+      }
+    },
+    {
+      "name": "createTrainingDifficultyBinding",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 99,
         "column": 1
       }
     },
@@ -4256,6 +4294,12 @@
       },
       {
         "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "createTrainingDifficultyBinding",
+        "callExpression": "createTrainingDifficultyBinding",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "toSymbol": "createAnswerNavigationBinding",
         "callExpression": "createAnswerNavigationBinding",
         "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
@@ -4342,6 +4386,11 @@
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
+        "toType": "InfraModuleSpec",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
+        "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "Readonly",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
@@ -4353,11 +4402,6 @@
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
         "toType": "TemplateAuthoringState",
-        "sourcePath": "src/authoring/compose-category-manifest.ts"
-      },
-      {
-        "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "Users",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4411,11 +4455,6 @@
         "sourcePath": "src/design/category-theme.ts"
       },
       {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "Users",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
         "fromSymbol": "compileCategoryDesign",
         "toType": "CategoryDesignOverrides",
         "sourcePath": "src/design/category-theme.ts"
@@ -4453,11 +4492,6 @@
       {
         "fromSymbol": "CompiledCategoryDesign",
         "toType": "TonePairDefinition",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "Users",
         "sourcePath": "src/design/category-theme.ts"
       },
       {
@@ -4506,11 +4540,6 @@
         "sourcePath": "src/design/category-theme.ts"
       },
       {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "Users",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
         "fromSymbol": "resolveTonePair",
         "toType": "TonePairDefinition",
         "sourcePath": "src/design/tone-catalog.ts"
@@ -4538,11 +4567,6 @@
       {
         "fromSymbol": "OAuthFixtureDefinition",
         "toType": "AuthOAuthConfig",
-        "sourcePath": "src/fixtures/oauth.ts"
-      },
-      {
-        "fromSymbol": "OAuthFixtureDefinition",
-        "toType": "Users",
         "sourcePath": "src/fixtures/oauth.ts"
       },
       {
@@ -4609,6 +4633,21 @@
         "fromSymbol": "TemplateDefinition",
         "toType": "AppManifest",
         "sourcePath": "src/templates/catalog.ts"
+      },
+      {
+        "fromSymbol": "SplashScreenSpec",
+        "toType": "MediaAssetReference",
+        "sourcePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts"
+      },
+      {
+        "fromSymbol": "SplashScreenSpec",
+        "toType": "SplashScreenModeSpec",
+        "sourcePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts"
+      },
+      {
+        "fromSymbol": "SplashScreenSpec",
+        "toType": "SplashScreenResizeMode",
+        "sourcePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts"
       }
     ],
     "componentComposition": []

@@ -13,8 +13,8 @@ const manifest = {
     category: 'lifestyle',
     themeId: 'stillpath',
   },
-  themes: [
-    {
+  themes: {
+    stillpath: {
       id: 'stillpath',
       name: 'Stillpath',
       light: {
@@ -57,7 +57,7 @@ const manifest = {
         },
       },
     },
-  ],
+  },
   activeThemeId: 'stillpath',
   activeThemeMode: 'light',
   media: {
@@ -623,7 +623,7 @@ const manifest = {
         },
         objectStorage: {
           provider: 'supabase',
-          buckets: ['media'],
+          buckets: { media: true },
         },
         secretStore: {
           provider: 'supabase-vault',
@@ -652,7 +652,7 @@ const manifest = {
         },
       },
     },
-    modules: [],
+    modules: {},
   },
   navigator: {
     type: 'tabs',

@@ -24,7 +24,7 @@ export function createManifestShell(args: {
       category: args.seed.category,
       themeId: args.theme.id,
     },
-    themes: [args.theme],
+    themes: Object.fromEntries([[args.theme.id, args.theme]]),
     activeThemeId: args.theme.id,
     splashScreen: createSplashScreen(args.theme),
     infra: structuredClone(BASE_INFRA),

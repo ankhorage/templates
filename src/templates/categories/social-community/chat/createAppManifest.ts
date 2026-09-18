@@ -21,8 +21,8 @@ const manifest: AppManifest = {
     category: 'social_community',
     themeId: 'close',
   },
-  themes: [
-    {
+  themes: {
+    close: {
       id: 'close',
       name: 'Close',
       light: {
@@ -52,7 +52,7 @@ const manifest: AppManifest = {
         },
       },
     },
-  ],
+  },
   activeThemeId: 'close',
   splashScreen: {
     backgroundColor: '#4F46E5',
@@ -73,7 +73,7 @@ const manifest: AppManifest = {
         },
         objectStorage: {
           provider: 'supabase',
-          buckets: ['media'],
+          buckets: { media: true },
         },
         secretStore: {
           provider: 'supabase-vault',
@@ -103,7 +103,7 @@ const manifest: AppManifest = {
         },
       },
     },
-    modules: [],
+    modules: {},
   },
   settings: {
     localization: {

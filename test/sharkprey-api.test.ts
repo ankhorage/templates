@@ -27,7 +27,7 @@ const answerOperation = {
 
 test('SharkPrey declares the complete production poker training API', () => {
   const manifest = createAppManifest();
-  const api = manifest.infra.apis?.find(({ id }) => id === 'poker-training');
+  const api = Object.values(manifest.infra.apis ?? {}).find(({ id }) => id === 'poker-training');
   const endpoint = api?.endpoints.tasks;
 
   expect(api).toMatchObject({

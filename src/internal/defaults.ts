@@ -15,7 +15,7 @@ export const BASE_INFRA: InfraManifest = {
       },
       objectStorage: {
         provider: 'supabase',
-        buckets: ['media'],
+        buckets: { media: true },
       },
       secretStore: {
         provider: 'supabase-vault',
@@ -38,7 +38,7 @@ export const BASE_INFRA: InfraManifest = {
       },
     },
   },
-  modules: [],
+  modules: {},
 };
 
 export const BASE_SETTINGS: AppManifest['settings'] = {
