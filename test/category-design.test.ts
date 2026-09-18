@@ -178,8 +178,9 @@ describe('ready manifest composition', () => {
       screens: baseScreens,
       dataSources: {},
       dataBindings: {},
-      modules: ['expo-localization'],
-      modulesConfig: { localization: { defaultLocale: 'en' } },
+      modules: {
+        'expo-localization': { config: { defaultLocale: 'en' } },
+      },
     } satisfies ComposeCategoryAppManifestInput;
     const first = composeCategoryAppManifest(input);
     const second = composeCategoryAppManifest(input);
@@ -187,8 +188,7 @@ describe('ready manifest composition', () => {
     expect(first.status).toBe('ready');
     expect(first.diagnostics).toEqual([]);
     expect(first.manifest).toEqual(second.manifest);
-    expect(first.manifest.infra.modules).toEqual(['expo-localization']);
-    expect(first.manifest.infra.modulesConfig).toEqual(input.modulesConfig);
+    expect(first.manifest.infra.modules).toEqual(input.modules);
     expect(first.manifest.dataSources).toEqual({});
     expect(first.manifest.dataBindings).toEqual({});
     expect(assertTemplateManifestReady(first)).toBe(first.manifest);
