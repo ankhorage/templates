@@ -9,7 +9,7 @@ import createAppManifest from '../src/templates/categories/education-learning/sh
 
 test('SharkPrey compiles both theme modes and validates navigation on every target', () => {
   const manifest = createAppManifest();
-  for (const theme of manifest.themes) {
+  for (const theme of Object.values(manifest.themes)) {
     const compiled = compileZoraTheme(theme);
     expect(compiled.diagnostics).toEqual([]);
   }
