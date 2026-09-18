@@ -122,7 +122,7 @@ test('every published template uses the environment-aware infrastructure contrac
       compute: { provider: 'local' },
       runtime: { provider: 'minikube' },
     });
-    expect(local.objectStorage).toEqual({ provider: 'supabase', buckets: ['media'] });
+    expect(local.objectStorage).toEqual({ provider: 'supabase', buckets: { media: true } });
     expect(Reflect.has(infra, 'storage')).toBe(false);
     expect(Reflect.has(local.deployment, 'target')).toBe(false);
     expect(Reflect.has(local.deployment, 'monitoring')).toBe(false);
