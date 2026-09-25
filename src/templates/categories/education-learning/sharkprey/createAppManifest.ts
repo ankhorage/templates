@@ -1445,7 +1445,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'decision-table-space',
-                type: 'View',
+                type: 'Grid',
                 props: {},
                 children: [
                   {
@@ -1690,7 +1690,7 @@ const manifest: AppManifest = {
               },
               {
                 id: 'review-table-space',
-                type: 'View',
+                type: 'Grid',
                 props: {},
                 children: [
                   {

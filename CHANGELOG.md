@@ -1,5 +1,17 @@
 # @ankhorage/templates
 
+## 12.0.2
+
+### Patch Changes
+
+- 7b70e0c: Update Ankhorage dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/navigator`, `@ankhorage/paradox`, `@ankhorage/zora-tabletop`, `@ankhorage/zora`.
+
+## 12.0.1
+
+### Patch Changes
+
+- a3f5e79: Update Ankhorage dependencies: `@ankhorage/zora`.
+
 ## 12.0.0
 
 ### Major Changes
