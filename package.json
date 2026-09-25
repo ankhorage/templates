@@ -74,7 +74,8 @@
     "test": "bun test",
     "prepublishOnly": "bun run typecheck && bun run build && bun test",
     "version-packages": "ankhorage-changeset version",
-    "knip:check": "ankhorage-knip"
+    "knip:check": "ankhorage-knip",
+    "test:standalone": "bun test test/root-exports.test.ts test/commands.test.ts"
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.1",
