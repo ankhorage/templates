@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.9
+
+### Patch Changes
+
+- d2270b4: Update Ankhorage dependencies: `@ankhorage/zora`.
+
 ## 12.0.8
 
 ### Patch Changes
