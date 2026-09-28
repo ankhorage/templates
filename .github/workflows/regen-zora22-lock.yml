@@ -1,0 +1,32 @@
+name: Regenerate ZORA 22 lock
+
+on:
+  push:
+    branches:
+      - chore/581-zora-22
+
+permissions:
+  contents: write
+
+jobs:
+  lock:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/581-zora-22
+      - uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: '1.4.2'
+      - run: bun install
+      - name: Commit lockfile
+        shell: bash
+        run: |
+          if git diff --quiet -- bun.lock; then
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bun.lock
+          git commit -m "chore(templates): lock ZORA 22"
+          git push origin HEAD:chore/581-zora-22
