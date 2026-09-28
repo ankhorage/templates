@@ -2,4 +2,4 @@
 '@ankhorage/templates': patch
 ---
 
-Update dependencies from Renovate pull request #340.
+Update Ankhorage dependencies: `@ankhorage/doctor`, `@ankhorage/paradox`, `@ankhorage/zora`.
