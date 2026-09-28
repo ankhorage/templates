@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.3
+
+### Patch Changes
+
+- 0e6c222: refactor: consume canonical core ZORA metadata and remove the obsolete tabletop plugin dependency
+
 ## 12.0.2
 
 ### Patch Changes
