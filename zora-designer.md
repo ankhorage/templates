@@ -11,7 +11,7 @@
       "Installed owner API inspection",
       "Live Ankhorage API Gateway OpenAPI and published poker tasks",
       "Local api-gateway SharkPrey v0 review dataset",
-      "Released @ankhorage/zora-tabletop public API"
+      "Released @ankhorage/zora 21.1.0 public API"
     ],
     "evidence": [
       {
@@ -45,10 +45,10 @@
         "observation": "One hundred review candidates are currently NLHE tournament tasks with ten player records each."
       },
       {
-        "id": "zora-tabletop",
+        "id": "zora-tabletop-core",
         "kind": "owner-api",
-        "location": "../zora-tabletop/src/index.ts",
-        "observation": "Released 0.0.5 exports TabletopTable, PlayingCard, CardBack, and CardHand for React Native and React Native Web; TabletopTable supports two through ten seats."
+        "location": "@ankhorage/zora",
+        "observation": "Released ZORA 21.1.0 owns TabletopTable, PlayingCard, CardBack, and CardHand as core React Native and React Native Web components; TabletopTable supports two through ten seats."
       },
       {
         "id": "concept-image-series",
@@ -315,17 +315,11 @@
       },
       {
         "owner": "@ankhorage/zora",
-        "version": "4.0.0",
+        "version": "21.1.0",
         "paths": [
           "computedTheme",
           "componentMetadata",
-          "events"
-        ]
-      },
-      {
-        "owner": "@ankhorage/zora-tabletop",
-        "version": "0.0.5",
-        "paths": [
+          "events",
           "TabletopTable",
           "PlayingCard",
           "CardBack",
@@ -341,22 +335,12 @@
       "English copy is used for the global concept series."
     ],
     "unsupported": [
-      "Core ZORA manifest metadata does not expose @ankhorage/zora-tabletop elements as direct manifest nodes.",
       "RadioGroup and Form are not direct manifest nodes in installed ZORA metadata.",
       "List and MetricCard are not direct manifest nodes in installed ZORA metadata.",
       "SettingsLayout and SwitchField are not direct manifest nodes in installed ZORA metadata.",
       "React-rendered SplashScreen is not a direct manifest node; native splash configuration is outside ZORA."
     ],
     "ownerRuntimeDrift": [
-      {
-        "owner": "@ankhorage/zora-tabletop",
-        "path": "TabletopTable",
-        "ownerValue": "Released presentational React component supporting two through ten seats.",
-        "designTarget": "Nine-seat MTT table available to manifest-driven runtime composition.",
-        "evidence": "zora-tabletop 0.0.5 public API and Templates owner composition",
-        "failedGate": "manifest-node-metadata",
-        "requiredOwnerChange": "Expose tabletop components through the appropriate current manifest/runtime metadata owner without adding app-specific logic to zora-tabletop."
-      },
       {
         "owner": "Ankhorage API Gateway",
         "path": "/v1/poker/training/tasks",
@@ -445,7 +429,7 @@
       "Leaving an active session requires abandonment confirmation and preserves state until confirmed."
     ],
     "recipeDecisions": {
-      "table": "Use @ankhorage/zora-tabletop TabletopTable with PlayingCard, CardBack, and CardHand semantics.",
+      "table": "Use core @ankhorage/zora TabletopTable with PlayingCard, CardBack, and CardHand semantics.",
       "actions": "Use ZORA Button with equal visual weight for answer choices so presentation does not reveal correctness.",
       "feedback": "Use ZORA Notice plus semantic Text and Button.",
       "summary": "Use ZORA ProgressRing and Button.",
@@ -763,7 +747,6 @@
     ],
     "applicationGate": "pass-with-non-blocking-gaps",
     "ownerRuntimeDrift": [
-      "zora-tabletop manifest metadata",
       "poker target API contract"
     ],
     "blockers": []
@@ -819,7 +802,7 @@ Use the platform system family because owner-recommended Atkinson Hyperlegible a
 
 ## Component and interaction states
 
-Use ZORA primitives where metadata supports them and @ankhorage/zora-tabletop for the table and cards. Preserve loading, offline, empty, retry, pressed, selected, disabled, success, error, and destructive-confirmation states.
+Use core ZORA primitives and core ZORA Tabletop components for the table and cards. Preserve loading, offline, empty, retry, pressed, selected, disabled, success, error, and destructive-confirmation states.
 
 ## Screen specifications
 
@@ -835,7 +818,7 @@ Configuration and portable template are complete with non-blocking owner/runtime
 
 ## Findings and remediation
 
-Expose tabletop components through current manifest/runtime metadata and update the curated poker API for explicit formats, table size, dealer/full-seat state, adaptive categories, progress, history, and statistics before implementation.
+Core ZORA 21.1.0 now owns tabletop manifest/runtime metadata. Update the curated poker API for explicit formats, table size, dealer/full-seat state, adaptive categories, progress, history, and statistics before implementation.
 
 ## Risks needing verification
 
