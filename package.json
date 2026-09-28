@@ -89,7 +89,7 @@
     "@ankhorage/doctor": "^0.11.14",
     "@ankhorage/paradox": "^0.2.6",
     "@types/bun": "^1.4.2",
-    "@types/node": "^25.2.3",
+    "@types/node": "^26.6.3",
     "typescript": "^5.9.3"
   },
   "packageManager": "bun@1.4.2"
