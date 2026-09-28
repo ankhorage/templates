@@ -2,4 +2,4 @@
 '@ankhorage/templates': patch
 ---
 
-Update dependencies from Renovate pull request #328.
+Update TypeScript to version 6.
