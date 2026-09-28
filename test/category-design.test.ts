@@ -226,8 +226,8 @@ describe('blocked manifest composition', () => {
   });
 });
 
-describe('plugin manifest composition', () => {
-  test('validates plugin nodes and placement through composed ZORA metadata', () => {
+describe('core ZORA manifest composition', () => {
+  test('validates core component nodes and placement through canonical ZORA metadata', () => {
     const { manifest } = composeCategoryAppManifest({
       category: 'reference',
       navigator: baseNavigator,
