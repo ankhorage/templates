@@ -226,8 +226,8 @@ describe('blocked manifest composition', () => {
   });
 });
 
-describe('plugin manifest composition', () => {
-  test('validates plugin nodes and placement through composed ZORA metadata', () => {
+describe('core ZORA manifest composition', () => {
+  test('recognizes Tabletop as a core component through canonical ZORA metadata', () => {
     const { manifest } = composeCategoryAppManifest({
       category: 'reference',
       navigator: baseNavigator,
@@ -245,15 +245,9 @@ describe('plugin manifest composition', () => {
 
     const homeScreen = manifest.screens.home;
     if (!homeScreen) throw new Error('Expected the composed home screen.');
-    homeScreen.root.children = [
-      {
-        id: 'text-parent',
-        type: 'Text',
-        children: [{ id: 'invalid-table', type: 'TabletopTable', props: { seats: [] } }],
-      },
-    ];
+    homeScreen.root.children = [{ id: 'unknown', type: 'StandalonePluginWidget' }];
     expect(validateTemplateManifest(manifest).diagnostics.map(({ code }) => code)).toContain(
-      'invalid-node-placement',
+      'unknown-component',
     );
   });
 });
