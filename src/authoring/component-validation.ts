@@ -12,7 +12,7 @@ export function isMissingElementNode(node: UiNode): boolean {
   return node.type === metadata.name;
 }
 
-/*** Validate component availability and child placement through canonical core ZORA metadata. */
+/*** Validate component availability through canonical core ZORA metadata. */
 export function collectComponentDiagnostics(
   screens: Readonly<Record<string, ScreenSpec>>,
 ): TemplateCompositionDiagnostic[] {
@@ -29,17 +29,6 @@ export function collectComponentDiagnostics(
           message: `Node "${node.id}" uses unknown component "${node.type}".`,
         });
         return;
-      }
-      for (const [index, child] of (node.children ?? []).entries()) {
-        if (!(child.type in TEMPLATE_ZORA_COMPONENT_META)) continue;
-        if (metadata.allowedChildren.includes(child.type)) continue;
-        diagnostics.push({
-          code: 'invalid-node-placement',
-          severity: 'error',
-          path: `${path}.children[${index}]`,
-          nodeId: child.id,
-          message: `Component "${child.type}" cannot be placed inside "${node.type}".`,
-        });
       }
     });
   }
