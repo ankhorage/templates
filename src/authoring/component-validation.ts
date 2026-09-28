@@ -1,16 +1,9 @@
 import type { ScreenSpec, UiNode } from '@ankhorage/contracts';
-import { composeZoraPluginMetadata, ZORA_CORE_PLUGIN_METADATA } from '@ankhorage/zora/metadata';
-import { ZORA_PLUGIN_METADATA as ZORA_TABLETOP_PLUGIN_METADATA } from '@ankhorage/zora-tabletop/metadata';
+import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 
 import type { TemplateCompositionDiagnostic } from './compose-category-manifest';
 
-const TEMPLATE_ZORA_COMPONENT_META = composeZoraPluginMetadata([
-  ZORA_CORE_PLUGIN_METADATA,
-  ZORA_TABLETOP_PLUGIN_METADATA,
-]).componentMeta;
-const TEMPLATE_ZORA_PLUGIN_COMPONENT_TYPES = new Set(
-  Object.keys(ZORA_TABLETOP_PLUGIN_METADATA.componentMeta),
-);
+const TEMPLATE_ZORA_COMPONENT_META = ZORA_COMPONENT_META;
 
 /*** Ask composed ZORA metadata whether a manifest node is the canonical draft placeholder. */
 export function isMissingElementNode(node: UiNode): boolean {
@@ -19,7 +12,7 @@ export function isMissingElementNode(node: UiNode): boolean {
   return node.type === metadata.name;
 }
 
-/*** Validate component availability and plugin placement through the composed ZORA catalog. */
+/*** Validate component availability and child placement through canonical core ZORA metadata. */
 export function collectComponentDiagnostics(
   screens: Readonly<Record<string, ScreenSpec>>,
 ): TemplateCompositionDiagnostic[] {
@@ -38,7 +31,7 @@ export function collectComponentDiagnostics(
         return;
       }
       for (const [index, child] of (node.children ?? []).entries()) {
-        if (!TEMPLATE_ZORA_PLUGIN_COMPONENT_TYPES.has(child.type)) continue;
+        if (!(child.type in TEMPLATE_ZORA_COMPONENT_META)) continue;
         if (metadata.allowedChildren.includes(child.type)) continue;
         diagnostics.push({
           code: 'invalid-node-placement',
