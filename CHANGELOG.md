@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.6
+
+### Patch Changes
+
+- caed040: Update dependencies from Renovate pull request #320.
+
 ## 12.0.5
 
 ### Patch Changes
