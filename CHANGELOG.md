@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.5
+
+### Patch Changes
+
+- ef7d853: Update dependencies from Renovate pull request #337.
+
 ## 12.0.4
 
 ### Patch Changes
