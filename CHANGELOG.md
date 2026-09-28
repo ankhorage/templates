@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.8
+
+### Patch Changes
+
+- eae43bc: Update Ankhorage dependencies: `@ankhorage/doctor`, `@ankhorage/zora`.
+
 ## 12.0.7
 
 ### Patch Changes
