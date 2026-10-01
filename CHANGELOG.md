@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.36
+
+### Patch Changes
+
+- 3fb93ef: Update dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/navigator`, `@ankhorage/paradox`, `@ankhorage/zora`.
+
 ## 12.0.35
 
 ### Patch Changes
