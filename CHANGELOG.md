@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 12.0.18
+
+### Patch Changes
+
+- 86921a4: Update Renovate-managed workflows.
+- 48f0a30: Update dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/navigator`.
+
 ## 12.0.17
 
 ### Patch Changes
