@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 12.0.13
+
+### Patch Changes
+
+- 78d94fb: Update Renovate-managed workflows.
+- 620d2a9: Update dependencies: `typescript`.
+
 ## 12.0.12
 
 ### Patch Changes
