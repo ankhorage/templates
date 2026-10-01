@@ -1,5 +1,13 @@
 # @ankhorage/templates
 
+## 12.0.50
+
+### Patch Changes
+
+- 66d65dc: Update dependencies: `@types/node`.
+- bf888d9: Update Renovate-managed workflows.
+- b722e83: Update dependencies: `@ankhorage/doctor`, `@ankhorage/zora`.
+
 ## 12.0.49
 
 ### Patch Changes
