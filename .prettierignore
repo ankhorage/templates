@@ -2,3 +2,5 @@ dist
 node_modules
 bun.lock
 zora-designer.md
+README.md
+paradox/
