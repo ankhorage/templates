@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.42
+
+### Patch Changes
+
+- 3921801: Update dependencies: `@ankhorage/doctor`, `@ankhorage/navigator`, `@ankhorage/paradox`, `@ankhorage/zora`.
+
 ## 12.0.41
 
 ### Patch Changes
