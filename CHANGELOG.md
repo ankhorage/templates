@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.11
+
+### Patch Changes
+
+- ccf54db: Update Ankhorage dependencies: `@ankhorage/navigator`.
+
 ## 12.0.10
 
 ### Patch Changes
