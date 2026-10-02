@@ -80,9 +80,6 @@
       "contracts": "12.0.1",
       "templates": "9.4.1",
       "zora": "4.4.1",
-      "plugins": {
-        "@ankhorage/zora-tabletop": "0.1.0"
-      },
       "navigator": "3.2.2"
     },
     "diagnostics": [],

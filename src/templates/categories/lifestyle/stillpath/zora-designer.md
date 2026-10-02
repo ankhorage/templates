@@ -153,10 +153,7 @@
       "colorTheory": "0.3.0",
       "contracts": "12.0.1",
       "templates": "9.7.1",
-      "zora": "4.5.0",
-      "plugins": {
-        "@ankhorage/zora-tabletop": "0.1.0"
-      }
+      "zora": "4.5.0"
     },
     "diagnostics": [],
     "assumptions": [
