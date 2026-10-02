@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.68
+
+### Patch Changes
+
+- d208fae: Update dependencies: `@ankhorage/navigator`, `@ankhorage/zora`.
+
 ## 12.0.67
 
 ### Patch Changes
