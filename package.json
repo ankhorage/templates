@@ -79,7 +79,7 @@
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.1",
-    "@ankhorage/contracts": "^22.8.48",
+    "@ankhorage/contracts": "^22.8.49",
     "@ankhorage/navigator": "^3.3.37",
     "@ankhorage/zora": "^22.0.27"
   },
