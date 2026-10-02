@@ -80,7 +80,7 @@
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.1",
     "@ankhorage/contracts": "^22.8.67",
-    "@ankhorage/navigator": "^3.3.50",
+    "@ankhorage/navigator": "^3.3.51",
     "@ankhorage/zora": "^22.0.44"
   },
   "devDependencies": {
