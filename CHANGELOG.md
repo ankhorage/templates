@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 12.0.82
+
+### Patch Changes
+
+- acbda42: Remove retired standalone ZORA plugin provenance from current template design and recognition
+  artifacts now that Chess, Game, and Tabletop are owned by core ZORA.
+
 ## 12.0.81
 
 ### Patch Changes
