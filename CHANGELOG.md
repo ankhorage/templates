@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.63
+
+### Patch Changes
+
+- cbfa562: Update Renovate-managed workflows.
+
 ## 12.0.62
 
 ### Patch Changes
