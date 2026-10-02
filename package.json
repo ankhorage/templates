@@ -79,15 +79,15 @@
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.1",
-    "@ankhorage/contracts": "^22.8.54",
-    "@ankhorage/navigator": "^3.3.41",
-    "@ankhorage/zora": "^22.0.30"
+    "@ankhorage/contracts": "^22.8.56",
+    "@ankhorage/navigator": "^3.3.43",
+    "@ankhorage/zora": "^22.0.32"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.12",
     "@ankhorage/devtools": "^1.17.0",
-    "@ankhorage/doctor": "^0.11.51",
-    "@ankhorage/paradox": "^0.2.19",
+    "@ankhorage/doctor": "^0.11.55",
+    "@ankhorage/paradox": "^0.2.20",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.4",
     "typescript": "^6.0.3"
