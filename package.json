@@ -79,14 +79,14 @@
   },
   "dependencies": {
     "@ankhorage/color-theory": "^0.3.1",
-    "@ankhorage/contracts": "^22.8.58",
-    "@ankhorage/navigator": "^3.3.46",
-    "@ankhorage/zora": "^22.0.35"
+    "@ankhorage/contracts": "^22.8.60",
+    "@ankhorage/navigator": "^3.3.47",
+    "@ankhorage/zora": "^22.0.37"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.8.12",
     "@ankhorage/devtools": "^1.17.0",
-    "@ankhorage/doctor": "^0.11.56",
+    "@ankhorage/doctor": "^0.11.57",
     "@ankhorage/paradox": "^0.2.21",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.4",
