@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.59
+
+### Patch Changes
+
+- b4077cc: Update dependencies: `@ankhorage/contracts`, `@ankhorage/navigator`.
+
 ## 12.0.58
 
 ### Patch Changes
