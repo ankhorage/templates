@@ -17,7 +17,7 @@ export {
   type CompiledCategoryDesign,
   resolveCategoryDesignPreset,
   type ResolvedCategoryDesignPreset,
-} from './design/category-theme';
+} from './presets/category-design';
 export {
   DESIGN_DENSITIES,
   DESIGN_SHAPES,
