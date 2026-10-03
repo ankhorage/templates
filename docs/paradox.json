@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v11.0.6",
+      "value": "v12.0.110",
       "color": "cb3837"
     },
     {
@@ -89,8 +89,8 @@
       "dependencies": [
         "src/authoring/component-validation.ts",
         "src/authoring/create-manifest-shell.ts",
-        "src/design/category-theme.ts",
-        "src/internal/defaults.ts"
+        "src/internal/defaults.ts",
+        "src/presets/category-design.ts"
       ],
       "exports": [
         "assertTemplateManifestReady",
@@ -181,24 +181,6 @@
       "isEntrypoint": false,
       "dependencies": ["src/design/category-types.ts"],
       "exports": ["CATEGORY_SOURCE"]
-    },
-    {
-      "path": "src/design/category-theme.ts",
-      "isEntrypoint": false,
-      "dependencies": [
-        "src/design/category-types.ts",
-        "src/design/tone-catalog.ts",
-        "src/presets/category-presets.ts"
-      ],
-      "exports": [
-        "CategoryDesignDiagnostic",
-        "CategoryDesignDiagnosticCode",
-        "CategoryDesignOverrides",
-        "compileCategoryDesign",
-        "CompiledCategoryDesign",
-        "resolveCategoryDesignPreset",
-        "ResolvedCategoryDesignPreset"
-      ]
     },
     {
       "path": "src/design/category-types.ts",
@@ -327,6 +309,24 @@
         "TEMPLATES_COMMAND_CATEGORY",
         "TEMPLATES_PACKAGE_NAME",
         "TEMPLATES_PACKAGE_VERSION"
+      ]
+    },
+    {
+      "path": "src/presets/category-design.ts",
+      "isEntrypoint": false,
+      "dependencies": [
+        "src/design/category-types.ts",
+        "src/design/tone-catalog.ts",
+        "src/presets/category-presets.ts"
+      ],
+      "exports": [
+        "CategoryDesignDiagnostic",
+        "CategoryDesignDiagnosticCode",
+        "CategoryDesignOverrides",
+        "compileCategoryDesign",
+        "CompiledCategoryDesign",
+        "resolveCategoryDesignPreset",
+        "ResolvedCategoryDesignPreset"
       ]
     },
     {
@@ -626,9 +626,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "type",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 17,
         "column": 1
       },
@@ -673,9 +673,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "unknown",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 14,
         "column": 1
       },
@@ -691,9 +691,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "type",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 24,
         "column": 1
       },
@@ -1016,9 +1016,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "function",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 203,
         "column": 1
       },
@@ -1054,9 +1054,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "type",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 50,
         "column": 1
       },
@@ -1207,21 +1207,21 @@
         {
           "name": "dataBindings",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+          "type": "ComponentDataBindingRegistry",
           "required": false,
           "description": null
         },
         {
           "name": "dataSources",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+          "type": "DataSourceRegistry",
           "required": false,
           "description": null
         },
         {
           "name": "modules",
           "kind": "property",
-          "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleSpec>>",
+          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleRegistry",
           "required": false,
           "description": null
         },
@@ -1592,9 +1592,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "function",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 120,
         "column": 1
       },
@@ -1630,9 +1630,9 @@
       "isReadme": false,
       "examples": [],
       "kind": "type",
-      "modulePath": "src/design/category-theme.ts",
+      "modulePath": "src/presets/category-design.ts",
       "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
+        "filePath": "src/presets/category-design.ts",
         "line": 38,
         "column": 1
       },
@@ -1819,10 +1819,10 @@
       "isReadme": false,
       "examples": [],
       "kind": "unknown",
-      "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
+      "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
-        "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-        "line": 2,
+        "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
+        "line": 172,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1837,10 +1837,10 @@
       "isReadme": false,
       "examples": [],
       "kind": "type",
-      "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
+      "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
-        "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-        "line": 7,
+        "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
+        "line": 177,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -2428,16 +2428,16 @@
       "description": "Ask composed ZORA metadata whether a manifest node is the canonical draft placeholder.",
       "sourceLocation": {
         "filePath": "src/authoring/component-validation.ts",
-        "line": 16,
+        "line": 9,
         "column": 1
       }
     },
     {
       "name": "collectComponentDiagnostics",
-      "description": "Validate component availability and plugin placement through the composed ZORA catalog.",
+      "description": "Validate component availability through canonical core ZORA metadata.",
       "sourceLocation": {
         "filePath": "src/authoring/component-validation.ts",
-        "line": 23,
+        "line": 16,
         "column": 1
       }
     },
@@ -2446,7 +2446,7 @@
       "description": "Visit every manifest child branch, including repeat empty-state nodes.",
       "sourceLocation": {
         "filePath": "src/authoring/component-validation.ts",
-        "line": 57,
+        "line": 39,
         "column": 1
       }
     },
@@ -2811,69 +2811,6 @@
       }
     },
     {
-      "name": "resolveDensityTokens",
-      "description": "Resolve canonical spacing token overrides for one density profile.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 55,
-        "column": 1
-      }
-    },
-    {
-      "name": "resolveShapeTokens",
-      "description": "Resolve canonical radius token overrides for one shape profile.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 64,
-        "column": 1
-      }
-    },
-    {
-      "name": "createProfileTokens",
-      "description": "Create canonical Contracts token overrides from reviewed density and shape direction.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 71,
-        "column": 1
-      }
-    },
-    {
-      "name": "resolveModeTonePair",
-      "description": "Resolve one requested tone pair and retain unsupported intent as diagnostics.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 85,
-        "column": 1
-      }
-    },
-    {
-      "name": "resolveCategoryDesignPreset",
-      "description": "Resolve category defaults and explicit overrides into canonical compact ThemeConfig source.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 120,
-        "column": 1
-      }
-    },
-    {
-      "name": "createSelectionTargets",
-      "description": "Create compiler selection targets for the measurable accent and foundation direction.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 166,
-        "column": 1
-      }
-    },
-    {
-      "name": "compileCategoryDesign",
-      "description": "Resolve and compile a category theme through the released ZORA owner pipeline.",
-      "sourceLocation": {
-        "filePath": "src/design/category-theme.ts",
-        "line": 203,
-        "column": 1
-      }
-    },
-    {
       "name": "resolveClassificationRow",
       "description": "Resolve one reviewed classification row without dynamic object access.",
       "sourceLocation": {
@@ -2969,6 +2906,69 @@
       "sourceLocation": {
         "filePath": "src/fixtures/oauth.ts",
         "line": 78,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveDensityTokens",
+      "description": "Resolve canonical spacing token overrides for one density profile.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 55,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveShapeTokens",
+      "description": "Resolve canonical radius token overrides for one shape profile.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 64,
+        "column": 1
+      }
+    },
+    {
+      "name": "createProfileTokens",
+      "description": "Create canonical Contracts token overrides from reviewed density and shape direction.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 71,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveModeTonePair",
+      "description": "Resolve one requested tone pair and retain unsupported intent as diagnostics.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 85,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveCategoryDesignPreset",
+      "description": "Resolve category defaults and explicit overrides into canonical compact ThemeConfig source.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 120,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSelectionTargets",
+      "description": "Create compiler selection targets for the measurable accent and foundation direction.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 166,
+        "column": 1
+      }
+    },
+    {
+      "name": "compileCategoryDesign",
+      "description": "Resolve and compile a category theme through the released ZORA owner pipeline.",
+      "sourceLocation": {
+        "filePath": "src/presets/category-design.ts",
+        "line": 203,
         "column": 1
       }
     },
@@ -3290,7 +3290,7 @@
     {
       "kind": "export",
       "name": "compileCategoryDesign",
-      "sourcePath": "src/design/category-theme.ts",
+      "sourcePath": "src/presets/category-design.ts",
       "symbolName": "compileCategoryDesign",
       "description": "Resolve and compile a category theme through the released ZORA owner pipeline.",
       "isReadme": false
@@ -3330,7 +3330,7 @@
     {
       "kind": "export",
       "name": "resolveCategoryDesignPreset",
-      "sourcePath": "src/design/category-theme.ts",
+      "sourcePath": "src/presets/category-design.ts",
       "symbolName": "resolveCategoryDesignPreset",
       "description": "Resolve category defaults and explicit overrides into canonical compact ThemeConfig source.",
       "isReadme": false
@@ -3417,11 +3417,6 @@
       },
       {
         "fromPath": "src/index.ts",
-        "toPath": "src/design/category-theme.ts",
-        "sourcePath": "src/index.ts"
-      },
-      {
-        "fromPath": "src/index.ts",
         "toPath": "src/design/category-types.ts",
         "sourcePath": "src/index.ts"
       },
@@ -3433,6 +3428,11 @@
       {
         "fromPath": "src/index.ts",
         "toPath": "src/fixtures/oauth.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
+        "toPath": "src/presets/category-design.ts",
         "sourcePath": "src/index.ts"
       },
       {
@@ -3462,12 +3462,12 @@
       },
       {
         "fromPath": "src/authoring/compose-category-manifest.ts",
-        "toPath": "src/design/category-theme.ts",
+        "toPath": "src/internal/defaults.ts",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
         "fromPath": "src/authoring/compose-category-manifest.ts",
-        "toPath": "src/internal/defaults.ts",
+        "toPath": "src/presets/category-design.ts",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -3516,24 +3516,24 @@
         "sourcePath": "src/design/category-source.ts"
       },
       {
-        "fromPath": "src/design/category-theme.ts",
-        "toPath": "src/presets/category-presets.ts",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromPath": "src/design/category-theme.ts",
-        "toPath": "src/design/category-types.ts",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromPath": "src/design/category-theme.ts",
-        "toPath": "src/design/tone-catalog.ts",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
         "fromPath": "src/design/category-types.ts",
         "toPath": "src/design/tone-catalog.ts",
         "sourcePath": "src/design/category-types.ts"
+      },
+      {
+        "fromPath": "src/presets/category-design.ts",
+        "toPath": "src/design/category-types.ts",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromPath": "src/presets/category-design.ts",
+        "toPath": "src/design/tone-catalog.ts",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromPath": "src/presets/category-design.ts",
+        "toPath": "src/presets/category-presets.ts",
+        "sourcePath": "src/presets/category-design.ts"
       },
       {
         "fromPath": "src/presets/category-presets.ts",
@@ -3879,12 +3879,6 @@
         "sourcePath": "src/templateSelector.ts"
       },
       {
-        "fromSymbol": "src/authoring/component-validation.ts",
-        "toSymbol": "composeZoraPluginMetadata",
-        "callExpression": "composeZoraPluginMetadata",
-        "sourcePath": "src/authoring/component-validation.ts"
-      },
-      {
         "fromSymbol": "collectComponentDiagnostics",
         "toSymbol": "visitUiNode",
         "callExpression": "visitUiNode",
@@ -4113,66 +4107,6 @@
         "sourcePath": "src/cli/standalone.ts"
       },
       {
-        "fromSymbol": "createProfileTokens",
-        "toSymbol": "resolveDensityTokens",
-        "callExpression": "resolveDensityTokens",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "createProfileTokens",
-        "toSymbol": "resolveShapeTokens",
-        "callExpression": "resolveShapeTokens",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "resolveModeTonePair",
-        "toSymbol": "resolveTonePair",
-        "callExpression": "resolveTonePair",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "resolveCategoryDesignPreset",
-        "toSymbol": "createZoraThemeConfig",
-        "callExpression": "createZoraThemeConfig",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "resolveCategoryDesignPreset",
-        "toSymbol": "createProfileTokens",
-        "callExpression": "createProfileTokens",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "resolveCategoryDesignPreset",
-        "toSymbol": "resolveModeTonePair",
-        "callExpression": "resolveModeTonePair",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "createSelectionTargets",
-        "toSymbol": "parseHexColorOrThrow",
-        "callExpression": "parseHexColorOrThrow",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "compileCategoryDesign",
-        "toSymbol": "resolveCategoryDesignPreset",
-        "callExpression": "resolveCategoryDesignPreset",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "compileCategoryDesign",
-        "toSymbol": "compileZoraTheme",
-        "callExpression": "compileZoraTheme",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "compileCategoryDesign",
-        "toSymbol": "createSelectionTargets",
-        "callExpression": "createSelectionTargets",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
         "fromSymbol": "createTonePairDefinition",
         "toSymbol": "resolveClassificationRow",
         "callExpression": "resolveClassificationRow",
@@ -4219,6 +4153,66 @@
         "toSymbol": "createOAuthConfig",
         "callExpression": "createOAuthConfig",
         "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "createProfileTokens",
+        "toSymbol": "resolveDensityTokens",
+        "callExpression": "resolveDensityTokens",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "createProfileTokens",
+        "toSymbol": "resolveShapeTokens",
+        "callExpression": "resolveShapeTokens",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "resolveModeTonePair",
+        "toSymbol": "resolveTonePair",
+        "callExpression": "resolveTonePair",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "resolveCategoryDesignPreset",
+        "toSymbol": "createZoraThemeConfig",
+        "callExpression": "createZoraThemeConfig",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "resolveCategoryDesignPreset",
+        "toSymbol": "createProfileTokens",
+        "callExpression": "createProfileTokens",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "resolveCategoryDesignPreset",
+        "toSymbol": "resolveModeTonePair",
+        "callExpression": "resolveModeTonePair",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "createSelectionTargets",
+        "toSymbol": "parseHexColorOrThrow",
+        "callExpression": "parseHexColorOrThrow",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "compileCategoryDesign",
+        "toSymbol": "resolveCategoryDesignPreset",
+        "callExpression": "resolveCategoryDesignPreset",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "compileCategoryDesign",
+        "toSymbol": "compileZoraTheme",
+        "callExpression": "compileZoraTheme",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "compileCategoryDesign",
+        "toSymbol": "createSelectionTargets",
+        "callExpression": "createSelectionTargets",
+        "sourcePath": "src/presets/category-design.ts"
       },
       {
         "fromSymbol": "createCategoryPreset",
@@ -4376,17 +4370,17 @@
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "ComponentDataBinding",
+        "toType": "ComponentDataBindingRegistry",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "DatabaseDataSourceConfig",
+        "toType": "DataSourceRegistry",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
         "fromSymbol": "ComposeCategoryAppManifestInput",
-        "toType": "InfraModuleSpec",
+        "toType": "InfraModuleRegistry",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
@@ -4425,121 +4419,6 @@
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
-        "fromSymbol": "CategoryDesignDiagnostic",
-        "toType": "CategoryDesignDiagnosticCode",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "Partial",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "ThemeGlobalTokenOverrides",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "ThemeMode",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "ThemeModeConfig",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CategoryDesignOverrides",
-        "toType": "ThemeRecipeOverrides",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "compileCategoryDesign",
-        "toType": "CategoryDesignOverrides",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "compileCategoryDesign",
-        "toType": "CompiledCategoryDesign",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "CategoryDesignDiagnostic",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "CategoryPreset",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "Readonly",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "ThemeConfig",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "ThemeMode",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "TonePairDefinition",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "CompiledCategoryDesign",
-        "toType": "ZoraComputedTheme",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "resolveCategoryDesignPreset",
-        "toType": "CategoryDesignOverrides",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "resolveCategoryDesignPreset",
-        "toType": "ResolvedCategoryDesignPreset",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "CategoryDesignDiagnostic",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "CategoryPreset",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "Readonly",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "ThemeConfig",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "ThemeMode",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
-        "fromSymbol": "ResolvedCategoryDesignPreset",
-        "toType": "TonePairDefinition",
-        "sourcePath": "src/design/category-theme.ts"
-      },
-      {
         "fromSymbol": "resolveTonePair",
         "toType": "TonePairDefinition",
         "sourcePath": "src/design/tone-catalog.ts"
@@ -4573,6 +4452,121 @@
         "fromSymbol": "resolveOAuthFixture",
         "toType": "OAuthFixtureDefinition",
         "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignDiagnostic",
+        "toType": "CategoryDesignDiagnosticCode",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "Partial",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "ThemeGlobalTokenOverrides",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "ThemeMode",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "ThemeModeConfig",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "ThemeRecipeOverrides",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "compileCategoryDesign",
+        "toType": "CategoryDesignOverrides",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "compileCategoryDesign",
+        "toType": "CompiledCategoryDesign",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "CategoryDesignDiagnostic",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "CategoryPreset",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "Readonly",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "ThemeConfig",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "ThemeMode",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "TonePairDefinition",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "ZoraComputedTheme",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "resolveCategoryDesignPreset",
+        "toType": "CategoryDesignOverrides",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "resolveCategoryDesignPreset",
+        "toType": "ResolvedCategoryDesignPreset",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "CategoryDesignDiagnostic",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "CategoryPreset",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "Readonly",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "ThemeConfig",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "ThemeMode",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "TonePairDefinition",
+        "sourcePath": "src/presets/category-design.ts"
       },
       {
         "fromSymbol": "CategoryPreset",
@@ -4637,17 +4631,17 @@
       {
         "fromSymbol": "SplashScreenSpec",
         "toType": "MediaAssetReference",
-        "sourcePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts"
+        "sourcePath": "node_modules/@ankhorage/contracts/dist/types.d.ts"
       },
       {
         "fromSymbol": "SplashScreenSpec",
         "toType": "SplashScreenModeSpec",
-        "sourcePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts"
+        "sourcePath": "node_modules/@ankhorage/contracts/dist/types.d.ts"
       },
       {
         "fromSymbol": "SplashScreenSpec",
         "toType": "SplashScreenResizeMode",
-        "sourcePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts"
+        "sourcePath": "node_modules/@ankhorage/contracts/dist/types.d.ts"
       }
     ],
     "componentComposition": []

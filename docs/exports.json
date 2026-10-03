@@ -214,9 +214,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 17,
       "column": 1
     },
@@ -261,9 +261,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "unknown",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 14,
       "column": 1
     },
@@ -279,9 +279,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 24,
       "column": 1
     },
@@ -604,9 +604,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "function",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 203,
       "column": 1
     },
@@ -642,9 +642,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 50,
       "column": 1
     },
@@ -795,21 +795,21 @@
       {
         "name": "dataBindings",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings\").ComponentDataBinding>>",
+        "type": "ComponentDataBindingRegistry",
         "required": false,
         "description": null
       },
       {
         "name": "dataSources",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index\").DatabaseDataSourceConfig>>",
+        "type": "DataSourceRegistry",
         "required": false,
         "description": null
       },
       {
         "name": "modules",
         "kind": "property",
-        "type": "Readonly<Record<string, import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleSpec>>",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleRegistry",
         "required": false,
         "description": null
       },
@@ -1180,9 +1180,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "function",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 120,
       "column": 1
     },
@@ -1218,9 +1218,9 @@
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "src/design/category-theme.ts",
+    "modulePath": "src/presets/category-design.ts",
     "sourceLocation": {
-      "filePath": "src/design/category-theme.ts",
+      "filePath": "src/presets/category-design.ts",
       "line": 38,
       "column": 1
     },
@@ -1407,10 +1407,10 @@
     "isReadme": false,
     "examples": [],
     "kind": "unknown",
-    "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
+    "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
-      "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-      "line": 2,
+      "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
+      "line": 172,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1425,10 +1425,10 @@
     "isReadme": false,
     "examples": [],
     "kind": "type",
-    "modulePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
+    "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
-      "filePath": "node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts",
-      "line": 7,
+      "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
+      "line": 177,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],

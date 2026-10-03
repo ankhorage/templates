@@ -262,12 +262,6 @@
               </button>
             </li>
             <li>
-              <button class="nav-button" type="button" data-target="src/design/category-theme.ts">
-                src/design/category-theme.ts
-                <small>7 functions</small>
-              </button>
-            </li>
-            <li>
               <button class="nav-button" type="button" data-target="src/design/tone-catalog.ts">
                 src/design/tone-catalog.ts
                 <small>8 functions</small>
@@ -277,6 +271,12 @@
               <button class="nav-button" type="button" data-target="src/fixtures/oauth.ts">
                 src/fixtures/oauth.ts
                 <small>3 functions</small>
+              </button>
+            </li>
+            <li>
+              <button class="nav-button" type="button" data-target="src/presets/category-design.ts">
+                src/presets/category-design.ts
+                <small>7 functions</small>
               </button>
             </li>
             <li>
@@ -381,14 +381,14 @@
             </article>
             <article
               class="item"
-              data-search="src/authoring/compose-category-manifest.ts src/authoring/component-validation.ts src/authoring/create-manifest-shell.ts src/design/category-theme.ts src/internal/defaults.ts assertTemplateManifestReady CategoryAppManifestComposition composeCategoryAppManifest ComposeCategoryAppManifestInput TemplateAuthoringState TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus validateTemplateManifest"
+              data-search="src/authoring/compose-category-manifest.ts src/authoring/component-validation.ts src/authoring/create-manifest-shell.ts src/internal/defaults.ts src/presets/category-design.ts assertTemplateManifestReady CategoryAppManifestComposition composeCategoryAppManifest ComposeCategoryAppManifestInput TemplateAuthoringState TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus validateTemplateManifest"
             >
               <h3>src/authoring/compose-category-manifest.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>src/authoring/component-validation.ts</code>,
                 <code>src/authoring/create-manifest-shell.ts</code>,
-                <code>src/design/category-theme.ts</code>, <code>src/internal/defaults.ts</code>
+                <code>src/internal/defaults.ts</code>, <code>src/presets/category-design.ts</code>
               </p>
               <p>
                 <strong>Exports:</strong> <code>assertTemplateManifestReady</code>,
@@ -510,24 +510,6 @@
             </article>
             <article
               class="item"
-              data-search="src/design/category-theme.ts src/design/category-types.ts src/design/tone-catalog.ts src/presets/category-presets.ts CategoryDesignDiagnostic CategoryDesignDiagnosticCode CategoryDesignOverrides compileCategoryDesign CompiledCategoryDesign resolveCategoryDesignPreset ResolvedCategoryDesignPreset"
-            >
-              <h3>src/design/category-theme.ts</h3>
-              <p class="muted">Referenced module</p>
-              <p>
-                <strong>Dependencies:</strong> <code>src/design/category-types.ts</code>,
-                <code>src/design/tone-catalog.ts</code>,
-                <code>src/presets/category-presets.ts</code>
-              </p>
-              <p>
-                <strong>Exports:</strong> <code>CategoryDesignDiagnostic</code>,
-                <code>CategoryDesignDiagnosticCode</code>, <code>CategoryDesignOverrides</code>,
-                <code>compileCategoryDesign</code>, <code>CompiledCategoryDesign</code>,
-                <code>resolveCategoryDesignPreset</code>, <code>ResolvedCategoryDesignPreset</code>
-              </p>
-            </article>
-            <article
-              class="item"
               data-search="src/design/category-types.ts src/design/tone-catalog.ts CategoryPreset CategoryPresetFieldReconciliation CategoryPresetReconciliationDecision CategoryPresetReconciliationReport CategoryPresetReconciliationSource DESIGN_DENSITIES DESIGN_SHAPES DesignDensity DesignShape"
             >
               <h3>src/design/category-types.ts</h3>
@@ -640,6 +622,24 @@
             </article>
             <article
               class="item"
+              data-search="src/presets/category-design.ts src/design/category-types.ts src/design/tone-catalog.ts src/presets/category-presets.ts CategoryDesignDiagnostic CategoryDesignDiagnosticCode CategoryDesignOverrides compileCategoryDesign CompiledCategoryDesign resolveCategoryDesignPreset ResolvedCategoryDesignPreset"
+            >
+              <h3>src/presets/category-design.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/design/category-types.ts</code>,
+                <code>src/design/tone-catalog.ts</code>,
+                <code>src/presets/category-presets.ts</code>
+              </p>
+              <p>
+                <strong>Exports:</strong> <code>CategoryDesignDiagnostic</code>,
+                <code>CategoryDesignDiagnosticCode</code>, <code>CategoryDesignOverrides</code>,
+                <code>compileCategoryDesign</code>, <code>CompiledCategoryDesign</code>,
+                <code>resolveCategoryDesignPreset</code>, <code>ResolvedCategoryDesignPreset</code>
+              </p>
+            </article>
+            <article
+              class="item"
               data-search="src/presets/category-presets.ts src/design/category-source.ts src/design/category-types.ts CATEGORY_PRESET_RECONCILIATION CATEGORY_PRESETS CategoryPreset CategoryPresetFieldReconciliation CategoryPresetReconciliationDecision CategoryPresetReconciliationReport"
             >
               <h3>src/presets/category-presets.ts</h3>
@@ -744,18 +744,41 @@
             <h2>Public API</h2>
 
             <section>
-              <h3>node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts</h3>
+              <h3>node_modules/@ankhorage/contracts/dist/types.d.ts</h3>
+              <article
+                class="item"
+                id="symbol-app-categories"
+                data-search="APP_CATEGORIES value node_modules/@ankhorage/contracts/dist/types.d.ts "
+              >
+                <h4>APP_CATEGORIES</h4>
+                <p class="muted">
+                  value • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:93:22</code>
+                </p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+              </article>
+              <article
+                class="item"
+                id="symbol-appcategory"
+                data-search="AppCategory unknown node_modules/@ankhorage/contracts/dist/types.d.ts "
+              >
+                <h4>AppCategory</h4>
+                <p class="muted">
+                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:94:1</code>
+                </p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+              </article>
               <article
                 class="item"
                 id="symbol-splashscreenresizemode"
-                data-search="SplashScreenResizeMode unknown node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts "
+                data-search="SplashScreenResizeMode unknown node_modules/@ankhorage/contracts/dist/types.d.ts "
               >
                 <h4>SplashScreenResizeMode</h4>
                 <p class="muted">
-                  unknown •
-                  <code
-                    >node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts:2:1</code
-                  >
+                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:172:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -764,14 +787,11 @@
               <article
                 class="item"
                 id="symbol-splashscreenspec"
-                data-search="SplashScreenSpec type node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts  SplashScreenResizeMode"
+                data-search="SplashScreenSpec type node_modules/@ankhorage/contracts/dist/types.d.ts  SplashScreenResizeMode"
               >
                 <h4>SplashScreenSpec</h4>
                 <p class="muted">
-                  type •
-                  <code
-                    >node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts:7:1</code
-                  >
+                  type • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:177:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -830,35 +850,6 @@
                     </tr>
                   </tbody>
                 </table>
-              </article>
-            </section>
-            <section>
-              <h3>node_modules/@ankhorage/contracts/dist/types.d.ts</h3>
-              <article
-                class="item"
-                id="symbol-app-categories"
-                data-search="APP_CATEGORIES value node_modules/@ankhorage/contracts/dist/types.d.ts "
-              >
-                <h4>APP_CATEGORIES</h4>
-                <p class="muted">
-                  value • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:93:22</code>
-                </p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
-              </article>
-              <article
-                class="item"
-                id="symbol-appcategory"
-                data-search="AppCategory unknown node_modules/@ankhorage/contracts/dist/types.d.ts "
-              >
-                <h4>AppCategory</h4>
-                <p class="muted">
-                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:94:1</code>
-                </p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
               </article>
             </section>
             <section>
@@ -1073,24 +1064,14 @@
                     <tr>
                       <td><code>dataBindings</code></td>
                       <td>property</td>
-                      <td>
-                        <code
-                          >Readonly&lt;Record&lt;string,
-                          import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings&quot;).ComponentDataBinding&gt;&gt;</code
-                        >
-                      </td>
+                      <td><code>ComponentDataBindingRegistry</code></td>
                       <td>no</td>
                       <td></td>
                     </tr>
                     <tr>
                       <td><code>dataSources</code></td>
                       <td>property</td>
-                      <td>
-                        <code
-                          >Readonly&lt;Record&lt;string,
-                          import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index&quot;).DatabaseDataSourceConfig&gt;&gt;</code
-                        >
-                      </td>
+                      <td><code>DataSourceRegistry</code></td>
                       <td>no</td>
                       <td></td>
                     </tr>
@@ -1099,8 +1080,7 @@
                       <td>property</td>
                       <td>
                         <code
-                          >Readonly&lt;Record&lt;string,
-                          import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra&quot;).InfraModuleSpec&gt;&gt;</code
+                          >import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra&quot;).InfraModuleRegistry</code
                         >
                       </td>
                       <td>no</td>
@@ -1314,612 +1294,6 @@
                   </table>
                   <p><strong>Returns:</strong> <code>CategoryAppManifestComposition</code></p>
                 </div>
-              </article>
-            </section>
-            <section>
-              <h3>src/design/category-theme.ts</h3>
-              <article
-                class="item"
-                id="symbol-categorydesigndiagnostic"
-                data-search="CategoryDesignDiagnostic type src/design/category-theme.ts  CategoryDesignDiagnosticCode"
-              >
-                <h4>CategoryDesignDiagnostic</h4>
-                <p class="muted">type • <code>src/design/category-theme.ts:17:1</code></p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div>
-                  <strong>Related symbols:</strong>
-                  <ul class="chips">
-                    <li class="chip">CategoryDesignDiagnosticCode</li>
-                  </ul>
-                </div>
-
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Member</th>
-                      <th>Kind</th>
-                      <th>Type</th>
-                      <th>Required</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>code</code></td>
-                      <td>property</td>
-                      <td><code>CategoryDesignDiagnosticCode</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>message</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>path</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>severity</code></td>
-                      <td>property</td>
-                      <td><code>&quot;error&quot; | &quot;warning&quot;</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </article>
-              <article
-                class="item"
-                id="symbol-categorydesigndiagnosticcode"
-                data-search="CategoryDesignDiagnosticCode unknown src/design/category-theme.ts "
-              >
-                <h4>CategoryDesignDiagnosticCode</h4>
-                <p class="muted">unknown • <code>src/design/category-theme.ts:14:1</code></p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
-              </article>
-              <article
-                class="item"
-                id="symbol-categorydesignoverrides"
-                data-search="CategoryDesignOverrides type src/design/category-theme.ts  ThemeMode"
-              >
-                <h4>CategoryDesignOverrides</h4>
-                <p class="muted">type • <code>src/design/category-theme.ts:24:1</code></p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div>
-                  <strong>Related symbols:</strong>
-                  <ul class="chips">
-                    <li class="chip">ThemeMode</li>
-                  </ul>
-                </div>
-
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Member</th>
-                      <th>Kind</th>
-                      <th>Type</th>
-                      <th>Required</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>dark</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >Partial&lt;import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
-                        >
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>density</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;compact&quot; | &quot;comfortable&quot; |
-                          &quot;spacious&quot;</code
-                        >
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>harmony</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;monochromatic&quot; | &quot;analogous&quot; |
-                          &quot;complementary&quot; | &quot;splitComplementary&quot; |
-                          &quot;triadic&quot; | &quot;tetradic&quot; | &quot;square&quot;</code
-                        >
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>light</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >Partial&lt;import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
-                        >
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>primaryColor</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>recipes</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeRecipeOverrides
-                          | undefined</code
-                        >
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>shape</code></td>
-                      <td>property</td>
-                      <td>
-                        <code>&quot;sharp&quot; | &quot;neutral&quot; | &quot;soft&quot;</code>
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>themeId</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>themeName</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>tokens</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeGlobalTokenOverrides
-                          | undefined</code
-                        >
-                      </td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>tonePairs</code></td>
-                      <td>property</td>
-                      <td><code>Partial&lt;Record&lt;ThemeMode, string&gt;&gt;</code></td>
-                      <td>no</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </article>
-              <article
-                class="item"
-                id="symbol-compilecategorydesign"
-                data-search='compileCategoryDesign function src/design/category-theme.ts Resolve and compile a category theme through the released ZORA owner pipeline. CategoryDesignOverrides CompiledCategoryDesign (category: "books_reading" | "business_productivity" | "developer_tools" | "education_learning" | "entertainment_media" | "finance_money" | "food_drink" | "games" | "graphics_design" | "health_fitness" | "kids_family" | "lifestyle" | "medical" | "music_audio" | "navigation_travel" | "news_magazines" | "photo_video" | "reference" | "shopping_commerce" | "social_community" | "sports" | "utilities_tools" | "weather", overrides?: CategoryDesignOverrides) =&gt; CompiledCategoryDesign'
-              >
-                <h4>compileCategoryDesign</h4>
-                <p class="muted">function • <code>src/design/category-theme.ts:203:1</code></p>
-                <p>
-                  Resolve and compile a category theme through the released ZORA owner pipeline.
-                </p>
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div>
-                  <strong>Related symbols:</strong>
-                  <ul class="chips">
-                    <li class="chip">CategoryDesignOverrides</li>
-                    <li class="chip">CompiledCategoryDesign</li>
-                  </ul>
-                </div>
-                <div>
-                  <h5>Signature</h5>
-                  <pre>
-(category: &quot;books_reading&quot; | &quot;business_productivity&quot; | &quot;developer_tools&quot; | &quot;education_learning&quot; | &quot;entertainment_media&quot; | &quot;finance_money&quot; | &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; | &quot;health_fitness&quot; | &quot;kids_family&quot; | &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; | &quot;navigation_travel&quot; | &quot;news_magazines&quot; | &quot;photo_video&quot; | &quot;reference&quot; | &quot;shopping_commerce&quot; | &quot;social_community&quot; | &quot;sports&quot; | &quot;utilities_tools&quot; | &quot;weather&quot;, overrides?: CategoryDesignOverrides) =&gt; CompiledCategoryDesign</pre>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Parameter</th>
-                        <th>Type</th>
-                        <th>Required</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><code>category</code></td>
-                        <td>
-                          <code
-                            >&quot;books_reading&quot; | &quot;business_productivity&quot; |
-                            &quot;developer_tools&quot; | &quot;education_learning&quot; |
-                            &quot;entertainment_media&quot; | &quot;finance_money&quot; |
-                            &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot;
-                            | &quot;health_fitness&quot; | &quot;kids_family&quot; |
-                            &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
-                            &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
-                            &quot;photo_video&quot; | &quot;reference&quot; |
-                            &quot;shopping_commerce&quot; | &quot;social_community&quot; |
-                            &quot;sports&quot; | &quot;utilities_tools&quot; |
-                            &quot;weather&quot;</code
-                          >
-                        </td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td><code>overrides</code></td>
-                        <td><code>CategoryDesignOverrides</code></td>
-                        <td>no</td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p><strong>Returns:</strong> <code>CompiledCategoryDesign</code></p>
-                </div>
-              </article>
-              <article
-                class="item"
-                id="symbol-compiledcategorydesign"
-                data-search="CompiledCategoryDesign type src/design/category-theme.ts  CategoryDesignDiagnostic CategoryPreset ThemeMode TonePairDefinition"
-              >
-                <h4>CompiledCategoryDesign</h4>
-                <p class="muted">type • <code>src/design/category-theme.ts:50:1</code></p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div>
-                  <strong>Related symbols:</strong>
-                  <ul class="chips">
-                    <li class="chip">CategoryDesignDiagnostic</li>
-                    <li class="chip">CategoryPreset</li>
-                    <li class="chip">ThemeMode</li>
-                    <li class="chip">TonePairDefinition</li>
-                  </ul>
-                </div>
-
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Member</th>
-                      <th>Kind</th>
-                      <th>Type</th>
-                      <th>Required</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>category</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;books_reading&quot; | &quot;business_productivity&quot; |
-                          &quot;developer_tools&quot; | &quot;education_learning&quot; |
-                          &quot;entertainment_media&quot; | &quot;finance_money&quot; |
-                          &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; |
-                          &quot;health_fitness&quot; | &quot;kids_family&quot; |
-                          &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
-                          &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
-                          &quot;photo_video&quot; | &quot;reference&quot; |
-                          &quot;shopping_commerce&quot; | &quot;social_community&quot; |
-                          &quot;sports&quot; | &quot;utilities_tools&quot; |
-                          &quot;weather&quot;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>computedTheme</code></td>
-                      <td>property</td>
-                      <td><code>ZoraComputedTheme</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>density</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;compact&quot; | &quot;comfortable&quot; |
-                          &quot;spacious&quot;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>diagnostics</code></td>
-                      <td>property</td>
-                      <td><code>readonly CategoryDesignDiagnostic[]</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>harmony</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;monochromatic&quot; | &quot;analogous&quot; |
-                          &quot;complementary&quot; | &quot;splitComplementary&quot; |
-                          &quot;triadic&quot; | &quot;tetradic&quot; | &quot;square&quot;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>preset</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >import(&quot;/home/runner/work/templates/templates/src/index&quot;).CategoryPreset</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>primaryColor</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>shape</code></td>
-                      <td>property</td>
-                      <td>
-                        <code>&quot;sharp&quot; | &quot;neutral&quot; | &quot;soft&quot;</code>
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>themeConfig</code></td>
-                      <td>property</td>
-                      <td><code>ThemeConfig</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>tonePairs</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >Readonly&lt;Record&lt;ThemeMode, TonePairDefinition | null&gt;&gt;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </article>
-              <article
-                class="item"
-                id="symbol-resolvecategorydesignpreset"
-                data-search='resolveCategoryDesignPreset function src/design/category-theme.ts Resolve category defaults and explicit overrides into canonical compact ThemeConfig source. CategoryDesignOverrides ResolvedCategoryDesignPreset (category: "books_reading" | "business_productivity" | "developer_tools" | "education_learning" | "entertainment_media" | "finance_money" | "food_drink" | "games" | "graphics_design" | "health_fitness" | "kids_family" | "lifestyle" | "medical" | "music_audio" | "navigation_travel" | "news_magazines" | "photo_video" | "reference" | "shopping_commerce" | "social_community" | "sports" | "utilities_tools" | "weather", overrides?: CategoryDesignOverrides) =&gt; ResolvedCategoryDesignPreset'
-              >
-                <h4>resolveCategoryDesignPreset</h4>
-                <p class="muted">function • <code>src/design/category-theme.ts:120:1</code></p>
-                <p>
-                  Resolve category defaults and explicit overrides into canonical compact
-                  ThemeConfig source.
-                </p>
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div>
-                  <strong>Related symbols:</strong>
-                  <ul class="chips">
-                    <li class="chip">CategoryDesignOverrides</li>
-                    <li class="chip">ResolvedCategoryDesignPreset</li>
-                  </ul>
-                </div>
-                <div>
-                  <h5>Signature</h5>
-                  <pre>
-(category: &quot;books_reading&quot; | &quot;business_productivity&quot; | &quot;developer_tools&quot; | &quot;education_learning&quot; | &quot;entertainment_media&quot; | &quot;finance_money&quot; | &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; | &quot;health_fitness&quot; | &quot;kids_family&quot; | &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; | &quot;navigation_travel&quot; | &quot;news_magazines&quot; | &quot;photo_video&quot; | &quot;reference&quot; | &quot;shopping_commerce&quot; | &quot;social_community&quot; | &quot;sports&quot; | &quot;utilities_tools&quot; | &quot;weather&quot;, overrides?: CategoryDesignOverrides) =&gt; ResolvedCategoryDesignPreset</pre>
-                  <table>
-                    <thead>
-                      <tr>
-                        <th>Parameter</th>
-                        <th>Type</th>
-                        <th>Required</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><code>category</code></td>
-                        <td>
-                          <code
-                            >&quot;books_reading&quot; | &quot;business_productivity&quot; |
-                            &quot;developer_tools&quot; | &quot;education_learning&quot; |
-                            &quot;entertainment_media&quot; | &quot;finance_money&quot; |
-                            &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot;
-                            | &quot;health_fitness&quot; | &quot;kids_family&quot; |
-                            &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
-                            &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
-                            &quot;photo_video&quot; | &quot;reference&quot; |
-                            &quot;shopping_commerce&quot; | &quot;social_community&quot; |
-                            &quot;sports&quot; | &quot;utilities_tools&quot; |
-                            &quot;weather&quot;</code
-                          >
-                        </td>
-                        <td>yes</td>
-                        <td></td>
-                      </tr>
-                      <tr>
-                        <td><code>overrides</code></td>
-                        <td><code>CategoryDesignOverrides</code></td>
-                        <td>no</td>
-                        <td></td>
-                      </tr>
-                    </tbody>
-                  </table>
-                  <p><strong>Returns:</strong> <code>ResolvedCategoryDesignPreset</code></p>
-                </div>
-              </article>
-              <article
-                class="item"
-                id="symbol-resolvedcategorydesignpreset"
-                data-search="ResolvedCategoryDesignPreset type src/design/category-theme.ts  CategoryDesignDiagnostic CategoryPreset ThemeMode TonePairDefinition"
-              >
-                <h4>ResolvedCategoryDesignPreset</h4>
-                <p class="muted">type • <code>src/design/category-theme.ts:38:1</code></p>
-
-                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
-                <div>
-                  <strong>Related symbols:</strong>
-                  <ul class="chips">
-                    <li class="chip">CategoryDesignDiagnostic</li>
-                    <li class="chip">CategoryPreset</li>
-                    <li class="chip">ThemeMode</li>
-                    <li class="chip">TonePairDefinition</li>
-                  </ul>
-                </div>
-
-                <table>
-                  <thead>
-                    <tr>
-                      <th>Member</th>
-                      <th>Kind</th>
-                      <th>Type</th>
-                      <th>Required</th>
-                      <th>Description</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><code>category</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;books_reading&quot; | &quot;business_productivity&quot; |
-                          &quot;developer_tools&quot; | &quot;education_learning&quot; |
-                          &quot;entertainment_media&quot; | &quot;finance_money&quot; |
-                          &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; |
-                          &quot;health_fitness&quot; | &quot;kids_family&quot; |
-                          &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
-                          &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
-                          &quot;photo_video&quot; | &quot;reference&quot; |
-                          &quot;shopping_commerce&quot; | &quot;social_community&quot; |
-                          &quot;sports&quot; | &quot;utilities_tools&quot; |
-                          &quot;weather&quot;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>density</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;compact&quot; | &quot;comfortable&quot; |
-                          &quot;spacious&quot;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>diagnostics</code></td>
-                      <td>property</td>
-                      <td><code>readonly CategoryDesignDiagnostic[]</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>harmony</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >&quot;monochromatic&quot; | &quot;analogous&quot; |
-                          &quot;complementary&quot; | &quot;splitComplementary&quot; |
-                          &quot;triadic&quot; | &quot;tetradic&quot; | &quot;square&quot;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>preset</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >import(&quot;/home/runner/work/templates/templates/src/index&quot;).CategoryPreset</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>primaryColor</code></td>
-                      <td>property</td>
-                      <td><code>string</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>shape</code></td>
-                      <td>property</td>
-                      <td>
-                        <code>&quot;sharp&quot; | &quot;neutral&quot; | &quot;soft&quot;</code>
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>themeConfig</code></td>
-                      <td>property</td>
-                      <td><code>ThemeConfig</code></td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td><code>tonePairs</code></td>
-                      <td>property</td>
-                      <td>
-                        <code
-                          >Readonly&lt;Record&lt;ThemeMode, TonePairDefinition | null&gt;&gt;</code
-                        >
-                      </td>
-                      <td>yes</td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
               </article>
             </section>
             <section>
@@ -2818,6 +2192,612 @@
               </article>
             </section>
             <section>
+              <h3>src/presets/category-design.ts</h3>
+              <article
+                class="item"
+                id="symbol-categorydesigndiagnostic"
+                data-search="CategoryDesignDiagnostic type src/presets/category-design.ts  CategoryDesignDiagnosticCode"
+              >
+                <h4>CategoryDesignDiagnostic</h4>
+                <p class="muted">type • <code>src/presets/category-design.ts:17:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">CategoryDesignDiagnosticCode</li>
+                  </ul>
+                </div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>code</code></td>
+                      <td>property</td>
+                      <td><code>CategoryDesignDiagnosticCode</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>message</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>path</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>severity</code></td>
+                      <td>property</td>
+                      <td><code>&quot;error&quot; | &quot;warning&quot;</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+              <article
+                class="item"
+                id="symbol-categorydesigndiagnosticcode"
+                data-search="CategoryDesignDiagnosticCode unknown src/presets/category-design.ts "
+              >
+                <h4>CategoryDesignDiagnosticCode</h4>
+                <p class="muted">unknown • <code>src/presets/category-design.ts:14:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+              </article>
+              <article
+                class="item"
+                id="symbol-categorydesignoverrides"
+                data-search="CategoryDesignOverrides type src/presets/category-design.ts  ThemeMode"
+              >
+                <h4>CategoryDesignOverrides</h4>
+                <p class="muted">type • <code>src/presets/category-design.ts:24:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">ThemeMode</li>
+                  </ul>
+                </div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>dark</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >Partial&lt;import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
+                        >
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>density</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;compact&quot; | &quot;comfortable&quot; |
+                          &quot;spacious&quot;</code
+                        >
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>harmony</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;monochromatic&quot; | &quot;analogous&quot; |
+                          &quot;complementary&quot; | &quot;splitComplementary&quot; |
+                          &quot;triadic&quot; | &quot;tetradic&quot; | &quot;square&quot;</code
+                        >
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>light</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >Partial&lt;import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types&quot;).ThemeModeConfig&gt;</code
+                        >
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>primaryColor</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>recipes</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeRecipeOverrides
+                          | undefined</code
+                        >
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>shape</code></td>
+                      <td>property</td>
+                      <td>
+                        <code>&quot;sharp&quot; | &quot;neutral&quot; | &quot;soft&quot;</code>
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>themeId</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>themeName</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>tokens</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >import(&quot;/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme&quot;).ThemeGlobalTokenOverrides
+                          | undefined</code
+                        >
+                      </td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>tonePairs</code></td>
+                      <td>property</td>
+                      <td><code>Partial&lt;Record&lt;ThemeMode, string&gt;&gt;</code></td>
+                      <td>no</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+              <article
+                class="item"
+                id="symbol-compilecategorydesign"
+                data-search='compileCategoryDesign function src/presets/category-design.ts Resolve and compile a category theme through the released ZORA owner pipeline. CategoryDesignOverrides CompiledCategoryDesign (category: "books_reading" | "business_productivity" | "developer_tools" | "education_learning" | "entertainment_media" | "finance_money" | "food_drink" | "games" | "graphics_design" | "health_fitness" | "kids_family" | "lifestyle" | "medical" | "music_audio" | "navigation_travel" | "news_magazines" | "photo_video" | "reference" | "shopping_commerce" | "social_community" | "sports" | "utilities_tools" | "weather", overrides?: CategoryDesignOverrides) =&gt; CompiledCategoryDesign'
+              >
+                <h4>compileCategoryDesign</h4>
+                <p class="muted">function • <code>src/presets/category-design.ts:203:1</code></p>
+                <p>
+                  Resolve and compile a category theme through the released ZORA owner pipeline.
+                </p>
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">CategoryDesignOverrides</li>
+                    <li class="chip">CompiledCategoryDesign</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>
+(category: &quot;books_reading&quot; | &quot;business_productivity&quot; | &quot;developer_tools&quot; | &quot;education_learning&quot; | &quot;entertainment_media&quot; | &quot;finance_money&quot; | &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; | &quot;health_fitness&quot; | &quot;kids_family&quot; | &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; | &quot;navigation_travel&quot; | &quot;news_magazines&quot; | &quot;photo_video&quot; | &quot;reference&quot; | &quot;shopping_commerce&quot; | &quot;social_community&quot; | &quot;sports&quot; | &quot;utilities_tools&quot; | &quot;weather&quot;, overrides?: CategoryDesignOverrides) =&gt; CompiledCategoryDesign</pre>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>category</code></td>
+                        <td>
+                          <code
+                            >&quot;books_reading&quot; | &quot;business_productivity&quot; |
+                            &quot;developer_tools&quot; | &quot;education_learning&quot; |
+                            &quot;entertainment_media&quot; | &quot;finance_money&quot; |
+                            &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot;
+                            | &quot;health_fitness&quot; | &quot;kids_family&quot; |
+                            &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
+                            &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
+                            &quot;photo_video&quot; | &quot;reference&quot; |
+                            &quot;shopping_commerce&quot; | &quot;social_community&quot; |
+                            &quot;sports&quot; | &quot;utilities_tools&quot; |
+                            &quot;weather&quot;</code
+                          >
+                        </td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td><code>overrides</code></td>
+                        <td><code>CategoryDesignOverrides</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p><strong>Returns:</strong> <code>CompiledCategoryDesign</code></p>
+                </div>
+              </article>
+              <article
+                class="item"
+                id="symbol-compiledcategorydesign"
+                data-search="CompiledCategoryDesign type src/presets/category-design.ts  CategoryDesignDiagnostic CategoryPreset ThemeMode TonePairDefinition"
+              >
+                <h4>CompiledCategoryDesign</h4>
+                <p class="muted">type • <code>src/presets/category-design.ts:50:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">CategoryDesignDiagnostic</li>
+                    <li class="chip">CategoryPreset</li>
+                    <li class="chip">ThemeMode</li>
+                    <li class="chip">TonePairDefinition</li>
+                  </ul>
+                </div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>category</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;books_reading&quot; | &quot;business_productivity&quot; |
+                          &quot;developer_tools&quot; | &quot;education_learning&quot; |
+                          &quot;entertainment_media&quot; | &quot;finance_money&quot; |
+                          &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; |
+                          &quot;health_fitness&quot; | &quot;kids_family&quot; |
+                          &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
+                          &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
+                          &quot;photo_video&quot; | &quot;reference&quot; |
+                          &quot;shopping_commerce&quot; | &quot;social_community&quot; |
+                          &quot;sports&quot; | &quot;utilities_tools&quot; |
+                          &quot;weather&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>computedTheme</code></td>
+                      <td>property</td>
+                      <td><code>ZoraComputedTheme</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>density</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;compact&quot; | &quot;comfortable&quot; |
+                          &quot;spacious&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>diagnostics</code></td>
+                      <td>property</td>
+                      <td><code>readonly CategoryDesignDiagnostic[]</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>harmony</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;monochromatic&quot; | &quot;analogous&quot; |
+                          &quot;complementary&quot; | &quot;splitComplementary&quot; |
+                          &quot;triadic&quot; | &quot;tetradic&quot; | &quot;square&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>preset</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >import(&quot;/home/runner/work/templates/templates/src/index&quot;).CategoryPreset</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>primaryColor</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>shape</code></td>
+                      <td>property</td>
+                      <td>
+                        <code>&quot;sharp&quot; | &quot;neutral&quot; | &quot;soft&quot;</code>
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>themeConfig</code></td>
+                      <td>property</td>
+                      <td><code>ThemeConfig</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>tonePairs</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >Readonly&lt;Record&lt;ThemeMode, TonePairDefinition | null&gt;&gt;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+              <article
+                class="item"
+                id="symbol-resolvecategorydesignpreset"
+                data-search='resolveCategoryDesignPreset function src/presets/category-design.ts Resolve category defaults and explicit overrides into canonical compact ThemeConfig source. CategoryDesignOverrides ResolvedCategoryDesignPreset (category: "books_reading" | "business_productivity" | "developer_tools" | "education_learning" | "entertainment_media" | "finance_money" | "food_drink" | "games" | "graphics_design" | "health_fitness" | "kids_family" | "lifestyle" | "medical" | "music_audio" | "navigation_travel" | "news_magazines" | "photo_video" | "reference" | "shopping_commerce" | "social_community" | "sports" | "utilities_tools" | "weather", overrides?: CategoryDesignOverrides) =&gt; ResolvedCategoryDesignPreset'
+              >
+                <h4>resolveCategoryDesignPreset</h4>
+                <p class="muted">function • <code>src/presets/category-design.ts:120:1</code></p>
+                <p>
+                  Resolve category defaults and explicit overrides into canonical compact
+                  ThemeConfig source.
+                </p>
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">CategoryDesignOverrides</li>
+                    <li class="chip">ResolvedCategoryDesignPreset</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>
+(category: &quot;books_reading&quot; | &quot;business_productivity&quot; | &quot;developer_tools&quot; | &quot;education_learning&quot; | &quot;entertainment_media&quot; | &quot;finance_money&quot; | &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; | &quot;health_fitness&quot; | &quot;kids_family&quot; | &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; | &quot;navigation_travel&quot; | &quot;news_magazines&quot; | &quot;photo_video&quot; | &quot;reference&quot; | &quot;shopping_commerce&quot; | &quot;social_community&quot; | &quot;sports&quot; | &quot;utilities_tools&quot; | &quot;weather&quot;, overrides?: CategoryDesignOverrides) =&gt; ResolvedCategoryDesignPreset</pre>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>category</code></td>
+                        <td>
+                          <code
+                            >&quot;books_reading&quot; | &quot;business_productivity&quot; |
+                            &quot;developer_tools&quot; | &quot;education_learning&quot; |
+                            &quot;entertainment_media&quot; | &quot;finance_money&quot; |
+                            &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot;
+                            | &quot;health_fitness&quot; | &quot;kids_family&quot; |
+                            &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
+                            &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
+                            &quot;photo_video&quot; | &quot;reference&quot; |
+                            &quot;shopping_commerce&quot; | &quot;social_community&quot; |
+                            &quot;sports&quot; | &quot;utilities_tools&quot; |
+                            &quot;weather&quot;</code
+                          >
+                        </td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                      <tr>
+                        <td><code>overrides</code></td>
+                        <td><code>CategoryDesignOverrides</code></td>
+                        <td>no</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p><strong>Returns:</strong> <code>ResolvedCategoryDesignPreset</code></p>
+                </div>
+              </article>
+              <article
+                class="item"
+                id="symbol-resolvedcategorydesignpreset"
+                data-search="ResolvedCategoryDesignPreset type src/presets/category-design.ts  CategoryDesignDiagnostic CategoryPreset ThemeMode TonePairDefinition"
+              >
+                <h4>ResolvedCategoryDesignPreset</h4>
+                <p class="muted">type • <code>src/presets/category-design.ts:38:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">CategoryDesignDiagnostic</li>
+                    <li class="chip">CategoryPreset</li>
+                    <li class="chip">ThemeMode</li>
+                    <li class="chip">TonePairDefinition</li>
+                  </ul>
+                </div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>category</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;books_reading&quot; | &quot;business_productivity&quot; |
+                          &quot;developer_tools&quot; | &quot;education_learning&quot; |
+                          &quot;entertainment_media&quot; | &quot;finance_money&quot; |
+                          &quot;food_drink&quot; | &quot;games&quot; | &quot;graphics_design&quot; |
+                          &quot;health_fitness&quot; | &quot;kids_family&quot; |
+                          &quot;lifestyle&quot; | &quot;medical&quot; | &quot;music_audio&quot; |
+                          &quot;navigation_travel&quot; | &quot;news_magazines&quot; |
+                          &quot;photo_video&quot; | &quot;reference&quot; |
+                          &quot;shopping_commerce&quot; | &quot;social_community&quot; |
+                          &quot;sports&quot; | &quot;utilities_tools&quot; |
+                          &quot;weather&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>density</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;compact&quot; | &quot;comfortable&quot; |
+                          &quot;spacious&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>diagnostics</code></td>
+                      <td>property</td>
+                      <td><code>readonly CategoryDesignDiagnostic[]</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>harmony</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >&quot;monochromatic&quot; | &quot;analogous&quot; |
+                          &quot;complementary&quot; | &quot;splitComplementary&quot; |
+                          &quot;triadic&quot; | &quot;tetradic&quot; | &quot;square&quot;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>preset</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >import(&quot;/home/runner/work/templates/templates/src/index&quot;).CategoryPreset</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>primaryColor</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>shape</code></td>
+                      <td>property</td>
+                      <td>
+                        <code>&quot;sharp&quot; | &quot;neutral&quot; | &quot;soft&quot;</code>
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>themeConfig</code></td>
+                      <td>property</td>
+                      <td><code>ThemeConfig</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>tonePairs</code></td>
+                      <td>property</td>
+                      <td>
+                        <code
+                          >Readonly&lt;Record&lt;ThemeMode, TonePairDefinition | null&gt;&gt;</code
+                        >
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </section>
+            <section>
               <h3>src/presets/category-presets.ts</h3>
               <article
                 class="item"
@@ -3285,9 +3265,8 @@
                 module_src_authoring_compose_category_manifest_ts --&gt;
                 module_src_authoring_create_manifest_shell_ts
                 module_src_authoring_compose_category_manifest_ts --&gt;
-                module_src_design_category_theme_ts
-                module_src_authoring_compose_category_manifest_ts --&gt;
-                module_src_internal_defaults_ts
+                module_src_internal_defaults_ts module_src_authoring_compose_category_manifest_ts
+                --&gt; module_src_presets_category_design_ts
                 module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_authoring_create_manifest_shell_ts
                 module_src_authoring_create_manifest_shell_ts --&gt;
@@ -3318,11 +3297,6 @@
                 module_src_design_category_source_ts[&quot;src/design/category-source.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_design_category_source_ts
                 module_src_design_category_source_ts --&gt; module_src_design_category_types_ts
-                module_src_design_category_theme_ts[&quot;src/design/category-theme.ts&quot;]
-                package__ankhorage_templates -.-&gt; module_src_design_category_theme_ts
-                module_src_design_category_theme_ts --&gt; module_src_design_category_types_ts
-                module_src_design_category_theme_ts --&gt; module_src_design_tone_catalog_ts
-                module_src_design_category_theme_ts --&gt; module_src_presets_category_presets_ts
                 module_src_design_category_types_ts[&quot;src/design/category-types.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_design_category_types_ts
                 module_src_design_category_types_ts --&gt; module_src_design_tone_catalog_ts
@@ -3336,6 +3310,11 @@
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_packageMetadata_ts
                 module_src_packageMetadata_ts --&gt; module_package_json
+                module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
+                package__ankhorage_templates -.-&gt; module_src_presets_category_design_ts
+                module_src_presets_category_design_ts --&gt; module_src_design_category_types_ts
+                module_src_presets_category_design_ts --&gt; module_src_design_tone_catalog_ts
+                module_src_presets_category_design_ts --&gt; module_src_presets_category_presets_ts
                 module_src_presets_category_presets_ts[&quot;src/presets/category-presets.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_presets_category_presets_ts
                 module_src_presets_category_presets_ts --&gt; module_src_design_category_source_ts
@@ -3383,8 +3362,8 @@ graph TD
   package__ankhorage_templates -.-&gt; module_src_authoring_compose_category_manifest_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_component_validation_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_create_manifest_shell_ts
-  module_src_authoring_compose_category_manifest_ts --&gt; module_src_design_category_theme_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_authoring_compose_category_manifest_ts --&gt; module_src_presets_category_design_ts
   module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_authoring_create_manifest_shell_ts
   module_src_authoring_create_manifest_shell_ts --&gt; module_src_authoring_splash_screen_ts
@@ -3416,11 +3395,6 @@ graph TD
   module_src_design_category_source_ts[&quot;src/design/category-source.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_design_category_source_ts
   module_src_design_category_source_ts --&gt; module_src_design_category_types_ts
-  module_src_design_category_theme_ts[&quot;src/design/category-theme.ts&quot;]
-  package__ankhorage_templates -.-&gt; module_src_design_category_theme_ts
-  module_src_design_category_theme_ts --&gt; module_src_design_category_types_ts
-  module_src_design_category_theme_ts --&gt; module_src_design_tone_catalog_ts
-  module_src_design_category_theme_ts --&gt; module_src_presets_category_presets_ts
   module_src_design_category_types_ts[&quot;src/design/category-types.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_design_category_types_ts
   module_src_design_category_types_ts --&gt; module_src_design_tone_catalog_ts
@@ -3434,6 +3408,11 @@ graph TD
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_packageMetadata_ts
   module_src_packageMetadata_ts --&gt; module_package_json
+  module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_presets_category_design_ts
+  module_src_presets_category_design_ts --&gt; module_src_design_category_types_ts
+  module_src_presets_category_design_ts --&gt; module_src_design_tone_catalog_ts
+  module_src_presets_category_design_ts --&gt; module_src_presets_category_presets_ts
   module_src_presets_category_presets_ts[&quot;src/presets/category-presets.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_presets_category_presets_ts
   module_src_presets_category_presets_ts --&gt; module_src_design_category_source_ts
@@ -3479,13 +3458,13 @@ graph TD
                 module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
                 module_src_design_category_source_ts[&quot;src/design/category-source.ts&quot;]
-                module_src_design_category_theme_ts[&quot;src/design/category-theme.ts&quot;]
                 module_src_design_category_types_ts[&quot;src/design/category-types.ts&quot;]
                 module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
                 module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
+                module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
                 module_src_presets_category_presets_ts[&quot;src/presets/category-presets.ts&quot;]
                 module_src_projectSeed_ts[&quot;src/projectSeed.ts&quot;]
                 module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
@@ -3501,9 +3480,9 @@ graph TD
                 module_src_authoring_compose_category_manifest_ts --&gt;
                 module_src_authoring_create_manifest_shell_ts
                 module_src_authoring_compose_category_manifest_ts --&gt;
-                module_src_design_category_theme_ts
-                module_src_authoring_compose_category_manifest_ts --&gt;
-                module_src_internal_defaults_ts module_src_authoring_create_manifest_shell_ts --&gt;
+                module_src_internal_defaults_ts module_src_authoring_compose_category_manifest_ts
+                --&gt; module_src_presets_category_design_ts
+                module_src_authoring_create_manifest_shell_ts --&gt;
                 module_src_authoring_splash_screen_ts module_src_authoring_create_manifest_shell_ts
                 --&gt; module_src_internal_defaults_ts module_src_catalog_ts --&gt;
                 module_src_templates_catalog_ts module_src_catalog_ts --&gt;
@@ -3517,12 +3496,12 @@ graph TD
                 module_src_packageMetadata_ts module_src_commands_ts --&gt;
                 module_src_projectSeed_ts module_src_commands_ts --&gt;
                 module_src_templateSelector_ts module_src_design_category_source_ts --&gt;
-                module_src_design_category_types_ts module_src_design_category_theme_ts --&gt;
-                module_src_design_category_types_ts module_src_design_category_theme_ts --&gt;
-                module_src_design_tone_catalog_ts module_src_design_category_theme_ts --&gt;
-                module_src_presets_category_presets_ts module_src_design_category_types_ts --&gt;
+                module_src_design_category_types_ts module_src_design_category_types_ts --&gt;
                 module_src_design_tone_catalog_ts module_src_packageMetadata_ts --&gt;
-                module_package_json module_src_presets_category_presets_ts --&gt;
+                module_package_json module_src_presets_category_design_ts --&gt;
+                module_src_design_category_types_ts module_src_presets_category_design_ts --&gt;
+                module_src_design_tone_catalog_ts module_src_presets_category_design_ts --&gt;
+                module_src_presets_category_presets_ts module_src_presets_category_presets_ts --&gt;
                 module_src_design_category_source_ts module_src_presets_category_presets_ts --&gt;
                 module_src_design_category_types_ts module_src_projectSeed_ts --&gt;
                 module_src_templates_catalog_ts module_src_templates_catalog_generated_ts --&gt;
@@ -3549,13 +3528,13 @@ graph LR
   module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
   module_src_commands_ts[&quot;src/commands.ts&quot;]
   module_src_design_category_source_ts[&quot;src/design/category-source.ts&quot;]
-  module_src_design_category_theme_ts[&quot;src/design/category-theme.ts&quot;]
   module_src_design_category_types_ts[&quot;src/design/category-types.ts&quot;]
   module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
   module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
+  module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
   module_src_presets_category_presets_ts[&quot;src/presets/category-presets.ts&quot;]
   module_src_projectSeed_ts[&quot;src/projectSeed.ts&quot;]
   module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
@@ -3567,8 +3546,8 @@ graph LR
   module_src_authoring_component_validation_ts --&gt; module_src_authoring_compose_category_manifest_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_component_validation_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_authoring_create_manifest_shell_ts
-  module_src_authoring_compose_category_manifest_ts --&gt; module_src_design_category_theme_ts
   module_src_authoring_compose_category_manifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_authoring_compose_category_manifest_ts --&gt; module_src_presets_category_design_ts
   module_src_authoring_create_manifest_shell_ts --&gt; module_src_authoring_splash_screen_ts
   module_src_authoring_create_manifest_shell_ts --&gt; module_src_internal_defaults_ts
   module_src_catalog_ts --&gt; module_src_templates_catalog_ts
@@ -3584,11 +3563,11 @@ graph LR
   module_src_commands_ts --&gt; module_src_projectSeed_ts
   module_src_commands_ts --&gt; module_src_templateSelector_ts
   module_src_design_category_source_ts --&gt; module_src_design_category_types_ts
-  module_src_design_category_theme_ts --&gt; module_src_design_category_types_ts
-  module_src_design_category_theme_ts --&gt; module_src_design_tone_catalog_ts
-  module_src_design_category_theme_ts --&gt; module_src_presets_category_presets_ts
   module_src_design_category_types_ts --&gt; module_src_design_tone_catalog_ts
   module_src_packageMetadata_ts --&gt; module_package_json
+  module_src_presets_category_design_ts --&gt; module_src_design_category_types_ts
+  module_src_presets_category_design_ts --&gt; module_src_design_tone_catalog_ts
+  module_src_presets_category_design_ts --&gt; module_src_presets_category_presets_ts
   module_src_presets_category_presets_ts --&gt; module_src_design_category_source_ts
   module_src_presets_category_presets_ts --&gt; module_src_design_category_types_ts
   module_src_projectSeed_ts --&gt; module_src_templates_catalog_ts
@@ -3615,13 +3594,13 @@ graph LR
                 module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
                 module_src_commands_ts[&quot;src/commands.ts&quot;]
                 module_src_design_category_source_ts[&quot;src/design/category-source.ts&quot;]
-                module_src_design_category_theme_ts[&quot;src/design/category-theme.ts&quot;]
                 module_src_design_category_types_ts[&quot;src/design/category-types.ts&quot;]
                 module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
                 module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
+                module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
                 module_src_presets_category_presets_ts[&quot;src/presets/category-presets.ts&quot;]
                 module_src_projectSeed_ts[&quot;src/projectSeed.ts&quot;]
                 module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
@@ -3655,12 +3634,12 @@ graph LR
                 export_TemplateCompositionDiagnostic export_CategoryAppManifestComposition -.-&gt;
                 export_TemplateCompositionStatus
                 export_CategoryDesignDiagnostic[&quot;CategoryDesignDiagnostic&quot;]
-                module_src_design_category_theme_ts --&gt; export_CategoryDesignDiagnostic
+                module_src_presets_category_design_ts --&gt; export_CategoryDesignDiagnostic
                 export_CategoryDesignDiagnostic -.-&gt; export_CategoryDesignDiagnosticCode
                 export_CategoryDesignDiagnosticCode[&quot;CategoryDesignDiagnosticCode&quot;]
-                module_src_design_category_theme_ts --&gt; export_CategoryDesignDiagnosticCode
+                module_src_presets_category_design_ts --&gt; export_CategoryDesignDiagnosticCode
                 export_CategoryDesignOverrides[&quot;CategoryDesignOverrides&quot;]
-                module_src_design_category_theme_ts --&gt; export_CategoryDesignOverrides
+                module_src_presets_category_design_ts --&gt; export_CategoryDesignOverrides
                 export_CategoryDesignOverrides -.-&gt; export_ThemeMode
                 export_CategoryPreset[&quot;CategoryPreset&quot;]
                 module_src_design_category_types_ts --&gt; export_CategoryPreset
@@ -3676,11 +3655,11 @@ graph LR
                 export_CategoryPresetReconciliationReport -.-&gt;
                 export_CategoryPresetFieldReconciliation
                 export_compileCategoryDesign[&quot;compileCategoryDesign&quot;]
-                module_src_design_category_theme_ts --&gt; export_compileCategoryDesign
+                module_src_presets_category_design_ts --&gt; export_compileCategoryDesign
                 export_compileCategoryDesign -.-&gt; export_CategoryDesignOverrides
                 export_compileCategoryDesign -.-&gt; export_CompiledCategoryDesign
                 export_CompiledCategoryDesign[&quot;CompiledCategoryDesign&quot;]
-                module_src_design_category_theme_ts --&gt; export_CompiledCategoryDesign
+                module_src_presets_category_design_ts --&gt; export_CompiledCategoryDesign
                 export_CompiledCategoryDesign -.-&gt; export_CategoryDesignDiagnostic
                 export_CompiledCategoryDesign -.-&gt; export_CategoryPreset
                 export_CompiledCategoryDesign -.-&gt; export_ThemeMode export_CompiledCategoryDesign
@@ -3726,11 +3705,11 @@ graph LR
                 export_OAuthFixtureId[&quot;OAuthFixtureId&quot;] module_src_fixtures_oauth_ts
                 --&gt; export_OAuthFixtureId
                 export_resolveCategoryDesignPreset[&quot;resolveCategoryDesignPreset&quot;]
-                module_src_design_category_theme_ts --&gt; export_resolveCategoryDesignPreset
+                module_src_presets_category_design_ts --&gt; export_resolveCategoryDesignPreset
                 export_resolveCategoryDesignPreset -.-&gt; export_CategoryDesignOverrides
                 export_resolveCategoryDesignPreset -.-&gt; export_ResolvedCategoryDesignPreset
                 export_ResolvedCategoryDesignPreset[&quot;ResolvedCategoryDesignPreset&quot;]
-                module_src_design_category_theme_ts --&gt; export_ResolvedCategoryDesignPreset
+                module_src_presets_category_design_ts --&gt; export_ResolvedCategoryDesignPreset
                 export_ResolvedCategoryDesignPreset -.-&gt; export_CategoryDesignDiagnostic
                 export_ResolvedCategoryDesignPreset -.-&gt; export_CategoryPreset
                 export_ResolvedCategoryDesignPreset -.-&gt; export_ThemeMode
@@ -3744,9 +3723,9 @@ graph LR
                 module_src_design_tone_catalog_ts --&gt; export_resolveTonePair
                 export_resolveTonePair -.-&gt; export_TonePairDefinition
                 export_SplashScreenResizeMode[&quot;SplashScreenResizeMode&quot;]
-                module_node_modules__ankhorage_contracts_dist_appManifest_splashScreen_d_ts --&gt;
+                module_node_modules__ankhorage_contracts_dist_types_d_ts --&gt;
                 export_SplashScreenResizeMode export_SplashScreenSpec[&quot;SplashScreenSpec&quot;]
-                module_node_modules__ankhorage_contracts_dist_appManifest_splashScreen_d_ts --&gt;
+                module_node_modules__ankhorage_contracts_dist_types_d_ts --&gt;
                 export_SplashScreenSpec export_SplashScreenSpec -.-&gt;
                 export_SplashScreenResizeMode export_TemplateArtifact[&quot;TemplateArtifact&quot;]
                 module_src_templates_catalog_ts --&gt; export_TemplateArtifact
@@ -3803,13 +3782,13 @@ graph LR
   module_src_commandContext_ts[&quot;src/commandContext.ts&quot;]
   module_src_commands_ts[&quot;src/commands.ts&quot;]
   module_src_design_category_source_ts[&quot;src/design/category-source.ts&quot;]
-  module_src_design_category_theme_ts[&quot;src/design/category-theme.ts&quot;]
   module_src_design_category_types_ts[&quot;src/design/category-types.ts&quot;]
   module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
   module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
+  module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
   module_src_presets_category_presets_ts[&quot;src/presets/category-presets.ts&quot;]
   module_src_projectSeed_ts[&quot;src/projectSeed.ts&quot;]
   module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
@@ -3841,12 +3820,12 @@ graph LR
   export_CategoryAppManifestComposition -.-&gt; export_TemplateCompositionDiagnostic
   export_CategoryAppManifestComposition -.-&gt; export_TemplateCompositionStatus
   export_CategoryDesignDiagnostic[&quot;CategoryDesignDiagnostic&quot;]
-  module_src_design_category_theme_ts --&gt; export_CategoryDesignDiagnostic
+  module_src_presets_category_design_ts --&gt; export_CategoryDesignDiagnostic
   export_CategoryDesignDiagnostic -.-&gt; export_CategoryDesignDiagnosticCode
   export_CategoryDesignDiagnosticCode[&quot;CategoryDesignDiagnosticCode&quot;]
-  module_src_design_category_theme_ts --&gt; export_CategoryDesignDiagnosticCode
+  module_src_presets_category_design_ts --&gt; export_CategoryDesignDiagnosticCode
   export_CategoryDesignOverrides[&quot;CategoryDesignOverrides&quot;]
-  module_src_design_category_theme_ts --&gt; export_CategoryDesignOverrides
+  module_src_presets_category_design_ts --&gt; export_CategoryDesignOverrides
   export_CategoryDesignOverrides -.-&gt; export_ThemeMode
   export_CategoryPreset[&quot;CategoryPreset&quot;]
   module_src_design_category_types_ts --&gt; export_CategoryPreset
@@ -3859,11 +3838,11 @@ graph LR
   module_src_design_category_types_ts --&gt; export_CategoryPresetReconciliationReport
   export_CategoryPresetReconciliationReport -.-&gt; export_CategoryPresetFieldReconciliation
   export_compileCategoryDesign[&quot;compileCategoryDesign&quot;]
-  module_src_design_category_theme_ts --&gt; export_compileCategoryDesign
+  module_src_presets_category_design_ts --&gt; export_compileCategoryDesign
   export_compileCategoryDesign -.-&gt; export_CategoryDesignOverrides
   export_compileCategoryDesign -.-&gt; export_CompiledCategoryDesign
   export_CompiledCategoryDesign[&quot;CompiledCategoryDesign&quot;]
-  module_src_design_category_theme_ts --&gt; export_CompiledCategoryDesign
+  module_src_presets_category_design_ts --&gt; export_CompiledCategoryDesign
   export_CompiledCategoryDesign -.-&gt; export_CategoryDesignDiagnostic
   export_CompiledCategoryDesign -.-&gt; export_CategoryPreset
   export_CompiledCategoryDesign -.-&gt; export_ThemeMode
@@ -3909,11 +3888,11 @@ graph LR
   export_OAuthFixtureId[&quot;OAuthFixtureId&quot;]
   module_src_fixtures_oauth_ts --&gt; export_OAuthFixtureId
   export_resolveCategoryDesignPreset[&quot;resolveCategoryDesignPreset&quot;]
-  module_src_design_category_theme_ts --&gt; export_resolveCategoryDesignPreset
+  module_src_presets_category_design_ts --&gt; export_resolveCategoryDesignPreset
   export_resolveCategoryDesignPreset -.-&gt; export_CategoryDesignOverrides
   export_resolveCategoryDesignPreset -.-&gt; export_ResolvedCategoryDesignPreset
   export_ResolvedCategoryDesignPreset[&quot;ResolvedCategoryDesignPreset&quot;]
-  module_src_design_category_theme_ts --&gt; export_ResolvedCategoryDesignPreset
+  module_src_presets_category_design_ts --&gt; export_ResolvedCategoryDesignPreset
   export_ResolvedCategoryDesignPreset -.-&gt; export_CategoryDesignDiagnostic
   export_ResolvedCategoryDesignPreset -.-&gt; export_CategoryPreset
   export_ResolvedCategoryDesignPreset -.-&gt; export_ThemeMode
@@ -3928,9 +3907,9 @@ graph LR
   module_src_design_tone_catalog_ts --&gt; export_resolveTonePair
   export_resolveTonePair -.-&gt; export_TonePairDefinition
   export_SplashScreenResizeMode[&quot;SplashScreenResizeMode&quot;]
-  module_node_modules__ankhorage_contracts_dist_appManifest_splashScreen_d_ts --&gt; export_SplashScreenResizeMode
+  module_node_modules__ankhorage_contracts_dist_types_d_ts --&gt; export_SplashScreenResizeMode
   export_SplashScreenSpec[&quot;SplashScreenSpec&quot;]
-  module_node_modules__ankhorage_contracts_dist_appManifest_splashScreen_d_ts --&gt; export_SplashScreenSpec
+  module_node_modules__ankhorage_contracts_dist_types_d_ts --&gt; export_SplashScreenSpec
   export_SplashScreenSpec -.-&gt; export_SplashScreenResizeMode
   export_TemplateArtifact[&quot;TemplateArtifact&quot;]
   module_src_templates_catalog_ts --&gt; export_TemplateArtifact
@@ -4203,7 +4182,7 @@ sequenceDiagram
               data-search="isMissingElementNode src/authoring/component-validation.ts Ask composed ZORA metadata whether a manifest node is the canonical draft placeholder."
             >
               <h3>isMissingElementNode</h3>
-              <p class="muted"><code>src/authoring/component-validation.ts:16:1</code></p>
+              <p class="muted"><code>src/authoring/component-validation.ts:9:1</code></p>
               <p>
                 Ask composed ZORA metadata whether a manifest node is the canonical draft
                 placeholder.
@@ -4211,21 +4190,18 @@ sequenceDiagram
             </article>
             <article
               class="item"
-              data-search="collectComponentDiagnostics src/authoring/component-validation.ts Validate component availability and plugin placement through the composed ZORA catalog."
+              data-search="collectComponentDiagnostics src/authoring/component-validation.ts Validate component availability through canonical core ZORA metadata."
             >
               <h3>collectComponentDiagnostics</h3>
-              <p class="muted"><code>src/authoring/component-validation.ts:23:1</code></p>
-              <p>
-                Validate component availability and plugin placement through the composed ZORA
-                catalog.
-              </p>
+              <p class="muted"><code>src/authoring/component-validation.ts:16:1</code></p>
+              <p>Validate component availability through canonical core ZORA metadata.</p>
             </article>
             <article
               class="item"
               data-search="visitUiNode src/authoring/component-validation.ts Visit every manifest child branch, including repeat empty-state nodes."
             >
               <h3>visitUiNode</h3>
-              <p class="muted"><code>src/authoring/component-validation.ts:57:1</code></p>
+              <p class="muted"><code>src/authoring/component-validation.ts:39:1</code></p>
               <p>Visit every manifest child branch, including repeat empty-state nodes.</p>
             </article>
           </section>
@@ -4560,81 +4536,6 @@ sequenceDiagram
           </section>
         </section>
         <section
-          id="view-src-design-category-theme-ts"
-          class="view"
-          data-view="src/design/category-theme.ts"
-          hidden
-        >
-          <section class="panel">
-            <h2>src/design/category-theme.ts</h2>
-            <article
-              class="item"
-              data-search="resolveDensityTokens src/design/category-theme.ts Resolve canonical spacing token overrides for one density profile."
-            >
-              <h3>resolveDensityTokens</h3>
-              <p class="muted"><code>src/design/category-theme.ts:55:1</code></p>
-              <p>Resolve canonical spacing token overrides for one density profile.</p>
-            </article>
-            <article
-              class="item"
-              data-search="resolveShapeTokens src/design/category-theme.ts Resolve canonical radius token overrides for one shape profile."
-            >
-              <h3>resolveShapeTokens</h3>
-              <p class="muted"><code>src/design/category-theme.ts:64:1</code></p>
-              <p>Resolve canonical radius token overrides for one shape profile.</p>
-            </article>
-            <article
-              class="item"
-              data-search="createProfileTokens src/design/category-theme.ts Create canonical Contracts token overrides from reviewed density and shape direction."
-            >
-              <h3>createProfileTokens</h3>
-              <p class="muted"><code>src/design/category-theme.ts:71:1</code></p>
-              <p>
-                Create canonical Contracts token overrides from reviewed density and shape
-                direction.
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="resolveModeTonePair src/design/category-theme.ts Resolve one requested tone pair and retain unsupported intent as diagnostics."
-            >
-              <h3>resolveModeTonePair</h3>
-              <p class="muted"><code>src/design/category-theme.ts:85:1</code></p>
-              <p>Resolve one requested tone pair and retain unsupported intent as diagnostics.</p>
-            </article>
-            <article
-              class="item"
-              data-search="resolveCategoryDesignPreset src/design/category-theme.ts Resolve category defaults and explicit overrides into canonical compact ThemeConfig source."
-            >
-              <h3>resolveCategoryDesignPreset</h3>
-              <p class="muted"><code>src/design/category-theme.ts:120:1</code></p>
-              <p>
-                Resolve category defaults and explicit overrides into canonical compact ThemeConfig
-                source.
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="createSelectionTargets src/design/category-theme.ts Create compiler selection targets for the measurable accent and foundation direction."
-            >
-              <h3>createSelectionTargets</h3>
-              <p class="muted"><code>src/design/category-theme.ts:166:1</code></p>
-              <p>
-                Create compiler selection targets for the measurable accent and foundation
-                direction.
-              </p>
-            </article>
-            <article
-              class="item"
-              data-search="compileCategoryDesign src/design/category-theme.ts Resolve and compile a category theme through the released ZORA owner pipeline."
-            >
-              <h3>compileCategoryDesign</h3>
-              <p class="muted"><code>src/design/category-theme.ts:203:1</code></p>
-              <p>Resolve and compile a category theme through the released ZORA owner pipeline.</p>
-            </article>
-          </section>
-        </section>
-        <section
           id="view-src-design-tone-catalog-ts"
           class="view"
           data-view="src/design/tone-catalog.ts"
@@ -4733,6 +4634,81 @@ sequenceDiagram
               <h3>resolveOAuthFixture</h3>
               <p class="muted"><code>src/fixtures/oauth.ts:78:1</code></p>
               <p class="empty">No description available.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-presets-category-design-ts"
+          class="view"
+          data-view="src/presets/category-design.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/presets/category-design.ts</h2>
+            <article
+              class="item"
+              data-search="resolveDensityTokens src/presets/category-design.ts Resolve canonical spacing token overrides for one density profile."
+            >
+              <h3>resolveDensityTokens</h3>
+              <p class="muted"><code>src/presets/category-design.ts:55:1</code></p>
+              <p>Resolve canonical spacing token overrides for one density profile.</p>
+            </article>
+            <article
+              class="item"
+              data-search="resolveShapeTokens src/presets/category-design.ts Resolve canonical radius token overrides for one shape profile."
+            >
+              <h3>resolveShapeTokens</h3>
+              <p class="muted"><code>src/presets/category-design.ts:64:1</code></p>
+              <p>Resolve canonical radius token overrides for one shape profile.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createProfileTokens src/presets/category-design.ts Create canonical Contracts token overrides from reviewed density and shape direction."
+            >
+              <h3>createProfileTokens</h3>
+              <p class="muted"><code>src/presets/category-design.ts:71:1</code></p>
+              <p>
+                Create canonical Contracts token overrides from reviewed density and shape
+                direction.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="resolveModeTonePair src/presets/category-design.ts Resolve one requested tone pair and retain unsupported intent as diagnostics."
+            >
+              <h3>resolveModeTonePair</h3>
+              <p class="muted"><code>src/presets/category-design.ts:85:1</code></p>
+              <p>Resolve one requested tone pair and retain unsupported intent as diagnostics.</p>
+            </article>
+            <article
+              class="item"
+              data-search="resolveCategoryDesignPreset src/presets/category-design.ts Resolve category defaults and explicit overrides into canonical compact ThemeConfig source."
+            >
+              <h3>resolveCategoryDesignPreset</h3>
+              <p class="muted"><code>src/presets/category-design.ts:120:1</code></p>
+              <p>
+                Resolve category defaults and explicit overrides into canonical compact ThemeConfig
+                source.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="createSelectionTargets src/presets/category-design.ts Create compiler selection targets for the measurable accent and foundation direction."
+            >
+              <h3>createSelectionTargets</h3>
+              <p class="muted"><code>src/presets/category-design.ts:166:1</code></p>
+              <p>
+                Create compiler selection targets for the measurable accent and foundation
+                direction.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="compileCategoryDesign src/presets/category-design.ts Resolve and compile a category theme through the released ZORA owner pipeline."
+            >
+              <h3>compileCategoryDesign</h3>
+              <p class="muted"><code>src/presets/category-design.ts:203:1</code></p>
+              <p>Resolve and compile a category theme through the released ZORA owner pipeline.</p>
             </article>
           </section>
         </section>

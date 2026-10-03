@@ -10,13 +10,13 @@ graph LR
   module_src_commandContext_ts["src/commandContext.ts"]
   module_src_commands_ts["src/commands.ts"]
   module_src_design_category_source_ts["src/design/category-source.ts"]
-  module_src_design_category_theme_ts["src/design/category-theme.ts"]
   module_src_design_category_types_ts["src/design/category-types.ts"]
   module_src_design_tone_catalog_ts["src/design/tone-catalog.ts"]
   module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
   module_src_index_ts["src/index.ts"]
   module_src_internal_defaults_ts["src/internal/defaults.ts"]
   module_src_packageMetadata_ts["src/packageMetadata.ts"]
+  module_src_presets_category_design_ts["src/presets/category-design.ts"]
   module_src_presets_category_presets_ts["src/presets/category-presets.ts"]
   module_src_projectSeed_ts["src/projectSeed.ts"]
   module_src_templates_catalog_generated_ts["src/templates/catalog.generated.ts"]
@@ -48,12 +48,12 @@ graph LR
   export_CategoryAppManifestComposition -.-> export_TemplateCompositionDiagnostic
   export_CategoryAppManifestComposition -.-> export_TemplateCompositionStatus
   export_CategoryDesignDiagnostic["CategoryDesignDiagnostic"]
-  module_src_design_category_theme_ts --> export_CategoryDesignDiagnostic
+  module_src_presets_category_design_ts --> export_CategoryDesignDiagnostic
   export_CategoryDesignDiagnostic -.-> export_CategoryDesignDiagnosticCode
   export_CategoryDesignDiagnosticCode["CategoryDesignDiagnosticCode"]
-  module_src_design_category_theme_ts --> export_CategoryDesignDiagnosticCode
+  module_src_presets_category_design_ts --> export_CategoryDesignDiagnosticCode
   export_CategoryDesignOverrides["CategoryDesignOverrides"]
-  module_src_design_category_theme_ts --> export_CategoryDesignOverrides
+  module_src_presets_category_design_ts --> export_CategoryDesignOverrides
   export_CategoryDesignOverrides -.-> export_ThemeMode
   export_CategoryPreset["CategoryPreset"]
   module_src_design_category_types_ts --> export_CategoryPreset
@@ -66,11 +66,11 @@ graph LR
   module_src_design_category_types_ts --> export_CategoryPresetReconciliationReport
   export_CategoryPresetReconciliationReport -.-> export_CategoryPresetFieldReconciliation
   export_compileCategoryDesign["compileCategoryDesign"]
-  module_src_design_category_theme_ts --> export_compileCategoryDesign
+  module_src_presets_category_design_ts --> export_compileCategoryDesign
   export_compileCategoryDesign -.-> export_CategoryDesignOverrides
   export_compileCategoryDesign -.-> export_CompiledCategoryDesign
   export_CompiledCategoryDesign["CompiledCategoryDesign"]
-  module_src_design_category_theme_ts --> export_CompiledCategoryDesign
+  module_src_presets_category_design_ts --> export_CompiledCategoryDesign
   export_CompiledCategoryDesign -.-> export_CategoryDesignDiagnostic
   export_CompiledCategoryDesign -.-> export_CategoryPreset
   export_CompiledCategoryDesign -.-> export_ThemeMode
@@ -116,11 +116,11 @@ graph LR
   export_OAuthFixtureId["OAuthFixtureId"]
   module_src_fixtures_oauth_ts --> export_OAuthFixtureId
   export_resolveCategoryDesignPreset["resolveCategoryDesignPreset"]
-  module_src_design_category_theme_ts --> export_resolveCategoryDesignPreset
+  module_src_presets_category_design_ts --> export_resolveCategoryDesignPreset
   export_resolveCategoryDesignPreset -.-> export_CategoryDesignOverrides
   export_resolveCategoryDesignPreset -.-> export_ResolvedCategoryDesignPreset
   export_ResolvedCategoryDesignPreset["ResolvedCategoryDesignPreset"]
-  module_src_design_category_theme_ts --> export_ResolvedCategoryDesignPreset
+  module_src_presets_category_design_ts --> export_ResolvedCategoryDesignPreset
   export_ResolvedCategoryDesignPreset -.-> export_CategoryDesignDiagnostic
   export_ResolvedCategoryDesignPreset -.-> export_CategoryPreset
   export_ResolvedCategoryDesignPreset -.-> export_ThemeMode
@@ -135,9 +135,9 @@ graph LR
   module_src_design_tone_catalog_ts --> export_resolveTonePair
   export_resolveTonePair -.-> export_TonePairDefinition
   export_SplashScreenResizeMode["SplashScreenResizeMode"]
-  module_node_modules__ankhorage_contracts_dist_appManifest_splashScreen_d_ts --> export_SplashScreenResizeMode
+  module_node_modules__ankhorage_contracts_dist_types_d_ts --> export_SplashScreenResizeMode
   export_SplashScreenSpec["SplashScreenSpec"]
-  module_node_modules__ankhorage_contracts_dist_appManifest_splashScreen_d_ts --> export_SplashScreenSpec
+  module_node_modules__ankhorage_contracts_dist_types_d_ts --> export_SplashScreenSpec
   export_SplashScreenSpec -.-> export_SplashScreenResizeMode
   export_TemplateArtifact["TemplateArtifact"]
   module_src_templates_catalog_ts --> export_TemplateArtifact

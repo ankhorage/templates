@@ -74,8 +74,8 @@ Source: `src/authoring/compose-category-manifest.ts:58:1`
 ## CategoryDesignDiagnostic
 
 Kind: `type`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:17:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:17:1`
 
 ### Members
 
@@ -89,14 +89,14 @@ Source: `src/design/category-theme.ts:17:1`
 ## CategoryDesignDiagnosticCode
 
 Kind: `unknown`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:14:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:14:1`
 
 ## CategoryDesignOverrides
 
 Kind: `type`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:24:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:24:1`
 
 ### Members
 
@@ -178,8 +178,8 @@ Source: `src/design/category-types.ts:78:1`
 ## compileCategoryDesign
 
 Kind: `function`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:203:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:203:1`
 
 Resolve and compile a category theme through the released ZORA owner pipeline.
 
@@ -193,8 +193,8 @@ Resolve and compile a category theme through the released ZORA owner pipeline.
 ## CompiledCategoryDesign
 
 Kind: `type`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:50:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:50:1`
 
 ### Members
 
@@ -237,9 +237,9 @@ Source: `src/authoring/compose-category-manifest.ts:44:1`
 | -------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------- | ----------- |
 | authoringState | property | `TemplateAuthoringState`                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
 | category       | property | `"books_reading" \| "business_productivity" \| "developer_tools" \| "education_learning" \| "entertainment_media" \| "finance_money" \| "food_drink" \| "games" \| "graphics_design" \| "health_fitness" \| "kids_family" \| "lifestyle" \| "medical" \| "music_audio" \| "navigation_travel" \| "news_magazines" \| "photo_video" \| "reference" \| "shopping_commerce" \| "social_community" \| "sports" \| "utilities_tools" \| "weather"` | yes      |             |
-| dataBindings   | property | `Readonly<Record<string, import("/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/bindings").ComponentDataBinding>>`                                                                                                                                                                                                                                                                                              | no       |             |
-| dataSources    | property | `Readonly<Record<string, import("/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/index").DatabaseDataSourceConfig>>`                                                                                                                                                                                                                                                                                             | no       |             |
-| modules        | property | `Readonly<Record<string, import("/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra").InfraModuleSpec>>`                                                                                                                                                                                                                                                                                                      | no       |             |
+| dataBindings   | property | `ComponentDataBindingRegistry`                                                                                                                                                                                                                                                                                                                                                                                                                | no       |             |
+| dataSources    | property | `DataSourceRegistry`                                                                                                                                                                                                                                                                                                                                                                                                                          | no       |             |
+| modules        | property | `import("/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra").InfraModuleRegistry`                                                                                                                                                                                                                                                                                                                            | no       |             |
 | name           | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
 | navigator      | property | `AppNavigatorManifest`                                                                                                                                                                                                                                                                                                                                                                                                                        | yes      |             |
 | screens        | property | `Readonly<Record<string, ScreenSpec>>`                                                                                                                                                                                                                                                                                                                                                                                                        | yes      |             |
@@ -364,8 +364,8 @@ Source: `src/fixtures/oauth.ts:6:1`
 ## resolveCategoryDesignPreset
 
 Kind: `function`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:120:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:120:1`
 
 Resolve category defaults and explicit overrides into canonical compact ThemeConfig source.
 
@@ -379,8 +379,8 @@ Resolve category defaults and explicit overrides into canonical compact ThemeCon
 ## ResolvedCategoryDesignPreset
 
 Kind: `type`
-Module: `src/design/category-theme.ts`
-Source: `src/design/category-theme.ts:38:1`
+Module: `src/presets/category-design.ts`
+Source: `src/presets/category-design.ts:38:1`
 
 ### Members
 
@@ -440,14 +440,14 @@ Resolve a reviewed tone pair or report that the identifier is not canonical.
 ## SplashScreenResizeMode
 
 Kind: `unknown`
-Module: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts:2:1`
+Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:172:1`
 
 ## SplashScreenSpec
 
 Kind: `type`
-Module: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/appManifest/splashScreen.d.ts:7:1`
+Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:177:1`
 
 ### Members
 
