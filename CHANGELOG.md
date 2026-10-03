@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.114
+
+### Patch Changes
+
+- 90c9e51: Update dependencies: `@ankhorage/contracts`.
+
 ## 12.0.113
 
 ### Patch Changes
