@@ -10,15 +10,6 @@ export {
   validateTemplateManifest,
 } from './authoring/compose-category-manifest';
 export {
-  type CategoryDesignDiagnostic,
-  type CategoryDesignDiagnosticCode,
-  type CategoryDesignOverrides,
-  compileCategoryDesign,
-  type CompiledCategoryDesign,
-  resolveCategoryDesignPreset,
-  type ResolvedCategoryDesignPreset,
-} from './design/category-theme';
-export {
   DESIGN_DENSITIES,
   DESIGN_SHAPES,
   type DesignDensity,
@@ -47,6 +38,15 @@ export {
   type OAuthFixtureId,
   resolveOAuthFixture,
 } from './fixtures/oauth';
+export {
+  type CategoryDesignDiagnostic,
+  type CategoryDesignDiagnosticCode,
+  type CategoryDesignOverrides,
+  compileCategoryDesign,
+  type CompiledCategoryDesign,
+  resolveCategoryDesignPreset,
+  type ResolvedCategoryDesignPreset,
+} from './presets/category-design';
 export {
   CATEGORY_PRESET_RECONCILIATION,
   CATEGORY_PRESETS,
