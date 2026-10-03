@@ -81,12 +81,12 @@
     "@ankhorage/color-theory": "^0.3.1",
     "@ankhorage/contracts": "^22.8.99",
     "@ankhorage/navigator": "^3.3.72",
-    "@ankhorage/zora": "^22.1.0"
+    "@ankhorage/zora": "^22.1.1"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.11.0",
     "@ankhorage/devtools": "^2.1.7",
-    "@ankhorage/doctor": "^0.12.6",
+    "@ankhorage/doctor": "^0.12.7",
     "@ankhorage/paradox": "^0.2.27",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.4",
