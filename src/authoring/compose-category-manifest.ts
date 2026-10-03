@@ -10,7 +10,7 @@ import {
   type UiNode,
 } from '@ankhorage/contracts';
 
-import { type CategoryDesignOverrides, compileCategoryDesign } from '../design/category-theme';
+import { type CategoryDesignOverrides, compileCategoryDesign } from '../presets/category-design';
 import { BASE_INFRA, BASE_SETTINGS, DEFAULT_TEMPLATE_VERSION } from '../internal/defaults';
 import {
   collectComponentDiagnostics,
