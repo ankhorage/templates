@@ -9,7 +9,6 @@ import {
 
 import type { DesignDensity, DesignShape } from '../design/category-types';
 import { resolveTonePair, type ThemeMode, type TonePairDefinition } from '../design/tone-catalog';
-
 import { CATEGORY_PRESETS } from './category-presets';
 
 export type CategoryDesignDiagnosticCode =
