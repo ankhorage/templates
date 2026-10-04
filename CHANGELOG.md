@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.126
+
+### Patch Changes
+
+- cfb945e: Update dependencies: `@ankhorage/zora`.
+
 ## 12.0.125
 
 ### Patch Changes
