@@ -81,7 +81,7 @@
     "@ankhorage/color-theory": "^0.3.1",
     "@ankhorage/contracts": "^22.8.103",
     "@ankhorage/navigator": "^3.3.72",
-    "@ankhorage/zora": "^23.2.5"
+    "@ankhorage/zora": "^23.3.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.11.1",
