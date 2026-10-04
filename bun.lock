@@ -8,12 +8,12 @@
         "@ankhorage/color-theory": "^0.3.1",
         "@ankhorage/contracts": "^22.8.103",
         "@ankhorage/navigator": "^3.3.72",
-        "@ankhorage/zora": "^23.2.3",
+        "@ankhorage/zora": "^23.2.4",
       },
       "devDependencies": {
         "@ankhorage/ankh": "^0.11.1",
         "@ankhorage/devtools": "^2.1.12",
-        "@ankhorage/doctor": "^0.12.14",
+        "@ankhorage/doctor": "^0.12.15",
         "@ankhorage/paradox": "^0.2.28",
         "@types/bun": "^1.4.2",
         "@types/node": "^26.6.4",
@@ -36,7 +36,7 @@
 
     "@ankhorage/devtools": ["@ankhorage/devtools@2.1.12", "", { "dependencies": { "@ankhorage/apm": "^0.8.14", "@ankhorage/contracts": "^22.8.103", "@ankhorage/project-detector": "^0.3.3", "@ankhorage/rules-repository": "^0.2.0", "@ankhorage/utility": "^0.5.5", "@changesets/cli": "^3.0.3", "@eslint/compat": "^2.1.1", "@eslint/js": "^10.0.1", "@next/eslint-plugin-next": "^16.3.8", "eslint": "^10.12.0", "eslint-config-prettier": "^10.1.8", "eslint-plugin-import": "^2.32.0", "eslint-plugin-prettier": "^5.5.6", "eslint-plugin-react": "^7.37.5", "eslint-plugin-react-hooks": "^7.1.1", "eslint-plugin-react-native": "^5.0.0", "eslint-plugin-security": "^4.2.0", "eslint-plugin-simple-import-sort": "^14.0.0", "eslint-plugin-unused-imports": "^4.4.1", "knip": "^6.39.0", "prettier": "^3.9.9", "typescript": "~6.0.3", "typescript-eslint": "^8.71.0" }, "bin": { "ankhorage-knip": "dist/cli/bin/knip.js", "ankhorage-eslint": "dist/cli/bin/eslint.js", "ankhorage-prettier": "dist/cli/bin/prettier.js", "ankhorage-changeset": "dist/cli/bin/changeset.js", "ankhorage-structure": "dist/cli/bin/structure.js", "ankhorage-apm-release": "dist/cli/bin/apm-release.js" } }, "sha512-MzBAxNJLc+ITaQPXp7D6ESVptggeWWAdAh8JJ+rtBnaUJiN82/tVt/V/V1/uAgPSY6GMb5IUZIkY1vgRj3CSUg=="],
 
-    "@ankhorage/doctor": ["@ankhorage/doctor@0.12.14", "", { "dependencies": { "@ankhorage/contracts": "^22.8.103", "@ankhorage/dependency-graph": "^1.1.1", "@ankhorage/rules-architecture": "^0.5.0", "@ankhorage/rules-repository": "^0.2.0", "@ankhorage/supabase-auth": "^1.2.34", "@ankhorage/utility": "^1.9.85" }, "bin": { "ankhorage-doctor": "dist/cli/standalone.js" } }, "sha512-BR17ZNcPYyDOtXRvKliuC+ljjMtnxPCuRrpcubfS0CbSecUEmA2YtzpFQwtOYKmxYuFQMSaGv3V5XW9HIdwALw=="],
+    "@ankhorage/doctor": ["@ankhorage/doctor@0.12.15", "", { "dependencies": { "@ankhorage/contracts": "^22.8.103", "@ankhorage/dependency-graph": "^1.1.1", "@ankhorage/rules-architecture": "^0.5.0", "@ankhorage/rules-repository": "^0.2.0", "@ankhorage/supabase-auth": "^1.2.35", "@ankhorage/utility": "^1.9.85" }, "bin": { "ankhorage-doctor": "dist/cli/standalone.js" } }, "sha512-AzmvZ1Pao9wYef9/r2ZVhmWT9pa/wnVsMXUVo9CL2A8oEfPA/dk3bL2VsS21EDdnBr6NUdFeM7dpYiEPxjQKog=="],
 
     "@ankhorage/game": ["@ankhorage/game@0.1.2", "", {}, "sha512-dWYhU/ZSIP2QDisuyH+46Qu6W2S6ucEOaYG7l7yvj3s06+wjeFJGtDv7JpD9dxWso+niIpv+C1+OKs0YzT+2ZQ=="],
 
@@ -58,13 +58,13 @@
 
     "@ankhorage/runtime": ["@ankhorage/runtime@3.0.59", "", { "dependencies": { "@ankhorage/contracts": "^22.8.99", "@ankhorage/data-sources": "^2.0.31", "@ankhorage/utility": "^1.9.82" }, "peerDependencies": { "react": ">=19.2.0 <20", "react-native": ">=0.86.0 <0.88", "react-native-web": "~0.21.3" }, "optionalPeers": ["react-native-web"] }, "sha512-mjy+Nijx5ysn8jNkTGYkywE3iYjvCzNfF4mAzEyWF9K6+C1ktppZlywLonwMGI2qM2LmT7j4VnENKJGzyS2DXw=="],
 
-    "@ankhorage/supabase-auth": ["@ankhorage/supabase-auth@1.2.34", "", { "dependencies": { "@ankhorage/contracts": "^22.8.102", "@noble/hashes": "2.4.0" } }, "sha512-2+U7DbGTgoObhrIBMwnMKhF+aMToRJlTflsgjfR1hhR7j8Dz4isMOn9vBKLyBamRm21t3RnzuKGGkOrOsYkW5g=="],
+    "@ankhorage/supabase-auth": ["@ankhorage/supabase-auth@1.2.35", "", { "dependencies": { "@ankhorage/contracts": "^22.8.103", "@noble/hashes": "2.4.0" } }, "sha512-mY3bFJRLnvFQo/k75CMrS5fTF9b8JfKSwsOEkalUgRlTMXCb2aRNwgI2loPFe3296PGPhun6eI1Xbdy+0KA9vQ=="],
 
     "@ankhorage/surface": ["@ankhorage/surface@9.1.115", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.1", "@ankhorage/contracts": "^22.8.102", "@ankhorage/utility": "^1.9.85", "@gorhom/bottom-sheet": "^5.2.14" }, "peerDependencies": { "@react-native-vector-icons/fontawesome": "^13.1.4", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.3", "@react-native-vector-icons/ionicons": "^13.1.3", "@react-native-vector-icons/material-design-icons": "^13.1.3", "react": "19.3.0", "react-native": "0.86.x || 0.87.x", "react-native-gesture-handler": "~2.32.0 || ~3.3.0", "react-native-reanimated": "4.5.1 || 4.7.0 || 4.7", "react-native-safe-area-context": "~5.10.0", "react-native-svg": "15.15.5", "react-native-web": "~0.21.0", "react-native-worklets": "0.10.1 || 0.13.0" } }, "sha512-hY8LRBhL0ulH8MdY+K71+/+ZyTntsIJMtIZTQ4zHPEljCpaJYVGl/SZWagL7m6hag3WKU4bmyDizHKQLKILhnw=="],
 
     "@ankhorage/utility": ["@ankhorage/utility@0.5.5", "", { "dependencies": { "@ankhorage/contracts": "^12.0.1" }, "peerDependencies": { "@techstark/opencv-js": "^5.0.0-release.1", "pixelmatch": "^7.2.0", "sharp": "^0.35.4", "tesseract.js": "^7.0.0" }, "optionalPeers": ["@techstark/opencv-js", "pixelmatch", "sharp", "tesseract.js"] }, "sha512-so1NXcIOQjEPNsNpdGp9McXsw8oIo4Mw/pF3y2x69f1MbwqEC79H7I0dResKs52S8Il4JeO/e5RO3Sf4yDdMGA=="],
 
-    "@ankhorage/zora": ["@ankhorage/zora@23.2.3", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.1", "@ankhorage/contracts": "^22.8.103", "@ankhorage/game": "^0.1.2", "@ankhorage/runtime": "^3.0.59", "@ankhorage/surface": "^9.1.115", "@ankhorage/utility": "^1.9.85", "chess.js": "^1.4.0", "expo-document-picker": "~57.0.3", "expo-image-picker": "~57.0.20" }, "peerDependencies": { "@react-native-vector-icons/fontawesome": "^13.1.3", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.4", "@react-native-vector-icons/ionicons": "^13.1.3", "react": "19.2.3", "react-native": "0.86.x", "react-native-gesture-handler": "~2.32.0", "react-native-reanimated": "4.5.1", "react-native-safe-area-context": "~5.7.0", "react-native-svg": "15.15.4", "react-native-web": "~0.21.3", "react-native-worklets": "0.10.1" } }, "sha512-YjN4dozZZrT62D1KXNudBbtz91ZftE4UaKJ2eBhe9CTbm+O2H0Ufo1onQE/g5LKtGJ3+bNJGK4ZYNfe7nWghJA=="],
+    "@ankhorage/zora": ["@ankhorage/zora@23.2.4", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.1", "@ankhorage/contracts": "^22.8.103", "@ankhorage/game": "^0.1.2", "@ankhorage/runtime": "^3.0.59", "@ankhorage/surface": "^9.1.116", "@ankhorage/utility": "^1.9.85", "chess.js": "^1.4.0", "expo-document-picker": "~57.0.3", "expo-image-picker": "~57.0.20" }, "peerDependencies": { "@react-native-vector-icons/fontawesome": "^13.1.3", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.4", "@react-native-vector-icons/ionicons": "^13.1.3", "react": "19.2.3", "react-native": "0.86.x", "react-native-gesture-handler": "~2.32.0", "react-native-reanimated": "4.5.1", "react-native-safe-area-context": "~5.7.0", "react-native-svg": "15.15.4", "react-native-web": "~0.21.3", "react-native-worklets": "0.10.1" } }, "sha512-uHKau85zXuREphXMAr3836Ol3fL9FBr6AZMPPiDjjbil7P5uv52N05ibEefbkS6ELT2GlGuG3eyZuFI8NX+Mag=="],
 
     "@babel/code-frame": ["@babel/code-frame@7.29.7", "", { "dependencies": { "@babel/helper-validator-identifier": "^7.29.7", "js-tokens": "^4.0.0", "picocolors": "^1.1.1" } }, "sha512-Aup7aUOfpbAUg2ROOJN6Iw5f9DMBlzu0mIkm/malLQFN/YQgO48wCj0Kxa3sEHJvPVFg7siR+qRInwXd2qhQKw=="],
 
@@ -1805,6 +1805,8 @@
     "@ankhorage/surface/@ankhorage/utility": ["@ankhorage/utility@1.9.85", "", { "peerDependencies": { "fastify": "^5.12.5" }, "optionalPeers": ["fastify"] }, "sha512-039OnOPntg5EY7BwMR4shCaHOO8N/DgNZOgQxkh/lxtsZbqIlf34bp47ZYh7NoPVibxLDwj8CeMl6m1Pw8y1aQ=="],
 
     "@ankhorage/utility/@ankhorage/contracts": ["@ankhorage/contracts@12.0.1", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.0" } }, "sha512-r3arTg1z4EEkrhiPAqG1rOwIwv8Ytjco2NQdF8GFsIHOpZ0tmRxih1UvGaQzg4j27vtWMrzvVvqfBWl/HswkWQ=="],
+
+    "@ankhorage/zora/@ankhorage/surface": ["@ankhorage/surface@9.1.116", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.1", "@ankhorage/contracts": "^22.8.103", "@ankhorage/utility": "^1.9.85", "@gorhom/bottom-sheet": "^5.2.14" }, "peerDependencies": { "@react-native-vector-icons/fontawesome": "^13.1.4", "@react-native-vector-icons/fontawesome5": "^13.1.3", "@react-native-vector-icons/fontawesome6": "^13.1.3", "@react-native-vector-icons/ionicons": "^13.1.3", "@react-native-vector-icons/material-design-icons": "^13.1.3", "react": "19.3.0", "react-native": "0.86.x || 0.87.x", "react-native-gesture-handler": "~2.32.0 || ~3.3.0", "react-native-reanimated": "4.5.1 || 4.7.0 || 4.7", "react-native-safe-area-context": "~5.10.0", "react-native-svg": "15.15.5", "react-native-web": "~0.21.0", "react-native-worklets": "0.10.1 || 0.13.0" } }, "sha512-owG65vzxAoV1VrjgD7OpvyOTaBuZxCbCb/jjIPy7rhwoa+ImdC6yS/bohnkj6TaLqvG3kosHVGzUGWx3kJ6z2Q=="],
 
     "@ankhorage/zora/@ankhorage/utility": ["@ankhorage/utility@1.9.85", "", { "peerDependencies": { "fastify": "^5.12.5" }, "optionalPeers": ["fastify"] }, "sha512-039OnOPntg5EY7BwMR4shCaHOO8N/DgNZOgQxkh/lxtsZbqIlf34bp47ZYh7NoPVibxLDwj8CeMl6m1Pw8y1aQ=="],
 
