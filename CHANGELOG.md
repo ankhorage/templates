@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.125
+
+### Patch Changes
+
+- eda21bd: Update dependencies: `@ankhorage/doctor`, `@ankhorage/zora`.
+
 ## 12.0.124
 
 ### Patch Changes
