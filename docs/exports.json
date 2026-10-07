@@ -62,7 +62,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 93,
+      "line": 50,
       "column": 22
     },
     "exportPaths": ["src/index.ts"],
@@ -80,7 +80,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 94,
+      "line": 51,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -118,6 +118,24 @@
         "returnDescription": null
       }
     ],
+    "members": [],
+    "structuredRows": []
+  },
+  {
+    "name": "CAPABILITIES",
+    "description": null,
+    "isReadme": false,
+    "examples": [],
+    "kind": "value",
+    "modulePath": "src/capabilities/index.ts",
+    "sourceLocation": {
+      "filePath": "src/capabilities/index.ts",
+      "line": 3,
+      "column": 14
+    },
+    "exportPaths": ["src/index.ts"],
+    "relatedSymbols": [],
+    "signatures": [],
     "members": [],
     "structuredRows": []
   },
@@ -1410,7 +1428,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 172,
+      "line": 129,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],
@@ -1428,7 +1446,7 @@
     "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
     "sourceLocation": {
       "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-      "line": 177,
+      "line": 134,
       "column": 1
     },
     "exportPaths": ["src/index.ts"],

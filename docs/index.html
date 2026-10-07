@@ -345,9 +345,9 @@
           <section class="panel">
             <h2>Package overview</h2>
             <div class="summary">
-              <div><strong>56</strong><span class="muted">public exports</span></div>
+              <div><strong>57</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>26</strong><span class="muted">modules</span></div>
+              <div><strong>27</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -423,6 +423,12 @@
                 <strong>Exports:</strong> <code>AppManifestWithSplashScreen</code>,
                 <code>createSplashScreen</code>
               </p>
+            </article>
+            <article class="item" data-search="src/capabilities/index.ts CAPABILITIES">
+              <h3>src/capabilities/index.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+              <p><strong>Exports:</strong> <code>CAPABILITIES</code></p>
             </article>
             <article
               class="item"
@@ -557,7 +563,7 @@
             </article>
             <article
               class="item"
-              data-search="src/index.ts ACCENT_TONE_FAMILIES ACCENT_TONE_TARGETS AccentToneFamily APP_CATEGORIES AppCategory assertTemplateManifestReady CATEGORY_PRESET_RECONCILIATION CATEGORY_PRESETS CategoryAppManifestComposition CategoryDesignDiagnostic CategoryDesignDiagnosticCode CategoryDesignOverrides CategoryPreset CategoryPresetFieldReconciliation CategoryPresetReconciliationDecision CategoryPresetReconciliationReport compileCategoryDesign CompiledCategoryDesign composeCategoryAppManifest ComposeCategoryAppManifestInput createTemplateArtifact DESIGN_DENSITIES DESIGN_SHAPES DesignDensity DesignShape FOUNDATION_TONE_FAMILIES FOUNDATION_TONE_TARGETS FoundationToneFamily listOAuthFixtures listTemplates OAUTH_CALLBACK_ROUTE OAUTH_FIXTURE_IDS OAuthFixtureDefinition OAuthFixtureId resolveCategoryDesignPreset ResolvedCategoryDesignPreset resolveOAuthFixture resolveTemplate resolveTonePair SplashScreenResizeMode SplashScreenSpec TemplateArtifact TemplateAuthoringState TemplateCatalogEntry TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus TemplateDefinition TemplateImageAsset ThemeMode TONE_PAIR_CATALOG TonePairClassification TonePairDefinition TonePairId ToneTarget validateTemplateManifest"
+              data-search="src/index.ts ACCENT_TONE_FAMILIES ACCENT_TONE_TARGETS AccentToneFamily APP_CATEGORIES AppCategory assertTemplateManifestReady CAPABILITIES CATEGORY_PRESET_RECONCILIATION CATEGORY_PRESETS CategoryAppManifestComposition CategoryDesignDiagnostic CategoryDesignDiagnosticCode CategoryDesignOverrides CategoryPreset CategoryPresetFieldReconciliation CategoryPresetReconciliationDecision CategoryPresetReconciliationReport compileCategoryDesign CompiledCategoryDesign composeCategoryAppManifest ComposeCategoryAppManifestInput createTemplateArtifact DESIGN_DENSITIES DESIGN_SHAPES DesignDensity DesignShape FOUNDATION_TONE_FAMILIES FOUNDATION_TONE_TARGETS FoundationToneFamily listOAuthFixtures listTemplates OAUTH_CALLBACK_ROUTE OAUTH_FIXTURE_IDS OAuthFixtureDefinition OAuthFixtureId resolveCategoryDesignPreset ResolvedCategoryDesignPreset resolveOAuthFixture resolveTemplate resolveTonePair SplashScreenResizeMode SplashScreenSpec TemplateArtifact TemplateAuthoringState TemplateCatalogEntry TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus TemplateDefinition TemplateImageAsset ThemeMode TONE_PAIR_CATALOG TonePairClassification TonePairDefinition TonePairId ToneTarget validateTemplateManifest"
             >
               <h3>src/index.ts</h3>
               <p class="muted">Configured entrypoint</p>
@@ -566,7 +572,7 @@
                 <strong>Exports:</strong> <code>ACCENT_TONE_FAMILIES</code>,
                 <code>ACCENT_TONE_TARGETS</code>, <code>AccentToneFamily</code>,
                 <code>APP_CATEGORIES</code>, <code>AppCategory</code>,
-                <code>assertTemplateManifestReady</code>,
+                <code>assertTemplateManifestReady</code>, <code>CAPABILITIES</code>,
                 <code>CATEGORY_PRESET_RECONCILIATION</code>, <code>CATEGORY_PRESETS</code>,
                 <code>CategoryAppManifestComposition</code>, <code>CategoryDesignDiagnostic</code>,
                 <code>CategoryDesignDiagnosticCode</code>, <code>CategoryDesignOverrides</code>,
@@ -609,11 +615,14 @@
             </article>
             <article
               class="item"
-              data-search="src/packageMetadata.ts package.json TEMPLATES_CAPABILITIES TEMPLATES_COMMAND_CATEGORY TEMPLATES_PACKAGE_NAME TEMPLATES_PACKAGE_VERSION"
+              data-search="src/packageMetadata.ts package.json src/capabilities/index.ts TEMPLATES_CAPABILITIES TEMPLATES_COMMAND_CATEGORY TEMPLATES_PACKAGE_NAME TEMPLATES_PACKAGE_VERSION"
             >
               <h3>src/packageMetadata.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>package.json</code></p>
+              <p>
+                <strong>Dependencies:</strong> <code>package.json</code>,
+                <code>src/capabilities/index.ts</code>
+              </p>
               <p>
                 <strong>Exports:</strong> <code>TEMPLATES_CAPABILITIES</code>,
                 <code>TEMPLATES_COMMAND_CATEGORY</code>, <code>TEMPLATES_PACKAGE_NAME</code>,
@@ -752,7 +761,7 @@
               >
                 <h4>APP_CATEGORIES</h4>
                 <p class="muted">
-                  value • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:93:22</code>
+                  value • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:50:22</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -765,7 +774,7 @@
               >
                 <h4>AppCategory</h4>
                 <p class="muted">
-                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:94:1</code>
+                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:51:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -778,7 +787,7 @@
               >
                 <h4>SplashScreenResizeMode</h4>
                 <p class="muted">
-                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:172:1</code>
+                  unknown • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:129:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -791,7 +800,7 @@
               >
                 <h4>SplashScreenSpec</h4>
                 <p class="muted">
-                  type • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:177:1</code>
+                  type • <code>node_modules/@ankhorage/contracts/dist/types.d.ts:134:1</code>
                 </p>
 
                 <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
@@ -1294,6 +1303,20 @@
                   </table>
                   <p><strong>Returns:</strong> <code>CategoryAppManifestComposition</code></p>
                 </div>
+              </article>
+            </section>
+            <section>
+              <h3>src/capabilities/index.ts</h3>
+              <article
+                class="item"
+                id="symbol-capabilities"
+                data-search="CAPABILITIES value src/capabilities/index.ts "
+              >
+                <h4>CAPABILITIES</h4>
+                <p class="muted">value • <code>src/capabilities/index.ts:3:14</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
               </article>
             </section>
             <section>
@@ -3274,6 +3297,8 @@
                 --&gt; module_src_internal_defaults_ts
                 module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_authoring_splash_screen_ts
+                module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+                package__ankhorage_templates -.-&gt; module_src_capabilities_index_ts
                 module_src_catalog_ts[&quot;src/catalog.ts&quot;] package__ankhorage_templates
                 -.-&gt; module_src_catalog_ts module_src_catalog_ts --&gt;
                 module_src_templates_catalog_ts module_src_catalog_ts --&gt;
@@ -3310,6 +3335,7 @@
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_packageMetadata_ts
                 module_src_packageMetadata_ts --&gt; module_package_json
+                module_src_packageMetadata_ts --&gt; module_src_capabilities_index_ts
                 module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_presets_category_design_ts
                 module_src_presets_category_design_ts --&gt; module_src_design_category_types_ts
@@ -3370,6 +3396,8 @@ graph TD
   module_src_authoring_create_manifest_shell_ts --&gt; module_src_internal_defaults_ts
   module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_authoring_splash_screen_ts
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_capabilities_index_ts
   module_src_catalog_ts[&quot;src/catalog.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_catalog_ts
   module_src_catalog_ts --&gt; module_src_templates_catalog_ts
@@ -3408,6 +3436,7 @@ graph TD
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_packageMetadata_ts
   module_src_packageMetadata_ts --&gt; module_package_json
+  module_src_packageMetadata_ts --&gt; module_src_capabilities_index_ts
   module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_presets_category_design_ts
   module_src_presets_category_design_ts --&gt; module_src_design_category_types_ts
@@ -3452,6 +3481,7 @@ graph TD
                 module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
                 module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
                 module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
+                module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
                 module_src_catalog_ts[&quot;src/catalog.ts&quot;]
                 module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
                 module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -3498,7 +3528,8 @@ graph TD
                 module_src_templateSelector_ts module_src_design_category_source_ts --&gt;
                 module_src_design_category_types_ts module_src_design_category_types_ts --&gt;
                 module_src_design_tone_catalog_ts module_src_packageMetadata_ts --&gt;
-                module_package_json module_src_presets_category_design_ts --&gt;
+                module_package_json module_src_packageMetadata_ts --&gt;
+                module_src_capabilities_index_ts module_src_presets_category_design_ts --&gt;
                 module_src_design_category_types_ts module_src_presets_category_design_ts --&gt;
                 module_src_design_tone_catalog_ts module_src_presets_category_design_ts --&gt;
                 module_src_presets_category_presets_ts module_src_presets_category_presets_ts --&gt;
@@ -3522,6 +3553,7 @@ graph LR
   module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
   module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
   module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
   module_src_catalog_ts[&quot;src/catalog.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -3565,6 +3597,7 @@ graph LR
   module_src_design_category_source_ts --&gt; module_src_design_category_types_ts
   module_src_design_category_types_ts --&gt; module_src_design_tone_catalog_ts
   module_src_packageMetadata_ts --&gt; module_package_json
+  module_src_packageMetadata_ts --&gt; module_src_capabilities_index_ts
   module_src_presets_category_design_ts --&gt; module_src_design_category_types_ts
   module_src_presets_category_design_ts --&gt; module_src_design_tone_catalog_ts
   module_src_presets_category_design_ts --&gt; module_src_presets_category_presets_ts
@@ -3588,6 +3621,7 @@ graph LR
                 module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
                 module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
                 module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
+                module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
                 module_src_catalog_ts[&quot;src/catalog.ts&quot;]
                 module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
                 module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -3622,7 +3656,8 @@ graph LR
                 export_assertTemplateManifestReady[&quot;assertTemplateManifestReady&quot;]
                 module_src_authoring_compose_category_manifest_ts --&gt;
                 export_assertTemplateManifestReady export_assertTemplateManifestReady -.-&gt;
-                export_CategoryAppManifestComposition
+                export_CategoryAppManifestComposition export_CAPABILITIES[&quot;CAPABILITIES&quot;]
+                module_src_capabilities_index_ts --&gt; export_CAPABILITIES
                 export_CATEGORY_PRESET_RECONCILIATION[&quot;CATEGORY_PRESET_RECONCILIATION&quot;]
                 module_src_presets_category_presets_ts --&gt; export_CATEGORY_PRESET_RECONCILIATION
                 export_CATEGORY_PRESETS[&quot;CATEGORY_PRESETS&quot;]
@@ -3776,6 +3811,7 @@ graph LR
   module_src_authoring_compose_category_manifest_ts[&quot;src/authoring/compose-category-manifest.ts&quot;]
   module_src_authoring_create_manifest_shell_ts[&quot;src/authoring/create-manifest-shell.ts&quot;]
   module_src_authoring_splash_screen_ts[&quot;src/authoring/splash-screen.ts&quot;]
+  module_src_capabilities_index_ts[&quot;src/capabilities/index.ts&quot;]
   module_src_catalog_ts[&quot;src/catalog.ts&quot;]
   module_src_cli_index_ts[&quot;src/cli/index.ts&quot;]
   module_src_cli_standalone_ts[&quot;src/cli/standalone.ts&quot;]
@@ -3810,6 +3846,8 @@ graph LR
   export_assertTemplateManifestReady[&quot;assertTemplateManifestReady&quot;]
   module_src_authoring_compose_category_manifest_ts --&gt; export_assertTemplateManifestReady
   export_assertTemplateManifestReady -.-&gt; export_CategoryAppManifestComposition
+  export_CAPABILITIES[&quot;CAPABILITIES&quot;]
+  module_src_capabilities_index_ts --&gt; export_CAPABILITIES
   export_CATEGORY_PRESET_RECONCILIATION[&quot;CATEGORY_PRESET_RECONCILIATION&quot;]
   module_src_presets_category_presets_ts --&gt; export_CATEGORY_PRESET_RECONCILIATION
   export_CATEGORY_PRESETS[&quot;CATEGORY_PRESETS&quot;]

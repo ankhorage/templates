@@ -22,13 +22,13 @@ Source: `src/design/tone-catalog.ts:24:1`
 
 Kind: `value`
 Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:93:22`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:50:22`
 
 ## AppCategory
 
 Kind: `unknown`
 Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:94:1`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:51:1`
 
 ## assertTemplateManifestReady
 
@@ -43,6 +43,12 @@ Fail catalog registration or release finalization while any blocker remains.
 - `(composition: CategoryAppManifestComposition) => AppManifest`
   - composition: `CategoryAppManifestComposition`
   - returns: `AppManifest`
+
+## CAPABILITIES
+
+Kind: `value`
+Module: `src/capabilities/index.ts`
+Source: `src/capabilities/index.ts:3:14`
 
 ## CATEGORY_PRESET_RECONCILIATION
 
@@ -441,13 +447,13 @@ Resolve a reviewed tone pair or report that the identifier is not canonical.
 
 Kind: `unknown`
 Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:172:1`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:129:1`
 
 ## SplashScreenSpec
 
 Kind: `type`
 Module: `node_modules/@ankhorage/contracts/dist/types.d.ts`
-Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:177:1`
+Source: `node_modules/@ankhorage/contracts/dist/types.d.ts:134:1`
 
 ### Members
 

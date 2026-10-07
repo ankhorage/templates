@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.128
+
+### Patch Changes
+
+- Update the Ankhorage capability toolchain and migrate Templates metadata to canonical capability descriptors.
+
 ## 12.0.127
 
 ### Patch Changes

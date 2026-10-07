@@ -4,6 +4,7 @@ graph LR
   module_src_authoring_compose_category_manifest_ts["src/authoring/compose-category-manifest.ts"]
   module_src_authoring_create_manifest_shell_ts["src/authoring/create-manifest-shell.ts"]
   module_src_authoring_splash_screen_ts["src/authoring/splash-screen.ts"]
+  module_src_capabilities_index_ts["src/capabilities/index.ts"]
   module_src_catalog_ts["src/catalog.ts"]
   module_src_cli_index_ts["src/cli/index.ts"]
   module_src_cli_standalone_ts["src/cli/standalone.ts"]
@@ -38,6 +39,8 @@ graph LR
   export_assertTemplateManifestReady["assertTemplateManifestReady"]
   module_src_authoring_compose_category_manifest_ts --> export_assertTemplateManifestReady
   export_assertTemplateManifestReady -.-> export_CategoryAppManifestComposition
+  export_CAPABILITIES["CAPABILITIES"]
+  module_src_capabilities_index_ts --> export_CAPABILITIES
   export_CATEGORY_PRESET_RECONCILIATION["CATEGORY_PRESET_RECONCILIATION"]
   module_src_presets_category_presets_ts --> export_CATEGORY_PRESET_RECONCILIATION
   export_CATEGORY_PRESETS["CATEGORY_PRESETS"]

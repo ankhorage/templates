@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.0.127",
+      "value": "v12.0.128",
       "color": "cb3837"
     },
     {
@@ -115,6 +115,12 @@
       "isEntrypoint": false,
       "dependencies": [],
       "exports": ["AppManifestWithSplashScreen", "createSplashScreen"]
+    },
+    {
+      "path": "src/capabilities/index.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["CAPABILITIES"]
     },
     {
       "path": "src/catalog.ts",
@@ -242,6 +248,7 @@
         "APP_CATEGORIES",
         "AppCategory",
         "assertTemplateManifestReady",
+        "CAPABILITIES",
         "CATEGORY_PRESET_RECONCILIATION",
         "CATEGORY_PRESETS",
         "CategoryAppManifestComposition",
@@ -303,7 +310,7 @@
     {
       "path": "src/packageMetadata.ts",
       "isEntrypoint": false,
-      "dependencies": ["package.json"],
+      "dependencies": ["package.json", "src/capabilities/index.ts"],
       "exports": [
         "TEMPLATES_CAPABILITIES",
         "TEMPLATES_COMMAND_CATEGORY",
@@ -474,7 +481,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 93,
+        "line": 50,
         "column": 22
       },
       "exportPaths": ["src/index.ts"],
@@ -492,7 +499,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 94,
+        "line": 51,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -530,6 +537,24 @@
           "returnDescription": null
         }
       ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "CAPABILITIES",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "value",
+      "modulePath": "src/capabilities/index.ts",
+      "sourceLocation": {
+        "filePath": "src/capabilities/index.ts",
+        "line": 3,
+        "column": 14
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
       "members": [],
       "structuredRows": []
     },
@@ -1822,7 +1847,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 172,
+        "line": 129,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -1840,7 +1865,7 @@
       "modulePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
       "sourceLocation": {
         "filePath": "node_modules/@ankhorage/contracts/dist/types.d.ts",
-        "line": 177,
+        "line": 134,
         "column": 1
       },
       "exportPaths": ["src/index.ts"],
@@ -3417,6 +3442,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/capabilities/index.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/design/category-types.ts",
         "sourcePath": "src/index.ts"
       },
@@ -3448,6 +3478,11 @@
       {
         "fromPath": "src/packageMetadata.ts",
         "toPath": "package.json",
+        "sourcePath": "src/packageMetadata.ts"
+      },
+      {
+        "fromPath": "src/packageMetadata.ts",
+        "toPath": "src/capabilities/index.ts",
         "sourcePath": "src/packageMetadata.ts"
       },
       {
