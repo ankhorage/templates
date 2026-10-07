@@ -10,8 +10,27 @@ describe('package metadata', () => {
     const expectedAnkhMetadata = {
       category: 'templates',
       provider: './dist/cli/index.js',
-      capabilities: ['templates.list', 'templates.inspect', 'templates.create'],
-    } as const satisfies AnkhPackageMetadata;
+      capabilities: [
+        {
+          id: 'templates.list',
+          owner: '@ankhorage/templates',
+          access: ['invoke'],
+          binding: { kind: 'action', bindableAs: ['target'] },
+        },
+        {
+          id: 'templates.inspect',
+          owner: '@ankhorage/templates',
+          access: ['invoke'],
+          binding: { kind: 'action', bindableAs: ['target'] },
+        },
+        {
+          id: 'templates.create',
+          owner: '@ankhorage/templates',
+          access: ['invoke'],
+          binding: { kind: 'action', bindableAs: ['target'] },
+        },
+      ],
+    } satisfies AnkhPackageMetadata;
 
     expect(packageJson.name).toBe('@ankhorage/templates');
     expect(packageJson.type).toBe('module');
