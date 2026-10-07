@@ -30,7 +30,7 @@ describe('package metadata', () => {
           binding: { kind: 'action', bindableAs: ['target'] },
         },
       ],
-    } as const satisfies AnkhPackageMetadata;
+    } satisfies AnkhPackageMetadata;
 
     expect(packageJson.name).toBe('@ankhorage/templates');
     expect(packageJson.type).toBe('module');
