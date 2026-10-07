@@ -1,3 +1,4 @@
+export { CAPABILITIES } from './capabilities/index.js';
 export {
   assertTemplateManifestReady,
   type CategoryAppManifestComposition,

@@ -133,7 +133,7 @@ function createRuntimeCommandDescriptors() {
 function createExecutionRequest(args: {
   readonly argv: readonly string[];
   readonly category: string;
-  readonly capability: (typeof TEMPLATES_CAPABILITIES)[number];
+  readonly capability: (typeof TEMPLATES_CAPABILITIES)[number]['id'];
   readonly context: AnkhCommandExecutionContext;
   readonly path: readonly [string];
   readonly providerId: string;

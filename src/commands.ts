@@ -1,5 +1,5 @@
 import type { AppCategory } from '@ankhorage/contracts';
-import type { AnkhCapabilityId } from '@ankhorage/contracts/cli';
+import type { Capability } from '@ankhorage/contracts/capabilities';
 
 import {
   createTemplateArtifactForSelector,
@@ -40,7 +40,7 @@ type TemplatesCommandImplementation = (
 ) => Promise<TemplatesCommandRunResult>;
 
 export interface TemplatesCommandDefinition {
-  readonly capability: AnkhCapabilityId;
+  readonly capability: Capability['id'];
   readonly path: readonly [TemplatesCommandName];
   readonly standaloneName: TemplatesCommandName;
   readonly summary: string;
@@ -73,10 +73,10 @@ export type RunTemplatesCommandImpl = (
 ) => Promise<TemplatesCommandRunResult>;
 
 const COMMAND_CAPABILITIES = {
-  list: TEMPLATES_CAPABILITIES[0],
-  inspect: TEMPLATES_CAPABILITIES[1],
-  create: TEMPLATES_CAPABILITIES[2],
-} as const satisfies Record<TemplatesCommandName, AnkhCapabilityId>;
+  list: TEMPLATES_CAPABILITIES[0].id,
+  inspect: TEMPLATES_CAPABILITIES[1].id,
+  create: TEMPLATES_CAPABILITIES[2].id,
+} as const satisfies Record<TemplatesCommandName, Capability['id']>;
 
 export const TEMPLATES_COMMANDS = [
   {

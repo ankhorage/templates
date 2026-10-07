@@ -43,7 +43,11 @@
       "types": "./dist/cli/index.d.ts",
       "import": "./dist/cli/index.js"
     },
-    "./package.json": "./package.json"
+    "./package.json": "./package.json",
+    "./capabilities": {
+      "types": "./dist/capabilities/index.d.ts",
+      "import": "./dist/capabilities/index.js"
+    }
   },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -55,9 +59,45 @@
     "category": "templates",
     "provider": "./dist/cli/index.js",
     "capabilities": [
-      "templates.list",
-      "templates.inspect",
-      "templates.create"
+      {
+        "id": "templates.list",
+        "owner": "@ankhorage/templates",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        }
+      },
+      {
+        "id": "templates.inspect",
+        "owner": "@ankhorage/templates",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        }
+      },
+      {
+        "id": "templates.create",
+        "owner": "@ankhorage/templates",
+        "access": [
+          "invoke"
+        ],
+        "binding": {
+          "kind": "action",
+          "bindableAs": [
+            "target"
+          ]
+        }
+      }
     ]
   },
   "scripts": {
@@ -84,8 +124,8 @@
     "@ankhorage/zora": "^23.3.0"
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.11.1",
-    "@ankhorage/devtools": "^2.1.18",
+    "@ankhorage/ankh": "^0.12.0",
+    "@ankhorage/devtools": "^2.1.19",
     "@ankhorage/doctor": "^0.13.1",
     "@ankhorage/paradox": "^0.2.28",
     "@types/bun": "^1.4.2",
