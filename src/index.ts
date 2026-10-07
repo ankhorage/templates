@@ -1,4 +1,3 @@
-export { CAPABILITIES } from './capabilities/index.js';
 export {
   assertTemplateManifestReady,
   type CategoryAppManifestComposition,
@@ -10,6 +9,7 @@ export {
   type TemplateCompositionStatus,
   validateTemplateManifest,
 } from './authoring/compose-category-manifest';
+export { CAPABILITIES } from './capabilities/index.js';
 export {
   DESIGN_DENSITIES,
   DESIGN_SHAPES,
