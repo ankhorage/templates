@@ -1,5 +1,5 @@
 import type { AppCategory } from '@ankhorage/contracts';
-import type { Capability } from '@ankhorage/contracts/capabilities';
+import type { Capability } from '@ankhorage/contracts/capability';
 
 import {
   createTemplateArtifactForSelector,

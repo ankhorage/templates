@@ -1,7 +1,9 @@
+import { parseCapabilityCatalog } from '@ankhorage/capability';
 import type { AnkhPackageMetadata } from '@ankhorage/contracts/cli';
 import { describe, expect, test } from 'bun:test';
 
 import packageJson from '../package.json';
+import { CAPABILITIES } from '../src/capabilities/index.js';
 
 const CARET_SEMVER_RANGE = /^\^\d+\.\d+\.\d+$/u;
 
@@ -48,6 +50,11 @@ describe('package metadata', () => {
       capabilities: [...expectedAnkhMetadata.capabilities],
     });
     expect(packageJson.dependencies['@ankhorage/contracts']).toMatch(CARET_SEMVER_RANGE);
+    expect(packageJson.dependencies['@ankhorage/capability']).toMatch(CARET_SEMVER_RANGE);
     expect(packageJson.dependencies['@ankhorage/navigator']).toMatch(CARET_SEMVER_RANGE);
+  });
+
+  test('publishes a canonical capability catalog', () => {
+    expect(parseCapabilityCatalog(CAPABILITIES)).toEqual(CAPABILITIES);
   });
 });
