@@ -122,13 +122,13 @@
     "@ankhorage/color-theory": "^0.3.1",
     "@ankhorage/contracts": "^25.1.0",
     "@ankhorage/navigator": "^3.5.2",
-    "@ankhorage/zora": "^24.1.2"
+    "@ankhorage/zora": "^25.2.1"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.0",
     "@ankhorage/devtools": "^2.3.9",
-    "@ankhorage/doctor": "^0.14.5",
-    "@ankhorage/paradox": "^0.3.1",
+    "@ankhorage/doctor": "^0.14.10",
+    "@ankhorage/paradox": "^0.3.3",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.5",
     "typescript": "^6.0.3"
