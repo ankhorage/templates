@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.0
+
+### Minor Changes
+
+- 720fbb4: Migrate authored template manifests to the Contracts 26 capability binding model.
+
 ## 12.0.148
 
 ### Patch Changes

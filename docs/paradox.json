@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.0.148",
+      "value": "v12.1.0",
       "color": "cb3837"
     },
     {
@@ -3182,7 +3182,7 @@
       "description": "Create SharkPrey's portable ZORA screen composition with owner-validated navigation.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 10,
+        "line": 12,
         "column": 1
       }
     },
@@ -3191,7 +3191,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 21,
+        "line": 23,
         "column": 1
       }
     },
@@ -3200,7 +3200,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 63,
+        "line": 53,
         "column": 1
       }
     },
@@ -3209,7 +3209,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 86,
+        "line": 73,
         "column": 1
       }
     },
@@ -3218,7 +3218,34 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 99,
+        "line": 88,
+        "column": 1
+      }
+    },
+    {
+      "name": "apiResult",
+      "description": "Reference a named result from a canonical Poker Training API capability.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 132,
+        "column": 1
+      }
+    },
+    {
+      "name": "fallback",
+      "description": "Supply a portable fallback expression when a binding has no readable value.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 142,
+        "column": 1
+      }
+    },
+    {
+      "name": "transform",
+      "description": "Apply optional portable transforms without altering the referenced capability.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 147,
         "column": 1
       }
     },
@@ -4322,9 +4349,63 @@
         "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
       },
       {
+        "fromSymbol": "createAnswerNavigationBinding",
+        "toSymbol": "apiResult",
+        "callExpression": "apiResult",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "createOperationTextBinding",
+        "toSymbol": "fallback",
+        "callExpression": "fallback",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "createOperationTextBinding",
+        "toSymbol": "transform",
+        "callExpression": "transform",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "createOperationTextBinding",
+        "toSymbol": "apiResult",
+        "callExpression": "apiResult",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "createRouteTextBinding",
+        "toSymbol": "fallback",
+        "callExpression": "fallback",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "createTrainingDifficultyBinding",
+        "toSymbol": "apiResult",
+        "callExpression": "apiResult",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
         "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "toSymbol": "createTrainingDifficultyBinding",
         "callExpression": "createTrainingDifficultyBinding",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "fallback",
+        "callExpression": "fallback",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "apiResult",
+        "callExpression": "apiResult",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "transform",
+        "callExpression": "transform",
         "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
       },
       {
