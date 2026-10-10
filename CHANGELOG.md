@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.144
+
+### Patch Changes
+
+- 98d2791: Migrate capability catalog and command identity types to the current Capability APIs.
+
 ## 12.0.143
 
 ### Patch Changes
