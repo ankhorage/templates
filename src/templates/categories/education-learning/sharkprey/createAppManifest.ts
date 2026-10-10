@@ -1,5 +1,7 @@
 import type {
   AppManifest,
+  BindingCapabilityReference,
+  BindingExpression,
   BindingValueTransform,
   ComponentDataBinding,
   EventBinding,
@@ -19,43 +21,31 @@ export default function createAppManifest(): AppManifest {
 }
 
 function createAnswerNavigationBinding(correct: boolean, verdict: string): EventBinding {
-  const answerOperation = {
-    apiId: 'poker-training',
-    endpointId: 'tasks',
-    operationId: 'checkPokerTrainingTaskAnswer',
-  } as const;
-
   return {
-    target: { kind: 'action', type: 'navigate' },
-    when: {
-      source: { kind: 'operation', operation: answerOperation, path: 'correct' },
-      operator: 'eq',
-      value: correct,
-    },
-    input: {
-      route: { kind: 'literal', value: '/answer-explanation' },
-      params: {
-        kind: 'object',
-        fields: {
-          taskId: {
-            kind: 'source',
-            source: { kind: 'operation', operation: answerOperation, path: 'taskId' },
+    target: {
+      capability: 'navigator.navigate',
+      input: {
+        route: { kind: 'literal', value: '/answer-explanation' },
+        params: {
+          kind: 'object',
+          fields: {
+            taskId: apiResult('checkPokerTrainingTaskAnswer', 'answer', 'taskId'),
+            selectedOptionLabel: { capability: 'context.route', path: 'option.label' },
+            correctOptionValue: apiResult(
+              'checkPokerTrainingTaskAnswer',
+              'answer',
+              'correctOptionValue',
+            ),
+            explanation: apiResult('checkPokerTrainingTaskAnswer', 'answer', 'explanation'),
+            verdict: { kind: 'literal', value: verdict },
           },
-          selectedOptionLabel: {
-            kind: 'source',
-            source: { kind: 'context', path: 'option.label' },
-          },
-          correctOptionValue: {
-            kind: 'source',
-            source: { kind: 'operation', operation: answerOperation, path: 'correctOptionValue' },
-          },
-          explanation: {
-            kind: 'source',
-            source: { kind: 'operation', operation: answerOperation, path: 'explanation' },
-          },
-          verdict: { kind: 'literal', value: verdict },
         },
       },
+    },
+    when: {
+      source: apiResult('checkPokerTrainingTaskAnswer', 'answer', 'correct'),
+      operator: 'eq',
+      value: { kind: 'literal', value: correct },
     },
   };
 }
@@ -71,13 +61,10 @@ function createOperationTextBinding(
     componentType: 'Text',
     props: {
       text: {
-        source: {
-          kind: 'operation',
-          operation: { apiId: 'poker-training', endpointId: 'tasks', operationId },
-          path,
-        },
-        fallback: { value: '' },
-        ...(transforms ? { transforms } : {}),
+        value: fallback(transform(apiResult(operationId, 'task', path), transforms), {
+          kind: 'literal',
+          value: '',
+        }),
       },
     },
   };
@@ -89,8 +76,10 @@ function createRouteTextBinding(componentId: string, path: string): ComponentDat
     componentType: 'Text',
     props: {
       text: {
-        source: { kind: 'context', path: `route.params.${path}` },
-        fallback: { value: '' },
+        value: fallback(
+          { capability: 'context.route', path: `params.${path}` },
+          { kind: 'literal', value: '' },
+        ),
       },
     },
   };
@@ -100,58 +89,66 @@ function createTrainingDifficultyBinding(
   componentId: string,
   difficulty: number,
 ): ComponentDataBinding {
-  const listOperation = {
-    apiId: 'poker-training',
-    endpointId: 'tasks',
-    operationId: 'listPokerTrainingTasks',
-  } as const;
-
   return {
     componentId,
     componentType: 'Button',
     events: {
       press: [
         {
-          target: { kind: 'operation', operation: listOperation },
-          input: {
-            gameCategory: {
-              kind: 'source',
-              source: { kind: 'context', path: 'route.params.gameCategory' },
+          target: {
+            capability: 'api.poker-training.listPokerTrainingTasks',
+            result: 'listedTask',
+            input: {
+              gameCategory: { capability: 'context.route', path: 'params.gameCategory' },
+              tableSize: { capability: 'context.route', path: 'params.tableSize' },
+              street: { capability: 'context.route', path: 'params.street' },
+              difficulty: { kind: 'literal', value: difficulty },
+              limit: { kind: 'literal', value: 1 },
             },
-            tableSize: {
-              kind: 'source',
-              source: { kind: 'context', path: 'route.params.tableSize' },
-            },
-            street: {
-              kind: 'source',
-              source: { kind: 'context', path: 'route.params.street' },
-            },
-            difficulty: { kind: 'literal', value: difficulty },
-            limit: { kind: 'literal', value: 1 },
           },
         },
         {
-          target: { kind: 'action', type: 'navigate' },
-          when: {
-            source: { kind: 'operation', operation: listOperation, path: '0.id' },
-            operator: 'exists',
-          },
-          input: {
-            route: { kind: 'literal', value: '/decision-table' },
-            params: {
-              kind: 'object',
-              fields: {
-                taskId: {
-                  kind: 'source',
-                  source: { kind: 'operation', operation: listOperation, path: '0.id' },
-                },
+          target: {
+            capability: 'navigator.navigate',
+            input: {
+              route: { kind: 'literal', value: '/decision-table' },
+              params: {
+                kind: 'object',
+                fields: { taskId: apiResult('listPokerTrainingTasks', 'listedTask', '0.id') },
               },
             },
+          },
+          when: {
+            source: apiResult('listPokerTrainingTasks', 'listedTask', '0.id'),
+            operator: 'exists',
           },
         },
       ],
     },
   };
+}
+
+/*** Reference a named result from a canonical Poker Training API capability. */
+function apiResult<OperationId extends string>(
+  operationId: OperationId,
+  result: string,
+  path?: string,
+): BindingCapabilityReference {
+  const capability: `api.poker-training.${OperationId}` = `api.poker-training.${operationId}`;
+  return path === undefined ? { capability, result } : { capability, result, path };
+}
+
+/*** Supply a portable fallback expression when a binding has no readable value. */
+function fallback(value: BindingExpression, fallbackValue: BindingExpression): BindingExpression {
+  return { kind: 'fallback' as const, value, fallback: fallbackValue };
+}
+
+/*** Apply optional portable transforms without altering the referenced capability. */
+function transform(
+  value: BindingExpression,
+  transforms?: readonly BindingValueTransform[],
+): BindingExpression {
+  return transforms ? { kind: 'transform' as const, value, transforms } : value;
 }
 
 const manifest: AppManifest = {
@@ -234,15 +231,14 @@ const manifest: AppManifest = {
       events: {
         valueChange: [
           {
-            target: { kind: 'action', type: 'navigate' },
-            input: {
-              route: { kind: 'literal', value: '/training-setup/table' },
-              params: {
-                kind: 'object',
-                fields: {
-                  gameCategory: {
-                    kind: 'source',
-                    source: { kind: 'event', path: 'payload.value' },
+            target: {
+              capability: 'navigator.navigate',
+              input: {
+                route: { kind: 'literal', value: '/training-setup/table' },
+                params: {
+                  kind: 'object',
+                  fields: {
+                    gameCategory: { capability: 'radioGroup.valueChange', path: 'payload.value' },
                   },
                 },
               },
@@ -257,19 +253,15 @@ const manifest: AppManifest = {
       events: {
         valueChange: [
           {
-            target: { kind: 'action', type: 'navigate' },
-            input: {
-              route: { kind: 'literal', value: '/training-setup/street' },
-              params: {
-                kind: 'object',
-                fields: {
-                  gameCategory: {
-                    kind: 'source',
-                    source: { kind: 'context', path: 'route.params.gameCategory' },
-                  },
-                  tableSize: {
-                    kind: 'source',
-                    source: { kind: 'event', path: 'payload.value' },
+            target: {
+              capability: 'navigator.navigate',
+              input: {
+                route: { kind: 'literal', value: '/training-setup/street' },
+                params: {
+                  kind: 'object',
+                  fields: {
+                    gameCategory: { capability: 'context.route', path: 'params.gameCategory' },
+                    tableSize: { capability: 'radioGroup.valueChange', path: 'payload.value' },
                   },
                 },
               },
@@ -284,23 +276,16 @@ const manifest: AppManifest = {
       events: {
         valueChange: [
           {
-            target: { kind: 'action', type: 'navigate' },
-            input: {
-              route: { kind: 'literal', value: '/training-setup/difficulty' },
-              params: {
-                kind: 'object',
-                fields: {
-                  gameCategory: {
-                    kind: 'source',
-                    source: { kind: 'context', path: 'route.params.gameCategory' },
-                  },
-                  tableSize: {
-                    kind: 'source',
-                    source: { kind: 'context', path: 'route.params.tableSize' },
-                  },
-                  street: {
-                    kind: 'source',
-                    source: { kind: 'event', path: 'payload.value' },
+            target: {
+              capability: 'navigator.navigate',
+              input: {
+                route: { kind: 'literal', value: '/training-setup/difficulty' },
+                params: {
+                  kind: 'object',
+                  fields: {
+                    gameCategory: { capability: 'context.route', path: 'params.gameCategory' },
+                    tableSize: { capability: 'context.route', path: 'params.tableSize' },
+                    street: { capability: 'radioGroup.valueChange', path: 'payload.value' },
                   },
                 },
               },
@@ -319,29 +304,23 @@ const manifest: AppManifest = {
       componentType: 'PokerTrainingTable',
       props: {
         task: {
-          source: {
-            kind: 'operation',
-            operation: {
-              apiId: 'poker-training',
-              endpointId: 'tasks',
-              operationId: 'getPokerTrainingTaskById',
-            },
-            path: 'task',
-          },
-          fallback: { value: {} },
+          value: fallback(apiResult('getPokerTrainingTaskById', 'task', 'task'), {
+            kind: 'literal',
+            value: {},
+          }),
           loading: {
             state: 'loading',
-            fallback: { value: {} },
+            value: { kind: 'literal', value: {} },
             message: 'Loading training task.',
           },
           empty: {
             state: 'empty',
-            fallback: { value: {} },
+            value: { kind: 'literal', value: {} },
             message: 'No published training task is available.',
           },
           error: {
             state: 'error',
-            fallback: { value: {} },
+            value: { kind: 'literal', value: {} },
             message: 'The training task could not be loaded.',
           },
         },
@@ -352,27 +331,21 @@ const manifest: AppManifest = {
       componentType: 'Heading',
       props: {
         text: {
-          source: {
-            kind: 'operation',
-            operation: {
-              apiId: 'poker-training',
-              endpointId: 'tasks',
-              operationId: 'getPokerTrainingTaskById',
-            },
-            path: 'task.prompt',
-          },
-          fallback: { value: 'No task loaded.' },
+          value: fallback(apiResult('getPokerTrainingTaskById', 'task', 'task.prompt'), {
+            kind: 'literal',
+            value: 'No task loaded.',
+          }),
           loading: {
             state: 'loading',
-            fallback: { value: 'Loading training task…' },
+            value: { kind: 'literal', value: 'Loading training task…' },
           },
           empty: {
             state: 'empty',
-            fallback: { value: 'No published training task is available.' },
+            value: { kind: 'literal', value: 'No published training task is available.' },
           },
           error: {
             state: 'error',
-            fallback: { value: 'The training task could not be loaded.' },
+            value: { kind: 'literal', value: 'The training task could not be loaded.' },
           },
         },
       },
@@ -382,16 +355,10 @@ const manifest: AppManifest = {
       componentType: 'Text',
       props: {
         text: {
-          source: {
-            kind: 'operation',
-            operation: {
-              apiId: 'poker-training',
-              endpointId: 'tasks',
-              operationId: 'getPokerTrainingTaskById',
-            },
-            path: 'task.historyText',
-          },
-          fallback: { value: '' },
+          value: fallback(apiResult('getPokerTrainingTaskById', 'task', 'task.historyText'), {
+            kind: 'literal',
+            value: '',
+          }),
         },
       },
     },
@@ -400,17 +367,10 @@ const manifest: AppManifest = {
       componentType: 'Text',
       props: {
         text: {
-          source: {
-            kind: 'operation',
-            operation: {
-              apiId: 'poker-training',
-              endpointId: 'tasks',
-              operationId: 'getPokerTrainingTaskById',
-            },
-            path: 'task.street',
-          },
-          fallback: { value: '' },
-          transforms: ['uppercase'],
+          value: fallback(
+            transform(apiResult('getPokerTrainingTaskById', 'task', 'task.street'), ['uppercase']),
+            { kind: 'literal', value: '' },
+          ),
         },
       },
     },
@@ -419,37 +379,21 @@ const manifest: AppManifest = {
       componentType: 'Button',
       props: {
         children: {
-          source: { kind: 'context', path: 'option.label' },
-          fallback: { value: 'Choose answer' },
+          value: fallback(
+            { capability: 'context.route', path: 'option.label' },
+            { kind: 'literal', value: 'Choose answer' },
+          ),
         },
       },
       events: {
         press: [
           {
             target: {
-              kind: 'operation',
-              operation: {
-                apiId: 'poker-training',
-                endpointId: 'tasks',
-                operationId: 'checkPokerTrainingTaskAnswer',
-              },
-            },
-            input: {
-              taskId: {
-                kind: 'source',
-                source: {
-                  kind: 'operation',
-                  operation: {
-                    apiId: 'poker-training',
-                    endpointId: 'tasks',
-                    operationId: 'getPokerTrainingTaskById',
-                  },
-                  path: 'task.id',
-                },
-              },
-              selectedOptionValue: {
-                kind: 'source',
-                source: { kind: 'context', path: 'option.value' },
+              capability: 'api.poker-training.checkPokerTrainingTaskAnswer',
+              result: 'answer',
+              input: {
+                taskId: apiResult('getPokerTrainingTaskById', 'task', 'task.id'),
+                selectedOptionValue: { capability: 'context.route', path: 'option.value' },
               },
             },
           },
@@ -463,29 +407,23 @@ const manifest: AppManifest = {
       componentType: 'PokerTrainingTable',
       props: {
         task: {
-          source: {
-            kind: 'operation',
-            operation: {
-              apiId: 'poker-training',
-              endpointId: 'tasks',
-              operationId: 'getPokerTrainingTaskById',
-            },
-            path: 'task',
-          },
-          fallback: { value: {} },
+          value: fallback(apiResult('getPokerTrainingTaskById', 'task', 'task'), {
+            kind: 'literal',
+            value: {},
+          }),
           loading: {
             state: 'loading',
-            fallback: { value: {} },
+            value: { kind: 'literal', value: {} },
             message: 'Loading reviewed hand.',
           },
           empty: {
             state: 'empty',
-            fallback: { value: {} },
+            value: { kind: 'literal', value: {} },
             message: 'The reviewed hand is unavailable.',
           },
           error: {
             state: 'error',
-            fallback: { value: {} },
+            value: { kind: 'literal', value: {} },
             message: 'The reviewed hand could not be loaded.',
           },
         },
@@ -1322,17 +1260,10 @@ const manifest: AppManifest = {
       title: 'Your decision',
       dataLoaders: [
         {
-          kind: 'operation',
-          operation: {
-            apiId: 'poker-training',
-            endpointId: 'tasks',
-            operationId: 'getPokerTrainingTaskById',
-          },
+          capability: 'api.poker-training.getPokerTrainingTaskById',
+          result: 'task',
           input: {
-            taskId: {
-              kind: 'source',
-              source: { kind: 'context', path: 'route.params.taskId' },
-            },
+            taskId: { capability: 'context.route', path: 'params.taskId' },
           },
         },
       ],
@@ -1508,15 +1439,7 @@ const manifest: AppManifest = {
                   accessibilityLabel: 'Answer options',
                 },
                 repeat: {
-                  source: {
-                    kind: 'operation',
-                    operation: {
-                      apiId: 'poker-training',
-                      endpointId: 'tasks',
-                      operationId: 'getPokerTrainingTaskById',
-                    },
-                    path: 'options',
-                  },
+                  source: apiResult('getPokerTrainingTaskById', 'task', 'options'),
                   itemAlias: 'option',
                   keyPath: 'id',
                 },
@@ -1569,17 +1492,10 @@ const manifest: AppManifest = {
         'Reloads the reviewed task and renders the submitted answer outcome returned by the poker API.',
       dataLoaders: [
         {
-          kind: 'operation',
-          operation: {
-            apiId: 'poker-training',
-            endpointId: 'tasks',
-            operationId: 'getPokerTrainingTaskById',
-          },
+          capability: 'api.poker-training.getPokerTrainingTaskById',
+          result: 'task',
           input: {
-            taskId: {
-              kind: 'source',
-              source: { kind: 'context', path: 'route.params.taskId' },
-            },
+            taskId: { capability: 'context.route', path: 'params.taskId' },
           },
         },
       ],

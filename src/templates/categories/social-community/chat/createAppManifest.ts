@@ -597,14 +597,8 @@ const manifest: AppManifest = {
         press: [
           {
             target: {
-              kind: 'action',
-              type: 'navigate',
-            },
-            input: {
-              route: {
-                kind: 'literal',
-                value: '/chat-maya',
-              },
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/chat-maya' } },
             },
           },
         ],
@@ -617,14 +611,8 @@ const manifest: AppManifest = {
         press: [
           {
             target: {
-              kind: 'action',
-              type: 'navigate',
-            },
-            input: {
-              route: {
-                kind: 'literal',
-                value: '/chat-maya',
-              },
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/chat-maya' } },
             },
           },
         ],
@@ -637,14 +625,8 @@ const manifest: AppManifest = {
         press: [
           {
             target: {
-              kind: 'action',
-              type: 'navigate',
-            },
-            input: {
-              route: {
-                kind: 'literal',
-                value: '/chats',
-              },
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/chats' } },
             },
           },
         ],

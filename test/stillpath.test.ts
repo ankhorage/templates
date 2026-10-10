@@ -51,10 +51,10 @@ test('Stillpath keeps every bound navigation action within its four reviewed rou
   for (const binding of Object.values(manifest.dataBindings ?? {})) {
     for (const events of Object.values(binding.events ?? {})) {
       for (const event of events) {
-        if (event.target.kind !== 'action' || event.target.type !== 'navigate') continue;
-        const route = event.input?.route;
-        expect(route?.kind).toBe('literal');
-        if (route?.kind === 'literal') {
+        if (event.target.capability !== 'navigator.navigate') continue;
+        const route = event.target.input?.route;
+        expect(route && 'kind' in route ? route.kind : undefined).toBe('literal');
+        if (route && 'kind' in route && route.kind === 'literal') {
           expect(typeof route.value).toBe('string');
           if (typeof route.value === 'string') expect(routes.has(route.value)).toBe(true);
         }
