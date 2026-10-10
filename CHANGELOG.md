@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.0.148
+
+### Patch Changes
+
+- db358c4: Update dependencies: `@ankhorage/zora`.
+
 ## 12.0.147
 
 ### Patch Changes
