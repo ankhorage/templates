@@ -4258,14 +4258,8 @@ const manifest = {
         press: [
           {
             target: {
-              kind: 'action',
-              type: 'navigate',
-            },
-            input: {
-              route: {
-                kind: 'literal',
-                value: '/rituals',
-              },
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/rituals' } },
             },
           },
         ],
@@ -4278,14 +4272,8 @@ const manifest = {
         press: [
           {
             target: {
-              kind: 'action',
-              type: 'navigate',
-            },
-            input: {
-              route: {
-                kind: 'literal',
-                value: '/journal',
-              },
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/journal' } },
             },
           },
         ],
@@ -4298,14 +4286,8 @@ const manifest = {
         press: [
           {
             target: {
-              kind: 'action',
-              type: 'navigate',
-            },
-            input: {
-              route: {
-                kind: 'literal',
-                value: '/',
-              },
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/' } },
             },
           },
         ],
