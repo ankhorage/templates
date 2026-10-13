@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.2
+
+### Patch Changes
+
+- 6dccc00: Update dependencies: `@ankhorage/doctor`, `@ankhorage/zora`.
+
 ## 12.1.1
 
 ### Patch Changes
