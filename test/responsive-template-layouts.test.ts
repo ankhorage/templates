@@ -72,5 +72,14 @@ test('every published screen declares its deliberate content width', () => {
       chats: 'default',
       direct: 'default',
     },
+    'books_reading/reader': {
+      home: 'default',
+      library: 'default',
+      discover: 'default',
+      profile: 'default',
+      'book-details': 'default',
+      reader: 'wide',
+      settings: 'narrow',
+    },
   });
 });

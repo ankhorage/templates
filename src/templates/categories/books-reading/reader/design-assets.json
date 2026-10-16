@@ -1,0 +1,75 @@
+{
+  "assets": [
+    {
+      "mediaId": "my-tigers-cover",
+      "role": "image",
+      "sourcePath": "assets/images/my-tigers.png",
+      "targetPath": "assets/images/my-tigers.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/home/root/children/2/children/0/props/source",
+        "/screens/library/root/children/4/children/0/props/source",
+        "/screens/book-details/root/children/2/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "nav-home",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/home.svg",
+      "targetPath": "assets/images/svg/home.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/0/icon/source"]
+    },
+    {
+      "mediaId": "nav-library",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/library.svg",
+      "targetPath": "assets/images/svg/library.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/1/icon/source"]
+    },
+    {
+      "mediaId": "nav-discover",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/discover.svg",
+      "targetPath": "assets/images/svg/discover.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/2/icon/source"]
+    },
+    {
+      "mediaId": "nav-profile",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/profile.svg",
+      "targetPath": "assets/images/svg/profile.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/3/icon/source"]
+    }
+  ],
+  "screens": [
+    { "sourcePath": "assets/screens/01-home.png", "targetPath": "assets/screens/01-home.png" },
+    {
+      "sourcePath": "assets/screens/02-library.png",
+      "targetPath": "assets/screens/02-library.png"
+    },
+    {
+      "sourcePath": "assets/screens/03-reader-my-tigers.png",
+      "targetPath": "assets/screens/03-reader-my-tigers.png"
+    },
+    {
+      "sourcePath": "assets/screens/04-profile.png",
+      "targetPath": "assets/screens/04-profile.png"
+    },
+    {
+      "sourcePath": "assets/screens/05-settings.png",
+      "targetPath": "assets/screens/05-settings.png"
+    },
+    {
+      "sourcePath": "assets/screens/06-discover.png",
+      "targetPath": "assets/screens/06-discover.png"
+    },
+    {
+      "sourcePath": "assets/screens/07-book-details.png",
+      "targetPath": "assets/screens/07-book-details.png"
+    }
+  ]
+}
