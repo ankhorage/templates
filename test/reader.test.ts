@@ -1,8 +1,21 @@
+import { readdirSync } from 'node:fs';
+
 import { createNavigatorPlan } from '@ankhorage/navigator';
 import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 import { expect, test } from 'bun:test';
 
 import { resolveTemplate, validateTemplateManifest } from '../src/index';
+
+function hasMediaReference(value: unknown, mediaId: string): boolean {
+  if (typeof value !== 'object' || value === null || !('thumbnailUri' in value)) return false;
+  const { thumbnailUri } = value as { readonly thumbnailUri: unknown };
+  return (
+    typeof thumbnailUri === 'object' &&
+    thumbnailUri !== null &&
+    'mediaId' in thumbnailUri &&
+    thumbnailUri.mediaId === mediaId
+  );
+}
 
 test('Reader is a complete books-reading template with the released ebook reader requirement', () => {
   const manifest = resolveTemplate('books_reading', 'reader').createAppManifest();
@@ -46,7 +59,16 @@ test('Reader composes released explorer, rail, and filter contracts without plac
   expect(itemSchema.map(({ key }) => key)).toContain('name');
   expect(explorer).toMatchObject({
     type: 'MediaExplorer',
-    props: { items: [{ id: 'the-jungle-book', kind: 'image', name: 'The Jungle Book' }] },
+    props: {
+      items: [
+        {
+          id: 'the-jungle-book',
+          kind: 'image',
+          name: 'The Jungle Book',
+          thumbnailUri: { mediaId: 'the-jungle-book-cover' },
+        },
+      ],
+    },
   });
   expect(filter?.type).toBe('ChipGroup');
   expect(filter?.props?.disabled).toBe(true);
@@ -56,6 +78,41 @@ test('Reader composes released explorer, rail, and filter contracts without plac
     props: { itemSize: 'regular' },
     children: [expect.objectContaining({ type: 'MediaCard' })],
   });
+});
+
+test('Reader resolves the library cover through the canonical runtime media reference', () => {
+  const manifest = resolveTemplate('books_reading', 'reader').createAppManifest();
+  const explorer = manifest.screens.library?.root.children?.find(
+    ({ id }) => id === 'library-jungle-book',
+  );
+  const cover = manifest.media?.assets['the-jungle-book-cover'];
+  const items: unknown = explorer?.props?.items;
+  const normalizedItems: readonly unknown[] = Array.isArray(items) ? items : [];
+  const [item] = normalizedItems;
+
+  if (cover?.source.kind !== 'bundled') throw new Error('Reader cover must be bundled media.');
+  if (!hasMediaReference(item, cover.id)) {
+    throw new Error('Library Explorer item must reference the registered cover media.');
+  }
+
+  expect(cover.source.path).toBe('assets/images/the-jungle-book.png');
+});
+
+test('Reader retains its seven original design references separate from runtime assets', () => {
+  const screenReferences = readdirSync(
+    'src/templates/categories/books-reading/reader/assets/screens',
+    'utf8',
+  ).sort();
+
+  expect(screenReferences).toEqual([
+    '01-home.png',
+    '02-library.png',
+    '03-reader-my-tigers.png',
+    '04-profile.png',
+    '05-settings.png',
+    '06-discover.png',
+    '07-book-details.png',
+  ]);
 });
 
 test('Reader composes tabs through TabList and TabPanel children', () => {
@@ -86,6 +143,7 @@ test('Reader delegates navigation to released Navigator plans and does not claim
   expect(reader?.props?.page).toBeUndefined();
   expect(reader?.props?.pageCount).toBeUndefined();
   expect(reader?.props?.progress).toBeUndefined();
+  expect(manifest.dataBindings?.['reader-contents']).toBeUndefined();
   expect(
     createNavigatorPlan(manifest.navigator, {
       platform: 'web',
