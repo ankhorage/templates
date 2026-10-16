@@ -56,28 +56,6 @@ const bindings: ComponentDataBindingRegistry = {
   'book-continue': navigateBinding('book-continue', 'Button', '/reader'),
   'book-back': navigateBinding('book-back', 'IconButton', '/'),
   'settings-back': navigateBinding('settings-back', 'IconButton', '/profile'),
-  'reader-contents': {
-    componentId: 'reader-contents',
-    componentType: 'Reader',
-    events: {
-      openContents: [
-        {
-          target: {
-            capability: 'navigator.navigate',
-            input: { route: { kind: 'literal', value: '/book-details' } },
-          },
-        },
-      ],
-      openAppearance: [
-        {
-          target: {
-            capability: 'navigator.navigate',
-            input: { route: { kind: 'literal', value: '/settings' } },
-          },
-        },
-      ],
-    },
-  },
 };
 
 /*** Bind a metadata-backed component interaction to a canonical Navigator route. */
@@ -283,6 +261,7 @@ const manifest = {
                   id: 'the-jungle-book',
                   kind: 'image',
                   name: 'The Jungle Book',
+                  thumbnailUri: { mediaId: 'the-jungle-book-cover' },
                 },
               ],
             },
@@ -498,9 +477,6 @@ const manifest = {
               format: 'epub',
               title: 'The Jungle Book',
               subtitle: 'Rudyard Kipling',
-              contentsLabel: 'Contents',
-              appearanceLabel: 'Appearance',
-              highlightLabel: 'Highlight',
               showChrome: true,
               readerColorScheme: 'sepia',
               fontScale: 1,
