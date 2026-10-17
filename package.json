@@ -112,6 +112,7 @@
     "format:check": "ankhorage-prettier --check .",
     "typecheck": "bun run templates:catalog && bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
     "test": "bun test",
+    "test:packed-consumer": "bun run build && bun test ./test/packedConsumer.ts",
     "prepublishOnly": "bun run typecheck && bun run build && bun test",
     "version-packages": "ankhorage-changeset version",
     "knip:check": "ankhorage-knip",
@@ -122,7 +123,7 @@
     "@ankhorage/color-theory": "^0.3.1",
     "@ankhorage/contracts": "^26.0.0",
     "@ankhorage/navigator": "^3.5.4",
-    "@ankhorage/zora": "^25.8.7"
+    "@ankhorage/zora": "^25.8.11"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.1",
