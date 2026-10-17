@@ -74,10 +74,10 @@ function assertReaderManifestIsExposed(consumer: ReturnType<typeof createPackedC
       },
     },
   });
-  assertReaderNavigatorBindings(inspected.manifest);
+  assertBookDetailNavigatorBindings(inspected.manifest);
 }
 
-function assertReaderNavigatorBindings(manifest: unknown): void {
+function assertBookDetailNavigatorBindings(manifest: unknown): void {
   expect(manifest).toMatchObject({
     dataBindings: {
       'book-continue': {

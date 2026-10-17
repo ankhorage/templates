@@ -133,7 +133,7 @@ test('Reader composes tabs through TabList and TabPanel children', () => {
   expect(manifest.dataBindings?.['discover-recommendations']).toBeUndefined();
 });
 
-test('Reader delegates navigation to released Navigator plans and does not claim an EPUB locator', () => {
+test('Reader uses a release-valid Navigator plan and does not claim an EPUB locator', () => {
   const manifest = resolveTemplate('books_reading', 'reader').createAppManifest();
   const reader = manifest.screens.reader?.root.children?.[0];
 
@@ -144,6 +144,7 @@ test('Reader delegates navigation to released Navigator plans and does not claim
   expect(reader?.props?.pageCount).toBeUndefined();
   expect(reader?.props?.progress).toBeUndefined();
   expect(manifest.dataBindings?.['reader-contents']).toBeUndefined();
+  expect(manifest.dataBindings?.['reader-back']).toBeUndefined();
   expect(
     createNavigatorPlan(manifest.navigator, {
       platform: 'web',
