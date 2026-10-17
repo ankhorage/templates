@@ -125,7 +125,7 @@
     "@ankhorage/zora": "^25.8.10"
   },
   "devDependencies": {
-    "@ankhorage/ankh": "^0.13.1",
+    "@ankhorage/ankh": "^0.13.2",
     "@ankhorage/devtools": "^2.3.18",
     "@ankhorage/doctor": "^0.14.18",
     "@ankhorage/paradox": "^0.3.4",
