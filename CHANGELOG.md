@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.11
+
+### Patch Changes
+
+- 3de9633: Update dependencies: `@ankhorage/zora`.
+
 ## 12.1.10
 
 ### Patch Changes
