@@ -65,7 +65,7 @@
 
     "@ankhorage/rules-repository": ["@ankhorage/rules-repository@0.2.0", "", { "dependencies": { "@ankhorage/rules": "^0.2.0" } }, "sha512-ugJq6urUXGpexwcJAERSfauHJAUtWN2ZkogsAMYUX9dMCH8wXcQrdWOuYHjL5G7wB6f0IX2Ebjri7091AuF1XQ=="],
 
-    "@ankhorage/runtime": ["@ankhorage/runtime@5.0.2", "", { "dependencies": { "@ankhorage/capability": "^0.2.1", "@ankhorage/contracts": "^26.0.0", "@ankhorage/data-sources": "^2.1.1", "@ankhorage/utility": "^1.9.85" }, "peerDependencies": { "react": ">=19.2.0 <20", "react-native": ">=0.86.0 <0.88", "react-native-web": "~0.21.3" }, "optionalPeers": ["react-native-web"] }, "sha512-suX8HB08ou6T57fzerE5a6iUH904uriyvslDiAJPW/vUVfdcr3sz2NyWfPu6Jnq26bUO/pcU5W03RAXZ+BheLg=="],
+    "@ankhorage/runtime": ["@ankhorage/runtime@5.0.3", "", { "dependencies": { "@ankhorage/capability": "^0.2.2", "@ankhorage/contracts": "^26.0.0", "@ankhorage/data-sources": "^2.1.1", "@ankhorage/utility": "^1.9.85" }, "peerDependencies": { "react": ">=19.2.0 <20", "react-native": ">=0.86.0 <0.88", "react-native-web": "~0.21.3" }, "optionalPeers": ["react-native-web"] }, "sha512-7Hh9UfLowGNh9S/zE+Hh1InOSB1Wcv+8K9EBhSGRWQxhzZNKf3x2Zs7KUkqbndjdNcu1weu0HMHiEizAaOH2Ww=="],
 
     "@ankhorage/supabase-auth": ["@ankhorage/supabase-auth@1.2.44", "", { "dependencies": { "@ankhorage/contracts": "^25.2.0", "@noble/hashes": "2.4.0" } }, "sha512-Agps4eV8tJheskGIdmHlNbHveOaQHfuZlfWxkXOAwn3r97+KAECD37IT0PYvsTOh48WaaB3HAmp9VLiicYE8Lw=="],
 

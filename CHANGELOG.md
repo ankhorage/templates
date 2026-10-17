@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 12.1.7
+
+### Patch Changes
+
+- 701d9a0: Update dependencies: `@ankhorage/zora`.
+- 79e5899: Update dependencies: `@ankhorage/navigator`.
+
 ## 12.1.6
 
 ### Patch Changes
