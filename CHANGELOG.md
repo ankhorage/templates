@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.6
+
+### Patch Changes
+
+- 8a09aee: Update dependencies: `@ankhorage/capability`.
+
 ## 12.1.5
 
 ### Patch Changes
