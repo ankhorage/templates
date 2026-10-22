@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.20
+
+### Patch Changes
+
+- 2464dbf: Update dependencies: `@ankhorage/navigator`.
+
 ## 12.1.19
 
 ### Patch Changes
