@@ -5,6 +5,7 @@ import type {
   ScreenSpec,
   UiNode,
 } from '@ankhorage/contracts';
+import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 import { expect, test } from 'bun:test';
 
 import createAppManifest from '../src/templates/categories/education-learning/sharkprey/createAppManifest';
@@ -23,6 +24,43 @@ test('SharkPrey invokes Navigator through its canonical capability', () => {
       },
     },
   });
+});
+
+test('SharkPrey binds every Button navigation action through button.press', () => {
+  const manifest = createAppManifest();
+  const expectedRoutes = {
+    'onboarding-start': '/training-setup',
+    'onboarding-rules-link': '/learn',
+    'review-next': '/training-setup',
+    'summary-practice': '/training-setup',
+    'stats-practice': '/training-setup',
+  } as const;
+  const routes = new Set(collectNavigatorPaths(manifest.navigator));
+  const button = ZORA_COMPONENT_META.Button;
+  if (button === undefined) throw new Error('ZORA does not expose Button metadata.');
+  const buttonEvent = button.events?.press;
+
+  expect(buttonEvent?.eventType).toBe('button.press');
+  for (const [componentId, route] of Object.entries(expectedRoutes)) {
+    const binding = requireBinding(manifest, componentId);
+    const node = findManifestNode(manifest, componentId);
+    const [event] = requireEvents(binding, 'press');
+
+    expect(binding.componentType).toBe('Button');
+    expect(node.type).toBe('Button');
+    expect(node.props?.onPress).toBeUndefined();
+    expect(routes.has(route)).toBe(true);
+    expect(event?.target).toEqual({
+      capability: 'navigator.navigate',
+      input: { route: { kind: 'literal', value: route } },
+    });
+  }
+
+  for (const node of Object.values(manifest.screens).flatMap((screen) =>
+    collectNodes(screen.root),
+  )) {
+    if (node.type === 'Button') expect(node.props?.onPress).toBeUndefined();
+  }
 });
 
 test('SharkPrey loads API data through a capability invocation and named result slot', () => {
@@ -121,6 +159,27 @@ function findNode(root: UiNode, id: string): UiNode {
     nodes.push(...(node.children ?? []));
   }
   throw new Error(`Missing node ${id}.`);
+}
+
+function findManifestNode(manifest: AppManifest, id: string): UiNode {
+  for (const screen of Object.values(manifest.screens)) {
+    const node = collectNodes(screen.root).find((candidate) => candidate.id === id);
+    if (node) return node;
+  }
+  throw new Error(`Missing node ${id}.`);
+}
+
+function collectNodes(root: UiNode): readonly UiNode[] {
+  const nodes = [root];
+  for (const node of nodes) nodes.push(...(node.children ?? []));
+  return nodes;
+}
+
+function collectNavigatorPaths(navigator: AppManifest['navigator']): readonly string[] {
+  return navigator.routes.flatMap(({ path, navigator: nestedNavigator }) => [
+    ...(path === undefined ? [] : [path]),
+    ...(nestedNavigator === undefined ? [] : collectNavigatorPaths(nestedNavigator)),
+  ]);
 }
 
 function requireScreen(manifest: AppManifest, id: string): ScreenSpec {
