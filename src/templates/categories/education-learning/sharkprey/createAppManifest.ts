@@ -299,6 +299,76 @@ const manifest: AppManifest = {
     'setup-difficulty-3': createTrainingDifficultyBinding('setup-difficulty-3', 3),
     'setup-difficulty-4': createTrainingDifficultyBinding('setup-difficulty-4', 4),
     'setup-difficulty-5': createTrainingDifficultyBinding('setup-difficulty-5', 5),
+    'onboarding-start': {
+      componentId: 'onboarding-start',
+      componentType: 'Button',
+      events: {
+        press: [
+          {
+            target: {
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/training-setup' } },
+            },
+          },
+        ],
+      },
+    },
+    'onboarding-rules-link': {
+      componentId: 'onboarding-rules-link',
+      componentType: 'Button',
+      events: {
+        press: [
+          {
+            target: {
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/learn' } },
+            },
+          },
+        ],
+      },
+    },
+    'review-next': {
+      componentId: 'review-next',
+      componentType: 'Button',
+      events: {
+        press: [
+          {
+            target: {
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/training-setup' } },
+            },
+          },
+        ],
+      },
+    },
+    'summary-practice': {
+      componentId: 'summary-practice',
+      componentType: 'Button',
+      events: {
+        press: [
+          {
+            target: {
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/training-setup' } },
+            },
+          },
+        ],
+      },
+    },
+    'stats-practice': {
+      componentId: 'stats-practice',
+      componentType: 'Button',
+      events: {
+        press: [
+          {
+            target: {
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: '/training-setup' } },
+            },
+          },
+        ],
+      },
+    },
     'decision-poker-table': {
       componentId: 'decision-poker-table',
       componentType: 'PokerTrainingTable',
@@ -1011,12 +1081,6 @@ const manifest: AppManifest = {
                       color: 'secondary',
                       variant: 'ghost',
                       size: 'l',
-                      onPress: {
-                        type: 'navigate',
-                        payload: {
-                          route: '/learn',
-                        },
-                      },
                       fullWidth: true,
                     },
                     style: {
@@ -1043,12 +1107,6 @@ const manifest: AppManifest = {
                       color: 'secondary',
                       variant: 'solid',
                       size: 'l',
-                      onPress: {
-                        type: 'navigate',
-                        payload: {
-                          route: '/training-setup',
-                        },
-                      },
                       fullWidth: true,
                     },
                     style: {
@@ -1751,12 +1809,6 @@ const manifest: AppManifest = {
                       color: 'secondary',
                       variant: 'solid',
                       size: 'l',
-                      onPress: {
-                        type: 'navigate',
-                        payload: {
-                          route: '/training-setup',
-                        },
-                      },
                       fullWidth: true,
                     },
                     style: {
@@ -2157,12 +2209,6 @@ const manifest: AppManifest = {
                   color: 'secondary',
                   variant: 'solid',
                   size: 'l',
-                  onPress: {
-                    type: 'navigate',
-                    payload: {
-                      route: '/training-setup',
-                    },
-                  },
                   fullWidth: true,
                 },
                 style: {
@@ -3378,12 +3424,6 @@ const manifest: AppManifest = {
                   color: 'secondary',
                   variant: 'solid',
                   size: 'l',
-                  onPress: {
-                    type: 'navigate',
-                    payload: {
-                      route: '/training-setup',
-                    },
-                  },
                   fullWidth: true,
                 },
                 style: {
