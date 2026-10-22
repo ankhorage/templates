@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.19
+
+### Patch Changes
+
+- da4d366: Update dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`.
+
 ## 12.1.18
 
 ### Patch Changes
