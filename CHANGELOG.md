@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.1.22
+
+### Patch Changes
+
+- a9503cd: Fix SharkPrey Button navigation bindings.
+
 ## 12.1.21
 
 ### Patch Changes
