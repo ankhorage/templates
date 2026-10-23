@@ -1,8 +1,10 @@
-import { lstat, mkdir, readFile, realpath, stat, writeFile } from 'node:fs/promises';
+import { lstat, mkdir, readFile, realpath, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import type { AppCategory, AppManifest } from '@ankhorage/contracts';
+import { statPathExistsAsync } from '@ankhorage/utility/node/fs';
+import { isPathInsideResolved } from '@ankhorage/utility/node/path';
 
 import type { TemplateImageAsset } from './templates/catalog.js';
 
@@ -125,7 +127,7 @@ function createProjectSeedDependencies(
 ): ProjectSeedDependencies {
   return {
     mkdir: overrides.mkdir ?? mkdir,
-    pathExists: overrides.pathExists ?? pathExists,
+    pathExists: overrides.pathExists ?? statPathExistsAsync,
     readTemplateAsset: overrides.readTemplateAsset ?? readPackagedTemplateAsset,
     writeFile: overrides.writeFile ?? writeFile,
   };
@@ -144,29 +146,7 @@ async function readPackagedTemplateAsset(asset: TemplateImageAsset): Promise<Uin
 }
 
 function assertInside(parentPath: string, childPath: string, label: string): void {
-  const relativePath = path.relative(parentPath, childPath);
-  if (
-    relativePath === '' ||
-    relativePath === '..' ||
-    relativePath.startsWith(`..${path.sep}`) ||
-    path.isAbsolute(relativePath)
-  ) {
+  if (!isPathInsideResolved(parentPath, childPath)) {
     throw new Error(`${label} escapes its owner directory: ${childPath}`);
   }
-}
-
-async function pathExists(targetPath: string): Promise<boolean> {
-  try {
-    await stat(targetPath);
-    return true;
-  } catch (error) {
-    if (isNotFoundError(error)) {
-      return false;
-    }
-    throw error;
-  }
-}
-
-function isNotFoundError(error: unknown): error is NodeJS.ErrnoException {
-  return error instanceof Error && 'code' in error && error.code === 'ENOENT';
 }

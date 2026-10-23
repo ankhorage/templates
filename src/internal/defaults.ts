@@ -1,4 +1,9 @@
-import { type AppManifest, DEFAULT_AUTH_FLOW, type InfraManifest } from '@ankhorage/contracts';
+import {
+  type AppManifest,
+  type AuthFlowConfig,
+  DEFAULT_AUTH_FLOW,
+  type InfraManifest,
+} from '@ankhorage/contracts';
 
 export const DEFAULT_TEMPLATE_VERSION = '1.0.0';
 
@@ -47,3 +52,20 @@ export const BASE_SETTINGS: AppManifest['settings'] = {
     locales: ['en'],
   },
 };
+
+/*** Create the standard local infrastructure with intentional template-specific auth routes. */
+export function createLocalInfra(authFlow: Partial<AuthFlowConfig>): InfraManifest {
+  return {
+    ...structuredClone(BASE_INFRA),
+    environments: {
+      local: {
+        ...structuredClone(BASE_INFRA.environments.local),
+        auth: {
+          ...structuredClone(BASE_INFRA.environments.local.auth),
+          provider: 'supabase',
+          flow: { ...DEFAULT_AUTH_FLOW, ...authFlow },
+        },
+      },
+    },
+  };
+}

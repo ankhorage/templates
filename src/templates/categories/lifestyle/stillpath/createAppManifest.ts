@@ -1,5 +1,7 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
+import { createLocalInfra } from '../../../../internal/defaults';
+
 /*** Return the complete Stillpath design with responsive owner-backed navigation and bundled media. */
 export default function createAppManifest(): AppManifest {
   return structuredClone(manifest);
@@ -610,50 +612,7 @@ const manifest = {
       },
     },
   },
-  infra: {
-    environments: {
-      local: {
-        deployment: {
-          compute: { provider: 'local' },
-          runtime: { provider: 'minikube' },
-        },
-        database: {
-          provider: 'supabase',
-          tier: 'dev',
-        },
-        objectStorage: {
-          provider: 'supabase',
-          buckets: { media: true },
-        },
-        secretStore: {
-          provider: 'supabase-vault',
-        },
-        auth: {
-          provider: 'supabase',
-          scope: 'global',
-          flow: {
-            signInRoute: 'sign-in',
-            signUpRoute: 'sign-up',
-            signOutRoute: 'sign-out',
-            postSignInRoute: '/',
-            unauthorizedRoute: 'sign-in',
-          },
-          signIn: {
-            identifiers: ['email'],
-          },
-          signUp: {
-            requiredFields: ['email', 'password'],
-            optionalFields: ['firstName', 'lastName'],
-            signUpPolicy: 'autoSignIn',
-          },
-          profile: {
-            fields: ['email', 'firstName', 'lastName'],
-          },
-        },
-      },
-    },
-    modules: {},
-  },
+  infra: createLocalInfra({ postSignInRoute: '/' }),
   navigator: {
     type: 'tabs',
     implementation: 'headless',
