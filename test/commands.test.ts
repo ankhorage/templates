@@ -1,11 +1,11 @@
 import { describe, expect, mock, test } from 'bun:test';
 
-import type { CreateProjectSeedRequest } from '../src/projectSeed.js';
 import {
   findTemplatesCommandByStandaloneName,
   runTemplatesCommand,
   TEMPLATES_COMMANDS,
 } from '../src/commands.js';
+import type { CreateProjectSeedRequest } from '../src/projectSeed.js';
 import { createCapturedContext } from './testSupport.js';
 
 describe('templates commands', () => {
@@ -45,10 +45,10 @@ describe('templates commands', () => {
 
   test('creates project display names with every slug word capitalized', async () => {
     const capture = createCapturedContext();
-    const createProjectSeed = mock(async (request: CreateProjectSeedRequest) => {
+    const createProjectSeed = mock((request: CreateProjectSeedRequest) => {
       expect(request.metadata.displayName).toBe('Chess Trainer');
       expect(request.readmeText).toContain('# Chess Trainer');
-      return { projectPath: '/projects/chess-trainer', createdFiles: [] };
+      return Promise.resolve({ projectPath: '/projects/chess-trainer', createdFiles: [] });
     });
     const command = findTemplatesCommandByStandaloneName('create');
     if (command === null) throw new Error('Create command is unavailable.');
