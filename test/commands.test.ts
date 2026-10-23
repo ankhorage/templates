@@ -23,7 +23,7 @@ describe('templates commands', () => {
 
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toBe(
-      'Available templates:\n\n  books_reading/reader - Reeda\n  education_learning/sharkprey - SharkPrey\n  lifestyle/stillpath - Stillpath\n  social_community/chat - Close\n',
+      'Available templates:\n\n  books_reading/reader - Reeda\n  education_learning/sharkprey - SharkPrey\n  food_drink/nutriflow - NutriFlow\n  lifestyle/stillpath - Stillpath\n  social_community/chat - Close\n',
     );
   });
 

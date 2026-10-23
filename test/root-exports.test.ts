@@ -14,6 +14,15 @@ import {
   validateTemplateManifest,
 } from '../src/index';
 
+const catalogEntries = (templates: ReturnType<typeof listTemplates>) =>
+  templates.map(({ category, name, selector, slug, sourceRoot }) => ({
+    category,
+    name,
+    selector,
+    slug,
+    sourceRoot,
+  }));
+
 test('exposes authoring and standalone template APIs', () => {
   expect(Object.keys(CATEGORY_PRESETS)).toHaveLength(APP_CATEGORIES.length);
   expect(CATEGORY_PRESET_RECONCILIATION).toHaveLength(APP_CATEGORIES.length);
@@ -27,15 +36,7 @@ test('exposes authoring and standalone template APIs', () => {
 
 test('discovers each portable template from the canonical directory tree', () => {
   const templates = listTemplates();
-  expect(
-    templates.map(({ category, name, selector, slug, sourceRoot }) => ({
-      category,
-      name,
-      selector,
-      slug,
-      sourceRoot,
-    })),
-  ).toEqual([
+  expect(catalogEntries(templates)).toEqual([
     {
       category: 'books_reading',
       name: 'Reeda',
@@ -49,6 +50,13 @@ test('discovers each portable template from the canonical directory tree', () =>
       selector: 'education_learning/sharkprey',
       slug: 'sharkprey',
       sourceRoot: 'src/templates/categories/education-learning/sharkprey',
+    },
+    {
+      category: 'food_drink',
+      name: 'NutriFlow',
+      selector: 'food_drink/nutriflow',
+      slug: 'nutriflow',
+      sourceRoot: 'src/templates/categories/food-drink/nutriflow',
     },
     {
       category: 'lifestyle',

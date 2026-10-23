@@ -33,6 +33,53 @@ test('every published template plans navigation at every supported responsive si
   }
 });
 
+const expectedWidths = {
+  'education_learning/sharkprey': {
+    onboarding: 'narrow',
+    'training-setup': 'narrow',
+    'training-table-size': 'narrow',
+    'training-street': 'narrow',
+    'training-difficulty': 'narrow',
+    'decision-table': 'wide',
+    'answer-explanation': 'wide',
+    'hand-history': 'default',
+    stats: 'default',
+    learn: 'default',
+    settings: 'narrow',
+  },
+  'food_drink/nutriflow': {
+    home: 'default',
+    'log-meal': 'default',
+    recipes: 'default',
+    plan: 'default',
+    progress: 'default',
+    community: 'default',
+    profile: 'default',
+    'recipe-details': 'default',
+    settings: 'narrow',
+  },
+  'lifestyle/stillpath': {
+    'stillpath-home': 'default',
+    'stillpath-journal': 'default',
+    'stillpath-rituals': 'default',
+    'stillpath-profile': 'default',
+  },
+  'social_community/chat': {
+    friends: 'default',
+    chats: 'default',
+    direct: 'default',
+  },
+  'books_reading/reader': {
+    home: 'default',
+    library: 'default',
+    discover: 'default',
+    profile: 'default',
+    'book-details': 'default',
+    reader: 'wide',
+    settings: 'narrow',
+  },
+};
+
 test('every published screen declares its deliberate content width', () => {
   const widths = Object.fromEntries(
     listTemplates().map((template) => [
@@ -46,39 +93,5 @@ test('every published screen declares its deliberate content width', () => {
     ]),
   );
 
-  expect(widths).toEqual({
-    'education_learning/sharkprey': {
-      onboarding: 'narrow',
-      'training-setup': 'narrow',
-      'training-table-size': 'narrow',
-      'training-street': 'narrow',
-      'training-difficulty': 'narrow',
-      'decision-table': 'wide',
-      'answer-explanation': 'wide',
-      'hand-history': 'default',
-      stats: 'default',
-      learn: 'default',
-      settings: 'narrow',
-    },
-    'lifestyle/stillpath': {
-      'stillpath-home': 'default',
-      'stillpath-journal': 'default',
-      'stillpath-rituals': 'default',
-      'stillpath-profile': 'default',
-    },
-    'social_community/chat': {
-      friends: 'default',
-      chats: 'default',
-      direct: 'default',
-    },
-    'books_reading/reader': {
-      home: 'default',
-      library: 'default',
-      discover: 'default',
-      profile: 'default',
-      'book-details': 'default',
-      reader: 'wide',
-      settings: 'narrow',
-    },
-  });
+  expect(widths).toEqual(expectedWidths);
 });

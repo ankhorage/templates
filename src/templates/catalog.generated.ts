@@ -1,7 +1,8 @@
 import createAppManifest0 from './categories/books-reading/reader/createAppManifest';
 import createAppManifest1 from './categories/education-learning/sharkprey/createAppManifest';
-import createAppManifest2 from './categories/lifestyle/stillpath/createAppManifest';
-import createAppManifest3 from './categories/social-community/chat/createAppManifest';
+import createAppManifest2 from './categories/food-drink/nutriflow/createAppManifest';
+import createAppManifest3 from './categories/lifestyle/stillpath/createAppManifest';
+import createAppManifest4 from './categories/social-community/chat/createAppManifest';
 
 import type { TemplateDefinition } from './catalog';
 
@@ -19,15 +20,21 @@ export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = [
     createAppManifest: createAppManifest1,
   },
   {
+    category: 'food_drink',
+    slug: 'nutriflow',
+    sourceRoot: 'src/templates/categories/food-drink/nutriflow',
+    createAppManifest: createAppManifest2,
+  },
+  {
     category: 'lifestyle',
     slug: 'stillpath',
     sourceRoot: 'src/templates/categories/lifestyle/stillpath',
-    createAppManifest: createAppManifest2,
+    createAppManifest: createAppManifest3,
   },
   {
     category: 'social_community',
     slug: 'chat',
     sourceRoot: 'src/templates/categories/social-community/chat',
-    createAppManifest: createAppManifest3,
+    createAppManifest: createAppManifest4,
   },
 ];
