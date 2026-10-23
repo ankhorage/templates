@@ -39,6 +39,78 @@ function recipeImage(id: string, mediaId: string, alt: string): UiNode {
   };
 }
 
+/*** Create one deterministic local-food review before the portable meal-log confirmation. */
+function mealLogSummary(input: MealLogSummaryInput) {
+  return {
+    id: `log-${input.id}`,
+    name: `${input.title} serving`,
+    title: input.title,
+    description: `Local serving summary: ${input.serving}, ${input.energy}.`,
+    root: {
+      id: `log-${input.id}-root`,
+      type: 'Screen',
+      props: { width: 'default', scroll: true },
+      children: [
+        heading(`log-${input.id}-title`, input.title, 1),
+        recipeImage(`log-${input.id}-image`, input.mediaId, input.title),
+        {
+          id: `log-${input.id}-serving`,
+          type: 'MetricCard',
+          props: {
+            label: 'Serving',
+            value: input.serving,
+            description: `${input.energy} · local sample`,
+          },
+        },
+        copy(
+          `log-${input.id}-note`,
+          'This adds a deterministic local sample. Connect a meal service to persist personal entries.',
+        ),
+        action(input.actionId, 'Add sample meal'),
+      ],
+    },
+  };
+}
+
+type MealLogSummaryInput = {
+  readonly actionId: string;
+  readonly energy: string;
+  readonly id: string;
+  readonly mediaId: string;
+  readonly serving: string;
+  readonly title: string;
+};
+
+/*** Create one media-backed recipe detail screen for a specific local sample. */
+function recipeDetail(input: RecipeDetailInput) {
+  return {
+    id: `recipe-details-${input.id}`,
+    name: `${input.title} recipe details`,
+    title: input.title,
+    description: 'A local sample recipe detail.',
+    root: {
+      id: `recipe-details-${input.id}-root`,
+      type: 'Screen',
+      props: { width: 'default', scroll: true },
+      children: [
+        heading(`recipe-details-${input.id}-title`, input.title, 1),
+        recipeImage(`recipe-details-${input.id}-image`, input.mediaId, input.title),
+        copy(`recipe-details-${input.id}-meta`, input.meta),
+        copy(`recipe-details-${input.id}-copy`, input.copy),
+        action('recipe-add-plan', 'View meal plan'),
+      ],
+    },
+  };
+}
+
+type RecipeDetailInput = {
+  readonly copy: string;
+  readonly id: string;
+  readonly mediaId: string;
+  readonly meta: string;
+  readonly title: string;
+};
+
 /*** Bind a supported interactive component event to a canonical Navigator route. */
 function navigateBinding(
   componentId: string,
@@ -66,16 +138,28 @@ const bindings: ComponentDataBindingRegistry = {
   'home-log-meal': navigateBinding('home-log-meal', 'Button', '/log'),
   'home-plan': navigateBinding('home-plan', 'Button', '/plan'),
   'home-recipes': navigateBinding('home-recipes', 'MediaCard', '/recipes'),
-  'log-search-recipes': navigateBinding('log-search-recipes', 'Button', '/recipes'),
-  'log-manual-entry': navigateBinding('log-manual-entry', 'Button', '/recipes'),
-  'log-add-recent': navigateBinding('log-add-recent', 'Button', '/'),
-  'recipes-green-bowl': navigateBinding(
-    'recipes-green-bowl',
-    'MediaExplorer',
-    '/recipe-details',
-    'activate',
+  'log-search': navigateBinding('log-search', 'SearchInput', '/log/results', 'submit'),
+  'log-search-results': navigateBinding('log-search-results', 'Button', '/log/results'),
+  'log-manual-entry': navigateBinding('log-manual-entry', 'Button', '/log/results'),
+  'log-add-recent': navigateBinding('log-add-recent', 'Button', '/log/berry-oats'),
+  'log-result-berry-oats': navigateBinding('log-result-berry-oats', 'Button', '/log/berry-oats'),
+  'log-result-green-bowl': navigateBinding('log-result-green-bowl', 'Button', '/log/green-bowl'),
+  'log-result-lemon-salmon': navigateBinding(
+    'log-result-lemon-salmon',
+    'Button',
+    '/log/lemon-salmon',
   ),
-  'recipes-details': navigateBinding('recipes-details', 'Button', '/recipe-details'),
+  'log-add-berry-oats': navigateBinding('log-add-berry-oats', 'Button', '/log/added'),
+  'log-add-green-bowl': navigateBinding('log-add-green-bowl', 'Button', '/log/added'),
+  'log-add-lemon-salmon': navigateBinding('log-add-lemon-salmon', 'Button', '/log/added'),
+  'log-added-home': navigateBinding('log-added-home', 'Button', '/'),
+  'recipes-green-bowl': navigateBinding('recipes-green-bowl', 'MediaCard', '/recipes/green-bowl'),
+  'recipes-lemon-salmon': navigateBinding(
+    'recipes-lemon-salmon',
+    'MediaCard',
+    '/recipes/lemon-salmon',
+  ),
+  'recipes-berry-oats': navigateBinding('recipes-berry-oats', 'MediaCard', '/recipes/berry-oats'),
   'recipe-add-plan': navigateBinding('recipe-add-plan', 'Button', '/plan'),
   'plan-add-meal': navigateBinding('plan-add-meal', 'Button', '/recipes'),
   'progress-plan': navigateBinding('progress-plan', 'Button', '/plan'),
@@ -161,9 +245,28 @@ const manifest = {
           ],
         },
       },
+      { name: 'log-results', path: '/log/results', screenId: 'log-results' },
+      { name: 'log-berry-oats', path: '/log/berry-oats', screenId: 'log-berry-oats' },
+      { name: 'log-green-bowl', path: '/log/green-bowl', screenId: 'log-green-bowl' },
+      { name: 'log-lemon-salmon', path: '/log/lemon-salmon', screenId: 'log-lemon-salmon' },
+      { name: 'log-added', path: '/log/added', screenId: 'log-added' },
       { name: 'plan', path: '/plan', screenId: 'plan' },
       { name: 'community', path: '/community', screenId: 'community' },
-      { name: 'recipe-details', path: '/recipe-details', screenId: 'recipe-details' },
+      {
+        name: 'recipe-details-green-bowl',
+        path: '/recipes/green-bowl',
+        screenId: 'recipe-details-green-bowl',
+      },
+      {
+        name: 'recipe-details-lemon-salmon',
+        path: '/recipes/lemon-salmon',
+        screenId: 'recipe-details-lemon-salmon',
+      },
+      {
+        name: 'recipe-details-berry-oats',
+        path: '/recipes/berry-oats',
+        screenId: 'recipe-details-berry-oats',
+      },
       { name: 'settings', path: '/settings', screenId: 'settings' },
     ],
   },
@@ -293,13 +396,13 @@ const manifest = {
                   {
                     id: 'log-search',
                     type: 'SearchInput',
-                    props: { placeholder: 'Search local sample foods', disabled: true },
+                    props: { placeholder: 'Search local sample foods' },
                   },
                   copy(
                     'log-search-note',
-                    'Search is ready for a connected food source; this portable starter shows sample entries.',
+                    'Submit a search to browse the portable starter’s local sample foods.',
                   ),
-                  action('log-search-recipes', 'Browse sample recipes'),
+                  action('log-search-results', 'Browse sample foods'),
                 ],
               },
               {
@@ -314,12 +417,12 @@ const manifest = {
                       permissionStatus: 'unavailable',
                       title: 'Scanner unavailable',
                       description: 'This starter has no camera adapter configured.',
-                      overlayTitle: 'Use search instead',
+                      overlayTitle: 'Use local sample foods instead',
                       overlayDescription: 'Barcode scans need a host camera capability.',
-                      manualEntryLabel: 'Browse sample recipes',
+                      manualEntryLabel: 'Browse sample foods',
                     },
                   },
-                  action('log-manual-entry', 'Browse sample recipes'),
+                  action('log-manual-entry', 'Browse sample foods'),
                 ],
               },
               {
@@ -332,17 +435,105 @@ const manifest = {
                     type: 'Card',
                     props: {
                       title: 'Recent sample',
-                      description: 'Berry overnight oats · serving note saved locally',
+                      description: 'Berry overnight oats · 1 bowl · 320 kcal',
                     },
                     children: [
                       recipeImage('log-recent-image', 'berry-oats', 'Berry overnight oats'),
                     ],
                   },
-                  action('log-add-recent', 'View sample day'),
+                  action('log-add-recent', 'Review serving'),
                 ],
               },
             ],
           },
+        ],
+      },
+    },
+    'log-results': {
+      id: 'log-results',
+      name: 'Sample food results',
+      title: 'Sample food results',
+      description: 'Deterministic local foods for the portable starter.',
+      root: {
+        id: 'log-results-root',
+        type: 'Screen',
+        props: { width: 'default', scroll: true },
+        children: [
+          heading('log-results-title', 'Sample food results', 1),
+          copy(
+            'log-results-copy',
+            'These local samples keep the meal-log flow usable without a food service.',
+          ),
+          {
+            id: 'log-results-berry-oats-card',
+            type: 'Card',
+            props: { title: 'Berry overnight oats', description: '1 bowl · 320 kcal' },
+            children: [
+              recipeImage('log-results-berry-oats-image', 'berry-oats', 'Berry overnight oats'),
+              action('log-result-berry-oats', 'Choose serving'),
+            ],
+          },
+          {
+            id: 'log-results-green-bowl-card',
+            type: 'Card',
+            props: { title: 'Green grain bowl', description: '1 bowl · 480 kcal' },
+            children: [
+              recipeImage('log-results-green-bowl-image', 'green-bowl', 'Green grain bowl'),
+              action('log-result-green-bowl', 'Choose serving'),
+            ],
+          },
+          {
+            id: 'log-results-lemon-salmon-card',
+            type: 'Card',
+            props: { title: 'Lemon herb salmon', description: '1 plate · 540 kcal' },
+            children: [
+              recipeImage('log-results-lemon-salmon-image', 'lemon-salmon', 'Lemon herb salmon'),
+              action('log-result-lemon-salmon', 'Choose serving'),
+            ],
+          },
+        ],
+      },
+    },
+    'log-berry-oats': mealLogSummary({
+      id: 'berry-oats',
+      title: 'Berry overnight oats',
+      serving: '1 bowl',
+      energy: '320 kcal',
+      mediaId: 'berry-oats',
+      actionId: 'log-add-berry-oats',
+    }),
+    'log-green-bowl': mealLogSummary({
+      id: 'green-bowl',
+      title: 'Green grain bowl',
+      serving: '1 bowl',
+      energy: '480 kcal',
+      mediaId: 'green-bowl',
+      actionId: 'log-add-green-bowl',
+    }),
+    'log-lemon-salmon': mealLogSummary({
+      id: 'lemon-salmon',
+      title: 'Lemon herb salmon',
+      serving: '1 plate',
+      energy: '540 kcal',
+      mediaId: 'lemon-salmon',
+      actionId: 'log-add-lemon-salmon',
+    }),
+    'log-added': {
+      id: 'log-added',
+      name: 'Sample meal added',
+      title: 'Sample meal added',
+      description: 'A deterministic confirmation for the local meal-log flow.',
+      root: {
+        id: 'log-added-root',
+        type: 'Screen',
+        props: { width: 'narrow', scroll: true },
+        children: [
+          heading('log-added-title', 'Sample meal added', 1),
+          copy(
+            'log-added-copy',
+            'Your selected local sample is now reflected in this starter flow. Connect a meal service to persist personal entries.',
+          ),
+          action('log-added-home', 'View sample day'),
         ],
       },
     },
@@ -376,41 +567,33 @@ const manifest = {
           },
           {
             id: 'recipes-green-bowl',
-            type: 'MediaExplorer',
+            type: 'MediaCard',
             props: {
-              selectionMode: 'single',
-              tileSize: 148,
-              items: [
-                {
-                  id: 'green-bowl-recipe',
-                  kind: 'image',
-                  name: 'Green grain bowl',
-                  thumbnailUri: { mediaId: 'green-bowl' },
-                },
-                {
-                  id: 'salmon-recipe',
-                  kind: 'image',
-                  name: 'Lemon herb salmon',
-                  thumbnailUri: { mediaId: 'lemon-salmon' },
-                },
-                {
-                  id: 'oats-recipe',
-                  kind: 'image',
-                  name: 'Berry overnight oats',
-                  thumbnailUri: { mediaId: 'berry-oats' },
-                },
-              ],
-              emptyText: 'No local sample recipes match this filter.',
+              title: 'Green grain bowl',
+              description: '35 minutes · local sample recipe',
+              imageSource: { mediaId: 'green-bowl' },
+              imageLabel: 'Green grain bowl',
             },
           },
           {
-            id: 'recipes-featured',
-            type: 'Card',
-            props: { title: 'Green grain bowl', description: '35 minutes · local sample recipe' },
-            children: [
-              recipeImage('recipes-featured-image', 'green-bowl', 'Green grain bowl'),
-              action('recipes-details', 'View recipe'),
-            ],
+            id: 'recipes-lemon-salmon',
+            type: 'MediaCard',
+            props: {
+              title: 'Lemon herb salmon',
+              description: '30 minutes · local sample recipe',
+              imageSource: { mediaId: 'lemon-salmon' },
+              imageLabel: 'Lemon herb salmon',
+            },
+          },
+          {
+            id: 'recipes-berry-oats',
+            type: 'MediaCard',
+            props: {
+              title: 'Berry overnight oats',
+              description: '10 minutes · local sample recipe',
+              imageSource: { mediaId: 'berry-oats' },
+              imageLabel: 'Berry overnight oats',
+            },
           },
         ],
       },
@@ -672,27 +855,27 @@ const manifest = {
         ],
       },
     },
-    'recipe-details': {
-      id: 'recipe-details',
-      name: 'Recipe details',
+    'recipe-details-green-bowl': recipeDetail({
+      id: 'green-bowl',
       title: 'Green grain bowl',
-      description: 'A local sample recipe detail.',
-      root: {
-        id: 'recipe-details-root',
-        type: 'Screen',
-        props: { width: 'default', scroll: true },
-        children: [
-          heading('recipe-details-title', 'Green grain bowl', 1),
-          recipeImage('recipe-details-image', 'green-bowl', 'Green grain bowl'),
-          copy('recipe-details-meta', '35 minutes · local sample recipe'),
-          copy(
-            'recipe-details-copy',
-            'A flexible bowl with grains, greens, roasted vegetables, and a simple dressing.',
-          ),
-          action('recipe-add-plan', 'View meal plan'),
-        ],
-      },
-    },
+      mediaId: 'green-bowl',
+      meta: '35 minutes · local sample recipe',
+      copy: 'A flexible bowl with grains, greens, roasted vegetables, and a simple dressing.',
+    }),
+    'recipe-details-lemon-salmon': recipeDetail({
+      id: 'lemon-salmon',
+      title: 'Lemon herb salmon',
+      mediaId: 'lemon-salmon',
+      meta: '30 minutes · local sample recipe',
+      copy: 'A bright baked salmon plate with herbs, lemon, and seasonal vegetables.',
+    }),
+    'recipe-details-berry-oats': recipeDetail({
+      id: 'berry-oats',
+      title: 'Berry overnight oats',
+      mediaId: 'berry-oats',
+      meta: '10 minutes · local sample recipe',
+      copy: 'A make-ahead oat bowl with berries, yogurt, and a handful of seeds.',
+    }),
     settings: {
       id: 'settings',
       name: 'Settings',

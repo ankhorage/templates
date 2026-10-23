@@ -6,6 +6,41 @@ import { expect, test } from 'bun:test';
 
 import { createTemplateArtifact, resolveTemplate, validateTemplateManifest } from '../src/index';
 
+function assertLocalMealLogFlow() {
+  const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
+  const logChildren = manifest.screens['log-meal']?.root.children ?? [];
+  const logModes = logChildren.find(({ id }) => id === 'log-meal-modes');
+  const scannerPanel = logModes?.children?.find(({ id }) => id === 'log-scan-panel');
+  const scanner = scannerPanel?.children?.find(({ id }) => id === 'log-scanner');
+  const searchPanel = logModes?.children?.find(({ id }) => id === 'log-search-panel');
+  const search = searchPanel?.children?.find(({ id }) => id === 'log-search');
+
+  expect(ZORA_COMPONENT_META.BarcodeScannerView).toBeDefined();
+  expect(search).toMatchObject({ type: 'SearchInput' });
+  expect(search?.props?.disabled).toBeUndefined();
+  expect(manifest.dataBindings?.['log-search']).toMatchObject({
+    componentType: 'SearchInput',
+    events: { submit: [{ target: { input: { route: { value: '/log/results' } } } }] },
+  });
+  expect(scanner).toMatchObject({
+    type: 'BarcodeScannerView',
+    props: { permissionStatus: 'unavailable' },
+  });
+  assertLocalFoodResults();
+}
+
+function assertLocalFoodResults() {
+  const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
+  const results = manifest.screens['log-results']?.root.children ?? [];
+
+  expect(
+    results.filter(({ type }) => type === 'Card').map(({ props }) => props?.description),
+  ).toEqual(['1 bowl · 320 kcal', '1 bowl · 480 kcal', '1 plate · 540 kcal']);
+  expect(manifest.dataBindings?.['log-add-berry-oats']).toMatchObject({
+    events: { press: [{ target: { input: { route: { value: '/log/added' } } } }] },
+  });
+}
+
 test('NutriFlow is discovered as the portable food and drink template', () => {
   const template = resolveTemplate('food_drink', 'nutriflow');
 
@@ -16,18 +51,25 @@ test('NutriFlow is discovered as the portable food and drink template', () => {
   });
 });
 
-test('NutriFlow keeps its complete seven-screen nutrition flow release-valid', () => {
+test('NutriFlow keeps its complete local nutrition flow release-valid', () => {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
 
   expect(Object.keys(manifest.screens)).toEqual([
     'home',
     'log-meal',
+    'log-results',
+    'log-berry-oats',
+    'log-green-bowl',
+    'log-lemon-salmon',
+    'log-added',
     'recipes',
     'plan',
     'progress',
     'community',
     'profile',
-    'recipe-details',
+    'recipe-details-green-bowl',
+    'recipe-details-lemon-salmon',
+    'recipe-details-berry-oats',
     'settings',
   ]);
   expect(manifest.navigator.routes[0]?.navigator?.routes.map((route) => route.name)).toEqual([
@@ -54,8 +96,17 @@ test('NutriFlow uses release-backed navigation for its primary local actions', (
     events: { press: [{ target: { capability: 'navigator.navigate' } }] },
   });
   expect(bindings?.['recipes-green-bowl']).toMatchObject({
-    componentType: 'MediaExplorer',
-    events: { activate: [{ target: { capability: 'navigator.navigate' } }] },
+    componentType: 'MediaCard',
+    events: {
+      press: [
+        {
+          target: {
+            capability: 'navigator.navigate',
+            input: { route: { value: '/recipes/green-bowl' } },
+          },
+        },
+      ],
+    },
   });
   expect(bindings?.['profile-community']).toMatchObject({
     events: { press: [{ target: { input: { route: { value: '/community' } } } }] },
@@ -69,15 +120,8 @@ test('NutriFlow uses release-backed navigation for its primary local actions', (
   ).toEqual([]);
 });
 
-test('NutriFlow uses owner scanner, explorer, progress, and bundled image contracts', () => {
+test('NutriFlow provides a deterministic local meal-log flow and media-backed recipe tiles', () => {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
-  const logChildren = manifest.screens['log-meal']?.root.children ?? [];
-  const logModes = logChildren.find(({ id }) => id === 'log-meal-modes');
-  const scannerPanel = logModes?.children?.find(({ id }) => id === 'log-scan-panel');
-  const scanner = scannerPanel?.children?.find(({ id }) => id === 'log-scanner');
-  const recipes = manifest.screens.recipes?.root.children?.find(
-    ({ id }) => id === 'recipes-green-bowl',
-  );
   const progress = manifest.screens.progress?.root.children?.find(
     ({ id }) => id === 'progress-range',
   );
@@ -85,14 +129,8 @@ test('NutriFlow uses owner scanner, explorer, progress, and bundled image contra
     (asset) => asset.kind === 'image' && asset.source.kind === 'bundled',
   );
 
-  expect(ZORA_COMPONENT_META.BarcodeScannerView).toBeDefined();
-  expect(ZORA_COMPONENT_META.MediaExplorer).toBeDefined();
   expect(ZORA_COMPONENT_META.ProgressRing).toBeDefined();
-  expect(scanner).toMatchObject({
-    type: 'BarcodeScannerView',
-    props: { permissionStatus: 'unavailable' },
-  });
-  expect(recipes).toMatchObject({ type: 'MediaExplorer' });
+  assertLocalMealLogFlow();
   expect(progress).toMatchObject({ type: 'Tabs' });
   expect(imageAssets.map((asset) => asset.id)).toEqual([
     'green-bowl',
@@ -110,4 +148,27 @@ test('NutriFlow uses owner scanner, explorer, progress, and bundled image contra
   for (const asset of artifact.assets) {
     expect(existsSync(asset.sourcePath)).toBe(true);
   }
+});
+
+test('NutriFlow maps each media-backed recipe tile to its own detail route', () => {
+  const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
+  const recipeCards = (manifest.screens.recipes?.root.children ?? []).filter(
+    ({ type }) => type === 'MediaCard',
+  );
+
+  expect(ZORA_COMPONENT_META.MediaCard).toBeDefined();
+  expect(recipeCards.map(({ id, props }) => [id, props?.imageSource])).toEqual([
+    ['recipes-green-bowl', { mediaId: 'green-bowl' }],
+    ['recipes-lemon-salmon', { mediaId: 'lemon-salmon' }],
+    ['recipes-berry-oats', { mediaId: 'berry-oats' }],
+  ]);
+  expect(manifest.dataBindings?.['recipes-green-bowl']).toMatchObject({
+    events: { press: [{ target: { input: { route: { value: '/recipes/green-bowl' } } } }] },
+  });
+  expect(manifest.dataBindings?.['recipes-lemon-salmon']).toMatchObject({
+    events: { press: [{ target: { input: { route: { value: '/recipes/lemon-salmon' } } } }] },
+  });
+  expect(manifest.dataBindings?.['recipes-berry-oats']).toMatchObject({
+    events: { press: [{ target: { input: { route: { value: '/recipes/berry-oats' } } } }] },
+  });
 });
