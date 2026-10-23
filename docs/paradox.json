@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.1.22",
+      "value": "v12.2.0",
       "color": "cb3837"
     },
     {
@@ -365,6 +365,7 @@
       "isEntrypoint": false,
       "dependencies": [
         "src/templates/catalog.ts",
+        "src/templates/categories/books-reading/reader/createAppManifest.ts",
         "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
         "src/templates/categories/social-community/chat/createAppManifest.ts"
@@ -384,6 +385,12 @@
         "TemplateDefinition",
         "TemplateImageAsset"
       ]
+    },
+    {
+      "path": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/internal/defaults.ts"],
+      "exports": ["default"]
     },
     {
       "path": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
@@ -3179,6 +3186,60 @@
     },
     {
       "name": "createAppManifest",
+      "description": "Return the complete portable Reeda reading application manifest.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "line": 7,
+        "column": 1
+      }
+    },
+    {
+      "name": "heading",
+      "description": "Create a semantic heading node with the shared reading-template hierarchy.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "line": 19,
+        "column": 1
+      }
+    },
+    {
+      "name": "text",
+      "description": "Create body copy without duplicating the owner-backed Text node shape.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "line": 24,
+        "column": 1
+      }
+    },
+    {
+      "name": "action",
+      "description": "Create a routed primary action and retain one explicit binding owner for it.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "line": 29,
+        "column": 1
+      }
+    },
+    {
+      "name": "jungleBookCover",
+      "description": "Render the canonical public-domain sample-book cover through bundled media.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "line": 34,
+        "column": 1
+      }
+    },
+    {
+      "name": "navigateBinding",
+      "description": "Bind a metadata-backed component interaction to a canonical Navigator route.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "line": 62,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAppManifest",
       "description": "Create SharkPrey's portable ZORA screen composition with owner-validated navigation.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
@@ -3609,6 +3670,11 @@
       },
       {
         "fromPath": "src/templates/catalog.generated.ts",
+        "toPath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "sourcePath": "src/templates/catalog.generated.ts"
+      },
+      {
+        "fromPath": "src/templates/catalog.generated.ts",
         "toPath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "sourcePath": "src/templates/catalog.generated.ts"
       },
@@ -3631,6 +3697,11 @@
         "fromPath": "src/templates/catalog.ts",
         "toPath": "src/templates/catalog.generated.ts",
         "sourcePath": "src/templates/catalog.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "toPath": "src/internal/defaults.ts",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
       }
     ],
     "calls": [
@@ -4341,6 +4412,42 @@
         "toSymbol": "assertTemplateImagePath",
         "callExpression": "assertTemplateImagePath",
         "sourcePath": "src/templates/catalog.ts"
+      },
+      {
+        "fromSymbol": "createAppManifest",
+        "toSymbol": "validateNavigatorManifest",
+        "callExpression": "validateNavigatorManifest",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "toSymbol": "navigateBinding",
+        "callExpression": "navigateBinding",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "toSymbol": "heading",
+        "callExpression": "heading",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "toSymbol": "jungleBookCover",
+        "callExpression": "jungleBookCover",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "toSymbol": "text",
+        "callExpression": "text",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "toSymbol": "action",
+        "callExpression": "action",
+        "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
       },
       {
         "fromSymbol": "createAppManifest",
