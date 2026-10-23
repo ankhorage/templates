@@ -55,7 +55,6 @@ test('every published screen declares its deliberate content width', () => {
       'training-difficulty': 'narrow',
       'decision-table': 'wide',
       'answer-explanation': 'wide',
-      'session-summary': 'default',
       'hand-history': 'default',
       stats: 'default',
       learn: 'default',
