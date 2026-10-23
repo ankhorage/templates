@@ -5,19 +5,79 @@ import type {
   BindingValueTransform,
   ComponentDataBinding,
   EventBinding,
+  UiNode,
 } from '@ankhorage/contracts';
-import { validateNavigatorManifest } from '@ankhorage/navigator';
+import { DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
+
+import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
+import { createLocalInfra } from '../../../../internal/defaults';
 
 /*** Create SharkPrey's portable ZORA screen composition with owner-validated navigation. */
 export default function createAppManifest(): AppManifest {
-  const diagnostics = validateNavigatorManifest(manifest.navigator, {
-    platform: 'ios',
-    expoRouterVersion: '57.0.18',
-  });
-  if (diagnostics.some((diagnostic) => diagnostic.severity === 'error')) {
-    throw new Error(diagnostics.map((diagnostic) => diagnostic.message).join(' '));
-  }
-  return structuredClone(manifest);
+  return createValidatedManifest(manifest);
+}
+
+/*** Create the fixed SharkPrey wordmark while keeping every screen's node identities stable. */
+function createSharkPreyBrandWord(idPrefix: string): UiNode {
+  return {
+    id: `${idPrefix}-brand-word`,
+    type: 'View',
+    props: {},
+    children: [
+      {
+        id: `${idPrefix}-brand-word-image`,
+        type: 'Image',
+        props: { source: { mediaId: 'sharkprey-logo' }, alt: 'SharkPrey' },
+        style: { position: 'absolute', width: 162, height: 108, left: -22, top: -72 },
+      },
+    ],
+    style: { gap: 12, width: 122, height: 27, overflow: 'hidden', marginTop: 16 },
+  };
+}
+
+/*** Create the fixed score range footer for a SharkPrey metric card. */
+function createStatsMetricRange(metricIndex: string): UiNode {
+  return {
+    id: `stats-metric-range-${metricIndex}`,
+    type: 'View',
+    props: {},
+    children: [
+      {
+        id: `stats-metric-min-${metricIndex}`,
+        type: 'Text',
+        props: { text: '0', variant: 'caption', emphasis: 'muted' },
+        style: { flex: 1 },
+      },
+      {
+        id: `stats-metric-max-${metricIndex}`,
+        type: 'Text',
+        props: { text: '100', variant: 'caption', emphasis: 'muted' },
+      },
+    ],
+    style: { gap: 12, flexDirection: 'row', alignItems: 'center' },
+  };
+}
+
+/*** Create the status presentation for an independently identified hand-history entry. */
+function createHistoryResult(handIndex: string): UiNode {
+  return {
+    id: `history-hand-result-${handIndex}`,
+    type: 'View',
+    props: {},
+    children: [
+      {
+        id: `history-hand-icon-${handIndex}`,
+        type: 'Icon',
+        props: { source: { mediaId: 'sharkprey-correct-icon' }, size: 36, color: '#22c55e' },
+      },
+      {
+        id: `history-hand-status-${handIndex}`,
+        type: 'Text',
+        props: { text: 'Correct', variant: 'body', color: 'success', align: 'center' },
+      },
+    ],
+    style: { gap: 12, alignItems: 'center' },
+  };
 }
 
 function createAnswerNavigationBinding(correct: boolean, verdict: string): EventBinding {
@@ -479,6 +539,7 @@ const manifest: AppManifest = {
     },
   },
   infra: {
+    ...createLocalInfra({ ...DEFAULT_AUTH_FLOW, postSignInRoute: 'onboarding' }),
     apis: {
       'poker-training': {
         id: 'poker-training',
@@ -658,49 +719,6 @@ const manifest: AppManifest = {
         },
       },
     },
-    environments: {
-      local: {
-        deployment: {
-          compute: { provider: 'local' },
-          runtime: { provider: 'minikube' },
-        },
-        database: {
-          provider: 'supabase',
-          tier: 'dev',
-        },
-        objectStorage: {
-          provider: 'supabase',
-          buckets: { media: true },
-        },
-        secretStore: {
-          provider: 'supabase-vault',
-        },
-        auth: {
-          provider: 'supabase',
-          scope: 'global',
-          flow: {
-            signInRoute: 'sign-in',
-            signUpRoute: 'sign-up',
-            signOutRoute: 'sign-out',
-            forgotPasswordRoute: 'forgot-password',
-            postSignInRoute: 'onboarding',
-            unauthorizedRoute: 'sign-in',
-          },
-          signIn: {
-            identifiers: ['email'],
-          },
-          signUp: {
-            requiredFields: ['email', 'password'],
-            optionalFields: ['firstName', 'lastName'],
-            signUpPolicy: 'autoSignIn',
-          },
-          profile: {
-            fields: ['email', 'firstName', 'lastName'],
-          },
-        },
-      },
-    },
-    modules: {},
   },
   state: {
     provider: 'legend',
@@ -890,37 +908,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'onboarding-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'onboarding-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('onboarding'),
                 ],
                 style: {
                   gap: 0,
@@ -1255,37 +1243,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'decision-table-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'decision-table-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('decision-table'),
                 ],
                 style: {
                   gap: 0,
@@ -1485,37 +1443,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'answer-explanation-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'answer-explanation-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('answer-explanation'),
                 ],
                 style: {
                   gap: 0,
@@ -1766,37 +1694,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'hand-history-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'hand-history-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('hand-history'),
                 ],
                 style: {
                   gap: 0,
@@ -1972,38 +1870,7 @@ const manifest: AppManifest = {
                           flex: 1,
                         },
                       },
-                      {
-                        id: 'history-hand-result-1',
-                        type: 'View',
-                        props: {},
-                        children: [
-                          {
-                            id: 'history-hand-icon-1',
-                            type: 'Icon',
-                            props: {
-                              source: {
-                                mediaId: 'sharkprey-correct-icon',
-                              },
-                              size: 36,
-                              color: '#22c55e',
-                            },
-                          },
-                          {
-                            id: 'history-hand-status-1',
-                            type: 'Text',
-                            props: {
-                              text: 'Correct',
-                              variant: 'body',
-                              color: 'success',
-                              align: 'center',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                          alignItems: 'center',
-                        },
-                      },
+                      createHistoryResult('1'),
                     ],
                     style: {
                       gap: 12,
@@ -2071,38 +1938,7 @@ const manifest: AppManifest = {
                           flex: 1,
                         },
                       },
-                      {
-                        id: 'history-hand-result-2',
-                        type: 'View',
-                        props: {},
-                        children: [
-                          {
-                            id: 'history-hand-icon-2',
-                            type: 'Icon',
-                            props: {
-                              source: {
-                                mediaId: 'sharkprey-correct-icon',
-                              },
-                              size: 36,
-                              color: '#22c55e',
-                            },
-                          },
-                          {
-                            id: 'history-hand-status-2',
-                            type: 'Text',
-                            props: {
-                              text: 'Correct',
-                              variant: 'body',
-                              color: 'success',
-                              align: 'center',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                          alignItems: 'center',
-                        },
-                      },
+                      createHistoryResult('2'),
                     ],
                     style: {
                       gap: 12,
@@ -2184,37 +2020,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'stats-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'stats-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('stats'),
                 ],
                 style: {
                   gap: 0,
@@ -2429,39 +2235,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          {
-                            id: 'stats-metric-range-0-0',
-                            type: 'View',
-                            props: {},
-                            children: [
-                              {
-                                id: 'stats-metric-min-0-0',
-                                type: 'Text',
-                                props: {
-                                  text: '0',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                                style: {
-                                  flex: 1,
-                                },
-                              },
-                              {
-                                id: 'stats-metric-max-0-0',
-                                type: 'Text',
-                                props: {
-                                  text: '100',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                              },
-                            ],
-                            style: {
-                              gap: 12,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            },
-                          },
+                          createStatsMetricRange('0-0'),
                         ],
                         style: {
                           gap: 6,
@@ -2556,39 +2330,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          {
-                            id: 'stats-metric-range-0-1',
-                            type: 'View',
-                            props: {},
-                            children: [
-                              {
-                                id: 'stats-metric-min-0-1',
-                                type: 'Text',
-                                props: {
-                                  text: '0',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                                style: {
-                                  flex: 1,
-                                },
-                              },
-                              {
-                                id: 'stats-metric-max-0-1',
-                                type: 'Text',
-                                props: {
-                                  text: '100',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                              },
-                            ],
-                            style: {
-                              gap: 12,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            },
-                          },
+                          createStatsMetricRange('0-1'),
                         ],
                         style: {
                           gap: 6,
@@ -2692,39 +2434,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          {
-                            id: 'stats-metric-range-1-0',
-                            type: 'View',
-                            props: {},
-                            children: [
-                              {
-                                id: 'stats-metric-min-1-0',
-                                type: 'Text',
-                                props: {
-                                  text: '0',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                                style: {
-                                  flex: 1,
-                                },
-                              },
-                              {
-                                id: 'stats-metric-max-1-0',
-                                type: 'Text',
-                                props: {
-                                  text: '100',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                              },
-                            ],
-                            style: {
-                              gap: 12,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            },
-                          },
+                          createStatsMetricRange('1-0'),
                         ],
                         style: {
                           gap: 6,
@@ -2819,39 +2529,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          {
-                            id: 'stats-metric-range-1-1',
-                            type: 'View',
-                            props: {},
-                            children: [
-                              {
-                                id: 'stats-metric-min-1-1',
-                                type: 'Text',
-                                props: {
-                                  text: '0',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                                style: {
-                                  flex: 1,
-                                },
-                              },
-                              {
-                                id: 'stats-metric-max-1-1',
-                                type: 'Text',
-                                props: {
-                                  text: '100',
-                                  variant: 'caption',
-                                  emphasis: 'muted',
-                                },
-                              },
-                            ],
-                            style: {
-                              gap: 12,
-                              flexDirection: 'row',
-                              alignItems: 'center',
-                            },
-                          },
+                          createStatsMetricRange('1-1'),
                         ],
                         style: {
                           gap: 6,
@@ -2949,37 +2627,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'learn-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'learn-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('learn'),
                 ],
                 style: {
                   gap: 0,
@@ -3366,37 +3014,7 @@ const manifest: AppManifest = {
                       overflow: 'hidden',
                     },
                   },
-                  {
-                    id: 'settings-brand-word',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'settings-brand-word-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 162,
-                          height: 108,
-                          left: -22,
-                          top: -72,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 122,
-                      height: 27,
-                      overflow: 'hidden',
-                      marginTop: 16,
-                    },
-                  },
+                  createSharkPreyBrandWord('settings'),
                 ],
                 style: {
                   gap: 0,

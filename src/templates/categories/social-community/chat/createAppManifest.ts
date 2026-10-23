@@ -1,16 +1,11 @@
-import type { AppManifest } from '@ankhorage/contracts';
-import { validateNavigatorManifest } from '@ankhorage/navigator';
+import { type AppManifest, DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
+
+import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
+import { createLocalInfra } from '../../../../internal/defaults';
 
 /*** Return the portable Close social and direct-chat design with owner-validated mobile navigation. */
 export default function createAppManifest(): AppManifest {
-  const diagnostics = validateNavigatorManifest(manifest.navigator, {
-    platform: 'ios',
-    expoRouterVersion: '57.0.18',
-  });
-  if (diagnostics.some((diagnostic) => diagnostic.severity === 'error')) {
-    throw new Error(diagnostics.map((diagnostic) => diagnostic.message).join(' '));
-  }
-  return structuredClone(manifest);
+  return createValidatedManifest(manifest);
 }
 
 const manifest: AppManifest = {
@@ -60,51 +55,7 @@ const manifest: AppManifest = {
       backgroundColor: '#4F46E5',
     },
   },
-  infra: {
-    environments: {
-      local: {
-        deployment: {
-          compute: { provider: 'local' },
-          runtime: { provider: 'minikube' },
-        },
-        database: {
-          provider: 'supabase',
-          tier: 'dev',
-        },
-        objectStorage: {
-          provider: 'supabase',
-          buckets: { media: true },
-        },
-        secretStore: {
-          provider: 'supabase-vault',
-        },
-        auth: {
-          provider: 'supabase',
-          scope: 'global',
-          flow: {
-            signInRoute: 'sign-in',
-            signUpRoute: 'sign-up',
-            signOutRoute: 'sign-out',
-            forgotPasswordRoute: 'forgot-password',
-            postSignInRoute: '/',
-            unauthorizedRoute: 'sign-in',
-          },
-          signIn: {
-            identifiers: ['email'],
-          },
-          signUp: {
-            requiredFields: ['email', 'password'],
-            optionalFields: ['firstName', 'lastName'],
-            signUpPolicy: 'autoSignIn',
-          },
-          profile: {
-            fields: ['email', 'firstName', 'lastName'],
-          },
-        },
-      },
-    },
-    modules: {},
-  },
+  infra: createLocalInfra({ ...DEFAULT_AUTH_FLOW, postSignInRoute: '/' }),
   settings: {
     localization: {
       defaultLocale: 'en',
