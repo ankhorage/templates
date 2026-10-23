@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/templates",
-  "version": "12.1.22",
+  "version": "12.2.1",
   "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
   "homepage": "https://github.com/ankhorage/templates#readme",
   "bugs": {
@@ -111,7 +111,8 @@
     "format": "ankhorage-prettier --write .",
     "format:check": "ankhorage-prettier --check .",
     "typecheck": "bun run templates:catalog && bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
-    "test": "bun test",
+    "test": "bun test && bun run test:packed-consumer",
+    "test:packed-consumer": "bun run build && bun test ./test/packedConsumer.ts",
     "prepublishOnly": "bun run typecheck && bun run build && bun test",
     "version-packages": "ankhorage-changeset version",
     "knip:check": "ankhorage-knip",

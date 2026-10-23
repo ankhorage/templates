@@ -54,7 +54,7 @@ export const BASE_SETTINGS: AppManifest['settings'] = {
 };
 
 /*** Create the standard local infrastructure with intentional template-specific auth routes. */
-export function createLocalInfra(authFlow: Partial<AuthFlowConfig>): InfraManifest {
+export function createLocalInfra(authFlow: AuthFlowConfig): InfraManifest {
   return {
     ...structuredClone(BASE_INFRA),
     environments: {
@@ -63,7 +63,7 @@ export function createLocalInfra(authFlow: Partial<AuthFlowConfig>): InfraManife
         auth: {
           ...structuredClone(BASE_INFRA.environments.local.auth),
           provider: 'supabase',
-          flow: { ...DEFAULT_AUTH_FLOW, ...authFlow },
+          flow: structuredClone(authFlow),
         },
       },
     },

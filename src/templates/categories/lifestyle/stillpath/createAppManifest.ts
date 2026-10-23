@@ -612,7 +612,13 @@ const manifest = {
       },
     },
   },
-  infra: createLocalInfra({ postSignInRoute: '/' }),
+  infra: createLocalInfra({
+    signInRoute: 'sign-in',
+    signUpRoute: 'sign-up',
+    signOutRoute: 'sign-out',
+    postSignInRoute: '/',
+    unauthorizedRoute: 'sign-in',
+  }),
   navigator: {
     type: 'tabs',
     implementation: 'headless',

@@ -55,7 +55,6 @@ test('every published screen declares its deliberate content width', () => {
       'training-difficulty': 'narrow',
       'decision-table': 'wide',
       'answer-explanation': 'wide',
-      'session-summary': 'default',
       'hand-history': 'default',
       stats: 'default',
       learn: 'default',
@@ -71,6 +70,15 @@ test('every published screen declares its deliberate content width', () => {
       friends: 'default',
       chats: 'default',
       direct: 'default',
+    },
+    'books_reading/reader': {
+      home: 'default',
+      library: 'default',
+      discover: 'default',
+      profile: 'default',
+      'book-details': 'default',
+      reader: 'wide',
+      settings: 'narrow',
     },
   });
 });

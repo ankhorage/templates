@@ -1,5 +1,17 @@
 # @ankhorage/templates
 
+## 12.2.1
+
+### Patch Changes
+
+- 0edae78: Remove unsupported SharkPrey interaction affordances until application-owned state and lesson capabilities are available.
+
+## 12.2.0
+
+### Minor Changes
+
+- 2cbf284: Add the portable books-reading Reader template with seven manifest-authored screens and the released `ebookReader` capability.
+
 ## 12.1.22
 
 ### Patch Changes

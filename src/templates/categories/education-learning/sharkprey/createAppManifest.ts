@@ -7,6 +7,7 @@ import type {
   EventBinding,
   UiNode,
 } from '@ankhorage/contracts';
+import { DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
 
 import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
 import { createLocalInfra } from '../../../../internal/defaults';
@@ -35,20 +36,20 @@ function createSharkPreyBrandWord(idPrefix: string): UiNode {
 }
 
 /*** Create the fixed score range footer for a SharkPrey metric card. */
-function createStatsMetricRange(idPrefix: string): UiNode {
+function createStatsMetricRange(metricIndex: string): UiNode {
   return {
-    id: `${idPrefix}-range`,
+    id: `stats-metric-range-${metricIndex}`,
     type: 'View',
     props: {},
     children: [
       {
-        id: `${idPrefix}-min`,
+        id: `stats-metric-min-${metricIndex}`,
         type: 'Text',
         props: { text: '0', variant: 'caption', emphasis: 'muted' },
         style: { flex: 1 },
       },
       {
-        id: `${idPrefix}-max`,
+        id: `stats-metric-max-${metricIndex}`,
         type: 'Text',
         props: { text: '100', variant: 'caption', emphasis: 'muted' },
       },
@@ -58,19 +59,19 @@ function createStatsMetricRange(idPrefix: string): UiNode {
 }
 
 /*** Create the status presentation for an independently identified hand-history entry. */
-function createHistoryResult(idPrefix: string): UiNode {
+function createHistoryResult(handIndex: string): UiNode {
   return {
-    id: `${idPrefix}-result`,
+    id: `history-hand-result-${handIndex}`,
     type: 'View',
     props: {},
     children: [
       {
-        id: `${idPrefix}-icon`,
+        id: `history-hand-icon-${handIndex}`,
         type: 'Icon',
         props: { source: { mediaId: 'sharkprey-correct-icon' }, size: 36, color: '#22c55e' },
       },
       {
-        id: `${idPrefix}-status`,
+        id: `history-hand-status-${handIndex}`,
         type: 'Text',
         props: { text: 'Correct', variant: 'body', color: 'success', align: 'center' },
       },
@@ -372,50 +373,8 @@ const manifest: AppManifest = {
         ],
       },
     },
-    'onboarding-rules-link': {
-      componentId: 'onboarding-rules-link',
-      componentType: 'Button',
-      events: {
-        press: [
-          {
-            target: {
-              capability: 'navigator.navigate',
-              input: { route: { kind: 'literal', value: '/learn' } },
-            },
-          },
-        ],
-      },
-    },
     'review-next': {
       componentId: 'review-next',
-      componentType: 'Button',
-      events: {
-        press: [
-          {
-            target: {
-              capability: 'navigator.navigate',
-              input: { route: { kind: 'literal', value: '/training-setup' } },
-            },
-          },
-        ],
-      },
-    },
-    'summary-practice': {
-      componentId: 'summary-practice',
-      componentType: 'Button',
-      events: {
-        press: [
-          {
-            target: {
-              capability: 'navigator.navigate',
-              input: { route: { kind: 'literal', value: '/training-setup' } },
-            },
-          },
-        ],
-      },
-    },
-    'stats-practice': {
-      componentId: 'stats-practice',
       componentType: 'Button',
       events: {
         press: [
@@ -580,7 +539,7 @@ const manifest: AppManifest = {
     },
   },
   infra: {
-    ...createLocalInfra({ postSignInRoute: 'onboarding' }),
+    ...createLocalInfra({ ...DEFAULT_AUTH_FLOW, postSignInRoute: 'onboarding' }),
     apis: {
       'poker-training': {
         id: 'poker-training',
@@ -843,11 +802,6 @@ const manifest: AppManifest = {
                     path: '/answer-explanation',
                     screenId: 'answer-explanation',
                   },
-                  {
-                    name: 'session-summary',
-                    path: '/session-summary',
-                    screenId: 'session-summary',
-                  },
                 ],
               },
             },
@@ -903,9 +857,9 @@ const manifest: AppManifest = {
   screens: {
     onboarding: {
       id: 'onboarding',
-      name: 'Where are you starting?',
-      title: 'Where are you starting?',
-      description: 'Live poker training backed by the production Ankhorage gateway.',
+      name: 'Ready to train?',
+      title: 'Ready to train?',
+      description: 'Start the canonical poker-training setup flow.',
       root: {
         id: 'onboarding-screen',
         type: 'Screen',
@@ -967,7 +921,7 @@ const manifest: AppManifest = {
                 id: 'onboarding-title',
                 type: 'Heading',
                 props: {
-                  text: 'Where are you starting?',
+                  text: 'Ready to train?',
                   level: 1,
                   size: 'h1',
                 },
@@ -1009,79 +963,6 @@ const manifest: AppManifest = {
                 ],
               },
               {
-                id: 'onboarding-level',
-                type: 'RadioGroup',
-                props: {
-                  options: [
-                    {
-                      value: 'new',
-                      label: 'New to NLHE',
-                      iconSource: {
-                        mediaId: 'sharkprey-graduation-icon',
-                      },
-                    },
-                    {
-                      value: 'ranges',
-                      label: 'Learning the ranges',
-                      iconSource: {
-                        mediaId: 'sharkprey-stats-icon',
-                      },
-                    },
-                    {
-                      value: 'experienced',
-                      label: 'Experienced player',
-                      iconSource: {
-                        mediaId: 'sharkprey-star-icon',
-                      },
-                    },
-                  ],
-                  defaultValue: 'ranges',
-                  presentation: 'card',
-                  columns: 1,
-                  contentOrientation: 'horizontal',
-                  color: 'secondary',
-                  size: 'l',
-                  gap: 'm',
-                },
-              },
-              {
-                id: 'onboarding-rules',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'onboarding-rules-icon',
-                    type: 'Icon',
-                    props: {
-                      source: {
-                        mediaId: 'sharkprey-learn-icon',
-                      },
-                      size: 20,
-                      color: '#0060FF',
-                    },
-                  },
-                  {
-                    id: 'onboarding-rules-link',
-                    type: 'Button',
-                    props: {
-                      children: 'New to NLHE? Learn the rules',
-                      color: 'secondary',
-                      variant: 'ghost',
-                      size: 'l',
-                      fullWidth: true,
-                    },
-                    style: {
-                      minHeight: 48,
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                },
-              },
-              {
                 id: 'onboarding-footer',
                 type: 'View',
                 props: {},
@@ -1090,7 +971,7 @@ const manifest: AppManifest = {
                     id: 'onboarding-start',
                     type: 'Button',
                     props: {
-                      children: 'Start assessment',
+                      children: 'Start training',
                       color: 'secondary',
                       variant: 'solid',
                       size: 'l',
@@ -1759,370 +1640,6 @@ const manifest: AppManifest = {
         ],
       },
     },
-    'session-summary': {
-      id: 'session-summary',
-      name: 'Session complete',
-      title: 'Session complete',
-      description: 'Reference design populated with sample training content.',
-      root: {
-        id: 'session-summary-screen',
-        type: 'Screen',
-        props: {
-          width: 'default',
-          scroll: true,
-        },
-        children: [
-          {
-            id: 'session-summary-content',
-            type: 'View',
-            props: {},
-            children: [
-              {
-                id: 'session-summary-brand',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'session-summary-brand-mark',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'session-summary-brand-mark-image',
-                        type: 'Image',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-logo',
-                          },
-                          alt: 'SharkPrey shark',
-                        },
-                        style: {
-                          position: 'absolute',
-                          width: 123,
-                          height: 82,
-                          left: -34,
-                          top: -5,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      width: 57,
-                      height: 50,
-                      overflow: 'hidden',
-                    },
-                  },
-                  createSharkPreyBrandWord('session-summary'),
-                ],
-                style: {
-                  gap: 0,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  marginBottom: 8,
-                },
-              },
-              {
-                id: 'session-summary-title',
-                type: 'Heading',
-                props: {
-                  text: 'Session complete',
-                  level: 1,
-                  size: 'h1',
-                },
-              },
-              {
-                id: 'summary-accuracy',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'summary-accuracy-progress',
-                    type: 'ProgressRing',
-                    props: {
-                      value: 70,
-                      max: 100,
-                      color: 'secondary',
-                      trackColor: 'neutral',
-                      size: 192,
-                      thickness: 12,
-                      accessibilityLabel: 'Accuracy',
-                      accessibilityValueText: '70 percent',
-                    },
-                  },
-                  {
-                    id: 'summary-accuracy-center',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'summary-accuracy-number',
-                        type: 'Text',
-                        props: {
-                          text: '70%',
-                          variant: 'body',
-                          weight: 'bold',
-                          align: 'center',
-                        },
-                        style: {
-                          fontSize: 64,
-                          lineHeight: 76,
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      position: 'absolute',
-                      top: 0,
-                      bottom: 0,
-                      left: 0,
-                      right: 0,
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  width: 192,
-                  height: 192,
-                  alignSelf: 'center',
-                },
-              },
-              {
-                id: 'summary-total',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'summary-correct',
-                    type: 'Heading',
-                    props: {
-                      text: '7 of 10 correct',
-                      level: 2,
-                      size: 'h2',
-                      align: 'center',
-                    },
-                  },
-                  {
-                    id: 'summary-percent',
-                    type: 'Text',
-                    props: {
-                      text: '70% accuracy',
-                      variant: 'body',
-                      align: 'center',
-                      emphasis: 'muted',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 4,
-                },
-              },
-              {
-                id: 'summary-scores',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'summary-score-0',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'summary-score-title-0',
-                        type: 'Text',
-                        props: {
-                          text: 'Strongest',
-                          variant: 'body',
-                          align: 'center',
-                        },
-                        style: {
-                          color: '#22c55e',
-                        },
-                      },
-                      {
-                        id: 'summary-score-icon-wrap-0',
-                        type: 'View',
-                        props: {},
-                        children: [
-                          {
-                            id: 'summary-score-icon-0',
-                            type: 'Icon',
-                            props: {
-                              source: {
-                                mediaId: 'sharkprey-trend-icon',
-                              },
-                              size: 48,
-                              color: '#22c55e',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                          alignItems: 'center',
-                        },
-                      },
-                      {
-                        id: 'summary-score-category-0',
-                        type: 'Text',
-                        props: {
-                          text: 'Preflop ranges',
-                          variant: 'body',
-                          align: 'center',
-                        },
-                      },
-                      {
-                        id: 'summary-score-divider-0',
-                        type: 'Divider',
-                        props: {},
-                      },
-                      {
-                        id: 'summary-score-value-0',
-                        type: 'Text',
-                        props: {
-                          text: '86',
-                          variant: 'body',
-                          weight: 'bold',
-                          align: 'center',
-                        },
-                        style: {
-                          fontSize: 34,
-                          lineHeight: 42,
-                          color: '#22c55e',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      padding: 16,
-                      borderRadius: 12,
-                      borderWidth: 1,
-                      borderColor: '#22c55e',
-                      backgroundColor: '#101410',
-                      flex: 1,
-                    },
-                  },
-                  {
-                    id: 'summary-score-1',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'summary-score-title-1',
-                        type: 'Text',
-                        props: {
-                          text: 'Needs work',
-                          variant: 'body',
-                          align: 'center',
-                        },
-                        style: {
-                          color: '#f59e0b',
-                        },
-                      },
-                      {
-                        id: 'summary-score-icon-wrap-1',
-                        type: 'View',
-                        props: {},
-                        children: [
-                          {
-                            id: 'summary-score-icon-1',
-                            type: 'Icon',
-                            props: {
-                              source: {
-                                mediaId: 'sharkprey-target-icon',
-                              },
-                              size: 48,
-                              color: '#f59e0b',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                          alignItems: 'center',
-                        },
-                      },
-                      {
-                        id: 'summary-score-category-1',
-                        type: 'Text',
-                        props: {
-                          text: 'Bet sizing',
-                          variant: 'body',
-                          align: 'center',
-                        },
-                      },
-                      {
-                        id: 'summary-score-divider-1',
-                        type: 'Divider',
-                        props: {},
-                      },
-                      {
-                        id: 'summary-score-value-1',
-                        type: 'Text',
-                        props: {
-                          text: '61',
-                          variant: 'body',
-                          weight: 'bold',
-                          align: 'center',
-                        },
-                        style: {
-                          fontSize: 34,
-                          lineHeight: 42,
-                          color: '#f59e0b',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      padding: 16,
-                      borderRadius: 12,
-                      borderWidth: 1,
-                      borderColor: '#f59e0b',
-                      backgroundColor: '#101410',
-                      flex: 1,
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                },
-              },
-              {
-                id: 'summary-adaptive',
-                type: 'Text',
-                props: {
-                  text: 'Your next session will adapt to these results.',
-                  variant: 'body',
-                  align: 'center',
-                  emphasis: 'muted',
-                },
-              },
-              {
-                id: 'summary-practice',
-                type: 'Button',
-                props: {
-                  children: 'Practice bet sizing',
-                  color: 'secondary',
-                  variant: 'solid',
-                  size: 'l',
-                  fullWidth: true,
-                },
-                style: {
-                  minHeight: 48,
-                },
-              },
-            ],
-            style: {
-              gap: 16,
-              minHeight: 710,
-              paddingHorizontal: 10,
-              paddingTop: 14,
-            },
-          },
-        ],
-      },
-    },
     'hand-history': {
       id: 'hand-history',
       name: 'History',
@@ -2193,33 +1710,6 @@ const manifest: AppManifest = {
                   text: 'History',
                   level: 1,
                   size: 'h1',
-                },
-              },
-              {
-                id: 'history-filter',
-                type: 'RadioGroup',
-                props: {
-                  options: [
-                    {
-                      value: 'all',
-                      label: 'All',
-                    },
-                    {
-                      value: 'correct',
-                      label: 'Correct',
-                    },
-                    {
-                      value: 'review',
-                      label: 'Review',
-                    },
-                  ],
-                  defaultValue: 'all',
-                  presentation: 'card',
-                  columns: 3,
-                  contentOrientation: 'horizontal',
-                  color: 'secondary',
-                  size: 'm',
-                  gap: 's',
                 },
               },
               {
@@ -2380,7 +1870,7 @@ const manifest: AppManifest = {
                           flex: 1,
                         },
                       },
-                      createHistoryResult('history-hand-1'),
+                      createHistoryResult('1'),
                     ],
                     style: {
                       gap: 12,
@@ -2448,7 +1938,7 @@ const manifest: AppManifest = {
                           flex: 1,
                         },
                       },
-                      createHistoryResult('history-hand-2'),
+                      createHistoryResult('2'),
                     ],
                     style: {
                       gap: 12,
@@ -2745,7 +2235,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          createStatsMetricRange('stats-metric-0-0'),
+                          createStatsMetricRange('0-0'),
                         ],
                         style: {
                           gap: 6,
@@ -2840,7 +2330,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          createStatsMetricRange('stats-metric-0-1'),
+                          createStatsMetricRange('0-1'),
                         ],
                         style: {
                           gap: 6,
@@ -2944,7 +2434,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          createStatsMetricRange('stats-metric-1-0'),
+                          createStatsMetricRange('1-0'),
                         ],
                         style: {
                           gap: 6,
@@ -3039,7 +2529,7 @@ const manifest: AppManifest = {
                               size: 's',
                             },
                           },
-                          createStatsMetricRange('stats-metric-1-1'),
+                          createStatsMetricRange('1-1'),
                         ],
                         style: {
                           gap: 6,
@@ -3064,17 +2554,12 @@ const manifest: AppManifest = {
                 },
               },
               {
-                id: 'stats-practice',
-                type: 'Button',
+                id: 'stats-practice-unavailable',
+                type: 'Text',
                 props: {
-                  children: 'Practice bet sizing',
-                  color: 'secondary',
-                  variant: 'solid',
-                  size: 'l',
-                  fullWidth: true,
-                },
-                style: {
-                  minHeight: 48,
+                  text: 'Practice recommendations require application-owned history and lesson state.',
+                  variant: 'bodySmall',
+                  emphasis: 'muted',
                 },
               },
             ],
@@ -3214,17 +2699,12 @@ const manifest: AppManifest = {
                             },
                           },
                           {
-                            id: 'learn-explore',
-                            type: 'Button',
+                            id: 'learn-explore-unavailable',
+                            type: 'Text',
                             props: {
-                              children: 'Explore fundamentals',
-                              color: 'neutral',
-                              variant: 'outline',
-                              size: 'l',
-                              fullWidth: true,
-                            },
-                            style: {
-                              minHeight: 48,
+                              text: 'Lessons require application-provided content.',
+                              variant: 'bodySmall',
+                              emphasis: 'muted',
                             },
                           },
                         ],
@@ -3326,36 +2806,12 @@ const manifest: AppManifest = {
                     },
                   },
                   {
-                    id: 'learn-cbet-count',
+                    id: 'learn-cbet-unavailable',
                     type: 'Text',
                     props: {
-                      text: '2 of 5 lessons',
-                      variant: 'body',
+                      text: 'Lesson progress is unavailable without an application lesson model.',
+                      variant: 'bodySmall',
                       emphasis: 'muted',
-                    },
-                  },
-                  {
-                    id: 'learn-cbet-progress',
-                    type: 'Progress',
-                    props: {
-                      value: 40,
-                      max: 100,
-                      color: 'secondary',
-                      size: 's',
-                    },
-                  },
-                  {
-                    id: 'learn-continue',
-                    type: 'Button',
-                    props: {
-                      children: 'Continue lesson',
-                      color: 'secondary',
-                      variant: 'solid',
-                      size: 'l',
-                      fullWidth: true,
-                    },
-                    style: {
-                      minHeight: 48,
                     },
                   },
                 ],
@@ -3418,14 +2874,6 @@ const manifest: AppManifest = {
                           emphasis: 'muted',
                         },
                       },
-                      {
-                        id: 'learn-fundamental-chevron-0',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
-                        },
-                      },
                     ],
                     style: {
                       gap: 12,
@@ -3484,14 +2932,6 @@ const manifest: AppManifest = {
                           emphasis: 'muted',
                         },
                       },
-                      {
-                        id: 'learn-fundamental-chevron-1',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
-                        },
-                      },
                     ],
                     style: {
                       gap: 12,
@@ -3525,7 +2965,7 @@ const manifest: AppManifest = {
       name: 'Settings',
       title: 'Settings',
       description:
-        'Preference rows, connection and reset retain the supplied design. Account operations and confirmation destinations are not supplied.',
+        'Preferences and reset require application-owned persisted state and confirmation behavior.',
       root: {
         id: 'settings-screen',
         type: 'Screen',
@@ -3638,17 +3078,9 @@ const manifest: AppManifest = {
                         id: 'settings-value-0',
                         type: 'Text',
                         props: {
-                          text: 'System',
+                          text: 'Unavailable',
                           variant: 'bodySmall',
                           emphasis: 'muted',
-                        },
-                      },
-                      {
-                        id: 'settings-chevron-0',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
                         },
                       },
                     ],
@@ -3696,17 +3128,9 @@ const manifest: AppManifest = {
                         id: 'settings-value-1',
                         type: 'Text',
                         props: {
-                          text: 'SharkPrey Classic',
+                          text: 'Unavailable',
                           variant: 'bodySmall',
                           emphasis: 'muted',
-                        },
-                      },
-                      {
-                        id: 'settings-chevron-1',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
                         },
                       },
                     ],
@@ -3754,17 +3178,9 @@ const manifest: AppManifest = {
                         id: 'settings-value-2',
                         type: 'Text',
                         props: {
-                          text: 'English',
+                          text: 'Unavailable',
                           variant: 'bodySmall',
                           emphasis: 'muted',
-                        },
-                      },
-                      {
-                        id: 'settings-chevron-2',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
                         },
                       },
                     ],
@@ -3812,17 +3228,9 @@ const manifest: AppManifest = {
                         id: 'settings-value-3',
                         type: 'Text',
                         props: {
-                          text: 'On',
+                          text: 'Unavailable',
                           variant: 'bodySmall',
                           emphasis: 'muted',
-                        },
-                      },
-                      {
-                        id: 'settings-chevron-3',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
                         },
                       },
                     ],
@@ -3853,79 +3261,12 @@ const manifest: AppManifest = {
                 },
               },
               {
-                id: 'settings-reset',
-                type: 'View',
-                props: {},
-                children: [
-                  {
-                    id: 'settings-reset-row',
-                    type: 'View',
-                    props: {},
-                    children: [
-                      {
-                        id: 'settings-reset-icon',
-                        type: 'Icon',
-                        props: {
-                          source: {
-                            mediaId: 'sharkprey-reset-icon',
-                          },
-                          size: 30,
-                          color: '#ef4444',
-                        },
-                      },
-                      {
-                        id: 'settings-reset-copy',
-                        type: 'View',
-                        props: {},
-                        children: [
-                          {
-                            id: 'settings-reset-title',
-                            type: 'Text',
-                            props: {
-                              text: 'Reset stats',
-                              variant: 'body',
-                              color: 'error',
-                              weight: 'semiBold',
-                            },
-                          },
-                          {
-                            id: 'settings-reset-description',
-                            type: 'Text',
-                            props: {
-                              text: 'Erase all progress and category scores',
-                              variant: 'bodySmall',
-                              emphasis: 'muted',
-                            },
-                          },
-                        ],
-                        style: {
-                          gap: 12,
-                          flex: 1,
-                        },
-                      },
-                      {
-                        id: 'settings-reset-chevron',
-                        type: 'Text',
-                        props: {
-                          text: '›',
-                          variant: 'body',
-                        },
-                      },
-                    ],
-                    style: {
-                      gap: 12,
-                      flexDirection: 'row',
-                      alignItems: 'center',
-                    },
-                  },
-                ],
-                style: {
-                  gap: 12,
-                  padding: 16,
-                  borderRadius: 12,
-                  borderWidth: 1,
-                  borderColor: '#ef4444',
-                  backgroundColor: '#101410',
+                id: 'settings-reset-unavailable',
+                type: 'Text',
+                props: {
+                  text: 'Resetting stats requires application-owned persisted state and confirmation.',
+                  variant: 'bodySmall',
+                  emphasis: 'muted',
                 },
               },
               {

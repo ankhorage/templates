@@ -1,4 +1,4 @@
-import type { AppManifest } from '@ankhorage/contracts';
+import { type AppManifest, DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
 
 import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
 import { createLocalInfra } from '../../../../internal/defaults';
@@ -55,7 +55,7 @@ const manifest: AppManifest = {
       backgroundColor: '#4F46E5',
     },
   },
-  infra: createLocalInfra({ postSignInRoute: '/' }),
+  infra: createLocalInfra({ ...DEFAULT_AUTH_FLOW, postSignInRoute: '/' }),
   settings: {
     localization: {
       defaultLocale: 'en',

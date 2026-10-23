@@ -7,6 +7,62 @@ import { expect, test } from 'bun:test';
 import { createTemplateArtifact, validateTemplateManifest } from '../src/index';
 import createAppManifest from '../src/templates/categories/education-learning/sharkprey/createAppManifest';
 
+const SHARKPREY_SURVIVING_NODE_IDS = [
+  'stats-metric-0-0',
+  'stats-metric-row-0-0',
+  'stats-metric-icon-0-0',
+  'stats-metric-content-0-0',
+  'stats-metric-top-0-0',
+  'stats-metric-name-0-0',
+  'stats-metric-value-0-0',
+  'stats-metric-bar-0-0',
+  'stats-metric-range-0-0',
+  'stats-metric-min-0-0',
+  'stats-metric-max-0-0',
+  'stats-metric-0-1',
+  'stats-metric-row-0-1',
+  'stats-metric-icon-0-1',
+  'stats-metric-content-0-1',
+  'stats-metric-top-0-1',
+  'stats-metric-name-0-1',
+  'stats-metric-value-0-1',
+  'stats-metric-bar-0-1',
+  'stats-metric-range-0-1',
+  'stats-metric-min-0-1',
+  'stats-metric-max-0-1',
+  'stats-metric-1-0',
+  'stats-metric-row-1-0',
+  'stats-metric-icon-1-0',
+  'stats-metric-content-1-0',
+  'stats-metric-top-1-0',
+  'stats-metric-name-1-0',
+  'stats-metric-value-1-0',
+  'stats-metric-bar-1-0',
+  'stats-metric-range-1-0',
+  'stats-metric-min-1-0',
+  'stats-metric-max-1-0',
+  'stats-metric-1-1',
+  'stats-metric-row-1-1',
+  'stats-metric-icon-1-1',
+  'stats-metric-content-1-1',
+  'stats-metric-top-1-1',
+  'stats-metric-name-1-1',
+  'stats-metric-value-1-1',
+  'stats-metric-bar-1-1',
+  'stats-metric-range-1-1',
+  'stats-metric-min-1-1',
+  'stats-metric-max-1-1',
+  'history-hand-result-0',
+  'history-hand-result-1',
+  'history-hand-icon-1',
+  'history-hand-status-1',
+  'history-hand-result-2',
+  'history-hand-icon-2',
+  'history-hand-status-2',
+  'history-hand-icon-0',
+  'history-hand-status-0',
+].sort();
+
 test('SharkPrey compiles both theme modes and validates navigation on every target', () => {
   const manifest = createAppManifest();
   for (const theme of Object.values(manifest.themes)) {
@@ -56,6 +112,27 @@ test('SharkPrey keeps single-choice values valid and node identities unique per 
     };
     visit(screen.root);
   }
+});
+
+test('SharkPrey preserves the original metric and history node IDs', () => {
+  const manifest = createAppManifest();
+  const ids = new Set<string>();
+  const visit = (node: UiNode): void => {
+    ids.add(node.id);
+    node.children?.forEach(visit);
+  };
+  for (const screen of Object.values(manifest.screens)) visit(screen.root);
+
+  expect(
+    [...ids]
+      .filter(
+        (id) =>
+          id.startsWith('stats-metric-') || /^history-hand-(?:result|icon|status)-\d$/u.test(id),
+      )
+      .sort(),
+  ).toEqual(SHARKPREY_SURVIVING_NODE_IDS);
+  expect(manifest.screens['session-summary']).toBeUndefined();
+  expect(manifest.navigator.routes.some(({ name }) => name === 'session-summary')).toBe(false);
 });
 
 test('SharkPrey exports runtime media without rendering reference screenshots', () => {
