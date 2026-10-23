@@ -274,6 +274,22 @@
               </button>
             </li>
             <li>
+              <button
+                class="nav-button"
+                type="button"
+                data-target="src/internal/createValidatedManifest.ts"
+              >
+                src/internal/createValidatedManifest.ts
+                <small>1 function</small>
+              </button>
+            </li>
+            <li>
+              <button class="nav-button" type="button" data-target="src/internal/defaults.ts">
+                src/internal/defaults.ts
+                <small>1 function</small>
+              </button>
+            </li>
+            <li>
               <button class="nav-button" type="button" data-target="src/presets/category-design.ts">
                 src/presets/category-design.ts
                 <small>7 functions</small>
@@ -292,7 +308,7 @@
             <li>
               <button class="nav-button" type="button" data-target="src/projectSeed.ts">
                 src/projectSeed.ts
-                <small>8 functions</small>
+                <small>6 functions</small>
               </button>
             </li>
             <li>
@@ -318,7 +334,7 @@
                 data-target="src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
               >
                 src/templates/categories/education-learning/sharkprey/createAppManifest.ts
-                <small>8 functions</small>
+                <small>11 functions</small>
               </button>
             </li>
             <li>
@@ -357,7 +373,7 @@
             <div class="summary">
               <div><strong>57</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>28</strong><span class="muted">modules</span></div>
+              <div><strong>29</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -613,14 +629,23 @@
             </article>
             <article
               class="item"
-              data-search="src/internal/defaults.ts BASE_INFRA BASE_SETTINGS DEFAULT_TEMPLATE_VERSION"
+              data-search="src/internal/createValidatedManifest.ts createValidatedManifest"
+            >
+              <h3>src/internal/createValidatedManifest.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+              <p><strong>Exports:</strong> <code>createValidatedManifest</code></p>
+            </article>
+            <article
+              class="item"
+              data-search="src/internal/defaults.ts BASE_INFRA BASE_SETTINGS createLocalInfra DEFAULT_TEMPLATE_VERSION"
             >
               <h3>src/internal/defaults.ts</h3>
               <p class="muted">Referenced module</p>
               <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
               <p>
                 <strong>Exports:</strong> <code>BASE_INFRA</code>, <code>BASE_SETTINGS</code>,
-                <code>DEFAULT_TEMPLATE_VERSION</code>
+                <code>createLocalInfra</code>, <code>DEFAULT_TEMPLATE_VERSION</code>
               </p>
             </article>
             <article
@@ -729,29 +754,35 @@
             </article>
             <article
               class="item"
-              data-search="src/templates/categories/education-learning/sharkprey/createAppManifest.ts default"
+              data-search="src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/internal/createValidatedManifest.ts src/internal/defaults.ts default"
             >
               <h3>src/templates/categories/education-learning/sharkprey/createAppManifest.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/internal/createValidatedManifest.ts</code>,
+                <code>src/internal/defaults.ts</code>
+              </p>
               <p><strong>Exports:</strong> <code>default</code></p>
             </article>
             <article
               class="item"
-              data-search="src/templates/categories/lifestyle/stillpath/createAppManifest.ts default"
+              data-search="src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/internal/defaults.ts default"
             >
               <h3>src/templates/categories/lifestyle/stillpath/createAppManifest.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+              <p><strong>Dependencies:</strong> <code>src/internal/defaults.ts</code></p>
               <p><strong>Exports:</strong> <code>default</code></p>
             </article>
             <article
               class="item"
-              data-search="src/templates/categories/social-community/chat/createAppManifest.ts default"
+              data-search="src/templates/categories/social-community/chat/createAppManifest.ts src/internal/createValidatedManifest.ts src/internal/defaults.ts default"
             >
               <h3>src/templates/categories/social-community/chat/createAppManifest.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/internal/createValidatedManifest.ts</code>,
+                <code>src/internal/defaults.ts</code>
+              </p>
               <p><strong>Exports:</strong> <code>default</code></p>
             </article>
             <article
@@ -3350,6 +3381,8 @@
                 module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_fixtures_oauth_ts
                 module_src_index_ts[&quot;src/index.ts&quot;]
+                module_src_internal_createValidatedManifest_ts[&quot;src/internal/createValidatedManifest.ts&quot;]
+                package__ankhorage_templates -.-&gt; module_src_internal_createValidatedManifest_ts
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_internal_defaults_ts
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
@@ -3390,12 +3423,22 @@
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+                module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+                --&gt; module_src_internal_createValidatedManifest_ts
+                module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+                --&gt; module_src_internal_defaults_ts
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
+                module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
                 module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
                 module_src_templates_categories_social_community_chat_createAppManifest_ts
+                module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt;
+                module_src_internal_createValidatedManifest_ts
+                module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
                 module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_templateSelector_ts
               </div>
@@ -3458,6 +3501,8 @@ graph TD
   module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_fixtures_oauth_ts
   module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_internal_createValidatedManifest_ts[&quot;src/internal/createValidatedManifest.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_internal_createValidatedManifest_ts
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_internal_defaults_ts
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
@@ -3491,10 +3536,15 @@ graph TD
   module_src_templates_categories_books_reading_reader_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
+  module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_social_community_chat_createAppManifest_ts
+  module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templateSelector_ts
 </pre>
@@ -3523,6 +3573,7 @@ graph TD
                 module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
                 module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
+                module_src_internal_createValidatedManifest_ts[&quot;src/internal/createValidatedManifest.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
                 module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
@@ -3579,6 +3630,16 @@ graph TD
                 module_src_templates_catalog_ts --&gt; module_src_templates_catalog_generated_ts
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts --&gt;
                 module_src_internal_defaults_ts
+                module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+                --&gt; module_src_internal_createValidatedManifest_ts
+                module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+                --&gt; module_src_internal_defaults_ts
+                module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
+                module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt;
+                module_src_internal_createValidatedManifest_ts
+                module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
               </div>
               <details>
                 <summary>View Mermaid source</summary>
@@ -3600,6 +3661,7 @@ graph LR
   module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
   module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_internal_createValidatedManifest_ts[&quot;src/internal/createValidatedManifest.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
   module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
@@ -3648,6 +3710,11 @@ graph LR
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_social_community_chat_createAppManifest_ts
   module_src_templates_catalog_ts --&gt; module_src_templates_catalog_generated_ts
   module_src_templates_categories_books_reading_reader_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_defaults_ts
 </pre>
               </details>
             </article>
@@ -3671,6 +3738,7 @@ graph LR
                 module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
                 module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
                 module_src_index_ts[&quot;src/index.ts&quot;]
+                module_src_internal_createValidatedManifest_ts[&quot;src/internal/createValidatedManifest.ts&quot;]
                 module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
                 module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
                 module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
@@ -3862,6 +3930,7 @@ graph LR
   module_src_design_tone_catalog_ts[&quot;src/design/tone-catalog.ts&quot;]
   module_src_fixtures_oauth_ts[&quot;src/fixtures/oauth.ts&quot;]
   module_src_index_ts[&quot;src/index.ts&quot;]
+  module_src_internal_createValidatedManifest_ts[&quot;src/internal/createValidatedManifest.ts&quot;]
   module_src_internal_defaults_ts[&quot;src/internal/defaults.ts&quot;]
   module_src_packageMetadata_ts[&quot;src/packageMetadata.ts&quot;]
   module_src_presets_category_design_ts[&quot;src/presets/category-design.ts&quot;]
@@ -4113,7 +4182,8 @@ sequenceDiagram
                 sequenceDiagram participant participant_collectTemplateImageAssets as
                 collectTemplateImageAssets participant participant_createAppManifest as
                 createAppManifest participant participant_createTemplateArtifact as
-                createTemplateArtifact participant participant_listTemplates as listTemplates
+                createTemplateArtifact participant participant_createValidatedManifest as
+                createValidatedManifest participant participant_listTemplates as listTemplates
                 participant participant_resolveTemplate as resolveTemplate participant
                 participant_validateNavigatorManifest as validateNavigatorManifest
                 participant_createTemplateArtifact-&gt;&gt;participant_resolveTemplate:
@@ -4125,12 +4195,15 @@ sequenceDiagram
                 participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest:
                 validateNavigatorManifest()
                 participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
-                participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest:
+                participant_createAppManifest-&gt;&gt;participant_createValidatedManifest:
+                createValidatedManifest()
+                participant_createValidatedManifest-&gt;&gt;participant_validateNavigatorManifest:
                 validateNavigatorManifest()
-                participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
-                participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest:
-                validateNavigatorManifest()
-                participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
+                participant_validateNavigatorManifest--&gt;&gt;participant_createValidatedManifest:
+                return participant_createValidatedManifest--&gt;&gt;participant_createAppManifest:
+                return participant_createAppManifest-&gt;&gt;participant_createValidatedManifest:
+                createValidatedManifest()
+                participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
                 participant_createAppManifest--&gt;&gt;participant_createTemplateArtifact: return
                 participant_createTemplateArtifact-&gt;&gt;participant_collectTemplateImageAssets:
                 collectTemplateImageAssets()
@@ -4144,6 +4217,7 @@ sequenceDiagram
   participant participant_collectTemplateImageAssets as collectTemplateImageAssets
   participant participant_createAppManifest as createAppManifest
   participant participant_createTemplateArtifact as createTemplateArtifact
+  participant participant_createValidatedManifest as createValidatedManifest
   participant participant_listTemplates as listTemplates
   participant participant_resolveTemplate as resolveTemplate
   participant participant_validateNavigatorManifest as validateNavigatorManifest
@@ -4154,10 +4228,12 @@ sequenceDiagram
   participant_createTemplateArtifact-&gt;&gt;participant_createAppManifest: template.createAppManifest()
   participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
   participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
-  participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
-  participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
-  participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
-  participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
+  participant_createAppManifest-&gt;&gt;participant_createValidatedManifest: createValidatedManifest()
+  participant_createValidatedManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
+  participant_validateNavigatorManifest--&gt;&gt;participant_createValidatedManifest: return
+  participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
+  participant_createAppManifest-&gt;&gt;participant_createValidatedManifest: createValidatedManifest()
+  participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
   participant_createAppManifest--&gt;&gt;participant_createTemplateArtifact: return
   participant_createTemplateArtifact-&gt;&gt;participant_collectTemplateImageAssets: collectTemplateImageAssets()
   participant_collectTemplateImageAssets--&gt;&gt;participant_createTemplateArtifact: return
@@ -4722,6 +4798,48 @@ sequenceDiagram
           </section>
         </section>
         <section
+          id="view-src-internal-createvalidatedmanifest-ts"
+          class="view"
+          data-view="src/internal/createValidatedManifest.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/internal/createValidatedManifest.ts</h2>
+            <article
+              class="item"
+              data-search="createValidatedManifest src/internal/createValidatedManifest.ts Validate a template&#39;s mobile navigator before returning an isolated manifest copy."
+            >
+              <h3>createValidatedManifest</h3>
+              <p class="muted"><code>src/internal/createValidatedManifest.ts:5:1</code></p>
+              <p>
+                Validate a template&#39;s mobile navigator before returning an isolated manifest
+                copy.
+              </p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-internal-defaults-ts"
+          class="view"
+          data-view="src/internal/defaults.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/internal/defaults.ts</h2>
+            <article
+              class="item"
+              data-search="createLocalInfra src/internal/defaults.ts Create the standard local infrastructure with intentional template-specific auth routes."
+            >
+              <h3>createLocalInfra</h3>
+              <p class="muted"><code>src/internal/defaults.ts:57:1</code></p>
+              <p>
+                Create the standard local infrastructure with intentional template-specific auth
+                routes.
+              </p>
+            </article>
+          </section>
+        </section>
+        <section
           id="view-src-presets-category-design-ts"
           class="view"
           data-view="src/presets/category-design.ts"
@@ -4864,42 +4982,32 @@ sequenceDiagram
             <h2>src/projectSeed.ts</h2>
             <article class="item" data-search="createProjectSeed src/projectSeed.ts ">
               <h3>createProjectSeed</h3>
-              <p class="muted"><code>src/projectSeed.ts:48:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:50:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="writeProjectMetadata src/projectSeed.ts ">
               <h3>writeProjectMetadata</h3>
-              <p class="muted"><code>src/projectSeed.ts:81:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:83:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="writeMaterializedAssets src/projectSeed.ts ">
               <h3>writeMaterializedAssets</h3>
-              <p class="muted"><code>src/projectSeed.ts:110:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:112:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="createProjectSeedDependencies src/projectSeed.ts ">
               <h3>createProjectSeedDependencies</h3>
-              <p class="muted"><code>src/projectSeed.ts:123:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:125:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="readPackagedTemplateAsset src/projectSeed.ts ">
               <h3>readPackagedTemplateAsset</h3>
-              <p class="muted"><code>src/projectSeed.ts:134:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:136:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="assertInside src/projectSeed.ts ">
               <h3>assertInside</h3>
-              <p class="muted"><code>src/projectSeed.ts:146:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="pathExists src/projectSeed.ts ">
-              <h3>pathExists</h3>
-              <p class="muted"><code>src/projectSeed.ts:158:1</code></p>
-              <p class="empty">No description available.</p>
-            </article>
-            <article class="item" data-search="isNotFoundError src/projectSeed.ts ">
-              <h3>isNotFoundError</h3>
-              <p class="muted"><code>src/projectSeed.ts:170:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:148:1</code></p>
               <p class="empty">No description available.</p>
             </article>
           </section>
@@ -5045,7 +5153,7 @@ sequenceDiagram
               <h3>createAppManifest</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:12:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:16:1</code
                 >
               </p>
               <p>
@@ -5055,12 +5163,53 @@ sequenceDiagram
             </article>
             <article
               class="item"
+              data-search="createSharkPreyBrandWord src/templates/categories/education-learning/sharkprey/createAppManifest.ts Create the fixed SharkPrey wordmark while keeping every screen&#39;s node identities stable."
+            >
+              <h3>createSharkPreyBrandWord</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:21:1</code
+                >
+              </p>
+              <p>
+                Create the fixed SharkPrey wordmark while keeping every screen&#39;s node identities
+                stable.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="createStatsMetricRange src/templates/categories/education-learning/sharkprey/createAppManifest.ts Create the fixed score range footer for a SharkPrey metric card."
+            >
+              <h3>createStatsMetricRange</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:39:1</code
+                >
+              </p>
+              <p>Create the fixed score range footer for a SharkPrey metric card.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createHistoryResult src/templates/categories/education-learning/sharkprey/createAppManifest.ts Create the status presentation for an independently identified hand-history entry."
+            >
+              <h3>createHistoryResult</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:62:1</code
+                >
+              </p>
+              <p>
+                Create the status presentation for an independently identified hand-history entry.
+              </p>
+            </article>
+            <article
+              class="item"
               data-search="createAnswerNavigationBinding src/templates/categories/education-learning/sharkprey/createAppManifest.ts "
             >
               <h3>createAnswerNavigationBinding</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:23:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:83:1</code
                 >
               </p>
               <p class="empty">No description available.</p>
@@ -5072,7 +5221,7 @@ sequenceDiagram
               <h3>createOperationTextBinding</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:53:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:113:1</code
                 >
               </p>
               <p class="empty">No description available.</p>
@@ -5084,7 +5233,7 @@ sequenceDiagram
               <h3>createRouteTextBinding</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:73:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:133:1</code
                 >
               </p>
               <p class="empty">No description available.</p>
@@ -5096,7 +5245,7 @@ sequenceDiagram
               <h3>createTrainingDifficultyBinding</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:88:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:148:1</code
                 >
               </p>
               <p class="empty">No description available.</p>
@@ -5108,7 +5257,7 @@ sequenceDiagram
               <h3>apiResult</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:132:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:192:1</code
                 >
               </p>
               <p>Reference a named result from a canonical Poker Training API capability.</p>
@@ -5120,7 +5269,7 @@ sequenceDiagram
               <h3>fallback</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:142:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:202:1</code
                 >
               </p>
               <p>Supply a portable fallback expression when a binding has no readable value.</p>
@@ -5132,7 +5281,7 @@ sequenceDiagram
               <h3>transform</h3>
               <p class="muted">
                 <code
-                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:147:1</code
+                  >src/templates/categories/education-learning/sharkprey/createAppManifest.ts:207:1</code
                 >
               </p>
               <p>Apply optional portable transforms without altering the referenced capability.</p>
@@ -5153,7 +5302,7 @@ sequenceDiagram
             >
               <h3>createAppManifest</h3>
               <p class="muted">
-                <code>src/templates/categories/lifestyle/stillpath/createAppManifest.ts:4:1</code>
+                <code>src/templates/categories/lifestyle/stillpath/createAppManifest.ts:6:1</code>
               </p>
               <p>
                 Return the complete Stillpath design with responsive owner-backed navigation and
@@ -5176,7 +5325,7 @@ sequenceDiagram
             >
               <h3>createAppManifest</h3>
               <p class="muted">
-                <code>src/templates/categories/social-community/chat/createAppManifest.ts:5:1</code>
+                <code>src/templates/categories/social-community/chat/createAppManifest.ts:7:1</code>
               </p>
               <p>
                 Return the portable Close social and direct-chat design with owner-validated mobile

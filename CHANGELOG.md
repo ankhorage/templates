@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.2.2
+
+### Patch Changes
+
+- f607bb0: Deduplicate template manifests and reuse canonical Utility filesystem helpers.
+
 ## 12.2.1
 
 ### Patch Changes

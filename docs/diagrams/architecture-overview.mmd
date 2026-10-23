@@ -54,6 +54,8 @@ graph TD
   module_src_fixtures_oauth_ts["src/fixtures/oauth.ts"]
   package__ankhorage_templates -.-> module_src_fixtures_oauth_ts
   module_src_index_ts["src/index.ts"]
+  module_src_internal_createValidatedManifest_ts["src/internal/createValidatedManifest.ts"]
+  package__ankhorage_templates -.-> module_src_internal_createValidatedManifest_ts
   module_src_internal_defaults_ts["src/internal/defaults.ts"]
   package__ankhorage_templates -.-> module_src_internal_defaults_ts
   module_src_packageMetadata_ts["src/packageMetadata.ts"]
@@ -87,9 +89,14 @@ graph TD
   module_src_templates_categories_books_reading_reader_createAppManifest_ts --> module_src_internal_defaults_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts["src/templates/categories/education-learning/sharkprey/createAppManifest.ts"]
   package__ankhorage_templates -.-> module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --> module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --> module_src_internal_defaults_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts["src/templates/categories/lifestyle/stillpath/createAppManifest.ts"]
   package__ankhorage_templates -.-> module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
+  module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --> module_src_internal_defaults_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts["src/templates/categories/social-community/chat/createAppManifest.ts"]
   package__ankhorage_templates -.-> module_src_templates_categories_social_community_chat_createAppManifest_ts
+  module_src_templates_categories_social_community_chat_createAppManifest_ts --> module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_social_community_chat_createAppManifest_ts --> module_src_internal_defaults_ts
   module_src_templateSelector_ts["src/templateSelector.ts"]
   package__ankhorage_templates -.-> module_src_templateSelector_ts

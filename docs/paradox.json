@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.2.1",
+      "value": "v12.2.2",
       "color": "cb3837"
     },
     {
@@ -302,10 +302,16 @@
       ]
     },
     {
+      "path": "src/internal/createValidatedManifest.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
+      "exports": ["createValidatedManifest"]
+    },
+    {
       "path": "src/internal/defaults.ts",
       "isEntrypoint": false,
       "dependencies": [],
-      "exports": ["BASE_INFRA", "BASE_SETTINGS", "DEFAULT_TEMPLATE_VERSION"]
+      "exports": ["BASE_INFRA", "BASE_SETTINGS", "createLocalInfra", "DEFAULT_TEMPLATE_VERSION"]
     },
     {
       "path": "src/packageMetadata.ts",
@@ -395,19 +401,19 @@
     {
       "path": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
       "isEntrypoint": false,
-      "dependencies": [],
+      "dependencies": ["src/internal/createValidatedManifest.ts", "src/internal/defaults.ts"],
       "exports": ["default"]
     },
     {
       "path": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
       "isEntrypoint": false,
-      "dependencies": [],
+      "dependencies": ["src/internal/defaults.ts"],
       "exports": ["default"]
     },
     {
       "path": "src/templates/categories/social-community/chat/createAppManifest.ts",
       "isEntrypoint": false,
-      "dependencies": [],
+      "dependencies": ["src/internal/createValidatedManifest.ts", "src/internal/defaults.ts"],
       "exports": ["default"]
     },
     {
@@ -2942,6 +2948,24 @@
       }
     },
     {
+      "name": "createValidatedManifest",
+      "description": "Validate a template's mobile navigator before returning an isolated manifest copy.",
+      "sourceLocation": {
+        "filePath": "src/internal/createValidatedManifest.ts",
+        "line": 5,
+        "column": 1
+      }
+    },
+    {
+      "name": "createLocalInfra",
+      "description": "Create the standard local infrastructure with intentional template-specific auth routes.",
+      "sourceLocation": {
+        "filePath": "src/internal/defaults.ts",
+        "line": 57,
+        "column": 1
+      }
+    },
+    {
       "name": "resolveDensityTokens",
       "description": "Resolve canonical spacing token overrides for one density profile.",
       "sourceLocation": {
@@ -3063,7 +3087,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 48,
+        "line": 50,
         "column": 1
       }
     },
@@ -3072,7 +3096,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 81,
+        "line": 83,
         "column": 1
       }
     },
@@ -3081,7 +3105,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 110,
+        "line": 112,
         "column": 1
       }
     },
@@ -3090,7 +3114,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 123,
+        "line": 125,
         "column": 1
       }
     },
@@ -3099,7 +3123,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 134,
+        "line": 136,
         "column": 1
       }
     },
@@ -3108,25 +3132,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 146,
-        "column": 1
-      }
-    },
-    {
-      "name": "pathExists",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/projectSeed.ts",
-        "line": 158,
-        "column": 1
-      }
-    },
-    {
-      "name": "isNotFoundError",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/projectSeed.ts",
-        "line": 170,
+        "line": 148,
         "column": 1
       }
     },
@@ -3243,7 +3249,34 @@
       "description": "Create SharkPrey's portable ZORA screen composition with owner-validated navigation.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 12,
+        "line": 16,
+        "column": 1
+      }
+    },
+    {
+      "name": "createSharkPreyBrandWord",
+      "description": "Create the fixed SharkPrey wordmark while keeping every screen's node identities stable.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 21,
+        "column": 1
+      }
+    },
+    {
+      "name": "createStatsMetricRange",
+      "description": "Create the fixed score range footer for a SharkPrey metric card.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 39,
+        "column": 1
+      }
+    },
+    {
+      "name": "createHistoryResult",
+      "description": "Create the status presentation for an independently identified hand-history entry.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "line": 62,
         "column": 1
       }
     },
@@ -3252,7 +3285,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 23,
+        "line": 83,
         "column": 1
       }
     },
@@ -3261,7 +3294,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 53,
+        "line": 113,
         "column": 1
       }
     },
@@ -3270,7 +3303,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 73,
+        "line": 133,
         "column": 1
       }
     },
@@ -3279,7 +3312,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 88,
+        "line": 148,
         "column": 1
       }
     },
@@ -3288,7 +3321,7 @@
       "description": "Reference a named result from a canonical Poker Training API capability.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 132,
+        "line": 192,
         "column": 1
       }
     },
@@ -3297,7 +3330,7 @@
       "description": "Supply a portable fallback expression when a binding has no readable value.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 142,
+        "line": 202,
         "column": 1
       }
     },
@@ -3306,7 +3339,7 @@
       "description": "Apply optional portable transforms without altering the referenced capability.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 147,
+        "line": 207,
         "column": 1
       }
     },
@@ -3315,7 +3348,7 @@
       "description": "Return the complete Stillpath design with responsive owner-backed navigation and bundled media.",
       "sourceLocation": {
         "filePath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
-        "line": 4,
+        "line": 6,
         "column": 1
       }
     },
@@ -3324,7 +3357,7 @@
       "description": "Return the portable Close social and direct-chat design with owner-validated mobile navigation.",
       "sourceLocation": {
         "filePath": "src/templates/categories/social-community/chat/createAppManifest.ts",
-        "line": 5,
+        "line": 7,
         "column": 1
       }
     },
@@ -3702,6 +3735,31 @@
         "fromPath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
         "toPath": "src/internal/defaults.ts",
         "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toPath": "src/internal/createValidatedManifest.ts",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toPath": "src/internal/defaults.ts",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
+        "toPath": "src/internal/defaults.ts",
+        "sourcePath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/social-community/chat/createAppManifest.ts",
+        "toPath": "src/internal/createValidatedManifest.ts",
+        "sourcePath": "src/templates/categories/social-community/chat/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/social-community/chat/createAppManifest.ts",
+        "toPath": "src/internal/defaults.ts",
+        "sourcePath": "src/templates/categories/social-community/chat/createAppManifest.ts"
       }
     ],
     "calls": [
@@ -3982,15 +4040,9 @@
         "sourcePath": "src/projectSeed.ts"
       },
       {
-        "fromSymbol": "pathExists",
-        "toSymbol": "stat",
-        "callExpression": "stat",
-        "sourcePath": "src/projectSeed.ts"
-      },
-      {
-        "fromSymbol": "pathExists",
-        "toSymbol": "isNotFoundError",
-        "callExpression": "isNotFoundError",
+        "fromSymbol": "assertInside",
+        "toSymbol": "isPathInsideResolved",
+        "callExpression": "isPathInsideResolved",
         "sourcePath": "src/projectSeed.ts"
       },
       {
@@ -4288,6 +4340,12 @@
         "sourcePath": "src/fixtures/oauth.ts"
       },
       {
+        "fromSymbol": "createValidatedManifest",
+        "toSymbol": "validateNavigatorManifest",
+        "callExpression": "validateNavigatorManifest",
+        "sourcePath": "src/internal/createValidatedManifest.ts"
+      },
+      {
         "fromSymbol": "createProfileTokens",
         "toSymbol": "resolveDensityTokens",
         "callExpression": "resolveDensityTokens",
@@ -4451,8 +4509,8 @@
       },
       {
         "fromSymbol": "createAppManifest",
-        "toSymbol": "validateNavigatorManifest",
-        "callExpression": "validateNavigatorManifest",
+        "toSymbol": "createValidatedManifest",
+        "callExpression": "createValidatedManifest",
         "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
       },
       {
@@ -4534,9 +4592,45 @@
         "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
       },
       {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "createLocalInfra",
+        "callExpression": "createLocalInfra",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "createSharkPreyBrandWord",
+        "callExpression": "createSharkPreyBrandWord",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "createHistoryResult",
+        "callExpression": "createHistoryResult",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
+        "toSymbol": "createStatsMetricRange",
+        "callExpression": "createStatsMetricRange",
+        "sourcePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
+        "toSymbol": "createLocalInfra",
+        "callExpression": "createLocalInfra",
+        "sourcePath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts"
+      },
+      {
         "fromSymbol": "createAppManifest",
-        "toSymbol": "validateNavigatorManifest",
-        "callExpression": "validateNavigatorManifest",
+        "toSymbol": "createValidatedManifest",
+        "callExpression": "createValidatedManifest",
+        "sourcePath": "src/templates/categories/social-community/chat/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/social-community/chat/createAppManifest.ts",
+        "toSymbol": "createLocalInfra",
+        "callExpression": "createLocalInfra",
         "sourcePath": "src/templates/categories/social-community/chat/createAppManifest.ts"
       }
     ],
