@@ -37,6 +37,13 @@ test('discovers each portable template from the canonical directory tree', () =>
     })),
   ).toEqual([
     {
+      category: 'books_reading',
+      name: 'Reeda',
+      selector: 'books_reading/reader',
+      slug: 'reader',
+      sourceRoot: 'src/templates/categories/books-reading/reader',
+    },
+    {
       category: 'education_learning',
       name: 'SharkPrey',
       selector: 'education_learning/sharkprey',
