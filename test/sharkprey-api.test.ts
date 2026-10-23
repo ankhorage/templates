@@ -30,10 +30,7 @@ test('SharkPrey binds every Button navigation action through button.press', () =
   const manifest = createAppManifest();
   const expectedRoutes = {
     'onboarding-start': '/training-setup',
-    'onboarding-rules-link': '/learn',
     'review-next': '/training-setup',
-    'summary-practice': '/training-setup',
-    'stats-practice': '/training-setup',
   } as const;
   const routes = new Set(collectNavigatorPaths(manifest.navigator));
   const button = ZORA_COMPONENT_META.Button;
@@ -61,6 +58,26 @@ test('SharkPrey binds every Button navigation action through button.press', () =
   )) {
     if (node.type === 'Button') expect(node.props?.onPress).toBeUndefined();
   }
+});
+
+test('SharkPrey defers interactions without an application state owner', () => {
+  const manifest = createAppManifest();
+  const routes = new Set(collectNavigatorPaths(manifest.navigator));
+  const nodeIds = new Set(
+    Object.values(manifest.screens).flatMap((screen) =>
+      collectNodes(screen.root).map((node) => node.id),
+    ),
+  );
+
+  expect(routes.has('/session-summary')).toBe(false);
+  expect(manifest.screens['session-summary']).toBeUndefined();
+  expect(Object.keys(manifest.dataBindings ?? {})).not.toContain('summary-practice');
+  expect(Object.keys(manifest.dataBindings ?? {})).not.toContain('stats-practice');
+  expect(nodeIds).not.toContain('onboarding-level');
+  expect(nodeIds).not.toContain('history-filter');
+  expect(nodeIds).not.toContain('learn-explore');
+  expect(nodeIds).not.toContain('learn-continue');
+  expect([...nodeIds].some((id) => id.includes('chevron'))).toBe(false);
 });
 
 test('SharkPrey loads API data through a capability invocation and named result slot', () => {
