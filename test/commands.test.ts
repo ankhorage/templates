@@ -1,5 +1,6 @@
-import { describe, expect, test } from 'bun:test';
+import { describe, expect, mock, test } from 'bun:test';
 
+import type { CreateProjectSeedRequest } from '../src/projectSeed.js';
 import {
   findTemplatesCommandByStandaloneName,
   runTemplatesCommand,
@@ -40,6 +41,30 @@ describe('templates commands', () => {
 
     expect(result.exitCode).toBe(1);
     expect(capture.readStderr()).toContain('Use the canonical <category>/<slug> format');
+  });
+
+  test('creates project display names with every slug word capitalized', async () => {
+    const capture = createCapturedContext();
+    const createProjectSeed = mock(async (request: CreateProjectSeedRequest) => {
+      expect(request.metadata.displayName).toBe('Chess Trainer');
+      expect(request.readmeText).toContain('# Chess Trainer');
+      return { projectPath: '/projects/chess-trainer', createdFiles: [] };
+    });
+    const command = findTemplatesCommandByStandaloneName('create');
+    if (command === null) throw new Error('Create command is unavailable.');
+
+    const result = await runTemplatesCommand(
+      {
+        argv: ['chess-trainer', '--template', 'social_community/chat'],
+        command,
+        context: capture.context,
+      },
+      { services: { createProjectSeed } },
+    );
+
+    expect(result.exitCode).toBe(0);
+    expect(createProjectSeed).toHaveBeenCalledTimes(1);
+    expect(capture.readStdout()).toContain('/projects/chess-trainer');
   });
 });
 
