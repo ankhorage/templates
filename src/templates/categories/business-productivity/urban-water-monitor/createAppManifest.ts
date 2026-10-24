@@ -355,7 +355,10 @@ const manifest = {
         props: { width: 'default', scroll: true },
         children: [
           heading('events-title', 'Events', 1),
-          copy('events-note', 'Illustrative event schedule. Upcoming and past filters are static in this starter.'),
+          copy(
+            'events-note',
+            'Illustrative event schedule. Upcoming and past filters are static in this starter.',
+          ),
           {
             id: 'events-filters',
             type: 'ChipGroup',
@@ -880,7 +883,8 @@ const manifest = {
             type: 'Card',
             props: {
               title: 'Walkthrough complete — nothing saved',
-              description: 'No data was stored or transmitted; no live report or laboratory result was created.',
+              description:
+                'No data was stored or transmitted; no live report or laboratory result was created.',
               tone: 'subtle',
             },
           },
