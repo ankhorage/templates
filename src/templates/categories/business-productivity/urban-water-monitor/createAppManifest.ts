@@ -191,10 +191,10 @@ const manifest = {
             id: 'dashboard-health',
             type: 'Card',
             props: {
-              title: 'City water health: good',
+              title: 'City water health · demo overview',
               eyebrow: 'Demo summary',
               description:
-                'Based on 12 verified field or laboratory records in this deterministic starter dataset.',
+                'Illustrative summary only. No live water-quality assessment is calculated in this starter.',
               tone: 'subtle',
             },
             children: [
@@ -222,9 +222,9 @@ const manifest = {
                 id: 'dashboard-standard',
                 type: 'MetricCard',
                 props: {
-                  label: 'Within reference range',
-                  value: '96%',
-                  description: 'verified results only',
+                  label: 'Reference-range rate',
+                  value: 'N/A',
+                  description: 'Not calculated from demo records',
                   compact: true,
                 },
               },
@@ -355,7 +355,7 @@ const manifest = {
         props: { width: 'default', scroll: true },
         children: [
           heading('events-title', 'Events', 1),
-          copy('events-note', 'Upcoming and past filters are static in this starter.'),
+          copy('events-note', 'Illustrative event schedule. Upcoming and past filters are static in this starter.'),
           {
             id: 'events-filters',
             type: 'ChipGroup',
@@ -373,8 +373,8 @@ const manifest = {
             type: 'Card',
             props: {
               title: 'Riverside Clean-Up Day',
-              eyebrow: 'APR 26',
-              description: 'Saturday, 9:00 AM · Riverside Park · community action',
+              eyebrow: 'NOV 07, 2026',
+              description: 'Saturday, 9:00 AM · Riverside Park · illustrative community event',
             },
           },
           {
@@ -382,8 +382,8 @@ const manifest = {
             type: 'Card',
             props: {
               title: 'Water Quality Workshop',
-              eyebrow: 'MAY 10',
-              description: 'Saturday, 10:00 AM · Civic Library · monitoring literacy',
+              eyebrow: 'NOV 14, 2026',
+              description: 'Saturday, 10:00 AM · Civic Library · illustrative workshop',
             },
           },
           {
@@ -391,8 +391,8 @@ const manifest = {
             type: 'Card',
             props: {
               title: 'Community Monitoring Walk',
-              eyebrow: 'JUN 7',
-              description: 'Saturday, 7:00 PM · Lakeside Park · guided observation',
+              eyebrow: 'NOV 21, 2026',
+              description: 'Saturday, 7:00 PM · Lakeside Park · illustrative monitoring walk',
             },
           },
           action('events-riverside', 'View Riverside event'),
@@ -472,7 +472,7 @@ const manifest = {
           heading('field-capture-title', 'Report / capture', 1),
           copy(
             'field-capture-note',
-            'This starter never submits to a live service. Review creates only a local demo confirmation.',
+            'This starter never submits or saves a report. Review and confirmation are navigation-only demo screens.',
             'bodySmall',
           ),
           {
@@ -820,7 +820,7 @@ const manifest = {
           heading('event-detail-title', 'Riverside Clean-Up Day', 1),
           copy(
             'event-detail-copy',
-            'Saturday, 9:00 AM at Riverside Park. Participation is a static demonstration; no registration is sent.',
+            'Saturday, November 7, 2026, 9:00 AM at Riverside Park. Illustrative event only; no registration is sent.',
           ),
           action('event-campaigns', 'Explore related campaigns'),
         ],
@@ -858,29 +858,29 @@ const manifest = {
           heading('capture-review-title', 'Review local demo report', 1),
           copy(
             'capture-review-copy',
-            'Observation at Riverside Park. Trust class: field observation. This confirms a local demo state only and does not transmit data.',
+            'Observation at Riverside Park. Trust class: field observation. This walkthrough does not save or transmit a report.',
           ),
-          action('capture-confirm', 'Confirm local demo report'),
+          action('capture-confirm', 'Continue to demo confirmation'),
         ],
       },
     },
     'capture-confirmed': {
       id: 'capture-confirmed',
-      name: 'Local demo report confirmed',
-      title: 'Demo report confirmed',
-      description: 'A truthful local-only confirmation state.',
+      name: 'Demo walkthrough complete',
+      title: 'Demo walkthrough complete',
+      description: 'Navigation-only demonstration; no report is persisted.',
       root: {
         id: 'capture-confirmed-root',
         type: 'Screen',
         props: { width: 'default', scroll: true },
         children: [
-          heading('capture-confirmed-title', 'Demo report confirmed', 1),
+          heading('capture-confirmed-title', 'Demo walkthrough complete', 1),
           {
             id: 'capture-confirmed-card',
             type: 'Card',
             props: {
-              title: 'Saved only in this demo flow',
-              description: 'No network request, live report, or laboratory result was created.',
+              title: 'Walkthrough complete — nothing saved',
+              description: 'No data was stored or transmitted; no live report or laboratory result was created.',
               tone: 'subtle',
             },
           },
