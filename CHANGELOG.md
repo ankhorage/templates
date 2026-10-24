@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.2.3
+
+### Patch Changes
+
+- c319201: Reuse Utility's canonical slug display-name formatter when creating standalone template project seeds.
+
 ## 12.2.2
 
 ### Patch Changes

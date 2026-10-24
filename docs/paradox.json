@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.2.2",
+      "value": "v12.2.3",
       "color": "cb3837"
     },
     {
@@ -422,7 +422,6 @@
       "dependencies": [],
       "exports": [
         "createTemplateSelector",
-        "deriveDisplayNameFromSlug",
         "ParsedTemplateSelector",
         "parseProjectSlug",
         "parseTemplateCategory",
@@ -3398,20 +3397,11 @@
       }
     },
     {
-      "name": "deriveDisplayNameFromSlug",
-      "description": null,
-      "sourceLocation": {
-        "filePath": "src/templateSelector.ts",
-        "line": 68,
-        "column": 1
-      }
-    },
-    {
       "name": "isAppCategory",
       "description": null,
       "sourceLocation": {
         "filePath": "src/templateSelector.ts",
-        "line": 76,
+        "line": 68,
         "column": 1
       }
     }
@@ -3891,8 +3881,8 @@
       },
       {
         "fromSymbol": "runCreateCommand",
-        "toSymbol": "deriveDisplayNameFromSlug",
-        "callExpression": "deriveDisplayNameFromSlug",
+        "toSymbol": "formatSlugDisplayName",
+        "callExpression": "formatSlugDisplayName",
         "sourcePath": "src/commands.ts"
       },
       {
