@@ -13,6 +13,8 @@ sequenceDiagram
   participant_createTemplateArtifact->>participant_createAppManifest: template.createAppManifest()
   participant_createAppManifest->>participant_validateNavigatorManifest: validateNavigatorManifest()
   participant_validateNavigatorManifest-->>participant_createAppManifest: return
+  participant_createAppManifest->>participant_validateNavigatorManifest: validateNavigatorManifest()
+  participant_validateNavigatorManifest-->>participant_createAppManifest: return
   participant_createAppManifest->>participant_createValidatedManifest: createValidatedManifest()
   participant_createValidatedManifest->>participant_validateNavigatorManifest: validateNavigatorManifest()
   participant_validateNavigatorManifest-->>participant_createValidatedManifest: return

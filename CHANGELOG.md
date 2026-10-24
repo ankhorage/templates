@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.3.1
+
+### Patch Changes
+
+- 3e78b83: feat: add the Urban Water Monitor template with a provenance-aware static map
+
 ## 12.3.0
 
 ### Minor Changes
