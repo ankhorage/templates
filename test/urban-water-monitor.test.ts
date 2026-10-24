@@ -95,6 +95,30 @@ test('Urban Water Monitor retains provenance and does not pass modelled context 
   expect(results.map(({ props }) => props?.description).join(' ')).toContain('sensor measurement');
 });
 
+test('Urban Water Monitor labels static claims, event dates and unsaved capture truthfully', () => {
+  const manifest = urbanWaterMonitor();
+  const dashboard = JSON.stringify(manifest.screens.dashboard);
+  const events = JSON.stringify(manifest.screens.events);
+  const eventDetail = JSON.stringify(manifest.screens['event-detail']);
+  const capture = JSON.stringify(manifest.screens['field-capture']);
+  const review = JSON.stringify(manifest.screens['capture-review']);
+  const completed = JSON.stringify(manifest.screens['capture-confirmed']);
+
+  expect(dashboard).toContain('No live water-quality assessment is calculated');
+  expect(dashboard).toContain('Not calculated from demo records');
+  expect(dashboard).not.toContain('96%');
+
+  expect(events).toContain('NOV 07, 2026');
+  expect(events).toContain('NOV 14, 2026');
+  expect(events).toContain('NOV 21, 2026');
+  expect(eventDetail).toContain('November 7, 2026');
+
+  expect(capture).toContain('never submits or saves a report');
+  expect(review).toContain('does not save or transmit a report');
+  expect(completed).toContain('nothing saved');
+  expect(completed).toContain('No data was stored or transmitted');
+});
+
 test('Urban Water Monitor binds each primary demo journey to a valid route', () => {
   const manifest = urbanWaterMonitor();
   const serializedBindings = JSON.stringify(manifest.dataBindings);
