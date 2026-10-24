@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.2.6
+
+### Patch Changes
+
+- 1ac3b1f: Update dependencies: `@ankhorage/doctor`, `@ankhorage/navigator`.
+
 ## 12.2.5
 
 ### Patch Changes
