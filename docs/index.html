@@ -341,6 +341,16 @@
               <button
                 class="nav-button"
                 type="button"
+                data-target="src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+              >
+                src/templates/categories/food-drink/nutriflow/createAppManifest.ts
+                <small>8 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
                 data-target="src/templates/categories/lifestyle/stillpath/createAppManifest.ts"
               >
                 src/templates/categories/lifestyle/stillpath/createAppManifest.ts
@@ -373,7 +383,7 @@
             <div class="summary">
               <div><strong>57</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>29</strong><span class="muted">modules</span></div>
+              <div><strong>30</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -715,7 +725,7 @@
             </article>
             <article
               class="item"
-              data-search="src/templates/catalog.generated.ts src/templates/catalog.ts src/templates/categories/books-reading/reader/createAppManifest.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/templates/categories/social-community/chat/createAppManifest.ts TEMPLATE_DEFINITIONS"
+              data-search="src/templates/catalog.generated.ts src/templates/catalog.ts src/templates/categories/books-reading/reader/createAppManifest.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/templates/categories/food-drink/nutriflow/createAppManifest.ts src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/templates/categories/social-community/chat/createAppManifest.ts TEMPLATE_DEFINITIONS"
             >
               <h3>src/templates/catalog.generated.ts</h3>
               <p class="muted">Referenced module</p>
@@ -724,7 +734,8 @@
                 <code>src/templates/categories/books-reading/reader/createAppManifest.ts</code>,
                 <code
                   >src/templates/categories/education-learning/sharkprey/createAppManifest.ts</code
-                >, <code>src/templates/categories/lifestyle/stillpath/createAppManifest.ts</code>,
+                >, <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts</code>,
+                <code>src/templates/categories/lifestyle/stillpath/createAppManifest.ts</code>,
                 <code>src/templates/categories/social-community/chat/createAppManifest.ts</code>
               </p>
               <p><strong>Exports:</strong> <code>TEMPLATE_DEFINITIONS</code></p>
@@ -762,6 +773,15 @@
                 <strong>Dependencies:</strong> <code>src/internal/createValidatedManifest.ts</code>,
                 <code>src/internal/defaults.ts</code>
               </p>
+              <p><strong>Exports:</strong> <code>default</code></p>
+            </article>
+            <article
+              class="item"
+              data-search="src/templates/categories/food-drink/nutriflow/createAppManifest.ts src/internal/defaults.ts default"
+            >
+              <h3>src/templates/categories/food-drink/nutriflow/createAppManifest.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <code>src/internal/defaults.ts</code></p>
               <p><strong>Exports:</strong> <code>default</code></p>
             </article>
             <article
@@ -3408,6 +3428,8 @@
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
+                module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_social_community_chat_createAppManifest_ts
@@ -3426,6 +3448,11 @@
                 --&gt; module_src_internal_createValidatedManifest_ts
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
                 --&gt; module_src_internal_defaults_ts
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
+                package__ankhorage_templates -.-&gt;
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
@@ -3525,6 +3552,7 @@ graph TD
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_books_reading_reader_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+  module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_social_community_chat_createAppManifest_ts
   module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
@@ -3537,6 +3565,9 @@ graph TD
   package__ankhorage_templates -.-&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
+  module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt; module_src_internal_defaults_ts
@@ -3582,6 +3613,7 @@ graph TD
                 module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
                 module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -3623,6 +3655,8 @@ graph TD
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
+                module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_social_community_chat_createAppManifest_ts
@@ -3633,6 +3667,8 @@ graph TD
                 --&gt; module_src_internal_createValidatedManifest_ts
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
                 --&gt; module_src_internal_defaults_ts
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt;
                 module_src_internal_defaults_ts
                 module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt;
@@ -3670,6 +3706,7 @@ graph LR
   module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
   module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
+  module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
   module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -3705,12 +3742,14 @@ graph LR
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_books_reading_reader_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
+  module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_social_community_chat_createAppManifest_ts
   module_src_templates_catalog_ts --&gt; module_src_templates_catalog_generated_ts
   module_src_templates_categories_books_reading_reader_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_defaults_ts
@@ -3747,6 +3786,7 @@ graph LR
                 module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
+                module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
                 module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -3939,6 +3979,7 @@ graph LR
   module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
   module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
+  module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
   module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -4200,7 +4241,10 @@ sequenceDiagram
                 validateNavigatorManifest()
                 participant_validateNavigatorManifest--&gt;&gt;participant_createValidatedManifest:
                 return participant_createValidatedManifest--&gt;&gt;participant_createAppManifest:
-                return participant_createAppManifest-&gt;&gt;participant_createValidatedManifest:
+                return participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest:
+                validateNavigatorManifest()
+                participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
+                participant_createAppManifest-&gt;&gt;participant_createValidatedManifest:
                 createValidatedManifest()
                 participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
                 participant_createAppManifest--&gt;&gt;participant_createTemplateArtifact: return
@@ -4231,6 +4275,8 @@ sequenceDiagram
   participant_createValidatedManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
   participant_validateNavigatorManifest--&gt;&gt;participant_createValidatedManifest: return
   participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
+  participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
+  participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
   participant_createAppManifest-&gt;&gt;participant_createValidatedManifest: createValidatedManifest()
   participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
   participant_createAppManifest--&gt;&gt;participant_createTemplateArtifact: return
@@ -5284,6 +5330,98 @@ sequenceDiagram
                 >
               </p>
               <p>Apply optional portable transforms without altering the referenced capability.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-templates-categories-food-drink-nutriflow-createappmanifest-ts"
+          class="view"
+          data-view="src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/templates/categories/food-drink/nutriflow/createAppManifest.ts</h2>
+            <article
+              class="item"
+              data-search="createAppManifest src/templates/categories/food-drink/nutriflow/createAppManifest.ts Return the complete portable NutriFlow nutrition companion manifest."
+            >
+              <h3>createAppManifest</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:7:1</code>
+              </p>
+              <p>Return the complete portable NutriFlow nutrition companion manifest.</p>
+            </article>
+            <article
+              class="item"
+              data-search="heading src/templates/categories/food-drink/nutriflow/createAppManifest.ts Create a semantic heading within NutriFlow&#39;s shared screen hierarchy."
+            >
+              <h3>heading</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:19:1</code>
+              </p>
+              <p>Create a semantic heading within NutriFlow&#39;s shared screen hierarchy.</p>
+            </article>
+            <article
+              class="item"
+              data-search="copy src/templates/categories/food-drink/nutriflow/createAppManifest.ts Create concise supportive copy without duplicating the owner Text shape."
+            >
+              <h3>copy</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:24:1</code>
+              </p>
+              <p>Create concise supportive copy without duplicating the owner Text shape.</p>
+            </article>
+            <article
+              class="item"
+              data-search="action src/templates/categories/food-drink/nutriflow/createAppManifest.ts Create a route-backed primary action for a portable local flow."
+            >
+              <h3>action</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:29:1</code>
+              </p>
+              <p>Create a route-backed primary action for a portable local flow.</p>
+            </article>
+            <article
+              class="item"
+              data-search="recipeImage src/templates/categories/food-drink/nutriflow/createAppManifest.ts Render a bundled recipe image through the portable runtime media contract."
+            >
+              <h3>recipeImage</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:34:1</code>
+              </p>
+              <p>Render a bundled recipe image through the portable runtime media contract.</p>
+            </article>
+            <article
+              class="item"
+              data-search="mealLogSummary src/templates/categories/food-drink/nutriflow/createAppManifest.ts Create one non-saving local-food preview before its portable confirmation."
+            >
+              <h3>mealLogSummary</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:43:1</code>
+              </p>
+              <p>Create one non-saving local-food preview before its portable confirmation.</p>
+            </article>
+            <article
+              class="item"
+              data-search="recipeDetail src/templates/categories/food-drink/nutriflow/createAppManifest.ts Create one media-backed recipe detail screen for a specific local sample."
+            >
+              <h3>recipeDetail</h3>
+              <p class="muted">
+                <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts:85:1</code>
+              </p>
+              <p>Create one media-backed recipe detail screen for a specific local sample.</p>
+            </article>
+            <article
+              class="item"
+              data-search="navigateBinding src/templates/categories/food-drink/nutriflow/createAppManifest.ts Bind a supported interactive component event to a canonical Navigator route."
+            >
+              <h3>navigateBinding</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/food-drink/nutriflow/createAppManifest.ts:115:1</code
+                >
+              </p>
+              <p>Bind a supported interactive component event to a canonical Navigator route.</p>
             </article>
           </section>
         </section>

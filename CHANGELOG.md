@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.3.0
+
+### Minor Changes
+
+- 438c928: Add the portable NutriFlow food and drink template with local media, navigation, and nutrition companion flows.
+
 ## 12.2.6
 
 ### Patch Changes
