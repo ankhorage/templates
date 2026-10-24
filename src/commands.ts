@@ -1,5 +1,6 @@
 import type { AppCategory } from '@ankhorage/contracts';
 import type { Capability } from '@ankhorage/contracts/capability';
+import { formatSlugDisplayName } from '@ankhorage/utility/string';
 
 import {
   createTemplateArtifactForSelector,
@@ -21,7 +22,6 @@ import {
   type ProjectSeedDependencies,
 } from './projectSeed.js';
 import {
-  deriveDisplayNameFromSlug,
   parseProjectSlug,
   parseTemplateCategory,
   parseTemplateSelector,
@@ -227,7 +227,7 @@ async function runCreateCommand(
 ): Promise<TemplatesCommandRunResult> {
   const { projectSlug, selector } = parseCreateArguments(argv);
   const entry = services.resolveTemplateCatalogEntry(selector);
-  const displayName = deriveDisplayNameFromSlug(projectSlug);
+  const displayName = formatSlugDisplayName(projectSlug);
   const artifact = services.createTemplateArtifactForSelector({
     selector,
     projectSlug,

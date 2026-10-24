@@ -65,14 +65,6 @@ export function createTemplateSelector(category: AppCategory, slug: string): str
   return `${category}/${slug}`;
 }
 
-export function deriveDisplayNameFromSlug(projectSlug: string): string {
-  return projectSlug
-    .split('-')
-    .filter((segment) => segment.length > 0)
-    .map((segment) => `${segment[0]?.toUpperCase() ?? ''}${segment.slice(1)}`)
-    .join(' ');
-}
-
 function isAppCategory(value: string): value is AppCategory {
   return APP_CATEGORIES.some((category) => category === value);
 }
