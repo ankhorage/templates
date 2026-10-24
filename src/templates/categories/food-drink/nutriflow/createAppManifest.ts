@@ -39,13 +39,13 @@ function recipeImage(id: string, mediaId: string, alt: string): UiNode {
   };
 }
 
-/*** Create one deterministic local-food review before the portable meal-log confirmation. */
+/*** Create one non-saving local-food preview before its portable confirmation. */
 function mealLogSummary(input: MealLogSummaryInput) {
   return {
     id: `log-${input.id}`,
-    name: `${input.title} serving`,
+    name: `${input.title} sample preview`,
     title: input.title,
-    description: `Local serving summary: ${input.serving}, ${input.energy}.`,
+    description: `Sample serving preview: ${input.serving}, ${input.energy}.`,
     root: {
       id: `log-${input.id}-root`,
       type: 'Screen',
@@ -64,9 +64,9 @@ function mealLogSummary(input: MealLogSummaryInput) {
         },
         copy(
           `log-${input.id}-note`,
-          'This adds a deterministic local sample. Connect a meal service to persist personal entries.',
+          'This preview does not add or save a meal. Connect a meal service to persist personal entries.',
         ),
-        action(input.actionId, 'Add sample meal'),
+        action(input.actionId, 'Preview sample meal'),
       ],
     },
   };
@@ -290,8 +290,8 @@ const manifest = {
               value: 3,
               max: 4,
               centerValue: '3',
-              centerLabel: 'meals logged',
-              accessibilityLabel: 'Three meals logged today',
+              centerLabel: 'sample meals',
+              accessibilityLabel: 'Three sample meals displayed today',
             },
           },
           {
@@ -309,7 +309,7 @@ const manifest = {
                 props: {
                   label: 'Protein',
                   value: 'Balanced',
-                  description: 'from today’s meals',
+                  description: 'from today’s sample meals',
                   compact: true,
                 },
               },
@@ -325,7 +325,7 @@ const manifest = {
               },
             ],
           },
-          heading('home-meals', 'Today’s meals'),
+          heading('home-meals', 'Today’s sample meals'),
           {
             id: 'home-breakfast',
             type: 'Card',
@@ -357,18 +357,18 @@ const manifest = {
     'log-meal': {
       id: 'log-meal',
       name: 'Log Meal',
-      title: 'Log a meal',
-      description: 'Search, scan, or use a local sample entry.',
+      title: 'Preview a meal',
+      description: 'Browse local samples; food search and scanning are not configured.',
       root: {
         id: 'log-meal-root',
         type: 'Screen',
         props: { width: 'default', scroll: true },
         children: [
-          heading('log-meal-title', 'Log a meal', 1),
+          heading('log-meal-title', 'Preview a meal', 1),
           {
             id: 'log-meal-modes',
             type: 'Tabs',
-            props: { defaultValue: 'search', accessibilityLabel: 'Meal logging modes' },
+            props: { defaultValue: 'search', accessibilityLabel: 'Meal preview modes' },
             children: [
               {
                 id: 'log-meal-tab-list',
@@ -416,7 +416,7 @@ const manifest = {
                     props: {
                       permissionStatus: 'unavailable',
                       title: 'Scanner unavailable',
-                      description: 'This starter has no camera adapter configured.',
+                      description: 'Scanner integration is not configured in this starter.',
                       overlayTitle: 'Use local sample foods instead',
                       overlayDescription: 'Barcode scans need a host camera capability.',
                       manualEntryLabel: 'Browse sample foods',
@@ -520,18 +520,18 @@ const manifest = {
     }),
     'log-added': {
       id: 'log-added',
-      name: 'Sample meal added',
-      title: 'Sample meal added',
-      description: 'A deterministic confirmation for the local meal-log flow.',
+      name: 'Sample meal preview',
+      title: 'Sample meal preview',
+      description: 'A non-saving preview for the portable starter.',
       root: {
         id: 'log-added-root',
         type: 'Screen',
         props: { width: 'narrow', scroll: true },
         children: [
-          heading('log-added-title', 'Sample meal added', 1),
+          heading('log-added-title', 'Sample meal preview', 1),
           copy(
             'log-added-copy',
-            'Your selected local sample is now reflected in this starter flow. Connect a meal service to persist personal entries.',
+            'This is a preview only: no meal was added, saved, or persisted. Connect a meal service to record personal entries.',
           ),
           action('log-added-home', 'View sample day'),
         ],
@@ -659,7 +659,7 @@ const manifest = {
                       recipeImage('plan-dinner-image', 'lemon-salmon', 'Lemon herb salmon'),
                     ],
                   },
-                  action('plan-add-meal', 'Browse recipes to add'),
+                  action('plan-add-meal', 'Browse sample recipes'),
                 ],
               },
               {
@@ -747,7 +747,7 @@ const manifest = {
                   },
                   copy(
                     'progress-empty',
-                    'No connected history yet. Add meals over time to see your own patterns.',
+                    'No connected history yet. Connect a meal service to see your own patterns.',
                   ),
                   action('progress-plan', 'Open meal plan'),
                 ],
@@ -889,7 +889,7 @@ const manifest = {
           heading('settings-title', 'Privacy and settings', 1),
           copy(
             'settings-copy',
-            'NutriFlow stores only the portable sample state until you configure a service.',
+            'NutriFlow includes portable sample content until you configure a service.',
           ),
           {
             id: 'settings-notifications',

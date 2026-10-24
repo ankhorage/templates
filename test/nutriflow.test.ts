@@ -6,7 +6,7 @@ import { expect, test } from 'bun:test';
 
 import { createTemplateArtifact, resolveTemplate, validateTemplateManifest } from '../src/index';
 
-function assertLocalMealLogFlow() {
+function assertSampleMealPreview() {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
   const logChildren = manifest.screens['log-meal']?.root.children ?? [];
   const logModes = logChildren.find(({ id }) => id === 'log-meal-modes');
@@ -26,10 +26,10 @@ function assertLocalMealLogFlow() {
     type: 'BarcodeScannerView',
     props: { permissionStatus: 'unavailable' },
   });
-  assertLocalFoodResults();
+  assertSampleFoodResults();
 }
 
-function assertLocalFoodResults() {
+function assertSampleFoodResults() {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
   const results = manifest.screens['log-results']?.root.children ?? [];
 
@@ -51,7 +51,7 @@ test('NutriFlow is discovered as the portable food and drink template', () => {
   });
 });
 
-test('NutriFlow keeps its complete local nutrition flow release-valid', () => {
+test('NutriFlow keeps its complete preview flow release-valid', () => {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
 
   expect(Object.keys(manifest.screens)).toEqual([
@@ -120,7 +120,7 @@ test('NutriFlow uses release-backed navigation for its primary local actions', (
   ).toEqual([]);
 });
 
-test('NutriFlow provides a deterministic local meal-log flow and media-backed recipe tiles', () => {
+test('NutriFlow provides a non-saving meal preview and media-backed recipe tiles', () => {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
   const progress = manifest.screens.progress?.root.children?.find(
     ({ id }) => id === 'progress-range',
@@ -130,7 +130,13 @@ test('NutriFlow provides a deterministic local meal-log flow and media-backed re
   );
 
   expect(ZORA_COMPONENT_META.ProgressRing).toBeDefined();
-  assertLocalMealLogFlow();
+  assertSampleMealPreview();
+  expect(manifest.screens['log-added']?.title).toBe('Sample meal preview');
+  expect(
+    manifest.screens['log-added']?.root.children?.find(({ id }) => id === 'log-added-copy')?.props
+      ?.text,
+  ).toEqual(expect.stringContaining('no meal was added'));
+  expect(JSON.stringify(manifest.dataBindings)).not.toContain('state.set');
   expect(progress).toMatchObject({ type: 'Tabs' });
   expect(imageAssets.map((asset) => asset.id)).toEqual([
     'green-bowl',

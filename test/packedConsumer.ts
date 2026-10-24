@@ -32,7 +32,12 @@ function createPackedConsumer(packageDirectory: string) {
     join(consumerDirectory, 'package.json'),
     JSON.stringify({ name: 'reader-template-consumer', private: true, version: '0.0.0' }),
   );
-  run('bun', ['install', '--ignore-scripts', tarballPath], consumerDirectory, cacheDirectory);
+  run(
+    'bun',
+    ['install', '--offline', '--ignore-scripts', tarballPath],
+    consumerDirectory,
+    cacheDirectory,
+  );
   return { temporaryRoot, consumerDirectory, cacheDirectory };
 }
 
@@ -153,7 +158,6 @@ function run(
     encoding: 'utf8',
     env: {
       ...process.env,
-      BUN_INSTALL_CACHE_DIR: cacheDirectory,
       NPM_CONFIG_CACHE: cacheDirectory,
       TMPDIR: cacheDirectory,
     },
