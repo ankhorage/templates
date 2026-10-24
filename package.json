@@ -124,7 +124,7 @@
     "@ankhorage/contracts": "^26.0.1",
     "@ankhorage/navigator": "^3.5.9",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^25.8.17"
+    "@ankhorage/zora": "^25.8.18"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.2",
