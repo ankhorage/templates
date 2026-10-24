@@ -1,0 +1,21 @@
+{
+  "assets": [
+    {
+      "mediaId": "urban-water-map",
+      "role": "image",
+      "sourcePath": "assets/images/urban-water-map.png",
+      "targetPath": "assets/images/urban-water-map.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/map/root/children/4/props/source",
+        "/screens/site-detail/root/children/1/props/source"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "sourcePath": "assets/screens/design.png",
+      "targetPath": "assets/screens/design.png"
+    }
+  ]
+}

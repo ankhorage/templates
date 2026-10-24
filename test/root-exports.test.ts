@@ -45,6 +45,13 @@ test('discovers each portable template from the canonical directory tree', () =>
       sourceRoot: 'src/templates/categories/books-reading/reader',
     },
     {
+      category: 'business_productivity',
+      name: 'Urban Water Monitor',
+      selector: 'business_productivity/urban-water-monitor',
+      slug: 'urban-water-monitor',
+      sourceRoot: 'src/templates/categories/business-productivity/urban-water-monitor',
+    },
+    {
       category: 'education_learning',
       name: 'SharkPrey',
       selector: 'education_learning/sharkprey',

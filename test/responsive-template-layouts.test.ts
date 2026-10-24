@@ -34,6 +34,20 @@ test('every published template plans navigation at every supported responsive si
 });
 
 const expectedWidths = {
+  'business_productivity/urban-water-monitor': {
+    dashboard: 'default',
+    map: 'wide',
+    events: 'default',
+    campaigns: 'default',
+    'field-capture': 'default',
+    results: 'default',
+    profile: 'default',
+    'site-detail': 'default',
+    'event-detail': 'default',
+    'campaign-detail': 'default',
+    'capture-review': 'default',
+    'capture-confirmed': 'default',
+  },
   'education_learning/sharkprey': {
     onboarding: 'narrow',
     'training-setup': 'narrow',
