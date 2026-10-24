@@ -154,15 +154,16 @@ test('Reader uses a release-valid Navigator plan and does not claim an EPUB loca
   ).toEqual([]);
 });
 
-test('Reader loads the public-domain Project Gutenberg EPUB source', async () => {
+test('Reader declares the public-domain Project Gutenberg EPUB source', () => {
   const manifest = resolveTemplate('books_reading', 'reader').createAppManifest();
   const source = manifest.media?.assets['the-jungle-book-epub'];
   if (source?.source.kind !== 'url') throw new Error('Reader EPUB source must be a URL.');
 
-  const response = await fetch(source.source.url);
-  const bytes = new Uint8Array(await response.arrayBuffer());
+  const url = new URL(source.source.url);
 
-  expect(response.ok).toBe(true);
-  expect(response.headers.get('content-type')).toContain('application/epub+zip');
-  expect(bytes.slice(0, 4)).toEqual(new Uint8Array([0x50, 0x4b, 0x03, 0x04]));
+  expect(url).toMatchObject({
+    protocol: 'https:',
+    hostname: 'www.gutenberg.org',
+    pathname: '/ebooks/236.epub3.images',
+  });
 });

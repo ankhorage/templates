@@ -1,5 +1,15 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
+import {
+  mkdirSync,
+  mkdtempSync,
+  readdirSync,
+  readFileSync,
+  renameSync,
+  rmSync,
+  statSync,
+  symlinkSync,
+  writeFileSync,
+} from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
 
@@ -22,18 +32,16 @@ function createPackedConsumer(packageDirectory: string) {
   const temporaryRoot = mkdtempSync(join(tmpdir(), 'templates-packed-reader-'));
   const packDirectory = join(temporaryRoot, 'pack');
   const consumerDirectory = join(temporaryRoot, 'consumer');
-  const cacheDirectory = join(temporaryRoot, 'cache');
   mkdirSync(packDirectory);
   mkdirSync(consumerDirectory);
-  mkdirSync(cacheDirectory);
-  const tarballPath = createPackageTarball(packageDirectory, packDirectory, cacheDirectory);
+  const tarballPath = createPackageTarball(packageDirectory, packDirectory);
 
   writeFileSync(
     join(consumerDirectory, 'package.json'),
     JSON.stringify({ name: 'reader-template-consumer', private: true, version: '0.0.0' }),
   );
-  run('bun', ['install', '--ignore-scripts', tarballPath], consumerDirectory, cacheDirectory);
-  return { temporaryRoot, consumerDirectory, cacheDirectory };
+  materializePackedConsumer(packageDirectory, consumerDirectory, tarballPath);
+  return { temporaryRoot, consumerDirectory };
 }
 
 function assertReaderManifestIsExposed(consumer: ReturnType<typeof createPackedConsumer>): void {
@@ -41,7 +49,6 @@ function assertReaderManifestIsExposed(consumer: ReturnType<typeof createPackedC
     'bun',
     ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'list'],
     consumer.consumerDirectory,
-    consumer.cacheDirectory,
   );
   expect(listOutput).toContain('books_reading/reader - Reeda');
 
@@ -49,7 +56,6 @@ function assertReaderManifestIsExposed(consumer: ReturnType<typeof createPackedC
     'bun',
     ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', 'books_reading/reader'],
     consumer.consumerDirectory,
-    consumer.cacheDirectory,
   );
   const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
   expect(inspected.manifest).toMatchObject({
@@ -111,7 +117,6 @@ function assertReaderCoverIsMaterialized(consumer: ReturnType<typeof createPacke
       'books_reading/reader',
     ],
     consumer.consumerDirectory,
-    consumer.cacheDirectory,
   );
   const generatedCover = join(
     consumer.consumerDirectory,
@@ -126,36 +131,54 @@ function assertReaderCoverIsMaterialized(consumer: ReturnType<typeof createPacke
   expect(readFileSync(generatedCover)).toEqual(readFileSync(packagedCover));
 }
 
-function createPackageTarball(
-  packageDirectory: string,
-  packDirectory: string,
-  cacheDirectory: string,
-): string {
+function createPackageTarball(packageDirectory: string, packDirectory: string): string {
   const output = run(
     'npm',
     ['pack', '--ignore-scripts', '--json', '--silent', '--pack-destination', packDirectory],
     packageDirectory,
-    cacheDirectory,
   );
   const [packed] = JSON.parse(output) as readonly { readonly filename: string }[];
   if (packed === undefined) throw new Error('npm pack did not produce a package tarball.');
   return join(packDirectory, basename(packed.filename));
 }
 
-function run(
-  command: string,
-  arguments_: readonly string[],
-  cwd: string,
-  cacheDirectory: string,
-): string {
+function materializePackedConsumer(
+  packageDirectory: string,
+  consumerDirectory: string,
+  tarballPath: string,
+): void {
+  const consumerNodeModules = join(consumerDirectory, 'node_modules');
+  mkdirSync(consumerNodeModules);
+  linkInstalledDependencies(packageDirectory, consumerNodeModules);
+  run('tar', ['-xzf', tarballPath, '-C', consumerNodeModules], consumerDirectory);
+  renameSync(
+    join(consumerNodeModules, 'package'),
+    join(consumerNodeModules, '@ankhorage', 'templates'),
+  );
+}
+
+function linkInstalledDependencies(packageDirectory: string, consumerNodeModules: string): void {
+  const sourceNodeModules = join(packageDirectory, 'node_modules');
+  for (const entry of readdirSync(sourceNodeModules)) {
+    if (entry === '@ankhorage') {
+      linkAnkhorageDependencies(join(sourceNodeModules, entry), join(consumerNodeModules, entry));
+      continue;
+    }
+    symlinkSync(join(sourceNodeModules, entry), join(consumerNodeModules, entry), 'dir');
+  }
+}
+
+function linkAnkhorageDependencies(sourceDirectory: string, consumerDirectory: string): void {
+  mkdirSync(consumerDirectory);
+  for (const entry of readdirSync(sourceDirectory)) {
+    if (entry === 'templates') continue;
+    symlinkSync(join(sourceDirectory, entry), join(consumerDirectory, entry), 'dir');
+  }
+}
+
+function run(command: string, arguments_: readonly string[], cwd: string): string {
   return execFileSync(command, arguments_, {
     cwd,
     encoding: 'utf8',
-    env: {
-      ...process.env,
-      BUN_INSTALL_CACHE_DIR: cacheDirectory,
-      NPM_CONFIG_CACHE: cacheDirectory,
-      TMPDIR: cacheDirectory,
-    },
   });
 }

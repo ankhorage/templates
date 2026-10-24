@@ -1,0 +1,94 @@
+{
+  "assets": [
+    {
+      "mediaId": "green-bowl",
+      "role": "image",
+      "sourcePath": "assets/images/green-bowl.png",
+      "targetPath": "assets/images/green-bowl.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/home/root/children/6/children/0/props/source",
+        "/screens/home/root/children/10/props/imageSource",
+        "/screens/log-results/root/children/3/children/0/props/source",
+        "/screens/log-green-bowl/root/children/1/props/source",
+        "/screens/recipes/root/children/3/props/imageSource",
+        "/screens/plan/root/children/1/children/1/children/2/children/0/props/source",
+        "/screens/community/root/children/2/children/0/props/source",
+        "/screens/recipe-details-green-bowl/root/children/1/props/source"
+      ]
+    },
+    {
+      "mediaId": "lemon-salmon",
+      "role": "image",
+      "sourcePath": "assets/images/lemon-salmon.png",
+      "targetPath": "assets/images/lemon-salmon.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/log-results/root/children/4/children/0/props/source",
+        "/screens/log-lemon-salmon/root/children/1/props/source",
+        "/screens/recipes/root/children/4/props/imageSource",
+        "/screens/plan/root/children/1/children/1/children/3/children/0/props/source",
+        "/screens/recipe-details-lemon-salmon/root/children/1/props/source"
+      ]
+    },
+    {
+      "mediaId": "berry-oats",
+      "role": "image",
+      "sourcePath": "assets/images/berry-oats.png",
+      "targetPath": "assets/images/berry-oats.png",
+      "contentType": "image/png",
+      "usages": [
+        "/screens/home/root/children/5/children/0/props/source",
+        "/screens/log-meal/root/children/1/children/3/children/0/children/0/props/source",
+        "/screens/log-results/root/children/2/children/0/props/source",
+        "/screens/log-berry-oats/root/children/1/props/source",
+        "/screens/recipes/root/children/5/props/imageSource",
+        "/screens/plan/root/children/1/children/1/children/1/children/0/props/source",
+        "/screens/recipe-details-berry-oats/root/children/1/props/source"
+      ]
+    },
+    {
+      "mediaId": "nav-home",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/home.svg",
+      "targetPath": "assets/images/svg/home.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/0/icon/source"]
+    },
+    {
+      "mediaId": "nav-log",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/log.svg",
+      "targetPath": "assets/images/svg/log.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/1/icon/source"]
+    },
+    {
+      "mediaId": "nav-recipes",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/recipes.svg",
+      "targetPath": "assets/images/svg/recipes.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/2/icon/source"]
+    },
+    {
+      "mediaId": "nav-progress",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/progress.svg",
+      "targetPath": "assets/images/svg/progress.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/3/icon/source"]
+    },
+    {
+      "mediaId": "nav-profile",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/profile.svg",
+      "targetPath": "assets/images/svg/profile.svg",
+      "contentType": "image/svg+xml",
+      "usages": ["/navigator/routes/0/navigator/routes/4/icon/source"]
+    }
+  ],
+  "screens": [
+    { "sourcePath": "assets/screens/design.png", "targetPath": "assets/screens/design.png" }
+  ]
+}
