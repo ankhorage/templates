@@ -1,6 +1,8 @@
 import { existsSync } from 'node:fs';
 
+import type { AppManifest } from '@ankhorage/contracts';
 import { createNavigatorPlan } from '@ankhorage/navigator';
+import { CAPABILITIES as RUNTIME_CAPABILITIES } from '@ankhorage/runtime/capabilities';
 import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 import { expect, test } from 'bun:test';
 
@@ -36,8 +38,41 @@ function assertSampleFoodResults() {
   expect(
     results.filter(({ type }) => type === 'Card').map(({ props }) => props?.description),
   ).toEqual(['1 bowl · 320 kcal', '1 bowl · 480 kcal', '1 plate · 540 kcal']);
-  expect(manifest.dataBindings?.['log-add-berry-oats']).toMatchObject({
-    events: { press: [{ target: { input: { route: { value: '/log/added' } } } }] },
+  expect(manifest.dataBindings?.['log-add-berry-oats']?.events?.press?.[1]).toMatchObject({
+    target: { input: { route: { value: '/log/added' } } },
+  });
+}
+
+function assertSampleMealStateBinding(manifest: AppManifest) {
+  const addMeal = manifest.dataBindings?.['log-add-berry-oats']?.events?.press?.[0]?.target;
+  const stateSet = RUNTIME_CAPABILITIES.find(({ id }) => id === 'state.set');
+
+  expect(stateSet?.owner).toBe('@ankhorage/runtime');
+  expect(stateSet?.binding).toEqual({ kind: 'state', bindableAs: ['target'] });
+  expect(addMeal).toMatchObject({
+    capability: 'state.set',
+    input: {
+      path: { value: 'nutriflow' },
+      value: {
+        value: {
+          daily: { mealCount: 4 },
+          lastLoggedMeal: { title: 'Berry overnight oats' },
+        },
+      },
+    },
+  });
+  expect(manifest.dataBindings?.['log-add-berry-oats']?.events?.press?.[1]).toMatchObject({
+    target: { capability: 'navigator.navigate', input: { route: { value: '/log/added' } } },
+  });
+  expect(manifest.dataBindings?.['log-added-copy']).toMatchObject({
+    props: {
+      text: {
+        value: {
+          kind: 'fallback',
+          value: { capability: 'state.nutriflow', path: 'lastLoggedMeal.confirmation' },
+        },
+      },
+    },
   });
 }
 
@@ -120,7 +155,7 @@ test('NutriFlow uses release-backed navigation for its primary local actions', (
   ).toEqual([]);
 });
 
-test('NutriFlow provides a non-saving meal preview and media-backed recipe tiles', () => {
+test('NutriFlow stores a sample meal through the released Runtime state contract', () => {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
   const progress = manifest.screens.progress?.root.children?.find(
     ({ id }) => id === 'progress-range',
@@ -131,12 +166,8 @@ test('NutriFlow provides a non-saving meal preview and media-backed recipe tiles
 
   expect(ZORA_COMPONENT_META.ProgressRing).toBeDefined();
   assertSampleMealPreview();
-  expect(manifest.screens['log-added']?.title).toBe('Sample meal preview');
-  expect(
-    manifest.screens['log-added']?.root.children?.find(({ id }) => id === 'log-added-copy')?.props
-      ?.text,
-  ).toEqual(expect.stringContaining('no meal was added'));
-  expect(JSON.stringify(manifest.dataBindings)).not.toContain('state.set');
+  expect(manifest.state).toEqual({ provider: 'legend', persistence: false });
+  assertSampleMealStateBinding(manifest);
   expect(progress).toMatchObject({ type: 'Tabs' });
   expect(imageAssets.map((asset) => asset.id)).toEqual([
     'green-bowl',
