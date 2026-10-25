@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.4.0",
+      "value": "v12.4.1",
       "color": "cb3837"
     },
     {
@@ -3376,10 +3376,10 @@
     },
     {
       "name": "createTrainingDifficultyBinding",
-      "description": null,
+      "description": "Bind a difficulty selection to its task lookup and explicit empty-result diagnostic.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 148,
+        "line": 149,
         "column": 1
       }
     },
@@ -3388,7 +3388,7 @@
       "description": "Reference a named result from a canonical Poker Training API capability.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 192,
+        "line": 213,
         "column": 1
       }
     },
@@ -3397,7 +3397,7 @@
       "description": "Supply a portable fallback expression when a binding has no readable value.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 202,
+        "line": 223,
         "column": 1
       }
     },
@@ -3406,7 +3406,7 @@
       "description": "Apply optional portable transforms without altering the referenced capability.",
       "sourceLocation": {
         "filePath": "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
-        "line": 207,
+        "line": 228,
         "column": 1
       }
     },

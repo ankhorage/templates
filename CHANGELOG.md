@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.4.1
+
+### Patch Changes
+
+- 50c2937: Report an explicit alert when a SharkPrey training task query succeeds with no matching task.
+
 ## 12.4.0
 
 ### Minor Changes
