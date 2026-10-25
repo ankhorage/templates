@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.3.2",
+      "value": "v12.4.0",
       "color": "cb3837"
     },
     {
@@ -3415,7 +3415,7 @@
       "description": "Return the complete portable NutriFlow nutrition companion manifest.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 7,
+        "line": 12,
         "column": 1
       }
     },
@@ -3424,7 +3424,7 @@
       "description": "Create a semantic heading within NutriFlow's shared screen hierarchy.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 19,
+        "line": 24,
         "column": 1
       }
     },
@@ -3433,7 +3433,7 @@
       "description": "Create concise supportive copy without duplicating the owner Text shape.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 24,
+        "line": 29,
         "column": 1
       }
     },
@@ -3442,7 +3442,7 @@
       "description": "Create a route-backed primary action for a portable local flow.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 29,
+        "line": 34,
         "column": 1
       }
     },
@@ -3451,16 +3451,16 @@
       "description": "Render a bundled recipe image through the portable runtime media contract.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 34,
+        "line": 39,
         "column": 1
       }
     },
     {
       "name": "mealLogSummary",
-      "description": "Create one non-saving local-food preview before its portable confirmation.",
+      "description": "Create one local-food confirmation before its in-memory meal-log update.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 43,
+        "line": 48,
         "column": 1
       }
     },
@@ -3469,7 +3469,16 @@
       "description": "Create one media-backed recipe detail screen for a specific local sample.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 85,
+        "line": 90,
+        "column": 1
+      }
+    },
+    {
+      "name": "mealAddedConfirmation",
+      "description": "Create the success confirmation for the sample meal selected by the preceding update.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "line": 112,
         "column": 1
       }
     },
@@ -3478,7 +3487,43 @@
       "description": "Bind a supported interactive component event to a canonical Navigator route.",
       "sourceLocation": {
         "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "line": 115,
+        "line": 143,
+        "column": 1
+      }
+    },
+    {
+      "name": "addSampleMealBinding",
+      "description": "Bind one local sample to Runtime's atomic append before its success-only confirmation.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "line": 166,
+        "column": 1
+      }
+    },
+    {
+      "name": "mealCollection",
+      "description": "Read NutriFlow's single session-only meal collection, initially empty for a new Runtime session.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "line": 211,
+        "column": 1
+      }
+    },
+    {
+      "name": "mealCount",
+      "description": "Derive the logged-meal count from NutriFlow's canonical collection through Runtime.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "line": 220,
+        "column": 1
+      }
+    },
+    {
+      "name": "repeatedMealField",
+      "description": "Read one repeated meal field from the current Runtime repeat item.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "line": 225,
         "column": 1
       }
     },
@@ -4856,9 +4901,51 @@
         "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
       },
       {
+        "fromSymbol": "mealAddedConfirmation",
+        "toSymbol": "heading",
+        "callExpression": "heading",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "mealAddedConfirmation",
+        "toSymbol": "copy",
+        "callExpression": "copy",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "mealAddedConfirmation",
+        "toSymbol": "action",
+        "callExpression": "action",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "mealCount",
+        "toSymbol": "mealCollection",
+        "callExpression": "mealCollection",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
         "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
         "toSymbol": "navigateBinding",
         "callExpression": "navigateBinding",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "toSymbol": "addSampleMealBinding",
+        "callExpression": "addSampleMealBinding",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "toSymbol": "mealCount",
+        "callExpression": "mealCount",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "toSymbol": "repeatedMealField",
+        "callExpression": "repeatedMealField",
         "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
       },
       {
@@ -4875,8 +4962,8 @@
       },
       {
         "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
-        "toSymbol": "recipeImage",
-        "callExpression": "recipeImage",
+        "toSymbol": "mealCollection",
+        "callExpression": "mealCollection",
         "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
       },
       {
@@ -4887,8 +4974,20 @@
       },
       {
         "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "toSymbol": "recipeImage",
+        "callExpression": "recipeImage",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
         "toSymbol": "mealLogSummary",
         "callExpression": "mealLogSummary",
+        "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "toSymbol": "mealAddedConfirmation",
+        "callExpression": "mealAddedConfirmation",
         "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
       },
       {

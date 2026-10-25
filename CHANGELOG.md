@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.4.0
+
+### Minor Changes
+
+- a3708f7: Make NutriFlow's local sample meal log mutate portable in-memory Runtime state before showing its confirmation.
+
 ## 12.3.2
 
 ### Patch Changes
