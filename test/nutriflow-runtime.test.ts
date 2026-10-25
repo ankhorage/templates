@@ -1,5 +1,7 @@
 import type { AppManifest, BindingValue, StateAdapter, UiNode } from '@ankhorage/contracts';
 import { expect, mock, test } from 'bun:test';
+import React from 'react';
+import { renderToStaticMarkup } from 'react-dom/server';
 
 import { resolveTemplate } from '../src/index';
 
@@ -10,6 +12,26 @@ await mock.module('react-native', () => ({
 }));
 
 const runtime = await import('@ankhorage/runtime');
+
+/*** Keep the mounted test registry serializable while preserving Runtime child output. */
+function asReactNode(value: unknown): React.ReactNode {
+  if (typeof value === 'string' || typeof value === 'number') return value;
+  if (React.isValidElement(value)) return value;
+  if (Array.isArray(value)) return value.map(asReactNode);
+  return null;
+}
+
+const runtimeTestRegistry = Object.fromEntries(
+  ['Card', 'List', 'MetricCard', 'Screen', 'Text'].map((componentType) => [
+    componentType,
+    ({ children, description, label, text, title, value }: Record<string, unknown>) =>
+      React.createElement(
+        'section',
+        { 'data-runtime-component': componentType },
+        [label, title, value, text, description, children].map(asReactNode),
+      ),
+  ]),
+);
 
 /*** Locate one authored node for Runtime event dispatch acceptance. */
 function findNode(node: UiNode, id: string): UiNode {
@@ -51,6 +73,25 @@ function createDispatcher(manifest: AppManifest, stateAdapter: StateAdapter) {
   return { dataBindings, executeCapability, routes };
 }
 
+/*** Mount the Home manifest through Runtime and return its accessible text output. */
+function renderHome(manifest: AppManifest, stateAdapter: StateAdapter): string {
+  const {
+    dataBindings,
+    screens: { home },
+  } = manifest;
+  if (home === undefined) throw new Error('Missing NutriFlow Home.');
+  if (dataBindings === undefined) throw new Error('NutriFlow requires data bindings.');
+  return renderToStaticMarkup(
+    React.createElement(runtime.RuntimeRenderer, {
+      dataBindings,
+      isRoot: true,
+      node: home.root,
+      registry: runtimeTestRegistry,
+      stateAdapter,
+    }),
+  );
+}
+
 /*** Dispatch one real Runtime press and retain the released result slot across attempts. */
 async function press(
   manifest: AppManifest,
@@ -78,7 +119,7 @@ async function press(
   });
 }
 
-test('NutriFlow appends repeatedly and exposes reactive state-backed Home bindings', async () => {
+test('NutriFlow appends repeatedly and mounts each in-memory meal on Home', async () => {
   const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
   const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
   const dispatcher = createDispatcher(manifest, stateAdapter);
@@ -90,7 +131,6 @@ test('NutriFlow appends repeatedly and exposes reactive state-backed Home bindin
   const { home } = manifest.screens;
   if (home === undefined) throw new Error('Missing NutriFlow Home.');
   const list = findNode(home.root, 'home-meal-list');
-  const progress = findNode(home.root, 'home-progress');
 
   const { repeat } = list;
   if (repeat === undefined) throw new Error('NutriFlow Home meal list must repeat.');
@@ -113,15 +153,33 @@ test('NutriFlow appends repeatedly and exposes reactive state-backed Home bindin
     '/log/added/green-bowl',
     '/log/added/berry-oats',
   ]);
-  expect(
-    runtime.resolveRuntimeBindings({
-      dataBindings: dispatcher.dataBindings,
-      node: progress,
-      props: progress.props ?? {},
-      stateAdapter,
-    }).props,
-  ).toMatchObject({ centerValue: 3, value: 3, accessibilityLabel: 'Meals logged in this session' });
+  const rendered = renderHome(manifest, stateAdapter);
+  expect(rendered).toContain('Meals logged this session3');
+  expect(rendered.match(/Berry overnight oats/g)).toHaveLength(2);
+  expect(rendered).toContain('Green grain bowl');
+  expect(rendered).not.toContain('No meals logged yet');
   if (subscription.ok) await subscription.data.unsubscribe();
+});
+
+test('NutriFlow mounts the repeat empty state and unbounded meal count', () => {
+  const manifest = resolveTemplate('food_drink', 'nutriflow').createAppManifest();
+  const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
+
+  expect(renderHome(manifest, stateAdapter)).toContain(
+    'No meals logged yet. Add a local sample to begin.',
+  );
+  stateAdapter.set('nutriflow.meals', [
+    { energy: '320 kcal', serving: '1 bowl', title: 'Berry overnight oats' },
+    { energy: '480 kcal', serving: '1 bowl', title: 'Green grain bowl' },
+    { energy: '540 kcal', serving: '1 plate', title: 'Lemon herb salmon' },
+    { energy: '320 kcal', serving: '1 bowl', title: 'Berry overnight oats' },
+    { energy: '480 kcal', serving: '1 bowl', title: 'Green grain bowl' },
+  ]);
+
+  const rendered = renderHome(manifest, stateAdapter);
+  expect(rendered).toContain('Meals logged this session5');
+  expect(rendered).toContain('Lemon herb salmon');
+  expect(rendered).not.toContain('No meals logged yet');
 });
 
 test('NutriFlow clears a prior success slot and does not navigate on failed update', async () => {

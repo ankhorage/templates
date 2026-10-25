@@ -280,20 +280,11 @@ const bindings: ComponentDataBindingRegistry = {
   'profile-settings': navigateBinding('profile-settings', 'Button', '/settings'),
   'community-home': navigateBinding('community-home', 'Button', '/'),
   'settings-profile': navigateBinding('settings-profile', 'Button', '/profile'),
-  'home-progress': {
-    componentId: 'home-progress',
-    componentType: 'ProgressRing',
+  'home-meal-count': {
+    componentId: 'home-meal-count',
+    componentType: 'MetricCard',
     props: {
       value: { value: mealCount() },
-      centerValue: { value: mealCount() },
-      centerLabel: { value: { kind: 'literal', value: 'Meals logged' } },
-    },
-  },
-  'home-support': {
-    componentId: 'home-support',
-    componentType: 'Text',
-    props: {
-      text: { value: mealCount() },
     },
   },
   'home-meal': {
@@ -437,14 +428,13 @@ const manifest = {
           heading('home-title', 'Good morning, Maya', 1),
           copy('home-support', 'A thoughtful meal is already a good start.', 'lead'),
           {
-            id: 'home-progress',
-            type: 'ProgressRing',
+            id: 'home-meal-count',
+            type: 'MetricCard',
             props: {
-              value: 3,
-              max: 4,
-              centerValue: '3',
-              centerLabel: 'Meals logged',
-              accessibilityLabel: 'Meals logged in this session',
+              label: 'Meals logged this session',
+              value: '0',
+              description: 'Entries are not persisted.',
+              tone: 'secondary',
             },
           },
           {
@@ -482,11 +472,14 @@ const manifest = {
           {
             id: 'home-meal-list',
             type: 'List',
-            props: {
-              accessibilityLabel: 'Meals logged in this session',
-              emptyText: 'No meals logged yet. Add a local sample to begin.',
+            props: { accessibilityLabel: 'Meals logged in this session' },
+            repeat: {
+              source: mealCollection(),
+              itemAlias: 'meal',
+              empty: [
+                copy('home-meals-empty', 'No meals logged yet. Add a local sample to begin.'),
+              ],
             },
-            repeat: { source: mealCollection(), itemAlias: 'meal' },
             children: [{ id: 'home-meal', type: 'Card', props: {} }],
           },
           action('home-log-meal', 'Log a meal'),
