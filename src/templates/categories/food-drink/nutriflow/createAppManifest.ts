@@ -1,4 +1,9 @@
-import type { AppManifest, ComponentDataBindingRegistry, UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  BindingExpression,
+  ComponentDataBindingRegistry,
+  UiNode,
+} from '@ankhorage/contracts';
 import { validateNavigatorManifest } from '@ankhorage/navigator';
 
 import { BASE_INFRA } from '../../../../internal/defaults';
@@ -39,7 +44,7 @@ function recipeImage(id: string, mediaId: string, alt: string): UiNode {
   };
 }
 
-/*** Create one non-saving local-food preview before its portable confirmation. */
+/*** Create one local-food confirmation before its in-memory meal-log update. */
 function mealLogSummary(input: MealLogSummaryInput) {
   return {
     id: `log-${input.id}`,
@@ -64,9 +69,9 @@ function mealLogSummary(input: MealLogSummaryInput) {
         },
         copy(
           `log-${input.id}-note`,
-          'This preview does not add or save a meal. Connect a meal service to persist personal entries.',
+          'Add this local sample to today for this session. Personal entries are not persisted.',
         ),
-        action(input.actionId, 'Preview sample meal'),
+        action(input.actionId, 'Add sample meal'),
       ],
     },
   };
@@ -103,6 +108,29 @@ function recipeDetail(input: RecipeDetailInput) {
   };
 }
 
+/*** Create the success confirmation for the sample meal selected by the preceding update. */
+function mealAddedConfirmation(input: MealLogSummaryInput) {
+  return {
+    id: `log-added-${input.id}`,
+    name: `${input.title} added`,
+    title: `${input.title} added`,
+    description: 'An in-memory sample meal confirmation.',
+    root: {
+      id: `log-added-${input.id}-root`,
+      type: 'Screen',
+      props: { width: 'narrow', scroll: true },
+      children: [
+        heading(`log-added-${input.id}-title`, `${input.title} added`, 1),
+        copy(
+          `log-added-${input.id}-copy`,
+          `${input.title} was added to this session's meal log. Entries are not persisted.`,
+        ),
+        action('log-added-home', 'View today’s meals'),
+      ],
+    },
+  };
+}
+
 type RecipeDetailInput = {
   readonly copy: string;
   readonly id: string;
@@ -134,6 +162,70 @@ function navigateBinding(
   };
 }
 
+/*** Bind one local sample to Runtime's atomic append before its success-only confirmation. */
+function addSampleMealBinding(input: MealLogSummaryInput): ComponentDataBindingRegistry[string] {
+  return {
+    componentId: input.actionId,
+    componentType: 'Button',
+    events: {
+      press: [
+        {
+          target: {
+            capability: 'state.update',
+            input: {
+              path: { kind: 'literal', value: 'nutriflow.meals' },
+              update: {
+                kind: 'object',
+                fields: {
+                  kind: { kind: 'literal', value: 'append' },
+                  value: {
+                    kind: 'object',
+                    fields: {
+                      energy: { kind: 'literal', value: input.energy },
+                      serving: { kind: 'literal', value: input.serving },
+                      title: { kind: 'literal', value: input.title },
+                    },
+                  },
+                },
+              },
+            },
+            result: 'meal-log-update',
+          },
+        },
+        {
+          when: {
+            source: { capability: 'state.update', result: 'meal-log-update' },
+            operator: 'exists',
+          },
+          target: {
+            capability: 'navigator.navigate',
+            input: { route: { kind: 'literal', value: `/log/added/${input.id}` } },
+          },
+        },
+      ],
+    },
+  };
+}
+
+/*** Read NutriFlow's single session-only meal collection, initially empty for a new Runtime session. */
+function mealCollection(): BindingExpression {
+  return {
+    kind: 'fallback',
+    value: { capability: 'state.nutriflow', path: 'meals' },
+    fallback: { kind: 'literal', value: [] },
+  };
+}
+
+/*** Derive the logged-meal count from NutriFlow's canonical collection through Runtime. */
+function mealCount(): BindingExpression {
+  return { kind: 'transform', value: mealCollection(), transforms: ['length'] };
+}
+
+/*** Read one repeated meal field from the current Runtime repeat item. */
+function repeatedMealField(path: string): BindingExpression {
+  return { capability: 'context.meal', path };
+}
+
 const bindings: ComponentDataBindingRegistry = {
   'home-log-meal': navigateBinding('home-log-meal', 'Button', '/log'),
   'home-plan': navigateBinding('home-plan', 'Button', '/plan'),
@@ -149,9 +241,30 @@ const bindings: ComponentDataBindingRegistry = {
     'Button',
     '/log/lemon-salmon',
   ),
-  'log-add-berry-oats': navigateBinding('log-add-berry-oats', 'Button', '/log/added'),
-  'log-add-green-bowl': navigateBinding('log-add-green-bowl', 'Button', '/log/added'),
-  'log-add-lemon-salmon': navigateBinding('log-add-lemon-salmon', 'Button', '/log/added'),
+  'log-add-berry-oats': addSampleMealBinding({
+    id: 'berry-oats',
+    title: 'Berry overnight oats',
+    serving: '1 bowl',
+    energy: '320 kcal',
+    mediaId: 'berry-oats',
+    actionId: 'log-add-berry-oats',
+  }),
+  'log-add-green-bowl': addSampleMealBinding({
+    id: 'green-bowl',
+    title: 'Green grain bowl',
+    serving: '1 bowl',
+    energy: '480 kcal',
+    mediaId: 'green-bowl',
+    actionId: 'log-add-green-bowl',
+  }),
+  'log-add-lemon-salmon': addSampleMealBinding({
+    id: 'lemon-salmon',
+    title: 'Lemon herb salmon',
+    serving: '1 plate',
+    energy: '540 kcal',
+    mediaId: 'lemon-salmon',
+    actionId: 'log-add-lemon-salmon',
+  }),
   'log-added-home': navigateBinding('log-added-home', 'Button', '/'),
   'recipes-green-bowl': navigateBinding('recipes-green-bowl', 'MediaCard', '/recipes/green-bowl'),
   'recipes-lemon-salmon': navigateBinding(
@@ -167,6 +280,22 @@ const bindings: ComponentDataBindingRegistry = {
   'profile-settings': navigateBinding('profile-settings', 'Button', '/settings'),
   'community-home': navigateBinding('community-home', 'Button', '/'),
   'settings-profile': navigateBinding('settings-profile', 'Button', '/profile'),
+  'home-meal-count': {
+    componentId: 'home-meal-count',
+    componentType: 'MetricCard',
+    props: {
+      value: { value: mealCount() },
+    },
+  },
+  'home-meal': {
+    componentId: 'home-meal',
+    componentType: 'Card',
+    props: {
+      title: { value: repeatedMealField('title') },
+      description: { value: repeatedMealField('serving') },
+      accessibilityLabel: { value: repeatedMealField('title') },
+    },
+  },
 };
 
 const manifest = {
@@ -191,6 +320,7 @@ const manifest = {
   },
   activeThemeId: 'nutriflow',
   activeThemeMode: 'light',
+  state: { provider: 'legend', persistence: false },
   settings: { localization: { defaultLocale: 'en', locales: ['en'] } },
   infra: structuredClone(BASE_INFRA),
   navigator: {
@@ -249,7 +379,21 @@ const manifest = {
       { name: 'log-berry-oats', path: '/log/berry-oats', screenId: 'log-berry-oats' },
       { name: 'log-green-bowl', path: '/log/green-bowl', screenId: 'log-green-bowl' },
       { name: 'log-lemon-salmon', path: '/log/lemon-salmon', screenId: 'log-lemon-salmon' },
-      { name: 'log-added', path: '/log/added', screenId: 'log-added' },
+      {
+        name: 'log-added-berry-oats',
+        path: '/log/added/berry-oats',
+        screenId: 'log-added-berry-oats',
+      },
+      {
+        name: 'log-added-green-bowl',
+        path: '/log/added/green-bowl',
+        screenId: 'log-added-green-bowl',
+      },
+      {
+        name: 'log-added-lemon-salmon',
+        path: '/log/added/lemon-salmon',
+        screenId: 'log-added-lemon-salmon',
+      },
       { name: 'plan', path: '/plan', screenId: 'plan' },
       { name: 'community', path: '/community', screenId: 'community' },
       {
@@ -284,14 +428,13 @@ const manifest = {
           heading('home-title', 'Good morning, Maya', 1),
           copy('home-support', 'A thoughtful meal is already a good start.', 'lead'),
           {
-            id: 'home-progress',
-            type: 'ProgressRing',
+            id: 'home-meal-count',
+            type: 'MetricCard',
             props: {
-              value: 3,
-              max: 4,
-              centerValue: '3',
-              centerLabel: 'sample meals',
-              accessibilityLabel: 'Three sample meals displayed today',
+              label: 'Meals logged this session',
+              value: '0',
+              description: 'Entries are not persisted.',
+              tone: 'secondary',
             },
           },
           {
@@ -325,18 +468,19 @@ const manifest = {
               },
             ],
           },
-          heading('home-meals', 'Today’s sample meals'),
+          heading('home-meals', 'Today’s meals'),
           {
-            id: 'home-breakfast',
-            type: 'Card',
-            props: { title: 'Breakfast', description: 'Berry overnight oats · sample entry' },
-            children: [recipeImage('home-breakfast-image', 'berry-oats', 'Berry overnight oats')],
-          },
-          {
-            id: 'home-lunch',
-            type: 'Card',
-            props: { title: 'Lunch', description: 'Green grain bowl · sample entry' },
-            children: [recipeImage('home-lunch-image', 'green-bowl', 'Green grain bowl')],
+            id: 'home-meal-list',
+            type: 'List',
+            props: { accessibilityLabel: 'Meals logged in this session' },
+            repeat: {
+              source: mealCollection(),
+              itemAlias: 'meal',
+              empty: [
+                copy('home-meals-empty', 'No meals logged yet. Add a local sample to begin.'),
+              ],
+            },
+            children: [{ id: 'home-meal', type: 'Card', props: {} }],
           },
           action('home-log-meal', 'Log a meal'),
           action('home-plan', 'View today’s plan'),
@@ -518,25 +662,30 @@ const manifest = {
       mediaId: 'lemon-salmon',
       actionId: 'log-add-lemon-salmon',
     }),
-    'log-added': {
-      id: 'log-added',
-      name: 'Sample meal preview',
-      title: 'Sample meal preview',
-      description: 'A non-saving preview for the portable starter.',
-      root: {
-        id: 'log-added-root',
-        type: 'Screen',
-        props: { width: 'narrow', scroll: true },
-        children: [
-          heading('log-added-title', 'Sample meal preview', 1),
-          copy(
-            'log-added-copy',
-            'This is a preview only: no meal was added, saved, or persisted. Connect a meal service to record personal entries.',
-          ),
-          action('log-added-home', 'View sample day'),
-        ],
-      },
-    },
+    'log-added-berry-oats': mealAddedConfirmation({
+      id: 'berry-oats',
+      title: 'Berry overnight oats',
+      serving: '1 bowl',
+      energy: '320 kcal',
+      mediaId: 'berry-oats',
+      actionId: 'log-add-berry-oats',
+    }),
+    'log-added-green-bowl': mealAddedConfirmation({
+      id: 'green-bowl',
+      title: 'Green grain bowl',
+      serving: '1 bowl',
+      energy: '480 kcal',
+      mediaId: 'green-bowl',
+      actionId: 'log-add-green-bowl',
+    }),
+    'log-added-lemon-salmon': mealAddedConfirmation({
+      id: 'lemon-salmon',
+      title: 'Lemon herb salmon',
+      serving: '1 plate',
+      energy: '540 kcal',
+      mediaId: 'lemon-salmon',
+      actionId: 'log-add-lemon-salmon',
+    }),
     recipes: {
       id: 'recipes',
       name: 'Recipes',
