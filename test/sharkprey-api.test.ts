@@ -100,6 +100,40 @@ test('SharkPrey loads API data through a capability invocation and named result 
   });
 });
 
+test('SharkPrey reports an empty training-task result without treating failed operations as empty', () => {
+  const manifest = createAppManifest();
+  const events = requireEvents(requireBinding(manifest, 'setup-difficulty-4'), 'press');
+
+  expect(events).toHaveLength(3);
+  expect(events[2]).toEqual(emptyTrainingTaskAlertEvent());
+});
+
+function emptyTrainingTaskAlertEvent(): EventBinding {
+  return {
+    target: {
+      capability: 'expo.alert',
+      input: {
+        message: {
+          kind: 'literal',
+          value: 'Action unavailable\n\nNo matching training task was found.',
+        },
+      },
+    },
+    when: {
+      source: {
+        kind: 'transform',
+        value: {
+          capability: 'api.poker-training.listPokerTrainingTasks',
+          result: 'listedTask',
+        },
+        transforms: ['length'],
+      },
+      operator: 'eq',
+      value: { kind: 'literal', value: 0 },
+    },
+  };
+}
+
 test('SharkPrey evaluates result conditions through Contracts 26 expressions', () => {
   const manifest = createAppManifest();
   const events = requireEvents(requireBinding(manifest, 'decision-answer-button'), 'press');

@@ -145,6 +145,7 @@ function createRouteTextBinding(componentId: string, path: string): ComponentDat
   };
 }
 
+/*** Bind a difficulty selection to its task lookup and explicit empty-result diagnostic. */
 function createTrainingDifficultyBinding(
   componentId: string,
   difficulty: number,
@@ -181,6 +182,26 @@ function createTrainingDifficultyBinding(
           when: {
             source: apiResult('listPokerTrainingTasks', 'listedTask', '0.id'),
             operator: 'exists',
+          },
+        },
+        {
+          target: {
+            capability: 'expo.alert',
+            input: {
+              message: {
+                kind: 'literal',
+                value: 'Action unavailable\n\nNo matching training task was found.',
+              },
+            },
+          },
+          when: {
+            source: {
+              kind: 'transform',
+              value: apiResult('listPokerTrainingTasks', 'listedTask'),
+              transforms: ['length'],
+            },
+            operator: 'eq',
+            value: { kind: 'literal', value: 0 },
           },
         },
       ],
