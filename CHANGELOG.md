@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.4.2
+
+### Patch Changes
+
+- 14e268e: Update dependencies: `@ankhorage/color-theory`, `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/navigator`.
+
 ## 12.4.1
 
 ### Patch Changes
