@@ -121,17 +121,17 @@
   "dependencies": {
     "@ankhorage/capability": "^0.2.2",
     "@ankhorage/color-theory": "^0.3.2",
-    "@ankhorage/contracts": "^26.2.2",
-    "@ankhorage/navigator": "^3.5.14",
-    "@ankhorage/runtime": "^5.2.0",
+    "@ankhorage/contracts": "^26.3.0",
+    "@ankhorage/navigator": "^3.5.15",
+    "@ankhorage/runtime": "^5.2.2",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^25.10.0"
+    "@ankhorage/zora": "^25.10.1"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.2",
     "@ankhorage/devtools": "^2.3.33",
-    "@ankhorage/doctor": "^0.14.25",
-    "@ankhorage/paradox": "^0.3.5",
+    "@ankhorage/doctor": "^0.14.26",
+    "@ankhorage/paradox": "^0.3.6",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.6",
     "pkgviz": "^0.8.3",
