@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.4.12
+
+### Patch Changes
+
+- e365bf1: Update dependencies: `@ankhorage/zora`.
+
 ## 12.4.11
 
 ### Patch Changes
