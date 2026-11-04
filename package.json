@@ -122,15 +122,15 @@
     "@ankhorage/capability": "^0.2.2",
     "@ankhorage/color-theory": "^0.3.2",
     "@ankhorage/contracts": "^26.4.0",
-    "@ankhorage/navigator": "^3.5.15",
+    "@ankhorage/navigator": "^3.5.16",
     "@ankhorage/runtime": "^5.2.3",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^25.10.5"
+    "@ankhorage/zora": "^25.10.6"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.3",
     "@ankhorage/devtools": "^2.3.34",
-    "@ankhorage/doctor": "^0.14.31",
+    "@ankhorage/doctor": "^0.14.32",
     "@ankhorage/paradox": "^0.3.6",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.6",
