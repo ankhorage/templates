@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.4.9
+
+### Patch Changes
+
+- 8e9e7eb: Update dependencies: `@ankhorage/doctor`, `@ankhorage/runtime`.
+
 ## 12.4.8
 
 ### Patch Changes
