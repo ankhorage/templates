@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 12.5.1
+
+### Patch Changes
+
+- d827531: Update dependencies: `@ankhorage/contracts`.
+- 95eed4e: Update dependencies: `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.5.0
 
 ### Minor Changes
