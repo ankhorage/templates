@@ -9,7 +9,7 @@ export default function createAppManifest(): AppManifest {
   return createValidatedManifest(manifest);
 }
 
-/*** Build the shared Navy GrossMeister shell with a future-avatar slot and footer wordmark. */
+/*** Build the shared Navy GrossMeister shell with an avatar slot and footer wordmark. */
 function createShell(screenId: string, children: readonly UiNode[]): UiNode {
   return {
     id: `${screenId}-root`,
@@ -43,7 +43,7 @@ function createShell(screenId: string, children: readonly UiNode[]): UiNode {
           {
             id: `${screenId}-avatar-slot`,
             type: 'View',
-            props: { accessibilityLabel: 'Future signed-in avatar' },
+            props: { accessibilityLabel: 'Profilbild' },
             style: {
               width: 44,
               height: 44,
@@ -113,10 +113,17 @@ function button(
   };
 }
 
-const boardSizeOptions = Array.from({ length: 23 }, (_, index) => {
+const boardDimensionOptions = Array.from({ length: 23 }, (_, index) => {
   const size = index + 2;
-  return { value: `${size}x${size}`, label: `${size} × ${size}` };
+  return { value: `${size}`, label: `${size}` };
 });
+
+const previewPieces = [
+  { color: 'white' as const, piece: 'k', cell: { column: 5, row: 1 } },
+  { color: 'white' as const, piece: 'n', cell: { column: 3, row: 3 } },
+  { color: 'black' as const, piece: 'k', cell: { column: 5, row: 8 } },
+  { color: 'black' as const, piece: 'b', cell: { column: 6, row: 6 } },
+];
 
 const manifest: AppManifest = {
   metadata: {
@@ -170,38 +177,37 @@ const manifest: AppManifest = {
       id: 'play',
       name: 'Spielen',
       title: 'Neue Partie',
-      description: 'Board-first multiplayer configuration pending the server-owned chess API.',
+      description: 'Konfiguriere zuerst dein Schachbrett.',
       root: createShell('play', [
         { id: 'play-title', type: 'Heading', props: { text: 'Neue Partie', level: 1, size: 'h1' } },
-        text(
-          'play-copy',
-          'Konfiguriere Brett und Figuren. Erstellen, Sperren und Starten werden erst durch API Gateway #70 möglich.',
-        ),
+        text('play-copy', 'Wähle Reihen, Spalten und deine Figuren.'),
         {
           id: 'play-board',
           type: 'ChessBoard',
           props: {
             columns: 8,
             rows: 8,
-            pieces: [
-              { color: 'white', piece: 'k', cell: { column: 5, row: 1 } },
-              { color: 'white', piece: 'n', cell: { column: 3, row: 3 } },
-              { color: 'black', piece: 'k', cell: { column: 5, row: 8 } },
-              { color: 'black', piece: 'b', cell: { column: 6, row: 6 } },
-            ],
+            pieces: previewPieces,
             orientation: 'white',
             showCoordinates: true,
-            disabled: true,
           },
         },
         {
-          id: 'play-board-size',
+          id: 'play-board-columns',
           type: 'Select',
           props: {
-            label: 'Brettgröße',
-            defaultValue: '8x8',
-            options: boardSizeOptions,
-            disabled: true,
+            label: 'Spalten',
+            defaultValue: '8',
+            options: boardDimensionOptions,
+          },
+        },
+        {
+          id: 'play-board-rows',
+          type: 'Select',
+          props: {
+            label: 'Reihen',
+            defaultValue: '8',
+            options: boardDimensionOptions,
           },
         },
         {
@@ -216,7 +222,6 @@ const manifest: AppManifest = {
               { value: 'knight', label: 'Springer' },
               { value: 'bishop', label: 'Läufer' },
             ],
-            disabled: true,
           },
         },
         {
@@ -225,41 +230,147 @@ const manifest: AppManifest = {
           props: {
             title: 'Choice Coin',
             description:
-              'Choice Coins stehen für konfigurierbare Schachfiguren, nicht für die Wahl einer Farbe. Beide Spielenden wählen und sperren ihre Figuren serverseitig.',
+              'Du wählst deine Schachfiguren. Die Auswahl einer Farbe gehört nicht zu Choice Coin.',
             tone: 'outline',
           },
         },
-        button('create-game', 'Mehrspieler-API erforderlich', 'solid', true),
+        button('create-game', 'Partie erstellen', 'solid', true),
       ]),
     },
     lobby: {
       id: 'lobby',
       name: 'Lobby',
       title: 'Lobby',
-      description: 'Server-owned multiplayer lobby placeholder.',
+      description: 'Finde offene Partien.',
       root: createShell('lobby', [
         { id: 'lobby-title', type: 'Heading', props: { text: 'Lobby', level: 1, size: 'h1' } },
-        text(
-          'lobby-copy',
-          'Offene Partien, Beitreten und Sitzzuordnung werden von API Gateway #70 bereitgestellt.',
-        ),
+        text('lobby-copy', 'Offene Partien erscheinen hier, sobald sie verfügbar sind.'),
         {
           id: 'lobby-api-card',
           type: 'Card',
           props: {
-            title: 'Mehrspieler-Lobby nicht verbunden',
-            description: 'API Gateway #70 muss die Lobby lesen und den Beitritt atomar ausführen.',
+            title: 'Noch keine offene Partie',
+            description: 'Beitreten ist zurzeit nicht verfügbar.',
             tone: 'outline',
           },
-          children: [button('join-game', 'Beitreten nicht verfügbar', 'outline', true)],
+          children: [button('join-game', 'Beitreten', 'outline', true)],
         },
+      ]),
+    },
+    waiting: {
+      id: 'waiting',
+      name: 'Warten',
+      title: 'Warten auf Mitspielende',
+      description: 'Die Partie wartet auf weitere Spielende.',
+      root: createShell('waiting', [
+        {
+          id: 'waiting-title',
+          type: 'Heading',
+          props: { text: 'Warten auf Mitspielende', level: 1, size: 'h1' },
+        },
+        text('waiting-copy', 'Sobald alle bereit sind, geht es weiter.'),
+        {
+          id: 'waiting-status',
+          type: 'Card',
+          props: {
+            title: 'Noch nicht bereit',
+            description: 'Der Status wird geladen.',
+            tone: 'outline',
+          },
+          children: [button('start-match', 'Partie starten', 'solid', true)],
+        },
+      ]),
+    },
+    coin: {
+      id: 'coin',
+      name: 'Choice Coin',
+      title: 'Choice Coin',
+      description: 'Wähle deine Figuren für Choice Coin.',
+      root: createShell('coin', [
+        { id: 'coin-title', type: 'Heading', props: { text: 'Choice Coin', level: 1, size: 'h1' } },
+        text('coin-copy', 'Wähle die Figuren, die du spielen möchtest.'),
+        {
+          id: 'coin-piece-choice',
+          type: 'RadioGroup',
+          props: {
+            defaultValue: 'queen',
+            presentation: 'card',
+            options: [
+              { value: 'queen', label: 'Königin' },
+              { value: 'rook', label: 'Turm' },
+              { value: 'knight', label: 'Springer' },
+              { value: 'bishop', label: 'Läufer' },
+            ],
+          },
+        },
+        {
+          id: 'coin-status',
+          type: 'Card',
+          props: {
+            title: 'Auswahl noch nicht gesichert',
+            description: 'Die Auswahl wird erst mit der Partie bestätigt.',
+            tone: 'outline',
+          },
+        },
+      ]),
+    },
+    match: {
+      id: 'match',
+      name: 'Partie',
+      title: 'Partie',
+      description: 'Die laufende Partie wird hier angezeigt.',
+      root: createShell('match', [
+        { id: 'match-title', type: 'Heading', props: { text: 'Partie', level: 1, size: 'h1' } },
+        text('match-copy', 'Der Spielstand wird angezeigt, sobald die Partie läuft.'),
+        {
+          id: 'match-board',
+          type: 'ChessBoard',
+          props: {
+            columns: 8,
+            rows: 8,
+            pieces: previewPieces,
+            orientation: 'white',
+            showCoordinates: true,
+            disabled: true,
+          },
+        },
+        {
+          id: 'match-status',
+          type: 'Card',
+          props: {
+            title: 'Partie noch nicht gestartet',
+            description: 'Züge sind noch nicht verfügbar.',
+            tone: 'outline',
+          },
+        },
+        button('resign-match', 'Aufgeben', 'outline', true),
+      ]),
+    },
+    result: {
+      id: 'result',
+      name: 'Ergebnis',
+      title: 'Ergebnis',
+      description: 'Das Ergebnis der Partie wird hier angezeigt.',
+      root: createShell('result', [
+        { id: 'result-title', type: 'Heading', props: { text: 'Ergebnis', level: 1, size: 'h1' } },
+        text('result-copy', 'Das Ergebnis ist noch nicht verfügbar.'),
+        {
+          id: 'result-summary',
+          type: 'Card',
+          props: {
+            title: 'Partie beendet',
+            description: 'Das Ergebnis wird nach der Partie angezeigt.',
+            tone: 'outline',
+          },
+        },
+        button('result-new-game', 'Partie erstellen', 'solid', true),
       ]),
     },
     'sign-in': {
       id: 'sign-in',
       name: 'Anmelden',
       title: 'Anmelden',
-      description: 'Canonical authentication sign-in screen.',
+      description: 'Melde dich an.',
       root: createShell('sign-in', [
         {
           id: 'sign-in-title',
@@ -283,7 +394,7 @@ const manifest: AppManifest = {
       id: 'sign-up',
       name: 'Registrieren',
       title: 'Konto erstellen',
-      description: 'Canonical registration screen.',
+      description: 'Erstelle ein Konto.',
       root: createShell('sign-up', [
         {
           id: 'sign-up-title',

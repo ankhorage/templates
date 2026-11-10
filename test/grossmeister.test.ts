@@ -1,6 +1,19 @@
+import type { UiNode } from '@ankhorage/contracts';
 import { expect, test } from 'bun:test';
 
 import { createTemplateArtifact, resolveTemplate, validateTemplateManifest } from '../src/index';
+
+function requiredChild(children: readonly UiNode[] | undefined, id: string): UiNode {
+  const child = children?.find((node) => node.id === id);
+  if (!child) throw new Error(`Expected GrossMeister node: ${id}`);
+  return child;
+}
+
+function requiredChildProps(children: readonly UiNode[] | undefined, id: string) {
+  const { props } = requiredChild(children, id);
+  if (!props) throw new Error(`Expected GrossMeister node props: ${id}`);
+  return props;
+}
 
 test('GrossMeister is a release-valid single-Navy board-first chess configuration', () => {
   const template = resolveTemplate('games', 'grossmeister');
@@ -11,7 +24,16 @@ test('GrossMeister is a release-valid single-Navy board-first chess configuratio
     'play',
     'lobby',
   ]);
-  expect(Object.keys(manifest.screens)).toEqual(['play', 'lobby', 'sign-in', 'sign-up']);
+  expect(Object.keys(manifest.screens)).toEqual([
+    'play',
+    'lobby',
+    'waiting',
+    'coin',
+    'match',
+    'result',
+    'sign-in',
+    'sign-up',
+  ]);
   expect(manifest.screens.play?.root.children?.some(({ type }) => type === 'ChessBoard')).toBe(
     true,
   );
@@ -21,44 +43,69 @@ test('GrossMeister is a release-valid single-Navy board-first chess configuratio
 test('GrossMeister preserves the supported 2-24 board configuration and Choice Coin model', () => {
   const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
   const playChildren = manifest.screens.play?.root.children ?? [];
-  const boardSize = playChildren.find(({ id }) => id === 'play-board-size');
+  const columns = playChildren.find(({ id }) => id === 'play-board-columns');
+  const rows = playChildren.find(({ id }) => id === 'play-board-rows');
   const choiceCoin = playChildren.find(({ id }) => id === 'play-choice-coin');
-  const boardSizeProps = boardSize?.props;
+  const columnsProps = columns?.props;
+  const rowsProps = rows?.props;
   const choiceCoinProps = choiceCoin?.props;
 
-  expect(boardSizeProps).toBeDefined();
+  expect(columnsProps).toBeDefined();
+  expect(rowsProps).toBeDefined();
   expect(choiceCoinProps).toBeDefined();
-  if (!boardSizeProps || !choiceCoinProps) {
+  if (!columnsProps || !rowsProps || !choiceCoinProps) {
     throw new Error('GrossMeister configuration controls must remain present.');
   }
-  expect(boardSizeProps.options).toHaveLength(23);
-  expect(boardSizeProps.options).toContainEqual({ value: '2x2', label: '2 × 2' });
-  expect(boardSizeProps.options).toContainEqual({ value: '24x24', label: '24 × 24' });
-  expect(choiceCoinProps.description).toContain('konfigurierbare Schachfiguren');
+  expect(columnsProps.options).toHaveLength(23);
+  expect(rowsProps.options).toHaveLength(23);
+  expect(columnsProps.options).toContainEqual({ value: '2', label: '2' });
+  expect(columnsProps.options).toContainEqual({ value: '24', label: '24' });
+  expect(rowsProps.options).toContainEqual({ value: '2', label: '2' });
+  expect(rowsProps.options).toContainEqual({ value: '24', label: '24' });
+  expect(columnsProps.options).toContainEqual({ value: '10', label: '10' });
+  expect(rowsProps.options).toContainEqual({ value: '13', label: '13' });
+  expect(choiceCoinProps.description).toContain('Schachfiguren');
   expect(choiceCoinProps.description).not.toContain('wer die Farbe');
 });
 
 test('GrossMeister does not bind unavailable multiplayer operations as navigation', () => {
   const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
-  const createGame = manifest.screens.play?.root.children?.find(({ id }) => id === 'create-game');
-  const joinGame = manifest.screens.lobby?.root.children
-    ?.find(({ id }) => id === 'lobby-api-card')
-    ?.children?.find(({ id }) => id === 'join-game');
-  const createGameProps = createGame?.props;
-  const joinGameProps = joinGame?.props;
+  const createGameProps = requiredChildProps(manifest.screens.play?.root.children, 'create-game');
+  const joinGameProps = requiredChildProps(
+    requiredChild(manifest.screens.lobby?.root.children, 'lobby-api-card').children,
+    'join-game',
+  );
+  const startMatchProps = requiredChildProps(
+    requiredChild(manifest.screens.waiting?.root.children, 'waiting-status').children,
+    'start-match',
+  );
+  const resignMatchProps = requiredChildProps(
+    manifest.screens.match?.root.children,
+    'resign-match',
+  );
   const bindings = manifest.dataBindings ?? {};
 
-  expect(createGameProps).toBeDefined();
-  expect(joinGameProps).toBeDefined();
-  if (!createGameProps || !joinGameProps) {
-    throw new Error('GrossMeister multiplayer boundaries must remain visible.');
-  }
   expect(createGameProps.disabled).toBe(true);
   expect(joinGameProps.disabled).toBe(true);
-  expect(Object.keys(bindings)).not.toContain('create-game');
-  expect(Object.keys(bindings)).not.toContain('join-game');
-  expect(Object.keys(bindings)).not.toContain('start-match');
-  expect(Object.keys(bindings)).not.toContain('resign-match');
+  expect(startMatchProps.disabled).toBe(true);
+  expect(resignMatchProps.disabled).toBe(true);
+  expect(Object.keys(bindings)).toEqual(['sign-in-form', 'sign-up-form']);
+  expect(manifest.dataSources).toBeUndefined();
+});
+
+test('GrossMeister keeps unavailable actions and technical dependencies out of product copy', () => {
+  const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
+  const productCopy = JSON.stringify(manifest.screens);
+
+  expect(productCopy).toContain('Partie erstellen');
+  expect(productCopy).toContain('Beitreten');
+  expect(productCopy).toContain('Choice Coin');
+  expect(productCopy).toContain('Partie starten');
+  expect(productCopy).toContain('Aufgeben');
+  expect(productCopy).not.toContain('API Gateway');
+  expect(productCopy).not.toContain('ZORA #');
+  expect(productCopy).not.toContain('#70');
+  expect(productCopy).not.toContain('#1087');
 });
 
 test('GrossMeister ships only the checked Navy brand assets with its isolated artifact', () => {

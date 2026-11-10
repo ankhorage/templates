@@ -84,6 +84,10 @@ const expectedWidths = {
   'games/grossmeister': {
     play: 'default',
     lobby: 'default',
+    waiting: 'default',
+    coin: 'default',
+    match: 'default',
+    result: 'default',
     'sign-in': 'default',
     'sign-up': 'default',
   },

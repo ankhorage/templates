@@ -31,7 +31,7 @@
   "config": {
     "category": { "value": "games", "origin": "project" },
     "intent": {
-      "value": "A board-first multiplayer chess configuration that remains honest about unavailable server operations.",
+      "value": "A board-first multiplayer chess configuration that retains every authored presentation state while remaining honest about unavailable server operations.",
       "origin": "user"
     },
     "platforms": { "value": ["ios", "android", "web"], "origin": "project" },
@@ -63,8 +63,8 @@
       },
       {
         "id": "grossmeister-board-configuration-binding",
-        "owner": "@ankhorage/zora",
-        "detail": "Released ChessBoard metadata supports instance columns, rows, and pieces plus emitted cell/move intents, but no declarative action binds Select or RadioGroup configuration to a board preview or serializes the configured template. The 2-24 and custom-piece controls therefore remain disabled pending a generic owner-backed authoring capability."
+        "owner": "@ankhorage/zora#1087",
+        "detail": "Released ChessBoard metadata supports caller-owned columns, rows, and pieces plus cell/move intents; Select and RadioGroup expose value-change events. No released generic configuration-state capability or declarative field-change-to-ChessBoard binding exists. The row, column, and piece controls remain declarative and independently selectable, but they cannot update the board preview, persist a draft, or serialize a configured template until #1087 is released."
       },
       {
         "id": "grossmeister-choice-coin-domain",
@@ -91,6 +91,36 @@
       "id": "lobby",
       "purpose": "Visible unavailable lobby boundary; it does not pretend that games can be joined.",
       "primaryAction": "Disabled join action pending API Gateway #70."
+    },
+    {
+      "id": "waiting",
+      "purpose": "Authored waiting presentation without a simulated readiness transition.",
+      "primaryAction": "Disabled start action pending the server-authoritative readiness state."
+    },
+    {
+      "id": "coin",
+      "purpose": "Choice Coin piece-selection presentation for player-owned choices, without a color coin flip or lock simulation.",
+      "primaryAction": "Piece choice is displayed declaratively; player locks remain server-owned."
+    },
+    {
+      "id": "match",
+      "purpose": "Authored match presentation with a disabled board and resign boundary; it does not implement moves or game rules.",
+      "primaryAction": "Disabled resign action pending the server-authoritative match operation."
+    },
+    {
+      "id": "result",
+      "purpose": "Authored result presentation without invented outcome data or a new-game transition.",
+      "primaryAction": "Disabled create action pending a server-authoritative game creation operation."
+    },
+    {
+      "id": "sign-in",
+      "purpose": "Canonical sign-in presentation.",
+      "primaryAction": "Submit through the existing authentication binding."
+    },
+    {
+      "id": "sign-up",
+      "purpose": "Canonical sign-up presentation.",
+      "primaryAction": "Submit through the existing authentication binding."
     }
   ],
   "assets": {
@@ -124,7 +154,8 @@
     "blockers": []
   },
   "openDecisions": [
-    "Bind enabled multiplayer controls only after API Gateway #70 is released with declared owner-backed operations and a generated application host is selected for runtime acceptance."
+    "Bind enabled multiplayer controls only after API Gateway #70 is released with declared owner-backed operations and a generated application host is selected for runtime acceptance.",
+    "Bind row, column, and piece configuration to the board preview only after ZORA #1087 releases the generic declarative configuration capability."
   ]
 }
 ---
