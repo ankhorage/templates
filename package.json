@@ -121,7 +121,7 @@
   "dependencies": {
     "@ankhorage/capability": "^0.2.2",
     "@ankhorage/color-theory": "^0.3.2",
-    "@ankhorage/contracts": "^26.4.0",
+    "@ankhorage/contracts": "^26.5.0",
     "@ankhorage/navigator": "^3.5.16",
     "@ankhorage/runtime": "^5.2.4",
     "@ankhorage/utility": "^1.10.0",
