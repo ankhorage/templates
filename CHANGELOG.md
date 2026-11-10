@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.0
+
+### Minor Changes
+
+- bb5e513: Add the GrossMeister Navy configurable chess application template.
+
 ## 12.4.18
 
 ### Patch Changes

@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.4.18",
+      "value": "v12.5.0",
       "color": "cb3837"
     },
     {
@@ -375,6 +375,7 @@
         "src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts",
         "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
+        "src/templates/categories/games/grossmeister/createAppManifest.ts",
         "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
         "src/templates/categories/social-community/chat/createAppManifest.ts"
       ],
@@ -416,6 +417,12 @@
       "path": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
       "isEntrypoint": false,
       "dependencies": ["src/internal/defaults.ts"],
+      "exports": ["default"]
+    },
+    {
+      "path": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+      "isEntrypoint": false,
+      "dependencies": ["src/internal/createValidatedManifest.ts", "src/internal/defaults.ts"],
       "exports": ["default"]
     },
     {
@@ -3529,6 +3536,51 @@
     },
     {
       "name": "createAppManifest",
+      "description": "Create the complete portable GrossMeister chess application manifest.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 8,
+        "column": 1
+      }
+    },
+    {
+      "name": "createShell",
+      "description": "Build the shared Navy GrossMeister shell with an avatar slot and footer wordmark.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 13,
+        "column": 1
+      }
+    },
+    {
+      "name": "navigate",
+      "description": "Create one portable navigation binding for an explicitly named route.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 83,
+        "column": 1
+      }
+    },
+    {
+      "name": "text",
+      "description": "Create a concise text node for the fixed Navy application screens.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 93,
+        "column": 1
+      }
+    },
+    {
+      "name": "button",
+      "description": "Create a release-safe button with its visible label and minimum touch target.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 102,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAppManifest",
       "description": "Return the complete Stillpath design with responsive owner-backed navigation and bundled media.",
       "sourceLocation": {
         "filePath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
@@ -3898,6 +3950,11 @@
       },
       {
         "fromPath": "src/templates/catalog.generated.ts",
+        "toPath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "sourcePath": "src/templates/catalog.generated.ts"
+      },
+      {
+        "fromPath": "src/templates/catalog.generated.ts",
         "toPath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
         "sourcePath": "src/templates/catalog.generated.ts"
       },
@@ -3940,6 +3997,16 @@
         "fromPath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
         "toPath": "src/internal/defaults.ts",
         "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toPath": "src/internal/createValidatedManifest.ts",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromPath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toPath": "src/internal/defaults.ts",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
       },
       {
         "fromPath": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",
@@ -4995,6 +5062,42 @@
         "toSymbol": "recipeDetail",
         "callExpression": "recipeDetail",
         "sourcePath": "src/templates/categories/food-drink/nutriflow/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "createAppManifest",
+        "toSymbol": "createValidatedManifest",
+        "callExpression": "createValidatedManifest",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "createLocalInfra",
+        "callExpression": "createLocalInfra",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "createShell",
+        "callExpression": "createShell",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "text",
+        "callExpression": "text",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "button",
+        "callExpression": "button",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "navigate",
+        "callExpression": "navigate",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
       },
       {
         "fromSymbol": "src/templates/categories/lifestyle/stillpath/createAppManifest.ts",

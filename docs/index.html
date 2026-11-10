@@ -361,6 +361,16 @@
               <button
                 class="nav-button"
                 type="button"
+                data-target="src/templates/categories/games/grossmeister/createAppManifest.ts"
+              >
+                src/templates/categories/games/grossmeister/createAppManifest.ts
+                <small>5 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
                 data-target="src/templates/categories/lifestyle/stillpath/createAppManifest.ts"
               >
                 src/templates/categories/lifestyle/stillpath/createAppManifest.ts
@@ -393,7 +403,7 @@
             <div class="summary">
               <div><strong>57</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>31</strong><span class="muted">modules</span></div>
+              <div><strong>32</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -735,7 +745,7 @@
             </article>
             <article
               class="item"
-              data-search="src/templates/catalog.generated.ts src/templates/catalog.ts src/templates/categories/books-reading/reader/createAppManifest.ts src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/templates/categories/food-drink/nutriflow/createAppManifest.ts src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/templates/categories/social-community/chat/createAppManifest.ts TEMPLATE_DEFINITIONS"
+              data-search="src/templates/catalog.generated.ts src/templates/catalog.ts src/templates/categories/books-reading/reader/createAppManifest.ts src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/templates/categories/food-drink/nutriflow/createAppManifest.ts src/templates/categories/games/grossmeister/createAppManifest.ts src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/templates/categories/social-community/chat/createAppManifest.ts TEMPLATE_DEFINITIONS"
             >
               <h3>src/templates/catalog.generated.ts</h3>
               <p class="muted">Referenced module</p>
@@ -748,6 +758,7 @@
                 <code
                   >src/templates/categories/education-learning/sharkprey/createAppManifest.ts</code
                 >, <code>src/templates/categories/food-drink/nutriflow/createAppManifest.ts</code>,
+                <code>src/templates/categories/games/grossmeister/createAppManifest.ts</code>,
                 <code>src/templates/categories/lifestyle/stillpath/createAppManifest.ts</code>,
                 <code>src/templates/categories/social-community/chat/createAppManifest.ts</code>
               </p>
@@ -806,6 +817,18 @@
               <h3>src/templates/categories/food-drink/nutriflow/createAppManifest.ts</h3>
               <p class="muted">Referenced module</p>
               <p><strong>Dependencies:</strong> <code>src/internal/defaults.ts</code></p>
+              <p><strong>Exports:</strong> <code>default</code></p>
+            </article>
+            <article
+              class="item"
+              data-search="src/templates/categories/games/grossmeister/createAppManifest.ts src/internal/createValidatedManifest.ts src/internal/defaults.ts default"
+            >
+              <h3>src/templates/categories/games/grossmeister/createAppManifest.ts</h3>
+              <p class="muted">Referenced module</p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/internal/createValidatedManifest.ts</code>,
+                <code>src/internal/defaults.ts</code>
+              </p>
               <p><strong>Exports:</strong> <code>default</code></p>
             </article>
             <article
@@ -3456,6 +3479,8 @@
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts
+                module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_social_community_chat_createAppManifest_ts
@@ -3483,6 +3508,13 @@
                 package__ankhorage_templates -.-&gt;
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts[&quot;src/templates/categories/games/grossmeister/createAppManifest.ts&quot;]
+                package__ankhorage_templates -.-&gt;
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt;
+                module_src_internal_createValidatedManifest_ts
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt;
                 module_src_internal_defaults_ts
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
@@ -3585,6 +3617,7 @@ graph TD
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
+  module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_games_grossmeister_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_social_community_chat_createAppManifest_ts
   module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
@@ -3603,6 +3636,10 @@ graph TD
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts[&quot;src/templates/categories/games/grossmeister/createAppManifest.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_templates_categories_games_grossmeister_createAppManifest_ts
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt; module_src_internal_defaults_ts
@@ -3650,6 +3687,7 @@ graph TD
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts[&quot;src/templates/categories/games/grossmeister/createAppManifest.ts&quot;]
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
                 module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -3695,6 +3733,8 @@ graph TD
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts
+                module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_social_community_chat_createAppManifest_ts
@@ -3708,6 +3748,10 @@ graph TD
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
                 --&gt; module_src_internal_defaults_ts
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt;
+                module_src_internal_defaults_ts
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt;
+                module_src_internal_createValidatedManifest_ts
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt;
                 module_src_internal_defaults_ts
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt;
                 module_src_internal_defaults_ts
@@ -3748,6 +3792,7 @@ graph LR
   module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts[&quot;src/templates/categories/games/grossmeister/createAppManifest.ts&quot;]
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
   module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -3785,6 +3830,7 @@ graph LR
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
+  module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_games_grossmeister_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_social_community_chat_createAppManifest_ts
   module_src_templates_catalog_ts --&gt; module_src_templates_catalog_generated_ts
@@ -3793,6 +3839,8 @@ graph LR
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts --&gt; module_src_internal_defaults_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_createValidatedManifest_ts
   module_src_templates_categories_social_community_chat_createAppManifest_ts --&gt; module_src_internal_defaults_ts
@@ -3831,6 +3879,7 @@ graph LR
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
+                module_src_templates_categories_games_grossmeister_createAppManifest_ts[&quot;src/templates/categories/games/grossmeister/createAppManifest.ts&quot;]
                 module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
                 module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
                 module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -4025,6 +4074,7 @@ graph LR
   module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
+  module_src_templates_categories_games_grossmeister_createAppManifest_ts[&quot;src/templates/categories/games/grossmeister/createAppManifest.ts&quot;]
   module_src_templates_categories_lifestyle_stillpath_createAppManifest_ts[&quot;src/templates/categories/lifestyle/stillpath/createAppManifest.ts&quot;]
   module_src_templates_categories_social_community_chat_createAppManifest_ts[&quot;src/templates/categories/social-community/chat/createAppManifest.ts&quot;]
   module_src_templateSelector_ts[&quot;src/templateSelector.ts&quot;]
@@ -4295,6 +4345,9 @@ sequenceDiagram
                 participant_createAppManifest-&gt;&gt;participant_createValidatedManifest:
                 createValidatedManifest()
                 participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
+                participant_createAppManifest-&gt;&gt;participant_createValidatedManifest:
+                createValidatedManifest()
+                participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
                 participant_createAppManifest--&gt;&gt;participant_createTemplateArtifact: return
                 participant_createTemplateArtifact-&gt;&gt;participant_collectTemplateImageAssets:
                 collectTemplateImageAssets()
@@ -4327,6 +4380,8 @@ sequenceDiagram
   participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
   participant_createAppManifest-&gt;&gt;participant_validateNavigatorManifest: validateNavigatorManifest()
   participant_validateNavigatorManifest--&gt;&gt;participant_createAppManifest: return
+  participant_createAppManifest-&gt;&gt;participant_createValidatedManifest: createValidatedManifest()
+  participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
   participant_createAppManifest-&gt;&gt;participant_createValidatedManifest: createValidatedManifest()
   participant_createValidatedManifest--&gt;&gt;participant_createAppManifest: return
   participant_createAppManifest--&gt;&gt;participant_createTemplateArtifact: return
@@ -5630,6 +5685,68 @@ sequenceDiagram
                 >
               </p>
               <p>Read one repeated meal field from the current Runtime repeat item.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-templates-categories-games-grossmeister-createappmanifest-ts"
+          class="view"
+          data-view="src/templates/categories/games/grossmeister/createAppManifest.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/templates/categories/games/grossmeister/createAppManifest.ts</h2>
+            <article
+              class="item"
+              data-search="createAppManifest src/templates/categories/games/grossmeister/createAppManifest.ts Create the complete portable GrossMeister chess application manifest."
+            >
+              <h3>createAppManifest</h3>
+              <p class="muted">
+                <code>src/templates/categories/games/grossmeister/createAppManifest.ts:8:1</code>
+              </p>
+              <p>Create the complete portable GrossMeister chess application manifest.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createShell src/templates/categories/games/grossmeister/createAppManifest.ts Build the shared Navy GrossMeister shell with an avatar slot and footer wordmark."
+            >
+              <h3>createShell</h3>
+              <p class="muted">
+                <code>src/templates/categories/games/grossmeister/createAppManifest.ts:13:1</code>
+              </p>
+              <p>
+                Build the shared Navy GrossMeister shell with an avatar slot and footer wordmark.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="navigate src/templates/categories/games/grossmeister/createAppManifest.ts Create one portable navigation binding for an explicitly named route."
+            >
+              <h3>navigate</h3>
+              <p class="muted">
+                <code>src/templates/categories/games/grossmeister/createAppManifest.ts:83:1</code>
+              </p>
+              <p>Create one portable navigation binding for an explicitly named route.</p>
+            </article>
+            <article
+              class="item"
+              data-search="text src/templates/categories/games/grossmeister/createAppManifest.ts Create a concise text node for the fixed Navy application screens."
+            >
+              <h3>text</h3>
+              <p class="muted">
+                <code>src/templates/categories/games/grossmeister/createAppManifest.ts:93:1</code>
+              </p>
+              <p>Create a concise text node for the fixed Navy application screens.</p>
+            </article>
+            <article
+              class="item"
+              data-search="button src/templates/categories/games/grossmeister/createAppManifest.ts Create a release-safe button with its visible label and minimum touch target."
+            >
+              <h3>button</h3>
+              <p class="muted">
+                <code>src/templates/categories/games/grossmeister/createAppManifest.ts:102:1</code>
+              </p>
+              <p>Create a release-safe button with its visible label and minimum touch target.</p>
             </article>
           </section>
         </section>
