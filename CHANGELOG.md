@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.3
+
+### Patch Changes
+
+- 6ebeb72: Update dependencies: `@ankhorage/navigator`, `@ankhorage/zora`.
+
 ## 12.5.2
 
 ### Patch Changes
