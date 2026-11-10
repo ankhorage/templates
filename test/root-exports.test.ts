@@ -23,6 +23,14 @@ const catalogEntries = (templates: ReturnType<typeof listTemplates>) =>
     sourceRoot,
   }));
 
+const grossmeisterCatalogEntry = {
+  category: 'games',
+  name: 'GrossMeister',
+  selector: 'games/grossmeister',
+  slug: 'grossmeister',
+  sourceRoot: 'src/templates/categories/games/grossmeister',
+} as const;
+
 test('exposes authoring and standalone template APIs', () => {
   expect(Object.keys(CATEGORY_PRESETS)).toHaveLength(APP_CATEGORIES.length);
   expect(CATEGORY_PRESET_RECONCILIATION).toHaveLength(APP_CATEGORIES.length);
@@ -65,6 +73,7 @@ test('discovers each portable template from the canonical directory tree', () =>
       slug: 'nutriflow',
       sourceRoot: 'src/templates/categories/food-drink/nutriflow',
     },
+    grossmeisterCatalogEntry,
     {
       category: 'lifestyle',
       name: 'Stillpath',
@@ -80,9 +89,12 @@ test('discovers each portable template from the canonical directory tree', () =>
       sourceRoot: 'src/templates/categories/social-community/chat',
     },
   ]);
-  expect(templates.every((template) => typeof template.createAppManifest === 'function')).toBe(
-    true,
-  );
+});
+
+test('discovers a manifest factory for every portable template', () => {
+  expect(
+    listTemplates().every((template) => typeof template.createAppManifest === 'function'),
+  ).toBe(true);
 });
 
 test('exports an isolated chat manifest with portable runtime media', () => {

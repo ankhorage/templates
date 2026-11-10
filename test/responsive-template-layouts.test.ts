@@ -81,6 +81,16 @@ const expectedWidths = {
     'recipe-details-berry-oats': 'default',
     settings: 'narrow',
   },
+  'games/grossmeister': {
+    play: 'default',
+    lobby: 'default',
+    waiting: 'default',
+    coin: 'default',
+    match: 'default',
+    result: 'default',
+    'sign-in': 'default',
+    'sign-up': 'default',
+  },
   'lifestyle/stillpath': {
     'stillpath-home': 'default',
     'stillpath-journal': 'default',
