@@ -23,7 +23,7 @@ describe('templates commands', () => {
 
     expect(result.exitCode).toBe(0);
     expect(capture.readStdout()).toBe(
-      'Available templates:\n\n  books_reading/reader - Reeda\n  business_productivity/urban-water-monitor - Urban Water Monitor\n  education_learning/sharkprey - SharkPrey\n  food_drink/nutriflow - NutriFlow\n  lifestyle/stillpath - Stillpath\n  social_community/chat - Close\n',
+      'Available templates:\n\n  books_reading/reader - Reeda\n  business_productivity/urban-water-monitor - Urban Water Monitor\n  education_learning/sharkprey - SharkPrey\n  food_drink/nutriflow - NutriFlow\n  games/grossmeister - GrossMeister\n  lifestyle/stillpath - Stillpath\n  social_community/chat - Close\n',
     );
   });
 
@@ -32,7 +32,7 @@ describe('templates commands', () => {
     const result = await runCommand('inspect', ['games/example'], capture.context);
 
     expect(result.exitCode).toBe(1);
-    expect(capture.readStderr()).toContain('does not expose any templates');
+    expect(capture.readStderr()).toContain('Unknown template selector "games/example"');
   });
 
   test('rejects a bare template slug', async () => {

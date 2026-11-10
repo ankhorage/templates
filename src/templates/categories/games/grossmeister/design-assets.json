@@ -1,0 +1,48 @@
+{
+  "assets": [
+    {
+      "mediaId": "grossmeister-mark",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/grossmeister-mark.svg",
+      "targetPath": "assets/images/svg/grossmeister-mark.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/play/root/children/0/children/0/children/0/props/source",
+        "/screens/lobby/root/children/0/children/0/children/0/props/source",
+        "/screens/waiting/root/children/0/children/0/children/0/props/source",
+        "/screens/coin/root/children/0/children/0/children/0/props/source",
+        "/screens/match/root/children/0/children/0/children/0/props/source",
+        "/screens/result/root/children/0/children/0/children/0/props/source",
+        "/screens/sign-in/root/children/0/children/0/children/0/props/source",
+        "/screens/sign-up/root/children/0/children/0/children/0/props/source"
+      ]
+    },
+    {
+      "mediaId": "grossmeister-wordmark",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/grossmeister-wordmark.svg",
+      "targetPath": "assets/images/svg/grossmeister-wordmark.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/play/root/children/9/children/0/props/source",
+        "/screens/lobby/root/children/4/children/0/props/source",
+        "/screens/waiting/root/children/4/children/0/props/source",
+        "/screens/coin/root/children/5/children/0/props/source",
+        "/screens/match/root/children/6/children/0/props/source",
+        "/screens/result/root/children/5/children/0/props/source",
+        "/screens/sign-in/root/children/3/children/0/props/source",
+        "/screens/sign-up/root/children/3/children/0/props/source"
+      ]
+    }
+  ],
+  "screens": [
+    {
+      "sourcePath": "assets/screens/01-play-mobile-concept.png",
+      "targetPath": "assets/screens/01-play-mobile-concept.png"
+    },
+    {
+      "sourcePath": "assets/screens/02-play-desktop-concept.png",
+      "targetPath": "assets/screens/02-play-desktop-concept.png"
+    }
+  ]
+}
