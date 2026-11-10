@@ -35,5 +35,14 @@
       ]
     }
   ],
-  "screens": []
+  "screens": [
+    {
+      "sourcePath": "assets/screens/01-play-mobile-concept.png",
+      "targetPath": "assets/screens/01-play-mobile-concept.png"
+    },
+    {
+      "sourcePath": "assets/screens/02-play-desktop-concept.png",
+      "targetPath": "assets/screens/02-play-desktop-concept.png"
+    }
+  ]
 }

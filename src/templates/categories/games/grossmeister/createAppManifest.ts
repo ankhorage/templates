@@ -103,14 +103,20 @@ function button(
   id: string,
   label: string,
   variant: 'solid' | 'outline' | 'soft' = 'solid',
+  disabled = false,
 ): UiNode {
   return {
     id,
     type: 'Button',
-    props: { children: label, variant, size: 'l' },
+    props: { children: label, disabled, variant, size: 'l' },
     style: { minHeight: 44 },
   };
 }
+
+const boardSizeOptions = Array.from({ length: 23 }, (_, index) => {
+  const size = index + 2;
+  return { value: `${size}x${size}`, label: `${size} × ${size}` };
+});
 
 const manifest: AppManifest = {
   metadata: {
@@ -155,10 +161,6 @@ const manifest: AppManifest = {
           ],
         },
       },
-      { name: 'waiting', screenId: 'waiting' },
-      { name: 'coin', screenId: 'coin' },
-      { name: 'match', screenId: 'match' },
-      { name: 'result', screenId: 'result' },
       { name: 'sign-in', screenId: 'sign-in' },
       { name: 'sign-up', screenId: 'sign-up' },
     ],
@@ -168,149 +170,89 @@ const manifest: AppManifest = {
       id: 'play',
       name: 'Spielen',
       title: 'Neue Partie',
-      description: 'Configure and offer a portable chess match.',
+      description: 'Board-first multiplayer configuration pending the server-owned chess API.',
       root: createShell('play', [
         { id: 'play-title', type: 'Heading', props: { text: 'Neue Partie', level: 1, size: 'h1' } },
-        text('play-copy', 'Stelle deine Partie zusammen und lade einen Gegner ein.'),
+        text(
+          'play-copy',
+          'Konfiguriere Brett und Figuren. Erstellen, Sperren und Starten werden erst durch API Gateway #70 möglich.',
+        ),
+        {
+          id: 'play-board',
+          type: 'ChessBoard',
+          props: {
+            columns: 8,
+            rows: 8,
+            pieces: [
+              { color: 'white', piece: 'k', cell: { column: 5, row: 1 } },
+              { color: 'white', piece: 'n', cell: { column: 3, row: 3 } },
+              { color: 'black', piece: 'k', cell: { column: 5, row: 8 } },
+              { color: 'black', piece: 'b', cell: { column: 6, row: 6 } },
+            ],
+            orientation: 'white',
+            showCoordinates: true,
+            disabled: true,
+          },
+        },
         {
           id: 'play-board-size',
           type: 'Select',
           props: {
-            label: 'Brett',
+            label: 'Brettgröße',
             defaultValue: '8x8',
-            options: [{ value: '8x8', label: '8 × 8' }],
+            options: boardSizeOptions,
+            disabled: true,
           },
         },
         {
-          id: 'play-time',
-          type: 'Select',
-          props: {
-            label: 'Bedenkzeit',
-            defaultValue: '10',
-            options: [
-              { value: '10', label: '10 Minuten' },
-              { value: '15', label: '15 Minuten' },
-            ],
-          },
-        },
-        {
-          id: 'play-color',
+          id: 'play-custom-pieces',
           type: 'RadioGroup',
           props: {
-            defaultValue: 'choice',
+            defaultValue: 'queen',
             presentation: 'card',
             options: [
-              { value: 'choice', label: 'Choice Coin' },
-              { value: 'white', label: 'Weiss' },
-              { value: 'black', label: 'Schwarz' },
+              { value: 'queen', label: 'Königin' },
+              { value: 'rook', label: 'Turm' },
+              { value: 'knight', label: 'Springer' },
+              { value: 'bishop', label: 'Läufer' },
             ],
+            disabled: true,
           },
         },
-        button('create-game', 'Partie erstellen'),
+        {
+          id: 'play-choice-coin',
+          type: 'Card',
+          props: {
+            title: 'Choice Coin',
+            description:
+              'Choice Coins stehen für konfigurierbare Schachfiguren, nicht für die Wahl einer Farbe. Beide Spielenden wählen und sperren ihre Figuren serverseitig.',
+            tone: 'outline',
+          },
+        },
+        button('create-game', 'Mehrspieler-API erforderlich', 'solid', true),
       ]),
     },
     lobby: {
       id: 'lobby',
       name: 'Lobby',
       title: 'Lobby',
-      description: 'Waiting games with explicit join actions.',
+      description: 'Server-owned multiplayer lobby placeholder.',
       root: createShell('lobby', [
         { id: 'lobby-title', type: 'Heading', props: { text: 'Lobby', level: 1, size: 'h1' } },
-        text('lobby-copy', 'Offene Partien warten auf einen Gegner.'),
-        {
-          id: 'waiting-game-card',
-          type: 'Card',
-          props: {
-            title: 'Anna · 10 Minuten',
-            description: '8 × 8 · Choice Coin',
-            tone: 'outline',
-          },
-          children: [button('join-game', 'Beitreten', 'outline')],
-        },
-      ]),
-    },
-    waiting: {
-      id: 'waiting',
-      name: 'Warten',
-      title: 'Warte auf Gegner',
-      description: 'Waiting-game offer state.',
-      root: createShell('waiting', [
-        {
-          id: 'waiting-title',
-          type: 'Heading',
-          props: { text: 'Warte auf Gegner', level: 1, size: 'h1' },
-        },
         text(
-          'waiting-copy',
-          'Deine Partie ist offen. Wir benachrichtigen dich, sobald jemand beitritt.',
+          'lobby-copy',
+          'Offene Partien, Beitreten und Sitzzuordnung werden von API Gateway #70 bereitgestellt.',
         ),
-        button('back-lobby', 'Zur Lobby', 'outline'),
-      ]),
-    },
-    coin: {
-      id: 'coin',
-      name: 'Choice Coin',
-      title: 'Choice Coin',
-      description: 'Color selection state.',
-      root: createShell('coin', [
-        { id: 'coin-title', type: 'Heading', props: { text: 'Choice Coin', level: 1, size: 'h1' } },
-        text('coin-copy', 'Die Münze entscheidet, wer die Farbe wählt.'),
         {
-          id: 'coin-choice',
-          type: 'RadioGroup',
-          props: {
-            defaultValue: 'white',
-            presentation: 'card',
-            options: [
-              { value: 'white', label: 'Weiss spielen' },
-              { value: 'black', label: 'Schwarz spielen' },
-            ],
-          },
-        },
-        button('start-match', 'Partie starten'),
-      ]),
-    },
-    match: {
-      id: 'match',
-      name: 'Partie',
-      title: 'Deine Partie',
-      description: 'Active board presentation; legal game operations remain owner-provided.',
-      root: createShell('match', [
-        {
-          id: 'match-title',
-          type: 'Heading',
-          props: { text: 'Deine Partie', level: 1, size: 'h1' },
-        },
-        text('match-status', 'Weiss ist am Zug', 'bodySmall'),
-        {
-          id: 'match-board',
-          type: 'ChessBoard',
-          props: { columns: 8, rows: 8, pieces: [], orientation: 'white', showCoordinates: true },
-        },
-        button('resign-match', 'Aufgeben', 'outline'),
-      ]),
-    },
-    result: {
-      id: 'result',
-      name: 'Ergebnis',
-      title: 'Partie beendet',
-      description: 'Game result state.',
-      root: createShell('result', [
-        {
-          id: 'result-title',
-          type: 'Heading',
-          props: { text: 'Partie beendet', level: 1, size: 'h1' },
-        },
-        {
-          id: 'result-card',
+          id: 'lobby-api-card',
           type: 'Card',
           props: {
-            title: 'Remis',
-            description: 'Eine spannende Partie auf Augenhöhe.',
+            title: 'Mehrspieler-Lobby nicht verbunden',
+            description: 'API Gateway #70 muss die Lobby lesen und den Beitritt atomar ausführen.',
             tone: 'outline',
           },
+          children: [button('join-game', 'Beitreten nicht verfügbar', 'outline', true)],
         },
-        button('result-lobby', 'Zur Lobby'),
       ]),
     },
     'sign-in': {
@@ -364,36 +306,6 @@ const manifest: AppManifest = {
     },
   },
   dataBindings: {
-    'create-game': {
-      componentId: 'create-game',
-      componentType: 'Button',
-      events: { press: [navigate('/waiting')] },
-    },
-    'join-game': {
-      componentId: 'join-game',
-      componentType: 'Button',
-      events: { press: [navigate('/coin')] },
-    },
-    'back-lobby': {
-      componentId: 'back-lobby',
-      componentType: 'Button',
-      events: { press: [navigate('/lobby')] },
-    },
-    'start-match': {
-      componentId: 'start-match',
-      componentType: 'Button',
-      events: { press: [navigate('/match')] },
-    },
-    'resign-match': {
-      componentId: 'resign-match',
-      componentType: 'Button',
-      events: { press: [navigate('/result')] },
-    },
-    'result-lobby': {
-      componentId: 'result-lobby',
-      componentType: 'Button',
-      events: { press: [navigate('/lobby')] },
-    },
     'sign-in-form': {
       componentId: 'sign-in-form',
       componentType: 'SignInForm',
