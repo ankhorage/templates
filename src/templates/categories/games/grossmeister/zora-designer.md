@@ -64,12 +64,12 @@
       {
         "id": "grossmeister-board-configuration-binding",
         "owner": "@ankhorage/zora#1087",
-        "detail": "Released ChessBoard metadata supports caller-owned columns, rows, and pieces plus cell/move intents; Select and RadioGroup expose value-change events. No released generic configuration-state capability or declarative field-change-to-ChessBoard binding exists. The row, column, and piece controls remain declarative and independently selectable, but they cannot update the board preview, persist a draft, or serialize a configured template until #1087 is released."
+        "detail": "Released ChessBoard metadata owns presentation props and cell/move intents; Runtime owns configuration state and capability execution; Contracts owns serializable binding expressions. Select and RadioGroup expose value-change events, but no released capability joins those three owner boundaries for generic configuration state or field-change-to-ChessBoard binding. The row and column controls remain declarative and independently selectable, but they cannot update the board preview, persist a draft, or serialize a configured template until #1087 is released. Templates must not add a local state engine."
       },
       {
         "id": "grossmeister-choice-coin-domain",
         "owner": "@ankhorage/chess and @ankhorage/api-gateway#70",
-        "detail": "Choice Coin is modeled as configurable chess pieces. Its player-owned selections and server lock must use released chess-domain behavior through the Gateway API; Templates neither copies rules nor resolves a color coin flip."
+        "detail": "The released chess engine offers Choice Coin N/B and Free Choice P/N/B/R/Q/K presets. Each player selects every coin independently and the server locks complete selections. ZORA RadioGroup is one global single-choice presentation only; it cannot model per-coin selection or server locking. Templates therefore shows the supported preset vocabulary without a bound selector, copied rules, or color coin flip."
       },
       {
         "id": "grossmeister-web-hit-target",

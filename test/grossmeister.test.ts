@@ -1,4 +1,5 @@
 import type { UiNode } from '@ankhorage/contracts';
+import { createNavigatorPlan } from '@ankhorage/navigator';
 import { expect, test } from 'bun:test';
 
 import { createTemplateArtifact, resolveTemplate, validateTemplateManifest } from '../src/index';
@@ -20,6 +21,15 @@ test('GrossMeister is a release-valid single-Navy board-first chess configuratio
   const manifest = template.createAppManifest();
 
   expect(Object.keys(manifest.themes)).toEqual(['grossmeister-navy']);
+  expect(manifest.navigator.routes.map(({ name }) => name)).toEqual([
+    '(tabs)',
+    'waiting',
+    'coin',
+    'match',
+    'result',
+    'sign-in',
+    'sign-up',
+  ]);
   expect(manifest.navigator.routes[0]?.navigator?.routes.map(({ name }) => name)).toEqual([
     'play',
     'lobby',
@@ -46,6 +56,9 @@ test('GrossMeister preserves the supported 2-24 board configuration and Choice C
   const columns = playChildren.find(({ id }) => id === 'play-board-columns');
   const rows = playChildren.find(({ id }) => id === 'play-board-rows');
   const choiceCoin = playChildren.find(({ id }) => id === 'play-choice-coin');
+  const coinChildren = manifest.screens.coin?.root.children ?? [];
+  const nbPreset = coinChildren.find(({ id }) => id === 'coin-nb-preset');
+  const freeChoicePreset = coinChildren.find(({ id }) => id === 'coin-free-choice-preset');
   const columnsProps = columns?.props;
   const rowsProps = rows?.props;
   const choiceCoinProps = choiceCoin?.props;
@@ -64,8 +77,45 @@ test('GrossMeister preserves the supported 2-24 board configuration and Choice C
   expect(rowsProps.options).toContainEqual({ value: '24', label: '24' });
   expect(columnsProps.options).toContainEqual({ value: '10', label: '10' });
   expect(rowsProps.options).toContainEqual({ value: '13', label: '13' });
-  expect(choiceCoinProps.description).toContain('Schachfiguren');
+  expect(choiceCoinProps.description).toContain('Choice Coins');
   expect(choiceCoinProps.description).not.toContain('wer die Farbe');
+  expect(choiceCoinProps.description).toContain('N/B');
+  expect(choiceCoinProps.description).toContain('P/N/B/R/Q/K');
+  expect(nbPreset?.props?.description).toContain('je Coin und je Spielenden');
+  expect(freeChoicePreset?.props?.description).toContain('P/N/B/R/Q/K');
+  expect(JSON.stringify(manifest.screens.coin)).not.toContain('RadioGroup');
+});
+
+test('GrossMeister resolves every authored screen through the Navigator topology', () => {
+  const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
+  const plan = createNavigatorPlan(manifest.navigator, {
+    platform: 'web',
+    responsiveSize: 'expanded',
+    expoRouterVersion: '57.0.18',
+  });
+  const screenIds = [
+    ...plan.root.routes.flatMap((route) =>
+      route.navigator === undefined
+        ? route.screenId === undefined
+          ? []
+          : [route.screenId]
+        : route.navigator.routes.flatMap((nestedRoute) =>
+            nestedRoute.screenId === undefined ? [] : [nestedRoute.screenId],
+          ),
+    ),
+  ].sort();
+
+  expect(screenIds).toEqual([
+    'coin',
+    'lobby',
+    'match',
+    'play',
+    'result',
+    'sign-in',
+    'sign-up',
+    'waiting',
+  ]);
+  expect(plan.diagnostics.filter(({ severity }) => severity === 'error')).toEqual([]);
 });
 
 test('GrossMeister does not bind unavailable multiplayer operations as navigation', () => {

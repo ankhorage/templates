@@ -168,6 +168,10 @@ const manifest: AppManifest = {
           ],
         },
       },
+      { name: 'waiting', screenId: 'waiting' },
+      { name: 'coin', screenId: 'coin' },
+      { name: 'match', screenId: 'match' },
+      { name: 'result', screenId: 'result' },
       { name: 'sign-in', screenId: 'sign-in' },
       { name: 'sign-up', screenId: 'sign-up' },
     ],
@@ -211,26 +215,12 @@ const manifest: AppManifest = {
           },
         },
         {
-          id: 'play-custom-pieces',
-          type: 'RadioGroup',
-          props: {
-            defaultValue: 'queen',
-            presentation: 'card',
-            options: [
-              { value: 'queen', label: 'Königin' },
-              { value: 'rook', label: 'Turm' },
-              { value: 'knight', label: 'Springer' },
-              { value: 'bishop', label: 'Läufer' },
-            ],
-          },
-        },
-        {
           id: 'play-choice-coin',
           type: 'Card',
           props: {
             title: 'Choice Coin',
             description:
-              'Du wählst deine Schachfiguren. Die Auswahl einer Farbe gehört nicht zu Choice Coin.',
+              'Das Brett unterstützt Choice Coins mit N/B und Free Choice mit P/N/B/R/Q/K. Jede Coin wird pro Spielenden einzeln gewählt und serverseitig gesperrt.',
             tone: 'outline',
           },
         },
@@ -288,19 +278,25 @@ const manifest: AppManifest = {
       description: 'Wähle deine Figuren für Choice Coin.',
       root: createShell('coin', [
         { id: 'coin-title', type: 'Heading', props: { text: 'Choice Coin', level: 1, size: 'h1' } },
-        text('coin-copy', 'Wähle die Figuren, die du spielen möchtest.'),
+        text('coin-copy', 'Die verfügbaren Figuren hängen vom gewählten Engine-Preset ab.'),
         {
-          id: 'coin-piece-choice',
-          type: 'RadioGroup',
+          id: 'coin-nb-preset',
+          type: 'Card',
           props: {
-            defaultValue: 'queen',
-            presentation: 'card',
-            options: [
-              { value: 'queen', label: 'Königin' },
-              { value: 'rook', label: 'Turm' },
-              { value: 'knight', label: 'Springer' },
-              { value: 'bishop', label: 'Läufer' },
-            ],
+            title: 'Choice Coin: N/B',
+            description:
+              'Jede Choice Coin bietet Springer (N) oder Läufer (B). Die Auswahl gilt je Coin und je Spielenden.',
+            tone: 'outline',
+          },
+        },
+        {
+          id: 'coin-free-choice-preset',
+          type: 'Card',
+          props: {
+            title: 'Free Choice Coin: P/N/B/R/Q/K',
+            description:
+              'P/N/B/R/Q/K: Jede Free Choice Coin bietet Bauer (P), Springer (N), Läufer (B), Turm (R), Königin (Q) oder König (K).',
+            tone: 'outline',
           },
         },
         {
@@ -308,7 +304,8 @@ const manifest: AppManifest = {
           type: 'Card',
           props: {
             title: 'Auswahl noch nicht gesichert',
-            description: 'Die Auswahl wird erst mit der Partie bestätigt.',
+            description:
+              'Dieses Template zeigt keine Coin-Auswahl oder Sperre. Die vollständigen Auswahlmengen und Sperren bleiben serverautoritativ.',
             tone: 'outline',
           },
         },
