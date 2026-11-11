@@ -1,4 +1,10 @@
-import type { AppManifest, EventBinding, UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  BindingExpression,
+  ComponentDataBindingRegistry,
+  EventBinding,
+  UiNode,
+} from '@ankhorage/contracts';
 import { DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
 
 import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
@@ -124,6 +130,70 @@ const previewPieces = [
   { color: 'black' as const, piece: 'k', cell: { column: 5, row: 8 } },
   { color: 'black' as const, piece: 'b', cell: { column: 6, row: 6 } },
 ];
+
+/*** Read one persisted Select value, retaining the authored eight-cell default before selection. */
+function boardDimensionValue(path: 'columns' | 'rows'): BindingExpression {
+  return {
+    kind: 'fallback',
+    value: { capability: 'state.grossmeister', path: `board.${path}` },
+    fallback: { kind: 'literal', value: '8' },
+  };
+}
+
+/*** Convert the canonical Select value only where ChessBoard requires a numeric dimension. */
+function boardDimension(path: 'columns' | 'rows'): BindingExpression {
+  return {
+    kind: 'transform',
+    value: boardDimensionValue(path),
+    transforms: ['number'],
+  };
+}
+
+/*** Read caller-owned pieces while retaining the portable board preview when no host state exists. */
+function boardPieces(): BindingExpression {
+  return {
+    kind: 'fallback',
+    value: { capability: 'state.grossmeister', path: 'board.pieces' },
+    fallback: { kind: 'literal', value: previewPieces },
+  };
+}
+
+/*** Set one persisted board dimension from the released Select event. */
+function setBoardDimension(path: 'columns' | 'rows'): EventBinding {
+  return {
+    target: {
+      capability: 'state.set',
+      input: {
+        path: { kind: 'literal', value: `grossmeister.board.${path}` },
+        value: { capability: 'select.valueChange', path: 'payload.value' },
+      },
+    },
+  };
+}
+
+const boardBindings: ComponentDataBindingRegistry = {
+  'play-board': {
+    componentId: 'play-board',
+    componentType: 'ChessBoard',
+    props: {
+      columns: { value: boardDimension('columns') },
+      pieces: { value: boardPieces() },
+      rows: { value: boardDimension('rows') },
+    },
+  },
+  'play-board-columns': {
+    componentId: 'play-board-columns',
+    componentType: 'Select',
+    props: { value: { value: boardDimensionValue('columns') } },
+    events: { valueChange: [setBoardDimension('columns')] },
+  },
+  'play-board-rows': {
+    componentId: 'play-board-rows',
+    componentType: 'Select',
+    props: { value: { value: boardDimensionValue('rows') } },
+    events: { valueChange: [setBoardDimension('rows')] },
+  },
+};
 
 const manifest: AppManifest = {
   metadata: {
@@ -414,6 +484,7 @@ const manifest: AppManifest = {
     },
   },
   dataBindings: {
+    ...boardBindings,
     'sign-in-form': {
       componentId: 'sign-in-form',
       componentType: 'SignInForm',

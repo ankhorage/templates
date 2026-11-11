@@ -47,13 +47,14 @@
   },
   "derivation": {
     "provenance": {
-      "contracts": "26.4.0",
+      "contracts": "26.5.0",
+      "runtime": "5.3.0",
       "templates": "12.4.17",
-      "zora": "26.0.0"
+      "zora": "26.1.0"
     },
     "diagnostics": [],
     "assumptions": [
-      "The 8 x 8 board is a non-interactive presentation preview; the released ChessBoard public metadata permits caller-owned dimensions from 2 through 24 and caller-owned pieces."
+      "The released declarative state bindings persist independent 2 through 24 board dimensions while ChessBoard retains caller-owned pieces."
     ],
     "unsupported": [
       {
@@ -62,19 +63,14 @@
         "detail": "Create, join, Choice Coin player-choice lock, start, move, resign, lobby reads, identity, and seat ownership require the versioned server-authoritative chess API. No released public operation is available to this portable manifest, so the controls are disabled and unbound. Replace only after #70 publishes the supported owner-backed operations."
       },
       {
-        "id": "grossmeister-board-configuration-binding",
-        "owner": "@ankhorage/zora#1087",
-        "detail": "Released ChessBoard metadata owns presentation props and cell/move intents; Runtime owns configuration state and capability execution; Contracts owns serializable binding expressions. Select and RadioGroup expose value-change events, but no released capability joins those three owner boundaries for generic configuration state or field-change-to-ChessBoard binding. The row and column controls remain declarative and independently selectable, but they cannot update the board preview, persist a draft, or serialize a configured template until #1087 is released. Templates must not add a local state engine."
-      },
-      {
         "id": "grossmeister-choice-coin-domain",
         "owner": "@ankhorage/chess and @ankhorage/api-gateway#70",
         "detail": "The released chess engine offers Choice Coin N/B and Free Choice P/N/B/R/Q/K presets. Each player selects every coin independently and the server locks complete selections. ZORA RadioGroup is one global single-choice presentation only; it cannot model per-coin selection or server locking. Templates therefore shows the supported preset vocabulary without a bound selector, copied rules, or color coin flip."
       },
       {
-        "id": "grossmeister-web-hit-target",
-        "owner": "@ankhorage/zora#1083",
-        "detail": "The still-open ZORA fix owns web ChessBoard hit targets. This template carries no local workaround and must consume the published fix when available."
+        "id": "grossmeister-piece-ownership",
+        "owner": "@ankhorage/zora",
+        "detail": "ChessBoard owns rendering only. GrossMeister keeps its declarative caller-owned pieces; pieces outside a resized board have no rendered cell."
       }
     ],
     "ownerRuntimeDrift": []
@@ -84,7 +80,7 @@
       "id": "play",
       "purpose": "Board-first configuration preview with explicit unavailable multiplayer boundary.",
       "primaryAction": "Disabled until API Gateway #70 is published and bound by its released public operation.",
-      "states": ["default preview", "disabled configuration", "disabled multiplayer action"],
+      "states": ["default preview", "interactive configuration", "disabled multiplayer action"],
       "evidence": ["play-mobile-concept", "play-desktop-concept"]
     },
     {
@@ -154,8 +150,7 @@
     "blockers": []
   },
   "openDecisions": [
-    "Bind enabled multiplayer controls only after API Gateway #70 is released with declared owner-backed operations and a generated application host is selected for runtime acceptance.",
-    "Bind row, column, and piece configuration to the board preview only after ZORA #1087 releases the generic declarative configuration capability."
+    "Bind enabled multiplayer controls only after API Gateway #70 is released with declared owner-backed operations and a generated application host is selected for runtime acceptance."
   ]
 }
 ---
@@ -168,4 +163,4 @@ GrossMeister keeps one Navy/White design and puts the released ChessBoard on the
 
 ## Accessibility and validation
 
-The board preview, configuration controls, and multiplayer controls are disabled until their owner-backed behavior is available. Concept evidence is separate from runtime acceptance; no native-device or real-host claim is made.
+The board configuration controls update the preview through released Runtime state bindings. Multiplayer controls remain disabled until their server-authoritative operations are available. Concept evidence is separate from runtime acceptance.

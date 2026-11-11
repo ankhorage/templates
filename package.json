@@ -111,7 +111,8 @@
     "format": "ankhorage-prettier --write .",
     "format:check": "ankhorage-prettier --check .",
     "typecheck": "bun run templates:catalog && bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
-    "test": "bun test && bun run test:packed-consumer",
+    "test": "bun test --path-ignore-patterns 'test/grossmeister.chromium.test.ts' && bun run test:packed-consumer",
+    "test:chromium": "bun test ./test/grossmeister.chromium.test.ts",
     "test:packed-consumer": "bun run build && bun test ./test/packedConsumer.ts",
     "prepublishOnly": "bun run typecheck && bun run build && bun test",
     "version-packages": "ankhorage-changeset version",
@@ -135,6 +136,7 @@
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.6",
     "pkgviz": "^0.8.3",
+    "playwright": "^1.65.0",
     "typescript": "^6.0.3"
   },
   "packageManager": "bun@1.4.2"

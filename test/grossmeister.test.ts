@@ -1,8 +1,16 @@
-import type { UiNode } from '@ankhorage/contracts';
+import type { AppManifest, StateAdapter, UiNode } from '@ankhorage/contracts';
 import { createNavigatorPlan } from '@ankhorage/navigator';
-import { expect, test } from 'bun:test';
+import { expect, mock, test } from 'bun:test';
 
 import { createTemplateArtifact, resolveTemplate, validateTemplateManifest } from '../src/index';
+
+await mock.module('react-native', () => ({
+  StyleSheet: { create: <T>(styles: T) => styles },
+  Text: () => null,
+  View: () => null,
+}));
+
+const runtime = await import('@ankhorage/runtime');
 
 function requiredChild(children: readonly UiNode[] | undefined, id: string): UiNode {
   const child = children?.find((node) => node.id === id);
@@ -14,6 +22,65 @@ function requiredChildProps(children: readonly UiNode[] | undefined, id: string)
   const { props } = requiredChild(children, id);
   if (!props) throw new Error(`Expected GrossMeister node props: ${id}`);
   return props;
+}
+
+/*** Find one node in the GrossMeister screen tree for Runtime interaction acceptance. */
+function requiredNode(node: UiNode, id: string): UiNode {
+  if (node.id === id) return node;
+  for (const child of node.children ?? []) {
+    const found = findNode(child, id);
+    if (found !== undefined) return found;
+  }
+  throw new Error(`Expected GrossMeister node: ${id}`);
+}
+
+/*** Search one node subtree without turning an ordinary miss into a test failure. */
+function findNode(node: UiNode, id: string): UiNode | undefined {
+  if (node.id === id) return node;
+  for (const child of node.children ?? []) {
+    const found = findNode(child, id);
+    if (found !== undefined) return found;
+  }
+  return undefined;
+}
+
+/*** Dispatch one released Select value-change event through Runtime's state capability executor. */
+async function selectBoardDimension(
+  manifest: AppManifest,
+  stateAdapter: StateAdapter,
+  id: 'play-board-columns' | 'play-board-rows',
+  value: string,
+): Promise<void> {
+  const { dataBindings, screens } = manifest;
+  const { play } = screens;
+  if (play === undefined || dataBindings === undefined) {
+    throw new Error('GrossMeister requires the play screen and component bindings.');
+  }
+  await runtime.dispatchRuntimeComponentEvent({
+    dataBindings,
+    event: { payload: { value }, sourceNodeId: id, type: 'select.valueChange' },
+    eventName: 'valueChange',
+    executeCapability: runtime.composeRuntimeCapabilityExecutor({
+      apiCapabilityExecutor: () => Promise.resolve({ diagnostics: [], ok: false as const }),
+      stateAdapter,
+    }),
+    node: requiredNode(play.root, id),
+  });
+}
+
+/*** Resolve one configuration node's props exactly as Runtime supplies them to released ZORA. */
+function resolveRuntimeProps(manifest: AppManifest, stateAdapter: StateAdapter, id: string) {
+  const { dataBindings, screens } = manifest;
+  const { play } = screens;
+  if (play === undefined || dataBindings === undefined) {
+    throw new Error('GrossMeister requires the play screen and component bindings.');
+  }
+  return runtime.resolveRuntimeBindings({
+    dataBindings,
+    node: requiredNode(play.root, id),
+    props: requiredChildProps(play.root.children, id),
+    stateAdapter,
+  }).props;
 }
 
 test('GrossMeister is a release-valid single-Navy board-first chess configuration', () => {
@@ -118,7 +185,7 @@ test('GrossMeister resolves every authored screen through the Navigator topology
   expect(plan.diagnostics.filter(({ severity }) => severity === 'error')).toEqual([]);
 });
 
-test('GrossMeister does not bind unavailable multiplayer operations as navigation', () => {
+test('GrossMeister binds only supported board configuration and leaves multiplayer operations unavailable', () => {
   const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
   const createGameProps = requiredChildProps(manifest.screens.play?.root.children, 'create-game');
   const joinGameProps = requiredChildProps(
@@ -139,8 +206,61 @@ test('GrossMeister does not bind unavailable multiplayer operations as navigatio
   expect(joinGameProps.disabled).toBe(true);
   expect(startMatchProps.disabled).toBe(true);
   expect(resignMatchProps.disabled).toBe(true);
-  expect(Object.keys(bindings)).toEqual(['sign-in-form', 'sign-up-form']);
+  expect(Object.keys(bindings)).toEqual([
+    'play-board',
+    'play-board-columns',
+    'play-board-rows',
+    'sign-in-form',
+    'sign-up-form',
+  ]);
   expect(manifest.dataSources).toBeUndefined();
+});
+
+test('GrossMeister persists controlled Select strings and converts them only for ChessBoard', async () => {
+  const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
+  const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
+
+  await selectBoardDimension(manifest, stateAdapter, 'play-board-columns', '10');
+  await selectBoardDimension(manifest, stateAdapter, 'play-board-rows', '13');
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board-columns')).toMatchObject({
+    value: '10',
+  });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board-rows')).toMatchObject({
+    value: '13',
+  });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board')).toMatchObject({
+    columns: 10,
+    rows: 13,
+    pieces: [
+      { color: 'white', piece: 'k', cell: { column: 5, row: 1 } },
+      { color: 'white', piece: 'n', cell: { column: 3, row: 3 } },
+      { color: 'black', piece: 'k', cell: { column: 5, row: 8 } },
+      { color: 'black', piece: 'b', cell: { column: 6, row: 6 } },
+    ],
+  });
+
+  await selectBoardDimension(manifest, stateAdapter, 'play-board-columns', '24');
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board')).toMatchObject({
+    columns: 24,
+    rows: 13,
+  });
+  expect(stateAdapter.get('grossmeister.board')).toEqual({
+    ok: true,
+    data: { columns: '24', rows: '13' },
+  });
+});
+
+test('GrossMeister lets the caller replace preview pieces without changing board dimensions', () => {
+  const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
+  const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
+  const pieces = [{ color: 'black', piece: 'q', cell: { column: 2, row: 2 } }];
+
+  stateAdapter.set('grossmeister.board', { columns: '2', pieces, rows: '24' });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board')).toMatchObject({
+    columns: 2,
+    pieces,
+    rows: 24,
+  });
 });
 
 test('GrossMeister keeps unavailable actions and technical dependencies out of product copy', () => {

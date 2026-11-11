@@ -1,7 +1,7 @@
 import { createKnipConfig } from '@ankhorage/devtools/knip';
 
 export default createKnipConfig({
-  entry: ['.agents/skills/**/scripts/**/*.ts'],
+  entry: ['.agents/skills/**/scripts/**/*.ts', 'test/grossmeisterChromiumHarness.tsx'],
   ignoreDependencies: ['@ankhorage/doctor'],
   ignoreFiles: [
     '.prettierrc.js',

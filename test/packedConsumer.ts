@@ -22,6 +22,7 @@ test('a fresh packed consumer materializes the Reader template and its bundled L
 
   try {
     assertReaderManifestIsExposed(consumer);
+    assertGrossMeisterBoardBindingsAreExposed(consumer);
     assertReaderCoverIsMaterialized(consumer);
   } finally {
     rmSync(consumer.temporaryRoot, { force: true, recursive: true });
@@ -42,6 +43,69 @@ function createPackedConsumer(packageDirectory: string) {
   );
   materializePackedConsumer(packageDirectory, consumerDirectory, tarballPath);
   return { temporaryRoot, consumerDirectory };
+}
+
+function assertGrossMeisterBoardBindingsAreExposed(
+  consumer: ReturnType<typeof createPackedConsumer>,
+): void {
+  const inspectOutput = run(
+    'bun',
+    ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', 'games/grossmeister'],
+    consumer.consumerDirectory,
+  );
+  const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
+  assertGrossMeisterRuntimeBindings(inspected.manifest);
+}
+
+function assertGrossMeisterRuntimeBindings(manifest: unknown): void {
+  expect(manifest).toMatchObject({
+    dataBindings: {
+      'play-board': {
+        props: {
+          columns: {
+            value: {
+              kind: 'transform',
+              transforms: ['number'],
+              value: { kind: 'fallback', value: { capability: 'state.grossmeister' } },
+            },
+          },
+          pieces: {
+            value: {
+              kind: 'fallback',
+              value: { capability: 'state.grossmeister', path: 'board.pieces' },
+            },
+          },
+          rows: {
+            value: {
+              kind: 'transform',
+              transforms: ['number'],
+              value: { kind: 'fallback', value: { capability: 'state.grossmeister' } },
+            },
+          },
+        },
+      },
+      'play-board-columns': {
+        props: {
+          value: { value: { kind: 'fallback', fallback: { value: '8' } } },
+        },
+        events: {
+          valueChange: [
+            {
+              target: {
+                capability: 'state.set',
+                input: { value: { capability: 'select.valueChange', path: 'payload.value' } },
+              },
+            },
+          ],
+        },
+      },
+      'play-board-rows': {
+        props: {
+          value: { value: { kind: 'fallback', fallback: { value: '8' } } },
+        },
+      },
+    },
+  });
 }
 
 function assertReaderManifestIsExposed(consumer: ReturnType<typeof createPackedConsumer>): void {
