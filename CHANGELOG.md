@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.8
+
+### Patch Changes
+
+- 755c3c2: feat(templates): bind GrossMeister board controls through released state APIs
+
 ## 12.5.7
 
 ### Patch Changes

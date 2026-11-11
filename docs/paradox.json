@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.5.7",
+      "value": "v12.5.8",
       "color": "cb3837"
     },
     {
@@ -3539,7 +3539,7 @@
       "description": "Create the complete portable GrossMeister chess application manifest.",
       "sourceLocation": {
         "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
-        "line": 8,
+        "line": 14,
         "column": 1
       }
     },
@@ -3548,7 +3548,7 @@
       "description": "Build the shared Navy GrossMeister shell with an avatar slot and footer wordmark.",
       "sourceLocation": {
         "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
-        "line": 13,
+        "line": 19,
         "column": 1
       }
     },
@@ -3557,7 +3557,7 @@
       "description": "Create one portable navigation binding for an explicitly named route.",
       "sourceLocation": {
         "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
-        "line": 83,
+        "line": 89,
         "column": 1
       }
     },
@@ -3566,7 +3566,7 @@
       "description": "Create a concise text node for the fixed Navy application screens.",
       "sourceLocation": {
         "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
-        "line": 93,
+        "line": 99,
         "column": 1
       }
     },
@@ -3575,7 +3575,43 @@
       "description": "Create a release-safe button with its visible label and minimum touch target.",
       "sourceLocation": {
         "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
-        "line": 102,
+        "line": 108,
+        "column": 1
+      }
+    },
+    {
+      "name": "boardDimensionValue",
+      "description": "Read one persisted Select value, retaining the authored eight-cell default before selection.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 135,
+        "column": 1
+      }
+    },
+    {
+      "name": "boardDimension",
+      "description": "Convert the canonical Select value only where ChessBoard requires a numeric dimension.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 144,
+        "column": 1
+      }
+    },
+    {
+      "name": "boardPieces",
+      "description": "Read caller-owned pieces while retaining the portable board preview when no host state exists.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 153,
+        "column": 1
+      }
+    },
+    {
+      "name": "setBoardDimension",
+      "description": "Set one persisted board dimension from the released Select event.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "line": 162,
         "column": 1
       }
     },
@@ -5067,6 +5103,36 @@
         "fromSymbol": "createAppManifest",
         "toSymbol": "createValidatedManifest",
         "callExpression": "createValidatedManifest",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "boardDimension",
+        "toSymbol": "boardDimensionValue",
+        "callExpression": "boardDimensionValue",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "boardDimension",
+        "callExpression": "boardDimension",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "boardPieces",
+        "callExpression": "boardPieces",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "boardDimensionValue",
+        "callExpression": "boardDimensionValue",
+        "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/games/grossmeister/createAppManifest.ts",
+        "toSymbol": "setBoardDimension",
+        "callExpression": "setBoardDimension",
         "sourcePath": "src/templates/categories/games/grossmeister/createAppManifest.ts"
       },
       {
