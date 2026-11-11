@@ -1,4 +1,10 @@
-import type { AppManifest, EventBinding, UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  BindingExpression,
+  ComponentDataBindingRegistry,
+  EventBinding,
+  UiNode,
+} from '@ankhorage/contracts';
 import { DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
 
 import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
@@ -124,6 +130,53 @@ const previewPieces = [
   { color: 'black' as const, piece: 'k', cell: { column: 5, row: 8 } },
   { color: 'black' as const, piece: 'b', cell: { column: 6, row: 6 } },
 ];
+
+/*** Read one persisted board dimension, retaining the authored eight-cell default before selection. */
+function boardDimension(path: 'columns' | 'rows'): BindingExpression {
+  return {
+    kind: 'fallback',
+    value: { capability: 'state.grossmeister', path: `board.${path}` },
+    fallback: { kind: 'literal', value: 8 },
+  };
+}
+
+/*** Set one persisted board dimension from the released Select event using the canonical numeric transform. */
+function setBoardDimension(path: 'columns' | 'rows'): EventBinding {
+  return {
+    target: {
+      capability: 'state.set',
+      input: {
+        path: { kind: 'literal', value: `grossmeister.board.${path}` },
+        value: {
+          kind: 'transform',
+          value: { capability: 'select.valueChange', path: 'payload.value' },
+          transforms: ['number'],
+        },
+      },
+    },
+  };
+}
+
+const boardBindings: ComponentDataBindingRegistry = {
+  'play-board': {
+    componentId: 'play-board',
+    componentType: 'ChessBoard',
+    props: {
+      columns: { value: boardDimension('columns') },
+      rows: { value: boardDimension('rows') },
+    },
+  },
+  'play-board-columns': {
+    componentId: 'play-board-columns',
+    componentType: 'Select',
+    events: { valueChange: [setBoardDimension('columns')] },
+  },
+  'play-board-rows': {
+    componentId: 'play-board-rows',
+    componentType: 'Select',
+    events: { valueChange: [setBoardDimension('rows')] },
+  },
+};
 
 const manifest: AppManifest = {
   metadata: {
@@ -414,6 +467,7 @@ const manifest: AppManifest = {
     },
   },
   dataBindings: {
+    ...boardBindings,
     'sign-in-form': {
       componentId: 'sign-in-form',
       componentType: 'SignInForm',
