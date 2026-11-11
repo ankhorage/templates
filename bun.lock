@@ -21,6 +21,7 @@
         "@types/bun": "^1.4.2",
         "@types/node": "^26.6.6",
         "pkgviz": "^0.8.3",
+        "playwright": "^1.65.0",
         "typescript": "^6.0.3",
       },
     },
@@ -1671,6 +1672,10 @@
     "picomatch": ["picomatch@4.0.7", "", {}, "sha512-qcJu88Q2IWqJsDD529JKMdwGm/dvInW4HvQnRwiH9JtihJvzGOscDtHE3x1pBKeUOTysQ8kVmLnJ2kJu7yhcGA=="],
 
     "pkgviz": ["pkgviz@0.8.3", "", { "dependencies": { "@ankhorage/dependency-graph": "^1.1.1", "@ankhorage/graph": "^0.3.0", "@ankhorage/graph-cytoscape": "^0.2.0", "@ankhorage/project-detector": "^0.3.3", "@ankhorage/rules": "^0.2.0", "@ankhorage/rules-architecture": "^0.5.0", "@ankhorage/utility": "^1.9.0", "@artiphishle/testosterone": "^0.3.9", "ankh-hooks": "^1.5.2", "cytoscape": "^3.34.3", "next": "16.3.5", "react": "^19.3.0", "react-dom": "^19.3.0", "typescript": "~6.0.3", "xml-js": "^1.6.11" }, "bin": { "pkgviz": "bin/pkgviz.ts" } }, "sha512-6McTG3spAchZqg+gP88q/5qaeTZvJbnevXtV7qC9b3yMFgHq2H24CNY3A99yiZ2sOfpewuJiBCEfEkgFfDQiaQ=="],
+
+    "playwright": ["playwright@1.65.0", "", { "dependencies": { "playwright-core": "1.65.0" }, "bin": { "playwright": "cli.js" } }, "sha512-F3AMWcR44qMBt4kq+6Kb6mX7bjGXshktKFOPULd7reED6ZJWevjbNRqysP7q+AATE9kdPEZBibex1BYsvpVoeA=="],
+
+    "playwright-core": ["playwright-core@1.65.0", "", { "bin": { "playwright-core": "cli.js" } }, "sha512-vNSKgH6YqtN7cdT/L334zo0a+YwkrpicyrHJlWWPIm/Q+Nn2SWInil01oT0mbu96U4GgoRtCYQD9CzJQgju+lA=="],
 
     "plist": ["plist@3.1.1", "", { "dependencies": { "@xmldom/xmldom": "^0.9.10", "base64-js": "^1.5.1", "xmlbuilder": "^15.1.1" } }, "sha512-ZIfcLJC+7E7FBFnDxm9MPmt7D+DidyQ26lewieO75AdhA2ayMtsJSES0iWzqJQbcVRSrTufQoy0DR94xHue0oA=="],
 

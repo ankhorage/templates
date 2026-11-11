@@ -108,6 +108,12 @@ jobs:
             echo "No test script found; skipping."
           fi
 
+      - name: Run Chromium acceptance
+        if: github.event_name == 'pull_request'
+        run: |
+          bunx playwright install --with-deps chromium
+          bun run test:chromium
+
       - name: Run typecheck
         run: |
           if node -e "const p=require('./package.json'); process.exit(p.scripts?.typecheck ? 0 : 1)"; then

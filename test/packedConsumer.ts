@@ -54,24 +54,54 @@ function assertGrossMeisterBoardBindingsAreExposed(
     consumer.consumerDirectory,
   );
   const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
-  expect(inspected.manifest).toMatchObject({
+  assertGrossMeisterRuntimeBindings(inspected.manifest);
+}
+
+function assertGrossMeisterRuntimeBindings(manifest: unknown): void {
+  expect(manifest).toMatchObject({
     dataBindings: {
       'play-board': {
         props: {
-          columns: { value: { kind: 'fallback', value: { capability: 'state.grossmeister' } } },
-          rows: { value: { kind: 'fallback', value: { capability: 'state.grossmeister' } } },
+          columns: {
+            value: {
+              kind: 'transform',
+              transforms: ['number'],
+              value: { kind: 'fallback', value: { capability: 'state.grossmeister' } },
+            },
+          },
+          pieces: {
+            value: {
+              kind: 'fallback',
+              value: { capability: 'state.grossmeister', path: 'board.pieces' },
+            },
+          },
+          rows: {
+            value: {
+              kind: 'transform',
+              transforms: ['number'],
+              value: { kind: 'fallback', value: { capability: 'state.grossmeister' } },
+            },
+          },
         },
       },
       'play-board-columns': {
+        props: {
+          value: { value: { kind: 'fallback', fallback: { value: '8' } } },
+        },
         events: {
           valueChange: [
             {
               target: {
                 capability: 'state.set',
-                input: { value: { kind: 'transform', transforms: ['number'] } },
+                input: { value: { capability: 'select.valueChange', path: 'payload.value' } },
               },
             },
           ],
+        },
+      },
+      'play-board-rows': {
+        props: {
+          value: { value: { kind: 'fallback', fallback: { value: '8' } } },
         },
       },
     },

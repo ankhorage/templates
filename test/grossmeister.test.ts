@@ -68,8 +68,8 @@ async function selectBoardDimension(
   });
 }
 
-/*** Resolve the configuration board props exactly as Runtime supplies them to released ZORA. */
-function resolveBoardProps(manifest: AppManifest, stateAdapter: StateAdapter) {
+/*** Resolve one configuration node's props exactly as Runtime supplies them to released ZORA. */
+function resolveRuntimeProps(manifest: AppManifest, stateAdapter: StateAdapter, id: string) {
   const { dataBindings, screens } = manifest;
   const { play } = screens;
   if (play === undefined || dataBindings === undefined) {
@@ -77,8 +77,8 @@ function resolveBoardProps(manifest: AppManifest, stateAdapter: StateAdapter) {
   }
   return runtime.resolveRuntimeBindings({
     dataBindings,
-    node: requiredNode(play.root, 'play-board'),
-    props: requiredChildProps(play.root.children, 'play-board'),
+    node: requiredNode(play.root, id),
+    props: requiredChildProps(play.root.children, id),
     stateAdapter,
   }).props;
 }
@@ -216,13 +216,19 @@ test('GrossMeister binds only supported board configuration and leaves multiplay
   expect(manifest.dataSources).toBeUndefined();
 });
 
-test('GrossMeister persists independent numeric board dimensions through released Runtime bindings', async () => {
+test('GrossMeister persists controlled Select strings and converts them only for ChessBoard', async () => {
   const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
   const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
 
   await selectBoardDimension(manifest, stateAdapter, 'play-board-columns', '10');
   await selectBoardDimension(manifest, stateAdapter, 'play-board-rows', '13');
-  expect(resolveBoardProps(manifest, stateAdapter)).toMatchObject({
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board-columns')).toMatchObject({
+    value: '10',
+  });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board-rows')).toMatchObject({
+    value: '13',
+  });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board')).toMatchObject({
     columns: 10,
     rows: 13,
     pieces: [
@@ -234,10 +240,26 @@ test('GrossMeister persists independent numeric board dimensions through release
   });
 
   await selectBoardDimension(manifest, stateAdapter, 'play-board-columns', '24');
-  expect(resolveBoardProps(manifest, stateAdapter)).toMatchObject({ columns: 24, rows: 13 });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board')).toMatchObject({
+    columns: 24,
+    rows: 13,
+  });
   expect(stateAdapter.get('grossmeister.board')).toEqual({
     ok: true,
-    data: { columns: 24, rows: 13 },
+    data: { columns: '24', rows: '13' },
+  });
+});
+
+test('GrossMeister lets the caller replace preview pieces without changing board dimensions', () => {
+  const manifest = resolveTemplate('games', 'grossmeister').createAppManifest();
+  const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
+  const pieces = [{ color: 'black', piece: 'q', cell: { column: 2, row: 2 } }];
+
+  stateAdapter.set('grossmeister.board', { columns: '2', pieces, rows: '24' });
+  expect(resolveRuntimeProps(manifest, stateAdapter, 'play-board')).toMatchObject({
+    columns: 2,
+    pieces,
+    rows: 24,
   });
 });
 
