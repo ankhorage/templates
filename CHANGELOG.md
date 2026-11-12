@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.14
+
+### Patch Changes
+
+- b852b7b: Update dependencies: `@ankhorage/navigator`, `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.5.13
 
 ### Patch Changes
