@@ -21,6 +21,7 @@ test('a fresh packed consumer materializes the Reader template and its bundled L
   const consumer = createPackedConsumer(packageRoot);
 
   try {
+    assertPublishedFlowContractsAreConsumable(consumer);
     assertReaderManifestIsExposed(consumer);
     assertGrossMeisterBoardBindingsAreExposed(consumer);
     assertReaderCoverIsMaterialized(consumer);
@@ -43,6 +44,43 @@ function createPackedConsumer(packageDirectory: string) {
   );
   materializePackedConsumer(packageDirectory, consumerDirectory, tarballPath);
   return { temporaryRoot, consumerDirectory };
+}
+
+function assertPublishedFlowContractsAreConsumable(
+  consumer: ReturnType<typeof createPackedConsumer>,
+): void {
+  writeFileSync(
+    join(consumer.consumerDirectory, 'flow-contracts.mjs'),
+    "import '@ankhorage/contracts/flow';\n",
+  );
+  writeFileSync(
+    join(consumer.consumerDirectory, 'flow-contracts.ts'),
+    [
+      "import '@ankhorage/contracts/flow';",
+      "import type { FlowDefinition } from '@ankhorage/contracts/flow';",
+      "const workflow: FlowDefinition = { id: 'packed-template-workflow', version: 1, title: 'Packed template workflow', nodes: [], edges: [], triggers: [{ id: 'manual', kind: 'manual' }] };",
+      'void workflow;',
+    ].join('\n'),
+  );
+
+  run('node', ['flow-contracts.mjs'], consumer.consumerDirectory);
+  run('bun', ['flow-contracts.mjs'], consumer.consumerDirectory);
+  run(
+    'node',
+    [
+      'node_modules/typescript/bin/tsc',
+      '--noEmit',
+      '--module',
+      'NodeNext',
+      '--moduleResolution',
+      'NodeNext',
+      '--target',
+      'ES2022',
+      '--skipLibCheck',
+      'flow-contracts.ts',
+    ],
+    consumer.consumerDirectory,
+  );
 }
 
 function assertGrossMeisterBoardBindingsAreExposed(
@@ -244,5 +282,9 @@ function run(command: string, arguments_: readonly string[], cwd: string): strin
   return execFileSync(command, arguments_, {
     cwd,
     encoding: 'utf8',
+    env: {
+      ...process.env,
+      npm_config_cache: join(tmpdir(), 'templates-packed-consumer-cache'),
+    },
   });
 }
