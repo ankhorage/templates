@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.17
+
+### Patch Changes
+
+- 0862469: Update dependencies: `@ankhorage/paradox`, `@ankhorage/zora`.
+
 ## 12.5.16
 
 ### Patch Changes
