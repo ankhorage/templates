@@ -126,7 +126,7 @@
     "@ankhorage/navigator": "^3.5.19",
     "@ankhorage/runtime": "^5.3.4",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^26.1.5"
+    "@ankhorage/zora": "^26.1.6"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.3",
