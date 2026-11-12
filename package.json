@@ -126,13 +126,13 @@
     "@ankhorage/navigator": "^3.5.19",
     "@ankhorage/runtime": "^5.3.4",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^26.1.6"
+    "@ankhorage/zora": "^27.0.0"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.3",
     "@ankhorage/devtools": "^2.3.34",
     "@ankhorage/doctor": "^0.14.35",
-    "@ankhorage/paradox": "^0.3.6",
+    "@ankhorage/paradox": "^0.3.7",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.6",
     "pkgviz": "^0.8.3",
