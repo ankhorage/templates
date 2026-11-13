@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.19
+
+### Patch Changes
+
+- 83153c5: Update dependencies: `@ankhorage/navigator`, `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.5.18
 
 ### Patch Changes
