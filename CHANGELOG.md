@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.20
+
+### Patch Changes
+
+- 58ccda3: Update dependencies: `@ankhorage/zora`.
+
 ## 12.5.19
 
 ### Patch Changes
