@@ -123,10 +123,10 @@
     "@ankhorage/capability": "^0.2.2",
     "@ankhorage/color-theory": "^0.3.2",
     "@ankhorage/contracts": "^26.8.0",
-    "@ankhorage/navigator": "^3.5.19",
-    "@ankhorage/runtime": "^5.3.4",
+    "@ankhorage/navigator": "^3.5.20",
+    "@ankhorage/runtime": "^5.3.6",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^27.0.0"
+    "@ankhorage/zora": "^27.0.1"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.3",
