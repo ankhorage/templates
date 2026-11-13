@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.18
+
+### Patch Changes
+
+- e6881db: Update dependencies: `@ankhorage/contracts`.
+
 ## 12.5.17
 
 ### Patch Changes
