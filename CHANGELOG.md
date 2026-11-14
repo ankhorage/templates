@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.11
+
+### Patch Changes
+
+- d5a5039: Update dependencies: `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.6.10
 
 ### Patch Changes
