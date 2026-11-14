@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 1,
+  "kind": "library",
+  "title": "Ankhorage Templates",
+  "summary": "Provides portable application templates, design presets, manifest authoring helpers, and a reusable template catalog.",
+  "purpose": "Turn reusable template definitions and presets into validated project seeds without coupling them to one authoring application.",
+  "domain": "application template authoring",
+  "responsibilities": [
+    "Publish template manifests, presets, design categories, and catalog selection behavior.",
+    "Validate and compose portable manifests and project seeds.",
+    "Expose template authoring through package, CLI, and capability entrypoints.",
+    "Generate and consume the repository-owned template catalog."
+  ],
+  "boundaries": [
+    "Does not own rendering primitives, runtime execution, or navigation behavior.",
+    "Does not deploy generated applications or manage their repositories.",
+    "Does not make template consumers depend on a sibling Studio checkout."
+  ],
+  "audience": [
+    "Application generators and authoring tools selecting reusable templates.",
+    "Developers composing validated manifests and project seeds."
+  ],
+  "useCases": [
+    "Select a template from the published catalog.",
+    "Compose a validated manifest shell with category design presets.",
+    "Materialize a portable project seed for downstream generation."
+  ],
+  "architecture": {
+    "role": "Reusable template and manifest-authoring library with a thin CLI and capability boundary.",
+    "invariants": [
+      "Template manifests remain portable data.",
+      "Runtime, navigation, design-system, and color behavior are consumed through published public APIs.",
+      "Generated catalog data remains owned by the template catalog workflow."
+    ]
+  },
+  "constraints": {
+    "limitations": [
+      "A template only includes assets and capabilities declared by its manifest.",
+      "Final application generation and deployment are performed by downstream consumers."
+    ]
+  }
+}
