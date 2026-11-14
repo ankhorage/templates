@@ -124,7 +124,7 @@
     "@ankhorage/color-theory": "^0.3.2",
     "@ankhorage/contracts": "^26.10.0",
     "@ankhorage/navigator": "^3.5.22",
-    "@ankhorage/runtime": "^5.4.0",
+    "@ankhorage/runtime": "^5.4.1",
     "@ankhorage/utility": "^1.10.0",
     "@ankhorage/zora": "^27.1.2"
   },
