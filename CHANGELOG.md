@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.13
+
+### Patch Changes
+
+- d5a5d53: Update dependencies: `@ankhorage/runtime`.
+
 ## 12.6.12
 
 ### Patch Changes
