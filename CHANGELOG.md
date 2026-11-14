@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.5.26
+
+### Patch Changes
+
+- 46f2311: Update dependencies: `@ankhorage/navigator`, `@ankhorage/runtime`.
+
 ## 12.5.25
 
 ### Patch Changes
