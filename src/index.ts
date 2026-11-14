@@ -57,6 +57,11 @@ export {
   type CategoryPresetReconciliationReport,
 } from './presets/category-presets';
 export {
+  type CreateProjectSeedResult,
+  materializeTemplateRevision,
+  type MaterializeTemplateRevisionRequest,
+} from './projectSeed';
+export {
   createTemplateArtifact,
   listTemplates,
   resolveTemplate,
