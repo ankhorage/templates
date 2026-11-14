@@ -9,7 +9,7 @@
         "@ankhorage/color-theory": "^0.3.2",
         "@ankhorage/contracts": "^26.11.1",
         "@ankhorage/navigator": "^3.5.22",
-        "@ankhorage/runtime": "^5.4.4",
+        "@ankhorage/runtime": "^5.4.5",
         "@ankhorage/utility": "^1.10.1",
         "@ankhorage/zora": "^27.1.11",
       },
