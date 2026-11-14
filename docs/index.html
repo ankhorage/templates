@@ -308,7 +308,7 @@
             <li>
               <button class="nav-button" type="button" data-target="src/projectSeed.ts">
                 src/projectSeed.ts
-                <small>6 functions</small>
+                <small>10 functions</small>
               </button>
             </li>
             <li>
@@ -401,7 +401,7 @@
           <section class="panel">
             <h2>Package overview</h2>
             <div class="summary">
-              <div><strong>57</strong><span class="muted">public exports</span></div>
+              <div><strong>60</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
               <div><strong>32</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
@@ -619,7 +619,7 @@
             </article>
             <article
               class="item"
-              data-search="src/index.ts ACCENT_TONE_FAMILIES ACCENT_TONE_TARGETS AccentToneFamily APP_CATEGORIES AppCategory assertTemplateManifestReady CAPABILITIES CATEGORY_PRESET_RECONCILIATION CATEGORY_PRESETS CategoryAppManifestComposition CategoryDesignDiagnostic CategoryDesignDiagnosticCode CategoryDesignOverrides CategoryPreset CategoryPresetFieldReconciliation CategoryPresetReconciliationDecision CategoryPresetReconciliationReport compileCategoryDesign CompiledCategoryDesign composeCategoryAppManifest ComposeCategoryAppManifestInput createTemplateArtifact DESIGN_DENSITIES DESIGN_SHAPES DesignDensity DesignShape FOUNDATION_TONE_FAMILIES FOUNDATION_TONE_TARGETS FoundationToneFamily listOAuthFixtures listTemplates OAUTH_CALLBACK_ROUTE OAUTH_FIXTURE_IDS OAuthFixtureDefinition OAuthFixtureId resolveCategoryDesignPreset ResolvedCategoryDesignPreset resolveOAuthFixture resolveTemplate resolveTonePair SplashScreenResizeMode SplashScreenSpec TemplateArtifact TemplateAuthoringState TemplateCatalogEntry TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus TemplateDefinition TemplateImageAsset ThemeMode TONE_PAIR_CATALOG TonePairClassification TonePairDefinition TonePairId ToneTarget validateTemplateManifest"
+              data-search="src/index.ts ACCENT_TONE_FAMILIES ACCENT_TONE_TARGETS AccentToneFamily APP_CATEGORIES AppCategory assertTemplateManifestReady CAPABILITIES CATEGORY_PRESET_RECONCILIATION CATEGORY_PRESETS CategoryAppManifestComposition CategoryDesignDiagnostic CategoryDesignDiagnosticCode CategoryDesignOverrides CategoryPreset CategoryPresetFieldReconciliation CategoryPresetReconciliationDecision CategoryPresetReconciliationReport compileCategoryDesign CompiledCategoryDesign composeCategoryAppManifest ComposeCategoryAppManifestInput CreateProjectSeedResult createTemplateArtifact DESIGN_DENSITIES DESIGN_SHAPES DesignDensity DesignShape FOUNDATION_TONE_FAMILIES FOUNDATION_TONE_TARGETS FoundationToneFamily listOAuthFixtures listTemplates materializeTemplateRevision MaterializeTemplateRevisionRequest OAUTH_CALLBACK_ROUTE OAUTH_FIXTURE_IDS OAuthFixtureDefinition OAuthFixtureId resolveCategoryDesignPreset ResolvedCategoryDesignPreset resolveOAuthFixture resolveTemplate resolveTonePair SplashScreenResizeMode SplashScreenSpec TemplateArtifact TemplateAuthoringState TemplateCatalogEntry TemplateCompositionDiagnostic TemplateCompositionDiagnosticCode TemplateCompositionStatus TemplateDefinition TemplateImageAsset ThemeMode TONE_PAIR_CATALOG TonePairClassification TonePairDefinition TonePairId ToneTarget validateTemplateManifest"
             >
               <h3>src/index.ts</h3>
               <p class="muted">Configured entrypoint</p>
@@ -636,12 +636,13 @@
                 <code>CategoryPresetReconciliationDecision</code>,
                 <code>CategoryPresetReconciliationReport</code>, <code>compileCategoryDesign</code>,
                 <code>CompiledCategoryDesign</code>, <code>composeCategoryAppManifest</code>,
-                <code>ComposeCategoryAppManifestInput</code>, <code>createTemplateArtifact</code>,
-                <code>DESIGN_DENSITIES</code>, <code>DESIGN_SHAPES</code>,
-                <code>DesignDensity</code>, <code>DesignShape</code>,
+                <code>ComposeCategoryAppManifestInput</code>, <code>CreateProjectSeedResult</code>,
+                <code>createTemplateArtifact</code>, <code>DESIGN_DENSITIES</code>,
+                <code>DESIGN_SHAPES</code>, <code>DesignDensity</code>, <code>DesignShape</code>,
                 <code>FOUNDATION_TONE_FAMILIES</code>, <code>FOUNDATION_TONE_TARGETS</code>,
                 <code>FoundationToneFamily</code>, <code>listOAuthFixtures</code>,
-                <code>listTemplates</code>, <code>OAUTH_CALLBACK_ROUTE</code>,
+                <code>listTemplates</code>, <code>materializeTemplateRevision</code>,
+                <code>MaterializeTemplateRevisionRequest</code>, <code>OAUTH_CALLBACK_ROUTE</code>,
                 <code>OAUTH_FIXTURE_IDS</code>, <code>OAuthFixtureDefinition</code>,
                 <code>OAuthFixtureId</code>, <code>resolveCategoryDesignPreset</code>,
                 <code>ResolvedCategoryDesignPreset</code>, <code>resolveOAuthFixture</code>,
@@ -732,14 +733,19 @@
             </article>
             <article
               class="item"
-              data-search="src/projectSeed.ts src/templates/catalog.ts createProjectSeed CreateProjectSeedRequest CreateProjectSeedResult ProjectSeedDependencies"
+              data-search="src/projectSeed.ts src/packageMetadata.ts src/templates/catalog.ts src/templateSelector.ts createProjectSeed CreateProjectSeedRequest CreateProjectSeedResult materializeTemplateRevision MaterializeTemplateRevisionRequest ProjectSeedDependencies"
             >
               <h3>src/projectSeed.ts</h3>
               <p class="muted">Referenced module</p>
-              <p><strong>Dependencies:</strong> <code>src/templates/catalog.ts</code></p>
+              <p>
+                <strong>Dependencies:</strong> <code>src/packageMetadata.ts</code>,
+                <code>src/templates/catalog.ts</code>, <code>src/templateSelector.ts</code>
+              </p>
               <p>
                 <strong>Exports:</strong> <code>createProjectSeed</code>,
                 <code>CreateProjectSeedRequest</code>, <code>CreateProjectSeedResult</code>,
+                <code>materializeTemplateRevision</code>,
+                <code>MaterializeTemplateRevisionRequest</code>,
                 <code>ProjectSeedDependencies</code>
               </p>
             </article>
@@ -2963,6 +2969,154 @@
               </article>
             </section>
             <section>
+              <h3>src/projectSeed.ts</h3>
+              <article
+                class="item"
+                id="symbol-createprojectseedresult"
+                data-search="CreateProjectSeedResult type src/projectSeed.ts "
+              >
+                <h4>CreateProjectSeedResult</h4>
+                <p class="muted">type • <code>src/projectSeed.ts:40:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div><strong>Related symbols:</strong> <span class="empty">None</span></div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>createdFiles</code></td>
+                      <td>property</td>
+                      <td><code>readonly string[]</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>projectPath</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+              <article
+                class="item"
+                id="symbol-materializetemplaterevision"
+                data-search="materializeTemplateRevision function src/projectSeed.ts Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths. CreateProjectSeedResult MaterializeTemplateRevisionRequest (request: MaterializeTemplateRevisionRequest) =&gt; Promise&lt;CreateProjectSeedResult&gt;"
+              >
+                <h4>materializeTemplateRevision</h4>
+                <p class="muted">function • <code>src/projectSeed.ts:64:1</code></p>
+                <p>
+                  Materialize an approved manifest revision without regenerating it or accepting
+                  caller-supplied asset paths.
+                </p>
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">CreateProjectSeedResult</li>
+                    <li class="chip">MaterializeTemplateRevisionRequest</li>
+                  </ul>
+                </div>
+                <div>
+                  <h5>Signature</h5>
+                  <pre>
+(request: MaterializeTemplateRevisionRequest) =&gt; Promise&lt;CreateProjectSeedResult&gt;</pre>
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>Parameter</th>
+                        <th>Type</th>
+                        <th>Required</th>
+                        <th>Description</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>request</code></td>
+                        <td><code>MaterializeTemplateRevisionRequest</code></td>
+                        <td>yes</td>
+                        <td></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <p>
+                    <strong>Returns:</strong> <code>Promise&lt;CreateProjectSeedResult&gt;</code>
+                  </p>
+                </div>
+              </article>
+              <article
+                class="item"
+                id="symbol-materializetemplaterevisionrequest"
+                data-search="MaterializeTemplateRevisionRequest type src/projectSeed.ts  AppCategory"
+              >
+                <h4>MaterializeTemplateRevisionRequest</h4>
+                <p class="muted">type • <code>src/projectSeed.ts:46:1</code></p>
+
+                <p><strong>Export paths:</strong> <code>src/index.ts</code></p>
+                <div>
+                  <strong>Related symbols:</strong>
+                  <ul class="chips">
+                    <li class="chip">AppCategory</li>
+                  </ul>
+                </div>
+
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Member</th>
+                      <th>Kind</th>
+                      <th>Type</th>
+                      <th>Required</th>
+                      <th>Description</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><code>cwd</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>manifest</code></td>
+                      <td>property</td>
+                      <td><code>AppManifest</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>projectSlug</code></td>
+                      <td>property</td>
+                      <td><code>string</code></td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td><code>template</code></td>
+                      <td>property</td>
+                      <td>
+                        <code>{ readonly category: AppCategory; readonly slug: string; }</code>
+                      </td>
+                      <td>yes</td>
+                      <td></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </article>
+            </section>
+            <section>
               <h3>src/templates/catalog.ts</h3>
               <article
                 class="item"
@@ -3466,7 +3620,9 @@
                 module_src_presets_category_presets_ts --&gt; module_src_design_category_types_ts
                 module_src_projectSeed_ts[&quot;src/projectSeed.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_projectSeed_ts
+                module_src_projectSeed_ts --&gt; module_src_packageMetadata_ts
                 module_src_projectSeed_ts --&gt; module_src_templates_catalog_ts
+                module_src_projectSeed_ts --&gt; module_src_templateSelector_ts
                 module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
                 package__ankhorage_templates -.-&gt; module_src_templates_catalog_generated_ts
                 module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
@@ -3609,7 +3765,9 @@ graph TD
   module_src_presets_category_presets_ts --&gt; module_src_design_category_types_ts
   module_src_projectSeed_ts[&quot;src/projectSeed.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_projectSeed_ts
+  module_src_projectSeed_ts --&gt; module_src_packageMetadata_ts
   module_src_projectSeed_ts --&gt; module_src_templates_catalog_ts
+  module_src_projectSeed_ts --&gt; module_src_templateSelector_ts
   module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_catalog_generated_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
@@ -3723,7 +3881,9 @@ graph TD
                 module_src_presets_category_presets_ts module_src_presets_category_presets_ts --&gt;
                 module_src_design_category_source_ts module_src_presets_category_presets_ts --&gt;
                 module_src_design_category_types_ts module_src_projectSeed_ts --&gt;
-                module_src_templates_catalog_ts module_src_templates_catalog_generated_ts --&gt;
+                module_src_packageMetadata_ts module_src_projectSeed_ts --&gt;
+                module_src_templates_catalog_ts module_src_projectSeed_ts --&gt;
+                module_src_templateSelector_ts module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_catalog_ts module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
@@ -3824,7 +3984,9 @@ graph LR
   module_src_presets_category_design_ts --&gt; module_src_presets_category_presets_ts
   module_src_presets_category_presets_ts --&gt; module_src_design_category_source_ts
   module_src_presets_category_presets_ts --&gt; module_src_design_category_types_ts
+  module_src_projectSeed_ts --&gt; module_src_packageMetadata_ts
   module_src_projectSeed_ts --&gt; module_src_templates_catalog_ts
+  module_src_projectSeed_ts --&gt; module_src_templateSelector_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_books_reading_reader_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
@@ -3949,6 +4111,8 @@ graph LR
                 export_ComposeCategoryAppManifestInput export_ComposeCategoryAppManifestInput
                 -.-&gt; export_CategoryDesignOverrides export_ComposeCategoryAppManifestInput
                 -.-&gt; export_TemplateAuthoringState
+                export_CreateProjectSeedResult[&quot;CreateProjectSeedResult&quot;]
+                module_src_projectSeed_ts --&gt; export_CreateProjectSeedResult
                 export_createTemplateArtifact[&quot;createTemplateArtifact&quot;]
                 module_src_templates_catalog_ts --&gt; export_createTemplateArtifact
                 export_createTemplateArtifact -.-&gt; export_AppCategory
@@ -3971,6 +4135,13 @@ graph LR
                 export_OAuthFixtureDefinition export_listTemplates[&quot;listTemplates&quot;]
                 module_src_templates_catalog_ts --&gt; export_listTemplates export_listTemplates
                 -.-&gt; export_TemplateCatalogEntry
+                export_materializeTemplateRevision[&quot;materializeTemplateRevision&quot;]
+                module_src_projectSeed_ts --&gt; export_materializeTemplateRevision
+                export_materializeTemplateRevision -.-&gt; export_CreateProjectSeedResult
+                export_materializeTemplateRevision -.-&gt; export_MaterializeTemplateRevisionRequest
+                export_MaterializeTemplateRevisionRequest[&quot;MaterializeTemplateRevisionRequest&quot;]
+                module_src_projectSeed_ts --&gt; export_MaterializeTemplateRevisionRequest
+                export_MaterializeTemplateRevisionRequest -.-&gt; export_AppCategory
                 export_OAUTH_CALLBACK_ROUTE[&quot;OAUTH_CALLBACK_ROUTE&quot;]
                 module_src_fixtures_oauth_ts --&gt; export_OAUTH_CALLBACK_ROUTE
                 export_OAUTH_FIXTURE_IDS[&quot;OAUTH_FIXTURE_IDS&quot;] module_src_fixtures_oauth_ts
@@ -4138,6 +4309,8 @@ graph LR
   module_src_authoring_compose_category_manifest_ts --&gt; export_ComposeCategoryAppManifestInput
   export_ComposeCategoryAppManifestInput -.-&gt; export_CategoryDesignOverrides
   export_ComposeCategoryAppManifestInput -.-&gt; export_TemplateAuthoringState
+  export_CreateProjectSeedResult[&quot;CreateProjectSeedResult&quot;]
+  module_src_projectSeed_ts --&gt; export_CreateProjectSeedResult
   export_createTemplateArtifact[&quot;createTemplateArtifact&quot;]
   module_src_templates_catalog_ts --&gt; export_createTemplateArtifact
   export_createTemplateArtifact -.-&gt; export_AppCategory
@@ -4162,6 +4335,13 @@ graph LR
   export_listTemplates[&quot;listTemplates&quot;]
   module_src_templates_catalog_ts --&gt; export_listTemplates
   export_listTemplates -.-&gt; export_TemplateCatalogEntry
+  export_materializeTemplateRevision[&quot;materializeTemplateRevision&quot;]
+  module_src_projectSeed_ts --&gt; export_materializeTemplateRevision
+  export_materializeTemplateRevision -.-&gt; export_CreateProjectSeedResult
+  export_materializeTemplateRevision -.-&gt; export_MaterializeTemplateRevisionRequest
+  export_MaterializeTemplateRevisionRequest[&quot;MaterializeTemplateRevisionRequest&quot;]
+  module_src_projectSeed_ts --&gt; export_MaterializeTemplateRevisionRequest
+  export_MaterializeTemplateRevisionRequest -.-&gt; export_AppCategory
   export_OAUTH_CALLBACK_ROUTE[&quot;OAUTH_CALLBACK_ROUTE&quot;]
   module_src_fixtures_oauth_ts --&gt; export_OAUTH_CALLBACK_ROUTE
   export_OAUTH_FIXTURE_IDS[&quot;OAUTH_FIXTURE_IDS&quot;]
@@ -5130,34 +5310,63 @@ sequenceDiagram
         <section id="view-src-projectseed-ts" class="view" data-view="src/projectSeed.ts" hidden>
           <section class="panel">
             <h2>src/projectSeed.ts</h2>
+            <article
+              class="item"
+              data-search="materializeTemplateRevision src/projectSeed.ts Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths."
+            >
+              <h3>materializeTemplateRevision</h3>
+              <p class="muted"><code>src/projectSeed.ts:64:1</code></p>
+              <p>
+                Materialize an approved manifest revision without regenerating it or accepting
+                caller-supplied asset paths.
+              </p>
+            </article>
             <article class="item" data-search="createProjectSeed src/projectSeed.ts ">
               <h3>createProjectSeed</h3>
-              <p class="muted"><code>src/projectSeed.ts:50:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:91:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="writeProjectMetadata src/projectSeed.ts ">
               <h3>writeProjectMetadata</h3>
-              <p class="muted"><code>src/projectSeed.ts:83:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:127:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="writeMaterializedAssets src/projectSeed.ts ">
               <h3>writeMaterializedAssets</h3>
-              <p class="muted"><code>src/projectSeed.ts:112:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:159:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article
+              class="item"
+              data-search="createMaterializedRevisionReadme src/projectSeed.ts "
+            >
+              <h3>createMaterializedRevisionReadme</h3>
+              <p class="muted"><code>src/projectSeed.ts:172:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article class="item" data-search="assertProjectPath src/projectSeed.ts ">
+              <h3>assertProjectPath</h3>
+              <p class="muted"><code>src/projectSeed.ts:184:1</code></p>
+              <p class="empty">No description available.</p>
+            </article>
+            <article class="item" data-search="assertUniqueAssetTargets src/projectSeed.ts ">
+              <h3>assertUniqueAssetTargets</h3>
+              <p class="muted"><code>src/projectSeed.ts:193:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="createProjectSeedDependencies src/projectSeed.ts ">
               <h3>createProjectSeedDependencies</h3>
-              <p class="muted"><code>src/projectSeed.ts:125:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:203:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="readPackagedTemplateAsset src/projectSeed.ts ">
               <h3>readPackagedTemplateAsset</h3>
-              <p class="muted"><code>src/projectSeed.ts:136:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:214:1</code></p>
               <p class="empty">No description available.</p>
             </article>
             <article class="item" data-search="assertInside src/projectSeed.ts ">
               <h3>assertInside</h3>
-              <p class="muted"><code>src/projectSeed.ts:148:1</code></p>
+              <p class="muted"><code>src/projectSeed.ts:226:1</code></p>
               <p class="empty">No description available.</p>
             </article>
           </section>

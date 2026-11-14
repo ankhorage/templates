@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.0
+
+### Minor Changes
+
+- 9081496: Expose `materializeTemplateRevision` for materializing a stored manifest revision with catalog-owned template assets.
+
 ## 12.5.26
 
 ### Patch Changes

@@ -91,6 +91,8 @@ graph LR
   module_src_authoring_compose_category_manifest_ts --> export_ComposeCategoryAppManifestInput
   export_ComposeCategoryAppManifestInput -.-> export_CategoryDesignOverrides
   export_ComposeCategoryAppManifestInput -.-> export_TemplateAuthoringState
+  export_CreateProjectSeedResult["CreateProjectSeedResult"]
+  module_src_projectSeed_ts --> export_CreateProjectSeedResult
   export_createTemplateArtifact["createTemplateArtifact"]
   module_src_templates_catalog_ts --> export_createTemplateArtifact
   export_createTemplateArtifact -.-> export_AppCategory
@@ -115,6 +117,13 @@ graph LR
   export_listTemplates["listTemplates"]
   module_src_templates_catalog_ts --> export_listTemplates
   export_listTemplates -.-> export_TemplateCatalogEntry
+  export_materializeTemplateRevision["materializeTemplateRevision"]
+  module_src_projectSeed_ts --> export_materializeTemplateRevision
+  export_materializeTemplateRevision -.-> export_CreateProjectSeedResult
+  export_materializeTemplateRevision -.-> export_MaterializeTemplateRevisionRequest
+  export_MaterializeTemplateRevisionRequest["MaterializeTemplateRevisionRequest"]
+  module_src_projectSeed_ts --> export_MaterializeTemplateRevisionRequest
+  export_MaterializeTemplateRevisionRequest -.-> export_AppCategory
   export_OAUTH_CALLBACK_ROUTE["OAUTH_CALLBACK_ROUTE"]
   module_src_fixtures_oauth_ts --> export_OAUTH_CALLBACK_ROUTE
   export_OAUTH_FIXTURE_IDS["OAUTH_FIXTURE_IDS"]

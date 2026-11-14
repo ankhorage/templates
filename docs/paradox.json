@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.5.26",
+      "value": "v12.6.0",
       "color": "cb3837"
     },
     {
@@ -263,6 +263,7 @@
         "CompiledCategoryDesign",
         "composeCategoryAppManifest",
         "ComposeCategoryAppManifestInput",
+        "CreateProjectSeedResult",
         "createTemplateArtifact",
         "DESIGN_DENSITIES",
         "DESIGN_SHAPES",
@@ -273,6 +274,8 @@
         "FoundationToneFamily",
         "listOAuthFixtures",
         "listTemplates",
+        "materializeTemplateRevision",
+        "MaterializeTemplateRevisionRequest",
         "OAUTH_CALLBACK_ROUTE",
         "OAUTH_FIXTURE_IDS",
         "OAuthFixtureDefinition",
@@ -358,11 +361,17 @@
     {
       "path": "src/projectSeed.ts",
       "isEntrypoint": false,
-      "dependencies": ["src/templates/catalog.ts"],
+      "dependencies": [
+        "src/packageMetadata.ts",
+        "src/templates/catalog.ts",
+        "src/templateSelector.ts"
+      ],
       "exports": [
         "createProjectSeed",
         "CreateProjectSeedRequest",
         "CreateProjectSeedResult",
+        "materializeTemplateRevision",
+        "MaterializeTemplateRevisionRequest",
         "ProjectSeedDependencies"
       ]
     },
@@ -1329,6 +1338,39 @@
       "structuredRows": []
     },
     {
+      "name": "CreateProjectSeedResult",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/projectSeed.ts",
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 40,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": [],
+      "signatures": [],
+      "members": [
+        {
+          "name": "createdFiles",
+          "kind": "property",
+          "type": "readonly string[]",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "projectPath",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        }
+      ],
+      "structuredRows": []
+    },
+    {
       "name": "createTemplateArtifact",
       "description": "Create an isolated manifest and the local image files referenced by that template.",
       "isReadme": false,
@@ -1541,6 +1583,85 @@
         }
       ],
       "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "materializeTemplateRevision",
+      "description": "Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths.",
+      "isReadme": false,
+      "examples": [],
+      "kind": "function",
+      "modulePath": "src/projectSeed.ts",
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 64,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["CreateProjectSeedResult", "MaterializeTemplateRevisionRequest"],
+      "signatures": [
+        {
+          "label": "(request: MaterializeTemplateRevisionRequest) => Promise<CreateProjectSeedResult>",
+          "parameters": [
+            {
+              "name": "request",
+              "type": "MaterializeTemplateRevisionRequest",
+              "required": true,
+              "description": null
+            }
+          ],
+          "returnType": "Promise<CreateProjectSeedResult>",
+          "returnDescription": null
+        }
+      ],
+      "members": [],
+      "structuredRows": []
+    },
+    {
+      "name": "MaterializeTemplateRevisionRequest",
+      "description": null,
+      "isReadme": false,
+      "examples": [],
+      "kind": "type",
+      "modulePath": "src/projectSeed.ts",
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 46,
+        "column": 1
+      },
+      "exportPaths": ["src/index.ts"],
+      "relatedSymbols": ["AppCategory"],
+      "signatures": [],
+      "members": [
+        {
+          "name": "cwd",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "manifest",
+          "kind": "property",
+          "type": "AppManifest",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "projectSlug",
+          "kind": "property",
+          "type": "string",
+          "required": true,
+          "description": null
+        },
+        {
+          "name": "template",
+          "kind": "property",
+          "type": "{ readonly category: AppCategory; readonly slug: string; }",
+          "required": true,
+          "description": null
+        }
+      ],
       "structuredRows": []
     },
     {
@@ -3103,11 +3224,20 @@
       }
     },
     {
+      "name": "materializeTemplateRevision",
+      "description": "Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths.",
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 64,
+        "column": 1
+      }
+    },
+    {
       "name": "createProjectSeed",
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 50,
+        "line": 91,
         "column": 1
       }
     },
@@ -3116,7 +3246,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 83,
+        "line": 127,
         "column": 1
       }
     },
@@ -3125,7 +3255,34 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 112,
+        "line": 159,
+        "column": 1
+      }
+    },
+    {
+      "name": "createMaterializedRevisionReadme",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 172,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertProjectPath",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 184,
+        "column": 1
+      }
+    },
+    {
+      "name": "assertUniqueAssetTargets",
+      "description": null,
+      "sourceLocation": {
+        "filePath": "src/projectSeed.ts",
+        "line": 193,
         "column": 1
       }
     },
@@ -3134,7 +3291,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 125,
+        "line": 203,
         "column": 1
       }
     },
@@ -3143,7 +3300,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 136,
+        "line": 214,
         "column": 1
       }
     },
@@ -3152,7 +3309,7 @@
       "description": null,
       "sourceLocation": {
         "filePath": "src/projectSeed.ts",
-        "line": 148,
+        "line": 226,
         "column": 1
       }
     },
@@ -3738,6 +3895,14 @@
     },
     {
       "kind": "export",
+      "name": "materializeTemplateRevision",
+      "sourcePath": "src/projectSeed.ts",
+      "symbolName": "materializeTemplateRevision",
+      "description": "Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths.",
+      "isReadme": false
+    },
+    {
+      "kind": "export",
       "name": "resolveCategoryDesignPreset",
       "sourcePath": "src/presets/category-design.ts",
       "symbolName": "resolveCategoryDesignPreset",
@@ -3856,6 +4021,11 @@
       },
       {
         "fromPath": "src/index.ts",
+        "toPath": "src/projectSeed.ts",
+        "sourcePath": "src/index.ts"
+      },
+      {
+        "fromPath": "src/index.ts",
         "toPath": "src/templates/catalog.ts",
         "sourcePath": "src/index.ts"
       },
@@ -3871,7 +4041,17 @@
       },
       {
         "fromPath": "src/projectSeed.ts",
+        "toPath": "src/packageMetadata.ts",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromPath": "src/projectSeed.ts",
         "toPath": "src/templates/catalog.ts",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromPath": "src/projectSeed.ts",
+        "toPath": "src/templateSelector.ts",
         "sourcePath": "src/projectSeed.ts"
       },
       {
@@ -4254,9 +4434,45 @@
         "sourcePath": "src/projectSeed.ts"
       },
       {
+        "fromSymbol": "materializeTemplateRevision",
+        "toSymbol": "parseProjectSlug",
+        "callExpression": "parseProjectSlug",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "materializeTemplateRevision",
+        "toSymbol": "createTemplateArtifact",
+        "callExpression": "createTemplateArtifact",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "materializeTemplateRevision",
+        "toSymbol": "createProjectSeed",
+        "callExpression": "createProjectSeed",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "materializeTemplateRevision",
+        "toSymbol": "createMaterializedRevisionReadme",
+        "callExpression": "createMaterializedRevisionReadme",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
         "fromSymbol": "createProjectSeed",
         "toSymbol": "createProjectSeedDependencies",
         "callExpression": "createProjectSeedDependencies",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "createProjectSeed",
+        "toSymbol": "assertProjectPath",
+        "callExpression": "assertProjectPath",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "createProjectSeed",
+        "toSymbol": "assertUniqueAssetTargets",
+        "callExpression": "assertUniqueAssetTargets",
         "sourcePath": "src/projectSeed.ts"
       },
       {
@@ -4311,6 +4527,12 @@
         "fromSymbol": "writeMaterializedAssets",
         "toSymbol": "writeFile",
         "callExpression": "dependencies.writeFile",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "assertProjectPath",
+        "toSymbol": "isPathInsideResolved",
+        "callExpression": "isPathInsideResolved",
         "sourcePath": "src/projectSeed.ts"
       },
       {
@@ -5454,6 +5676,26 @@
         "fromSymbol": "CategoryPresetReconciliationReport",
         "toType": "CategoryPresetReconciliationSource",
         "sourcePath": "src/design/category-types.ts"
+      },
+      {
+        "fromSymbol": "materializeTemplateRevision",
+        "toType": "CreateProjectSeedResult",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "materializeTemplateRevision",
+        "toType": "MaterializeTemplateRevisionRequest",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "MaterializeTemplateRevisionRequest",
+        "toType": "AppCategory",
+        "sourcePath": "src/projectSeed.ts"
+      },
+      {
+        "fromSymbol": "MaterializeTemplateRevisionRequest",
+        "toType": "AppManifest",
+        "sourcePath": "src/projectSeed.ts"
       },
       {
         "fromSymbol": "createTemplateArtifact",

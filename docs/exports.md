@@ -253,6 +253,19 @@ Source: `src/authoring/compose-category-manifest.ts:44:1`
 | theme          | property | `CategoryDesignOverrides`                                                                                                                                                                                                                                                                                                                                                                                                                     | no       |             |
 | version        | property | `string`                                                                                                                                                                                                                                                                                                                                                                                                                                      | no       |             |
 
+## CreateProjectSeedResult
+
+Kind: `type`
+Module: `src/projectSeed.ts`
+Source: `src/projectSeed.ts:40:1`
+
+### Members
+
+| Name         | Kind     | Type                | Required | Description |
+| ------------ | -------- | ------------------- | -------- | ----------- |
+| createdFiles | property | `readonly string[]` | yes      |             |
+| projectPath  | property | `string`            | yes      |             |
+
 ## createTemplateArtifact
 
 Kind: `function`
@@ -333,6 +346,35 @@ List the standalone templates discovered from the canonical template directory t
 - `(category?: "books_reading" | "business_productivity" | "developer_tools" | "education_learning" | "entertainment_media" | "finance_money" | "food_drink" | "games" | "graphics_design" | "health_fitness" | "kids_family" | "lifestyle" | "medical" | "music_audio" | "navigation_travel" | "news_magazines" | "photo_video" | "reference" | "shopping_commerce" | "social_community" | "sports" | "utilities_tools" | "weather" | undefined) => readonly TemplateCatalogEntry[]`
   - category: `"books_reading" | "business_productivity" | "developer_tools" | "education_learning" | "entertainment_media" | "finance_money" | "food_drink" | "games" | "graphics_design" | "health_fitness" | "kids_family" | "lifestyle" | "medical" | "music_audio" | "navigation_travel" | "news_magazines" | "photo_video" | "reference" | "shopping_commerce" | "social_community" | "sports" | "utilities_tools" | "weather" | undefined` (optional)
   - returns: `readonly TemplateCatalogEntry[]`
+
+## materializeTemplateRevision
+
+Kind: `function`
+Module: `src/projectSeed.ts`
+Source: `src/projectSeed.ts:64:1`
+
+Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths.
+
+### Signatures
+
+- `(request: MaterializeTemplateRevisionRequest) => Promise<CreateProjectSeedResult>`
+  - request: `MaterializeTemplateRevisionRequest`
+  - returns: `Promise<CreateProjectSeedResult>`
+
+## MaterializeTemplateRevisionRequest
+
+Kind: `type`
+Module: `src/projectSeed.ts`
+Source: `src/projectSeed.ts:46:1`
+
+### Members
+
+| Name        | Kind     | Type                                                         | Required | Description |
+| ----------- | -------- | ------------------------------------------------------------ | -------- | ----------- |
+| cwd         | property | `string`                                                     | yes      |             |
+| manifest    | property | `AppManifest`                                                | yes      |             |
+| projectSlug | property | `string`                                                     | yes      |             |
+| template    | property | `{ readonly category: AppCategory; readonly slug: string; }` | yes      |             |
 
 ## OAUTH_CALLBACK_ROUTE
 
