@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.1
+
+### Patch Changes
+
+- 9577139: Update dependencies: `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.6.0
 
 ### Minor Changes
