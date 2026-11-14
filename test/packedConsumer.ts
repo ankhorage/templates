@@ -15,16 +15,21 @@ import { basename, join } from 'node:path';
 
 import { expect, test } from 'bun:test';
 
+import { assertSocialMediaManagerWorkflowIsExposed } from './packedConsumerAssertions';
+
 const packageRoot = process.cwd();
 
-test('a fresh packed consumer materializes the Reader template and its bundled Library cover', () => {
+test('a fresh packed consumer exposes the Reader and Social Media Manager templates', () => {
   const consumer = createPackedConsumer(packageRoot);
 
   try {
     assertPublishedFlowContractsAreConsumable(consumer);
     assertPublicMaterializationApiIsConsumable(consumer);
     assertReaderManifestIsExposed(consumer);
-    assertGrossMeisterBoardBindingsAreExposed(consumer);
+    assertSocialMediaManagerWorkflowIsExposed(
+      inspectTemplate(consumer, 'social_community/social-media-manager'),
+    );
+    assertGrossMeisterRuntimeBindings(inspectTemplate(consumer, 'games/grossmeister').manifest);
     assertReaderCoverIsMaterialized(consumer);
   } finally {
     rmSync(consumer.temporaryRoot, { force: true, recursive: true });
@@ -112,18 +117,6 @@ function assertPublishedFlowContractsAreConsumable(
   );
 }
 
-function assertGrossMeisterBoardBindingsAreExposed(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
-  const inspectOutput = run(
-    'bun',
-    ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', 'games/grossmeister'],
-    consumer.consumerDirectory,
-  );
-  const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
-  assertGrossMeisterRuntimeBindings(inspected.manifest);
-}
-
 function assertGrossMeisterRuntimeBindings(manifest: unknown): void {
   expect(manifest).toMatchObject({
     dataBindings: {
@@ -183,12 +176,7 @@ function assertReaderManifestIsExposed(consumer: ReturnType<typeof createPackedC
   );
   expect(listOutput).toContain('books_reading/reader - Reeda');
 
-  const inspectOutput = run(
-    'bun',
-    ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', 'books_reading/reader'],
-    consumer.consumerDirectory,
-  );
-  const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
+  const inspected = inspectTemplate(consumer, 'books_reading/reader');
   expect(inspected.manifest).toMatchObject({
     media: {
       assets: {
@@ -235,6 +223,19 @@ function assertBookDetailNavigatorBindings(manifest: unknown): void {
       },
     },
   });
+}
+
+function inspectTemplate(
+  consumer: ReturnType<typeof createPackedConsumer>,
+  selector: string,
+): { readonly manifest: unknown } {
+  return JSON.parse(
+    run(
+      'bun',
+      ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', selector],
+      consumer.consumerDirectory,
+    ),
+  ) as { readonly manifest: unknown };
 }
 
 function assertReaderCoverIsMaterialized(consumer: ReturnType<typeof createPackedConsumer>): void {
