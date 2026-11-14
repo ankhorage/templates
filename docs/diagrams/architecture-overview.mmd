@@ -73,7 +73,9 @@ graph TD
   module_src_presets_category_presets_ts --> module_src_design_category_types_ts
   module_src_projectSeed_ts["src/projectSeed.ts"]
   package__ankhorage_templates -.-> module_src_projectSeed_ts
+  module_src_projectSeed_ts --> module_src_packageMetadata_ts
   module_src_projectSeed_ts --> module_src_templates_catalog_ts
+  module_src_projectSeed_ts --> module_src_templateSelector_ts
   module_src_templates_catalog_generated_ts["src/templates/catalog.generated.ts"]
   package__ankhorage_templates -.-> module_src_templates_catalog_generated_ts
   module_src_templates_catalog_generated_ts --> module_src_templates_catalog_ts

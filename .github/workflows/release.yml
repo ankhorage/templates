@@ -187,10 +187,11 @@ jobs:
 
               if [ -n "$tagged_sha" ]; then
                 echo "Release tag ${release_tag} already points to ${release_sha}; resuming idempotent finalization."
+                git checkout --detach "$release_sha"
               else
-                echo "Recovering canonical release commit $release_sha for version $current_version without another version bump."
+                release_sha="$(git rev-parse HEAD)"
+                echo "Recovering unpublished version $current_version from current main commit $release_sha without another version bump."
               fi
-              git checkout --detach "$release_sha"
               echo "versioned=true" >> "$GITHUB_OUTPUT"
               echo "package_name=$(node -p "require('./package.json').name")" >> "$GITHUB_OUTPUT"
               echo "package_version=$current_version" >> "$GITHUB_OUTPUT"

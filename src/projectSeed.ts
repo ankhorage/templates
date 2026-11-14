@@ -6,7 +6,9 @@ import type { AppCategory, AppManifest } from '@ankhorage/contracts';
 import { statPathExistsAsync } from '@ankhorage/utility/node/fs';
 import { isPathInsideResolved } from '@ankhorage/utility/node/path';
 
-import type { TemplateImageAsset } from './templates/catalog.js';
+import { TEMPLATES_PACKAGE_NAME, TEMPLATES_PACKAGE_VERSION } from './packageMetadata.js';
+import { createTemplateArtifact, type TemplateImageAsset } from './templates/catalog.js';
+import { parseProjectSlug } from './templateSelector.js';
 
 const PACKAGE_ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const PACKAGED_TEMPLATE_ROOT = path.join(PACKAGE_ROOT, 'src', 'templates', 'categories');
@@ -40,11 +42,50 @@ export interface CreateProjectSeedResult {
   readonly createdFiles: readonly string[];
 }
 
+/** Materialize one approved manifest revision with assets from its selected published template. */
+export interface MaterializeTemplateRevisionRequest {
+  readonly cwd: string;
+  readonly projectSlug: string;
+  readonly template: {
+    readonly category: AppCategory;
+    readonly slug: string;
+  };
+  readonly manifest: AppManifest;
+}
+
 export interface ProjectSeedDependencies {
   readonly mkdir: typeof mkdir;
   readonly pathExists: (targetPath: string) => Promise<boolean>;
   readonly readTemplateAsset: (asset: TemplateImageAsset) => Promise<Uint8Array>;
   readonly writeFile: typeof writeFile;
+}
+
+/*** Materialize an approved manifest revision without regenerating it or accepting caller-supplied asset paths. */
+export async function materializeTemplateRevision(
+  request: MaterializeTemplateRevisionRequest,
+): Promise<CreateProjectSeedResult> {
+  const projectSlug = parseProjectSlug(request.projectSlug);
+  const artifact = createTemplateArtifact({
+    category: request.template.category,
+    slug: request.template.slug,
+  });
+
+  return createProjectSeed({
+    cwd: request.cwd,
+    projectSlug,
+    readmeText: createMaterializedRevisionReadme(request.manifest.metadata.name, request.template),
+    metadata: {
+      package: TEMPLATES_PACKAGE_NAME,
+      version: TEMPLATES_PACKAGE_VERSION,
+      projectSlug,
+      displayName: request.manifest.metadata.name,
+      category: request.template.category,
+      templateSlug: request.template.slug,
+      selector: `${request.template.category}/${request.template.slug}`,
+    },
+    manifest: request.manifest,
+    assets: artifact.assets,
+  });
 }
 
 export async function createProjectSeed(
@@ -53,6 +94,9 @@ export async function createProjectSeed(
 ): Promise<CreateProjectSeedResult> {
   const resolvedDependencies = createProjectSeedDependencies(dependencies);
   const projectPath = path.resolve(request.cwd, request.projectSlug);
+
+  assertProjectPath(request.cwd, request.projectSlug, projectPath);
+  assertUniqueAssetTargets(request.assets);
 
   if (await resolvedDependencies.pathExists(projectPath)) {
     throw new Error(`Project path already exists: ${projectPath}`);
@@ -88,7 +132,7 @@ async function writeProjectMetadata(
   await writeProjectFile(
     path.join(projectPath, 'ankh.config.json'),
     `${JSON.stringify(request.manifest, null, 2)}\n`,
-    'utf8',
+    { encoding: 'utf8', flag: 'wx' },
   );
   await writeProjectFile(
     path.join(projectPath, 'ankh.template.json'),
@@ -104,9 +148,12 @@ async function writeProjectMetadata(
       null,
       2,
     )}\n`,
-    'utf8',
+    { encoding: 'utf8', flag: 'wx' },
   );
-  await writeProjectFile(path.join(projectPath, 'README.md'), request.readmeText, 'utf8');
+  await writeProjectFile(path.join(projectPath, 'README.md'), request.readmeText, {
+    encoding: 'utf8',
+    flag: 'wx',
+  });
 }
 
 async function writeMaterializedAssets(
@@ -118,7 +165,38 @@ async function writeMaterializedAssets(
     const targetPath = path.resolve(projectPath, materialized.asset.targetPath);
     assertInside(projectPath, targetPath, 'Template asset target');
     await dependencies.mkdir(path.dirname(targetPath), { recursive: true });
-    await dependencies.writeFile(targetPath, materialized.contents);
+    await dependencies.writeFile(targetPath, materialized.contents, { flag: 'wx' });
+  }
+}
+
+function createMaterializedRevisionReadme(
+  displayName: string,
+  template: MaterializeTemplateRevisionRequest['template'],
+): string {
+  return [
+    `# ${displayName}`,
+    '',
+    `Materialized from the published template \`${template.category}/${template.slug}\`.`,
+    '',
+  ].join('\n');
+}
+
+function assertProjectPath(cwd: string, projectSlug: string, projectPath: string): void {
+  if (
+    path.basename(projectPath) !== projectSlug ||
+    !isPathInsideResolved(path.resolve(cwd), projectPath)
+  ) {
+    throw new Error(`Project path escapes its owner directory: ${projectPath}`);
+  }
+}
+
+function assertUniqueAssetTargets(assets: readonly TemplateImageAsset[]): void {
+  const targets = new Set<string>();
+  for (const asset of assets) {
+    if (targets.has(asset.targetPath)) {
+      throw new Error(`Template assets contain a duplicate target path: ${asset.targetPath}`);
+    }
+    targets.add(asset.targetPath);
   }
 }
 

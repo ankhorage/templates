@@ -1,5 +1,23 @@
 # @ankhorage/templates
 
+## 12.6.2
+
+### Patch Changes
+
+- 4824f41: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.1
+
+### Patch Changes
+
+- 9577139: Update dependencies: `@ankhorage/runtime`, `@ankhorage/zora`.
+
+## 12.6.0
+
+### Minor Changes
+
+- 9081496: Expose `materializeTemplateRevision` for materializing a stored manifest revision with catalog-owned template assets.
+
 ## 12.5.26
 
 ### Patch Changes

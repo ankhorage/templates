@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/templates",
-  "version": "12.5.26",
+  "version": "12.6.2",
   "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
   "homepage": "https://github.com/ankhorage/templates#readme",
   "bugs": {
@@ -114,7 +114,7 @@
     "test": "bun test --path-ignore-patterns 'test/grossmeister.chromium.test.ts' && bun run test:packed-consumer",
     "test:chromium": "bun test ./test/grossmeister.chromium.test.ts",
     "test:packed-consumer": "bun run build && bun test ./test/packedConsumer.ts",
-    "prepublishOnly": "bun run typecheck && bun run build && bun test",
+    "prepublishOnly": "bun run typecheck && bun run build && bun run test",
     "version-packages": "ankhorage-changeset version",
     "knip:check": "ankhorage-knip",
     "test:standalone": "bun test test/root-exports.test.ts test/commands.test.ts"
@@ -124,9 +124,9 @@
     "@ankhorage/color-theory": "^0.3.2",
     "@ankhorage/contracts": "^26.10.0",
     "@ankhorage/navigator": "^3.5.22",
-    "@ankhorage/runtime": "^5.3.10",
+    "@ankhorage/runtime": "^5.4.0",
     "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^27.0.3"
+    "@ankhorage/zora": "^27.1.1"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.3",
