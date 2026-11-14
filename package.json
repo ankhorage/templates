@@ -114,7 +114,7 @@
     "test": "bun test --path-ignore-patterns 'test/grossmeister.chromium.test.ts' && bun run test:packed-consumer",
     "test:chromium": "bun test ./test/grossmeister.chromium.test.ts",
     "test:packed-consumer": "bun run build && bun test ./test/packedConsumer.ts",
-    "prepublishOnly": "bun run typecheck && bun run build && bun test",
+    "prepublishOnly": "bun run typecheck && bun run build && bun run test",
     "version-packages": "ankhorage-changeset version",
     "knip:check": "ankhorage-knip",
     "test:standalone": "bun test test/root-exports.test.ts test/commands.test.ts"
