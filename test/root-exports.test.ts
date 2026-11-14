@@ -8,6 +8,7 @@ import {
   composeCategoryAppManifest,
   createTemplateArtifact,
   listTemplates,
+  materializeTemplateRevision,
   resolveCategoryDesignPreset,
   resolveTemplate,
   TONE_PAIR_CATALOG,
@@ -39,6 +40,7 @@ test('exposes authoring and standalone template APIs', () => {
   expect(typeof composeCategoryAppManifest).toBe('function');
   expect(typeof resolveCategoryDesignPreset).toBe('function');
   expect(typeof createTemplateArtifact).toBe('function');
+  expect(typeof materializeTemplateRevision).toBe('function');
   expect(typeof resolveTemplate).toBe('function');
 });
 

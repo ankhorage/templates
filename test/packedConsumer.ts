@@ -22,6 +22,7 @@ test('a fresh packed consumer materializes the Reader template and its bundled L
 
   try {
     assertPublishedFlowContractsAreConsumable(consumer);
+    assertPublicMaterializationApiIsConsumable(consumer);
     assertReaderManifestIsExposed(consumer);
     assertGrossMeisterBoardBindingsAreExposed(consumer);
     assertReaderCoverIsMaterialized(consumer);
@@ -44,6 +45,34 @@ function createPackedConsumer(packageDirectory: string) {
   );
   materializePackedConsumer(packageDirectory, consumerDirectory, tarballPath);
   return { temporaryRoot, consumerDirectory };
+}
+
+function assertPublicMaterializationApiIsConsumable(
+  consumer: ReturnType<typeof createPackedConsumer>,
+): void {
+  writeFileSync(
+    join(consumer.consumerDirectory, 'materialize-revision.mjs'),
+    [
+      "import { materializeTemplateRevision, resolveTemplate } from '@ankhorage/templates';",
+      "const template = { category: 'books_reading', slug: 'reader' };",
+      'const manifest = resolveTemplate(template.category, template.slug).createAppManifest();',
+      "manifest.metadata.name = 'Packed Revision';",
+      "await materializeTemplateRevision({ cwd: process.cwd(), projectSlug: 'packed-revision', template, manifest });",
+    ].join('\n'),
+  );
+  run('bun', ['materialize-revision.mjs'], consumer.consumerDirectory);
+
+  const generatedCover = join(
+    consumer.consumerDirectory,
+    'packed-revision',
+    'assets/images/the-jungle-book.png',
+  );
+  expect(statSync(generatedCover).size).toBeGreaterThan(0);
+  expect(
+    JSON.parse(
+      readFileSync(join(consumer.consumerDirectory, 'packed-revision', 'ankh.config.json'), 'utf8'),
+    ),
+  ).toMatchObject({ metadata: { name: 'Packed Revision' } });
 }
 
 function assertPublishedFlowContractsAreConsumable(
