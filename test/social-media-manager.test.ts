@@ -28,6 +28,8 @@ async function dispatchWorkflowAction(
   stateAdapter: StateAdapter,
   screenId: string,
   nodeId: string,
+  eventName: 'press' | 'valueChange' = 'press',
+  payload: Record<string, string> = {},
 ): Promise<void> {
   const screen = Object.values(manifest.screens).find(({ id }) => id === screenId);
   if (screen === undefined) throw new Error(`Missing Social Media Manager screen ${screenId}.`);
@@ -37,8 +39,12 @@ async function dispatchWorkflowAction(
   }
   await runtime.dispatchRuntimeComponentEvent({
     dataBindings: manifest.dataBindings,
-    event: { payload: {}, sourceNodeId: nodeId, type: 'button.press' },
-    eventName: 'press',
+    event: {
+      payload,
+      sourceNodeId: nodeId,
+      type: eventName === 'press' ? 'button.press' : 'select.valueChange',
+    },
+    eventName,
     executeCapability: runtime.composeRuntimeCapabilityExecutor({
       apiCapabilityExecutor: () => Promise.resolve({ diagnostics: [], ok: false as const }),
       stateAdapter,
@@ -80,13 +86,17 @@ test('Social Media Manager is a release-valid portable social community template
   ).toEqual([]);
 });
 
-test('Social Media Manager advances the local draft to scheduled workflow without claiming publication', async () => {
+test('Social Media Manager advances the local draft through preview, approval, and schedule without claiming publication', async () => {
   const manifest = resolveTemplate('social_community', 'social-media-manager').createAppManifest();
   const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
 
   await dispatchWorkflowAction(manifest, stateAdapter, 'composer', 'composer-save-draft');
   expect(stateAdapter.get('social-media-manager.workflow')).toMatchObject({
     data: { stage: 'draft' },
+  });
+  await dispatchWorkflowAction(manifest, stateAdapter, 'composer', 'composer-preview-draft');
+  expect(stateAdapter.get('social-media-manager.workflow')).toMatchObject({
+    data: { stage: 'preview' },
   });
   await dispatchWorkflowAction(manifest, stateAdapter, 'preview', 'preview-request-approval');
   expect(stateAdapter.get('social-media-manager.workflow')).toMatchObject({
@@ -98,12 +108,39 @@ test('Social Media Manager advances the local draft to scheduled workflow withou
     'approval-detail',
     'approval-approve-design',
   );
+  expect(stateAdapter.get('social-media-manager.workflow')).toMatchObject({
+    data: { stage: 'schedule' },
+  });
   await dispatchWorkflowAction(manifest, stateAdapter, 'schedule', 'schedule-confirm');
   expect(stateAdapter.get('social-media-manager.workflow')).toMatchObject({
-    data: { stage: 'scheduled' },
+    data: { stage: 'schedule' },
   });
   expect(JSON.stringify(manifest)).toContain('delivery unconfirmed');
   expect(JSON.stringify(manifest)).toContain('No provider data configured');
+});
+
+test('Social Media Manager records optional AI provider metadata without a credential payload', async () => {
+  const manifest = resolveTemplate('social_community', 'social-media-manager').createAppManifest();
+  const stateAdapter = runtime.createRuntimeMemoryStateAdapter();
+
+  await dispatchWorkflowAction(
+    manifest,
+    stateAdapter,
+    'onboarding',
+    'onboarding-ai-provider',
+    'valueChange',
+    { value: 'host-managed-ai' },
+  );
+
+  expect(stateAdapter.get('social-media-manager.ai-provider')).toEqual({
+    data: {
+      credentialStorage: 'host-managed',
+      provider: 'host-managed-ai',
+      secretPayload: false,
+    },
+    ok: true,
+  });
+  expect(JSON.stringify(manifest)).not.toContain('sk-');
 });
 
 test('Social Media Manager keeps advanced automation explicitly blocked on the published Flow owner API', () => {

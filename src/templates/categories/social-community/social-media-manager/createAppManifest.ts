@@ -1,4 +1,9 @@
-import type { AppManifest, ComponentDataBindingRegistry, UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  ComponentDataBindingRegistry,
+  EventBinding,
+  UiNode,
+} from '@ankhorage/contracts';
 
 import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
 import { createLocalInfra } from '../../../../internal/defaults';
@@ -7,6 +12,8 @@ import { createLocalInfra } from '../../../../internal/defaults';
 export default function createAppManifest(): AppManifest {
   return createValidatedManifest(manifest);
 }
+
+type WorkflowStage = 'draft' | 'preview' | 'approval' | 'schedule';
 
 /*** Create one semantic heading in the shared Studio-inspired visual hierarchy. */
 function heading(id: string, text: string, level: 1 | 2 | 3 = 2): UiNode {
@@ -64,34 +71,67 @@ function navigate(
 /*** Store one explicit session workflow snapshot through Runtime's released state capability. */
 function setWorkflow(
   componentId: string,
-  stage: 'draft' | 'preview' | 'approval' | 'scheduled',
-  route: string,
+  stage: WorkflowStage,
+  route?: string,
 ): ComponentDataBindingRegistry[string] {
+  const stateTransition = {
+    target: {
+      capability: 'state.set',
+      input: {
+        path: { kind: 'literal', value: 'social-media-manager.workflow' },
+        value: {
+          kind: 'literal',
+          value: {
+            stage,
+            title: 'Design systems, in motion',
+            channels: ['Instagram', 'LinkedIn'],
+          },
+        },
+      },
+    },
+  } satisfies EventBinding;
+  const events: readonly EventBinding[] =
+    route === undefined
+      ? [stateTransition]
+      : [
+          stateTransition,
+          {
+            target: {
+              capability: 'navigator.navigate',
+              input: { route: { kind: 'literal', value: route } },
+            },
+          } satisfies EventBinding,
+        ];
   return {
     componentId,
     componentType: 'Button',
     events: {
-      press: [
+      press: events,
+    },
+  };
+}
+
+/*** Record the optional AI provider selection as session metadata without accepting credentials. */
+function setAiProviderMetadata(componentId: string): ComponentDataBindingRegistry[string] {
+  return {
+    componentId,
+    componentType: 'Select',
+    events: {
+      valueChange: [
         {
           target: {
             capability: 'state.set',
             input: {
-              path: { kind: 'literal', value: 'social-media-manager.workflow' },
+              path: { kind: 'literal', value: 'social-media-manager.ai-provider' },
               value: {
-                kind: 'literal',
-                value: {
-                  stage,
-                  title: 'Design systems, in motion',
-                  channels: ['Instagram', 'LinkedIn'],
+                kind: 'object',
+                fields: {
+                  provider: { capability: 'select.valueChange', path: 'payload.value' },
+                  credentialStorage: { kind: 'literal', value: 'host-managed' },
+                  secretPayload: { kind: 'literal', value: false },
                 },
               },
             },
-          },
-        },
-        {
-          target: {
-            capability: 'navigator.navigate',
-            input: { route: { kind: 'literal', value: route } },
           },
         },
       ],
@@ -101,14 +141,16 @@ function setWorkflow(
 
 const bindings: ComponentDataBindingRegistry = {
   'onboarding-continue': navigate('onboarding-continue', 'Button', '/calendar'),
+  'onboarding-ai-provider': setAiProviderMetadata('onboarding-ai-provider'),
   'calendar-new-post': navigate('calendar-new-post', 'Button', '/composer'),
   'campaign-open-spring': navigate('campaign-open-spring', 'Card', '/composer'),
   'library-compose': navigate('library-compose', 'Button', '/composer'),
-  'composer-save-draft': setWorkflow('composer-save-draft', 'draft', '/preview'),
+  'composer-save-draft': setWorkflow('composer-save-draft', 'draft'),
+  'composer-preview-draft': setWorkflow('composer-preview-draft', 'preview', '/preview'),
   'preview-request-approval': setWorkflow('preview-request-approval', 'approval', '/approvals'),
   'approval-open-design': navigate('approval-open-design', 'Button', '/approvals/design-systems'),
-  'approval-approve-design': setWorkflow('approval-approve-design', 'preview', '/schedule'),
-  'schedule-confirm': setWorkflow('schedule-confirm', 'scheduled', '/queue'),
+  'approval-approve-design': setWorkflow('approval-approve-design', 'schedule', '/schedule'),
+  'schedule-confirm': setWorkflow('schedule-confirm', 'schedule', '/queue'),
   'queue-open-composer': navigate('queue-open-composer', 'Button', '/composer'),
   'notifications-open-approval': navigate(
     'notifications-open-approval',
@@ -211,6 +253,20 @@ const manifest = {
               options: [
                 { value: 'Europe/Zurich', label: 'Europe/Zurich' },
                 { value: 'America/New_York', label: 'America/New York' },
+              ],
+            },
+          },
+          {
+            id: 'onboarding-ai-provider',
+            type: 'Select',
+            props: {
+              label: 'Optional AI provider',
+              defaultValue: 'manual',
+              helperText:
+                'Save provider metadata for this session only. Connect credentials in your host application; never paste a key here.',
+              options: [
+                { value: 'manual', label: 'Manual workflow only' },
+                { value: 'host-managed-ai', label: 'Host-managed AI provider' },
               ],
             },
           },
@@ -392,7 +448,8 @@ const manifest = {
               'Provider publishing is intentionally unavailable until your app configures owned account adapters.',
             ),
           ]),
-          action('composer-save-draft', 'Save draft and preview'),
+          action('composer-save-draft', 'Save draft'),
+          action('composer-preview-draft', 'Preview draft'),
         ],
       },
     },
