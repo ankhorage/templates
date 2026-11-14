@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.16
+
+### Patch Changes
+
+- 5c0ab12: Update dependencies: `@ankhorage/capability`, `@ankhorage/doctor`, `@ankhorage/utility`.
+
 ## 12.6.15
 
 ### Patch Changes
