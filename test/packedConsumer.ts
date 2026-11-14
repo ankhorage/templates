@@ -17,12 +17,13 @@ import { expect, test } from 'bun:test';
 
 const packageRoot = process.cwd();
 
-test('a fresh packed consumer materializes the Reader template and its bundled Library cover', () => {
+test('a fresh packed consumer exposes the Reader and Social Media Manager templates', () => {
   const consumer = createPackedConsumer(packageRoot);
 
   try {
     assertPublishedFlowContractsAreConsumable(consumer);
     assertReaderManifestIsExposed(consumer);
+    assertSocialMediaManagerWorkflowIsExposed(consumer);
     assertGrossMeisterBoardBindingsAreExposed(consumer);
     assertReaderCoverIsMaterialized(consumer);
   } finally {
@@ -44,6 +45,26 @@ function createPackedConsumer(packageDirectory: string) {
   );
   materializePackedConsumer(packageDirectory, consumerDirectory, tarballPath);
   return { temporaryRoot, consumerDirectory };
+}
+
+function assertSocialMediaManagerWorkflowIsExposed(
+  consumer: ReturnType<typeof createPackedConsumer>,
+): void {
+  const inspectOutput = run(
+    'bun',
+    [
+      'node_modules/@ankhorage/templates/dist/cli/standalone.js',
+      'inspect',
+      'social_community/social-media-manager',
+    ],
+    consumer.consumerDirectory,
+  );
+  const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
+  const serializedManifest = JSON.stringify(inspected.manifest);
+  expect(serializedManifest).toContain('FlowCanvas unavailable');
+  expect(serializedManifest).toContain('composer-save-draft');
+  expect(serializedManifest).toContain('schedule-confirm');
+  expect(serializedManifest).toContain('state.set');
 }
 
 function assertPublishedFlowContractsAreConsumable(
