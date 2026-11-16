@@ -61,6 +61,7 @@ export {
   materializeTemplateRevision,
   type MaterializeTemplateRevisionRequest,
 } from './projectSeed';
+export type { SocialFlowBindingErrorCode } from './socialFlowBindingErrorCode';
 export {
   createSocialFlowBindings,
   type CreateSocialFlowBindingsInput,

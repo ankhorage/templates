@@ -108,7 +108,7 @@ test('denies unauthorized operations without surfacing the provider message', as
   const bindings = createSocialFlowBindings({
     flowPort: {
       ...createMockSocialFlowPort(),
-      startAsync: () => Promise.reject(codedError('AUTH_DENIED', 'Bearer top-secret-token')),
+      startAsync: () => Promise.reject(codedError('unauthenticated', 'Bearer top-secret-token')),
     },
     writeState: () => undefined,
   });
@@ -118,13 +118,75 @@ test('denies unauthorized operations without surfacing the provider message', as
   expect(result).toEqual({
     ok: false,
     state: {
-      code: 'AUTH_DENIED',
+      code: 'unauthenticated',
       message: 'You are not authorized to perform this Flow action.',
       phase: 'failed',
       retryable: false,
     },
   });
   expect(JSON.stringify(result)).not.toContain('top-secret-token');
+});
+
+test('generalizes an unknown provider error code that contains a token', async () => {
+  const token = 'Bearer provider-secret-token';
+  const states: SocialFlowBindingState[] = [];
+  const bindings = createSocialFlowBindings({
+    flowPort: {
+      ...createMockSocialFlowPort(),
+      startAsync: () => Promise.reject(codedError(token, 'Provider rejected the request.')),
+    },
+    writeState: (state) => states.push(state),
+  });
+
+  const result = await bindings.startAsync(publishRequest);
+
+  expect(result).toEqual({
+    ok: false,
+    state: {
+      code: 'flow-request-failed',
+      message: 'The Flow request could not be completed.',
+      phase: 'failed',
+      retryable: true,
+    },
+  });
+  expect(JSON.stringify({ result, states })).not.toContain(token);
+});
+
+test('generalizes an unknown Flow run error code that contains a token', async () => {
+  const token = 'Bearer run-secret-token';
+  const states: SocialFlowBindingState[] = [];
+  const bindings = createSocialFlowBindings({
+    flowPort: {
+      ...createMockSocialFlowPort(),
+      statusAsync: () =>
+        Promise.resolve({
+          ...pendingApprovalRun,
+          error: { code: token, message: token, retryable: false },
+          status: 'failed',
+        }),
+    },
+    writeState: (state) => states.push(state),
+  });
+
+  const result = await bindings.statusAsync(pendingApprovalRun.id);
+
+  expect(result).toEqual({
+    ok: true,
+    state: {
+      code: 'flow-request-failed',
+      message: 'The Flow could not complete.',
+      phase: 'failed',
+      retryable: false,
+      runId: pendingApprovalRun.id,
+    },
+    value: {
+      createdAt: pendingApprovalRun.createdAt,
+      flow: pendingApprovalRun.flow,
+      id: pendingApprovalRun.id,
+      status: 'failed',
+    },
+  });
+  expect(JSON.stringify({ result, states })).not.toContain(token);
 });
 
 test('reports offline and timeout states without invoking a duplicate publication', async () => {
@@ -170,7 +232,7 @@ test('retries safe status reads without starting the publication again', async (
       statusAsync: () => {
         statusReads += 1;
         if (statusReads === 1)
-          return Promise.reject(codedError('NETWORK_UNAVAILABLE', 'private connection details'));
+          return Promise.reject(codedError('offline', 'private connection details'));
         return Promise.resolve(publishedRun);
       },
     },

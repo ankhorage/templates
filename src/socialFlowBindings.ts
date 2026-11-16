@@ -1,6 +1,11 @@
 import type { FlowApprovalRequest, FlowRunSnapshot } from '@ankhorage/contracts/flow';
 import type { RuntimeFlowPort, RuntimeFlowStartRequest } from '@ankhorage/runtime';
 
+import {
+  type SocialFlowBindingErrorCode,
+  socialFlowBindingErrorCode,
+} from './socialFlowBindingErrorCode';
+
 export type SocialFlowBindingPhase =
   | 'awaiting-approval'
   | 'cancelled'
@@ -11,7 +16,7 @@ export type SocialFlowBindingPhase =
   | 'timed-out'
   | 'unavailable';
 export interface SocialFlowBindingState {
-  readonly code?: string;
+  readonly code?: SocialFlowBindingErrorCode;
   readonly message?: string;
   readonly phase: SocialFlowBindingPhase;
   readonly retryable: boolean;
@@ -216,7 +221,7 @@ function stateForRun(value: FlowRunSnapshot): SocialFlowBindingState {
       return { phase: 'cancelled', retryable: false, runId: value.id };
     case 'failed':
       return failureState({
-        code: value.error?.code,
+        code: readErrorCode(value.error) ?? 'flow-request-failed',
         message: 'The Flow could not complete.',
         retryable: value.error?.retryable ?? false,
         runId: value.id,
@@ -244,27 +249,27 @@ function stateForError(error: unknown): SocialFlowBindingState {
       retryable: true,
     };
   const code = readErrorCode(error);
-  if (code === 'AUTH_DENIED' || code === 'FORBIDDEN' || code === 'UNAUTHENTICATED')
+  if (code === 'permission-denied' || code === 'unauthenticated')
     return {
       code,
       message: 'You are not authorized to perform this Flow action.',
       phase: 'failed',
       retryable: false,
     };
-  if (code === 'OFFLINE' || code === 'NETWORK_UNAVAILABLE') return offlineState();
+  if (code === 'offline') return offlineState();
   return failureState({
-    code,
+    code: code ?? 'flow-request-failed',
     message: 'The Flow request could not be completed.',
     retryable: true,
   });
 }
-/*** Read a narrow stable error code while ignoring arbitrary Error messages and metadata. */
-function readErrorCode(error: unknown): string | undefined {
+/*** Read only Runtime's fixed public Flow diagnostics from an untrusted error payload. */
+function readErrorCode(error: unknown): SocialFlowBindingErrorCode | undefined {
   if (typeof error !== 'object' || error === null || !('code' in error)) return undefined;
   const { code } = error;
-  return typeof code === 'string' ? code : undefined;
+  return socialFlowBindingErrorCode(code);
 }
-/*** Preserve a stable transport code while converting an arbitrary rejection into a safe Error. */
+/*** Preserve only a released Runtime diagnostic while converting an arbitrary rejection into a safe Error. */
 function toSafeError(error: unknown): Error {
   const code = readErrorCode(error);
   return Object.assign(
@@ -294,7 +299,7 @@ function notFoundState(): SocialFlowBindingState {
 }
 /*** Construct a failure state without materializing an undefined optional code. */
 function failureState(input: {
-  readonly code: string | undefined;
+  readonly code: SocialFlowBindingErrorCode | undefined;
   readonly message: string;
   readonly retryable: boolean;
   readonly runId?: string;
