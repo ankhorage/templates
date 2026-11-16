@@ -10,14 +10,14 @@ import {
   type UiNode,
 } from '@ankhorage/contracts';
 
-import { BASE_INFRA, BASE_SETTINGS, DEFAULT_TEMPLATE_VERSION } from '../internal/defaults';
-import { type CategoryDesignOverrides, compileCategoryDesign } from '../presets/category-design';
+import { BASE_INFRA, BASE_SETTINGS, DEFAULT_TEMPLATE_VERSION } from '../internal/defaults.js';
+import { type CategoryDesignOverrides, compileCategoryDesign } from '../presets/category-design.js';
 import {
   collectComponentDiagnostics,
   isMissingElementNode,
   visitUiNode,
-} from './component-validation';
-import { createManifestShell } from './create-manifest-shell';
+} from './component-validation.js';
+import { createManifestShell } from './create-manifest-shell.js';
 
 export type TemplateAuthoringState = 'draft' | 'release';
 export type TemplateCompositionStatus = 'blocked' | 'ready';

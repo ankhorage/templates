@@ -48,7 +48,7 @@ export async function generateTemplateCatalog(
   const imports = definitions
     .map(
       (definition, index) =>
-        `import createAppManifest${index} from './categories/${definition.categoryDirectory}/${definition.slug}/createAppManifest';`,
+        `import createAppManifest${index} from './categories/${definition.categoryDirectory}/${definition.slug}/createAppManifest.js';`,
     )
     .join('\n');
   const entries = definitions
@@ -63,7 +63,7 @@ export async function generateTemplateCatalog(
     .join('\n');
   const definitionsSource = definitions.length === 0 ? '[]' : `[\n${entries}\n]`;
 
-  const source = `${imports}${imports ? '\n\n' : ''}import type { TemplateDefinition } from './catalog';
+  const source = `${imports}${imports ? '\n\n' : ''}import type { TemplateDefinition } from './catalog.js';
 
 export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = ${definitionsSource};
 `;

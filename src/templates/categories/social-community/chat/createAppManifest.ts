@@ -1,7 +1,7 @@
 import { type AppManifest, DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
 
-import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
-import { createLocalInfra } from '../../../../internal/defaults';
+import { createValidatedManifest } from '../../../../internal/createValidatedManifest.js';
+import { createLocalInfra } from '../../../../internal/defaults.js';
 
 /*** Return the portable Close social and direct-chat design with owner-validated mobile navigation. */
 export default function createAppManifest(): AppManifest {

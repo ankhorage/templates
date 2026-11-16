@@ -1,7 +1,7 @@
 import type { ScreenSpec, UiNode } from '@ankhorage/contracts';
 import { ZORA_COMPONENT_META } from '@ankhorage/zora/metadata';
 
-import type { TemplateCompositionDiagnostic } from './compose-category-manifest';
+import type { TemplateCompositionDiagnostic } from './compose-category-manifest.js';
 
 const TEMPLATE_ZORA_COMPONENT_META = ZORA_COMPONENT_META;
 

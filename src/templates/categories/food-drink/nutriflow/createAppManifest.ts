@@ -6,7 +6,7 @@ import type {
 } from '@ankhorage/contracts';
 import { validateNavigatorManifest } from '@ankhorage/navigator';
 
-import { BASE_INFRA } from '../../../../internal/defaults';
+import { BASE_INFRA } from '../../../../internal/defaults.js';
 
 /*** Return the complete portable NutriFlow nutrition companion manifest. */
 export default function createAppManifest(): AppManifest {

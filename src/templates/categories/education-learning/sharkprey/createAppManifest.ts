@@ -9,8 +9,8 @@ import type {
 } from '@ankhorage/contracts';
 import { DEFAULT_AUTH_FLOW } from '@ankhorage/contracts';
 
-import { createValidatedManifest } from '../../../../internal/createValidatedManifest';
-import { createLocalInfra } from '../../../../internal/defaults';
+import { createValidatedManifest } from '../../../../internal/createValidatedManifest.js';
+import { createLocalInfra } from '../../../../internal/defaults.js';
 
 /*** Create SharkPrey's portable ZORA screen composition with owner-validated navigation. */
 export default function createAppManifest(): AppManifest {

@@ -1,6 +1,6 @@
 import type { AppCategory, AppManifest } from '@ankhorage/contracts';
 
-import { TEMPLATE_DEFINITIONS } from './catalog.generated';
+import { TEMPLATE_DEFINITIONS } from './catalog.generated.js';
 
 export interface TemplateDefinition {
   readonly category: AppCategory;

@@ -1,6 +1,6 @@
 import type { AppManifest } from '@ankhorage/contracts';
 
-import { createLocalInfra } from '../../../../internal/defaults';
+import { createLocalInfra } from '../../../../internal/defaults.js';
 
 /*** Return the complete Stillpath design with responsive owner-backed navigation and bundled media. */
 export default function createAppManifest(): AppManifest {

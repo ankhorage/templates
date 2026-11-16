@@ -8,14 +8,14 @@ export {
   type TemplateCompositionDiagnosticCode,
   type TemplateCompositionStatus,
   validateTemplateManifest,
-} from './authoring/compose-category-manifest';
+} from './authoring/compose-category-manifest.js';
 export { CAPABILITIES } from './capabilities/index.js';
 export {
   DESIGN_DENSITIES,
   DESIGN_SHAPES,
   type DesignDensity,
   type DesignShape,
-} from './design/category-types';
+} from './design/category-types.js';
 export {
   ACCENT_TONE_FAMILIES,
   ACCENT_TONE_TARGETS,
@@ -30,7 +30,7 @@ export {
   type TonePairDefinition,
   type TonePairId,
   type ToneTarget,
-} from './design/tone-catalog';
+} from './design/tone-catalog.js';
 export {
   listOAuthFixtures,
   OAUTH_CALLBACK_ROUTE,
@@ -38,7 +38,7 @@ export {
   type OAuthFixtureDefinition,
   type OAuthFixtureId,
   resolveOAuthFixture,
-} from './fixtures/oauth';
+} from './fixtures/oauth.js';
 export {
   type CategoryDesignDiagnostic,
   type CategoryDesignDiagnosticCode,
@@ -47,7 +47,7 @@ export {
   type CompiledCategoryDesign,
   resolveCategoryDesignPreset,
   type ResolvedCategoryDesignPreset,
-} from './presets/category-design';
+} from './presets/category-design.js';
 export {
   CATEGORY_PRESET_RECONCILIATION,
   CATEGORY_PRESETS,
@@ -55,12 +55,12 @@ export {
   type CategoryPresetFieldReconciliation,
   type CategoryPresetReconciliationDecision,
   type CategoryPresetReconciliationReport,
-} from './presets/category-presets';
+} from './presets/category-presets.js';
 export {
   type CreateProjectSeedResult,
   materializeTemplateRevision,
   type MaterializeTemplateRevisionRequest,
-} from './projectSeed';
+} from './projectSeed.js';
 export {
   createTemplateArtifact,
   listTemplates,
@@ -69,7 +69,7 @@ export {
   type TemplateCatalogEntry,
   type TemplateDefinition,
   type TemplateImageAsset,
-} from './templates/catalog';
+} from './templates/catalog.js';
 export {
   APP_CATEGORIES,
   type AppCategory,
