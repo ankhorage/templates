@@ -1,6 +1,6 @@
 {
   "name": "@ankhorage/templates",
-  "version": "12.6.2",
+  "version": "12.6.30",
   "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
   "homepage": "https://github.com/ankhorage/templates#readme",
   "bugs": {
@@ -120,19 +120,19 @@
     "test:standalone": "bun test test/root-exports.test.ts test/commands.test.ts"
   },
   "dependencies": {
-    "@ankhorage/capability": "^0.2.2",
-    "@ankhorage/color-theory": "^0.3.2",
-    "@ankhorage/contracts": "^26.10.0",
+    "@ankhorage/capability": "^0.2.3",
+    "@ankhorage/color-theory": "^0.3.3",
+    "@ankhorage/contracts": "^26.11.1",
     "@ankhorage/navigator": "^3.5.22",
-    "@ankhorage/runtime": "^5.4.0",
-    "@ankhorage/utility": "^1.10.0",
-    "@ankhorage/zora": "^27.1.1"
+    "@ankhorage/runtime": "^5.5.0",
+    "@ankhorage/utility": "^1.10.1",
+    "@ankhorage/zora": "^27.2.4"
   },
   "devDependencies": {
     "@ankhorage/ankh": "^0.13.3",
     "@ankhorage/devtools": "^2.3.34",
-    "@ankhorage/doctor": "^0.14.35",
-    "@ankhorage/paradox": "^0.3.7",
+    "@ankhorage/doctor": "^0.14.36",
+    "@ankhorage/paradox": "^0.5.0",
     "@types/bun": "^1.4.2",
     "@types/node": "^26.6.6",
     "pkgviz": "^0.8.3",
