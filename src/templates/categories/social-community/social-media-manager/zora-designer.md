@@ -53,9 +53,10 @@
   },
   "derivation": {
     "provenance": [
-      "@ankhorage/zora@27.1.1",
-      "@ankhorage/runtime@5.4.0",
-      "@ankhorage/navigator@3.5.22"
+      "@ankhorage/contracts@26.11.1",
+      "@ankhorage/navigator@3.5.22",
+      "@ankhorage/runtime@5.5.0",
+      "@ankhorage/zora@27.2.4"
     ],
     "diagnostics": [],
     "assumptions": [
