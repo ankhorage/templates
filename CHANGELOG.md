@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.30
+
+### Patch Changes
+
+- d844cb2: Update dependencies: `@ankhorage/runtime`.
+
 ## 12.6.29
 
 ### Patch Changes
