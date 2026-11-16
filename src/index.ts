@@ -62,6 +62,17 @@ export {
   type MaterializeTemplateRevisionRequest,
 } from './projectSeed';
 export {
+  createSocialFlowBindings,
+  type CreateSocialFlowBindingsInput,
+  type SocialFlowApproval,
+  type SocialFlowBindingPhase,
+  type SocialFlowBindingResult,
+  type SocialFlowBindings,
+  type SocialFlowBindingState,
+  type SocialFlowEvent,
+  type SocialFlowRun,
+} from './socialFlowBindings';
+export {
   createTemplateArtifact,
   listTemplates,
   resolveTemplate,
