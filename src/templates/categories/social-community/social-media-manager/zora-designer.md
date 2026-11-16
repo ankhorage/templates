@@ -14,7 +14,8 @@
       "test/social-media-manager.test.ts"
     ],
     "limitations": [
-      "No provider accounts, media service, publishing API, analytics API, generated mobile binary, or published ZORA FlowCanvas API is available in this package."
+      "No provider accounts, media service, publishing API, analytics API, generated mobile binary, or published ZORA FlowCanvas API is available in this package.",
+      "The published Templates create command materializes only ankh.config.json, ankh.template.json, README.md, and declared assets. No published owner currently consumes that seed into an executable Web, iOS, or Android application."
     ]
   },
   "config": {
@@ -52,8 +53,8 @@
   },
   "derivation": {
     "provenance": [
-      "@ankhorage/zora@27.0.3",
-      "@ankhorage/runtime@5.3.10",
+      "@ankhorage/zora@27.1.1",
+      "@ankhorage/runtime@5.4.0",
       "@ankhorage/navigator@3.5.22"
     ],
     "diagnostics": [],
@@ -80,6 +81,7 @@
     "composer",
     "preview",
     "approvals",
+    "approval-detail",
     "schedule",
     "queue",
     "notifications",
@@ -94,18 +96,20 @@
   },
   "validation": {
     "scope": "audit",
-    "status": "partial",
+    "status": "blocked",
     "gates": [
       "portable manifest: pass",
       "Runtime workflow: pass",
       "provider delivery: blocked",
-      "FlowCanvas: blocked"
+      "FlowCanvas: blocked",
+      "executable app generation: blocked"
     ],
-    "applicationGate": "not-assessable",
+    "applicationGate": "blocked",
     "ownerRuntimeDrift": [],
     "blockers": [
       "Published @ankhorage/zora/flow FlowCanvas API",
-      "host-owned social provider adapters"
+      "host-owned social provider adapters",
+      "A published owner that converts the Templates seed into an executable Web, iOS, and Android application"
     ]
   },
   "audit": {
@@ -1731,7 +1735,8 @@
   },
   "openDecisions": [
     "Integrate @ankhorage/zora/flow only after its public release.",
-    "Add provider adapters only in the consuming host configuration."
+    "Add provider adapters only in the consuming host configuration.",
+    "Run browser, Android, and iOS acceptance only after a published owner creates an executable app from the materialized seed."
   ]
 }
 ---
