@@ -16,6 +16,8 @@ import { basename, join } from 'node:path';
 import { expect, test } from 'bun:test';
 
 const packageRoot = process.cwd();
+type PackedConsumer = ReturnType<typeof createPackedConsumer>;
+
 test('a fresh packed consumer materializes the Reader template and its bundled Library cover', () => {
   const consumer = createPackedConsumer(packageRoot);
 
@@ -45,9 +47,7 @@ function createPackedConsumer(packageDirectory: string) {
   return { temporaryRoot, consumerDirectory };
 }
 
-function assertPublicMaterializationApiIsConsumable(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
+function assertPublicMaterializationApiIsConsumable(consumer: PackedConsumer): void {
   writeFileSync(
     join(consumer.consumerDirectory, 'materialize-revision.mjs'),
     [
@@ -72,9 +72,7 @@ function assertPublicMaterializationApiIsConsumable(
   ).toMatchObject({ metadata: { name: 'Packed Revision' } });
 }
 
-function assertPublishedFlowContractsAreConsumable(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
+function assertPublishedFlowContractsAreConsumable(consumer: PackedConsumer): void {
   writeFileSync(
     join(consumer.consumerDirectory, 'flow-contracts.mjs'),
     [
@@ -92,11 +90,7 @@ function assertPublishedFlowContractsAreConsumable(
       "import type { FlowDefinition } from '@ankhorage/contracts/flow';",
       "import { materializeTemplateRevision, resolveTemplate } from '@ankhorage/templates';",
       "const workflow: FlowDefinition = { id: 'packed-template-workflow', version: 1, title: 'Packed template workflow', nodes: [], edges: [], triggers: [{ id: 'manual', kind: 'manual' }] };",
-      'const materialize: typeof materializeTemplateRevision = materializeTemplateRevision;',
-      'const resolve: typeof resolveTemplate = resolveTemplate;',
       'void workflow;',
-      'void materialize;',
-      'void resolve;',
     ].join('\n'),
   );
   run('node', ['flow-contracts.mjs'], consumer.consumerDirectory);
@@ -117,9 +111,7 @@ function assertPublishedFlowContractsAreConsumable(
     consumer.consumerDirectory,
   );
 }
-function assertGrossMeisterBoardBindingsAreExposed(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
+function assertGrossMeisterBoardBindingsAreExposed(consumer: PackedConsumer): void {
   const inspectOutput = run(
     'bun',
     ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', 'games/grossmeister'],
