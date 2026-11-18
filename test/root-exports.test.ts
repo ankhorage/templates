@@ -32,6 +32,14 @@ const grossmeisterCatalogEntry = {
   sourceRoot: 'src/templates/categories/games/grossmeister',
 } as const;
 
+const socialMediaManagerCatalogEntry = {
+  category: 'social_community',
+  name: 'Social Media Manager',
+  selector: 'social_community/social-media-manager',
+  slug: 'social-media-manager',
+  sourceRoot: 'src/templates/categories/social-community/social-media-manager',
+} as const;
+
 test('exposes authoring and standalone template APIs', () => {
   expect(Object.keys(CATEGORY_PRESETS)).toHaveLength(APP_CATEGORIES.length);
   expect(CATEGORY_PRESET_RECONCILIATION).toHaveLength(APP_CATEGORIES.length);
@@ -90,6 +98,7 @@ test('discovers each portable template from the canonical directory tree', () =>
       slug: 'chat',
       sourceRoot: 'src/templates/categories/social-community/chat',
     },
+    socialMediaManagerCatalogEntry,
   ]);
 });
 
