@@ -44,53 +44,61 @@ test('exposes authoring and standalone template APIs', () => {
   expect(typeof resolveTemplate).toBe('function');
 });
 
+const EXPECTED_CATALOG_ENTRIES: ReturnType<typeof catalogEntries> = [
+  {
+    category: 'books_reading',
+    name: 'Reeda',
+    selector: 'books_reading/reader',
+    slug: 'reader',
+    sourceRoot: 'src/templates/categories/books-reading/reader',
+  },
+  {
+    category: 'business_productivity',
+    name: 'Urban Water Monitor',
+    selector: 'business_productivity/urban-water-monitor',
+    slug: 'urban-water-monitor',
+    sourceRoot: 'src/templates/categories/business-productivity/urban-water-monitor',
+  },
+  {
+    category: 'developer_tools',
+    name: 'Ankhorage Flow',
+    selector: 'developer_tools/flow',
+    slug: 'flow',
+    sourceRoot: 'src/templates/categories/developer-tools/flow',
+  },
+  {
+    category: 'education_learning',
+    name: 'SharkPrey',
+    selector: 'education_learning/sharkprey',
+    slug: 'sharkprey',
+    sourceRoot: 'src/templates/categories/education-learning/sharkprey',
+  },
+  {
+    category: 'food_drink',
+    name: 'NutriFlow',
+    selector: 'food_drink/nutriflow',
+    slug: 'nutriflow',
+    sourceRoot: 'src/templates/categories/food-drink/nutriflow',
+  },
+  grossmeisterCatalogEntry,
+  {
+    category: 'lifestyle',
+    name: 'Stillpath',
+    selector: 'lifestyle/stillpath',
+    slug: 'stillpath',
+    sourceRoot: 'src/templates/categories/lifestyle/stillpath',
+  },
+  {
+    category: 'social_community',
+    name: 'Close',
+    selector: 'social_community/chat',
+    slug: 'chat',
+    sourceRoot: 'src/templates/categories/social-community/chat',
+  },
+];
+
 test('discovers each portable template from the canonical directory tree', () => {
-  const templates = listTemplates();
-  expect(catalogEntries(templates)).toEqual([
-    {
-      category: 'books_reading',
-      name: 'Reeda',
-      selector: 'books_reading/reader',
-      slug: 'reader',
-      sourceRoot: 'src/templates/categories/books-reading/reader',
-    },
-    {
-      category: 'business_productivity',
-      name: 'Urban Water Monitor',
-      selector: 'business_productivity/urban-water-monitor',
-      slug: 'urban-water-monitor',
-      sourceRoot: 'src/templates/categories/business-productivity/urban-water-monitor',
-    },
-    {
-      category: 'education_learning',
-      name: 'SharkPrey',
-      selector: 'education_learning/sharkprey',
-      slug: 'sharkprey',
-      sourceRoot: 'src/templates/categories/education-learning/sharkprey',
-    },
-    {
-      category: 'food_drink',
-      name: 'NutriFlow',
-      selector: 'food_drink/nutriflow',
-      slug: 'nutriflow',
-      sourceRoot: 'src/templates/categories/food-drink/nutriflow',
-    },
-    grossmeisterCatalogEntry,
-    {
-      category: 'lifestyle',
-      name: 'Stillpath',
-      selector: 'lifestyle/stillpath',
-      slug: 'stillpath',
-      sourceRoot: 'src/templates/categories/lifestyle/stillpath',
-    },
-    {
-      category: 'social_community',
-      name: 'Close',
-      selector: 'social_community/chat',
-      slug: 'chat',
-      sourceRoot: 'src/templates/categories/social-community/chat',
-    },
-  ]);
+  expect(catalogEntries(listTemplates())).toEqual(EXPECTED_CATALOG_ENTRIES);
 });
 
 test('discovers a manifest factory for every portable template', () => {

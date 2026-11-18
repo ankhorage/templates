@@ -111,6 +111,18 @@ const expectedWidths = {
     reader: 'wide',
     settings: 'narrow',
   },
+  'developer_tools/flow': {
+    workflows: 'wide',
+    'workflow-new': 'default',
+    'workflow-editor': 'wide',
+    versions: 'default',
+    runs: 'wide',
+    'run-detail': 'wide',
+    approvals: 'default',
+    schedules: 'default',
+    credentials: 'default',
+    settings: 'default',
+  },
 };
 
 test('every published screen declares its deliberate content width', () => {
