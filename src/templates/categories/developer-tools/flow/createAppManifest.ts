@@ -1,4 +1,9 @@
-import type { AppManifest, ComponentDataBindingRegistry, UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  ComponentDataBindingRegistry,
+  SerializableValue,
+  UiNode,
+} from '@ankhorage/contracts';
 import { validateNavigatorManifest } from '@ankhorage/navigator';
 
 import { BASE_INFRA } from '../../../../internal/defaults';
@@ -56,6 +61,31 @@ function navigateBinding(
   };
 }
 
+/** Bind a released Runtime Flow operation while leaving host authentication and execution outside the template. */
+function flowBinding(
+  componentId: string,
+  capability: 'flow.approval' | 'flow.cancel' | 'flow.events' | 'flow.start' | 'flow.status',
+  input: Record<string, SerializableValue>,
+): ComponentDataBindingRegistry[string] {
+  return {
+    componentId,
+    componentType: 'Button',
+    events: {
+      press: [
+        {
+          target: {
+            capability,
+            input: Object.fromEntries(
+              Object.entries(input).map(([key, value]) => [key, { kind: 'literal', value }]),
+            ),
+            result: `${componentId}-result`,
+          },
+        },
+      ],
+    },
+  };
+}
+
 const bindings: ComponentDataBindingRegistry = {
   'workflows-create': navigateBinding('workflows-create', 'Button', '/workflows/new'),
   'workflow-release-notice': navigateBinding('workflow-release-notice', 'Button', '/versions'),
@@ -71,6 +101,25 @@ const bindings: ComponentDataBindingRegistry = {
     'Button',
     '/workflows/order-intake',
   ),
+  'runs-start': flowBinding('runs-start', 'flow.start', {
+    flow: { id: 'order-intake', version: 3 },
+    idempotencyKey: 'template-order-intake-manual',
+    triggerId: 'manual',
+  }),
+  'runs-refresh': flowBinding('runs-refresh', 'flow.status', { runId: 'run-20261116-01' }),
+  'run-cancel': flowBinding('run-cancel', 'flow.cancel', { runId: 'run-20261116-01' }),
+  'run-events': flowBinding('run-events', 'flow.events', {
+    afterId: 0,
+    runId: 'run-20261116-01',
+  }),
+  'approval-approve': flowBinding('approval-approve', 'flow.approval', {
+    approvalId: 'apr-118',
+    approved: true,
+  }),
+  'approval-reject': flowBinding('approval-reject', 'flow.approval', {
+    approvalId: 'apr-118',
+    approved: false,
+  }),
 };
 
 const manifest = {
@@ -293,7 +342,7 @@ const manifest = {
               title: 'Version 4',
               eyebrow: 'Draft',
               description:
-                'Three nodes · one manual trigger · unpublishable until Flow API #8 is released.',
+                'Three nodes · one manual trigger · publish through the host-owned Flow API, not this manifest.',
             },
           },
           {
@@ -312,7 +361,7 @@ const manifest = {
           },
           copy(
             'version-publish-note',
-            'Publishing requires a released Flow API capability. No local publish state is fabricated.',
+            'The published Runtime Flow binding does not expose draft or publish operations. The generated host must use the Flow API directly; no local publish state is fabricated.',
             'bodySmall',
           ),
           action('versions-back', 'Back to workflow'),
@@ -330,6 +379,7 @@ const manifest = {
         props: { width: 'wide', scroll: true },
         children: [
           heading('runs-title', 'Runs', 1),
+          action('runs-start', 'Run published workflow'),
           {
             id: 'run-current',
             type: 'Card',
@@ -338,7 +388,11 @@ const manifest = {
               eyebrow: 'Waiting for approval',
               description: 'Order intake · version 3 · started 09:14 UTC · step 2 paused',
             },
-            children: [action('runs-detail', 'Inspect run')],
+            children: [
+              action('runs-detail', 'Inspect run'),
+              action('runs-refresh', 'Refresh status'),
+              action('run-cancel', 'Cancel run'),
+            ],
           },
           {
             id: 'run-success',
@@ -360,7 +414,7 @@ const manifest = {
           },
           copy(
             'runs-status-note',
-            'Run status is represented by the published FlowExecutionStatus union; no execution takes place in this template.',
+            'Run actions call a configured RuntimeFlowPort. Without a host adapter they return a visible missing-adapter diagnostic and do not claim success.',
             'bodySmall',
           ),
         ],
@@ -385,6 +439,7 @@ const manifest = {
               description: 'Order intake · version 3 · manual trigger',
             },
           },
+          action('run-events', 'Refresh event trace'),
           heading('run-steps-title', 'Steps'),
           {
             id: 'run-step-receive',
@@ -424,7 +479,8 @@ const manifest = {
       id: 'approvals',
       name: 'Approvals',
       title: 'Approval inbox',
-      description: 'Pending FlowApprovalRequest metadata without a resolution adapter.',
+      description:
+        'Pending FlowApprovalRequest metadata with a host-bound Runtime resolution action.',
       root: {
         id: 'approvals-root',
         type: 'Screen',
@@ -442,14 +498,18 @@ const manifest = {
             children: [action('approvals-detail', 'Inspect associated run')],
           },
           {
-            id: 'approval-unavailable',
+            id: 'approval-host-bound',
             type: 'Card',
             props: {
-              title: 'Resolution unavailable',
+              title: 'Host authorization required',
               tone: 'subtle',
               description:
-                'Approve and reject operations require the released Flow API. This template preserves the inbox state but does not fake a decision.',
+                'Approve and reject call the released RuntimeFlowPort. The host supplies authorization and returns an error or offline diagnostic; this template never fabricates a decision.',
             },
+            children: [
+              action('approval-approve', 'Approve order'),
+              action('approval-reject', 'Reject order'),
+            ],
           },
         ],
       },
@@ -538,9 +598,9 @@ const manifest = {
             id: 'settings-flow-api',
             type: 'Card',
             props: {
-              title: 'Flow API #8',
+              title: 'Flow API #8 released',
               description:
-                'Not released. A generated app must supply published Runtime/Data Source bindings before persistence, runs, approvals, or schedules are operable.',
+                'Flow 0.10.1 and Runtime 5.5.4 provide host-bound start, status, cancel, approval, and event bindings. Draft, validation, publishing, schedules, and credentials remain Flow-host responsibilities.',
             },
           },
           {
@@ -558,7 +618,7 @@ const manifest = {
             props: {
               title: 'Standalone start path',
               description:
-                'Run `bunx @ankhorage/templates create flow-demo --template developer_tools/flow` to materialize an ankh.config.json seed. No generated-app owner or localhost server command exists here, so no port can truthfully be documented.',
+                'Run `bunx @ankhorage/templates create flow-demo --template developer_tools/flow` to materialize an ankh.config.json seed. Flow #25 still owns the missing runnable-app generator, so the resulting manifest directory is not an executable Expo app and no port is documented.',
             },
           },
         ],

@@ -85,7 +85,7 @@ test('Flow presents every independent authoring and monitoring screen through re
   expect(serialized).toContain('Flow API #8');
   expect(serialized).toContain('Secret reference');
   expect(serialized).toContain('bunx @ankhorage/templates create flow-demo');
-  expect(serialized).toContain('no port can truthfully be documented');
+  expect(serialized).toContain('not an executable Expo app and no port is documented');
   expect(serialized).not.toContain('"type":"FlowCanvas"');
   expect(serialized).not.toContain('@ankhorage/flow');
   expect(validateTemplateManifest(manifest, 'release')).toMatchObject({
@@ -94,7 +94,7 @@ test('Flow presents every independent authoring and monitoring screen through re
   });
 });
 
-test('Flow fake-API acceptance retains contract identity without adding an executor', () => {
+test('Flow fake-API acceptance retains contract identity and released host bindings without adding an executor', () => {
   const fakeApi = createFakeFlowApi();
   const manifest = resolveTemplate(category, slug).createAppManifest();
 
@@ -105,6 +105,18 @@ test('Flow fake-API acceptance retains contract identity without adding an execu
   expect(manifest.dataBindings?.['runs-detail']).toMatchObject({
     componentType: 'Button',
     events: { press: [{ target: { capability: 'navigator.navigate' } }] },
+  });
+  expect(manifest.dataBindings?.['runs-start']).toMatchObject({
+    events: { press: [{ target: { capability: 'flow.start' } }] },
+  });
+  expect(manifest.dataBindings?.['approval-approve']).toMatchObject({
+    events: { press: [{ target: { capability: 'flow.approval' } }] },
+  });
+  expect(manifest.dataBindings?.['approval-reject']).toMatchObject({
+    events: { press: [{ target: { capability: 'flow.approval' } }] },
+  });
+  expect(manifest.dataBindings?.['run-events']).toMatchObject({
+    events: { press: [{ target: { capability: 'flow.events' } }] },
   });
   expect(JSON.stringify(manifest.dataBindings)).not.toContain('flow.execute');
   expect(JSON.stringify(manifest.dataBindings)).not.toContain('flow.publish');

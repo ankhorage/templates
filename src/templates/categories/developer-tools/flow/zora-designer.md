@@ -44,7 +44,7 @@
       "FlowCanvas, mobile outline, node palette, and inspector await ZORA #1108/#1109."
     ],
     "ownerRuntimeDrift": [
-      "Flow API #8 is not released; no persistence, executor, publishing, approval resolution, scheduler, or credential adapter is bound."
+      "Flow 0.10.1 and Runtime 5.5.4 publish host-bound start, status, cancel, approval, and event operations; draft, validation, publishing, scheduling, credential storage, and host composition remain outside the template."
     ]
   },
   "tokens": {},
@@ -1743,7 +1743,7 @@ Wide operational screens and default detail screens preserve responsive Navigato
 
 ## Component and interaction states
 
-Navigation is bound through Runtime Navigator capabilities. Unreleased Flow operations remain visibly unavailable.
+Navigation is bound through Runtime Navigator capabilities. Released Runtime Flow operations remain host-bound; draft, validation, publishing, scheduling, and credentials remain visibly unavailable.
 
 ## Screen specifications
 
@@ -1767,7 +1767,7 @@ A host must provide secret storage and Flow API authorization.
 
 ## Not assessable
 
-No generated app or Flow provider is available in this repository.
+No generated app owner is available in this repository. Flow #25 owns the reusable runnable-app generator handoff; a host must compose the released Flow provider.
 
 ## Open decisions
 
