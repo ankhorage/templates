@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.46
+
+### Patch Changes
+
+- d23ce0b: Update dependencies: `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.6.45
 
 ### Patch Changes
