@@ -1,6 +1,6 @@
 import type { AppCategory, ThemeConfig } from '@ankhorage/contracts';
 
-import type { TonePairId } from './tone-catalog';
+import type { TonePairId } from './tone-catalog.js';
 
 export const DESIGN_DENSITIES = ['compact', 'comfortable', 'spacious'] as const;
 export type DesignDensity = (typeof DESIGN_DENSITIES)[number];

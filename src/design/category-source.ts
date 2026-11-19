@@ -1,4 +1,4 @@
-import type { CategoryPresetReconciliationSource } from './category-types';
+import type { CategoryPresetReconciliationSource } from './category-types.js';
 
 export const CATEGORY_SOURCE = [
   {

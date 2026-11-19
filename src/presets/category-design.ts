@@ -7,9 +7,13 @@ import {
   type ZoraThemeSelectionTarget,
 } from '@ankhorage/zora/theme';
 
-import type { DesignDensity, DesignShape } from '../design/category-types';
-import { resolveTonePair, type ThemeMode, type TonePairDefinition } from '../design/tone-catalog';
-import { CATEGORY_PRESETS } from './category-presets';
+import type { DesignDensity, DesignShape } from '../design/category-types.js';
+import {
+  resolveTonePair,
+  type ThemeMode,
+  type TonePairDefinition,
+} from '../design/tone-catalog.js';
+import { CATEGORY_PRESETS } from './category-presets.js';
 
 export type CategoryDesignDiagnosticCode =
   'decorative-finish-requires-runtime-recipe' | 'tone-pair-mode-mismatch' | 'unknown-tone-pair';

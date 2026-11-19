@@ -1,7 +1,7 @@
 import type { AppManifest, ComponentDataBindingRegistry, UiNode } from '@ankhorage/contracts';
 import { validateNavigatorManifest } from '@ankhorage/navigator';
 
-import { BASE_INFRA } from '../../../../internal/defaults';
+import { BASE_INFRA } from '../../../../internal/defaults.js';
 
 /*** Return the complete portable Urban Water Monitor demonstration manifest. */
 export default function createAppManifest(): AppManifest {

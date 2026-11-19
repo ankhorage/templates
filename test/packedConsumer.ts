@@ -16,6 +16,7 @@ import { basename, join } from 'node:path';
 import { expect, test } from 'bun:test';
 
 const packageRoot = process.cwd();
+type PackedConsumer = ReturnType<typeof createPackedConsumer>;
 
 test('a fresh packed consumer materializes the Reader template and its bundled Library cover', () => {
   const consumer = createPackedConsumer(packageRoot);
@@ -38,7 +39,6 @@ function createPackedConsumer(packageDirectory: string) {
   mkdirSync(packDirectory);
   mkdirSync(consumerDirectory);
   const tarballPath = createPackageTarball(packageDirectory, packDirectory);
-
   writeFileSync(
     join(consumerDirectory, 'package.json'),
     JSON.stringify({ name: 'reader-template-consumer', private: true, version: '0.0.0' }),
@@ -47,9 +47,7 @@ function createPackedConsumer(packageDirectory: string) {
   return { temporaryRoot, consumerDirectory };
 }
 
-function assertPublicMaterializationApiIsConsumable(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
+function assertPublicMaterializationApiIsConsumable(consumer: PackedConsumer): void {
   writeFileSync(
     join(consumer.consumerDirectory, 'materialize-revision.mjs'),
     [
@@ -60,8 +58,7 @@ function assertPublicMaterializationApiIsConsumable(
       "await materializeTemplateRevision({ cwd: process.cwd(), projectSlug: 'packed-revision', template, manifest });",
     ].join('\n'),
   );
-  run('bun', ['materialize-revision.mjs'], consumer.consumerDirectory);
-
+  run('node', ['materialize-revision.mjs'], consumer.consumerDirectory);
   const generatedCover = join(
     consumer.consumerDirectory,
     'packed-revision',
@@ -75,23 +72,27 @@ function assertPublicMaterializationApiIsConsumable(
   ).toMatchObject({ metadata: { name: 'Packed Revision' } });
 }
 
-function assertPublishedFlowContractsAreConsumable(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
+function assertPublishedFlowContractsAreConsumable(consumer: PackedConsumer): void {
   writeFileSync(
     join(consumer.consumerDirectory, 'flow-contracts.mjs'),
-    "import '@ankhorage/contracts/flow';\n",
+    [
+      "import '@ankhorage/contracts/flow';",
+      "import { materializeTemplateRevision, resolveTemplate } from '@ankhorage/templates';",
+      "if (typeof materializeTemplateRevision !== 'function' || typeof resolveTemplate !== 'function') {",
+      "  throw new Error('Templates root materialization API is unavailable.');",
+      '}',
+    ].join('\n'),
   );
   writeFileSync(
     join(consumer.consumerDirectory, 'flow-contracts.ts'),
     [
       "import '@ankhorage/contracts/flow';",
       "import type { FlowDefinition } from '@ankhorage/contracts/flow';",
+      "import { materializeTemplateRevision, resolveTemplate } from '@ankhorage/templates';",
       "const workflow: FlowDefinition = { id: 'packed-template-workflow', version: 1, title: 'Packed template workflow', nodes: [], edges: [], triggers: [{ id: 'manual', kind: 'manual' }] };",
       'void workflow;',
     ].join('\n'),
   );
-
   run('node', ['flow-contracts.mjs'], consumer.consumerDirectory);
   run('bun', ['flow-contracts.mjs'], consumer.consumerDirectory);
   run(
@@ -105,16 +106,12 @@ function assertPublishedFlowContractsAreConsumable(
       'NodeNext',
       '--target',
       'ES2022',
-      '--skipLibCheck',
       'flow-contracts.ts',
     ],
     consumer.consumerDirectory,
   );
 }
-
-function assertGrossMeisterBoardBindingsAreExposed(
-  consumer: ReturnType<typeof createPackedConsumer>,
-): void {
+function assertGrossMeisterBoardBindingsAreExposed(consumer: PackedConsumer): void {
   const inspectOutput = run(
     'bun',
     ['node_modules/@ankhorage/templates/dist/cli/standalone.js', 'inspect', 'games/grossmeister'],
@@ -123,7 +120,6 @@ function assertGrossMeisterBoardBindingsAreExposed(
   const inspected = JSON.parse(inspectOutput) as { readonly manifest: unknown };
   assertGrossMeisterRuntimeBindings(inspected.manifest);
 }
-
 function assertGrossMeisterRuntimeBindings(manifest: unknown): void {
   expect(manifest).toMatchObject({
     dataBindings: {

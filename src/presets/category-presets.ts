@@ -1,12 +1,12 @@
 import type { AppCategory } from '@ankhorage/contracts';
 
-import { CATEGORY_SOURCE } from '../design/category-source';
+import { CATEGORY_SOURCE } from '../design/category-source.js';
 import type {
   CategoryPreset,
   CategoryPresetFieldReconciliation,
   CategoryPresetReconciliationReport,
   CategoryPresetReconciliationSource,
-} from '../design/category-types';
+} from '../design/category-types.js';
 
 const CATEGORY_RECONCILIATION_SOURCE: readonly CategoryPresetReconciliationSource[] =
   CATEGORY_SOURCE;
@@ -141,4 +141,4 @@ export type {
   CategoryPresetFieldReconciliation,
   CategoryPresetReconciliationDecision,
   CategoryPresetReconciliationReport,
-} from '../design/category-types';
+} from '../design/category-types.js';

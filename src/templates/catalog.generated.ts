@@ -1,12 +1,12 @@
-import createAppManifest0 from './categories/books-reading/reader/createAppManifest';
-import createAppManifest1 from './categories/business-productivity/urban-water-monitor/createAppManifest';
-import createAppManifest2 from './categories/education-learning/sharkprey/createAppManifest';
-import createAppManifest3 from './categories/food-drink/nutriflow/createAppManifest';
-import createAppManifest4 from './categories/games/grossmeister/createAppManifest';
-import createAppManifest5 from './categories/lifestyle/stillpath/createAppManifest';
-import createAppManifest6 from './categories/social-community/chat/createAppManifest';
+import createAppManifest0 from './categories/books-reading/reader/createAppManifest.js';
+import createAppManifest1 from './categories/business-productivity/urban-water-monitor/createAppManifest.js';
+import createAppManifest2 from './categories/education-learning/sharkprey/createAppManifest.js';
+import createAppManifest3 from './categories/food-drink/nutriflow/createAppManifest.js';
+import createAppManifest4 from './categories/games/grossmeister/createAppManifest.js';
+import createAppManifest5 from './categories/lifestyle/stillpath/createAppManifest.js';
+import createAppManifest6 from './categories/social-community/chat/createAppManifest.js';
 
-import type { TemplateDefinition } from './catalog';
+import type { TemplateDefinition } from './catalog.js';
 
 export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = [
   {
