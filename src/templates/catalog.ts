@@ -1,4 +1,4 @@
-import type { AppCategory, AppManifest } from '@ankhorage/contracts';
+import type { AppCategory, AppManifest, MediaAsset } from '@ankhorage/contracts';
 
 import { TEMPLATE_DEFINITIONS } from './catalog.generated';
 
@@ -90,7 +90,8 @@ function collectTemplateImageAssets(
   template: TemplateCatalogEntry,
   manifest: AppManifest,
 ): readonly TemplateImageAsset[] {
-  return Object.values(manifest.media?.assets ?? {}).flatMap((asset) => {
+  const assets: readonly MediaAsset[] = Object.values(manifest.media?.assets ?? {});
+  return assets.flatMap((asset) => {
     if (asset.kind !== 'image' || asset.source.kind !== 'bundled') return [];
     assertTemplateImagePath(asset.source.path);
     return [

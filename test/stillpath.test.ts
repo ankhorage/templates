@@ -1,3 +1,4 @@
+import type { ComponentDataBinding } from '@ankhorage/contracts';
 import type {
   NavigatorResponsiveSize,
   NavigatorRuntimePlatform,
@@ -48,7 +49,8 @@ for (const platform of platforms) {
 test('Stillpath keeps every bound navigation action within its four reviewed routes', () => {
   const manifest = createAppManifest();
   const routes = new Set(manifest.navigator.routes.map((route) => route.path));
-  for (const binding of Object.values(manifest.dataBindings ?? {})) {
+  const bindings: readonly ComponentDataBinding[] = Object.values(manifest.dataBindings ?? {});
+  for (const binding of bindings) {
     for (const events of Object.values(binding.events ?? {})) {
       for (const event of events) {
         if (event.target.capability !== 'navigator.navigate') continue;

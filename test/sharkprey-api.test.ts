@@ -234,21 +234,21 @@ function collectNavigatorPaths(navigator: AppManifest['navigator']): readonly st
 }
 
 function requireScreen(manifest: AppManifest, id: string): ScreenSpec {
-  const screen = Object.values(manifest.screens).find((candidate) => candidate.id === id);
+  const screens: readonly ScreenSpec[] = Object.values(manifest.screens);
+  const screen = screens.find((candidate) => candidate.id === id);
   if (!screen) throw new Error(`Missing screen ${id}.`);
   return screen;
 }
 
 function requireBinding(manifest: AppManifest, id: string): ComponentDataBinding {
-  const binding = Object.values(manifest.dataBindings ?? {}).find(
-    (candidate) => candidate.componentId === id,
-  );
+  const bindings: readonly ComponentDataBinding[] = Object.values(manifest.dataBindings ?? {});
+  const binding = bindings.find((candidate) => candidate.componentId === id);
   if (!binding) throw new Error(`Missing binding ${id}.`);
   return binding;
 }
 
 function requireEvents(binding: ComponentDataBinding, event: string): readonly EventBinding[] {
-  const events = Object.entries(binding.events ?? {}).find(([name]) => name === event)?.[1];
+  const events = binding.events?.[event];
   if (!events) throw new Error(`Missing ${event} events for binding ${binding.componentId}.`);
   return events;
 }

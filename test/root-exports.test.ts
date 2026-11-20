@@ -1,4 +1,5 @@
 import { expect, test } from 'bun:test';
+import type { MediaAsset } from '@ankhorage/contracts';
 
 import {
   APP_CATEGORIES,
@@ -127,9 +128,10 @@ test('native splash artwork resolves through bundled template media', () => {
     for (const mode of [artifact.manifest.splashScreen, artifact.manifest.splashScreen?.dark]) {
       const mediaId = mode?.image?.mediaId;
       if (mediaId === undefined) continue;
-      const mediaAsset = Object.values(artifact.manifest.media?.assets ?? {}).find(
-        (asset) => asset.id === mediaId,
+      const mediaAssets: readonly MediaAsset[] = Object.values(
+        artifact.manifest.media?.assets ?? {},
       );
+      const mediaAsset = mediaAssets.find((asset) => asset.id === mediaId);
       expect(mediaAsset).toMatchObject({
         id: mediaId,
         kind: 'image',
