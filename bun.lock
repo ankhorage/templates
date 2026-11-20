@@ -35,7 +35,7 @@
 
     "@ankhorage/auth": ["@ankhorage/auth@0.1.4", "", { "dependencies": { "@ankhorage/contracts": "26.0.0" } }, "sha512-LqjRA1qpzlTeqTXY/WTltOtSCHCZOOYmymfPp4YxUv1WsAR81jHYeU50K4bsa2CPiNGP7NLlXVif83TBGl1Bcg=="],
 
-    "@ankhorage/auth-supabase": ["@ankhorage/auth-supabase@2.0.18", "", { "dependencies": { "@ankhorage/auth": "^0.1.4", "@ankhorage/contracts": "^26.12.0", "@noble/hashes": "2.4.0" } }, "sha512-h9yj2kJv5PtcyQrAAZqhE6dl1ah2RhfX2AlRGGc8yPMVQCkhKZFV7VhwJc3nh1VECxdpAj0dBhe91YiT2xSaEg=="],
+    "@ankhorage/auth-supabase": ["@ankhorage/auth-supabase@2.0.19", "", { "dependencies": { "@ankhorage/auth": "^0.1.4", "@ankhorage/contracts": "^26.13.0", "@noble/hashes": "2.4.0" } }, "sha512-MLNBlyHF9zCGQXuJQjMtDdiUa1hJiwdRR/srJ0xAsHNEiVrtv/KDZR9BTGny93WO9x8sXsz+6VxTwC2kB4JU3Q=="],
 
     "@ankhorage/capability": ["@ankhorage/capability@0.2.3", "", { "dependencies": { "@ankhorage/contracts": "^26.0.0", "@ankhorage/utility": "^1.9.85" } }, "sha512-xjQeaB0wLkdtHCjzzCvQ3+sJCKjQ20I+0FIpmdl60bpy9yij6UUgdoXEI3lWMpPoXG9tMMHmWQfXp7IP31bq4A=="],
 
@@ -43,7 +43,7 @@
 
     "@ankhorage/contracts": ["@ankhorage/contracts@26.13.0", "", { "dependencies": { "@ankhorage/color-theory": "^0.3.3", "@ankhorage/utility": "^1.10.1" } }, "sha512-W3EgZlIDO4eOz0Ykwt/525desBP+3lxmERR+AYKi/jxoH9k+xkiIVUwA3/559DujuRugOqYL03CDMIi3rGu2+w=="],
 
-    "@ankhorage/data-sources": ["@ankhorage/data-sources@2.2.3", "", { "dependencies": { "@ankhorage/contracts": "^26.12.0" } }, "sha512-mmC1Am4w6qirisjSO3n2XF6L8FRfY9q2ZpCIaObFZ6QiqOCTk2YfGO/1Q8g0T2zIooaY9Ti676K7QcJ0tI5Oyg=="],
+    "@ankhorage/data-sources": ["@ankhorage/data-sources@2.2.4", "", { "dependencies": { "@ankhorage/contracts": "^26.13.0" } }, "sha512-b1WU5kLF6Whp731CjDh75WMfqyx1DGwyaR1VNvQZm8Ti6d5M9yoXnqJ/sv3tZieewDxcJ6d7BvxL5ODrhz1hZw=="],
 
     "@ankhorage/dependency-graph": ["@ankhorage/dependency-graph@1.4.1", "", { "dependencies": { "@ankhorage/api": "^0.2.0", "@ankhorage/graph": "^0.3.0", "@ankhorage/project-detector": "^0.3.3", "@ankhorage/utility": "^0.8.0", "java-parser": "^3.0.1", "typescript": "~6.0.3" } }, "sha512-H2kiOq4iqvi18zVkvVZvB9/UcuLzaca29S8T67o773H5cH4Y+pr6/affEgX+DpCf+LgNS5pp8og4OA38EBMJ0Q=="],
 
