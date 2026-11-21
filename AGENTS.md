@@ -6,7 +6,39 @@
 
 Package: `@ankhorage/templates`
 
-Portable Ankhorage app templates, presets, and manifest authoring helpers.
+Title: Ankhorage Templates
+
+Provides portable application templates, design presets, manifest authoring helpers, and a reusable template catalog.
+
+Purpose: Turn reusable template definitions and presets into validated project seeds without coupling them to one authoring application.
+
+Audience:
+
+- Application generators and authoring tools selecting reusable templates.
+- Developers composing validated manifests and project seeds.
+
+## Scope and boundaries
+
+Responsibilities:
+
+- Publish template manifests, presets, design categories, and catalog selection behavior.
+- Validate and compose portable manifests and project seeds.
+- Expose template authoring through package, CLI, and capability entrypoints.
+- Generate and consume the repository-owned template catalog.
+
+Boundaries:
+
+- Does not own rendering primitives, runtime execution, or navigation behavior.
+- Does not deploy generated applications or manage their repositories.
+- Does not make template consumers depend on a sibling Studio checkout.
+
+Architecture role: Reusable template and manifest-authoring library with a thin CLI and capability boundary.
+
+Architectural invariants:
+
+- Template manifests remain portable data.
+- Runtime, navigation, design-system, and color behavior are consumed through published public APIs.
+- Generated catalog data remains owned by the template catalog workflow.
 
 ## Current architecture only
 
@@ -64,6 +96,26 @@ Paradox `/*** ... */` comments in `src` and leading `@usage` comments in real
 `examples/<example>/...` source files, plus any repository-owned manual documentation outside the
 generated output. The managed release workflow runs `bun run docs` after the package version bump
 and commits the regenerated artifacts in the release commit.
+
+## GitHub task lifecycle and workspace cleanup
+
+- **Start.** Treat each issue implementation, PR implementation, review, and change request (CR)
+  as an independent task. Fetch the current remote default branch and read the applicable issue,
+  PR, HEAD, review feedback, and CI state. Use a fresh, uniquely named task checkout or worktree.
+  Concurrent tasks must have distinct writable checkout, temporary, build, and cache paths.
+- **CRs.** Fetch and check out the current remote PR branch in the new workspace. Preserve PR
+  history and scope. Push corrections to the existing PR branch.
+- **Delivery.** Run applicable checks. Commit and push all intended changes, then verify that
+  GitHub has the intended commit on the correct remote branch. Report the exact HEAD, checks, CI,
+  findings, and blockers. Report acceptance that was not run as unverified. Read-only reviews hand
+  off their findings without creating a commit. Merge requires explicit authorization.
+- **Cleanup.** After handoff, resolve every candidate path and remove only task-owned directories
+  whose resolved paths are strictly under the resolved system path for `/tmp` (`/private/tmp` on
+  macOS). Refuse candidates that resolve outside that boundary, including through a symlink. Use
+  Git-aware removal for worktrees. Preserve workspaces outside the boundary, shared directories,
+  other tasks' directories, uncommitted changes, and unpushed commits. If blocked, persist
+  recoverable work first and document what must be retained. Report whether cleanup succeeded, was
+  skipped, or was blocked.
 
 ## Pull requests
 
