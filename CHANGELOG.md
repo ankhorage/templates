@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.58
+
+### Patch Changes
+
+- 1752e8f: Update dependencies: `@ankhorage/color-theory`.
+
 ## 12.6.57
 
 ### Patch Changes
