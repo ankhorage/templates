@@ -1,5 +1,12 @@
 # @ankhorage/templates
 
+## 12.6.59
+
+### Patch Changes
+
+- f1f0c0e: Update dependencies: `@ankhorage/contracts`.
+- ddf5d58: Update dependencies: `@ankhorage/runtime`.
+
 ## 12.6.58
 
 ### Patch Changes
