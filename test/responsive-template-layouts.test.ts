@@ -34,6 +34,10 @@ test('every published template plans navigation at every supported responsive si
 });
 
 const expectedWidths = {
+  'business_productivity/acquisition': {
+    acquisition: 'wide',
+    'company-detail': 'default',
+  },
   'business_productivity/urban-water-monitor': {
     dashboard: 'default',
     map: 'wide',

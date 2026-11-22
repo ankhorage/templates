@@ -1,3 +1,4 @@
+import type { AppManifest } from '@ankhorage/contracts';
 import { expect, test } from 'bun:test';
 
 import {
@@ -44,53 +45,61 @@ test('exposes authoring and standalone template APIs', () => {
   expect(typeof resolveTemplate).toBe('function');
 });
 
+const expectedCatalogEntries: ReturnType<typeof catalogEntries> = [
+  {
+    category: 'books_reading',
+    name: 'Reeda',
+    selector: 'books_reading/reader',
+    slug: 'reader',
+    sourceRoot: 'src/templates/categories/books-reading/reader',
+  },
+  {
+    category: 'business_productivity',
+    name: 'Acquisition',
+    selector: 'business_productivity/acquisition',
+    slug: 'acquisition',
+    sourceRoot: 'src/templates/categories/business-productivity/acquisition',
+  },
+  {
+    category: 'business_productivity',
+    name: 'Urban Water Monitor',
+    selector: 'business_productivity/urban-water-monitor',
+    slug: 'urban-water-monitor',
+    sourceRoot: 'src/templates/categories/business-productivity/urban-water-monitor',
+  },
+  {
+    category: 'education_learning',
+    name: 'SharkPrey',
+    selector: 'education_learning/sharkprey',
+    slug: 'sharkprey',
+    sourceRoot: 'src/templates/categories/education-learning/sharkprey',
+  },
+  {
+    category: 'food_drink',
+    name: 'NutriFlow',
+    selector: 'food_drink/nutriflow',
+    slug: 'nutriflow',
+    sourceRoot: 'src/templates/categories/food-drink/nutriflow',
+  },
+  grossmeisterCatalogEntry,
+  {
+    category: 'lifestyle',
+    name: 'Stillpath',
+    selector: 'lifestyle/stillpath',
+    slug: 'stillpath',
+    sourceRoot: 'src/templates/categories/lifestyle/stillpath',
+  },
+  {
+    category: 'social_community',
+    name: 'Close',
+    selector: 'social_community/chat',
+    slug: 'chat',
+    sourceRoot: 'src/templates/categories/social-community/chat',
+  },
+];
+
 test('discovers each portable template from the canonical directory tree', () => {
-  const templates = listTemplates();
-  expect(catalogEntries(templates)).toEqual([
-    {
-      category: 'books_reading',
-      name: 'Reeda',
-      selector: 'books_reading/reader',
-      slug: 'reader',
-      sourceRoot: 'src/templates/categories/books-reading/reader',
-    },
-    {
-      category: 'business_productivity',
-      name: 'Urban Water Monitor',
-      selector: 'business_productivity/urban-water-monitor',
-      slug: 'urban-water-monitor',
-      sourceRoot: 'src/templates/categories/business-productivity/urban-water-monitor',
-    },
-    {
-      category: 'education_learning',
-      name: 'SharkPrey',
-      selector: 'education_learning/sharkprey',
-      slug: 'sharkprey',
-      sourceRoot: 'src/templates/categories/education-learning/sharkprey',
-    },
-    {
-      category: 'food_drink',
-      name: 'NutriFlow',
-      selector: 'food_drink/nutriflow',
-      slug: 'nutriflow',
-      sourceRoot: 'src/templates/categories/food-drink/nutriflow',
-    },
-    grossmeisterCatalogEntry,
-    {
-      category: 'lifestyle',
-      name: 'Stillpath',
-      selector: 'lifestyle/stillpath',
-      slug: 'stillpath',
-      sourceRoot: 'src/templates/categories/lifestyle/stillpath',
-    },
-    {
-      category: 'social_community',
-      name: 'Close',
-      selector: 'social_community/chat',
-      slug: 'chat',
-      sourceRoot: 'src/templates/categories/social-community/chat',
-    },
-  ]);
+  expect(catalogEntries(listTemplates())).toEqual(expectedCatalogEntries);
 });
 
 test('discovers a manifest factory for every portable template', () => {
@@ -140,14 +149,32 @@ test('native splash artwork resolves through bundled template media', () => {
   }
 });
 
-test('every published template validates against the current owner component catalog', () => {
+test('every template declares its current owner-component release state', () => {
   for (const template of listTemplates()) {
+    if (template.selector === 'business_productivity/acquisition') {
+      expectAcquisitionDraft(template.createAppManifest());
+      continue;
+    }
     expect(validateTemplateManifest(template.createAppManifest(), 'release')).toMatchObject({
       status: 'ready',
       diagnostics: [],
     });
   }
 });
+
+function expectAcquisitionDraft(manifest: AppManifest) {
+  const result = validateTemplateManifest(manifest, 'draft');
+  expect(result.status).toBe('blocked');
+  expect(
+    result.diagnostics
+      .filter(({ code }) => code === 'missing-element')
+      .map(({ requestedCapability }) => requestedCapability),
+  ).toEqual([
+    'Rich selectable acquisition DataTable',
+    'Serializable Timeline items and markers',
+    'Responsive desktop master-detail projection',
+  ]);
+}
 
 test('every published template uses the environment-aware infrastructure contract', () => {
   for (const template of listTemplates()) {

@@ -1,0 +1,16 @@
+{
+  "assets": [
+    {
+      "mediaId": "acquisition-target",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/acquisition-target.svg",
+      "targetPath": "assets/images/svg/acquisition-target.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/acquisition/root/children/0/props/source",
+        "/screens/company-detail/root/children/1/props/source"
+      ]
+    }
+  ],
+  "screens": []
+}
