@@ -1,5 +1,246 @@
 # @ankhorage/templates
 
+## 12.6.70
+
+### Patch Changes
+
+- 3924319: Update dependencies: `@ankhorage/navigator`.
+
+## 12.6.69
+
+### Patch Changes
+
+- 1b2af64: Update dependencies: `@ankhorage/navigator`.
+
+## 12.6.68
+
+### Patch Changes
+
+- 0d24c04: Update dependencies: `@ankhorage/contracts`.
+
+## 12.6.67
+
+### Patch Changes
+
+- aaf2a87: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.66
+
+### Patch Changes
+
+- 34eeeb0: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.65
+
+### Patch Changes
+
+- 647ca8b: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.64
+
+### Patch Changes
+
+- cd6d7ce: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.63
+
+### Patch Changes
+
+- df6b6b8: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.62
+
+### Patch Changes
+
+- ab175af: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.61
+
+### Patch Changes
+
+- 5d4cc0b: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.60
+
+### Patch Changes
+
+- eb1852c: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.59
+
+### Patch Changes
+
+- f1f0c0e: Update dependencies: `@ankhorage/contracts`.
+- ddf5d58: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.58
+
+### Patch Changes
+
+- 1752e8f: Update dependencies: `@ankhorage/color-theory`.
+
+## 12.6.57
+
+### Patch Changes
+
+- a0330dc: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.56
+
+### Patch Changes
+
+- e63547a: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.55
+
+### Patch Changes
+
+- 355aed0: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.54
+
+### Patch Changes
+
+- c874429: Update dependencies: `@ankhorage/contracts`.
+
+## 12.6.53
+
+### Patch Changes
+
+- 786c3ef: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.52
+
+### Patch Changes
+
+- 9f8bbc2: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.51
+
+### Patch Changes
+
+- 93d2779: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.50
+
+### Patch Changes
+
+- de259c1: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.49
+
+### Patch Changes
+
+- b91f72b: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.48
+
+### Patch Changes
+
+- 0fbeddd: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.47
+
+### Patch Changes
+
+- b491ac1: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.46
+
+### Patch Changes
+
+- d23ce0b: Update dependencies: `@ankhorage/runtime`, `@ankhorage/zora`.
+
+## 12.6.45
+
+### Patch Changes
+
+- 3617213: Update dependencies: `@ankhorage/contracts`.
+
+## 12.6.44
+
+### Patch Changes
+
+- 88e574a: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.43
+
+### Patch Changes
+
+- ba91f29: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.42
+
+### Patch Changes
+
+- 001b304: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.41
+
+### Patch Changes
+
+- 2ab195a: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.40
+
+### Patch Changes
+
+- 652e31b: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.39
+
+### Patch Changes
+
+- 998b05e: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.38
+
+### Patch Changes
+
+- c291583: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.37
+
+### Patch Changes
+
+- a035899: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.36
+
+### Patch Changes
+
+- 2738599: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.35
+
+### Patch Changes
+
+- 4ea8b89: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.34
+
+### Patch Changes
+
+- b5fd007: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.33
+
+### Patch Changes
+
+- 57fc31e: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.32
+
+### Patch Changes
+
+- a23d4ce: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.31
+
+### Patch Changes
+
+- f1723f2: Update dependencies: `@ankhorage/zora`.
+
 ## 12.6.30
 
 ### Patch Changes
