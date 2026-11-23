@@ -1,9 +1,17 @@
-import { existsSync } from 'node:fs';
+import { existsSync, mkdtempSync, readFileSync, rmSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { join } from 'node:path';
 
+import { isAppManifest } from '@ankhorage/contracts';
 import { createNavigatorPlan } from '@ankhorage/navigator';
 import { expect, test } from 'bun:test';
 
-import { createTemplateArtifact, resolveTemplate, validateTemplateManifest } from '../src/index';
+import {
+  createTemplateArtifact,
+  materializeTemplateRevision,
+  resolveTemplate,
+  validateTemplateManifest,
+} from '../src/index';
 
 test('Acquisition registers one portable draft manifest with its bundled design asset', () => {
   const template = resolveTemplate('business_productivity', 'acquisition');
@@ -28,6 +36,72 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   ]);
   expect(existsSync(artifact.assets[0]?.sourcePath ?? '')).toBe(true);
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
+});
+
+test('Acquisition configures Zefix as a credential-referenced vendor API and uses project Vault', () => {
+  const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
+  const vendor = manifest.infra.apis?.zefix;
+
+  expect(manifest.state).toEqual({ provider: 'legend', persistence: false });
+  expect(manifest.infra.environments.local.secretStore).toEqual({ provider: 'supabase-vault' });
+  expect(vendor).toMatchObject({
+    id: 'zefix',
+    origin: 'external',
+    protocol: 'rest',
+    baseUrl: 'https://www.zefix.admin.ch/ZefixPublicREST',
+    credential: { id: 'zefix-credentials', kind: 'basic' },
+    endpoints: {
+      'company-search': {
+        path: '/api/v1/company/search',
+        operations: { 'company.search': { intent: 'read', method: 'POST' } },
+      },
+      'company-by-uid': {
+        path: '/api/v1/company/uid/{uid}',
+        operations: {
+          'company.by-uid': {
+            intent: 'read',
+            method: 'GET',
+            request: {
+              parameters: [
+                { name: 'uid', location: 'path', required: true, schema: { type: 'string' } },
+              ],
+            },
+          },
+        },
+      },
+    },
+  });
+  const serialized = JSON.stringify(manifest);
+  expect(serialized).not.toContain('ZEFIX_USERNAME');
+  expect(serialized).not.toContain('ZEFIX_PASSWORD');
+  expect(serialized).not.toContain('neo4j-password');
+  expect(isAppManifest(JSON.parse(serialized))).toBe(true);
+});
+
+test('Acquisition materializes its canonical ankh.config.json and bundled SVG unchanged', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'acquisition-template-'));
+  const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
+
+  try {
+    const artifact = await materializeTemplateRevision({
+      cwd: root,
+      projectSlug: 'acquisition-preview',
+      template: { category: 'business_productivity', slug: 'acquisition' },
+      manifest,
+    });
+    const generated = JSON.parse(
+      readFileSync(join(artifact.projectPath, 'ankh.config.json'), 'utf8'),
+    ) as unknown;
+
+    expect(isAppManifest(generated)).toBe(true);
+    expect(generated).toEqual(manifest);
+    expect(artifact.createdFiles).toContain('assets/images/svg/acquisition-target.svg');
+    expect(existsSync(join(artifact.projectPath, 'assets/images/svg/acquisition-target.svg'))).toBe(
+      true,
+    );
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
 });
 
 test('Acquisition delegates each responsive pane scroll owner to published MasterDetail', () => {
