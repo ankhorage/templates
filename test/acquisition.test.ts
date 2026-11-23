@@ -104,6 +104,39 @@ test('Acquisition materializes its canonical ankh.config.json and bundled SVG un
   }
 });
 
+test('Acquisition wires ZORA search events to session state and the Zefix API result slot', () => {
+  const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
+  const search = manifest.dataBindings?.['company-search'];
+
+  expect(search?.props?.value).toMatchObject({
+    value: {
+      kind: 'fallback',
+      value: { capability: 'state.acquisition', path: 'searchQuery' },
+    },
+  });
+  expect(search?.events?.valueChange?.[0]?.target).toMatchObject({
+    capability: 'state.set',
+    input: {
+      path: { kind: 'literal', value: 'acquisition.searchQuery' },
+      value: { capability: 'searchInput.valueChange', path: 'payload.value' },
+    },
+  });
+  expect(search?.events?.submit?.[0]?.target).toMatchObject({
+    capability: 'api.zefix.company.search',
+    result: 'acquisition.zefix.search',
+    input: {
+      body: {
+        kind: 'object',
+        fields: { name: { capability: 'state.acquisition', path: 'searchQuery' } },
+      },
+    },
+  });
+  expect(search?.events?.submit?.[0]?.when).toMatchObject({
+    operator: 'neq',
+    value: { kind: 'literal', value: '' },
+  });
+});
+
 test('Acquisition delegates each responsive pane scroll owner to published MasterDetail', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const result = validateTemplateManifest(manifest, 'draft');
