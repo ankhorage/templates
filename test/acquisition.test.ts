@@ -30,7 +30,7 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
-test('Acquisition combines the published responsive projection with existing Stack routes', () => {
+test('Acquisition delegates each responsive pane scroll owner to published MasterDetail', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const result = validateTemplateManifest(manifest, 'draft');
   const plan = createNavigatorPlan(manifest.navigator, {
@@ -51,10 +51,11 @@ test('Acquisition combines the published responsive projection with existing Sta
     type: 'MasterDetail',
     props: { activePane: 'master', desktopMode: 'split', masterWidth: 30 },
     children: [
-      { type: 'ScrollView', props: { accessibilityLabel: 'Company list' } },
-      { type: 'ScrollView', props: { accessibilityLabel: 'Selected company detail' } },
+      { type: 'View', props: { accessibilityLabel: 'Company list' } },
+      { type: 'View', props: { accessibilityLabel: 'Selected company detail' } },
     ],
   });
+  expect(masterDetail?.children?.every(({ type }) => type !== 'ScrollView')).toBe(true);
   expect(manifest.screens.acquisition?.root.props?.scroll).toBe(false);
 });
 

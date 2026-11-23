@@ -462,7 +462,7 @@ const manifest = {
             children: [
               {
                 id: 'acquisition-master-pane',
-                type: 'ScrollView',
+                type: 'View',
                 props: { flex: 1, p: 'm', accessibilityLabel: 'Company list' },
                 children: [
                   {
@@ -565,7 +565,7 @@ const manifest = {
               },
               {
                 id: 'acquisition-detail-pane',
-                type: 'ScrollView',
+                type: 'View',
                 props: { flex: 1, p: 'm', accessibilityLabel: 'Selected company detail' },
                 children: companyDetailNodes(selectedCompany, false),
               },
