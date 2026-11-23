@@ -166,7 +166,13 @@ test('every published template uses the environment-aware infrastructure contrac
       compute: { provider: 'local' },
       runtime: { provider: 'minikube' },
     });
-    expect(local.objectStorage).toEqual({ provider: 'supabase', buckets: { media: true } });
+    if (template.slug === 'acquisition') {
+      expect(local.objectStorage).toBeUndefined();
+      expect(local.database).toEqual({ provider: 'supabase', tier: 'dev' });
+      expect(local.secretStore).toEqual({ provider: 'supabase-vault' });
+    } else {
+      expect(local.objectStorage).toEqual({ provider: 'supabase', buckets: { media: true } });
+    }
     expect(Reflect.has(infra, 'storage')).toBe(false);
     expect(Reflect.has(local.deployment, 'target')).toBe(false);
     expect(Reflect.has(local.deployment, 'monitoring')).toBe(false);
