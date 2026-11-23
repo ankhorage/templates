@@ -38,12 +38,13 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
-test('Acquisition configures Zefix as a credential-referenced vendor API and uses project Vault', () => {
+test('Acquisition configures Zefix as a credential-referenced vendor API without inventing graph or Vault secrets', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const vendor = manifest.infra.apis?.zefix;
 
   expect(manifest.state).toEqual({ provider: 'legend', persistence: false });
   expect(manifest.infra.environments.local.secretStore).toEqual({ provider: 'supabase-vault' });
+  expect(manifest.infra.environments.local).not.toHaveProperty('graphDatabase');
   expect(vendor).toMatchObject({
     id: 'zefix',
     origin: 'external',
@@ -75,6 +76,7 @@ test('Acquisition configures Zefix as a credential-referenced vendor API and use
   expect(serialized).not.toContain('ZEFIX_USERNAME');
   expect(serialized).not.toContain('ZEFIX_PASSWORD');
   expect(serialized).not.toContain('neo4j-password');
+  expect(serialized).not.toContain('neo4j');
   expect(isAppManifest(JSON.parse(serialized))).toBe(true);
 });
 
@@ -149,6 +151,35 @@ test('Acquisition wires ZORA search events to session state and the Zefix API re
   });
 });
 
+test('Acquisition declares raw Zefix result-slot rows without mixing them with local demo data', () => {
+  const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
+  const masterDetail = manifest.screens.acquisition?.root.children?.find(
+    ({ id }) => id === 'acquisition-master-detail',
+  );
+  const zefixTable = masterDetail?.children?.[0]?.children?.find(
+    ({ id }) => id === 'zefix-search-results',
+  );
+  if (zefixTable === undefined)
+    throw new Error('Acquisition must include the Zefix results table.');
+
+  const serializedTable = JSON.stringify(zefixTable);
+  const zefixBinding = manifest.dataBindings?.['zefix-search-results'];
+
+  expect(zefixTable.props?.rows).toEqual([]);
+  expect(zefixBinding?.props?.rows).toEqual({
+    value: {
+      kind: 'fallback',
+      value: { capability: 'api.zefix.company.search', result: 'acquisition.zefix.search' },
+      fallback: { kind: 'literal', value: [] },
+    },
+  });
+  expect(serializedTable).toContain('"rowKey":"uid"');
+  expect(serializedTable).toContain('"value":"name"');
+  expect(serializedTable).not.toContain('website');
+  expect(serializedTable).not.toContain('contact');
+  expect(serializedTable).not.toContain('route');
+});
+
 test('Acquisition delegates each responsive pane scroll owner to published MasterDetail', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const result = validateTemplateManifest(manifest, 'draft');
@@ -199,6 +230,12 @@ test('Acquisition encodes rich DataTable cells with independent selection and ac
   expect(serializedBinding).toContain('acquisition.selectedCompanyRoutes');
   expect(serializedBinding).toContain('dataTable.rowActivate');
   expect(serializedBinding).toContain('navigator.navigate');
+
+  const zefixBinding = JSON.stringify(manifest.dataBindings?.['zefix-search-results']);
+  expect(zefixBinding).toContain('acquisition.zefix.search');
+  expect(zefixBinding).toContain('acquisition.selectedZefixCompanyUids');
+  expect(zefixBinding).toContain('acquisition.activeZefixCompanyUid');
+  expect(zefixBinding).not.toContain('navigator.navigate');
 });
 
 test('Acquisition serializes ordered Timeline media markers', () => {

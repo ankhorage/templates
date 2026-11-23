@@ -168,12 +168,25 @@ function selectedCompanyRoutes(): BindingExpression {
 
 /*** Persist the controlled checkbox selection only in the active Runtime session. */
 function setSelectedCompanyRoutes(): EventBinding {
+  return setSessionState(
+    'acquisition.selectedCompanyRoutes',
+    'dataTable.selectionChange',
+    'payload.selectedRowIds',
+  );
+}
+
+/*** Persist one manifest event value only in the active Runtime session. */
+function setSessionState(
+  path: string,
+  capability: `${string}.${string}`,
+  valuePath: string,
+): EventBinding {
   return {
     target: {
       capability: 'state.set',
       input: {
-        path: { kind: 'literal', value: 'acquisition.selectedCompanyRoutes' },
-        value: { capability: 'dataTable.selectionChange', path: 'payload.selectedRowIds' },
+        path: { kind: 'literal', value: path },
+        value: { capability, path: valuePath },
       },
     },
   };
@@ -186,6 +199,24 @@ function activateCompanyRoute(): EventBinding {
       capability: 'navigator.navigate',
       input: { route: { capability: 'dataTable.rowActivate', path: 'payload.rowId' } },
     },
+  };
+}
+
+/*** Record a Zefix row activation independently while the published host lacks detail projection. */
+function activateZefixCompany(): EventBinding {
+  return setSessionState(
+    'acquisition.activeZefixCompanyUid',
+    'dataTable.rowActivate',
+    'payload.rowId',
+  );
+}
+
+/*** Project the raw Zefix search array without inventing contact, route, logo, or website fields. */
+function zefixSearchRows(): BindingExpression {
+  return {
+    kind: 'fallback',
+    value: { capability: 'api.zefix.company.search', result: 'acquisition.zefix.search' },
+    fallback: { kind: 'literal', value: [] },
   };
 }
 
@@ -448,6 +479,30 @@ const bindings: ComponentDataBindingRegistry = {
       rowActivate: [activateCompanyRoute()],
     },
   },
+  'zefix-search-results': {
+    componentId: 'zefix-search-results',
+    componentType: 'DataTable',
+    props: {
+      rows: { value: zefixSearchRows() },
+      selectedRowIds: {
+        value: {
+          kind: 'fallback',
+          value: { capability: 'state.acquisition', path: 'selectedZefixCompanyUids' },
+          fallback: { kind: 'literal', value: [] },
+        },
+      },
+    },
+    events: {
+      selectionChange: [
+        setSessionState(
+          'acquisition.selectedZefixCompanyUids',
+          'dataTable.selectionChange',
+          'payload.selectedRowIds',
+        ),
+      ],
+      rowActivate: [activateZefixCompany()],
+    },
+  },
   ...Object.fromEntries(
     COMPANY_RECORDS.map((company) => [
       `company-back-${company.id}`,
@@ -631,7 +686,7 @@ const manifest = {
                       },
                     ],
                   },
-                  heading('acquisition-list-heading', 'Acquisition List', 2),
+                  heading('acquisition-list-heading', 'Demo companies', 2),
                   {
                     id: 'acquisition-data-table',
                     type: 'DataTable',
@@ -669,6 +724,32 @@ const manifest = {
                           },
                         },
                         { id: 'location', header: 'Location', accessor: 'location', minWidth: 140 },
+                        { id: 'status', header: 'Status', accessor: 'status', minWidth: 100 },
+                      ],
+                    },
+                  },
+                  heading('zefix-search-results-heading', 'Zefix search results', 2),
+                  {
+                    id: 'zefix-search-results',
+                    type: 'DataTable',
+                    props: {
+                      rows: [],
+                      rowKey: 'uid',
+                      density: 'compact',
+                      columns: [
+                        {
+                          id: 'name',
+                          header: 'Company',
+                          minWidth: 240,
+                          cell: { kind: 'text', value: 'name', weight: 'bold' },
+                        },
+                        { id: 'uid', header: 'UID', accessor: 'uid', minWidth: 160 },
+                        {
+                          id: 'legalSeat',
+                          header: 'Legal seat',
+                          accessor: 'legalSeat',
+                          minWidth: 160,
+                        },
                         { id: 'status', header: 'Status', accessor: 'status', minWidth: 100 },
                       ],
                     },
