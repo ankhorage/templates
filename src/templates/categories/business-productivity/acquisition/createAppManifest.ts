@@ -417,7 +417,57 @@ const manifest = {
   activeThemeId: 'acquisition',
   activeThemeMode: 'light',
   settings: { localization: { defaultLocale: 'en', locales: ['en'] } },
-  infra: structuredClone(BASE_INFRA),
+  state: { provider: 'legend', persistence: false },
+  infra: {
+    ...structuredClone(BASE_INFRA),
+    apis: {
+      zefix: {
+        id: 'zefix',
+        origin: 'external',
+        protocol: 'rest',
+        name: 'Zefix PublicREST',
+        description: 'Swiss official commercial register; vendor responses are not CRM records.',
+        baseUrl: 'https://www.zefix.admin.ch/ZefixPublicREST',
+        credential: { id: 'zefix-credentials', kind: 'basic' },
+        endpoints: {
+          'company-search': {
+            id: 'company-search',
+            kind: 'http',
+            path: '/api/v1/company/search',
+            operations: {
+              'company.search': {
+                id: 'company.search',
+                endpointId: 'company-search',
+                protocol: 'http',
+                intent: 'read',
+                method: 'POST',
+                request: { contentType: 'application/json' },
+              },
+            },
+          },
+          'company-by-uid': {
+            id: 'company-by-uid',
+            kind: 'http',
+            path: '/api/v1/company/uid/{uid}',
+            operations: {
+              'company.by-uid': {
+                id: 'company.by-uid',
+                endpointId: 'company-by-uid',
+                protocol: 'http',
+                intent: 'read',
+                method: 'GET',
+                request: {
+                  parameters: [
+                    { name: 'uid', location: 'path', required: true, schema: { type: 'string' } },
+                  ],
+                },
+              },
+            },
+          },
+        },
+      },
+    },
+  },
   media: {
     assets: {
       'acquisition-target': {
