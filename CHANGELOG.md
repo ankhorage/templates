@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.79
+
+### Patch Changes
+
+- cd97dbc: Update dependencies: `@ankhorage/zora`.
+
 ## 12.6.78
 
 ### Patch Changes
