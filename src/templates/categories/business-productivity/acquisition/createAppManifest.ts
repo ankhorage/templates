@@ -7,8 +7,6 @@ import type {
   UiNode,
 } from '@ankhorage/contracts';
 
-import { BASE_INFRA } from '../../../../internal/defaults';
-
 /*** Return the one portable, draft-stage Acquisition app manifest. */
 export default function createAppManifest(): AppManifest {
   return structuredClone(manifest);
@@ -536,7 +534,15 @@ const manifest = {
   settings: { localization: { defaultLocale: 'en', locales: ['en'] } },
   state: { provider: 'legend', persistence: false },
   infra: {
-    ...structuredClone(BASE_INFRA),
+    environments: {
+      local: {
+        deployment: {
+          compute: { provider: 'local' },
+          runtime: { provider: 'minikube' },
+        },
+      },
+    },
+    modules: {},
     apis: {
       zefix: {
         id: 'zefix',
