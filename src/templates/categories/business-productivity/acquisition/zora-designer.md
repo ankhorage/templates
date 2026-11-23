@@ -56,6 +56,8 @@ derivation:
     - "Published ZORA exposes serializable DataTable rich cells, controlled selection, and row activation."
     - "Published ZORA exposes direct-manifest Timeline items with image media markers."
     - "Published ZORA exposes MasterDetail as a direct manifest node with bounded independent panes and a host-owned compact active pane."
+    - "Canonical Acquisition manifest declares Zefix PublicREST search/UID operations in infra.apis with Basic credential reference zefix-credentials; no credential values."
+    - "Acquisition selects Legend in-memory session state for controlled local selection; no persistence is claimed."
   assumptions:
     - "The compact MasterDetail pane remains master because the existing Stack topology owns list-to-detail routing; no route-state binding is invented."
     - "Company, contact, and history records are small deterministic local demo collections."
@@ -120,13 +122,15 @@ validation:
     - "ZORA #1296"
     - "ZORA #1292"
     - "Infra #197: portable graphDatabase selection is not yet supported"
+    - "Trusted server-side Zefix credential execution and vendor-to-ZORA DataTable projection are not yet proven"
 findings: []
 risks:
   - "No desktop or native rendered visual acceptance has been run."
 openDecisions: []
 userNotes:
   - "Neo4j is the user-approved graph persistence provider for Acquisition; the Neo4j selection is pending a released graphDatabase Infra contract."
-  - "No Zefix credentials, live CRM/graph connection, database provisioning, or second mobile configuration."
+  - "Supabase Vault is the selected Secret Store; vendor credential ref zefix-credentials is declared but contains no secret payload. Neo4j credentials will use a distinct project-scoped Vault reference once graphDatabase is supported."
+  - "No raw Zefix credentials, live CRM/graph connection, database provisioning, or second mobile configuration."
 ---
 
 # Acquisition design record
