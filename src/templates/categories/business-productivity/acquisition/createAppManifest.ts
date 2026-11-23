@@ -157,15 +157,6 @@ function copy(id: string, text: string, variant: 'body' | 'bodySmall' | 'lead' =
   return { id, type: 'Text', props: { text, variant } };
 }
 
-/*** Declare an owner-backed gap as a visible draft-only manifest element. */
-function blocked(id: string, requestedCapability: string, reason: string): UiNode {
-  return {
-    id,
-    type: 'MissingElement',
-    props: { requestedCapability, reason, minimumWidth: 240, minimumHeight: 160 },
-  };
-}
-
 /*** Read the local Runtime selection while retaining the deterministic first-row selection. */
 function selectedCompanyRoutes(): BindingExpression {
   return {
@@ -235,8 +226,8 @@ function contactCards(companyId: string): UiNode[] {
   }));
 }
 
-/*** Build one local company detail screen for a deterministically routed demo row. */
-function companyDetailScreen(company: CompanyRecord): ScreenSpec {
+/*** Build reusable detail content for both the responsive pane and Stack-routed detail screen. */
+function companyDetailNodes(company: CompanyRecord, includeBack: boolean): UiNode[] {
   const history = HISTORY_RECORDS.filter((record) => record.companyId === company.id).map(
     ({ date, description, id, status, title }) => ({
       id,
@@ -249,6 +240,128 @@ function companyDetailScreen(company: CompanyRecord): ScreenSpec {
     }),
   );
 
+  return [
+    ...(includeBack
+      ? [
+          {
+            id: `company-back-${company.id}`,
+            type: 'Button',
+            props: { children: 'Back to companies', variant: 'ghost' },
+          } satisfies UiNode,
+        ]
+      : []),
+    {
+      id: `company-mark-${company.id}`,
+      type: 'Image',
+      props: {
+        source: { mediaId: 'acquisition-target' },
+        alt: 'Generic Acquisition company mark',
+        width: 64,
+        height: 64,
+        radius: 'm',
+      },
+    },
+    heading(`company-title-${company.id}`, company.name, 1),
+    copy(
+      `company-meta-${company.id}`,
+      `UID ${company.uid} · ${company.location} · ${company.website}`,
+      'bodySmall',
+    ),
+    {
+      id: `company-status-${company.id}`,
+      type: 'Badge',
+      props: { label: company.status, color: 'primary' },
+    },
+    {
+      id: `company-actions-${company.id}`,
+      type: 'View',
+      props: {
+        direction: 'row',
+        wrap: true,
+        gap: 's',
+        accessibilityLabel: 'Company actions',
+      },
+      children: [
+        {
+          id: `company-call-${company.id}`,
+          type: 'Button',
+          props: { children: 'Call', variant: 'solid' },
+        },
+        {
+          id: `company-email-${company.id}`,
+          type: 'Button',
+          props: { children: 'Email', variant: 'outline' },
+        },
+        {
+          id: `company-follow-up-${company.id}`,
+          type: 'Button',
+          props: { children: 'Schedule follow-up', variant: 'outline' },
+        },
+      ],
+    },
+    heading(`company-overview-${company.id}`, 'Overview', 2),
+    {
+      id: `company-basics-${company.id}`,
+      type: 'Card',
+      props: { title: 'Company Basics', tone: 'default' },
+      children: [
+        copy(`company-name-field-${company.id}`, `Company name: ${company.name}`),
+        copy(`company-uid-field-${company.id}`, `UID: ${company.uid}`),
+        copy(`company-location-field-${company.id}`, `Location: ${company.location}`),
+        copy(`company-website-field-${company.id}`, `Website: ${company.website}`),
+        copy(`company-status-field-${company.id}`, `Status: ${company.status}`),
+      ],
+    },
+    {
+      id: `company-contacts-${company.id}`,
+      type: 'Card',
+      props: {
+        title: 'Contacts',
+        description: 'Local demo contact records. They are not Zefix data and are not persisted.',
+      },
+      children: contactCards(company.id),
+    },
+    heading(`company-history-heading-${company.id}`, 'History', 2),
+    {
+      id: `company-history-${company.id}`,
+      type: 'Timeline',
+      props: { items: history, compact: false },
+    },
+    {
+      id: `company-next-step-${company.id}`,
+      type: 'Card',
+      props: {
+        title: 'Next Step',
+        description: 'A local draft only. No call outcome or date is persisted.',
+      },
+      children: [
+        {
+          id: `company-follow-up-date-${company.id}`,
+          type: 'DatePicker',
+          props: { label: 'Current action', value: '2025-01-22', required: false },
+        },
+        {
+          id: `company-call-result-${company.id}`,
+          type: 'RadioGroup',
+          props: {
+            value: 'follow-up',
+            orientation: 'horizontal',
+            presentation: 'card',
+            options: [
+              { value: 'not-reached', label: 'Not reached' },
+              { value: 'interested', label: 'Interested' },
+              { value: 'follow-up', label: 'Follow-up' },
+              { value: 'no-need', label: 'No need' },
+            ],
+          },
+        },
+      ],
+    },
+  ];
+}
+
+/*** Build one local company detail screen for a deterministically routed demo row. */
+function companyDetailScreen(company: CompanyRecord): ScreenSpec {
   return {
     id: `company-detail-${company.id}`,
     name: `${company.name} detail`,
@@ -258,130 +371,7 @@ function companyDetailScreen(company: CompanyRecord): ScreenSpec {
       id: `company-detail-root-${company.id}`,
       type: 'Screen',
       props: { width: 'default', scroll: true },
-      children: [
-        {
-          id: `company-back-${company.id}`,
-          type: 'Button',
-          props: { children: 'Back to companies', variant: 'ghost' },
-        },
-        {
-          id: `company-mark-${company.id}`,
-          type: 'Image',
-          props: {
-            source: { mediaId: 'acquisition-target' },
-            alt: 'Generic Acquisition company mark',
-            width: 64,
-            height: 64,
-            radius: 'm',
-          },
-        },
-        heading(`company-title-${company.id}`, company.name, 1),
-        copy(
-          `company-meta-${company.id}`,
-          `UID ${company.uid} · ${company.location} · ${company.website}`,
-          'bodySmall',
-        ),
-        {
-          id: `company-status-${company.id}`,
-          type: 'Badge',
-          props: { label: company.status, color: 'primary' },
-        },
-        {
-          id: `company-actions-${company.id}`,
-          type: 'View',
-          props: {
-            direction: 'row',
-            wrap: true,
-            gap: 's',
-            accessibilityLabel: 'Company actions',
-          },
-          children: [
-            {
-              id: `company-call-${company.id}`,
-              type: 'Button',
-              props: { children: 'Call', variant: 'solid' },
-            },
-            {
-              id: `company-email-${company.id}`,
-              type: 'Button',
-              props: { children: 'Email', variant: 'outline' },
-            },
-            {
-              id: `company-follow-up-${company.id}`,
-              type: 'Button',
-              props: { children: 'Schedule follow-up', variant: 'outline' },
-            },
-          ],
-        },
-        heading(`company-overview-${company.id}`, 'Overview', 2),
-        {
-          id: `company-basics-${company.id}`,
-          type: 'Card',
-          props: { title: 'Company Basics', tone: 'default' },
-          children: [
-            copy(`company-name-field-${company.id}`, `Company name: ${company.name}`),
-            copy(`company-uid-field-${company.id}`, `UID: ${company.uid}`),
-            copy(`company-location-field-${company.id}`, `Location: ${company.location}`),
-            copy(`company-website-field-${company.id}`, `Website: ${company.website}`),
-            copy(`company-status-field-${company.id}`, `Status: ${company.status}`),
-          ],
-        },
-        {
-          id: `company-contacts-${company.id}`,
-          type: 'Card',
-          props: {
-            title: 'Contacts',
-            description:
-              'Local demo contact records. They are not Zefix data and are not persisted.',
-          },
-          children: contactCards(company.id),
-        },
-        heading(`company-history-heading-${company.id}`, 'History', 2),
-        {
-          id: `company-history-${company.id}`,
-          type: 'Timeline',
-          props: { items: history, compact: false },
-        },
-        {
-          id: `company-next-step-${company.id}`,
-          type: 'Card',
-          props: {
-            title: 'Next Step',
-            description: 'A local draft only. No call outcome or date is persisted.',
-          },
-          children: [
-            {
-              id: `company-follow-up-date-${company.id}`,
-              type: 'DatePicker',
-              props: { label: 'Current action', value: '2025-01-22', required: false },
-            },
-            {
-              id: `company-call-result-${company.id}`,
-              type: 'RadioGroup',
-              props: {
-                value: 'follow-up',
-                orientation: 'horizontal',
-                presentation: 'card',
-                options: [
-                  { value: 'not-reached', label: 'Not reached' },
-                  { value: 'interested', label: 'Interested' },
-                  { value: 'follow-up', label: 'Follow-up' },
-                  { value: 'no-need', label: 'No need' },
-                ],
-              },
-            },
-          ],
-        },
-        ...(company.id === selectedCompany.id
-          ? [
-              blocked(
-                'company-responsive-projection',
-                'Responsive desktop master-detail projection',
-                'ZORA #1315 must publish one-manifest web split and compact native stack projection. The current Stack route is the portable mobile-safe route only.',
-              ),
-            ]
-          : []),
-      ],
+      children: companyDetailNodes(company, true),
     },
   };
 }
@@ -463,92 +453,123 @@ const manifest = {
       root: {
         id: 'acquisition-root',
         type: 'Screen',
-        props: { width: 'wide', scroll: true },
+        props: { width: 'wide', scroll: false },
         children: [
           {
-            id: 'acquisition-mark',
-            type: 'Icon',
-            props: { source: { mediaId: 'acquisition-target' }, accessibilityLabel: 'Acquisition' },
-          },
-          heading('acquisition-title', 'Acquisition', 1),
-          copy(
-            'acquisition-lead',
-            'Find companies, manage your acquisition list, and record call results.',
-            'lead',
-          ),
-          {
-            id: 'company-search',
-            type: 'SearchInput',
-            props: { value: '', placeholder: 'Search company (e.g. name, UID)', clearable: true },
-          },
-          {
-            id: 'company-filters',
-            type: 'View',
-            props: {
-              direction: 'row',
-              wrap: true,
-              gap: 's',
-              accessibilityLabel: 'Company filters',
-            },
+            id: 'acquisition-master-detail',
+            type: 'MasterDetail',
+            props: { activePane: 'master', desktopMode: 'split', masterWidth: 30 },
             children: [
               {
-                id: 'filter-canton',
-                type: 'Select',
-                props: { label: 'Canton', placeholder: 'All cantons', options: [] },
-              },
-              {
-                id: 'filter-legal-form',
-                type: 'Select',
-                props: { label: 'Legal form', placeholder: 'All legal forms', options: [] },
-              },
-              {
-                id: 'filter-status',
-                type: 'Select',
-                props: { label: 'Status', placeholder: 'All statuses', options: [] },
-              },
-            ],
-          },
-          heading('acquisition-list-heading', 'Acquisition List', 2),
-          {
-            id: 'acquisition-data-table',
-            type: 'DataTable',
-            props: {
-              rows: COMPANY_RECORDS,
-              rowKey: 'route',
-              density: 'compact',
-              columns: [
-                {
-                  id: 'company',
-                  header: 'Company',
-                  minWidth: 240,
-                  cell: {
-                    kind: 'stack',
-                    direction: 'row',
-                    align: 'center',
-                    gap: 's',
+                id: 'acquisition-master-pane',
+                type: 'ScrollView',
+                props: { flex: 1, p: 'm', accessibilityLabel: 'Company list' },
+                children: [
+                  {
+                    id: 'acquisition-mark',
+                    type: 'Icon',
+                    props: {
+                      source: { mediaId: 'acquisition-target' },
+                      accessibilityLabel: 'Acquisition',
+                    },
+                  },
+                  heading('acquisition-title', 'Acquisition', 1),
+                  copy(
+                    'acquisition-lead',
+                    'Find companies, manage your acquisition list, and record call results.',
+                    'lead',
+                  ),
+                  {
+                    id: 'company-search',
+                    type: 'SearchInput',
+                    props: {
+                      value: '',
+                      placeholder: 'Search company (e.g. name, UID)',
+                      clearable: true,
+                    },
+                  },
+                  {
+                    id: 'company-filters',
+                    type: 'View',
+                    props: {
+                      direction: 'row',
+                      wrap: true,
+                      gap: 's',
+                      accessibilityLabel: 'Company filters',
+                    },
                     children: [
-                      { kind: 'image', source: 'logo', alt: 'name' },
                       {
-                        kind: 'stack',
-                        direction: 'column',
-                        gap: 'xxs',
-                        children: [
-                          { kind: 'text', value: 'name', weight: 'bold' },
-                          {
-                            kind: 'link',
-                            href: 'websiteUrl',
-                            label: 'website',
-                            variant: 'caption',
-                          },
-                        ],
+                        id: 'filter-canton',
+                        type: 'Select',
+                        props: { label: 'Canton', placeholder: 'All cantons', options: [] },
+                      },
+                      {
+                        id: 'filter-legal-form',
+                        type: 'Select',
+                        props: {
+                          label: 'Legal form',
+                          placeholder: 'All legal forms',
+                          options: [],
+                        },
+                      },
+                      {
+                        id: 'filter-status',
+                        type: 'Select',
+                        props: { label: 'Status', placeholder: 'All statuses', options: [] },
                       },
                     ],
                   },
-                },
-                { id: 'location', header: 'Location', accessor: 'location', minWidth: 140 },
-                { id: 'status', header: 'Status', accessor: 'status', minWidth: 100 },
-              ],
-            },
+                  heading('acquisition-list-heading', 'Acquisition List', 2),
+                  {
+                    id: 'acquisition-data-table',
+                    type: 'DataTable',
+                    props: {
+                      rows: COMPANY_RECORDS,
+                      rowKey: 'route',
+                      density: 'compact',
+                      columns: [
+                        {
+                          id: 'company',
+                          header: 'Company',
+                          minWidth: 240,
+                          cell: {
+                            kind: 'stack',
+                            direction: 'row',
+                            align: 'center',
+                            gap: 's',
+                            children: [
+                              { kind: 'image', source: 'logo', alt: 'name' },
+                              {
+                                kind: 'stack',
+                                direction: 'column',
+                                gap: 'xxs',
+                                children: [
+                                  { kind: 'text', value: 'name', weight: 'bold' },
+                                  {
+                                    kind: 'link',
+                                    href: 'websiteUrl',
+                                    label: 'website',
+                                    variant: 'caption',
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        },
+                        { id: 'location', header: 'Location', accessor: 'location', minWidth: 140 },
+                        { id: 'status', header: 'Status', accessor: 'status', minWidth: 100 },
+                      ],
+                    },
+                  },
+                ],
+              },
+              {
+                id: 'acquisition-detail-pane',
+                type: 'ScrollView',
+                props: { flex: 1, p: 'm', accessibilityLabel: 'Selected company detail' },
+                children: companyDetailNodes(selectedCompany, false),
+              },
+            ],
           },
         ],
       },

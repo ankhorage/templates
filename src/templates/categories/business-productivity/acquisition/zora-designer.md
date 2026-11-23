@@ -44,23 +44,22 @@ config:
     value: analogous
     origin: derived
   navigator:
-    value: "Stack list to company-detail route; no desktop split projection is asserted."
+    value: "Stack list to company-detail route with a responsive MasterDetail projection."
     origin: derived
 derivation:
   provenance:
     contracts: 26.13.1
     navigator: 3.5.22
     runtime: 5.5.10
-    zora: 27.7.1
+    zora: 27.9.0
   diagnostics:
     - "Published ZORA exposes serializable DataTable rich cells, controlled selection, and row activation."
     - "Published ZORA exposes direct-manifest Timeline items with image media markers."
-    - "Navigator split view is alpha/testing-only on iOS and unsupported on web and Android."
+    - "Published ZORA exposes MasterDetail as a direct manifest node with bounded independent panes and a host-owned compact active pane."
   assumptions:
-    - "The mobile proposal is structural evidence only; native visual approval remains outstanding."
+    - "The compact MasterDetail pane remains master because the existing Stack topology owns list-to-detail routing; no route-state binding is invented."
     - "Company, contact, and history records are small deterministic local demo collections."
   unsupported:
-    - "ZORA #1315 responsive master-detail projection"
     - "ZORA #1296 Select bold"
     - "ZORA #1292 branded Navigator rail"
   ownerRuntimeDrift:
@@ -87,7 +86,7 @@ components:
     - DataTable
     - Timeline
   gaps:
-    - MissingElement
+    - MasterDetail
 screens:
   - id: acquisition
     purpose: "Search and filter a company collection, then enter a demo company detail route."
@@ -111,17 +110,15 @@ validation:
   scope: configuration
   gates:
     assetBundle: pass
-    manifestDraft: pass-with-blockers
+    manifestDraft: pass
     release: blocked
   blockers:
-    - "ZORA #1315"
     - "ZORA #1296"
     - "ZORA #1292"
 findings: []
 risks:
   - "No desktop or native rendered visual acceptance has been run."
-openDecisions:
-  - "Replace the responsive master-detail MissingElement only after ZORA #1315 is published and accepted."
+openDecisions: []
 userNotes:
   - "No Zefix credentials, CRM backend, persistence provider, or second mobile configuration."
 ---

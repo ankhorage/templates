@@ -30,7 +30,7 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
-test('Acquisition preserves released mobile navigation and the responsive owner gap', () => {
+test('Acquisition combines the published responsive projection with existing Stack routes', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const result = validateTemplateManifest(manifest, 'draft');
   const plan = createNavigatorPlan(manifest.navigator, {
@@ -40,17 +40,30 @@ test('Acquisition preserves released mobile navigation and the responsive owner 
   });
 
   expect(plan.diagnostics.filter(({ severity }) => severity === 'error')).toEqual([]);
-  expect(result.status).toBe('blocked');
-  expect(
-    result.diagnostics
-      .filter(({ code }) => code === 'missing-element')
-      .map(({ requestedCapability }) => requestedCapability),
-  ).toEqual(['Responsive desktop master-detail projection']);
+  expect(result.status).toBe('ready');
+  expect(result.diagnostics.filter(({ code }) => code === 'missing-element')).toEqual([]);
+
+  const masterDetail = manifest.screens.acquisition?.root.children?.find(
+    ({ id }) => id === 'acquisition-master-detail',
+  );
+
+  expect(masterDetail).toMatchObject({
+    type: 'MasterDetail',
+    props: { activePane: 'master', desktopMode: 'split', masterWidth: 30 },
+    children: [
+      { type: 'ScrollView', props: { accessibilityLabel: 'Company list' } },
+      { type: 'ScrollView', props: { accessibilityLabel: 'Selected company detail' } },
+    ],
+  });
+  expect(manifest.screens.acquisition?.root.props?.scroll).toBe(false);
 });
 
 test('Acquisition encodes rich DataTable cells with independent selection and activation events', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
-  const table = manifest.screens.acquisition?.root.children?.find(
+  const masterDetail = manifest.screens.acquisition?.root.children?.find(
+    ({ id }) => id === 'acquisition-master-detail',
+  );
+  const table = masterDetail?.children?.[0]?.children?.find(
     ({ id }) => id === 'acquisition-data-table',
   );
   const serializedTable = JSON.stringify(table);

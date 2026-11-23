@@ -1,4 +1,3 @@
-import type { AppManifest } from '@ankhorage/contracts';
 import { expect, test } from 'bun:test';
 
 import {
@@ -151,26 +150,12 @@ test('native splash artwork resolves through bundled template media', () => {
 
 test('every template declares its current owner-component release state', () => {
   for (const template of listTemplates()) {
-    if (template.selector === 'business_productivity/acquisition') {
-      expectAcquisitionDraft(template.createAppManifest());
-      continue;
-    }
     expect(validateTemplateManifest(template.createAppManifest(), 'release')).toMatchObject({
       status: 'ready',
       diagnostics: [],
     });
   }
 });
-
-function expectAcquisitionDraft(manifest: AppManifest) {
-  const result = validateTemplateManifest(manifest, 'draft');
-  expect(result.status).toBe('blocked');
-  expect(
-    result.diagnostics
-      .filter(({ code }) => code === 'missing-element')
-      .map(({ requestedCapability }) => requestedCapability),
-  ).toEqual(['Responsive desktop master-detail projection']);
-}
 
 test('every published template uses the environment-aware infrastructure contract', () => {
   for (const template of listTemplates()) {
