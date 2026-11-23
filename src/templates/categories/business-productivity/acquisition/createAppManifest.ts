@@ -1,4 +1,11 @@
-import type { AppManifest, ComponentDataBindingRegistry, UiNode } from '@ankhorage/contracts';
+import type {
+  AppManifest,
+  BindingExpression,
+  ComponentDataBindingRegistry,
+  EventBinding,
+  ScreenSpec,
+  UiNode,
+} from '@ankhorage/contracts';
 
 import { BASE_INFRA } from '../../../../internal/defaults';
 
@@ -11,10 +18,13 @@ type CompanyRecord = {
   readonly id: string;
   readonly legalForm: string;
   readonly location: string;
+  readonly logo: string;
   readonly name: string;
+  readonly route: string;
   readonly status: string;
   readonly uid: string;
   readonly website: string;
+  readonly websiteUrl: string;
 };
 
 type ContactRecord = {
@@ -29,8 +39,13 @@ type HistoryRecord = {
   readonly companyId: string;
   readonly date: string;
   readonly description: string;
+  readonly id: string;
+  readonly status: 'info' | 'primary' | 'success' | 'warning';
   readonly title: string;
 };
+
+const GENERIC_COMPANY_LOGO =
+  'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"%3E%3Crect width="64" height="64" rx="12" fill="%237C3AED"/%3E%3Cpath d="M18 44V24l14-8 14 8v20H18Zm8-4h4v-8h4v8h4V24l-6-3-6 3v16Z" fill="white"/%3E%3C/svg%3E';
 
 const COMPANY_RECORDS: readonly CompanyRecord[] = [
   {
@@ -38,7 +53,10 @@ const COMPANY_RECORDS: readonly CompanyRecord[] = [
     name: 'Wetzikon Technik AG',
     uid: 'CHE-412.987.654',
     location: 'Wetzikon (ZH)',
+    logo: GENERIC_COMPANY_LOGO,
     website: 'wetzikon-technik.ch',
+    websiteUrl: 'https://wetzikon-technik.ch',
+    route: '/companies/wetzikon-technik',
     legalForm: 'AG',
     status: 'Prospect',
   },
@@ -47,7 +65,10 @@ const COMPANY_RECORDS: readonly CompanyRecord[] = [
     name: 'Alpenblick Digital GmbH',
     uid: 'CHE-208.041.118',
     location: 'Zürich (ZH)',
+    logo: GENERIC_COMPANY_LOGO,
     website: 'alpenblick-digital.ch',
+    websiteUrl: 'https://alpenblick-digital.ch',
+    route: '/companies/alpenblick-digital',
     legalForm: 'GmbH',
     status: 'Prospect',
   },
@@ -56,7 +77,10 @@ const COMPANY_RECORDS: readonly CompanyRecord[] = [
     name: 'Seeblick Architektur AG',
     uid: 'CHE-355.109.712',
     location: 'Rapperswil (SG)',
+    logo: GENERIC_COMPANY_LOGO,
     website: 'seeblick-architektur.ch',
+    websiteUrl: 'https://seeblick-architektur.ch',
+    route: '/companies/seeblick-architektur',
     legalForm: 'AG',
     status: 'New',
   },
@@ -81,21 +105,47 @@ const CONTACT_RECORDS: readonly ContactRecord[] = [
 
 const HISTORY_RECORDS: readonly HistoryRecord[] = [
   {
+    id: 'added-to-acquisition',
     companyId: 'wetzikon-technik',
     title: 'Added to acquisition list',
     date: '15 Jan 2025, 09:14',
     description: 'Local demo event.',
+    status: 'success',
   },
   {
+    id: 'first-call-attempt',
     companyId: 'wetzikon-technik',
     title: 'First call attempt — Not reached',
     date: '15 Jan 2025, 14:37',
     description: 'Local demo event.',
+    status: 'warning',
+  },
+  {
+    id: 'follow-up-scheduled',
+    companyId: 'wetzikon-technik',
+    title: 'Follow-up scheduled',
+    date: '22 Jan 2025, 10:00',
+    description: 'Local demo follow-up. It is not persisted.',
+    status: 'primary',
+  },
+  {
+    id: 'note-added',
+    companyId: 'wetzikon-technik',
+    title: 'Note added',
+    date: '22 Jan 2025, 10:05',
+    description: 'Interested in a product demo. Call again next week.',
+    status: 'info',
   },
 ];
 
-const selectedCompany = COMPANY_RECORDS[0];
-if (!selectedCompany) throw new Error('Acquisition demo data must include a selected company.');
+/*** Resolve the deterministic demo company used for the initial controlled selection. */
+function resolveSelectedCompany(): CompanyRecord {
+  const company = COMPANY_RECORDS[0];
+  if (!company) throw new Error('Acquisition demo data must include a selected company.');
+  return company;
+}
+
+const selectedCompany = resolveSelectedCompany();
 
 /*** Create a semantic heading from a released manifest node. */
 function heading(id: string, text: string, level: 1 | 2 | 3 = 2): UiNode {
@@ -113,6 +163,38 @@ function blocked(id: string, requestedCapability: string, reason: string): UiNod
     id,
     type: 'MissingElement',
     props: { requestedCapability, reason, minimumWidth: 240, minimumHeight: 160 },
+  };
+}
+
+/*** Read the local Runtime selection while retaining the deterministic first-row selection. */
+function selectedCompanyRoutes(): BindingExpression {
+  return {
+    kind: 'fallback',
+    value: { capability: 'state.acquisition', path: 'selectedCompanyRoutes' },
+    fallback: { kind: 'literal', value: [selectedCompany.route] },
+  };
+}
+
+/*** Persist the controlled checkbox selection only in the active Runtime session. */
+function setSelectedCompanyRoutes(): EventBinding {
+  return {
+    target: {
+      capability: 'state.set',
+      input: {
+        path: { kind: 'literal', value: 'acquisition.selectedCompanyRoutes' },
+        value: { capability: 'dataTable.selectionChange', path: 'payload.selectedRowIds' },
+      },
+    },
+  };
+}
+
+/*** Navigate from the released DataTable activation payload without coupling selection to routing. */
+function activateCompanyRoute(): EventBinding {
+  return {
+    target: {
+      capability: 'navigator.navigate',
+      input: { route: { capability: 'dataTable.rowActivate', path: 'payload.rowId' } },
+    },
   };
 }
 
@@ -153,13 +235,173 @@ function contactCards(companyId: string): UiNode[] {
   }));
 }
 
+/*** Build one local company detail screen for a deterministically routed demo row. */
+function companyDetailScreen(company: CompanyRecord): ScreenSpec {
+  const history = HISTORY_RECORDS.filter((record) => record.companyId === company.id).map(
+    ({ date, description, id, status, title }) => ({
+      id,
+      title,
+      description,
+      meta: date,
+      status,
+      marker: { mediaId: 'acquisition-target' },
+      markerAlt: 'Acquisition target marker',
+    }),
+  );
+
+  return {
+    id: `company-detail-${company.id}`,
+    name: `${company.name} detail`,
+    title: company.name,
+    description: 'Local demo company detail with no backend persistence.',
+    root: {
+      id: `company-detail-root-${company.id}`,
+      type: 'Screen',
+      props: { width: 'default', scroll: true },
+      children: [
+        {
+          id: `company-back-${company.id}`,
+          type: 'Button',
+          props: { children: 'Back to companies', variant: 'ghost' },
+        },
+        {
+          id: `company-mark-${company.id}`,
+          type: 'Image',
+          props: {
+            source: { mediaId: 'acquisition-target' },
+            alt: 'Generic Acquisition company mark',
+            width: 64,
+            height: 64,
+            radius: 'm',
+          },
+        },
+        heading(`company-title-${company.id}`, company.name, 1),
+        copy(
+          `company-meta-${company.id}`,
+          `UID ${company.uid} · ${company.location} · ${company.website}`,
+          'bodySmall',
+        ),
+        {
+          id: `company-status-${company.id}`,
+          type: 'Badge',
+          props: { label: company.status, color: 'primary' },
+        },
+        {
+          id: `company-actions-${company.id}`,
+          type: 'View',
+          props: {
+            direction: 'row',
+            wrap: true,
+            gap: 's',
+            accessibilityLabel: 'Company actions',
+          },
+          children: [
+            {
+              id: `company-call-${company.id}`,
+              type: 'Button',
+              props: { children: 'Call', variant: 'solid' },
+            },
+            {
+              id: `company-email-${company.id}`,
+              type: 'Button',
+              props: { children: 'Email', variant: 'outline' },
+            },
+            {
+              id: `company-follow-up-${company.id}`,
+              type: 'Button',
+              props: { children: 'Schedule follow-up', variant: 'outline' },
+            },
+          ],
+        },
+        heading(`company-overview-${company.id}`, 'Overview', 2),
+        {
+          id: `company-basics-${company.id}`,
+          type: 'Card',
+          props: { title: 'Company Basics', tone: 'default' },
+          children: [
+            copy(`company-name-field-${company.id}`, `Company name: ${company.name}`),
+            copy(`company-uid-field-${company.id}`, `UID: ${company.uid}`),
+            copy(`company-location-field-${company.id}`, `Location: ${company.location}`),
+            copy(`company-website-field-${company.id}`, `Website: ${company.website}`),
+            copy(`company-status-field-${company.id}`, `Status: ${company.status}`),
+          ],
+        },
+        {
+          id: `company-contacts-${company.id}`,
+          type: 'Card',
+          props: {
+            title: 'Contacts',
+            description:
+              'Local demo contact records. They are not Zefix data and are not persisted.',
+          },
+          children: contactCards(company.id),
+        },
+        heading(`company-history-heading-${company.id}`, 'History', 2),
+        {
+          id: `company-history-${company.id}`,
+          type: 'Timeline',
+          props: { items: history, compact: false },
+        },
+        {
+          id: `company-next-step-${company.id}`,
+          type: 'Card',
+          props: {
+            title: 'Next Step',
+            description: 'A local draft only. No call outcome or date is persisted.',
+          },
+          children: [
+            {
+              id: `company-follow-up-date-${company.id}`,
+              type: 'DatePicker',
+              props: { label: 'Current action', value: '2025-01-22', required: false },
+            },
+            {
+              id: `company-call-result-${company.id}`,
+              type: 'RadioGroup',
+              props: {
+                value: 'follow-up',
+                orientation: 'horizontal',
+                presentation: 'card',
+                options: [
+                  { value: 'not-reached', label: 'Not reached' },
+                  { value: 'interested', label: 'Interested' },
+                  { value: 'follow-up', label: 'Follow-up' },
+                  { value: 'no-need', label: 'No need' },
+                ],
+              },
+            },
+          ],
+        },
+        ...(company.id === selectedCompany.id
+          ? [
+              blocked(
+                'company-responsive-projection',
+                'Responsive desktop master-detail projection',
+                'ZORA #1315 must publish one-manifest web split and compact native stack projection. The current Stack route is the portable mobile-safe route only.',
+              ),
+            ]
+          : []),
+      ],
+    },
+  };
+}
+
 const bindings: ComponentDataBindingRegistry = {
-  'acquisition-open-company': navigateBinding(
-    'acquisition-open-company',
-    'Button',
-    '/companies/wetzikon-technik',
+  'acquisition-data-table': {
+    componentId: 'acquisition-data-table',
+    componentType: 'DataTable',
+    props: { selectedRowIds: { value: selectedCompanyRoutes() } },
+    events: {
+      selectionChange: [setSelectedCompanyRoutes()],
+      rowActivate: [activateCompanyRoute()],
+    },
+  },
+  ...Object.fromEntries(
+    COMPANY_RECORDS.map((company) => [
+      `company-back-${company.id}`,
+      navigateBinding(`company-back-${company.id}`, 'Button', '/'),
+    ]),
   ),
-  'company-back': navigateBinding('company-back', 'Button', '/'),
 };
 
 const manifest = {
@@ -204,12 +446,12 @@ const manifest = {
     initialRouteName: 'acquisition',
     routes: [
       { name: 'acquisition', path: '/', label: 'Companies', screenId: 'acquisition' },
-      {
-        name: 'company-detail',
-        path: '/companies/wetzikon-technik',
-        label: selectedCompany.name,
-        screenId: 'company-detail',
-      },
+      ...COMPANY_RECORDS.map((company) => ({
+        name: `company-detail-${company.id}`,
+        path: company.route,
+        label: company.name,
+        screenId: `company-detail-${company.id}`,
+      })),
     ],
   },
   screens: {
@@ -267,163 +509,56 @@ const manifest = {
             ],
           },
           heading('acquisition-list-heading', 'Acquisition List', 2),
-          blocked(
-            'acquisition-data-table',
-            'Rich selectable acquisition DataTable',
-            'ZORA #1307 must publish serializable checkbox selection, row activation, and rich logo/bold/link cells.',
-          ),
           {
-            id: 'acquisition-sample-route',
-            type: 'Card',
+            id: 'acquisition-data-table',
+            type: 'DataTable',
             props: {
-              title: selectedCompany.name,
-              eyebrow: 'Demo company route',
-              description: `${selectedCompany.location} · ${selectedCompany.website}`,
-              tone: 'subtle',
-            },
-            children: [
-              copy(
-                'acquisition-sample-route-note',
-                'The complete company collection remains separate demo data until the table owner API is released.',
-                'bodySmall',
-              ),
-              {
-                id: 'acquisition-open-company',
-                type: 'Button',
-                props: { children: `Open ${selectedCompany.name}`, variant: 'outline', size: 'm' },
-              },
-            ],
-          },
-        ],
-      },
-    },
-    'company-detail': {
-      id: 'company-detail',
-      name: 'Company detail',
-      title: selectedCompany.name,
-      description: 'Local demo company detail with no backend persistence.',
-      root: {
-        id: 'company-detail-root',
-        type: 'Screen',
-        props: { width: 'default', scroll: true },
-        children: [
-          {
-            id: 'company-back',
-            type: 'Button',
-            props: { children: 'Back to companies', variant: 'ghost' },
-          },
-          {
-            id: 'company-mark',
-            type: 'Image',
-            props: {
-              source: { mediaId: 'acquisition-target' },
-              alt: 'Generic Acquisition company mark',
-              width: 64,
-              height: 64,
-              radius: 'm',
-            },
-          },
-          heading('company-title', selectedCompany.name, 1),
-          copy(
-            'company-meta',
-            `UID ${selectedCompany.uid} · ${selectedCompany.location} · ${selectedCompany.website}`,
-            'bodySmall',
-          ),
-          {
-            id: 'company-status',
-            type: 'Badge',
-            props: { label: selectedCompany.status, color: 'primary' },
-          },
-          {
-            id: 'company-actions',
-            type: 'View',
-            props: {
-              direction: 'row',
-              wrap: true,
-              gap: 's',
-              accessibilityLabel: 'Company actions',
-            },
-            children: [
-              { id: 'company-call', type: 'Button', props: { children: 'Call', variant: 'solid' } },
-              {
-                id: 'company-email',
-                type: 'Button',
-                props: { children: 'Email', variant: 'outline' },
-              },
-              {
-                id: 'company-follow-up',
-                type: 'Button',
-                props: { children: 'Schedule follow-up', variant: 'outline' },
-              },
-            ],
-          },
-          heading('company-overview', 'Overview', 2),
-          {
-            id: 'company-basics',
-            type: 'Card',
-            props: { title: 'Company Basics', tone: 'default' },
-            children: [
-              copy('company-name-field', `Company name: ${selectedCompany.name}`),
-              copy('company-uid-field', `UID: ${selectedCompany.uid}`),
-              copy('company-location-field', `Location: ${selectedCompany.location}`),
-              copy('company-website-field', `Website: ${selectedCompany.website}`),
-              copy('company-status-field', `Status: ${selectedCompany.status}`),
-            ],
-          },
-          {
-            id: 'company-contacts',
-            type: 'Card',
-            props: {
-              title: 'Contacts',
-              description:
-                'Local demo contact records. They are not Zefix data and are not persisted.',
-            },
-            children: contactCards(selectedCompany.id),
-          },
-          heading('company-history-heading', 'History', 2),
-          blocked(
-            'company-history',
-            'Serializable Timeline items and markers',
-            `ZORA #1308 must publish a Timeline manifest boundary for ${HISTORY_RECORDS.length} local demo events.`,
-          ),
-          {
-            id: 'company-next-step',
-            type: 'Card',
-            props: {
-              title: 'Next Step',
-              description: 'A local draft only. No call outcome or date is persisted.',
-            },
-            children: [
-              {
-                id: 'company-follow-up-date',
-                type: 'DatePicker',
-                props: { label: 'Current action', value: '2025-01-22', required: false },
-              },
-              {
-                id: 'company-call-result',
-                type: 'RadioGroup',
-                props: {
-                  value: 'follow-up',
-                  orientation: 'horizontal',
-                  presentation: 'card',
-                  options: [
-                    { value: 'not-reached', label: 'Not reached' },
-                    { value: 'interested', label: 'Interested' },
-                    { value: 'follow-up', label: 'Follow-up' },
-                    { value: 'no-need', label: 'No need' },
-                  ],
+              rows: COMPANY_RECORDS,
+              rowKey: 'route',
+              density: 'compact',
+              columns: [
+                {
+                  id: 'company',
+                  header: 'Company',
+                  minWidth: 240,
+                  cell: {
+                    kind: 'stack',
+                    direction: 'row',
+                    align: 'center',
+                    gap: 's',
+                    children: [
+                      { kind: 'image', source: 'logo', alt: 'name' },
+                      {
+                        kind: 'stack',
+                        direction: 'column',
+                        gap: 'xxs',
+                        children: [
+                          { kind: 'text', value: 'name', weight: 'bold' },
+                          {
+                            kind: 'link',
+                            href: 'websiteUrl',
+                            label: 'website',
+                            variant: 'caption',
+                          },
+                        ],
+                      },
+                    ],
+                  },
                 },
-              },
-            ],
+                { id: 'location', header: 'Location', accessor: 'location', minWidth: 140 },
+                { id: 'status', header: 'Status', accessor: 'status', minWidth: 100 },
+              ],
+            },
           },
-          blocked(
-            'company-responsive-projection',
-            'Responsive desktop master-detail projection',
-            'ZORA #1309 must publish one-manifest web split and compact native stack projection. The current Stack route is the portable mobile-safe route only.',
-          ),
         ],
       },
     },
+    ...Object.fromEntries(
+      COMPANY_RECORDS.map((company) => [
+        `company-detail-${company.id}`,
+        companyDetailScreen(company),
+      ]),
+    ),
   },
   dataBindings: bindings,
 } satisfies AppManifest;

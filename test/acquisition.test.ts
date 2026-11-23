@@ -17,7 +17,12 @@ test('Acquisition registers one portable draft manifest with its bundled design 
     selector: 'business_productivity/acquisition',
     sourceRoot: 'src/templates/categories/business-productivity/acquisition',
   });
-  expect(Object.keys(manifest.screens)).toEqual(['acquisition', 'company-detail']);
+  expect(Object.keys(manifest.screens)).toEqual([
+    'acquisition',
+    'company-detail-wetzikon-technik',
+    'company-detail-alpenblick-digital',
+    'company-detail-seeblick-architektur',
+  ]);
   expect(artifact.assets).toEqual([
     expect.objectContaining({ mediaId: 'acquisition-target', contentType: 'image/svg+xml' }),
   ]);
@@ -25,7 +30,7 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
-test('Acquisition preserves published mobile stack navigation and explicit owner gaps', () => {
+test('Acquisition preserves released mobile navigation and the responsive owner gap', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const result = validateTemplateManifest(manifest, 'draft');
   const plan = createNavigatorPlan(manifest.navigator, {
@@ -40,9 +45,39 @@ test('Acquisition preserves published mobile stack navigation and explicit owner
     result.diagnostics
       .filter(({ code }) => code === 'missing-element')
       .map(({ requestedCapability }) => requestedCapability),
-  ).toEqual([
-    'Rich selectable acquisition DataTable',
-    'Serializable Timeline items and markers',
-    'Responsive desktop master-detail projection',
-  ]);
+  ).toEqual(['Responsive desktop master-detail projection']);
+});
+
+test('Acquisition encodes rich DataTable cells with independent selection and activation events', () => {
+  const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
+  const table = manifest.screens.acquisition?.root.children?.find(
+    ({ id }) => id === 'acquisition-data-table',
+  );
+  const serializedTable = JSON.stringify(table);
+  const serializedBinding = JSON.stringify(manifest.dataBindings?.['acquisition-data-table']);
+
+  expect(serializedTable).toContain('"type":"DataTable"');
+  expect(serializedTable).toContain('"rowKey":"route"');
+  expect(serializedTable).toContain('"kind":"image"');
+  expect(serializedTable).toContain('"weight":"bold"');
+  expect(serializedTable).toContain('"kind":"link"');
+  expect(serializedTable).toContain('https://wetzikon-technik.ch');
+  expect(serializedBinding).toContain('dataTable.selectionChange');
+  expect(serializedBinding).toContain('acquisition.selectedCompanyRoutes');
+  expect(serializedBinding).toContain('dataTable.rowActivate');
+  expect(serializedBinding).toContain('navigator.navigate');
+});
+
+test('Acquisition serializes ordered Timeline media markers', () => {
+  const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
+  const history = manifest.screens['company-detail-wetzikon-technik']?.root.children?.find(
+    ({ id }) => id === 'company-history-wetzikon-technik',
+  );
+  const serializedHistory = JSON.stringify(history);
+
+  expect(serializedHistory).toContain('"type":"Timeline"');
+  expect(serializedHistory).toMatch(
+    /added-to-acquisition[\s\S]*first-call-attempt[\s\S]*follow-up-scheduled[\s\S]*note-added/,
+  );
+  expect(serializedHistory.match(/"marker":\{"mediaId":"acquisition-target"\}/g)).toHaveLength(4);
 });

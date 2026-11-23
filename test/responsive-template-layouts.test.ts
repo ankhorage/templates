@@ -36,7 +36,9 @@ test('every published template plans navigation at every supported responsive si
 const expectedWidths = {
   'business_productivity/acquisition': {
     acquisition: 'wide',
-    'company-detail': 'default',
+    'company-detail-wetzikon-technik': 'default',
+    'company-detail-alpenblick-digital': 'default',
+    'company-detail-seeblick-architektur': 'default',
   },
   'business_productivity/urban-water-monitor': {
     dashboard: 'default',

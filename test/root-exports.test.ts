@@ -169,11 +169,7 @@ function expectAcquisitionDraft(manifest: AppManifest) {
     result.diagnostics
       .filter(({ code }) => code === 'missing-element')
       .map(({ requestedCapability }) => requestedCapability),
-  ).toEqual([
-    'Rich selectable acquisition DataTable',
-    'Serializable Timeline items and markers',
-    'Responsive desktop master-detail projection',
-  ]);
+  ).toEqual(['Responsive desktop master-detail projection']);
 }
 
 test('every published template uses the environment-aware infrastructure contract', () => {

@@ -51,27 +51,19 @@ derivation:
     contracts: 26.13.1
     navigator: 3.5.22
     runtime: 5.5.10
-    zora: 27.6.1
+    zora: 27.7.1
   diagnostics:
-    - "DataTable has no serializable rich cells, selection, or activation event."
-    - "Timeline and ListItem are not direct manifest nodes."
+    - "Published ZORA exposes serializable DataTable rich cells, controlled selection, and row activation."
+    - "Published ZORA exposes direct-manifest Timeline items with image media markers."
     - "Navigator split view is alpha/testing-only on iOS and unsupported on web and Android."
   assumptions:
     - "The mobile proposal is structural evidence only; native visual approval remains outstanding."
     - "Company, contact, and history records are small deterministic local demo collections."
   unsupported:
-    - "ZORA #1307 rich selectable DataTable"
-    - "ZORA #1308 Timeline manifest"
-    - "ZORA #1309 responsive master-detail projection"
+    - "ZORA #1315 responsive master-detail projection"
     - "ZORA #1296 Select bold"
     - "ZORA #1292 branded Navigator rail"
   ownerRuntimeDrift:
-    - owner: "@ankhorage/zora"
-      path: "DataTable"
-      decision: "Use a MissingElement marker and a route-only demo detail entry; do not emulate a table."
-    - owner: "@ankhorage/zora"
-      path: "Timeline"
-      decision: "Use a MissingElement marker; preserve event data without a fake timeline."
     - owner: "@ankhorage/navigator"
       path: "split-view"
       decision: "Use the released Stack topology for the portable list-to-detail route only."
@@ -92,13 +84,15 @@ components:
     - Image
     - DatePicker
     - RadioGroup
+    - DataTable
+    - Timeline
   gaps:
     - MissingElement
 screens:
   - id: acquisition
     purpose: "Search and filter a company collection, then enter a demo company detail route."
-    primaryAction: "Open Wetzikon Technik AG"
-  - id: company-detail
+    primaryAction: "Activate a company row without changing its controlled checkbox selection."
+  - id: company-detail-wetzikon-technik
     purpose: "Review company basics, local contacts, history state and a next-step draft."
     primaryAction: "Back to companies"
 assets:
@@ -111,7 +105,8 @@ assets:
       provenance: "Repository-authored generic acquisition mark; no company logo is implied."
       usages:
         - acquisition mark
-        - company detail image
+        - company detail images
+        - ordered Timeline markers
 validation:
   scope: configuration
   gates:
@@ -119,16 +114,14 @@ validation:
     manifestDraft: pass-with-blockers
     release: blocked
   blockers:
-    - "ZORA #1307"
-    - "ZORA #1308"
-    - "ZORA #1309"
+    - "ZORA #1315"
     - "ZORA #1296"
     - "ZORA #1292"
 findings: []
 risks:
   - "No desktop or native rendered visual acceptance has been run."
 openDecisions:
-  - "Replace MissingElement markers only after the named owner APIs are published and accepted."
+  - "Replace the responsive master-detail MissingElement only after ZORA #1315 is published and accepted."
 userNotes:
   - "No Zefix credentials, CRM backend, persistence provider, or second mobile configuration."
 ---
