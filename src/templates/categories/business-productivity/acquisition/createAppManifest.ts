@@ -540,6 +540,9 @@ const manifest = {
           compute: { provider: 'local' },
           runtime: { provider: 'minikube' },
         },
+        // Supabase provides the required backend for Vault; Zefix results are never persisted.
+        database: { provider: 'supabase', tier: 'dev' },
+        secretStore: { provider: 'supabase-vault' },
       },
     },
     modules: {},
