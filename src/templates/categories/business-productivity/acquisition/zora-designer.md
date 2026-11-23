@@ -44,7 +44,7 @@ config:
     value: analogous
     origin: derived
   navigator:
-    value: "Stack list to company-detail route with a responsive MasterDetail projection."
+    value: "Stack list-to-detail routes with a responsive MasterDetail detail pane."
     origin: derived
 derivation:
   provenance:
@@ -64,8 +64,8 @@ derivation:
     - "ZORA #1292 branded Navigator rail"
   ownerRuntimeDrift:
     - owner: "@ankhorage/navigator"
-      path: "split-view"
-      decision: "Use the released Stack topology for the portable list-to-detail route only."
+      path: "reactive current-route and breakpoint-aware detail projection"
+      decision: "Use the released Stack topology for compact list-to-detail only; desktop in-place active-company projection requires a published host-owned selection source and reactive detail-subtree binding."
 tokens:
   light:
     source: "manifest acquisition theme; owner compilation required at downstream integration"
@@ -85,8 +85,9 @@ components:
     - RadioGroup
     - DataTable
     - Timeline
-  gaps:
     - MasterDetail
+  gaps:
+    - "Runtime/Navigator reactive active-company detail projection"
 screens:
   - id: acquisition
     purpose: "Search and filter a company collection, then enter a demo company detail route."
