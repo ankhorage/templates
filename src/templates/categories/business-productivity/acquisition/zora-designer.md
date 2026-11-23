@@ -66,6 +66,9 @@ derivation:
     - owner: "@ankhorage/navigator"
       path: "reactive current-route and breakpoint-aware detail projection"
       decision: "Use the released Stack topology for compact list-to-detail only; desktop in-place active-company projection requires a published host-owned selection source and reactive detail-subtree binding."
+    - owner: "@ankhorage/contracts and @ankhorage/infra"
+      path: "infra.environments.local.graphDatabase"
+      decision: "Neo4j was explicitly selected for Acquisition graph persistence. The currently published InfraManifest has no graphDatabase capability, so do not serialize an unsupported Neo4j provider in the generated ankh.config.json. Existing graph and relational selections are separate; see ankhorage/infra#197."
 tokens:
   light:
     source: "manifest acquisition theme; owner compilation required at downstream integration"
@@ -116,12 +119,14 @@ validation:
   blockers:
     - "ZORA #1296"
     - "ZORA #1292"
+    - "Infra #197: portable graphDatabase selection is not yet supported"
 findings: []
 risks:
   - "No desktop or native rendered visual acceptance has been run."
 openDecisions: []
 userNotes:
-  - "No Zefix credentials, CRM backend, persistence provider, or second mobile configuration."
+  - "Neo4j is the user-approved graph persistence provider for Acquisition; the Neo4j selection is pending a released graphDatabase Infra contract."
+  - "No Zefix credentials, live CRM/graph connection, database provisioning, or second mobile configuration."
 ---
 
 # Acquisition design record
