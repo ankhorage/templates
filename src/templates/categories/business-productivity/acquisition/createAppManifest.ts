@@ -377,6 +377,68 @@ function companyDetailScreen(company: CompanyRecord): ScreenSpec {
 }
 
 const bindings: ComponentDataBindingRegistry = {
+  'company-search': {
+    componentId: 'company-search',
+    componentType: 'SearchInput',
+    props: {
+      value: {
+        value: {
+          kind: 'fallback',
+          value: { capability: 'state.acquisition', path: 'searchQuery' },
+          fallback: { kind: 'literal', value: '' },
+        },
+      },
+    },
+    events: {
+      valueChange: [
+        {
+          target: {
+            capability: 'state.set',
+            input: {
+              path: { kind: 'literal', value: 'acquisition.searchQuery' },
+              value: { capability: 'searchInput.valueChange', path: 'payload.value' },
+            },
+          },
+        },
+      ],
+      clear: [
+        {
+          target: {
+            capability: 'state.set',
+            input: {
+              path: { kind: 'literal', value: 'acquisition.searchQuery' },
+              value: { kind: 'literal', value: '' },
+            },
+          },
+        },
+      ],
+      submit: [
+        {
+          target: {
+            capability: 'api.zefix.company.search',
+            input: {
+              body: {
+                kind: 'object',
+                fields: {
+                  name: { capability: 'state.acquisition', path: 'searchQuery' },
+                },
+              },
+            },
+            result: 'acquisition.zefix.search',
+          },
+          when: {
+            source: {
+              kind: 'fallback',
+              value: { capability: 'state.acquisition', path: 'searchQuery' },
+              fallback: { kind: 'literal', value: '' },
+            },
+            operator: 'neq',
+            value: { kind: 'literal', value: '' },
+          },
+        },
+      ],
+    },
+  },
   'acquisition-data-table': {
     componentId: 'acquisition-data-table',
     componentType: 'DataTable',
