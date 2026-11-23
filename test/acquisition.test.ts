@@ -38,7 +38,7 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
-test('Acquisition configures stateless Zefix search without database infrastructure or embedded secrets', () => {
+test('Acquisition configures Minikube with Supabase Vault but no Zefix result persistence or embedded secrets', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const vendor = manifest.infra.apis?.zefix;
 
@@ -48,10 +48,11 @@ test('Acquisition configures stateless Zefix search without database infrastruct
       compute: { provider: 'local' },
       runtime: { provider: 'minikube' },
     },
+    database: { provider: 'supabase', tier: 'dev' },
+    secretStore: { provider: 'supabase-vault' },
   });
-  expect(manifest.infra.environments.local).not.toHaveProperty('database');
   expect(manifest.infra.environments.local).not.toHaveProperty('graphDatabase');
-  expect(manifest.infra.environments.local).not.toHaveProperty('secretStore');
+  expect(manifest.infra.environments.local).not.toHaveProperty('objectStorage');
   expect(manifest.infra.environments.local).not.toHaveProperty('auth');
   expect(vendor).toMatchObject({
     id: 'zefix',
