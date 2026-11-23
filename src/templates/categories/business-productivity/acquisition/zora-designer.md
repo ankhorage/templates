@@ -56,7 +56,7 @@ derivation:
     - "Published ZORA exposes serializable DataTable rich cells, controlled selection, and row activation."
     - "Published ZORA exposes direct-manifest Timeline items with image media markers."
     - "Published ZORA exposes MasterDetail as a direct manifest node with bounded independent panes and a host-owned compact active pane."
-    - "Canonical Acquisition manifest declares Zefix PublicREST search/UID operations in infra.apis with Basic credential reference zefix-credentials; no credential values."
+    - "Acquisition currently declares Zefix PublicREST search/UID operations in infra.apis with Basic credential reference zefix-credentials; no credential values."
     - "Acquisition selects Legend in-memory session state for controlled local selection; no persistence is claimed."
   assumptions:
     - "The compact MasterDetail pane remains master because the existing Stack topology owns list-to-detail routing; no route-state binding is invented."
@@ -71,6 +71,9 @@ derivation:
     - owner: "@ankhorage/contracts and @ankhorage/infra"
       path: "infra.environments.local.graphDatabase"
       decision: "Neo4j was explicitly selected for Acquisition graph persistence. The currently published InfraManifest has no graphDatabase capability, so do not serialize an unsupported Neo4j provider in the generated ankh.config.json. Existing graph and relational selections are separate; see ankhorage/infra#197."
+    - owner: "@ankhorage/data-sources"
+      path: "createZefixPublicRestApi"
+      decision: "Published @ankhorage/data-sources 2.3.0 does not export the canonical descriptor. Draft data-sources#318 defines company-uid/company.get-by-uid with path parameter id, which differs from this manifest's company-by-uid/company.by-uid/uid contract. Do not import the PR branch or add an unpublished dependency. After publication, consume the released descriptor and prove infra.apis.zefix equals it."
 tokens:
   light:
     source: "manifest acquisition theme; owner compilation required at downstream integration"
@@ -122,10 +125,14 @@ validation:
     - "ZORA #1296"
     - "ZORA #1292"
     - "Infra #197: portable graphDatabase selection is not yet supported"
-    - "Trusted server-side Zefix credential execution and vendor-to-ZORA DataTable projection are not yet proven"
+    - "Trusted server-side Zefix API execution is missing; Templates must not add a REST executor."
+    - "A project-scoped Supabase Vault credential resolver is missing; the manifest retains only the zefix-credentials reference."
+    - "A manifest-visible operation error state is missing; result fallback is not a user-rendered failure state."
+    - "Reactive selected-company detail projection is missing from the published Runtime/Navigator boundary."
+    - "Authenticated generated-application acceptance is missing; canonical Supabase auth currently gates the Acquisition routes."
 findings: []
 risks:
-  - "No desktop or native rendered visual acceptance has been run."
+  - "No authenticated desktop or native rendered application acceptance has been run."
 openDecisions: []
 userNotes:
   - "Neo4j is the user-approved graph persistence provider for Acquisition; the Neo4j selection is pending a released graphDatabase Infra contract."
