@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.76
+
+### Patch Changes
+
+- e164caf: Update dependencies: `@ankhorage/doctor`, `@ankhorage/navigator`, `@ankhorage/runtime`.
+
 ## 12.6.75
 
 ### Patch Changes
