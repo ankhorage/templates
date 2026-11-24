@@ -5,6 +5,7 @@ import createAppManifest3 from './categories/food-drink/nutriflow/createAppManif
 import createAppManifest4 from './categories/games/grossmeister/createAppManifest';
 import createAppManifest5 from './categories/lifestyle/stillpath/createAppManifest';
 import createAppManifest6 from './categories/social-community/chat/createAppManifest';
+import createAppManifest7 from './categories/social-community/social-media-manager/createAppManifest';
 
 import type { TemplateDefinition } from './catalog';
 
@@ -50,5 +51,11 @@ export const TEMPLATE_DEFINITIONS: readonly TemplateDefinition[] = [
     slug: 'chat',
     sourceRoot: 'src/templates/categories/social-community/chat',
     createAppManifest: createAppManifest6,
+  },
+  {
+    category: 'social_community',
+    slug: 'social-media-manager',
+    sourceRoot: 'src/templates/categories/social-community/social-media-manager',
+    createAppManifest: createAppManifest7,
   },
 ];
