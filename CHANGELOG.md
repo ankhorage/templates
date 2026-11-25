@@ -1,5 +1,155 @@
 # @ankhorage/templates
 
+## 12.6.88
+
+### Patch Changes
+
+- 8e947d7: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.87
+
+### Patch Changes
+
+- 111a1ee: Keep the packed root entrypoint proof independent from npm publish lifecycle configuration.
+
+## 12.6.86
+
+### Patch Changes
+
+- 4979aa5: Keep the packed Node ESM consumer proof executable during npm publish dry runs.
+
+## 12.6.85
+
+### Patch Changes
+
+- 06934fe: Bundle the root package entrypoint so published template materialization APIs load through native Node ESM.
+
+## 12.6.84
+
+### Patch Changes
+
+- be05b18: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.83
+
+### Patch Changes
+
+- abcecf8: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.82
+
+### Patch Changes
+
+- 7240324: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.81
+
+### Patch Changes
+
+- 1229ec5: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.80
+
+### Patch Changes
+
+- 1457ecd: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.79
+
+### Patch Changes
+
+- cd97dbc: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.78
+
+### Patch Changes
+
+- e58fcaa: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.77
+
+### Patch Changes
+
+- c07d6b7: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.76
+
+### Patch Changes
+
+- e164caf: Update dependencies: `@ankhorage/doctor`, `@ankhorage/navigator`, `@ankhorage/runtime`.
+
+## 12.6.75
+
+### Patch Changes
+
+- d29a52f: Update dependencies: `@ankhorage/runtime`.
+
+## 12.6.74
+
+### Patch Changes
+
+- 124be33: Update dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/navigator`.
+
+## 12.6.73
+
+### Patch Changes
+
+- 49ac6a8: Update dependencies: `@ankhorage/contracts`.
+
+## 12.6.72
+
+### Patch Changes
+
+- 229721e: Update dependencies: `@ankhorage/navigator`.
+
+## 12.6.71
+
+### Patch Changes
+
+- eacd61f: Update dependencies: `@ankhorage/contracts`.
+
+## 12.6.70
+
+### Patch Changes
+
+- 3924319: Update dependencies: `@ankhorage/navigator`.
+
+## 12.6.69
+
+### Patch Changes
+
+- 1b2af64: Update dependencies: `@ankhorage/navigator`.
+
+## 12.6.68
+
+### Patch Changes
+
+- 0d24c04: Update dependencies: `@ankhorage/contracts`.
+
+## 12.6.67
+
+### Patch Changes
+
+- aaf2a87: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.66
+
+### Patch Changes
+
+- 34eeeb0: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.65
+
+### Patch Changes
+
+- 647ca8b: Update dependencies: `@ankhorage/zora`.
+
+## 12.6.64
+
+### Patch Changes
+
+- cd6d7ce: Update dependencies: `@ankhorage/zora`.
+
 ## 12.6.63
 
 ### Patch Changes
