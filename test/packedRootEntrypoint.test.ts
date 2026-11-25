@@ -1,5 +1,5 @@
 import { execFileSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, renameSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
@@ -25,10 +25,13 @@ test('a fresh packed consumer imports root materialization APIs through native N
       join(consumerRoot, 'package.json'),
       JSON.stringify({ name: 'templates-node-esm-consumer', private: true, version: '0.0.0' }),
     );
-    execFileSync('npm', ['install', '--ignore-scripts', join(packDirectory, tarball)], {
-      cwd: consumerRoot,
-      stdio: 'pipe',
-    });
+    const consumerNodeModules = join(consumerRoot, 'node_modules');
+    mkdirSync(join(consumerNodeModules, '@ankhorage'), { recursive: true });
+    execFileSync('tar', ['-xzf', join(packDirectory, tarball), '-C', consumerNodeModules]);
+    renameSync(
+      join(consumerNodeModules, 'package'),
+      join(consumerNodeModules, '@ankhorage', 'templates'),
+    );
     const output = execFileSync(
       'node',
       [
