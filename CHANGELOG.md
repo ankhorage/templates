@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.85
+
+### Patch Changes
+
+- 06934fe: Bundle the root package entrypoint so published template materialization APIs load through native Node ESM.
+
 ## 12.6.84
 
 ### Patch Changes
