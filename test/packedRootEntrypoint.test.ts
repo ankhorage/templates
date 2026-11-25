@@ -15,7 +15,7 @@ test('a fresh packed consumer imports root materialization APIs through native N
     mkdirSync(packDirectory);
     const tarball = execFileSync(
       'npm',
-      ['pack', '--ignore-scripts', '--pack-destination', packDirectory],
+      ['pack', '--ignore-scripts', '--dry-run=false', '--pack-destination', packDirectory],
       {
         cwd: packageRoot,
         encoding: 'utf8',
