@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.87
+
+### Patch Changes
+
+- 111a1ee: Keep the packed root entrypoint proof independent from npm publish lifecycle configuration.
+
 ## 12.6.86
 
 ### Patch Changes
