@@ -1,0 +1,22 @@
+{
+  "assets": [
+    {
+      "mediaId": "acquisition-target",
+      "role": "icon",
+      "sourcePath": "assets/images/svg/acquisition-target.svg",
+      "targetPath": "assets/images/svg/acquisition-target.svg",
+      "contentType": "image/svg+xml",
+      "usages": [
+        "/screens/acquisition/root/children/0/props/source",
+        "/screens/company-detail-wetzikon-technik/root/children/1/props/source",
+        "/screens/company-detail-wetzikon-technik/root/children/10/props/items/0/marker",
+        "/screens/company-detail-wetzikon-technik/root/children/10/props/items/1/marker",
+        "/screens/company-detail-wetzikon-technik/root/children/10/props/items/2/marker",
+        "/screens/company-detail-wetzikon-technik/root/children/10/props/items/3/marker",
+        "/screens/company-detail-alpenblick-digital/root/children/1/props/source",
+        "/screens/company-detail-seeblick-architektur/root/children/1/props/source"
+      ]
+    }
+  ],
+  "screens": []
+}
