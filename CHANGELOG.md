@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.6.86
+
+### Patch Changes
+
+- 4979aa5: Keep the packed Node ESM consumer proof executable during npm publish dry runs.
+
 ## 12.6.85
 
 ### Patch Changes
