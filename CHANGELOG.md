@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.7.0
+
+### Minor Changes
+
+- d5d5a46: Add the portable Acquisition template with released DataTable, Timeline, and responsive MasterDetail manifest controls.
+
 ## 12.6.88
 
 ### Patch Changes

@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.6.88",
+      "value": "v12.7.0",
       "color": "cb3837"
     },
     {
@@ -381,6 +381,7 @@
       "dependencies": [
         "src/templates/catalog.ts",
         "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
         "src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts",
         "src/templates/categories/education-learning/sharkprey/createAppManifest.ts",
         "src/templates/categories/food-drink/nutriflow/createAppManifest.ts",
@@ -408,6 +409,12 @@
       "path": "src/templates/categories/books-reading/reader/createAppManifest.ts",
       "isEntrypoint": false,
       "dependencies": ["src/internal/defaults.ts"],
+      "exports": ["default"]
+    },
+    {
+      "path": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+      "isEntrypoint": false,
+      "dependencies": [],
       "exports": ["default"]
     },
     {
@@ -3423,6 +3430,132 @@
     },
     {
       "name": "createAppManifest",
+      "description": "Return the one portable, draft-stage Acquisition app manifest.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 11,
+        "column": 1
+      }
+    },
+    {
+      "name": "resolveSelectedCompany",
+      "description": "Resolve the deterministic demo company used for the initial controlled selection.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 140,
+        "column": 1
+      }
+    },
+    {
+      "name": "heading",
+      "description": "Create a semantic heading from a released manifest node.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 149,
+        "column": 1
+      }
+    },
+    {
+      "name": "copy",
+      "description": "Create body copy without adding a template-owned presentation primitive.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 154,
+        "column": 1
+      }
+    },
+    {
+      "name": "selectedCompanyRoutes",
+      "description": "Read the local Runtime selection while retaining the deterministic first-row selection.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 159,
+        "column": 1
+      }
+    },
+    {
+      "name": "setSelectedCompanyRoutes",
+      "description": "Persist the controlled checkbox selection only in the active Runtime session.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 168,
+        "column": 1
+      }
+    },
+    {
+      "name": "setSessionState",
+      "description": "Persist one manifest event value only in the active Runtime session.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 177,
+        "column": 1
+      }
+    },
+    {
+      "name": "activateCompanyRoute",
+      "description": "Navigate from the released DataTable activation payload without coupling selection to routing.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 194,
+        "column": 1
+      }
+    },
+    {
+      "name": "activateZefixCompany",
+      "description": "Record a Zefix row activation independently while the published host lacks detail projection.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 204,
+        "column": 1
+      }
+    },
+    {
+      "name": "zefixSearchRows",
+      "description": "Project the raw Zefix search array without inventing contact, route, logo, or website fields.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 213,
+        "column": 1
+      }
+    },
+    {
+      "name": "navigateBinding",
+      "description": "Bind a released interactive event to a concrete route without inventing host capabilities.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 222,
+        "column": 1
+      }
+    },
+    {
+      "name": "contactCards",
+      "description": "Present locally authored contacts separately from company discovery records.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 244,
+        "column": 1
+      }
+    },
+    {
+      "name": "companyDetailNodes",
+      "description": "Build reusable detail content for both the responsive pane and Stack-routed detail screen.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 259,
+        "column": 1
+      }
+    },
+    {
+      "name": "companyDetailScreen",
+      "description": "Build one local company detail screen for a deterministically routed demo row.",
+      "sourceLocation": {
+        "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "line": 393,
+        "column": 1
+      }
+    },
+    {
+      "name": "createAppManifest",
       "description": "Return the complete portable Urban Water Monitor demonstration manifest.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts",
@@ -4147,6 +4280,11 @@
       {
         "fromPath": "src/templates/catalog.generated.ts",
         "toPath": "src/templates/categories/books-reading/reader/createAppManifest.ts",
+        "sourcePath": "src/templates/catalog.generated.ts"
+      },
+      {
+        "fromPath": "src/templates/catalog.generated.ts",
+        "toPath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
         "sourcePath": "src/templates/catalog.generated.ts"
       },
       {
@@ -5026,6 +5164,114 @@
         "toSymbol": "action",
         "callExpression": "action",
         "sourcePath": "src/templates/categories/books-reading/reader/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "resolveSelectedCompany",
+        "callExpression": "resolveSelectedCompany",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "setSelectedCompanyRoutes",
+        "toSymbol": "setSessionState",
+        "callExpression": "setSessionState",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "activateZefixCompany",
+        "toSymbol": "setSessionState",
+        "callExpression": "setSessionState",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "companyDetailNodes",
+        "toSymbol": "heading",
+        "callExpression": "heading",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "companyDetailNodes",
+        "toSymbol": "copy",
+        "callExpression": "copy",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "companyDetailNodes",
+        "toSymbol": "contactCards",
+        "callExpression": "contactCards",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "companyDetailScreen",
+        "toSymbol": "companyDetailNodes",
+        "callExpression": "companyDetailNodes",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "selectedCompanyRoutes",
+        "callExpression": "selectedCompanyRoutes",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "setSelectedCompanyRoutes",
+        "callExpression": "setSelectedCompanyRoutes",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "activateCompanyRoute",
+        "callExpression": "activateCompanyRoute",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "zefixSearchRows",
+        "callExpression": "zefixSearchRows",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "setSessionState",
+        "callExpression": "setSessionState",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "activateZefixCompany",
+        "callExpression": "activateZefixCompany",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "navigateBinding",
+        "callExpression": "navigateBinding",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "heading",
+        "callExpression": "heading",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "copy",
+        "callExpression": "copy",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "companyDetailNodes",
+        "callExpression": "companyDetailNodes",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "companyDetailScreen",
+        "callExpression": "companyDetailScreen",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
       },
       {
         "fromSymbol": "createAppManifest",

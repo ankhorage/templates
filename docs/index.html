@@ -331,6 +331,16 @@
               <button
                 class="nav-button"
                 type="button"
+                data-target="src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+              >
+                src/templates/categories/business-productivity/acquisition/createAppManifest.ts
+                <small>14 functions</small>
+              </button>
+            </li>
+            <li>
+              <button
+                class="nav-button"
+                type="button"
                 data-target="src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts"
               >
                 src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts
@@ -403,7 +413,7 @@
             <div class="summary">
               <div><strong>60</strong><span class="muted">public exports</span></div>
               <div><strong>0</strong><span class="muted">components</span></div>
-              <div><strong>32</strong><span class="muted">modules</span></div>
+              <div><strong>33</strong><span class="muted">modules</span></div>
               <div><strong>1</strong><span class="muted">entrypoints</span></div>
             </div>
             <h3>Entrypoints</h3>
@@ -751,13 +761,16 @@
             </article>
             <article
               class="item"
-              data-search="src/templates/catalog.generated.ts src/templates/catalog.ts src/templates/categories/books-reading/reader/createAppManifest.ts src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/templates/categories/food-drink/nutriflow/createAppManifest.ts src/templates/categories/games/grossmeister/createAppManifest.ts src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/templates/categories/social-community/chat/createAppManifest.ts TEMPLATE_DEFINITIONS"
+              data-search="src/templates/catalog.generated.ts src/templates/catalog.ts src/templates/categories/books-reading/reader/createAppManifest.ts src/templates/categories/business-productivity/acquisition/createAppManifest.ts src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts src/templates/categories/education-learning/sharkprey/createAppManifest.ts src/templates/categories/food-drink/nutriflow/createAppManifest.ts src/templates/categories/games/grossmeister/createAppManifest.ts src/templates/categories/lifestyle/stillpath/createAppManifest.ts src/templates/categories/social-community/chat/createAppManifest.ts TEMPLATE_DEFINITIONS"
             >
               <h3>src/templates/catalog.generated.ts</h3>
               <p class="muted">Referenced module</p>
               <p>
                 <strong>Dependencies:</strong> <code>src/templates/catalog.ts</code>,
                 <code>src/templates/categories/books-reading/reader/createAppManifest.ts</code>,
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts</code
+                >,
                 <code
                   >src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts</code
                 >,
@@ -791,6 +804,17 @@
               <h3>src/templates/categories/books-reading/reader/createAppManifest.ts</h3>
               <p class="muted">Referenced module</p>
               <p><strong>Dependencies:</strong> <code>src/internal/defaults.ts</code></p>
+              <p><strong>Exports:</strong> <code>default</code></p>
+            </article>
+            <article
+              class="item"
+              data-search="src/templates/categories/business-productivity/acquisition/createAppManifest.ts default"
+            >
+              <h3>
+                src/templates/categories/business-productivity/acquisition/createAppManifest.ts
+              </h3>
+              <p class="muted">Referenced module</p>
+              <p><strong>Dependencies:</strong> <span class="empty">None</span></p>
               <p><strong>Exports:</strong> <code>default</code></p>
             </article>
             <article
@@ -3629,6 +3653,8 @@
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
+                module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts
+                module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
@@ -3648,6 +3674,9 @@
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts --&gt;
                 module_src_internal_defaults_ts
+                module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts[&quot;src/templates/categories/business-productivity/acquisition/createAppManifest.ts&quot;]
+                package__ankhorage_templates -.-&gt;
+                module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
                 package__ankhorage_templates -.-&gt;
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
@@ -3772,6 +3801,7 @@ graph TD
   package__ankhorage_templates -.-&gt; module_src_templates_catalog_generated_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_books_reading_reader_createAppManifest_ts
+  module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
@@ -3784,6 +3814,8 @@ graph TD
   module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_books_reading_reader_createAppManifest_ts
   module_src_templates_categories_books_reading_reader_createAppManifest_ts --&gt; module_src_internal_defaults_ts
+  module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts[&quot;src/templates/categories/business-productivity/acquisition/createAppManifest.ts&quot;]
+  package__ankhorage_templates -.-&gt; module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts
   module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
   package__ankhorage_templates -.-&gt; module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
   module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts --&gt; module_src_internal_defaults_ts
@@ -3842,6 +3874,7 @@ graph TD
                 module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
                 module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
+                module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts[&quot;src/templates/categories/business-productivity/acquisition/createAppManifest.ts&quot;]
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
@@ -3886,6 +3919,8 @@ graph TD
                 module_src_templateSelector_ts module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_catalog_ts module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts
+                module_src_templates_catalog_generated_ts --&gt;
+                module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
                 module_src_templates_catalog_generated_ts --&gt;
@@ -3949,6 +3984,7 @@ graph LR
   module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
   module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
   module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
+  module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts[&quot;src/templates/categories/business-productivity/acquisition/createAppManifest.ts&quot;]
   module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
@@ -3989,6 +4025,7 @@ graph LR
   module_src_projectSeed_ts --&gt; module_src_templateSelector_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_catalog_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_books_reading_reader_createAppManifest_ts
+  module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts
   module_src_templates_catalog_generated_ts --&gt; module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts
@@ -4038,6 +4075,7 @@ graph LR
                 module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
                 module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
                 module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
+                module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts[&quot;src/templates/categories/business-productivity/acquisition/createAppManifest.ts&quot;]
                 module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
                 module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
                 module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
@@ -4242,6 +4280,7 @@ graph LR
   module_src_templates_catalog_generated_ts[&quot;src/templates/catalog.generated.ts&quot;]
   module_src_templates_catalog_ts[&quot;src/templates/catalog.ts&quot;]
   module_src_templates_categories_books_reading_reader_createAppManifest_ts[&quot;src/templates/categories/books-reading/reader/createAppManifest.ts&quot;]
+  module_src_templates_categories_business_productivity_acquisition_createAppManifest_ts[&quot;src/templates/categories/business-productivity/acquisition/createAppManifest.ts&quot;]
   module_src_templates_categories_business_productivity_urban_water_monitor_createAppManifest_ts[&quot;src/templates/categories/business-productivity/urban-water-monitor/createAppManifest.ts&quot;]
   module_src_templates_categories_education_learning_sharkprey_createAppManifest_ts[&quot;src/templates/categories/education-learning/sharkprey/createAppManifest.ts&quot;]
   module_src_templates_categories_food_drink_nutriflow_createAppManifest_ts[&quot;src/templates/categories/food-drink/nutriflow/createAppManifest.ts&quot;]
@@ -5494,6 +5533,204 @@ sequenceDiagram
                 <code>src/templates/categories/books-reading/reader/createAppManifest.ts:62:1</code>
               </p>
               <p>Bind a metadata-backed component interaction to a canonical Navigator route.</p>
+            </article>
+          </section>
+        </section>
+        <section
+          id="view-src-templates-categories-business-productivity-acquisition-createappmanifest-ts"
+          class="view"
+          data-view="src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+          hidden
+        >
+          <section class="panel">
+            <h2>src/templates/categories/business-productivity/acquisition/createAppManifest.ts</h2>
+            <article
+              class="item"
+              data-search="createAppManifest src/templates/categories/business-productivity/acquisition/createAppManifest.ts Return the one portable, draft-stage Acquisition app manifest."
+            >
+              <h3>createAppManifest</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:11:1</code
+                >
+              </p>
+              <p>Return the one portable, draft-stage Acquisition app manifest.</p>
+            </article>
+            <article
+              class="item"
+              data-search="resolveSelectedCompany src/templates/categories/business-productivity/acquisition/createAppManifest.ts Resolve the deterministic demo company used for the initial controlled selection."
+            >
+              <h3>resolveSelectedCompany</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:140:1</code
+                >
+              </p>
+              <p>
+                Resolve the deterministic demo company used for the initial controlled selection.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="heading src/templates/categories/business-productivity/acquisition/createAppManifest.ts Create a semantic heading from a released manifest node."
+            >
+              <h3>heading</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:149:1</code
+                >
+              </p>
+              <p>Create a semantic heading from a released manifest node.</p>
+            </article>
+            <article
+              class="item"
+              data-search="copy src/templates/categories/business-productivity/acquisition/createAppManifest.ts Create body copy without adding a template-owned presentation primitive."
+            >
+              <h3>copy</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:154:1</code
+                >
+              </p>
+              <p>Create body copy without adding a template-owned presentation primitive.</p>
+            </article>
+            <article
+              class="item"
+              data-search="selectedCompanyRoutes src/templates/categories/business-productivity/acquisition/createAppManifest.ts Read the local Runtime selection while retaining the deterministic first-row selection."
+            >
+              <h3>selectedCompanyRoutes</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:159:1</code
+                >
+              </p>
+              <p>
+                Read the local Runtime selection while retaining the deterministic first-row
+                selection.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="setSelectedCompanyRoutes src/templates/categories/business-productivity/acquisition/createAppManifest.ts Persist the controlled checkbox selection only in the active Runtime session."
+            >
+              <h3>setSelectedCompanyRoutes</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:168:1</code
+                >
+              </p>
+              <p>Persist the controlled checkbox selection only in the active Runtime session.</p>
+            </article>
+            <article
+              class="item"
+              data-search="setSessionState src/templates/categories/business-productivity/acquisition/createAppManifest.ts Persist one manifest event value only in the active Runtime session."
+            >
+              <h3>setSessionState</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:177:1</code
+                >
+              </p>
+              <p>Persist one manifest event value only in the active Runtime session.</p>
+            </article>
+            <article
+              class="item"
+              data-search="activateCompanyRoute src/templates/categories/business-productivity/acquisition/createAppManifest.ts Navigate from the released DataTable activation payload without coupling selection to routing."
+            >
+              <h3>activateCompanyRoute</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:194:1</code
+                >
+              </p>
+              <p>
+                Navigate from the released DataTable activation payload without coupling selection
+                to routing.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="activateZefixCompany src/templates/categories/business-productivity/acquisition/createAppManifest.ts Record a Zefix row activation independently while the published host lacks detail projection."
+            >
+              <h3>activateZefixCompany</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:204:1</code
+                >
+              </p>
+              <p>
+                Record a Zefix row activation independently while the published host lacks detail
+                projection.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="zefixSearchRows src/templates/categories/business-productivity/acquisition/createAppManifest.ts Project the raw Zefix search array without inventing contact, route, logo, or website fields."
+            >
+              <h3>zefixSearchRows</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:213:1</code
+                >
+              </p>
+              <p>
+                Project the raw Zefix search array without inventing contact, route, logo, or
+                website fields.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="navigateBinding src/templates/categories/business-productivity/acquisition/createAppManifest.ts Bind a released interactive event to a concrete route without inventing host capabilities."
+            >
+              <h3>navigateBinding</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:222:1</code
+                >
+              </p>
+              <p>
+                Bind a released interactive event to a concrete route without inventing host
+                capabilities.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="contactCards src/templates/categories/business-productivity/acquisition/createAppManifest.ts Present locally authored contacts separately from company discovery records."
+            >
+              <h3>contactCards</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:244:1</code
+                >
+              </p>
+              <p>Present locally authored contacts separately from company discovery records.</p>
+            </article>
+            <article
+              class="item"
+              data-search="companyDetailNodes src/templates/categories/business-productivity/acquisition/createAppManifest.ts Build reusable detail content for both the responsive pane and Stack-routed detail screen."
+            >
+              <h3>companyDetailNodes</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:259:1</code
+                >
+              </p>
+              <p>
+                Build reusable detail content for both the responsive pane and Stack-routed detail
+                screen.
+              </p>
+            </article>
+            <article
+              class="item"
+              data-search="companyDetailScreen src/templates/categories/business-productivity/acquisition/createAppManifest.ts Build one local company detail screen for a deterministically routed demo row."
+            >
+              <h3>companyDetailScreen</h3>
+              <p class="muted">
+                <code
+                  >src/templates/categories/business-productivity/acquisition/createAppManifest.ts:393:1</code
+                >
+              </p>
+              <p>Build one local company detail screen for a deterministically routed demo row.</p>
             </article>
           </section>
         </section>
