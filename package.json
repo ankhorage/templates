@@ -102,7 +102,7 @@
   },
   "scripts": {
     "templates:catalog": "bun .agents/skills/zora-designer/scripts/generate-template-catalog.ts .",
-    "build": "bun run templates:catalog && bun x tsc -p tsconfig.json",
+    "build": "bun run templates:catalog && bun x tsc -p tsconfig.json && bun build src/index.ts --target node --format esm --outdir dist",
     "changeset": "ankhorage-changeset",
     "changeset:status": "ankhorage-changeset status --since=origin/main",
     "docs": "bunx @ankhorage/paradox@0.1.16 && ankhorage-prettier --write docs README.md",
