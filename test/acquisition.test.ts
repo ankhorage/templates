@@ -3,6 +3,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 
 import { isAppManifest } from '@ankhorage/contracts';
+import { createZefixPublicRestApi } from '@ankhorage/data-sources';
 import { createNavigatorPlan } from '@ankhorage/navigator';
 import { expect, test } from 'bun:test';
 
@@ -38,7 +39,7 @@ test('Acquisition registers one portable draft manifest with its bundled design 
   expect(JSON.parse(JSON.stringify(manifest))).toEqual(manifest);
 });
 
-test('Acquisition configures Minikube with Supabase Vault but no Zefix result persistence or embedded secrets', () => {
+test('Acquisition consumes the published Zefix descriptor without Zefix result persistence or embedded secrets', () => {
   const manifest = resolveTemplate('business_productivity', 'acquisition').createAppManifest();
   const vendor = manifest.infra.apis?.zefix;
 
@@ -54,33 +55,7 @@ test('Acquisition configures Minikube with Supabase Vault but no Zefix result pe
   expect(manifest.infra.environments.local).not.toHaveProperty('graphDatabase');
   expect(manifest.infra.environments.local).not.toHaveProperty('objectStorage');
   expect(manifest.infra.environments.local).not.toHaveProperty('auth');
-  expect(vendor).toMatchObject({
-    id: 'zefix',
-    origin: 'external',
-    protocol: 'rest',
-    baseUrl: 'https://www.zefix.admin.ch/ZefixPublicREST',
-    credential: { id: 'zefix-credentials', kind: 'basic' },
-    endpoints: {
-      'company-search': {
-        path: '/api/v1/company/search',
-        operations: { 'company.search': { intent: 'read', method: 'POST' } },
-      },
-      'company-by-uid': {
-        path: '/api/v1/company/uid/{uid}',
-        operations: {
-          'company.by-uid': {
-            intent: 'read',
-            method: 'GET',
-            request: {
-              parameters: [
-                { name: 'uid', location: 'path', required: true, schema: { type: 'string' } },
-              ],
-            },
-          },
-        },
-      },
-    },
-  });
+  expect(vendor).toEqual(createZefixPublicRestApi());
   const serialized = JSON.stringify(manifest);
   expect(serialized).not.toContain('ZEFIX_USERNAME');
   expect(serialized).not.toContain('ZEFIX_PASSWORD');
@@ -187,6 +162,8 @@ test('Acquisition declares raw Zefix result-slot rows without mixing them with l
   expect(serializedTable).not.toContain('website');
   expect(serializedTable).not.toContain('contact');
   expect(serializedTable).not.toContain('route');
+  expect(serializedTable).not.toContain('wire');
+  expect(JSON.stringify(zefixBinding)).not.toContain('wire');
 });
 
 test('Acquisition delegates each responsive pane scroll owner to published MasterDetail', () => {
