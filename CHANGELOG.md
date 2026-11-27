@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.7.5
+
+### Patch Changes
+
+- 3277fe6: Consume the published Zefix API descriptor in the Acquisition template.
+
 ## 12.7.4
 
 ### Patch Changes

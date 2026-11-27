@@ -12,7 +12,7 @@
     {
       "id": "npm",
       "label": "npm",
-      "value": "v12.7.4",
+      "value": "v12.7.5",
       "color": "cb3837"
     },
     {
@@ -3433,7 +3433,7 @@
       "description": "Return the one portable, draft-stage Acquisition app manifest.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 11,
+        "line": 12,
         "column": 1
       }
     },
@@ -3442,7 +3442,7 @@
       "description": "Resolve the deterministic demo company used for the initial controlled selection.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 140,
+        "line": 141,
         "column": 1
       }
     },
@@ -3451,7 +3451,7 @@
       "description": "Create a semantic heading from a released manifest node.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 149,
+        "line": 150,
         "column": 1
       }
     },
@@ -3460,7 +3460,7 @@
       "description": "Create body copy without adding a template-owned presentation primitive.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 154,
+        "line": 155,
         "column": 1
       }
     },
@@ -3469,7 +3469,7 @@
       "description": "Read the local Runtime selection while retaining the deterministic first-row selection.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 159,
+        "line": 160,
         "column": 1
       }
     },
@@ -3478,7 +3478,7 @@
       "description": "Persist the controlled checkbox selection only in the active Runtime session.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 168,
+        "line": 169,
         "column": 1
       }
     },
@@ -3487,7 +3487,7 @@
       "description": "Persist one manifest event value only in the active Runtime session.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 177,
+        "line": 178,
         "column": 1
       }
     },
@@ -3496,7 +3496,7 @@
       "description": "Navigate from the released DataTable activation payload without coupling selection to routing.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 194,
+        "line": 195,
         "column": 1
       }
     },
@@ -3505,7 +3505,7 @@
       "description": "Record a Zefix row activation independently while the published host lacks detail projection.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 204,
+        "line": 205,
         "column": 1
       }
     },
@@ -3514,7 +3514,7 @@
       "description": "Project the raw Zefix search array without inventing contact, route, logo, or website fields.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 213,
+        "line": 214,
         "column": 1
       }
     },
@@ -3523,7 +3523,7 @@
       "description": "Bind a released interactive event to a concrete route without inventing host capabilities.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 222,
+        "line": 223,
         "column": 1
       }
     },
@@ -3532,7 +3532,7 @@
       "description": "Present locally authored contacts separately from company discovery records.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 244,
+        "line": 245,
         "column": 1
       }
     },
@@ -3541,7 +3541,7 @@
       "description": "Build reusable detail content for both the responsive pane and Stack-routed detail screen.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 259,
+        "line": 260,
         "column": 1
       }
     },
@@ -3550,7 +3550,7 @@
       "description": "Build one local company detail screen for a deterministically routed demo row.",
       "sourceLocation": {
         "filePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
-        "line": 393,
+        "line": 394,
         "column": 1
       }
     },
@@ -5247,6 +5247,12 @@
         "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
         "toSymbol": "navigateBinding",
         "callExpression": "navigateBinding",
+        "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
+      },
+      {
+        "fromSymbol": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts",
+        "toSymbol": "createZefixPublicRestApi",
+        "callExpression": "createZefixPublicRestApi",
         "sourcePath": "src/templates/categories/business-productivity/acquisition/createAppManifest.ts"
       },
       {
