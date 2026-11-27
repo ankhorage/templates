@@ -778,7 +778,7 @@
         {
           "name": "dark",
           "kind": "property",
-          "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -799,7 +799,7 @@
         {
           "name": "light",
           "kind": "property",
-          "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+          "type": "Partial<import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
           "required": false,
           "description": null
         },
@@ -813,7 +813,7 @@
         {
           "name": "recipes",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+          "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -841,7 +841,7 @@
         {
           "name": "tokens",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+          "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
           "required": false,
           "description": null
         },
@@ -1181,7 +1181,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
+          "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -1295,7 +1295,7 @@
         {
           "name": "modules",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleRegistry",
+          "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleRegistry",
           "required": false,
           "description": null
         },
@@ -1747,7 +1747,7 @@
         {
           "name": "oauth",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+          "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
           "required": true,
           "description": null
         }
@@ -1862,7 +1862,7 @@
         {
           "name": "preset",
           "kind": "property",
-          "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
+          "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/src/index\").CategoryPreset",
           "required": true,
           "description": null
         },
@@ -5740,6 +5740,11 @@
         "sourcePath": "src/authoring/compose-category-manifest.ts"
       },
       {
+        "fromSymbol": "ComposeCategoryAppManifestInput",
+        "toType": "Users",
+        "sourcePath": "src/authoring/compose-category-manifest.ts"
+      },
+      {
         "fromSymbol": "TemplateCompositionDiagnostic",
         "toType": "TemplateCompositionDiagnosticCode",
         "sourcePath": "src/authoring/compose-category-manifest.ts"
@@ -5790,6 +5795,11 @@
         "sourcePath": "src/fixtures/oauth.ts"
       },
       {
+        "fromSymbol": "OAuthFixtureDefinition",
+        "toType": "Users",
+        "sourcePath": "src/fixtures/oauth.ts"
+      },
+      {
         "fromSymbol": "resolveOAuthFixture",
         "toType": "OAuthFixtureDefinition",
         "sourcePath": "src/fixtures/oauth.ts"
@@ -5822,6 +5832,11 @@
       {
         "fromSymbol": "CategoryDesignOverrides",
         "toType": "ThemeRecipeOverrides",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CategoryDesignOverrides",
+        "toType": "Users",
         "sourcePath": "src/presets/category-design.ts"
       },
       {
@@ -5862,6 +5877,11 @@
       {
         "fromSymbol": "CompiledCategoryDesign",
         "toType": "TonePairDefinition",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "CompiledCategoryDesign",
+        "toType": "Users",
         "sourcePath": "src/presets/category-design.ts"
       },
       {
@@ -5907,6 +5927,11 @@
       {
         "fromSymbol": "ResolvedCategoryDesignPreset",
         "toType": "TonePairDefinition",
+        "sourcePath": "src/presets/category-design.ts"
+      },
+      {
+        "fromSymbol": "ResolvedCategoryDesignPreset",
+        "toType": "Users",
         "sourcePath": "src/presets/category-design.ts"
       },
       {
