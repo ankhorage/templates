@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.7.3
+
+### Patch Changes
+
+- 08b69e7: Update dependencies: `@ankhorage/doctor`, `@ankhorage/navigator`, `@ankhorage/runtime`, `@ankhorage/zora`.
+
 ## 12.7.2
 
 ### Patch Changes
