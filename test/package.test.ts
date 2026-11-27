@@ -29,9 +29,7 @@ describe('package metadata', () => {
     expect(packageJson.bin).toEqual({
       'ankhorage-templates': './dist/cli/standalone.js',
     });
-    expect(packageJson.scripts.prepublishOnly).toBe(
-      'bun run typecheck && bun run build && bun run test',
-    );
+    expect(packageJson.scripts).not.toHaveProperty('prepublishOnly');
     expect(packageJson.ankh).toEqual({
       category: expectedAnkhMetadata.category,
       provider: expectedAnkhMetadata.provider,
