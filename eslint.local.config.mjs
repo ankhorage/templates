@@ -12,7 +12,7 @@ export default [
   ...createConfig({
     tsconfigRootDir: configDir,
     project: ['./tsconfig.eslint.json'],
-    files: ['src/**/*.ts', 'test/**/*.ts'],
+    files: ['test/**/*.ts'],
   }),
   legacyRuleExceptions('complexity', ['test/create-food-drink-nutrition-catalog-scan-api.test.ts']),
   legacyRuleExceptions('max-lines', [
