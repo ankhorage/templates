@@ -119,11 +119,10 @@
     "lint:fix": "ankhorage-eslint . --fix --max-warnings=0",
     "format": "ankhorage-prettier --write .",
     "format:check": "ankhorage-prettier --check .",
-    "typecheck": "bun run templates:catalog && bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
+    "typecheck": "bun x tsc -p tsconfig.json --noEmit && bun x tsc -p tsconfig.test.json --noEmit",
     "test": "bun test --path-ignore-patterns 'test/grossmeister.chromium.test.ts' && bun run test:packed-consumer",
     "test:chromium": "bun test ./test/grossmeister.chromium.test.ts",
     "test:packed-consumer": "bun run build && bun test ./test/packedConsumer.ts",
-    "prepublishOnly": "bun run typecheck && bun run build && bun run test",
     "version-packages": "ankhorage-changeset version",
     "knip:check": "ankhorage-knip",
     "test:standalone": "bun test test/root-exports.test.ts test/commands.test.ts"
