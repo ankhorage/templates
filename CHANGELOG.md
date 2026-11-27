@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.7.6
+
+### Patch Changes
+
+- ea37a91: Update dependencies: `@ankhorage/paradox`, `@ankhorage/zora`.
+
 ## 12.7.5
 
 ### Patch Changes

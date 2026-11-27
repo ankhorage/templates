@@ -310,7 +310,7 @@
       {
         "name": "dark",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -331,7 +331,7 @@
       {
         "name": "light",
         "kind": "property",
-        "type": "Partial<import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
+        "type": "Partial<import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/types\").ThemeModeConfig>",
         "required": false,
         "description": null
       },
@@ -345,7 +345,7 @@
       {
         "name": "recipes",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeRecipeOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -373,7 +373,7 @@
       {
         "name": "tokens",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/theme\").ThemeGlobalTokenOverrides | undefined",
         "required": false,
         "description": null
       },
@@ -713,7 +713,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/src/index\").CategoryPreset",
+        "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
@@ -827,7 +827,7 @@
       {
         "name": "modules",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleRegistry",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/infra\").InfraModuleRegistry",
         "required": false,
         "description": null
       },
@@ -1279,7 +1279,7 @@
       {
         "name": "oauth",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
+        "type": "import(\"/home/runner/work/templates/templates/node_modules/@ankhorage/contracts/dist/auth\").AuthOAuthConfig",
         "required": true,
         "description": null
       }
@@ -1394,7 +1394,7 @@
       {
         "name": "preset",
         "kind": "property",
-        "type": "import(\"/Users/a_rtiphishl_e/git/@ankhorage/templates/src/index\").CategoryPreset",
+        "type": "import(\"/home/runner/work/templates/templates/src/index\").CategoryPreset",
         "required": true,
         "description": null
       },
