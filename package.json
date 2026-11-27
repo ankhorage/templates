@@ -1,39 +1,23 @@
 {
   "name": "@ankhorage/templates",
   "version": "12.7.5",
-  "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
-  "homepage": "https://github.com/ankhorage/templates#readme",
-  "bugs": {
-    "url": "https://github.com/ankhorage/templates/issues"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ankhorage/templates.git"
   },
-  "license": "MIT",
-  "type": "module",
-  "publishConfig": {
-    "access": "public"
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "devDependencies": {
+    "@ankhorage/ankh": "^0.13.7",
+    "@ankhorage/devtools": "^2.11.3",
+    "@ankhorage/doctor": "^0.15.21",
+    "@ankhorage/paradox": "^0.6.0",
+    "@types/bun": "^1.4.2",
+    "@types/node": "^26.6.11",
+    "pkgviz": "^0.8.3",
+    "playwright": "^1.65.1",
+    "typescript": "^6.0.3"
   },
-  "keywords": [
-    "ankhorage",
-    "app-generator",
-    "app-templates",
-    "expo",
-    "manifest",
-    "react-native",
-    "secret-store",
-    "supabase",
-    "templates",
-    "typescript",
-    "vault"
-  ],
-  "sideEffects": false,
-  "files": [
-    "dist",
-    "src/templates/categories/**/assets/**",
-    "CHANGELOG.md"
-  ],
   "exports": {
     ".": {
       "types": "./dist/index.d.ts",
@@ -48,12 +32,6 @@
       "types": "./dist/capabilities/index.d.ts",
       "import": "./dist/capabilities/index.js"
     }
-  },
-  "main": "./dist/index.js",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
-  "bin": {
-    "ankhorage-templates": "./dist/cli/standalone.js"
   },
   "ankh": {
     "category": "templates",
@@ -100,6 +78,37 @@
       }
     ]
   },
+  "bin": {
+    "ankhorage-templates": "./dist/cli/standalone.js"
+  },
+  "bugs": {
+    "url": "https://github.com/ankhorage/templates/issues"
+  },
+  "description": "Portable Ankhorage app templates, presets, and manifest authoring helpers.",
+  "files": [
+    "dist",
+    "src/templates/categories/**/assets/**",
+    "CHANGELOG.md"
+  ],
+  "homepage": "https://github.com/ankhorage/templates#readme",
+  "keywords": [
+    "ankhorage",
+    "app-generator",
+    "app-templates",
+    "expo",
+    "manifest",
+    "react-native",
+    "secret-store",
+    "supabase",
+    "templates",
+    "typescript",
+    "vault"
+  ],
+  "license": "MIT",
+  "packageManager": "bun@1.4.2",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "templates:catalog": "bun .agents/skills/zora-designer/scripts/generate-template-catalog.ts .",
     "build": "bun run templates:catalog && bun x tsc -p tsconfig.json && bun build src/index.ts --target node --format esm --outdir dist",
@@ -119,26 +128,17 @@
     "knip:check": "ankhorage-knip",
     "test:standalone": "bun test test/root-exports.test.ts test/commands.test.ts"
   },
+  "sideEffects": false,
+  "type": "module",
+  "types": "./dist/index.d.ts",
   "dependencies": {
     "@ankhorage/capability": "^0.2.3",
     "@ankhorage/color-theory": "^0.3.4",
     "@ankhorage/contracts": "^26.17.1",
     "@ankhorage/data-sources": "^2.4.0",
     "@ankhorage/navigator": "^3.6.7",
-    "@ankhorage/runtime": "^5.6.2",
+    "@ankhorage/runtime": "^5.6.4",
     "@ankhorage/utility": "^1.11.0",
     "@ankhorage/zora": "^27.11.2"
-  },
-  "devDependencies": {
-    "@ankhorage/ankh": "^0.13.3",
-    "@ankhorage/devtools": "^2.3.34",
-    "@ankhorage/doctor": "^0.15.21",
-    "@ankhorage/paradox": "^0.6.0",
-    "@types/bun": "^1.4.2",
-    "@types/node": "^26.6.11",
-    "pkgviz": "^0.8.3",
-    "playwright": "^1.65.1",
-    "typescript": "^6.0.3"
-  },
-  "packageManager": "bun@1.4.2"
+  }
 }
