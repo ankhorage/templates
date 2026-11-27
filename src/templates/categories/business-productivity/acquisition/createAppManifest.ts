@@ -6,6 +6,7 @@ import type {
   ScreenSpec,
   UiNode,
 } from '@ankhorage/contracts';
+import { createZefixPublicRestApi } from '@ankhorage/data-sources';
 
 /*** Return the one portable, draft-stage Acquisition app manifest. */
 export default function createAppManifest(): AppManifest {
@@ -547,51 +548,7 @@ const manifest = {
     },
     modules: {},
     apis: {
-      zefix: {
-        id: 'zefix',
-        origin: 'external',
-        protocol: 'rest',
-        name: 'Zefix PublicREST',
-        description: 'Swiss official commercial register; vendor responses are not CRM records.',
-        baseUrl: 'https://www.zefix.admin.ch/ZefixPublicREST',
-        credential: { id: 'zefix-credentials', kind: 'basic' },
-        endpoints: {
-          'company-search': {
-            id: 'company-search',
-            kind: 'http',
-            path: '/api/v1/company/search',
-            operations: {
-              'company.search': {
-                id: 'company.search',
-                endpointId: 'company-search',
-                protocol: 'http',
-                intent: 'read',
-                method: 'POST',
-                request: { contentType: 'application/json' },
-              },
-            },
-          },
-          'company-by-uid': {
-            id: 'company-by-uid',
-            kind: 'http',
-            path: '/api/v1/company/uid/{uid}',
-            operations: {
-              'company.by-uid': {
-                id: 'company.by-uid',
-                endpointId: 'company-by-uid',
-                protocol: 'http',
-                intent: 'read',
-                method: 'GET',
-                request: {
-                  parameters: [
-                    { name: 'uid', location: 'path', required: true, schema: { type: 'string' } },
-                  ],
-                },
-              },
-            },
-          },
-        },
-      },
+      zefix: createZefixPublicRestApi(),
     },
   },
   media: {

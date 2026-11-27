@@ -123,6 +123,7 @@
     "@ankhorage/capability": "^0.2.3",
     "@ankhorage/color-theory": "^0.3.4",
     "@ankhorage/contracts": "^26.17.1",
+    "@ankhorage/data-sources": "^2.4.0",
     "@ankhorage/navigator": "^3.6.7",
     "@ankhorage/runtime": "^5.6.2",
     "@ankhorage/utility": "^1.11.0",

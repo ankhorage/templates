@@ -73,7 +73,7 @@ derivation:
       decision: "Neo4j was explicitly selected for Acquisition graph persistence. The currently published InfraManifest has no graphDatabase capability, so do not serialize an unsupported Neo4j provider in the generated ankh.config.json. Existing graph and relational selections are separate; see ankhorage/infra#197."
     - owner: "@ankhorage/data-sources"
       path: "createZefixPublicRestApi"
-      decision: "Published @ankhorage/data-sources 2.3.0 does not export the canonical descriptor. Draft data-sources#318 defines company-uid/company.get-by-uid with path parameter id, which differs from this manifest's company-by-uid/company.by-uid/uid contract. Do not import the PR branch or add an unpublished dependency. After publication, consume the released descriptor and prove infra.apis.zefix equals it."
+      decision: "Published @ankhorage/data-sources 2.4.0 exports the canonical descriptor. The manifest consumes createZefixPublicRestApi directly, preserving company-uid/company.get-by-uid with path parameter id."
 tokens:
   light:
     source: "manifest acquisition theme; owner compilation required at downstream integration"
