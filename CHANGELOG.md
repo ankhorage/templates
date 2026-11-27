@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.7.1
+
+### Patch Changes
+
+- 1a29bfb: Update dependencies: `@ankhorage/utility`.
+
 ## 12.7.0
 
 ### Minor Changes
