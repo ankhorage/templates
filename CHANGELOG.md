@@ -1,5 +1,11 @@
 # @ankhorage/templates
 
+## 12.7.2
+
+### Patch Changes
+
+- 4d918c5: Update dependencies: `@ankhorage/contracts`, `@ankhorage/doctor`, `@ankhorage/runtime`.
+
 ## 12.7.1
 
 ### Patch Changes
